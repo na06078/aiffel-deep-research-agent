@@ -1,0 +1,127 @@
+{
+  "assets": [
+    {
+      "file": "마을_타일.png",
+      "source_page": "https://kenney.nl/assets/tiny-town",
+      "source_member": "Tilemap/tilemap_packed.png",
+      "source_crop": null,
+      "source_archive_sha256": "9768692dccff1d706408a5aedd6ca4f6cd1409506cbc84cb2f862919764be977",
+      "license": "CC0 1.0",
+      "width": 192,
+      "height": 176,
+      "transparent_pixels": 7155,
+      "opaque_pixels": 26637,
+      "rgba_sha256": "99b65c6c1f981d7ebfeefc5dd2e652269e90b1cbece9ad111ca221b8e330ca09"
+    },
+    {
+      "file": "조정자.png",
+      "source_page": "https://kenney.nl/assets/roguelike-characters",
+      "source_member": "Spritesheet/roguelikeChar_transparent.png",
+      "source_crop": [
+        0,
+        85,
+        16,
+        101
+      ],
+      "source_archive_sha256": "05c4c0af7326584cfffbbb196571eb9e102981d2033e90e225c5ba8da8771284",
+      "license": "CC0 1.0",
+      "width": 16,
+      "height": 16,
+      "transparent_pixels": 68,
+      "opaque_pixels": 188,
+      "rgba_sha256": "826c21742ecb88e160efe0ebe0a125f05d89d6447439c6dbf05817b90a346cf7"
+    },
+    {
+      "file": "조사관_1.png",
+      "source_page": "https://kenney.nl/assets/roguelike-characters",
+      "source_member": "Spritesheet/roguelikeChar_transparent.png",
+      "source_crop": [
+        17,
+        85,
+        33,
+        101
+      ],
+      "source_archive_sha256": "05c4c0af7326584cfffbbb196571eb9e102981d2033e90e225c5ba8da8771284",
+      "license": "CC0 1.0",
+      "width": 16,
+      "height": 16,
+      "transparent_pixels": 72,
+      "opaque_pixels": 184,
+      "rgba_sha256": "cf0eb2e758fb7e6bac34fe7a4435da80d5418df0c69e2cbff27b6efe15460b22"
+    },
+    {
+      "file": "조사관_2.png",
+      "source_page": "https://kenney.nl/assets/roguelike-characters",
+      "source_member": "Spritesheet/roguelikeChar_transparent.png",
+      "source_crop": [
+        0,
+        102,
+        16,
+        118
+      ],
+      "source_archive_sha256": "05c4c0af7326584cfffbbb196571eb9e102981d2033e90e225c5ba8da8771284",
+      "license": "CC0 1.0",
+      "width": 16,
+      "height": 16,
+      "transparent_pixels": 86,
+      "opaque_pixels": 170,
+      "rgba_sha256": "b8d0eb1cd7e7fae30f44670305b130b9717fbc837512f209df498ffb76b9cee8"
+    },
+    {
+      "file": "조사관_3.png",
+      "source_page": "https://kenney.nl/assets/roguelike-characters",
+      "source_member": "Spritesheet/roguelikeChar_transparent.png",
+      "source_crop": [
+        17,
+        102,
+        33,
+        118
+      ],
+      "source_archive_sha256": "05c4c0af7326584cfffbbb196571eb9e102981d2033e90e225c5ba8da8771284",
+      "license": "CC0 1.0",
+      "width": 16,
+      "height": 16,
+      "transparent_pixels": 78,
+      "opaque_pixels": 178,
+      "rgba_sha256": "c9d5d21e64d94ad23d179b94dbb568aedc3402669a51a308d684f62ba2fde366"
+    },
+    {
+      "file": "조사관_4.png",
+      "source_page": "https://kenney.nl/assets/roguelike-characters",
+      "source_member": "Spritesheet/roguelikeChar_transparent.png",
+      "source_crop": [
+        0,
+        119,
+        16,
+        135
+      ],
+      "source_archive_sha256": "05c4c0af7326584cfffbbb196571eb9e102981d2033e90e225c5ba8da8771284",
+      "license": "CC0 1.0",
+      "width": 16,
+      "height": 16,
+      "transparent_pixels": 68,
+      "opaque_pixels": 188,
+      "rgba_sha256": "f873137af54b8f3d4643f8f0d3b4ee0def453b4a282f456bc33896a79493a9da"
+    },
+    {
+      "file": "종합자.png",
+      "source_page": "https://kenney.nl/assets/roguelike-characters",
+      "source_member": "Spritesheet/roguelikeChar_transparent.png",
+      "source_crop": [
+        17,
+        119,
+        33,
+        135
+      ],
+      "source_archive_sha256": "05c4c0af7326584cfffbbb196571eb9e102981d2033e90e225c5ba8da8771284",
+      "license": "CC0 1.0",
+      "width": 16,
+      "height": 16,
+      "transparent_pixels": 66,
+      "opaque_pixels": 190,
+      "rgba_sha256": "5de3a161f3b69a321ebeaf0f1368a39faab426683450e7c48ccdca6327013774"
+    }
+  ],
+  "schema_version": 1,
+  "limitations": "선정 인물은 정면 포즈 6개다. 원본에서 방향별 걷기 연속 프레임은 확인하지 않았으며 이동/바운스는 코드 연출이다. 실제 AI 호출 또는 생성 이미지는 사용하지 않았다."
+}
