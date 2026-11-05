@@ -1,0 +1,42 @@
+# 인증값과 비밀정보: 예제에는 안전한 자리표시자만 둔다.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# 다시 만들 수 있는 개발 환경과 의존성
+.venv/
+venv/
+node_modules/
+__pycache__/
+*.py[cod]
+
+# 검사 도구와 빌드 캐시
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.cache/
+/build/
+/dist/
+
+# 실행 중 생기는 로컬 DB와 임시 파일
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm
+*.tmp
+*.log
+
+# 운영체제 보조 파일
+.DS_Store
+Thumbs.db
