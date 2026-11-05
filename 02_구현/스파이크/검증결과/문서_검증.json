@@ -1,0 +1,18 @@
+{
+  "checked_at_kst": "2026-11-05T23:58:27.465836+09:00",
+  "date_kst": "2026-11-05",
+  "status": "PASS",
+  "colors_matched_actual_css": 30,
+  "token_refs_resolved": 24,
+  "sidecar_components": 5,
+  "canonical_sections": 8,
+  "source_bundle_unchanged": true,
+  "live_health": {
+    "status": "ok",
+    "mode": "spike",
+    "provider": "test-double",
+    "actual_model_requests": 0
+  },
+  "live_status": 200,
+  "scope": "기록·스타일 토큰·인계 상태 확인. 실제 모델 또는 정식 앱 전체 검증이 아님"
+}

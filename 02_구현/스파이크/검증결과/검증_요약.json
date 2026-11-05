@@ -98,7 +98,12 @@
   "live_pid": 42432,
   "actual_model_requests": 0,
   "bundle_index_sha256": "8101b474bc3d61b8049872bece483f8bea891d82575355c2a6bf78940bb368e6",
-  "ui_independent_review": "pending",
+  "ui_independent_review": {
+    "disposition": "ship",
+    "scope": "two_spikes",
+    "proof": "독립화면검토.json",
+    "full_return_available_in_log": false
+  },
   "unverified": [
     "실제 gpt-5.6-luna 인증·호출·취소·usage",
     "교안 실제 코퍼스 리서치와 재위임·비교",

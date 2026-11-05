@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-05T14:51:22.242116+00:00",
+  "title": "Design System: 딥리서치 에이전트 · 두 스파이크",
+  "extensions": {
+    "colorMeta": {
+      "green": {
+        "role": "primary",
+        "displayName": "짙은 작업 녹색",
+        "canonical": "#286442",
+        "tonalRamp": ["oklch(15% 0.08409 155.884)", "oklch(26% 0.08409 155.884)", "oklch(38% 0.08409 155.884)", "oklch(49% 0.08409 155.884)", "oklch(61% 0.08409 155.884)", "oklch(72% 0.08409 155.884)", "oklch(84% 0.08409 155.884)", "oklch(95% 0.08409 155.884)"]
+      }
+    },
+    "typographyMeta": {
+      "body": {"displayName": "시스템 한국어 본문", "purpose": "읽기·조작 중심 본문과 상속 글꼴. 외부 웹폰트 없음."},
+      "headline": {"displayName": "작은 앱 제목", "purpose": "상단 브랜드 제목. 마케팅 display 역할 아님."},
+      "code": {"displayName": "불변 입출력", "purpose": "선택 사건의 JSON. 줄바꿈과 긴 식별자 보존."}
+    },
+    "shadows": [
+      {"name": "speech-bubble", "value": "0 3px 8px #2e4e2420", "purpose": "말풍선의 부드러운 오프셋 깊이. 일반 패널은 경계로 구분."}
+    ],
+    "motion": [
+      {"name": "button-feedback", "value": "background .12s,border-color .12s", "purpose": "버튼 상태 전환. prefers-reduced-motion:reduce에서 transition:none."},
+      {"name": "scene-move", "value": "1500ms", "purpose": "정면 포즈의 코드 이동. 걷기 프레임 아님."},
+      {"name": "scene-work", "value": "1600ms", "purpose": "로컬 합성 작업 상태 표시 시간."},
+      {"name": "scene-deliver", "value": "2200ms", "purpose": "문서 운반 연출. 실제 모델 사건과 분리."}
+    ],
+    "breakpoints": [
+      {"name": "wide-inspector-min", "value": "1400px"},
+      {"name": "compact-workspace-max", "value": "1050px"},
+      {"name": "stacked-workspace-max", "value": "780px"}
+    ],
+    "extractionNotes": "화면.css·앱.tsx·마을.tsx·상세보기.tsx와 기존 최종검사 캡처/JSON에서 추출. 두 스파이크만 해당. tonalRamp는 원본 green의 OKLCH 색상각·채도에 명도를 배분한 패널 미리보기 메타데이터이며 앱 토큰이 아니다. 스니펫은 원본 데스크톱 컴포넌트를 독립 표시하도록 ds- 접두사와 글꼴/줄높이, CSS 변수 fallback만 보완했다. 원본에 없는 textarea/nav hover나 전용 오류 상태를 추가하지 않았다. Pixi ticker에는 reduced-motion 대응이 없다."
+  },
+  "components": [
+    {
+      "name": "지시 전송",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "composer의 녹색 전송 버튼. 비어 있거나 전송 중이면 비활성.",
+      "html": "<button type=\"button\" class=\"ds-primary\">지시 보내기</button>",
+      "css": ".ds-primary{font-family:\"Segoe UI\",\"Malgun Gothic\",system-ui,sans-serif;font-size:14px;line-height:1.6;cursor:pointer;min-height:38px;border:1px solid var(--green,#286442);border-radius:5px;background:var(--green,#286442);color:#fffef9;padding:12px 22px;transition:background .12s,border-color .12s}.ds-primary:hover:not(:disabled){background:#204f34}.ds-primary:active:not(:disabled){background:var(--green,#286442)}.ds-primary:hover:active:not(:disabled){background:#204f34}.ds-primary:disabled{cursor:not-allowed;background:#dfe7d9;border-color:#c8d1c0;color:#59694f}.ds-primary:focus-visible{outline:3px solid #367546;outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+    },
+    {
+      "name": "일반 조작",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "장면·대역 제어에 사용하는 밝은 일반 버튼.",
+      "html": "<button type=\"button\" class=\"ds-secondary\">이동 보기</button>",
+      "css": ".ds-secondary{font-family:\"Segoe UI\",\"Malgun Gothic\",system-ui,sans-serif;font-size:14px;line-height:1.6;cursor:pointer;min-height:38px;border:1px solid #b4bfac;border-radius:5px;background:#fffef9;color:#26382e;padding:7px 13px;transition:background .12s,border-color .12s}.ds-secondary:hover:not(:disabled){background:#eaf0e3;border-color:#6d8665}.ds-secondary:active:not(:disabled){background:#dce8d4}.ds-secondary:disabled{cursor:not-allowed;color:#687363;background:#eeefe8;border-color:#d9ddd2}.ds-secondary:focus-visible{outline:3px solid #367546;outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
+    },
+    {
+      "name": "지시 입력",
+      "kind": "input",
+      "refersTo": "textarea",
+      "description": "세로 크기를 조절하는 실제 지시 입력. 전용 hover/오류 테두리는 없음.",
+      "html": "<textarea class=\"ds-command\" rows=\"2\" aria-label=\"작업 지시\" placeholder=\"예: 도시 녹지의 효과를 조사해 주세요. 다음 작업은 /큐 로 보관합니다.\"></textarea>",
+      "css": ".ds-command{font-family:\"Segoe UI\",\"Malgun Gothic\",system-ui,sans-serif;font-size:13px;line-height:1.6;min-width:0;resize:vertical;min-height:68px;max-height:300px;background:#fffef9;color:#26382e;border:1px solid #b6c1ae;border-radius:4px;padding:11px 12px;caret-color:#286442}.ds-command::placeholder{color:#61705a;opacity:1}.ds-command:focus-visible{outline:3px solid #367546;outline-offset:3px}"
+    },
+    {
+      "name": "실험 모드 탐색",
+      "kind": "nav",
+      "refersTo": "mode-nav",
+      "description": "에셋 실험과 실행 제어. 현재 링크만 강조하고 별도 hover 색은 없음.",
+      "html": "<nav class=\"ds-modes\" aria-label=\"실험 모드\"><a href=\"#/assets\" aria-current=\"page\">에셋 실험</a><a href=\"#/control\">실행 제어</a></nav>",
+      "css": ".ds-modes{display:flex;gap:4px;font-family:\"Segoe UI\",\"Malgun Gothic\",system-ui,sans-serif;font-size:14px;line-height:1.6}.ds-modes a{padding:5px 12px;text-decoration:none;border-radius:4px;color:#53614c}.ds-modes a[aria-current]{color:#245b3b;background:#e3ebdc;font-weight:650}.ds-modes a:focus-visible{outline:3px solid #367546;outline-offset:3px}"
+    },
+    {
+      "name": "사건 말풍선",
+      "kind": "custom",
+      "refersTo": "speech-bubble",
+      "description": "전체 클릭으로 선택 사건을 여는 말풍선. 작업대 변형의 본문은 ... 이며 사건 부재 시 disabled.",
+      "html": "<button type=\"button\" class=\"ds-bubble\"><strong>기획자</strong><span>합성 문서 운반</span><small>(클릭해서 더 자세히)</small></button>",
+      "css": ".ds-bubble{position:relative;display:flex;flex-direction:column;align-items:flex-start;text-align:left;font-family:\"Segoe UI\",\"Malgun Gothic\",system-ui,sans-serif;font-size:14px;line-height:1.45;cursor:pointer;background:#fffef3f5;border:1px solid #657e50;box-shadow:0 3px 8px #2e4e2420;border-radius:7px;padding:10px 12px 7px;min-height:0;color:#263b2a;transition:background .12s,border-color .12s}.ds-bubble::after{content:\"\";position:absolute;bottom:-6px;left:22px;width:10px;height:10px;background:#fffef3;border-bottom:1px solid #657e50;border-right:1px solid #657e50;transform:rotate(45deg)}.ds-bubble strong{font-size:11px;color:#3f5b35;margin-bottom:3px}.ds-bubble>span{font-size:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:clip;overflow-wrap:anywhere}.ds-bubble small{align-self:flex-end;font-size:9px;opacity:.76;white-space:nowrap;margin-top:5px}.ds-bubble:hover:not(:disabled){background:#eaf0e3;border-color:#6d8665}.ds-bubble:active:not(:disabled){background:#dce8d4}.ds-bubble:disabled{cursor:not-allowed;background:#fffef3eb;border-color:#7a8d68;color:#43583c}.ds-bubble:focus-visible{outline:3px solid #367546;outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-bubble{transition:none}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "작은 픽셀 마을의 작업 도구",
+    "overview": "에셋 실험과 실행 제어, 두 프로토타입의 구현값을 추출한 잠정 기록입니다. 밝은 중성 작업 바탕에 짙은 글자와 녹색 조작색을 쓰고, Kenney 픽셀 마을 옆에서 선택한 사건의 입출력을 읽습니다. 새 브랜드 승인이나 정식 앱·실제 GPT 연구 UI의 완성을 뜻하지 않습니다.",
+    "keyCharacteristics": [
+      "작은 픽셀 장면과 읽기 쉬운 시스템 한국어 UI.",
+      "선택 사건의 불변 상세와 실제 하단 지시 입력.",
+      "합성 장면·서버 테스트 대역·실제 모델을 구분하는 고지."
+    ],
+    "rules": [],
+    "dos": [
+      "**Do** 픽셀 경계와 실무적인 한국어 시스템 글꼴을 유지합니다.",
+      "**Do** 선택한 사건의 상세와 현재 실행·이전 문서를 구분합니다.",
+      "**Do** 합성 자료와 실제 모델 미호출 고지를 읽을 수 있게 유지합니다."
+    ],
+    "donts": [
+      "**Don't** 코드 이동을 검증된 걷기 애니메이션이나 실제 추론으로 설명하지 않습니다.",
+      "**Don't** 두 스파이크의 스타일 기록을 정식 제품·새 브랜드 승인으로 확대하지 않습니다."
+    ]
+  }
+}
