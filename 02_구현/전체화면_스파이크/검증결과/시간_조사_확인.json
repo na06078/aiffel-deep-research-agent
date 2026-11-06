@@ -1,0 +1,47 @@
+{
+  "sources": [
+    {
+      "url": "https://www.jaegertracing.io/docs/2.23/architecture/terminology/",
+      "http": 200,
+      "bytes": 38649,
+      "sha256": "9405c29dc16714694f9eb1aa5b3597df6aede8a799b541249ee28ff20dc402c5",
+      "observed_terms": {
+        "start time": true,
+        "duration": true,
+        "timeOffset": false,
+        "pause": false,
+        "elapsedMS": false,
+        "deltaTime": false
+      }
+    },
+    {
+      "url": "https://raw.githubusercontent.com/rrweb-io/rrweb/main/packages/rrweb/src/replay/index.ts",
+      "http": 200,
+      "bytes": 78167,
+      "sha256": "ec21669a23d3c35bb715a20aec29ad90924a6246d2b6c45ee2ea49147d5b1b5b",
+      "observed_terms": {
+        "start time": false,
+        "duration": true,
+        "timeOffset": true,
+        "pause": true,
+        "elapsedMS": false,
+        "deltaTime": false
+      }
+    },
+    {
+      "url": "https://pixijs.com/8.x/guides/components/ticker",
+      "http": 200,
+      "bytes": 47402,
+      "sha256": "8ab12f463d61403bb84c9ebffec186802350417771dff16113f43725ba7e9c70",
+      "observed_terms": {
+        "start time": false,
+        "duration": false,
+        "timeOffset": false,
+        "pause": true,
+        "elapsedMS": false,
+        "deltaTime": true
+      }
+    }
+  ],
+  "interpretation": "Span의 시작/기간, 사건 timeOffset 재구성, Pixi elapsedMS 시계 분리를 참고한다. 해당 라이브러리 설치/연동은 하지 않는다."
+}

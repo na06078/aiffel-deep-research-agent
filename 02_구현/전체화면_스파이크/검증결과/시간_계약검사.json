@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "scope": "사용자 승인 명세·읽기 전용 공유 계약·정상 렌더 후 드로어 누락 RED 확인. 새 기능 구현 통과 아님",
+  "ids": 82,
+  "legacy_ids_preserved": true,
+  "clock_sha256": "17b84c1c92d58a828cca53e4ba9ade630f82c0b1ebf9e42ec7468a5e3d6a2bcb",
+  "timing_sha256": "e742c19541d0a91b1fbafd803e809f7c32587faef8de9bb3b14dae8a3bd7b0cd",
+  "red": {
+    "status": "FAIL",
+    "boundary": "정상 렌더된 실제8766 UI에서 새 하단 시간창 손잡이",
+    "world_rendered": true,
+    "timeline_toggle_count": 0
+  }
+}
