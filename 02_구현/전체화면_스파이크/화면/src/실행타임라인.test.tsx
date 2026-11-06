@@ -31,3 +31,8 @@ it('하단 손잡이와 선택·재생 제어를 보존하고 기록이 없으�
  expect(html).toContain('보존된 실행이 없습니다');
  expect(renderToStaticMarkup(<Timeline {...base} open={false}/>)).not.toContain('data-testid="timeline-drawer"');
 });
+it('실제 제공자의 열린 실시간 타임라인에 모의 응답이라고 표시하지 않는다',()=>{
+ const html=renderToStaticMarkup(<Timeline {...base} archive={{...archive,provider:'openai'}}/>);
+ expect(html).toContain('실시간');
+ expect(html).not.toContain('실시간 · 모의 응답');
+});

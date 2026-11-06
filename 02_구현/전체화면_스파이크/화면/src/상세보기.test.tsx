@@ -12,3 +12,10 @@ it('보고서는 정확한 보고서 ID와 전체 Markdown 및 실제 다운로�
  const html=renderToStaticMarkup(<ReportViewer report={report}/>);
  expect(html).toContain('report-A');expect(html).toContain('href="/api/spike/reports/report-A/download"');expect(html).toContain('Markdown 다운로드');expect(html).toContain('마지막 문장');expect(html).not.toContain('<script>');
 });
+it('형식 검사 통과와 별개로 보고서의 인용 품질 경고를 숨기지 않는다',()=>{
+ const report={report_id:'report-A',run_id:'run-A',control_revision:1,title:'보고서',created_at:'2026-11-06T01:02:03Z',markdown:'# 본문',download_url:'/download',sha256:'hash'} as Report;
+ const html=renderToStaticMarkup(<ReportViewer report={report} quality={{passed:true,reasons:[],warnings:['자동 인용 검사는 의미적 지지를 증명하지 않습니다.','조사관 사이에 중복 읽기가 있습니다.']}}/>);
+ expect(html).toContain('의미적 지지를 증명하지 않습니다');
+ expect(html).toContain('중복 읽기');
+ expect(html).toContain('Markdown 다운로드');
+});

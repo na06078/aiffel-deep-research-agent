@@ -2,6 +2,18 @@ import {afterEach,expect,it,vi} from 'vitest';
 afterEach(()=>vi.unstubAllGlobals());
 import {projectArchive,offsetMs,sceneClock,stageTimes,replayEnd,measuredElapsed,adjacentStage} from './시간재생';
 import type {RunArchive} from './시간계약';
+import {projectionSnapshot} from './시간재생';
+import {actorState} from './역할투영';
+it('실제 재생은 제공자와 관측된 시도 수를 보존하고 gate 없이 모델 작업 중을 투영한다',()=>{
+ const a:RunArchive={...archive,provider:'openai',events:[{...event(1,0,'instruction.received',null,{text:'Q'}),provider:null},{...event(2,100,'model.started'),provider:'openai',status:'started'},{...event(3,200,'model.completed','비밀 없는 출력'),provider:'openai'}]};
+ const network=vi.fn();vi.stubGlobal('fetch',network);const frozen=JSON.stringify(a);
+ const projection=projectArchive(a,150),snap=projectionSnapshot(projection);
+ expect(snap.provider).toBe('openai');expect(snap.mode).toBe('research');expect(snap.actual_model_requests).toBe(1);expect(snap.mock_requests).toBe(0);
+ expect(actorState('planner',snap,projection.run).status).toBe('running');expect(actorState('planner',snap,projection.run).summary).not.toContain('모의');
+ expect(projectArchive(a,50).run.actual_model_requests).toBe(0);
+ expect(actorState('planner',projectionSnapshot(projectArchive(a,250)),projectArchive(a,250).run).status).toBe('completed');
+ expect(network).not.toHaveBeenCalled();expect(JSON.stringify(a)).toBe(frozen);
+});
 import type {EventDetail,RunSnapshot,Report} from './계약';
 const iso=(ms:number)=>new Date(Date.UTC(2026,10,6)+ms).toISOString();
 const run:RunSnapshot={run_id:'A',question:'最終 question',control_revision:1,status:'completed',phase:'submitted',plan:[{section_id:'s1',title:'plan',assignee:'researcher-1'}],draft:'final draft',report_id:'report-A',quality:{passed:true,reasons:[]},parent_report_id:null,created_at:iso(0),updated_at:iso(5000),mock_requests:2,actual_model_requests:0};

@@ -1,0 +1,277 @@
+{
+  "started_at": "2026-11-06T08:35:16.032187+00:00",
+  "base_url": "http://127.0.0.1:8768",
+  "scope": "실제 gpt-5.6-luna/교안/브라우저/보고서·재생",
+  "checks": [
+    {
+      "name": "실제 모델 응답·6노드·필수 품질 검사와 정본 제출",
+      "status": "PASS",
+      "actual_model_responses": 26
+    },
+    {
+      "name": "NPC와 생산 오브젝트 클릭의 실제 사건 상세",
+      "status": "PASS"
+    },
+    {
+      "name": "제출 문서 클릭·뷰어·다운로드·파일 재열기 동일성",
+      "status": "PASS",
+      "bytes": 11811
+    },
+    {
+      "name": "재생·시점 이동·새로고침·실시간 복귀·과거 기록의 호출/DB/정본 불변",
+      "status": "PASS"
+    }
+  ],
+  "captures": [
+    {
+      "file": "실제연구_첫화면.png",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 900,
+      "scrollX": 0,
+      "scrollY": 0,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvasCount": 1,
+      "sameCanvas": true
+    },
+    {
+      "file": "실제연구_사건상세.png",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 900,
+      "scrollX": 0,
+      "scrollY": 0,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvasCount": 1,
+      "sameCanvas": true
+    },
+    {
+      "file": "실제연구_최종보고서.png",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 900,
+      "scrollX": 0,
+      "scrollY": 0,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvasCount": 1,
+      "sameCanvas": true
+    },
+    {
+      "file": "실제연구_좁은보고서.png",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "scrollX": 0,
+      "scrollY": 0,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "canvasCount": 1,
+      "sameCanvas": true
+    },
+    {
+      "file": "실제연구_사용량과검사.png",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 900,
+      "scrollX": 0,
+      "scrollY": 0,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvasCount": 1,
+      "sameCanvas": true
+    },
+    {
+      "file": "실제연구_읽기전용재생.png",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 900,
+      "scrollX": 0,
+      "scrollY": 0,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvasCount": 1,
+      "sameCanvas": true
+    }
+  ],
+  "browser_errors": [],
+  "external_requests": [],
+  "budget_before": {
+    "attempt_count": 27,
+    "max_attempts": 40,
+    "remaining_attempts": 13,
+    "spent_usd": 0.04250905,
+    "reserved_usd": 0.0,
+    "max_usd": 1.0,
+    "input_tokens": 133489,
+    "output_tokens": 7614,
+    "unknown_count": 0
+  },
+  "run": {
+    "run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+    "question": "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?",
+    "control_revision": 1,
+    "status": "completed",
+    "phase": "submitted",
+    "plan": [
+      {
+        "section_id": "section-1",
+        "title": "동학농민혁명: 농민 봉기의 발생과 확산",
+        "assignee": "researcher-1",
+        "role": "원인 담당",
+        "seed": "동학 농민 혁명",
+        "instruction": "고부 봉기와 전주성 봉기를 중심으로 동학농민혁명이 언제, 어떻게 전개되었는지 밝히고, 탐관오리의 수탈·사회 모순·동학의 교조 신원 요구 등 복합적 원인을 설명한다.",
+        "budget": 3,
+        "round": 1,
+        "order": 0
+      },
+      {
+        "section_id": "section-2",
+        "title": "청일전쟁: 조선을 둘러싼 청·일의 무력 충돌",
+        "assignee": "researcher-2",
+        "role": "시간순 담당",
+        "seed": "청일 전쟁",
+        "instruction": "청일 양국의 조선 출병과 풍도 해전부터 전쟁 발발까지의 경과를 정리하고, 조선에 대한 종주권 경쟁과 동학농민혁명에 따른 출병이 전쟁의 원인으로 어떻게 작용했는지 밝힌다.",
+        "budget": 3,
+        "round": 1,
+        "order": 1
+      },
+      {
+        "section_id": "section-3",
+        "title": "갑오개혁: 조선 정부 개혁의 추진과 배경",
+        "assignee": "researcher-3",
+        "role": "큰그림 담당",
+        "seed": "갑오개혁",
+        "instruction": "1894년 갑오개혁의 주요 내용과 추진 시기를 제시하고, 동학농민혁명·일본군의 내정 간섭·청일전쟁이 개혁 추진에 미친 영향을 자료에 근거해 설명한다.",
+        "budget": 3,
+        "round": 1,
+        "order": 2
+      },
+      {
+        "section_id": "section-4",
+        "title": "김옥균 암살: 갑신정변 이후의 정치적 파장",
+        "assignee": "researcher-4",
+        "role": "인물 담당",
+        "seed": "김옥균",
+        "instruction": "김옥균이 1894년 상하이에서 암살된 경위와 관련 세력을 살펴보고, 갑신정변의 실패와 조선·청·일 사이의 갈등이 사건의 배경 및 원인으로 어떻게 이어졌는지 정리한다.",
+        "budget": 3,
+        "round": 1,
+        "order": 3
+      }
+    ],
+    "report_id": "44f307dedcbf4c8282d9b4e8a3a207bb",
+    "quality": {
+      "passed": true,
+      "reasons": [],
+      "warnings": [
+        "자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다.",
+        "조사관 사이에 중복 읽기가 있습니다.",
+        "읽었지만 본문 인용에 쓰이지 않은 문서가 있습니다."
+      ],
+      "metrics": {
+        "문장수": 57,
+        "근거붙은문장": 27,
+        "근거율": 47.4,
+        "허위인용": [],
+        "읽은문서": 10,
+        "읽고안쓴": [
+          "을미개혁"
+        ],
+        "인용편중": 18.4,
+        "중복률": 16.7,
+        "절수": 4,
+        "보고서자수": 5978,
+        "인용수": 38,
+        "LLM호출": 26,
+        "격리율": 4.8
+      },
+      "unknown_citations": [],
+      "unread_citations": [],
+      "misattributed_citations": []
+    },
+    "parent_report_id": null,
+    "created_at": "2026-11-06T07:41:38.379884+00:00",
+    "updated_at": "2026-11-06T07:42:18.270229+00:00",
+    "mock_requests": 0,
+    "actual_model_requests": 26,
+    "instruction_history": [
+      "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?"
+    ],
+    "report_title": "1894년 조선의 주요 사건과 발생 원인",
+    "research_stop_reason": "sufficient"
+  },
+  "budget_after_research": {
+    "attempt_count": 27,
+    "max_attempts": 40,
+    "remaining_attempts": 13,
+    "spent_usd": 0.04250905,
+    "reserved_usd": 0.0,
+    "max_usd": 1.0,
+    "input_tokens": 133489,
+    "output_tokens": 7614,
+    "unknown_count": 0
+  },
+  "run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+  "event_count": 91,
+  "research_stop_reason": "sufficient",
+  "report_id": "44f307dedcbf4c8282d9b4e8a3a207bb",
+  "report_sha256": "19c6f5f980533a7e001beecc6f3f2852f44869800c4ad0a7afd3dea0e4d242cd",
+  "download_file": "🧾 실제 연구 보고서.md",
+  "readonly_budget_before": {
+    "attempt_count": 27,
+    "max_attempts": 40,
+    "remaining_attempts": 13,
+    "spent_usd": 0.04250905,
+    "reserved_usd": 0.0,
+    "max_usd": 1.0,
+    "input_tokens": 133489,
+    "output_tokens": 7614,
+    "unknown_count": 0
+  },
+  "readonly_budget_after": {
+    "attempt_count": 27,
+    "max_attempts": 40,
+    "remaining_attempts": 13,
+    "spent_usd": 0.04250905,
+    "reserved_usd": 0.0,
+    "max_usd": 1.0,
+    "input_tokens": 133489,
+    "output_tokens": 7614,
+    "unknown_count": 0
+  },
+  "readonly_db_sha256": "027493e97aaa855197d1f7264aca2263021718530b0c55191165d12157ade90b",
+  "status": "PASS",
+  "finished_at": "2026-11-06T08:35:28.431013+00:00"
+}

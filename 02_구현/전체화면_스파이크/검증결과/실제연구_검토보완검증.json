@@ -1,0 +1,97 @@
+{
+  "범위": "독립 코드검토 RR-01/RR-02의 승인된 백엔드 수정; 전체 프로젝트 완료 아님",
+  "수정파일": [
+    "02_구현/전체화면_스파이크/서버/활동기록.py",
+    "02_구현/전체화면_스파이크/서버/저장소.py",
+    "02_구현/전체화면_스파이크/서버/실행제어.py",
+    "02_구현/전체화면_스파이크/서버/실제연구제어.py",
+    "02_구현/전체화면_스파이크/테스트/테스트_검토보완.py"
+  ],
+  "기존테스트수정": [],
+  "결과": {
+    "RR-01": "이미 종료한 호출 상태는 노드 종료 오류로 재기록하지 않음. 실제 호출은 영속 call_id로 자체 model.started/model.completed/model.failed/result.superseded만 연결하며 종료시각 이후 기록되는 동일 응답 사건도 보존. 노드는 전체 작업 사건/실패 유지.",
+    "RR-02": "calls.output과 event.error에 code/message/status/attempt_id만 안전 저장. 401/429는 안내 문구와 provider_http_401/provider_http_429 큐 사유; timeout/budget_exceeded는 원래 code 유지. 일반 supervise의 중복 실패/가짜 superseded 기록 방지.",
+    "대역호환": "기존 test-double payload/구간 키 모양 유지. call_id 없는 종료 사건은 같은 task/actor의 terminal_linked가 아닌 유일 호출에만 연결. 임의 최신 호출 추정 없음."
+  },
+  "과거링크정책": {
+    "적용": "archive의 기존 read_connection 스냅샷 내 메모리 보정만 수행; Repository provider=openai/mode=research + kind=model_wait + call_id 없는 구간만 대상. 새 명시 call_id 구간/노드/기존 test-double archive는 유지.",
+    "확정조건": "원래 event_ids에 포함된 실제 model.started.output.call_id와 같은 actor/revision의 calls 행을 대조. 사건의 occurred_at이 저장된 started_at~ended_at 안에 있어야 함(끝 미관측은 하한만). 유일한 호출 후보와 중복되지 않는 구간 대응만 허용.",
+    "링크": "확정 call_id와 같은 actor/revision/provider의 model.started/model.completed/model.failed/result.superseded 사건만 원래 event_id/순서 그대로 반환.",
+    "상태": "저장 calls.status를 기준으로 보정. content를 포함한 completed/superseded 응답 사건은 요청 completed로 표시하여 늦은 결과 적용 거부와 네트워크 실패를 구별.",
+    "모호한경우": "후보0/복수/동일 후보 중복 구간은 event_ids=[] 및 event_link_status=unavailable. 임의 최신 응답을 선택하지 않고 원래 상태/시간을 유지. 저장 이벤트/호출/구간/DB/보고서는 수정하지 않음.",
+    "타이밍": "started_at/ended_at/duration_ms/timing_source 재계산 또는 발명 없음."
+  },
+  "테스트": {
+    "cwd": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크",
+    "RED": [
+      {
+        "명령": "\"../../.venv/Scripts/python.exe\" -m pytest 테스트/테스트_검토보완.py -q --basetemp=../../.cache/실제연구_검사/검토보완/임시_RED1c",
+        "실패": 2,
+        "의도": "앞선 completed 호출이 failed로 덮이는 행동 반례",
+        "로그": "호출격리_행동_RED_확정.txt"
+      },
+      {
+        "명령": "\"../../.venv/Scripts/python.exe\" -m pytest 테스트/테스트_검토보완.py -k 안전제공자 -q --basetemp=../../.cache/실제연구_검사/검토보완/임시_RED2b",
+        "실패": 4,
+        "의도": "401/429/timeout/budget이 model_error 큐 사유로 유실",
+        "로그": "안전오류_행동_RED.txt"
+      },
+      {
+        "명령": "\"../../.venv/Scripts/python.exe\" -m pytest 테스트/테스트_검토보완.py -k 과거실제 -q --basetemp=../../.cache/실제연구_검사/검토보완/임시_RED3",
+        "실패": 2,
+        "의도": "legacy call_id 복구 누락/모호한 링크가 그대로 노출",
+        "로그": "과거읽기_RED.txt"
+      }
+    ],
+    "GREEN": [
+      {
+        "명령": "\"../../.venv/Scripts/python.exe\" -m pytest 테스트/테스트_검토보완.py 테스트/테스트_활동기록.py -q --basetemp=../../.cache/실제연구_검사/검토보완/임시_GREEN1",
+        "통과": 8,
+        "로그": "호출격리_GREEN.txt"
+      },
+      {
+        "명령": "\"../../.venv/Scripts/python.exe\" -m pytest 테스트/테스트_검토보완.py -q --basetemp=../../.cache/실제연구_검사/검토보완/임시_GREEN2",
+        "통과": 6,
+        "로그": "안전오류_GREEN.txt"
+      },
+      {
+        "명령": "\"../../.venv/Scripts/python.exe\" -m pytest 테스트/테스트_검토보완.py -q --basetemp=../../.cache/실제연구_검사/검토보완/임시_GREEN3",
+        "통과": 8,
+        "로그": "과거읽기_GREEN.txt"
+      }
+    ],
+    "관련회귀": {
+      "명령": "\"../../.venv/Scripts/python.exe\" -c 'from pathlib import Path; import pytest; import 테스트.테스트_실제연구제어 as 연구; 연구.EVIDENCE=Path(\"../../.cache/실제연구_검사/검토보완/기존연구\").resolve(); raise SystemExit(pytest.main([\"테스트/테스트_검토보완.py\", \"테스트/테스트_활동기록.py\", \"테스트/테스트_실행제어.py\", \"테스트/테스트_실행아카이브.py\", \"테스트/테스트_실제연구제어.py\", \"테스트/테스트_연구앱.py\", \"테스트/테스트_실제연결경계.py\", \"-q\", \"--basetemp=../../.cache/실제연구_검사/검토보완/임시_회귀2\", \"-p\", \"no:cacheprovider\"]))' ",
+      "통과": 44,
+      "경고": 2,
+      "경고내용": "in-process pytest wrapper가 먼저 가져온 anyio/langsmith의 PytestAssertRewriteWarning; 외부 추적은 기존 fixture에서 비활성. 제품 오류 아님.",
+      "구성": "기존36 + 새8 = 44; 전체 suite/UI 아님",
+      "로그": "관련회귀_GREEN_확정.txt"
+    },
+    "초기환경실패": [
+      "RED1 최초 basetemp 상위 폴더 미생성",
+      "fixture role 누락/미등록 값 2회; 제품 RED로 계산하지 않음",
+      "RED2 주입 usage의 attempt_count 누락; 보완 뒤 행동 RED 재확인",
+      "첫 회귀 wrapper의 상대 cache_dir 검증 내부오류(exit3/실행0); cacheprovider 비활성 후 회귀44 통과"
+    ],
+    "검증경계": "실제 RealResearchService/ASGI 앱/SQLite/LangGraph, 명시 주입 모델만 사용. 격리 legacy fixture의 전체 SQLite 파일 바이트와 calls/events/관측시간 및 반복 archive 불변 확인. 오류는 안전 필드/큐 정지/재시도없음/보고서 파일 불변 검증."
+  },
+  "메인필요DTO": {
+    "ActivitySpan": "call_id?: string; event_link_status?: \"unavailable\" (모호한 과거 링크 표시)",
+    "EventDetail.error": "status?: number | null; attempt_id?: string | null"
+  },
+  "제한": [
+    "실제 제공자/API/SDK 요청0; 실제 .env/인증값/사용자 실행DB/보고서/코퍼스 수정0; 서버 제어/설치/Git 없음.",
+    "기존 실제 완료 기록은 직접 열거나 변경하지 않음. 메인이 안전 재기동 후 원본 archive 읽기 검증/브라우저/전체 회귀/커밋 담당.",
+    "과거에 model.started가 없거나 시각·사건·calls 대응이 모호하면 링크 unavailable이며 호출 또는 시각을 발명하지 않음.",
+    "실제 제공자 401/429/timeout/budget 반응 및 역사적 내용 품질은 검증하지 않았으며 주입 오류 경로만 검증.",
+    "독립검토 JSON 파일은 전체 읽었으나 원본 report 문자열 자체 RR-02 이후에 [truncated]가 들어 있었음. 요청에 제공된 확정 원인/계약과 실제 소스로 보완."
+  ],
+  "메인재검증": {
+    "전체Python": 94,
+    "프론트": 58,
+    "실제기록연결": "26구간 혼입0·DB/예산/보고서 불변",
+    "실제브라우저": "최종 번들 PASS",
+    "비고": "메인이 서식/미사용 import를 정리하고 다시 전체 검증했다. 원문의 주입 대역/실제 제공자 구별 유지"
+  }
+}

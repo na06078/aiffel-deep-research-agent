@@ -23,6 +23,13 @@ it('재생 장면의 코드 사건은 archive 전체의 미래 사건이 아니�
  const html=renderToStaticMarkup(<App/>);
  expect(html).toContain('data-code="early-instruction"');expect(html).not.toContain('data-code="future-plan"');expect(html).not.toContain('data-report="future-report"');expect(html).toContain('data-at="1000"');
 });
+it('대역 서버에서 실제 아카이브를 재생해도 제공자와 요청 수는 재생 원본을 따른다',()=>{
+ vi.stubGlobal('location',{hash:'#/control'});
+ const run={run_id:'A',question:'Q',control_revision:1,status:'running' as const,phase:'planning',plan:[],draft:null,report_id:null,quality:{passed:null,reasons:[]},parent_report_id:null,created_at:'2026-11-06T00:00:00Z',updated_at:'2026-11-06T00:00:05Z',mock_requests:0,actual_model_requests:1};
+ const archive:RunArchive={run,revisions:[run],protocol_version:1,provider:'openai',started_at:run.created_at,ended_at:null,recorded_at:run.updated_at,duration_ms:5000,has_measured_spans:false,spans:[],truncated:false,high_watermark_seq:2,events:[{event_id:'instruction',run_id:'A',control_revision:1,actor:'planner',recipient:null,status:'completed',summary:'Q',input:{text:'Q'},output:null,error:null,provider:null,seq:1,type:'instruction.received',occurred_at:run.created_at},{event_id:'started',run_id:'A',control_revision:1,actor:'planner',recipient:null,status:'started',summary:'model.started',input:{prompt:'안전한 테스트 입력'},output:null,error:null,provider:'openai',seq:2,type:'model.started',occurred_at:'2026-11-06T00:00:01Z'}]};
+ replayOverride.value={open:true,runId:'A',archive,at:1500,replay:true,playing:false,projection:projectArchive(archive,1500),loading:false,error:'',setOpen:vi.fn(),select:vi.fn(),seek:vi.fn(),play:vi.fn(),stage:vi.fn(),live:vi.fn(),retry:vi.fn()};
+ const html=renderToStaticMarkup(<App/>);expect(html).not.toContain('모의 응답');expect(html).toContain('기록 재생 중');
+});
 it('실제 앱에 입력 아래 타임라인 손잡이를 연결하고 복원된 기록 모드는 명령을 잠근다',()=>{
  vi.stubGlobal('location',{hash:'#/control'});
  vi.stubGlobal('sessionStorage',{getItem:()=>JSON.stringify({runId:'completed-A',at:1000}),setItem:vi.fn(),removeItem:vi.fn()});

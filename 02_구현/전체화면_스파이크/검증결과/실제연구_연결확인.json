@@ -1,0 +1,39 @@
+{
+  "checked_at": "2026-11-06T07:35:06.098783+00:00",
+  "scope": "실제 모델 최소 호환성 1회",
+  "status": "PASS",
+  "response": {
+    "content": "{\"ok\":true}",
+    "model": "gpt-5.6-luna",
+    "attempt_id": "5ce9dadd95164333a6daa0bf0452602f",
+    "request_id": "req_b73c2b2b7426460b95999bb6300aaf7c",
+    "usage": {
+      "input_tokens": 34,
+      "output_tokens": 11,
+      "reasoning_tokens": 0
+    },
+    "estimated_cost_usd": 2.17e-05
+  },
+  "before": {
+    "attempt_count": 0,
+    "max_attempts": 40,
+    "remaining_attempts": 40,
+    "spent_usd": 0.0,
+    "reserved_usd": 0.0,
+    "max_usd": 1.0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "unknown_count": 0
+  },
+  "after": {
+    "attempt_count": 1,
+    "max_attempts": 40,
+    "remaining_attempts": 39,
+    "spent_usd": 2.17e-05,
+    "reserved_usd": 0.0,
+    "max_usd": 1.0,
+    "input_tokens": 34,
+    "output_tokens": 11,
+    "unknown_count": 0
+  }
+}

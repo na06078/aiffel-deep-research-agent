@@ -1,0 +1,43 @@
+import {afterEach,expect,it,vi} from 'vitest';
+import {renderToStaticMarkup} from 'react-dom/server';
+import {App} from './앱';
+import {EventViewer,ReportViewer} from './상세보기';
+import type {Snapshot,EventDetail} from './계약';
+const state=vi.hoisted(()=>({snapshot:null as Snapshot|null,popup:null as any,drawer:true}));
+vi.mock('react',async original=>{const r=await original<typeof import('react')>();return {...r,useReducer:(reducer:any,initial:any)=>r.useReducer(reducer,{...initial,popup:state.popup,drawer:state.drawer})};});
+vi.mock('./실행기록',()=>({useJournal:()=>({snapshot:state.snapshot,refresh:vi.fn(),connection:'조회 연결됨',error:''})}));
+vi.mock('./마을',()=>({Village:(p:any)=><canvas data-testid="village-canvas" data-mode={p.mode}/>}));
+vi.mock('./기록재생연결',()=>({useRecordedReplay:()=>({open:false,replay:false,archive:null,projection:null,at:0,runs:[],setOpen:vi.fn()})}));
+const run={run_id:'A',question:'연구 질문',control_revision:1,status:'running' as const,phase:'researching',plan:[],draft:null,report_id:null,quality:{passed:false,reasons:['인용 검증 실패']},parent_report_id:null,created_at:'2026-11-06T00:00:00Z',updated_at:'2026-11-06T00:00:01Z',mock_requests:0,actual_model_requests:7};
+it('실제 사건 상세는 요청0이라고 단정하지 않고 원문·오류를 안전하게 보존한다',()=>{
+ const network=vi.fn();vi.stubGlobal('fetch',network);
+ const e:EventDetail={event_id:'safe-e',run_id:'A',seq:1,control_revision:1,occurred_at:run.created_at,type:'model.failed',actor:'planner',recipient:null,status:'failed',summary:'생성 실패',input:{prompt:'<script>safe input</script>'},output:'비밀 없는 긴 출력'.repeat(500),error:{code:'model_unavailable',message:'선택 모델을 사용할 수 없습니다.'},provider:'openai'};
+ const html=renderToStaticMarkup(<EventViewer event={e}/>);
+ expect(html).not.toContain('실제 모델 요청 0');expect(html).toContain('openai');expect(html).toContain('&lt;script&gt;safe input&lt;/script&gt;');expect(html).toContain(e.output as string);expect(html).toContain('선택 모델을 사용할 수 없습니다.');
+ expect(renderToStaticMarkup(<EventViewer event={{...e,provider:'test-double'}}/>)).toContain('테스트 대역');
+ expect(renderToStaticMarkup(<EventViewer event={{...e,provider:'art-demo'}}/>)).toContain('합성 사건');
+ const report={report_id:'R',run_id:'A',control_revision:1,title:'연구 보고서',markdown:'# 실제 fixture 본문',sha256:'nonsecret-fixture',created_at:run.created_at,download_url:'/api/spike/reports/R/download'};
+ const rh=renderToStaticMarkup(<ReportViewer report={report}/>);expect(rh).toContain('Markdown 다운로드');expect(rh).toContain(report.markdown);expect(rh).toContain(report.download_url);expect(network).not.toHaveBeenCalled();
+});
+const actual:Snapshot={protocol_version:1,provider:'openai',mode:'research',runs:[],events:[],waiting:[],queue:[],current_run_id:null,queue_paused:false,queue_pause_reason:null,high_watermark_seq:0,events_has_more:false,mock_requests:0,actual_model_requests:7};
+afterEach(()=>{vi.unstubAllGlobals();state.popup=null;state.snapshot=null;});
+it('실제 서버 루트는 실행 제어로 열고 실제 요청 수를 표시하되 모의 경고나 연결 성공 장식을 만들지 않는다',()=>{
+ vi.stubGlobal('location',{hash:''});state.snapshot=actual;
+ const html=renderToStaticMarkup(<App/>);
+ expect(html).toContain('data-mode="control"');expect(html).toContain('실제 모델 요청 7');
+ expect(html).not.toContain('모의 응답');expect(html).not.toContain('테스트 대역');expect(html).not.toContain('실제 연결');
+});
+it('명시적 에셋 선택은 실제 서버에서도 합성 장면으로 남고 대역 경고와 해제 조작도 유지한다',()=>{
+ vi.stubGlobal('location',{hash:'#/assets'});state.snapshot=actual;
+ const network=vi.fn();vi.stubGlobal('fetch',network);
+ let html=renderToStaticMarkup(<App/>);expect(html).toContain('data-mode="assets"');expect(html).toContain('합성 장면');
+ vi.stubGlobal('location',{hash:'#/control'});state.snapshot={...actual,provider:'test-double',mode:'spike',actual_model_requests:0};state.popup={kind:'제어 도구'};
+ html=renderToStaticMarkup(<App/>);expect(html).toContain('모의 응답');expect(html).toContain('테스트 대역');expect(html).toContain('실제 모델 요청 0');expect(html).toContain('현재 모두 완료');expect(html).toContain('실패 응답');expect(network).not.toHaveBeenCalled();
+});
+it('실제 실행 팝업은 예산·품질 사유와 취소를 제공하고 대역 해제 조작은 숨긴다',()=>{
+ vi.stubGlobal('location',{hash:'#/control'});state.snapshot={...actual,current_run_id:'A',runs:[run],budget:{attempt_count:7,max_attempts:40,remaining_attempts:33,spent_usd:0.0123,reserved_usd:0.03,max_usd:1,input_tokens:1000,output_tokens:200,unknown_count:1}};
+ state.popup={kind:'실행/큐'};const html=renderToStaticMarkup(<App/>);
+ for(const text of ['시도 7 / 40','남은 시도 33','0.0123','0.0300','1.0000','입력 1000','출력 200','불명 1','실제 청구','인용 검증 실패','현재 실행 취소'])expect(html).toContain(text);
+ state.popup={kind:'제어 도구'};const controls=renderToStaticMarkup(<App/>);
+ expect(controls).not.toContain('현재 모두 완료');expect(controls).not.toContain('실패 응답');expect(controls).toContain('현재 실행 취소');expect(controls).not.toMatch(/disabled="">현재 실행 취소/);
+});

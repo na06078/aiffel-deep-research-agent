@@ -12,10 +12,12 @@ from 서버.활동기록 import measured_call, measured_node, measured_publish, 
 
 
 class ExecutionService:
-    def __init__(self, data_dir):
-        self.repo = Repository(data_dir)
+    def __init__(self, data_dir, *, provider="test-double", mode="spike"):
+        self.repo = Repository(data_dir, provider=provider, mode=mode)
         self.repo.restore()
         self.model = FakeModel()
+        self.report_title = "합성 실행 제어 시험 보고서"
+        self.report_filename_prefix = "🧪 스파이크 보고서"
         self.gates = {}
         self.tasks = set()
         self.graph = build_graph(self)
@@ -36,8 +38,24 @@ class ExecutionService:
             with self.repo.transaction() as (db, data):
                 self.fail(db, data, run_id, revision, "dispatcher", str(error), "execution.failed")
 
-    def fail(self, db, data, run_id, revision, actor, message, kind="model.failed", payload=None):
+    def fail(
+        self,
+        db,
+        data,
+        run_id,
+        revision,
+        actor,
+        message,
+        kind="model.failed",
+        payload=None,
+        *,
+        safe_error=None,
+    ):
         active = self.repo.fenced(data, run_id, revision)
+        public_error = safe_error or {"code": "model_error", "message": message}
+        reason = public_error["code"]
+        if reason == "provider_http" and public_error.get("status") in {401, 429}:
+            reason = f"provider_http_{public_error['status']}"
         self.repo.event(
             db,
             run_id,
@@ -45,12 +63,12 @@ class ExecutionService:
             kind if active else "result.superseded",
             actor,
             input=payload,
-            error={"code": "model_error", "message": message},
+            error=public_error,
             status="failed" if active else "superseded",
         )
         if active:
             active.update(status="failed", phase="failed", updated_at=now())
-            data.update(queue_paused=True, queue_pause_reason="model_error")
+            data.update(queue_paused=True, queue_pause_reason=reason)
             self.repo.save_revision(db, active)
 
     async def close(self):
@@ -435,7 +453,7 @@ class ExecutionService:
         if not run:
             return
         report_id = uid()
-        filename = f"🧪 스파이크 보고서_{report_id}.md"
+        filename = f"{self.report_filename_prefix}_{report_id}.md"
         content = run["draft"].encode("utf-8")
         path = self.repo.root / filename
         path.write_bytes(content)
@@ -446,7 +464,7 @@ class ExecutionService:
             "report_id": report_id,
             "run_id": run_id,
             "control_revision": revision,
-            "title": "합성 실행 제어 시험 보고서",
+            "title": self.report_title,
             "markdown": checked.decode("utf-8"),
             "sha256": hashlib.sha256(checked).hexdigest(),
             "created_at": now(),

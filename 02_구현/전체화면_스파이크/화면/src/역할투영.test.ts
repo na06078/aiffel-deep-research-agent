@@ -15,6 +15,12 @@ it('늦은 결과는 같은 버전에서도 현재 작업 말풍선으로 투영
  const s={waiting:[],events:[{event_id:'good',seq:3,actor:'researcher-1',run_id:'B',control_revision:2,type:'model.completed',status:'completed'},{event_id:'stale',seq:4,actor:'researcher-1',run_id:'B',control_revision:2,type:'result.superseded',status:'superseded'}]} as unknown as Snapshot;
  expect(actorState('researcher-1',s,run).event?.event_id).toBe('good');
 });
+it('실제 제공자의 대기 안내는 모의 응답이라고 부르지 않는다',()=>{
+ const run={run_id:'R',control_revision:1,status:'running',question:'실제 질문',plan:[{assignee:'researcher-1',title:'원인 조사',section_id:'s1'}]} as RunSnapshot;
+ const s={provider:'openai',waiting:[{actor:'researcher-1',run_id:'R',control_revision:1,is_stale:false}],events:[{event_id:'started',seq:1,actor:'researcher-1',run_id:'R',control_revision:1,type:'model.started',status:'waiting',summary:'model.started'}]} as Snapshot;
+ expect(actorState('researcher-1',s,run).summary).toBe('원인 조사 · 모델 응답 대기');
+ expect(actorState('researcher-1',{...s,provider:'test-double'},run).summary).toBe('원인 조사 · 모의 응답 대기');
+});
 it('내부 사건명 대신 실제 질문·배정 제목과 관측 상태를 말풍선에 표시한다',()=>{
  const run={run_id:'B',control_revision:2,status:'running',question:'도시 숲의 효과',plan:[{assignee:'researcher-1',title:'기온 완화',section_id:'s1'}]} as RunSnapshot;
  const s={waiting:[{actor:'researcher-1',run_id:'B',control_revision:2,is_stale:false}],events:[{event_id:'p',seq:1,actor:'planner',run_id:'B',control_revision:2,type:'plan.created',status:'completed',summary:'plan.created'},{event_id:'r',seq:2,actor:'researcher-1',run_id:'B',control_revision:2,type:'model.started',status:'waiting',summary:'model.started'}]} as Snapshot;

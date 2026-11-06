@@ -44,7 +44,7 @@ export function measuredElapsed(archive:RunArchive,observedAt?:number):number|nu
 }
 import type {Assignment,EventDetail,Report,RunSnapshot,Snapshot,Gate} from './계약';
 
-export interface ReplayProjection {run:RunSnapshot;events:EventDetail[];report:Report|null;waiting:Gate[]}
+export interface ReplayProjection {provider:RunArchive['provider'];run:RunSnapshot;events:EventDetail[];report:Report|null;waiting:Gate[]}
 export function offsetMs(archive:RunArchive,iso:string):number|null {
  const n=Date.parse(iso)-Date.parse(archive.started_at);
  return Number.isFinite(n)&&n>=0?n:null;
@@ -68,7 +68,7 @@ export function projectArchive(archive:RunArchive,at_ms:number):ReplayProjection
   switch(e.type){
    case 'plan.created':run={...run,plan:Array.isArray(e.output)?structuredClone(e.output) as Assignment[]:[],phase:'researching'};break;
    case 'model.started':{
-    run={...run,mock_requests:run.mock_requests+1};
+    run=e.provider==='openai'?{...run,actual_model_requests:run.actual_model_requests+1}:{...run,mock_requests:run.mock_requests+1};
     const gateId=(e.output as {gate_id?:string})?.gate_id;
     if(gateId)waiting.set(e.actor,{gate_id:gateId,run_id:e.run_id,control_revision:e.control_revision,actor:e.actor,section_id:(e.input as {assignment?:Assignment})?.assignment?.section_id??'',created_at:e.occurred_at,is_stale:false});
     break;
@@ -85,8 +85,8 @@ export function projectArchive(archive:RunArchive,at_ms:number):ReplayProjection
    case 'run.interrupted':run={...run,status:'interrupted',phase:'interrupted'};waiting.clear();break;
   }
  }
- return {run,events,report,waiting:[...waiting.values()]};
+ return {provider:archive.provider,run,events,report,waiting:[...waiting.values()]};
 }
 export function projectionSnapshot(projection:ReplayProjection):Snapshot {
- return {protocol_version:1,mode:'spike',provider:'test-double',current_run_id:projection.run.run_id,runs:[projection.run],queue:[],queue_paused:false,queue_pause_reason:null,waiting:projection.waiting,events:projection.events,events_has_more:false,high_watermark_seq:Math.max(0,...projection.events.map(e=>e.seq)),mock_requests:projection.run.mock_requests,actual_model_requests:0};
+ return {protocol_version:1,mode:projection.provider==='openai'?'research':'spike',provider:projection.provider,current_run_id:projection.run.run_id,runs:[projection.run],queue:[],queue_paused:false,queue_pause_reason:null,waiting:projection.waiting,events:projection.events,events_has_more:false,high_watermark_seq:Math.max(0,...projection.events.map(e=>e.seq)),mock_requests:projection.run.mock_requests,actual_model_requests:projection.run.actual_model_requests};
 }

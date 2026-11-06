@@ -27,7 +27,11 @@ class ApiError(Exception):
 
 
 class Repository:
-    def __init__(self, data_dir: Path):
+    def __init__(self, data_dir: Path, *, provider="test-double", mode="spike"):
+        if (provider, mode) not in {("test-double", "spike"), ("openai", "research")}:
+            raise ValueError("저장소 제공자와 실행 모드의 조합을 확인해 주세요.")
+        self.provider = provider
+        self.mode = mode
         self.root = data_dir.resolve()
         self.root.mkdir(parents=True, exist_ok=True)
         self.path = self.root / "실행기록.sqlite3"
@@ -137,7 +141,7 @@ class Repository:
             "input": copy.deepcopy(input),
             "output": copy.deepcopy(output),
             "error": error,
-            "provider": "test-double",
+            "provider": self.provider,
         }
         cursor = db.execute(
             "INSERT INTO events(event_id,body) VALUES(?,?)", (event["event_id"], encode(event))
@@ -192,15 +196,100 @@ class Repository:
             return {
                 **copy.deepcopy(state),
                 "protocol_version": 1,
-                "mode": "spike",
-                "provider": "test-double",
+                "mode": self.mode,
+                "provider": self.provider,
                 "waiting": waiting,
                 "events": events,
                 "events_has_more": db.execute("SELECT COUNT(*) FROM events").fetchone()[0] > 100,
                 "high_watermark_seq": watermark,
-                "mock_requests": len(calls),
-                "actual_model_requests": 0,
+                "mock_requests": len(calls) if self.provider == "test-double" else 0,
+                "actual_model_requests": sum(
+                    run.get("actual_model_requests", 0) for run in state["runs"]
+                ),
             }
+
+    def normalize_legacy_spans(self, db, run_id, spans, events):
+        """오염된 과거 실제 호출 링크만 메모리에서 보정한다. 원본 저널은 불변이다.
+
+        시작 사건 ID·actor·revision·관측 시각·calls 행이 모두 일치하는 유일한
+        대응만 허용한다. 단순 event_ids[0]/마지막 응답/행 순서는 근거가 아니다.
+        """
+        calls = {
+            r["call_id"]: dict(r)
+            for r in db.execute("SELECT * FROM calls WHERE run_id=?", (run_id,))
+        }
+        candidates = {}
+        for span in spans:
+            if span["kind"] != "model_wait" or span.get("call_id"):
+                continue
+            matches = set()
+            for event in events:
+                output = event.get("output")
+                if (
+                    event["provider"] != "openai"
+                    or event["type"] != "model.started"
+                    or event["event_id"] not in span["event_ids"]
+                    or not isinstance(output, dict)
+                ):
+                    continue
+                call_id = output.get("call_id")
+                call = calls.get(call_id)
+                if (
+                    not call
+                    or (call["actor"], call["revision"])
+                    != (span["actor"], span["control_revision"])
+                    or (event["actor"], event["control_revision"])
+                    != (span["actor"], span["control_revision"])
+                ):
+                    continue
+                try:
+                    started = datetime.fromisoformat(span["started_at"])
+                    occurred = datetime.fromisoformat(event["occurred_at"])
+                    ended = datetime.fromisoformat(span["ended_at"]) if span["ended_at"] else None
+                    if occurred < started or (ended is not None and occurred > ended):
+                        continue
+                except (ValueError, TypeError):
+                    continue
+                matches.add(call_id)
+            candidates[span["span_id"]] = matches
+        for span in spans:
+            if span["span_id"] not in candidates:
+                continue
+            matches = candidates[span["span_id"]]
+            if len(matches) != 1 or sum(matches == other for other in candidates.values()) != 1:
+                span.update(event_ids=[], event_link_status="unavailable")
+                continue
+            call_id = next(iter(matches))
+            call = calls[call_id]
+            own = []
+            for event in events:
+                if (event["provider"], event["actor"], event["control_revision"]) != (
+                    "openai",
+                    span["actor"],
+                    span["control_revision"],
+                ) or event["type"] not in {
+                    "model.started",
+                    "model.completed",
+                    "model.failed",
+                    "result.superseded",
+                }:
+                    continue
+                values = [event.get("output"), event.get("input")]
+                if any(isinstance(v, dict) and v.get("call_id") == call_id for v in values):
+                    own.append(event)
+            span.update(call_id=call_id, event_ids=[e["event_id"] for e in own])
+            # 늦은 응답의 적용 거절은 네트워크 실패가 아니다. 타이밍은 그대로 둔다.
+            if any(
+                e["type"] in {"model.completed", "result.superseded"}
+                and isinstance(e["output"], dict)
+                and "content" in e["output"]
+                for e in own
+            ):
+                span["status"] = "completed"
+            elif call["status"] in {"failed", "cancelled", "interrupted", "running", "superseded"}:
+                span["status"] = call["status"]
+            elif call["status"] == "completed":
+                span["status"] = "completed"
 
     def archive(self, run_id):
         # 독립 읽기 전용 연결의 일관된 스냅샷. 실행 제어/모델/저널 쓰기 경로와 분리한다.
@@ -230,6 +319,8 @@ class Repository:
                         "SELECT body FROM activity_spans WHERE run_id=? ORDER BY rowid", (run_id,)
                     )
                 ]
+            if self.provider == "openai" and self.mode == "research":
+                self.normalize_legacy_spans(db, run_id, spans, events)
             recorded = now()
             times = [run["created_at"], run["updated_at"]]
             times.extend(e["occurred_at"] for e in events)
@@ -245,7 +336,7 @@ class Repository:
             )
             return {
                 "protocol_version": 1,
-                "provider": "test-double",
+                "provider": self.provider,
                 "run": run,
                 "revisions": revisions,
                 "events": events,

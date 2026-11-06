@@ -3,6 +3,8 @@ import type { EventDetail, RunSnapshot } from './계약';
 // 실행/시간/재생 연결 정본. 메인만 수정하며 작업자는 읽기 전용으로 사용한다.
 export interface ActivitySpan {
   span_id: string;
+  call_id?: string | null;
+  event_link_status?: 'unavailable';
   run_id: string;
   control_revision: number;
   actor: string;
@@ -19,7 +21,7 @@ export interface ActivitySpan {
 
 export interface RunArchive {
   protocol_version: 1;
-  provider: 'test-double';
+  provider: 'test-double' | 'openai';
   run: RunSnapshot;
   revisions: RunSnapshot[];
   events: EventDetail[];

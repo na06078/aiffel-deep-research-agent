@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "scope": "실제 UI·POST 대역·실호출 없음",
+  "measurements": [
+    {
+      "width": 390,
+      "height": 844,
+      "popupBottom": 656.625,
+      "composerTop": 668.625,
+      "popupScrollTop": 5892,
+      "popupScrollHeight": 6412,
+      "windowScroll": 0
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "popupBottom": 731.8125,
+      "composerTop": 743.8125,
+      "popupScrollTop": 2436,
+      "popupScrollHeight": 3021,
+      "windowScroll": 0
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "popupBottom": 246.8125,
+      "composerTop": 258.8125,
+      "popupScrollTop": 3048,
+      "popupScrollHeight": 3230,
+      "windowScroll": 0
+    }
+  ],
+  "actual_requests": 27
+}

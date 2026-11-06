@@ -50,7 +50,49 @@ class Activity:
 
 
 def attach_event(db, event):
-    for span in _current.get():
+    spans = _current.get()
+    call_id = next(
+        (
+            value["call_id"]
+            for key in ("output", "input")
+            if isinstance(value := event.get(key), dict) and value.get("call_id")
+        ),
+        None,
+    )
+    # 기존 대역은 종료 payload에 call_id가 없다. 같은 task/actor의 유일한
+    # 미연결 호출만 허용하며 payload 모양은 바꾸지 않는다. 실제 제공자는 이 추론 금지.
+    compatibility = [
+        s
+        for s in spans
+        if s.call_id
+        and s.body["actor"] == event["actor"]
+        and not getattr(s, "terminal_linked", False)
+    ]
+    for span in spans:
+        if span.call_id:
+            if event["provider"] == "test-double" and call_id is None:
+                if event["type"] not in {
+                    "model.completed",
+                    "model.failed",
+                    "draft.created",
+                    "result.superseded",
+                }:
+                    continue
+                if len(compatibility) != 1 or compatibility[0] is not span:
+                    continue
+            elif call_id != span.call_id or event["type"] not in {
+                "model.started",
+                "model.completed",
+                "model.failed",
+                "result.superseded",
+            }:
+                continue
+            if event["type"] != "model.started":
+                span.terminal_linked = True
+                if event["provider"] == "test-double" and event["status"] == "superseded":
+                    span.body["status"] = "superseded"
+        elif span.body["ended_at"] is not None:
+            continue
         if (span.body["run_id"], span.body["control_revision"]) == (
             event["run_id"],
             event["control_revision"],
@@ -60,13 +102,15 @@ def attach_event(db, event):
             span.save(db)
 
 
-def start_call(db, state, actor, call_id):
+def start_call(db, state, actor, call_id, *, provider="test-double"):
     spans = _current.get()
     if not isinstance(spans, list):
         return
     span = Activity(
         state["run_id"], state["revision"], actor, actor, "model", "model_wait", call_id
     )
+    if provider == "openai":
+        span.body["call_id"] = call_id
     spans.append(span)
     span.save(db)
 
@@ -143,6 +187,9 @@ def measured_node(label, actor, track):
                         )
                         run = self.repo.run(data, state["run_id"])
                         for item in spans:
+                            # 요청 완료와 노드/파싱/결과 적용의 성패는 다른 사실이다.
+                            if item.call_id and item.body["ended_at"] is not None:
+                                continue
                             item.finish(db, outcome(item, run, state["revision"], error_status))
                         db.commit()
                 finally:

@@ -38,7 +38,9 @@ class Cancel(Continue):
     control_revision: int = Field(gt=0)
 
 
-def create_app(data_dir: Path | None = None, static_dir: Path | None = None):
+def create_app(
+    data_dir: Path | None = None, static_dir: Path | None = None, *, service_factory=None
+):
     root = Path(__file__).resolve().parents[3]
     configured = os.environ.get("SPIKE_DATA_DIR") if data_dir is None else None
     if configured:
@@ -50,13 +52,15 @@ def create_app(data_dir: Path | None = None, static_dir: Path | None = None):
 
     @asynccontextmanager
     async def lifespan(app):
-        app.state.service = ExecutionService(data_dir)
+        factory = app.state.service_factory or ExecutionService
+        app.state.service = factory(data_dir)
         try:
             yield
         finally:
             await app.state.service.close()
 
     app = FastAPI(lifespan=lifespan)
+    app.state.service_factory = service_factory
     app.add_middleware(LoopbackOnly)
 
     @app.exception_handler(ApiError)
@@ -68,7 +72,13 @@ def create_app(data_dir: Path | None = None, static_dir: Path | None = None):
 
     @app.get("/api/spike/snapshot")
     async def snapshot():
-        return app.state.service.repo.snapshot()
+        service = app.state.service
+        result = service.repo.snapshot()
+        if service.repo.provider == "openai":
+            budget = service.model.usage()
+            result["budget"] = budget
+            result["actual_model_requests"] = budget["attempt_count"]
+        return result
 
     @app.exception_handler(RequestValidationError)
     async def validation_error(request: Request, error: RequestValidationError):
@@ -93,11 +103,15 @@ def create_app(data_dir: Path | None = None, static_dir: Path | None = None):
 
     @app.get("/api/health")
     async def health():
+        service = app.state.service
+        repo = getattr(service, "repo", None)
+        provider = getattr(repo, "provider", "test-double")
+        actual = service.model.usage()["attempt_count"] if provider == "openai" else 0
         return {
             "status": "ok",
-            "mode": "spike",
-            "provider": "test-double",
-            "actual_model_requests": 0,
+            "mode": getattr(repo, "mode", "spike"),
+            "provider": provider,
+            "actual_model_requests": actual,
         }
 
     @app.post("/api/spike/commands", status_code=202)
@@ -106,6 +120,10 @@ def create_app(data_dir: Path | None = None, static_dir: Path | None = None):
 
     @app.post("/api/spike/releases")
     async def releases(body: Release):
+        if app.state.service.repo.provider != "test-double":
+            raise ApiError(
+                409, "test_controls_unavailable", "실제 연구에서는 모의 응답을 조작할 수 없습니다."
+            )
         return app.state.service.release(body.gate_ids, body.outcome)
 
     @app.post("/api/spike/queue/continue")

@@ -1,7 +1,16 @@
 // 스파이크 연결 정본. 메인만 수정하며 서버·화면 작업자는 읽기 전용으로 사용한다.
 export type RunStatus = 'running' | 'completed' | 'blocked' | 'failed' | 'cancelled' | 'interrupted';
 export type ReleaseOutcome = 'success' | 'failure' | 'quality_fail';
+export interface BudgetSummary {
+  attempt_count: number; max_attempts: number; remaining_attempts: number;
+  spent_usd: number; reserved_usd: number; max_usd: number;
+  input_tokens: number; output_tokens: number; unknown_count: number;
+}
 export interface Assignment { section_id: string; title: string; assignee: string }
+export interface QualitySummary {
+  passed: boolean | null; reasons: string[]; warnings?: string[];
+  metrics?: Record<string, unknown>;
+}
 export interface RunSnapshot {
   run_id: string;
   question: string;
@@ -11,12 +20,12 @@ export interface RunSnapshot {
   plan: Assignment[];
   report_id: string | null;
   draft: string | null;
-  quality: { passed: boolean | null; reasons: string[] };
+  quality: QualitySummary;
   parent_report_id: string | null;
   created_at: string;
   updated_at: string;
   mock_requests: number;
-  actual_model_requests: 0;
+  actual_model_requests: number;
 }
 export interface QueueItem { instruction_id: string; text: string; status: 'queued' }
 export interface Gate {
@@ -43,13 +52,13 @@ export interface JournalEvent {
 export interface EventDetail extends JournalEvent {
   input: unknown;
   output: unknown;
-  error: { code: string; message: string } | null;
-  provider: 'test-double' | 'art-demo' | null;
+  error: { code: string; message: string; status?: number | null; attempt_id?: string | null } | null;
+  provider: 'test-double' | 'openai' | 'art-demo' | null;
 }
 export interface Snapshot {
   protocol_version: 1;
-  mode: 'spike';
-  provider: 'test-double';
+  mode: 'spike' | 'research';
+  provider: 'test-double' | 'openai';
   current_run_id: string | null;
   runs: RunSnapshot[];
   queue: QueueItem[];
@@ -60,7 +69,8 @@ export interface Snapshot {
   events_has_more: boolean;
   high_watermark_seq: number;
   mock_requests: number;
-  actual_model_requests: 0;
+  actual_model_requests: number;
+  budget?: BudgetSummary;
 }
 export interface Admission {
   instruction_id: string;

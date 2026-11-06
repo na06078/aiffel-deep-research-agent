@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+  "model_spans": 26,
+  "problems": [],
+  "db_unchanged": true,
+  "budget_unchanged": true,
+  "actual_requests": 27,
+  "report_sha256": "19c6f5f980533a7e001beecc6f3f2852f44869800c4ad0a7afd3dea0e4d242cd",
+  "scope": "실제 기존 연구 기록의 읽기 전용 API 검사"
+}
