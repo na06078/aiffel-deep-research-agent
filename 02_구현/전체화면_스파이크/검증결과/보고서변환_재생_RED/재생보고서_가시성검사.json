@@ -1,0 +1,13 @@
+{
+  "checks": [
+    {
+      "name": "열린 보고서→제출 이전",
+      "passed": false
+    }
+  ],
+  "posts": [],
+  "base_url": "http://127.0.0.1:8768",
+  "status": "FAIL",
+  "error": "제출 이전으로 되감았는데 보고서 본문/다운로드가 남았습니다.",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\보고서변환_재생가시성검사.py\", line 63, in main\n    assert first, \"제출 이전으로 되감았는데 보고서 본문/다운로드가 남았습니다.\"\n           ^^^^^\nAssertionError: 제출 이전으로 되감았는데 보고서 본문/다운로드가 남았습니다.\n"
+}

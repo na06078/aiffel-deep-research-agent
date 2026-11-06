@@ -1,0 +1,109 @@
+{
+  "started_at": "2026-11-06T12:59:22.302212+00:00",
+  "scope": "actual",
+  "checks": [
+    {
+      "name": "같은 정본의 HTML/PDF 생성·다운로드·실제 재열기",
+      "status": "PASS",
+      "report_id": "44f307dedcbf4c8282d9b4e8a3a207bb",
+      "source_sha256": "19c6f5f980533a7e001beecc6f3f2852f44869800c4ad0a7afd3dea0e4d242cd",
+      "html_file": ".cache\\보고서변환_실사용\\보고서변환_실제_최종검사\\첫보고서.html",
+      "pdf_file": ".cache\\보고서변환_실사용\\보고서변환_실제_최종검사\\첫보고서.pdf",
+      "html_sha256": "cf1d54941222acc2777e052c4e6b3e37e9a86ef626ed04b1f8f43bf6ea414c77",
+      "pdf_sha256": "251af212f7b9b6910e9fec90e1de427164aececaac4d8866eac504fc5ad343ec",
+      "pdf_pages": 3,
+      "source_text_lines_checked": 25
+    },
+    {
+      "name": "세 해상도에서 변환 조작·닫기·입력·같은 마을 보존",
+      "status": "PASS"
+    },
+    {
+      "name": "실제 사용자 실행본의 새로고침·과거 보고서 변환 복원",
+      "status": "PASS"
+    },
+    {
+      "name": "변환 외 POST 없음·모델/상태/큐/정본 불변·외부 자원 요청 없음",
+      "status": "PASS"
+    }
+  ],
+  "posts": [
+    "http://127.0.0.1:8768/api/spike/reports/44f307dedcbf4c8282d9b4e8a3a207bb/exports",
+    "http://127.0.0.1:8768/api/spike/reports/44f307dedcbf4c8282d9b4e8a3a207bb/exports"
+  ],
+  "browser_errors": [],
+  "external_requests": [],
+  "captures": [
+    {
+      "file": "첫_HTML_재열기.png"
+    },
+    {
+      "file": "첫_PDF_전체쪽.png"
+    },
+    {
+      "file": "보고서_넓은창.png",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "보고서_좁은창.png",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "보고서_낮은창.png",
+      "width": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 390
+      }
+    }
+  ],
+  "model_attempts_before": 27,
+  "reports": [
+    {
+      "report_id": "44f307dedcbf4c8282d9b4e8a3a207bb",
+      "source_sha256": "19c6f5f980533a7e001beecc6f3f2852f44869800c4ad0a7afd3dea0e4d242cd",
+      "html_file": ".cache\\보고서변환_실사용\\보고서변환_실제_최종검사\\첫보고서.html",
+      "pdf_file": ".cache\\보고서변환_실사용\\보고서변환_실제_최종검사\\첫보고서.pdf",
+      "html_sha256": "cf1d54941222acc2777e052c4e6b3e37e9a86ef626ed04b1f8f43bf6ea414c77",
+      "pdf_sha256": "251af212f7b9b6910e9fec90e1de427164aececaac4d8866eac504fc5ad343ec",
+      "pdf_pages": 3,
+      "source_text_lines_checked": 25
+    }
+  ],
+  "model_attempts_after": 27,
+  "protected_files_unchanged": true,
+  "status": "PASS",
+  "finished_at": "2026-11-06T12:59:32.085565+00:00"
+}

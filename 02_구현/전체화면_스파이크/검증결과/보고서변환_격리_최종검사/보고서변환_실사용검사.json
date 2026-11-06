@@ -1,0 +1,143 @@
+{
+  "started_at": "2026-11-06T12:58:47.795220+00:00",
+  "scope": "isolated",
+  "checks": [
+    {
+      "name": "격리 실제 HTTP 변환 실패 표시와 Markdown 보존",
+      "status": "PASS"
+    },
+    {
+      "name": "같은 정본의 HTML/PDF 생성·다운로드·실제 재열기",
+      "status": "PASS",
+      "report_id": "8235d1956b2f4df5bfc705e06953c4d8",
+      "source_sha256": "5fcd42c8ea44b4a2430e6c156911ba3a13c54f7dafe2b80145963e50768f0987",
+      "html_file": ".cache\\보고서변환_실사용\\보고서변환_격리_최종검사\\첫보고서.html",
+      "pdf_file": ".cache\\보고서변환_실사용\\보고서변환_격리_최종검사\\첫보고서.pdf",
+      "html_sha256": "67af5d69b3df44e1303993c0a60e1dd9715c0770163a01d8c27e6ad971c585d6",
+      "pdf_sha256": "d22ddc0d5f1804ba1c58f1d054e29b0c8e5214e382bc9afa206f4e1fcd898ea9",
+      "pdf_pages": 3,
+      "source_text_lines_checked": 27
+    },
+    {
+      "name": "세 해상도에서 변환 조작·닫기·입력·같은 마을 보존",
+      "status": "PASS"
+    },
+    {
+      "name": "보고서 전환·늦은 응답 격리 및 긴 문서의 실제 페이지 변환",
+      "status": "PASS",
+      "report_id": "f8872c4d40e64473952f268f1fb5cf52",
+      "source_sha256": "f71f32f036fbd1636aa9508e8e6d32b590ffa41f24fdd8560ef7675df8d3de00",
+      "html_file": ".cache\\보고서변환_실사용\\보고서변환_격리_최종검사\\긴보고서.html",
+      "pdf_file": ".cache\\보고서변환_실사용\\보고서변환_격리_최종검사\\긴보고서.pdf",
+      "html_sha256": "418d9ae4d3e00536722fcde467387b3afb779e79b17c1f07422025e5fea750eb",
+      "pdf_sha256": "acf848c9fcf3dd4819f1578c3314ce140761f1354d09c0abb2841e3d7fa7f8d3",
+      "pdf_pages": 14,
+      "source_text_lines_checked": 94
+    },
+    {
+      "name": "실제 서버 재시작 후 파생 파일/상태 재사용·무재조사",
+      "status": "PASS"
+    },
+    {
+      "name": "변환 외 POST 없음·모델/상태/큐/정본 불변·외부 자원 요청 없음",
+      "status": "PASS"
+    }
+  ],
+  "posts": [
+    "http://127.0.0.1:8781/api/spike/reports/8235d1956b2f4df5bfc705e06953c4d8/exports",
+    "http://127.0.0.1:8781/api/spike/reports/8235d1956b2f4df5bfc705e06953c4d8/exports",
+    "http://127.0.0.1:8781/api/spike/reports/8235d1956b2f4df5bfc705e06953c4d8/exports",
+    "http://127.0.0.1:8781/api/spike/reports/f8872c4d40e64473952f268f1fb5cf52/exports",
+    "http://127.0.0.1:8781/api/spike/reports/f8872c4d40e64473952f268f1fb5cf52/exports"
+  ],
+  "browser_errors": [],
+  "external_requests": [],
+  "captures": [
+    {
+      "file": "첫_HTML_재열기.png"
+    },
+    {
+      "file": "첫_PDF_전체쪽.png"
+    },
+    {
+      "file": "보고서_넓은창.png",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "보고서_좁은창.png",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "보고서_낮은창.png",
+      "width": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 390
+      }
+    },
+    {
+      "file": "긴_HTML_재열기.png"
+    },
+    {
+      "file": "긴_PDF_전체쪽.png"
+    }
+  ],
+  "model_attempts_before": 0,
+  "reports": [
+    {
+      "report_id": "8235d1956b2f4df5bfc705e06953c4d8",
+      "source_sha256": "5fcd42c8ea44b4a2430e6c156911ba3a13c54f7dafe2b80145963e50768f0987",
+      "html_file": ".cache\\보고서변환_실사용\\보고서변환_격리_최종검사\\첫보고서.html",
+      "pdf_file": ".cache\\보고서변환_실사용\\보고서변환_격리_최종검사\\첫보고서.pdf",
+      "html_sha256": "67af5d69b3df44e1303993c0a60e1dd9715c0770163a01d8c27e6ad971c585d6",
+      "pdf_sha256": "d22ddc0d5f1804ba1c58f1d054e29b0c8e5214e382bc9afa206f4e1fcd898ea9",
+      "pdf_pages": 3,
+      "source_text_lines_checked": 27
+    },
+    {
+      "report_id": "f8872c4d40e64473952f268f1fb5cf52",
+      "source_sha256": "f71f32f036fbd1636aa9508e8e6d32b590ffa41f24fdd8560ef7675df8d3de00",
+      "html_file": ".cache\\보고서변환_실사용\\보고서변환_격리_최종검사\\긴보고서.html",
+      "pdf_file": ".cache\\보고서변환_실사용\\보고서변환_격리_최종검사\\긴보고서.pdf",
+      "html_sha256": "418d9ae4d3e00536722fcde467387b3afb779e79b17c1f07422025e5fea750eb",
+      "pdf_sha256": "acf848c9fcf3dd4819f1578c3314ce140761f1354d09c0abb2841e3d7fa7f8d3",
+      "pdf_pages": 14,
+      "source_text_lines_checked": 94
+    }
+  ],
+  "model_attempts_after": 0,
+  "status": "PASS",
+  "finished_at": "2026-11-06T12:59:13.934577+00:00"
+}

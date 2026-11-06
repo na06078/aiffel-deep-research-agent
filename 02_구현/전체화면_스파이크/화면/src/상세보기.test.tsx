@@ -1,4 +1,13 @@
 import {expect,it} from 'vitest';
+it('같은 보고서 안에서 HTML과 PDF 생성 제어를 제공하며 조회 전 다운로드는 없다',()=>{
+ const report={report_id:'A',run_id:'r',control_revision:1,title:'제목',created_at:'2026-11-06T01:02:03Z',markdown:'# 본문',download_url:'/md',sha256:'hash'};
+ const html=renderToStaticMarkup(<ReportViewer report={report}/>);
+ expect(html).toContain('data-testid="report-exports"');
+ expect(html).toContain('data-testid="export-html-create"');
+ expect(html).toContain('data-testid="export-pdf-create"');
+ expect(html).not.toContain('export-html-download');
+ expect(html).toContain('변환 상태를 조회');
+});
 import {renderToStaticMarkup} from 'react-dom/server';
 import {EventViewer,ReportViewer} from './상세보기';
 import type {EventDetail,Report} from './계약';

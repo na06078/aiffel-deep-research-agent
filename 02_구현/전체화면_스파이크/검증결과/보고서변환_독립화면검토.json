@@ -1,0 +1,132 @@
+{
+  "review_type": "독립 프런트엔드 읽기 전용 검토",
+  "verdict": "changes_requested",
+  "passed": false,
+  "summary": "기존 대상 테스트 4개 파일·31개 항목은 통과했습니다. 보고서 ID+해시 세션 분리, 늦은 GET/POST 방어, SSR에서 효과 실행 금지와 기존 Markdown/경고 보존은 확인했습니다. 다만 실제 App 호출자가 재생 시점 변경과 이미 열린 보고서 팝업을 분리해 두어, 보고서 제출 이전 시점에도 미래 보고서와 HTML/PDF 생성 제어가 남는 명세 위반을 발견했습니다. 실제 브라우저와 구현 중인 서버 통합의 완료 판정은 아닙니다.",
+  "baseline": "검토 시점의 현재 화면 소스와 실제 App 호출자. Git 비교·Git 쓰기 없음. 서버 작업자는 구현 중이므로 서버 소스와 서버 테스트는 검토하지 않음.",
+  "scope_root": "02_구현/전체화면_스파이크",
+  "standards": {
+    "status": "pass_with_limits",
+    "sources": ["상위 AGENTS.md의 사용자 승인·범위 보존·실행/검증 구분 규칙", "기술 명세서 23.3 작업자별 파일 소유 경계", "이번 독립 검토 위임의 읽기 전용 및 단일 증거 JSON 허용 경계"],
+    "assessment": "검토 대상에서 새 모델/연구 지시/큐 호출 연결은 발견하지 않았습니다. 구현 수정 없이 정적 추적과 허용된 프런트 테스트만 수행했습니다. 저장은 이 JSON 하나뿐이며 기존 작업자 인계 문서는 변경하지 않았습니다. 전체 저장소 규칙·보안 감사 판정은 아닙니다."
+  },
+  "spec": {
+    "status": "fail",
+    "sources": ["📘 딥리서치 에이전트 기술 명세서.md:554-582 (23절)", "📘 딥리서치 에이전트 작업 명세서.md:119-122 (D-05~D-08)", "📘 딥리서치 에이전트 작업 명세서.md:226 (A-18)"]
+  },
+  "findings": [
+    {
+      "id": "FE-EXP-01",
+      "severity": "P2",
+      "axis": "spec",
+      "title": "재생 시점을 제출 이전으로 이동해도 열린 미래 보고서와 생성 제어가 유지됨",
+      "evidence_type": "정적 실제 호출자 추적으로 확인한 도달 가능한 결함. 실제 브라우저 재현은 미실행.",
+      "requirement": {
+        "source": "📘 딥리서치 에이전트 기술 명세서.md:574",
+        "text": "재생 중에도 이미 존재하는 정본의 변환만 허용하며 과거에 없던 미래 보고서를 노출하지 않는다."
+      },
+      "trigger": [
+        "완료 시점 또는 실시간 상태에서 제출된 종이를 눌러 보고서 A 팝업을 엽니다.",
+        "팝업이 열린 상태에서 타임라인의 기록 시점 슬라이더·이전 단계·재생을 이용해 A 제출 이전 시점으로 이동합니다.",
+        "또는 타임라인 실행 선택에서 다른 실행 B의 초기 시점으로 전환합니다."
+      ],
+      "evidence": [
+        {"path": "화면/src/앱.tsx:31,66-71", "detail": "선택 보고서는 report 로컬 상태에 보관하며 open()/close()만 선택 토큰을 무효화합니다. showReport()의 늦은 응답 채택 조건도 selectionToken 일치뿐이고 재생 실행·시점은 검사하지 않습니다."},
+        {"path": "화면/src/앱.tsx:82-85", "detail": "마을 종이 자체는 재생 projection.report를 따릅니다. 따라서 제출 이전으로 되감으면 마을에서는 보고서가 사라지지만 기존 팝업 상태는 그대로 남습니다."},
+        {"path": "화면/src/앱.tsx:89,93,111", "detail": "팝업에는 재생 배너만 추가됩니다. ReportViewer 렌더 조건은 popup.kind===report && report뿐입니다. Timeline의 onSelect/onSeek/onPlay/onStage는 playback 함수를 직접 전달하여 팝업이나 report 선택 수명을 정리하지 않습니다."},
+        {"path": "화면/src/기록재생연결.ts:42-46", "detail": "select/seek/play/stage는 재생 커서·실행을 변경하지만 App의 선택 토큰이나 report 상태를 변경하지 않습니다."},
+        {"path": "화면/src/실행타임라인.tsx:40,62-63", "detail": "사용자가 실제 이용할 수 있는 슬라이더·실행 선택·이전 단계·재생 버튼이 해당 경로에 연결되어 있습니다."},
+        {"path": "화면/src/상세보기.tsx:6; 화면/src/보고서변환.tsx:47,88,93-98", "detail": "ReportViewer는 전달된 report의 Markdown 다운로드와 변환 제어를 무조건 렌더합니다. 변환 생성은 세션 active/loaded/format 상태만 검사하고 재생 투영에서 그 보고서가 존재하는지는 검사하지 않습니다. ID+해시가 바뀌지 않으면 기존 세션도 유지됩니다."},
+        {"path": "화면/src/앱.test.tsx:26-34; 화면/src/보고서변환.test.tsx:73-88", "detail": "기존 테스트는 초기 SSR에서 마을 종이에 미래 보고서가 없는 것과 별도 세션 간 늦은 응답을 각각 검사합니다. 실제 App에서 이미 열린 보고서를 유지한 채 재생 커서를 변경하거나 보고서 조회 중 되감는 흐름은 검사하지 않습니다."}
+      ],
+      "impact": "마을의 과거 투영과 팝업이 서로 다른 시점/실행을 표시합니다. 현재 재생 시점에 아직 없는 미래 보고서를 읽고 다운로드하거나 HTML/PDF 생성을 시작할 수 있습니다. 또한 조회 중 되감아도 늦은 api.report 응답이 팝업에 채택됩니다. 서버 정본 위변조나 연구 재실행이 발생한다는 주장은 아닙니다.",
+      "current_recovery": "사용자가 팝업을 직접 닫으면 세션 polling과 응답 반영이 정리됩니다. 다만 되감기/실행 전환만으로는 자동 정리되지 않습니다.",
+      "required_fix": "메인 소유 App 통합에서 재생 투영과 보고서 선택을 연결하십시오. 재생 중 선택 보고서가 현재 projection에 존재하지 않으면 보고서 렌더/변환 세션을 즉시 해제하거나 숨기고, 보고서 조회 선택 토큰도 무효화하여 늦은 응답이 다시 노출되지 않게 해야 합니다. 단순히 HTML/PDF 버튼만 비활성화하면 Markdown과 미래 본문 노출이 남습니다. 기존 팝업 닫기·입력·마을·타임라인 독립성은 보존하십시오.",
+      "required_validation": [
+        "완료 보고서 팝업을 연 뒤 제출 이전으로 되감으면 미래 본문·Markdown 링크·HTML/PDF 제어가 사라지고 polling이 종료되는지 검사",
+        "보고서 GET 대기 중 되감은 후 응답을 지연 반환해도 미래 보고서가 다시 나타나지 않는지 검사",
+        "보고서 A 팝업을 연 채 실행 B 초기 시점으로 전환하여 A 다운로드가 남지 않는지 검사",
+        "완료 시점으로 돌아온 뒤 정본을 명시적으로 재열면 해당 보고서 ID+해시만 조회하고 연구/큐 요청이 없는지 검사"
+      ]
+    }
+  ],
+  "non_blocking_observations": [
+    {
+      "id": "FE-EXP-O1",
+      "title": "POST 응답 유실 후에는 상태 재조회보다 같은 키의 POST 재시도를 안내함",
+      "evidence": "보고서변환.tsx:57-58은 요청 오류만 기록합니다. generating 항목이 없으면 28행의 polling도 예약되지 않습니다. ExportControls의 다시 조회는 readError가 있을 때만 75행에서 표시됩니다.",
+      "assessment": "서버 접수 후 응답만 유실되었을 때 화면은 not_requested+생성 요청 실패로 남을 수 있습니다. 다만 현재 명세 23.1은 동일 키 중복 생성 합치기/ready 재사용을 보장하고, 화면의 형식별 다시 시도는 정확히 같은 보고서·정본해시를 사용하므로 이것만으로 중복 연구/변환 결함이라고 판정하지 않았습니다. 실제 서버 멱등성은 서버 통합 검증에서 별도 확인해야 합니다.",
+      "suggestion": "가능하면 결과 불명 요청에는 상태 다시 확인을 제공하거나 GET으로 조정한 뒤 필요할 때만 POST하십시오. 강제 필수 수정이 아닌 복구 가독성 보강입니다."
+    },
+    {
+      "id": "FE-EXP-O2",
+      "title": "정상 GET으로 ready가 확인돼도 이전 POST 오류 문구는 남음",
+      "evidence": "보고서변환.tsx:41은 items/readError만 갱신하고 errors는 지우지 않습니다. 81,86,88행에서는 ready 다운로드와 이전 생성 요청 실패 문구를 동시에 렌더할 수 있습니다. 메모리 내 세션 프로브에서 POST 오류 후 refresh 결과가 ready인데 errors.html은 그대로인 것을 확인했습니다.",
+      "assessment": "자동 polling이 다른 형식 때문에 계속되는 경우에도 발생할 수 있으나, 문구 자체는 과거 요청 실패 사실을 표시하고 다운로드를 막지는 않습니다. 현재 명세상 필수 복구 불가 결함으로 격상하지 않았습니다.",
+      "suggestion": "같은 키에 대한 GET으로 generating/ready가 확인되면 결과 불명인 요청 오류를 해소하거나 과거 오류임을 구분하는 편이 명확합니다."
+    }
+  ],
+  "verified_behavior": [
+    "ReportViewer의 key는 report_id+sha256이며 useMemo 세션도 같은 두 값으로 생성됩니다.",
+    "세션 생성/SSR은 네트워크와 timer를 시작하지 않고 useEffect에서 start/stop합니다. useSyncExternalStore의 서버 snapshot 함수는 현재 state를 반환합니다.",
+    "GET/POST의 report_id와 source_report_hash를 선택 정본에 대조하고, POST 형식도 대조합니다. 준비 상태와 파생파일 sha256 및 URL이 있어야 다운로드 링크를 노출합니다. 다운로드 href 자체를 독립 파싱/검증하지 않으며 실제 URL·파일 해시 검증은 서버 계약에 의존합니다.",
+    "형식별 revision은 POST 전후를 세어 늦은 GET이 성공한 POST 상태를 되돌리는 것을 막습니다. pending 중 같은 형식 중복 POST도 차단합니다.",
+    "stop의 epoch 무효화 및 timer 정리는 이전 세션 GET/POST 응답 반영과 polling을 막습니다. 실제 App의 close/open 경로는 ReportViewer를 해제하므로 이 정리 경로와 연결됩니다. 다만 FE-EXP-01의 재생 전환 경로는 제외입니다.",
+    "조회 실패는 readError와 다시 조회를 표시하고 다운로드/생성을 막습니다. 다시 조회 중에는 버튼을 잠그며 성공하면 복구됩니다. 형식별 failed는 원인 표시와 해당 형식 재시도를 제공합니다.",
+    "Markdown 링크·전체 Markdown·내용 품질 경고는 ReportViewer에 유지됩니다. 변환 CSS는 report-exports 하위 선택자이며 마을 크기나 composer/timeline 전역 규칙을 변경하지 않습니다. 시각 배치 검증은 아닙니다."
+  ],
+  "reviewed_paths": [
+    "화면/src/계약.ts",
+    "화면/src/보고서변환.tsx",
+    "화면/src/보고서변환.css",
+    "화면/src/보고서변환.test.tsx",
+    "화면/src/상세보기.tsx",
+    "화면/src/상세보기.test.tsx",
+    "화면/src/통신.ts",
+    "화면/src/통신.test.ts",
+    "화면/src/앱.tsx",
+    "화면/src/앱.test.tsx",
+    "화면/src/기록재생연결.ts",
+    "화면/src/실행타임라인.tsx",
+    "화면/src/시간재생.ts (보고서 투영 관련 부분 검색)",
+    "화면/src/화면.css (전역 규칙 및 popup/composer/timeline 연결)",
+    "화면/package.json",
+    "화면/vite.config.ts"
+  ],
+  "tested_paths": ["화면/src/보고서변환.test.tsx", "화면/src/상세보기.test.tsx", "화면/src/통신.test.ts", "화면/src/앱.test.tsx"],
+  "commands_results": [
+    {
+      "cwd": "02_구현/전체화면_스파이크/화면",
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/보고서변환.test.tsx src/상세보기.test.tsx src/통신.test.ts src/앱.test.tsx",
+      "exit_code": 0,
+      "output": "RUN v5.1.0; Test Files 4 passed (4); Tests 31 passed (31); Start at 21:40:27; Duration 259ms",
+      "limits": "정적 렌더와 모의 API/타이머 테스트입니다. 실제 DOM 마운트 효과·클릭·팝업 재생 전환·서버 HTTP·실제 PDF를 검증한 결과가 아닙니다."
+    },
+    {
+      "command": "node --input-type=module -e: src/보고서변환.tsx의 createExportSession 함수만 메모리에서 읽어 TypeScript transpileModule로 실행 시도",
+      "exit_code": 1,
+      "output": "TypeError: Cannot read properties of undefined (reading ES2022)",
+      "assessment": "설치된 TypeScript 패키지가 가정한 transpile API를 제공하지 않아 보조 프로브가 실행 전 실패했습니다. 설치·파일 변경 없이 Node 내장 stripTypeScriptTypes로 대체했습니다. 제품 결함이 아닙니다."
+    },
+    {
+      "command": "\"C:/nvm4w/nodejs/node.exe\" --input-type=module -e: fs.readFileSync로 createExportSession 함수 추출 → node:module stripTypeScriptTypes → vm 컨텍스트 → in-memory exports/createExport 클라이언트로 POST 응답 유실 및 refresh 검사",
+      "exit_code": 0,
+      "output": [
+        {"scenario": "uncertain_POST_receipt", "gets": 1, "posts": 1, "html": "not_requested", "error": "변환 생성 요청에 실패했습니다."},
+        {"scenario": "manual_reconciliation", "gets": 2, "posts": 1, "html": "ready", "error": "변환 생성 요청에 실패했습니다."}
+      ],
+      "limits": "실제 함수의 상태 처리만 확인한 합성 메모리 프로브입니다. vm의 Error realm 차이로 원래 오류 문자열 대신 fallback 메시지가 기록됩니다. 서버 접수 여부와 실제 HTTP는 모의이며 실통합 성공 근거가 아닙니다. Node는 stripTypeScriptTypes 실험 기능 경고를 출력했습니다."
+    }
+  ],
+  "exclusions_untested": [
+    "구현 중인 서버/보고서변환.py·서버/앱.py·서버 테스트를 읽거나 검토하지 않았습니다.",
+    "실제 브라우저를 실행하거나 사용자 브라우저를 제어하지 않았습니다. DOM 효과·포커스·닫기/Escape·버튼 클릭·반응형/스크롤·팝업 높이·한글/PDF 시각 검사 미실행입니다.",
+    "실제 HTML/PDF 생성·다운로드/재열기·MIME/Content-Disposition·파일 바이트 해시·페이지 나눔·인용/출처 보존·서버 재시작·서버 중복 생성 합치기 미검증입니다.",
+    "실제 데이터·연구/예산 DB·정본·모델/연구 API·자격증명에 접근하거나 쓰지 않았습니다.",
+    "TypeScript 전체 검사·전체 프런트 회귀·전체 저장소 보안/Git 검토를 이번 독립 검토에서 재실행하지 않았습니다. 부모가 실행했다는 검사 결과를 이번 실행으로 대체하지 않습니다.",
+    "D-08의 불합격 초안 서버 차단 및 A-18의 실제 산출물 대조는 서버 통합/실사용 검증 소유자에게 남아 있습니다."
+  ],
+  "files_created": ["검증결과/보고서변환_독립화면검토.json"],
+  "implementation_files_modified": [],
+  "handoff": "우선 FE-EXP-01의 실제 App 재생/팝업 선택 수명 통합을 메인에서 채택·수정·검증하십시오. 선택 보강 O1/O2는 서버 멱등성과 복구 정책을 확인한 뒤 결정할 수 있습니다. 메인이 서버 구현 완료 후 실통합·브라우저·산출물 검증과 문서/최종 판정을 소유합니다."
+}

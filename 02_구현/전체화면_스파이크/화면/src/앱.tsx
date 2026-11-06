@@ -37,6 +37,13 @@ export function App(){
  const menuRef=useRef<HTMLButtonElement>(null),closeRef=useRef<HTMLButtonElement>(null);
  const surfaceRef=useRef<HTMLElement>(null),composerRef=useRef<HTMLDivElement>(null);
  const drawerSize=useDrawerHeight(surfaceRef,composerRef,!!ui.popup);
+ const selectedReportId=ui.popup?.kind==='report'?ui.popup.id:null;
+ const selectedReportAllowed=selectedReportId===null||!replaying||playback.projection?.report?.report_id===selectedReportId;
+ useEffect(()=>{
+  if(selectedReportId===null||selectedReportAllowed)return;
+  // 재생 시점에서 사라진 정본의 창과 진행 중 조회를 함께 해제한다. 타임라인 포커스는 유지한다.
+  selectionToken.current++;setReport(null);setLoading(false);setPopupError('');dispatch({type:'close'});
+ },[selectedReportId,selectedReportAllowed]);
  useEffect(()=>{
   const surface=surfaceRef.current,composer=composerRef.current;
   if(!surface||!composer)return;
@@ -90,7 +97,7 @@ export function App(){
    {loading&&<p role="status">보존된 기록을 불러오는 중입니다.</p>}
    {popupError&&<p role="alert">{popupError} <button onClick={()=>{if(ui.popup?.kind==='event')void showEvent(ui.popup.id);else if(ui.popup?.kind==='report')void showReport(ui.popup.id);else void operate(refresh);}}>다시 조회</button></p>}
    {ui.popup.kind==='event'&&detail&&<EventViewer event={detail}/>}
-   {ui.popup.kind==='report'&&report&&<ReportViewer report={report} quality={snapshot?.runs.find(run=>run.report_id===report.report_id)?.quality}/>}
+   {ui.popup.kind==='report'&&selectedReportAllowed&&report&&<ReportViewer report={report} quality={snapshot?.runs.find(run=>run.report_id===report.report_id)?.quality}/>}
    {ui.popup.kind==='idle'&&<p>{names[ui.popup.actor as Actor]}에게 연결된 현재 실행 사건이 없습니다. 과거 사건은 사건 기록에서 확인할 수 있습니다.</p>}
    {ui.popup.kind==='장면 도구'&&<><p>장면 연출만 바꿉니다. 실행·큐·서버 기록은 변경하지 않습니다.</p><div className="button-group">{([['이동 보기','move'],['작업 보기','work'],['문서 운반','deliver'],['처음으로','reset']] as const).map(([label,action])=><button key={action} onClick={()=>setDemo(d=>({action,nonce:d.nonce+1}))}>{label}</button>)}</div>{ui.mode==='control'&&<p>연출을 보려면 메뉴에서 에셋 실험으로 바꿔 주세요.</p>}</>}
    {ui.popup.kind==='실행/큐'&&<><p className="notice">{connection} · {requestLabel} · 연결 상태는 생성 성공을 뜻하지 않습니다.</p>{snapshot?.budget&&<><h3>호출 예산</h3><p>{`시도 ${snapshot.budget.attempt_count} / ${snapshot.budget.max_attempts} · 남은 시도 ${snapshot.budget.remaining_attempts}`}</p><p>{`사용 추정 $${snapshot.budget.spent_usd.toFixed(4)} · 예약 $${snapshot.budget.reserved_usd.toFixed(4)} · 한도 $${snapshot.budget.max_usd.toFixed(4)}`}</p><p>{`토큰 입력 ${snapshot.budget.input_tokens} · 출력 ${snapshot.budget.output_tokens} · 비용 불명 ${snapshot.budget.unknown_count}`}</p><p>정상요금 기준 추정치이며 실제 청구·계정 무료 혜택을 확인한 값이 아닙니다.</p></>}{current?<><h3>현재 실행</h3><dl><dt>질문</dt><dd>{current.question}</dd><dt>실행 ID</dt><dd>{current.run_id}</dd><dt>상태 / 단계 / 버전</dt><dd>{current.status} / {current.phase} / {current.control_revision}</dd></dl><p>현재 실행의 실제 모델 요청 {current.actual_model_requests}</p><h3>품질 검사 / 종료 사유</h3><p>{current.quality.passed===null?'아직 판정되지 않았습니다.':current.quality.passed?'필수 검사 통과':'필수 검사 불합격'}</p><ul>{current.quality.reasons.map((reason,i)=><li key={i}>{reason}</li>)}</ul>{eventList(events.filter(e=>e.status==='failed'||e.type.endsWith('.failed')))}<button className="danger" disabled={replaying||busy||current.status!=='running'} onClick={()=>void operate(()=>api.cancel(current.run_id,current.control_revision))}>현재 실행 취소</button><h3>조사 계획</h3>{current.plan.length?<ul>{current.plan.map(a=><li key={a.section_id}>{a.title} · {a.assignee}</li>)}</ul>:<p>아직 배정된 계획이 없습니다.</p>}</>:<p>현재 실행이 없습니다. 하단 입력으로 지시할 수 있습니다.</p>}<h3>대기 큐</h3>{snapshot?.queue.length?<ol>{snapshot.queue.map(q=><li key={q.instruction_id}>{q.text} · {q.status}</li>)}</ol>:<p>대기 중인 지시가 없습니다.</p>}<p>{snapshot?.queue_paused?`큐가 일시정지되었습니다: ${snapshot.queue_pause_reason}`:'큐가 일시정지되어 있지 않습니다.'}</p><button disabled={replaying||busy||!snapshot?.queue_paused} onClick={()=>void operate(api.continue)}>큐 계속</button></>}

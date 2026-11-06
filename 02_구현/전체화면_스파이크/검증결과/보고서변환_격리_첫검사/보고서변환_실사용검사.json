@@ -1,0 +1,136 @@
+{
+  "started_at": "2026-11-06T12:54:30.148280+00:00",
+  "scope": "isolated",
+  "checks": [
+    {
+      "name": "격리 실제 HTTP 변환 실패 표시와 Markdown 보존",
+      "status": "PASS"
+    },
+    {
+      "name": "같은 정본의 HTML/PDF 생성·다운로드·실제 재열기",
+      "status": "PASS",
+      "report_id": "47e6d4de168249edbb6f44f6f44454d7",
+      "source_sha256": "5fcd42c8ea44b4a2430e6c156911ba3a13c54f7dafe2b80145963e50768f0987",
+      "html_file": ".cache\\보고서변환_실사용\\보고서변환_격리_첫검사\\첫보고서.html",
+      "pdf_file": ".cache\\보고서변환_실사용\\보고서변환_격리_첫검사\\첫보고서.pdf",
+      "html_sha256": "67af5d69b3df44e1303993c0a60e1dd9715c0770163a01d8c27e6ad971c585d6",
+      "pdf_sha256": "23b333679e53289b8a13a4e4bd088f3441eec02fe99f0ad00a87f8ebf64e62f5",
+      "pdf_pages": 3,
+      "source_text_lines_checked": 27
+    },
+    {
+      "name": "세 해상도에서 변환 조작·닫기·입력·같은 마을 보존",
+      "status": "PASS"
+    },
+    {
+      "name": "보고서 전환·늦은 응답 격리 및 긴 문서의 실제 페이지 변환",
+      "status": "PASS",
+      "report_id": "dd06f29bcae0435eae68b11932a34e7e",
+      "source_sha256": "f71f32f036fbd1636aa9508e8e6d32b590ffa41f24fdd8560ef7675df8d3de00",
+      "html_file": ".cache\\보고서변환_실사용\\보고서변환_격리_첫검사\\긴보고서.html",
+      "pdf_file": ".cache\\보고서변환_실사용\\보고서변환_격리_첫검사\\긴보고서.pdf",
+      "html_sha256": "418d9ae4d3e00536722fcde467387b3afb779e79b17c1f07422025e5fea750eb",
+      "pdf_sha256": "c30c7c0359ff0bd439ad4699e31a85d8d7411f32ce88d2928c08bf370633bcd8",
+      "pdf_pages": 14,
+      "source_text_lines_checked": 94
+    }
+  ],
+  "posts": [
+    "http://127.0.0.1:8781/api/spike/reports/47e6d4de168249edbb6f44f6f44454d7/exports",
+    "http://127.0.0.1:8781/api/spike/reports/47e6d4de168249edbb6f44f6f44454d7/exports",
+    "http://127.0.0.1:8781/api/spike/reports/47e6d4de168249edbb6f44f6f44454d7/exports",
+    "http://127.0.0.1:8781/api/spike/reports/dd06f29bcae0435eae68b11932a34e7e/exports",
+    "http://127.0.0.1:8781/api/spike/reports/dd06f29bcae0435eae68b11932a34e7e/exports"
+  ],
+  "browser_errors": [],
+  "external_requests": [],
+  "captures": [
+    {
+      "file": "첫_HTML_재열기.png"
+    },
+    {
+      "file": "첫_PDF_전체쪽.png"
+    },
+    {
+      "file": "보고서_넓은창.png",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      }
+    },
+    {
+      "file": "보고서_좁은창.png",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "file": "보고서_낮은창.png",
+      "width": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 390
+      }
+    },
+    {
+      "file": "긴_HTML_재열기.png"
+    },
+    {
+      "file": "긴_PDF_전체쪽.png"
+    }
+  ],
+  "model_attempts_before": 0,
+  "reports": [
+    {
+      "report_id": "47e6d4de168249edbb6f44f6f44454d7",
+      "source_sha256": "5fcd42c8ea44b4a2430e6c156911ba3a13c54f7dafe2b80145963e50768f0987",
+      "html_file": ".cache\\보고서변환_실사용\\보고서변환_격리_첫검사\\첫보고서.html",
+      "pdf_file": ".cache\\보고서변환_실사용\\보고서변환_격리_첫검사\\첫보고서.pdf",
+      "html_sha256": "67af5d69b3df44e1303993c0a60e1dd9715c0770163a01d8c27e6ad971c585d6",
+      "pdf_sha256": "23b333679e53289b8a13a4e4bd088f3441eec02fe99f0ad00a87f8ebf64e62f5",
+      "pdf_pages": 3,
+      "source_text_lines_checked": 27
+    },
+    {
+      "report_id": "dd06f29bcae0435eae68b11932a34e7e",
+      "source_sha256": "f71f32f036fbd1636aa9508e8e6d32b590ffa41f24fdd8560ef7675df8d3de00",
+      "html_file": ".cache\\보고서변환_실사용\\보고서변환_격리_첫검사\\긴보고서.html",
+      "pdf_file": ".cache\\보고서변환_실사용\\보고서변환_격리_첫검사\\긴보고서.pdf",
+      "html_sha256": "418d9ae4d3e00536722fcde467387b3afb779e79b17c1f07422025e5fea750eb",
+      "pdf_sha256": "c30c7c0359ff0bd439ad4699e31a85d8d7411f32ce88d2928c08bf370633bcd8",
+      "pdf_pages": 14,
+      "source_text_lines_checked": 94
+    }
+  ],
+  "status": "FAIL",
+  "error": "Command '['C:\\\\my vault\\\\ME\\\\1. Note\\\\Hermes\\\\Aiffel_Work\\\\02_노드실습\\\\딥리서치_에이전트\\\\.venv\\\\Scripts\\\\python.exe', 'C:\\\\my vault\\\\ME\\\\1. Note\\\\Hermes\\\\Aiffel_Work\\\\02_노드실습\\\\딥리서치_에이전트\\\\02_구현\\\\전체화면_스파이크\\\\검증\\\\보고서변환_시험서버.py', '--data-dir', 'C:\\\\my vault\\\\ME\\\\1. Note\\\\Hermes\\\\Aiffel_Work\\\\02_노드실습\\\\딥리서치_에이전트\\\\.cache\\\\보고서변환_실사용\\\\보고서변환_격리_첫검사\\\\데이터', '--stop-file', 'C:\\\\my vault\\\\ME\\\\1. Note\\\\Hermes\\\\Aiffel_Work\\\\02_노드실습\\\\딥리서치_에이전트\\\\.cache\\\\보고서변환_실사용\\\\보고서변환_격리_첫검사\\\\종료표식', '--port', '8781', '--fail-first-pdf']' timed out after 15 seconds",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\보고서변환_실사용검사.py\", line 375, in run\n    stop_worker()\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\보고서변환_실사용검사.py\", line 150, in stop_worker\n    code = worker.wait(timeout=15)\n           ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\YH\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\subprocess.py\", line 1264, in wait\n    return self._wait(timeout=timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\YH\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\subprocess.py\", line 1593, in _wait\n    raise TimeoutExpired(self.args, timeout)\nsubprocess.TimeoutExpired: Command '['C:\\\\my vault\\\\ME\\\\1. Note\\\\Hermes\\\\Aiffel_Work\\\\02_노드실습\\\\딥리서치_에이전트\\\\.venv\\\\Scripts\\\\python.exe', 'C:\\\\my vault\\\\ME\\\\1. Note\\\\Hermes\\\\Aiffel_Work\\\\02_노드실습\\\\딥리서치_에이전트\\\\02_구현\\\\전체화면_스파이크\\\\검증\\\\보고서변환_시험서버.py', '--data-dir', 'C:\\\\my vault\\\\ME\\\\1. Note\\\\Hermes\\\\Aiffel_Work\\\\02_노드실습\\\\딥리서치_에이전트\\\\.cache\\\\보고서변환_실사용\\\\보고서변환_격리_첫검사\\\\데이터', '--stop-file', 'C:\\\\my vault\\\\ME\\\\1. Note\\\\Hermes\\\\Aiffel_Work\\\\02_노드실습\\\\딥리서치_에이전트\\\\.cache\\\\보고서변환_실사용\\\\보고서변환_격리_첫검사\\\\종료표식', '--port', '8781', '--fail-first-pdf']' timed out after 15 seconds\n",
+  "finished_at": "2026-11-06T12:55:11.266501+00:00"
+}

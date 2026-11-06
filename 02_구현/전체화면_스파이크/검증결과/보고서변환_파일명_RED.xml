@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="1.228" timestamp="2026-11-06T21:57:03.248558+09:00" hostname="z13flow"><testcase classname="테스트.테스트_보고서변환_API" name="test_새_변환파일명은_한국어이며_원본_Markdown의_이모지를_복사하지_않는다[html]" time="0.272"><failure message="AssertionError: assert '🧪 스파이크 보고서_c...842a2d3c.html' == '연구보고서_cb6db0...842a2d3c.html'&#10;  &#10;  - 연구보고서_cb6db045ddcf43b6a8e0d616842a2d3c.html&#10;  ? ^^&#10;  + 🧪 스파이크 보고서_cb6db045ddcf43b6a8e0d616842a2d3c.html&#10;  ? ^^^^^^^">tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서변환_파일명_RED/test_새_변환파일명은_한국어이며_원본_Markdow0')
+format = 'html'
+
+    @pytest.mark.parametrize("format", ["html", "pdf"])
+    async def test_새_변환파일명은_한국어이며_원본_Markdown의_이모지를_복사하지_않는다(tmp_path, format):
+        from urllib.parse import unquote
+    
+        async def filename_only_renderer(_markdown, _format, _report):
+            # 파일명 HTTP 경계만 검사하는 명시적 대역이며 실제 PDF 검증을 대신하지 않는다.
+            return b"filename-transport-fixture"
+    
+        async with export_client(tmp_path, filename_only_renderer) as (client, app):
+            report = await completed(client, app)
+            original_filename = app.state.service.report_bytes(report["report_id"])[2]
+            url = f"/api/spike/reports/{report['report_id']}/exports"
+            response = await client.post(url, json={"format": format, "source_report_hash": report["sha256"]})
+            assert response.status_code == 202
+            ready = next(item for item in (await settled(client, report))["exports"] if item["format"] == format)
+            response = await client.get(ready["download_url"])
+            assert response.status_code == 200
+            filename = unquote(response.headers["content-disposition"].partition("filename*=utf-8''")[2])
+&gt;           assert filename == f"연구보고서_{report['report_id']}.{format}"
+E           AssertionError: assert '🧪 스파이크 보고서_c...842a2d3c.html' == '연구보고서_cb6db0...842a2d3c.html'
+E             
+E             - 연구보고서_cb6db045ddcf43b6a8e0d616842a2d3c.html
+E             ? ^^
+E             + 🧪 스파이크 보고서_cb6db045ddcf43b6a8e0d616842a2d3c.html
+E             ? ^^^^^^^
+
+테스트\테스트_보고서변환_API.py:74: AssertionError</failure></testcase><testcase classname="테스트.테스트_보고서변환_API" name="test_새_변환파일명은_한국어이며_원본_Markdown의_이모지를_복사하지_않는다[pdf]" time="0.261"><failure message="AssertionError: assert '🧪 스파이크 보고서_3...20a9660b8.pdf' == '연구보고서_3b2fa0...20a9660b8.pdf'&#10;  &#10;  - 연구보고서_3b2fa02967e142e3b6df49420a9660b8.pdf&#10;  ? ^^&#10;  + 🧪 스파이크 보고서_3b2fa02967e142e3b6df49420a9660b8.pdf&#10;  ? ^^^^^^^">tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서변환_파일명_RED/test_새_변환파일명은_한국어이며_원본_Markdow1')
+format = 'pdf'
+
+    @pytest.mark.parametrize("format", ["html", "pdf"])
+    async def test_새_변환파일명은_한국어이며_원본_Markdown의_이모지를_복사하지_않는다(tmp_path, format):
+        from urllib.parse import unquote
+    
+        async def filename_only_renderer(_markdown, _format, _report):
+            # 파일명 HTTP 경계만 검사하는 명시적 대역이며 실제 PDF 검증을 대신하지 않는다.
+            return b"filename-transport-fixture"
+    
+        async with export_client(tmp_path, filename_only_renderer) as (client, app):
+            report = await completed(client, app)
+            original_filename = app.state.service.report_bytes(report["report_id"])[2]
+            url = f"/api/spike/reports/{report['report_id']}/exports"
+            response = await client.post(url, json={"format": format, "source_report_hash": report["sha256"]})
+            assert response.status_code == 202
+            ready = next(item for item in (await settled(client, report))["exports"] if item["format"] == format)
+            response = await client.get(ready["download_url"])
+            assert response.status_code == 200
+            filename = unquote(response.headers["content-disposition"].partition("filename*=utf-8''")[2])
+&gt;           assert filename == f"연구보고서_{report['report_id']}.{format}"
+E           AssertionError: assert '🧪 스파이크 보고서_3...20a9660b8.pdf' == '연구보고서_3b2fa0...20a9660b8.pdf'
+E             
+E             - 연구보고서_3b2fa02967e142e3b6df49420a9660b8.pdf
+E             ? ^^
+E             + 🧪 스파이크 보고서_3b2fa02967e142e3b6df49420a9660b8.pdf
+E             ? ^^^^^^^
+
+테스트\테스트_보고서변환_API.py:74: AssertionError</failure></testcase></testsuite></testsuites>

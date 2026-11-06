@@ -1,6 +1,22 @@
 import { it, expect, vi, afterEach } from 'vitest';
 import { sendCommand, api } from './통신';
 afterEach(()=>vi.unstubAllGlobals());
+it('createExport는 해당 정본 해시와 형식만 POST하며 202 메타데이터와 409 사유를 보존한다',async()=>{
+ const body={report_id:'B/C',source_report_hash:'exact-hash',format:'pdf',status:'generating'};
+ const fetcher=vi.fn().mockResolvedValueOnce(new Response(JSON.stringify(body),{status:202})).mockResolvedValueOnce(new Response(JSON.stringify({error:{code:'report_hash_mismatch',message:'정본 해시 불일치'}}),{status:409}));vi.stubGlobal('fetch',fetcher);
+ const result=await api.createExport('B/C','pdf','exact-hash').catch(()=>null);
+ expect(fetcher).toHaveBeenCalledExactlyOnceWith('/api/spike/reports/B%2FC/exports',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({format:'pdf',source_report_hash:'exact-hash'})});
+ expect(result).toEqual(body);
+ await expect(api.createExport('B/C','html','old-hash')).rejects.toThrow('report_hash_mismatch: 정본 해시 불일치');
+ expect(fetcher).toHaveBeenCalledTimes(2);
+});
+it('exports는 인코딩한 보고서의 collection만 GET하고 본문을 그대로 반환한다',async()=>{
+ const body={report_id:'A/B',source_report_hash:'hash-A',exports:[]};
+ const fetcher=vi.fn().mockResolvedValue(new Response(JSON.stringify(body)));vi.stubGlobal('fetch',fetcher);
+ const result=await api.exports('A/B').catch(()=>null);
+ expect(fetcher).toHaveBeenCalledExactlyOnceWith('/api/spike/reports/A%2FB/exports',undefined);
+ expect(result).toEqual(body);
+});
 it('archive는 실행 ID를 인코딩한 GET만 수행하며 현재 실행이나 작업을 변경하지 않는다',async()=>{
  const body={run:{run_id:'old/A'},events:[{event_id:'fixed'}],truncated:false};
  const fetcher=vi.fn().mockResolvedValue(new Response(JSON.stringify(body)));vi.stubGlobal('fetch',fetcher);

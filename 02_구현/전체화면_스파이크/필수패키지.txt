@@ -8,3 +8,5 @@ httpx==0.28.1
 playwright==1.64.1
 pillow==13.0.0
 ruff==0.17.3
+markdown-it-py==4.2.0
+pypdfium2==5.14.0

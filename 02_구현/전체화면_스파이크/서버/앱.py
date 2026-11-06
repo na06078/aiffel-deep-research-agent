@@ -6,14 +6,16 @@ import time
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Literal
+from urllib.parse import quote
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
+from fastapi.responses import FileResponse, JSONResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from starlette.exceptions import HTTPException
 
+from 서버.보고서변환 import ReportExports
 from 서버.실행제어 import ExecutionService
 from 서버.저장소 import ApiError, encode
 from 서버.접근경계 import LoopbackOnly
@@ -38,8 +40,17 @@ class Cancel(Continue):
     control_revision: int = Field(gt=0)
 
 
+class ExportRequest(BaseModel):
+    format: Literal["html", "pdf"]
+    source_report_hash: str = Field(pattern=r"^[0-9a-f]{64}$")
+
+
 def create_app(
-    data_dir: Path | None = None, static_dir: Path | None = None, *, service_factory=None
+    data_dir: Path | None = None,
+    static_dir: Path | None = None,
+    *,
+    service_factory=None,
+    export_renderer=None,
 ):
     root = Path(__file__).resolve().parents[3]
     configured = os.environ.get("SPIKE_DATA_DIR") if data_dir is None else None
@@ -54,10 +65,14 @@ def create_app(
     async def lifespan(app):
         factory = app.state.service_factory or ExecutionService
         app.state.service = factory(data_dir)
+        app.state.exports = ReportExports(app.state.service, export_renderer)
         try:
             yield
         finally:
-            await app.state.service.close()
+            try:
+                await app.state.exports.close()
+            finally:
+                await app.state.service.close()
 
     app = FastAPI(lifespan=lifespan)
     app.state.service_factory = service_factory
@@ -174,6 +189,35 @@ def create_app(
     @app.get("/api/spike/reports/{report_id}")
     async def report(report_id: str):
         return app.state.service.report_bytes(report_id)[0]
+
+    @app.get("/api/spike/reports/{report_id}/exports")
+    async def report_exports(report_id: str):
+        return app.state.exports.list(report_id)
+
+    @app.post("/api/spike/reports/{report_id}/exports", status_code=202)
+    async def create_export(report_id: str, body: ExportRequest):
+        return app.state.exports.request(report_id, body.format, body.source_report_hash)
+
+    @app.get("/api/spike/reports/{report_id}/exports/{format}/download")
+    async def download_export(
+        report_id: str,
+        format: Literal["html", "pdf"],
+        source_report_hash: str,
+        renderer_version: str,
+    ):
+        content, filename, entry = app.state.exports.download(
+            report_id, format, source_report_hash, renderer_version
+        )
+        return Response(
+            content,
+            media_type="text/html; charset=utf-8" if format == "html" else "application/pdf",
+            headers={
+                "Content-Disposition": "attachment; filename*=utf-8''" + quote(filename),
+                "X-Content-SHA256": entry["sha256"],
+                "X-Source-Report-SHA256": entry["source_report_hash"],
+                "X-Content-Type-Options": "nosniff",
+            },
+        )
 
     @app.get("/api/spike/reports/{report_id}/download")
     async def download(report_id: str):

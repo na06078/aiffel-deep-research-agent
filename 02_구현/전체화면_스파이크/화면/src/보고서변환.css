@@ -1,0 +1,11 @@
+.report-exports { margin: 20px 0; padding: 16px 0; border-block: 1px solid var(--line); }
+.report-exports h3 { margin: 0 0 8px; }
+.report-exports > p { margin: 0 0 12px; }
+.report-export-row { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 16px; padding: 12px 0; }
+.report-export-info { flex: 1 1 200px; min-width: 0; }
+.report-export-info p { margin: 4px 0 0; overflow-wrap: anywhere; }
+.report-export-info small { margin-top: 4px; }
+.report-export-row .download { min-height: 42px; display: inline-flex; align-items: center; padding: 10px 14px; }
+.report-exports [role="alert"] { color: var(--ink); overflow-wrap: anywhere; }
+.report-export-retry { margin-top: 8px; }
+@media (max-width: 560px) { .report-export-info { flex-basis: 100%; } }

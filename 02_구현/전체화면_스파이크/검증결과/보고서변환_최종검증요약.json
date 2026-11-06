@@ -1,0 +1,189 @@
+{
+  "status": "PASS",
+  "scope": "요청형 HTML/PDF; 실제 보고서 보존; 추가 모델 호출 없음",
+  "user_url": "http://127.0.0.1:8768/#/control",
+  "requirements_reference": "기술 명세23절 / D-05~D-08 / A-18",
+  "backend": {
+    "passed": 132,
+    "failed": 0,
+    "junit": "보고서변환_전체서버검사.xml",
+    "python_external_socket_guard": "Python 프로세스의 connect/connect_ex는 loopback만 허용; 자식 Chromium은 소유 렌더러의 offline/route/CSP로 별도 제한"
+  },
+  "frontend": {
+    "passed": 87,
+    "failed": 0,
+    "test_files": 17,
+    "report": "보고서변환_전체화면검사.json"
+  },
+  "typecheck": "PASS",
+  "ruff": "PASS",
+  "build": "PASS_WITH_EXISTING_CHUNK_WARNING",
+  "main_chunk_kb": 527.54,
+  "actual_workflow": {
+    "report": "보고서변환_실제_최종검사/보고서변환_실사용검사.json",
+    "checks": 4,
+    "reports": [
+      {
+        "report_id": "44f307dedcbf4c8282d9b4e8a3a207bb",
+        "source_sha256": "19c6f5f980533a7e001beecc6f3f2852f44869800c4ad0a7afd3dea0e4d242cd",
+        "html_file": ".cache\\보고서변환_실사용\\보고서변환_실제_최종검사\\첫보고서.html",
+        "pdf_file": ".cache\\보고서변환_실사용\\보고서변환_실제_최종검사\\첫보고서.pdf",
+        "html_sha256": "cf1d54941222acc2777e052c4e6b3e37e9a86ef626ed04b1f8f43bf6ea414c77",
+        "pdf_sha256": "251af212f7b9b6910e9fec90e1de427164aececaac4d8866eac504fc5ad343ec",
+        "pdf_pages": 3,
+        "source_text_lines_checked": 25
+      }
+    ]
+  },
+  "isolated_workflow": {
+    "report": "보고서변환_격리_최종검사/보고서변환_실사용검사.json",
+    "checks": 6,
+    "reports": [
+      {
+        "report_id": "8235d1956b2f4df5bfc705e06953c4d8",
+        "source_sha256": "5fcd42c8ea44b4a2430e6c156911ba3a13c54f7dafe2b80145963e50768f0987",
+        "html_file": ".cache\\보고서변환_실사용\\보고서변환_격리_최종검사\\첫보고서.html",
+        "pdf_file": ".cache\\보고서변환_실사용\\보고서변환_격리_최종검사\\첫보고서.pdf",
+        "html_sha256": "67af5d69b3df44e1303993c0a60e1dd9715c0770163a01d8c27e6ad971c585d6",
+        "pdf_sha256": "d22ddc0d5f1804ba1c58f1d054e29b0c8e5214e382bc9afa206f4e1fcd898ea9",
+        "pdf_pages": 3,
+        "source_text_lines_checked": 27
+      },
+      {
+        "report_id": "f8872c4d40e64473952f268f1fb5cf52",
+        "source_sha256": "f71f32f036fbd1636aa9508e8e6d32b590ffa41f24fdd8560ef7675df8d3de00",
+        "html_file": ".cache\\보고서변환_실사용\\보고서변환_격리_최종검사\\긴보고서.html",
+        "pdf_file": ".cache\\보고서변환_실사용\\보고서변환_격리_최종검사\\긴보고서.pdf",
+        "html_sha256": "418d9ae4d3e00536722fcde467387b3afb779e79b17c1f07422025e5fea750eb",
+        "pdf_sha256": "acf848c9fcf3dd4819f1578c3314ce140761f1354d09c0abb2841e3d7fa7f8d3",
+        "pdf_pages": 14,
+        "source_text_lines_checked": 94
+      }
+    ],
+    "fail_retry": true,
+    "late_response_isolation": true,
+    "real_process_restart_and_same_download": true
+  },
+  "replay_visibility": {
+    "original_independent_verdict": "changes_requested / FE-EXP-01",
+    "red": "보고서변환_재생_RED/재생보고서_가시성검사.json",
+    "first_green": "보고서변환_재생_GREEN/재생보고서_가시성검사.json",
+    "green": "보고서변환_재생_통합최종확인/재생보고서_가시성검사.json",
+    "cross_run_green": "보고서변환_재생_교차실행_GREEN/재생보고서_가시성검사.json",
+    "cross_run_checks": 4,
+    "green_checks": 3,
+    "posts": []
+  },
+  "filename_red_green": {
+    "red": "보고서변환_파일명_RED.xml",
+    "green": "보고서변환_파일명_GREEN.xml",
+    "cases": 2,
+    "canonical_name_unchanged": true
+  },
+  "model_attempts_before": 27,
+  "model_attempts_after": 27,
+  "new_model_requests": 0,
+  "protected_files_unchanged": {
+    "03_실행데이터/실제연구/실행기록.sqlite3": true,
+    "03_실행데이터/실제연구/호출예산.sqlite3": true,
+    "03_실행데이터/실제연구/🧾 실제 연구 보고서_44f307dedcbf4c8282d9b4e8a3a207bb.md": true
+  },
+  "state_and_queue_unchanged": true,
+  "downloads_readback": [
+    {
+      "format": "html",
+      "status": 200,
+      "bytes": 13364,
+      "sha256": "cf1d54941222acc2777e052c4e6b3e37e9a86ef626ed04b1f8f43bf6ea414c77",
+      "content_type": "text/html; charset=utf-8",
+      "content_disposition": "attachment; filename*=utf-8''%EC%97%B0%EA%B5%AC%EB%B3%B4%EA%B3%A0%EC%84%9C_44f307dedcbf4c8282d9b4e8a3a207bb.html"
+    },
+    {
+      "format": "pdf",
+      "status": 200,
+      "bytes": 130945,
+      "sha256": "251af212f7b9b6910e9fec90e1de427164aececaac4d8866eac504fc5ad343ec",
+      "content_type": "application/pdf",
+      "content_disposition": "attachment; filename*=utf-8''%EC%97%B0%EA%B5%AC%EB%B3%B4%EA%B3%A0%EC%84%9C_44f307dedcbf4c8282d9b4e8a3a207bb.pdf"
+    }
+  ],
+  "bundle_html_sha256": "16c922a08e2930caace2593809451d87788f6d4815c48981b1170b2f0eba2078",
+  "served_bundle_matches": true,
+  "bundled_refs_sha256": {
+    "/assets/index-tIUYErfw.js": "2b9754dd3aeb72a172e38c43bd3c3da0a88a57563d39372cd7b2d563383e191a",
+    "/assets/CanvasPool-DzuCm1vb.js": "edde6aa9084e7f5958ad3f9a1437ea82c2406913957ef01be12296ca951373f1",
+    "/assets/Filter-vpEaIMwd.js": "e802a7ce1c4d21948131c5d247ee9db7f33376b17678d973d22ae0296f1935fc",
+    "/assets/canvasUtils-U4WZZEj-.js": "c0a01018402f30d7e9ad35ae43fafc8c490899236e6f28c8c4c8095fd066d448",
+    "/assets/Cache-CTROkX_m.js": "1362d81633b62e495b282f17617beb74083f16064864156e04949a07fa9ae0cf",
+    "/assets/GCManagedHash-DCvVepMX.js": "f9c36545f614350af3b653bd4e603e590afad27332ad79133fb661180406b312",
+    "/assets/RenderTargetSystem-BK2ifv01.js": "76151e37944ac1989dd3632f63fdc2a7f8b897cd226583baa060db0c71ccd6b0",
+    "/assets/getTextureBatchBindGroup-CEQHRttu.js": "f820ad942542bd39943bfcbc6073fa6d5237ee8fe574a36f8a4d22ae67c9558a",
+    "/assets/GraphicsContext-48tzdr3Q.js": "26553fe11bde03fcc13af77e92b26890e5b7f7ec1b791ad26634a133b670a7dc",
+    "/assets/getTexelRangeRects-Bdv1rQ51.js": "baa0c3c95a387acb0bf72e4b440a0ffc947f8bfcb34bfd462c32a10bbe53c665",
+    "/assets/index-DVd1aBZr.css": "2e37c999128585293a6b4cf9f00b98dcb9c403553ba9c651d5de186303de1fef"
+  },
+  "layout_detector": [],
+  "visual_review": {
+    "status": "PASS_WITH_DOCUMENTED_LIMITS",
+    "reviewed": [
+      "실제 넓은/좁은/낮은 보고서 팝업",
+      "실제 HTML 재열기 첫 화면",
+      "실제 PDF 전체3쪽",
+      "긴 합성 PDF 전체14쪽 접촉 인쇄"
+    ],
+    "findings": "가림/겹침/한글 깨짐/본문 누락 없음. 좁은 창 긴 ID와 기본 한글 어절/인용이 줄·페이지 경계에 이어질 수 있음; 축소쪽 시각 검수는 전체 본문 텍스트 대조와 구별"
+  },
+  "independent_server_review": {
+    "status": "pass",
+    "standards": "pass",
+    "spec": "pass",
+    "report": "보고서변환_독립서버검토.json",
+    "unresolved_required_findings": 0,
+    "parent_source_readback": "생산 소스 및 기존 핵심 시험 해시 직접 일치. 추가 이름 시험은 서식 전 바이트 재구성 해시·AST 동일성으로 확인. 실제 실행은 메인 별도 근거."
+  },
+  "final_review": {
+    "standards": "pass",
+    "spec": "pass_after_parent_frontend_fix",
+    "original_frontend_verdict_preserved": true,
+    "reviewer_runtime_tests": false,
+    "parent_real_workflow_verified": true
+  },
+  "historical_content_verdict": "CONDITIONAL; 변환은 내용 오류 수정이나 생성 품질 개선이 아님",
+  "out_of_scope": [
+    "웹 검색",
+    "새 모델 호출/모델 변경",
+    "내용 재집필",
+    "비교 실험",
+    "운영 배포/원격/태그"
+  ],
+  "backups_created": false,
+  "local_git_policy": "코드·문서·근거를 같은 최종 로컬 검증 단위로 기록; 정확한 최종 커밋은 실제 Git으로 확인",
+  "git_whitespace_exception": {
+    "path": "02_구현/전체화면_스파이크/검증결과/보고서변환_파일명_RED.xml",
+    "lines": [7, 11, 24, 36, 40, 53],
+    "reason": "pytest가 생성한 실패 원문 traceback의 빈 줄/오류 표식 공백을 원형 보존. 코드 공백 오류가 아니며 이 파일만 검사 예외로 분리함.",
+    "other_staged_paths_check": "PASS",
+    "raw_evidence_preserved": true,
+    "line_endings": "원본 작업파일 5251바이트/CRLF58개는 그대로 보존. Git 기본 개행 정규화로 스테이징은5193바이트/LF이며 개행 정규화 후 텍스트는 완전히 동일. 공백6줄은 삭제하지 않음."
+  },
+  "source_sha256": {
+    "02_구현/전체화면_스파이크/서버/보고서변환.py": "bafd943dc2b9018f7abb813b0aab9967e5586f55e140a8415b095c875c871b5d",
+    "02_구현/전체화면_스파이크/서버/앱.py": "ffd6b09e92e7bd1963332ef6bcc33f4fbff3ca8227e5d93a0957e2176ac6334c",
+    "02_구현/전체화면_스파이크/테스트/테스트_보고서변환.py": "db46d8c1f28f0089069904a5a33792fb6319bc21a8a6c79a863d0f82f49111f8",
+    "02_구현/전체화면_스파이크/테스트/테스트_보고서변환_API.py": "e730052607ccb581a03524d5abf6e5a058f870e476133292606c117ef6a8a7d5",
+    "02_구현/전체화면_스파이크/화면/src/계약.ts": "c087542682959ba9bab7007473b8939c5c72a5084cba74c285ec2fc5bfb729ab",
+    "02_구현/전체화면_스파이크/화면/src/보고서변환.tsx": "bfa7e20c5caad407808be9dbf79bf8000ffec276615d4c8ff432e9cced3f9bf6",
+    "02_구현/전체화면_스파이크/화면/src/보고서변환.css": "f77241b0ab159810dc75ab250e52d5db7b03f9ab202380a7031e4c58ce0d9fa1",
+    "02_구현/전체화면_스파이크/화면/src/보고서변환.test.tsx": "1fc7e0a250cea546f737ef1d307a7d82ccb8ad37e1833ae2bd652aba812d1695",
+    "02_구현/전체화면_스파이크/화면/src/상세보기.tsx": "c97e901a3341bfa131b9ff5dae67ac6c865b691421d4b1f7a203dcb0b0a8e9ed",
+    "02_구현/전체화면_스파이크/화면/src/상세보기.test.tsx": "9d76d3c311b3399bc8525047cffc45ff83882114b4906dd713fdf0618f2614dc",
+    "02_구현/전체화면_스파이크/화면/src/통신.ts": "24397a2f563cc089af1c7e20fc3971d4c59098d44e4ce168188e90b8006704bc",
+    "02_구현/전체화면_스파이크/화면/src/통신.test.ts": "6a52a1b84340d24b3a19e74231f6cb18bf172f8febe5d9cd8a13193265e71a30",
+    "02_구현/전체화면_스파이크/화면/src/앱.tsx": "000e74efc045ac9b9b5c55c7d4e1560faa57647c421120992fcb5902934150d0",
+    "02_구현/전체화면_스파이크/필수패키지.txt": "3c45a84e3d5344fb2ee5b1bba29216e4bbeec878a356e73030ea0818d3bdcf36",
+    "02_구현/전체화면_스파이크/설치패키지_고정.txt": "3ab403756abdf7789811dd05bc9b4af580b752b77781b01aef853f742fc6f695",
+    "02_구현/전체화면_스파이크/검증/보고서변환_시험서버.py": "b1e59eadc4242124bc982a8447d8b01acdad0f9f28db6089c37f4e343a776e27",
+    "02_구현/전체화면_스파이크/검증/보고서변환_실사용검사.py": "bc959120af170a9b12e4630f5d0b835cd94055ac3a0d77fc52b9d15934997f20",
+    "02_구현/전체화면_스파이크/검증/보고서변환_재생가시성검사.py": "6e48f6d7667a80353a41d9bd8416665788a2e0ff174e8f75254552bf912b214c"
+  }
+}
