@@ -7,11 +7,11 @@
     "provider": "test-double",
     "actual_model_requests": 0
   },
-  "html_sha256": "07b4b13c2857e2ee70c828f62789659d50c8281c46e89d1c12b805dc37cebfe2",
+  "html_sha256": "55209051201c38cb63e6eb7e067de47a26933e3a7c01bb9039af149ae94f69d1",
   "served_assets": [
     {
-      "asset": "/assets/index-DKqyFPI_.js",
-      "sha256": "849f63da23649c2b129eb0c2ccd0af8e24361cd2e0e868012abafa0663b90c75"
+      "asset": "/assets/index-BdlwORW8.js",
+      "sha256": "f0d209731c61883b46e438c1a044ca3f287d419f8b606d5029ce9e9768e3a2d7"
     },
     {
       "asset": "/assets/CanvasPool-DzuCm1vb.js",
@@ -50,8 +50,8 @@
       "sha256": "baa0c3c95a387acb0bf72e4b440a0ffc947f8bfcb34bfd462c32a10bbe53c665"
     },
     {
-      "asset": "/assets/index-o87NBHk2.css",
-      "sha256": "20249c48cd01535757c5c6f27f170b4be1056a32d99fbf0f29efb97c535cda2a"
+      "asset": "/assets/index-Ci0VyfNG.css",
+      "sha256": "23a72836b40aeff388eec8a31781412de5eb55bcd957a0c8cb222c603cc4f08a"
     }
   ],
   "browser_errors": [],

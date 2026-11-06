@@ -1,0 +1,217 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "전체 마을 영역·입력 아래 접이식 시간창·동일 canvas",
+      "status": "PASS"
+    },
+    {
+      "name": "실제 구간 측정·병렬 대기·실행/버전별 전체 아카이브",
+      "status": "PASS",
+      "spans": 27,
+      "events": 39
+    },
+    {
+      "name": "시간 막대 실제 클릭·같은 기록의 원본 사건·입력/닫기 접근",
+      "status": "PASS"
+    },
+    {
+      "name": "앞/중간/뒤 seek·미래 보고서 차단·동일 시점 장면 결정성",
+      "status": "PASS"
+    },
+    {
+      "name": "실제 재생/일시정지·이전/다음 단계 조작",
+      "status": "PASS"
+    },
+    {
+      "name": "스크러버 실제 포인터·Home/End 키보드 탐색",
+      "status": "PASS"
+    },
+    {
+      "name": "리플레이 동안 POST0·DB/큐/정본/호출수 불변",
+      "status": "PASS"
+    },
+    {
+      "name": "새로고침·기록 재열기·실시간 복귀도 무재실행",
+      "status": "PASS"
+    }
+  ],
+  "captures": [
+    {
+      "file": "마을_새첫화면.png",
+      "width": 1440,
+      "height": 900,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "scrollX": 0,
+      "scrollY": 0,
+      "scrollWidth": 1440,
+      "scrollHeight": 900
+    },
+    {
+      "file": "시간창_빈상태.png",
+      "width": 1440,
+      "height": 900,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "scrollX": 0,
+      "scrollY": 0,
+      "scrollWidth": 1440,
+      "scrollHeight": 900
+    },
+    {
+      "file": "시간창_동시작업.png",
+      "width": 1440,
+      "height": 900,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "scrollX": 0,
+      "scrollY": 0,
+      "scrollWidth": 1440,
+      "scrollHeight": 900
+    },
+    {
+      "file": "재생_시작.png",
+      "width": 1440,
+      "height": 900,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "scrollX": 0,
+      "scrollY": 0,
+      "scrollWidth": 1440,
+      "scrollHeight": 900
+    },
+    {
+      "file": "재생_이전버전.png",
+      "width": 1440,
+      "height": 900,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "scrollX": 0,
+      "scrollY": 0,
+      "scrollWidth": 1440,
+      "scrollHeight": 900
+    },
+    {
+      "file": "시간창_좁은화면.png",
+      "width": 390,
+      "height": 844,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "scrollX": 0,
+      "scrollY": 0,
+      "scrollWidth": 390,
+      "scrollHeight": 844
+    },
+    {
+      "file": "시간창_낮은화면.png",
+      "width": 844,
+      "height": 390,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 390
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 390
+      },
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "scrollX": 0,
+      "scrollY": 0,
+      "scrollWidth": 844,
+      "scrollHeight": 390
+    }
+  ],
+  "errors": [],
+  "posts_during_replay": [],
+  "external_requests": [],
+  "selected_span_event": {
+    "span_id": "e1efa05dfbe04da8b10c7a87bbbd89ed",
+    "event_id": "ebe625e0586d4759a9b3b7487f08a3ae"
+  },
+  "readonly": {
+    "before": "812c155e5898dc2b5686d843aa42c66bded42423475292d6c994593840371b72",
+    "after": "812c155e5898dc2b5686d843aa42c66bded42423475292d6c994593840371b72",
+    "mock_requests_before": 11,
+    "mock_requests_after": 11,
+    "actual_model_requests": 0,
+    "report_sha256": "064b324289d76eb0b7db747a3d58e9e42acaf1093641accd5a4265ea9bf41506"
+  }
+}

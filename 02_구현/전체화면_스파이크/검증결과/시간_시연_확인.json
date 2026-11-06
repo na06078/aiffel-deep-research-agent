@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "user_url": "http://127.0.0.1:8766/#/control",
+  "created_one_labelled_synthetic_demo": true,
+  "demo_run_id": "7ddd31b86de9499c9a9c94e5ff0a8ccf",
+  "question": "[합성 시연] 마을 자료실과 정원의 협업·기록 리플레이",
+  "report_id": "10e5e1422ff04cc1b233ce3d737eceb2",
+  "report_sha256": "fb7c612ac8a1a8854479154ad206c0575a76f4a738fd79986321a8017573291c",
+  "replay_mock_requests_before": 6,
+  "replay_mock_requests_after": 6,
+  "actual_model_requests": 0,
+  "same_served_bundle": true,
+  "html_sha256": "55209051201c38cb63e6eb7e067de47a26933e3a7c01bb9039af149ae94f69d1",
+  "browser_errors": [],
+  "user_records_preserved": true
+}

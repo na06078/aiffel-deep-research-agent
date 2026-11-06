@@ -1,0 +1,62 @@
+{
+  "scope": "마을 컴포넌트만. 최종 앱/팝업/실제 실행 연결 수용이 아님",
+  "errors": [],
+  "captures": [
+    {
+      "file": "장면_넓은화면.png",
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 900,
+      "canvasCount": 1
+    },
+    {
+      "file": "장면_좁은화면.png",
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "canvasCount": 1
+    }
+  ],
+  "component_actions": [
+    "move",
+    "work",
+    "deliver"
+  ],
+  "recorded_clock": {
+    "seek_order": [
+      2200,
+      500,
+      2200
+    ],
+    "same_positions": true,
+    "paused_wall_clock_independent": true,
+    "future_paper_hidden": true
+  },
+  "status": "PASS"
+}

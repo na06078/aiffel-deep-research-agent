@@ -9,7 +9,7 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[3]
 SPIKE = Path(__file__).resolve().parents[1]
 os.environ["PLAYWRIGHT_BROWSERS_PATH"] = str(ROOT / ".cache/playwright")
-out = SPIKE / "검증결과/장면컴포넌트"
+out = SPIKE / "검증결과/마을_최종장면"
 out.mkdir(parents=True, exist_ok=True)
 result = {
     "scope": "마을 컴포넌트만. 최종 앱/팝업/실제 실행 연결 수용이 아님",
@@ -53,6 +53,72 @@ try:
             page.wait_for_selector(f"[data-testid=world][data-phase={phase}]")
             assert page.evaluate('window.__componentCanvas===document.querySelector("canvas")')
         result["component_actions"] = ["move", "work", "deliver"]
+        actor_ids = [
+            "planner",
+            "researcher-1",
+            "researcher-2",
+            "researcher-3",
+            "researcher-4",
+            "editor",
+        ]
+        fixture = {
+            "mode": "control",
+            "actors": {
+                actor: {
+                    "status": "waiting" if actor.startswith("researcher-") else "completed",
+                    "eventId": "fixture-" + actor,
+                    "summary": "장면 컴포넌트의 기록 시각 시험",
+                }
+                for actor in actor_ids
+            },
+            "clock": {
+                "at_ms": 2200,
+                "actor_started_ms": {actor: 0 for actor in actor_ids},
+                "report_submitted_ms": 0,
+                "replay": True,
+            },
+            "latestReport": {
+                "id": "component-only",
+                "title": "장면 검사",
+                "createdAt": "2026-11-06T00:00:00Z",
+            },
+        }
+
+        def show_at(value, submitted=0):
+            fixture["clock"].update(at_ms=value, report_submitted_ms=submitted)
+            page.evaluate(
+                "v=>window.dispatchEvent(new CustomEvent('scene-check-state',{detail:v}))", fixture
+            )
+            page.wait_for_function(
+                "v=>Number(document.querySelector('[data-testid=world]').dataset.sceneTime)===v",
+                arg=value,
+            )
+            page.wait_for_timeout(100)
+
+        def positions():
+            return page.locator('[data-testid^="npc-"]').evaluate_all(
+                "es=>es.map(e=>({id:e.dataset.testid,x:e.dataset.x,y:e.dataset.y}))"
+            )
+
+        show_at(2200)
+        first_positions = positions()
+        page.get_by_test_id("paper-document").wait_for(state="visible")
+        first_paper = page.get_by_test_id("paper-document").bounding_box()
+        show_at(500)
+        show_at(2200)
+        assert positions() == first_positions
+        assert page.get_by_test_id("paper-document").bounding_box() == first_paper
+        page.wait_for_timeout(250)
+        assert positions() == first_positions
+        show_at(500, submitted=1000)
+        assert not page.get_by_test_id("paper-document").is_visible()
+        result["recorded_clock"] = {
+            "seek_order": [2200, 500, 2200],
+            "same_positions": True,
+            "paused_wall_clock_independent": True,
+            "future_paper_hidden": True,
+        }
+        assert page.evaluate('window.__componentCanvas===document.querySelector("canvas")')
         assert not result["errors"], result["errors"]
         browser.close()
     result["status"] = "PASS"

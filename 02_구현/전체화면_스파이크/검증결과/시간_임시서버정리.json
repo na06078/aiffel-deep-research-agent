@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "stopped_exact_non_hermes_dev_pid": 42140,
+  "confirmed_cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면",
+  "user_server_preserved": [
+    {
+      "port": 8766,
+      "pid": 11828
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "unchanged_tested_source": true,
+  "requirement_and_scenario_ids": 82,
+  "token_refs": 13,
+  "css_colors": 14,
+  "sidecar_components": 6,
+  "checked_links": 7,
+  "current_state_not_stale": true,
+  "user_server_health": {
+    "status": "ok",
+    "mode": "spike",
+    "provider": "test-double",
+    "actual_model_requests": 0
+  }
+}
