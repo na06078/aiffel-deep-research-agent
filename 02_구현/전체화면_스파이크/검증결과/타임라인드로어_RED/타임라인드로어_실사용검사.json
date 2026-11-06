@@ -1,0 +1,41 @@
+{
+  "started_at": "2026-11-06T10:27:09.356647+00:00",
+  "checks": [],
+  "captures": [
+    "타임라인_하단스크롤.png",
+    "타임라인_실패상태.png"
+  ],
+  "browser_errors": [],
+  "posts": [],
+  "failures": [
+    "('replay-prev', {'top': 359, 'bottom': 389, 'left': 16, 'right': 89.296875, 'drawerTop': 540, 'drawerBottom': 900, 'inViewport': True, 'hit': False})"
+  ],
+  "scope": "기존 실제 완료 기록·읽기 전용 UI 조작; 새 연구/모델 호출 없음",
+  "budget_before": {
+    "attempt_count": 27,
+    "max_attempts": 40,
+    "remaining_attempts": 13,
+    "spent_usd": 0.04250905,
+    "reserved_usd": 0.0,
+    "max_usd": 1.0,
+    "input_tokens": 133489,
+    "output_tokens": 7614,
+    "unknown_count": 0
+  },
+  "report_sha256": "19c6f5f980533a7e001beecc6f3f2852f44869800c4ad0a7afd3dea0e4d242cd",
+  "budget_after": {
+    "attempt_count": 27,
+    "max_attempts": 40,
+    "remaining_attempts": 13,
+    "spent_usd": 0.04250905,
+    "reserved_usd": 0.0,
+    "max_usd": 1.0,
+    "input_tokens": 133489,
+    "output_tokens": 7614,
+    "unknown_count": 0
+  },
+  "db_unchanged": true,
+  "report_unchanged": true,
+  "status": "FAIL",
+  "finished_at": "2026-11-06T10:27:13.022555+00:00"
+}

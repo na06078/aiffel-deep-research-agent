@@ -16,6 +16,8 @@ import {EventViewer,ReportViewer} from './상세보기';
 import {useRecordedReplay} from './기록재생연결';
 import {projectionSnapshot,sceneClock} from './시간재생';
 import {Timeline} from './실행타임라인';
+import {useDrawerHeight} from './드로어크기';
+import type {CSSProperties} from 'react';
 const menus:Menu[]=['장면 도구','실행/큐','과거 기록','사건 기록','제어 도구','안내'];
 function Icon({close=false}:{close?:boolean}){return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">{close?<path d="m6 6 12 12M18 6 6 18"/>:<path d="M4 6h16M4 12h16M4 18h16"/>}</svg>}
 function localEvent(actor:Actor,nonce:number):EventDetail {return {event_id:`art-demo-${actor}-${nonce}`,run_id:'art-demo',control_revision:0,seq:nonce,occurred_at:new Date().toISOString(),type:'art-demo.work',actor,recipient:actor==='editor'?'publisher':'editor',status:'completed',summary:`${names[actor]}의 장면 실험용 작업 예시`,input:{prompt:'합성 자료의 관찰과 근거를 구분하여 짧게 정리하세요.',instruction:'마을 연구 활동을 시연합니다.',source:{title:'합성 실험 문서',text:'이 자료는 화면 동작을 확인하기 위해 만든 예시이며 실제 연구 근거가 아닙니다.'}},output:{summary:'합성 문서의 목적은 장면과 사건 상세 연결을 확인하는 것입니다.',actual_model_requests:0},provider:'art-demo',error:null};}
@@ -34,6 +36,7 @@ export function App(){
  const draftRef=useRef(ui.draft);draftRef.current=ui.draft;
  const menuRef=useRef<HTMLButtonElement>(null),closeRef=useRef<HTMLButtonElement>(null);
  const surfaceRef=useRef<HTMLElement>(null),composerRef=useRef<HTMLDivElement>(null);
+ const drawerSize=useDrawerHeight(surfaceRef,composerRef,!!ui.popup);
  useEffect(()=>{
   const surface=surfaceRef.current,composer=composerRef.current;
   if(!surface||!composer)return;
@@ -47,7 +50,7 @@ export function App(){
   const observer=new ResizeObserver(measure);observer.observe(composer);
   const frame=requestAnimationFrame(measure);window.addEventListener('resize',measure);
   return()=>{observer.disconnect();cancelAnimationFrame(frame);window.removeEventListener('resize',measure);};
- },[ui.popup?.kind,playback.open,replaying]);
+ },[ui.popup?.kind,playback.open,replaying,drawerSize.height]);
  const current=snapshot?.runs.find(r=>r.run_id===snapshot.current_run_id);
  const visibleCurrent=replaying?playback.projection?.run:current;
  const visibleSnapshot=useMemo(()=>replaying?(playback.projection?projectionSnapshot(playback.projection):null):snapshot,[replaying,playback.projection,snapshot]);
@@ -78,7 +81,7 @@ export function App(){
  const title=ui.popup?.kind==='event'?'사건 상세':ui.popup?.kind==='report'?'최종 보고서':ui.popup?.kind==='history'?'실행 상세':ui.popup?.kind==='idle'?'역할 상태':ui.popup?.kind;
  const visibleReport=replaying?playback.projection?.report??null:latestReport;
  const clock=playback.archive&&(replaying||ui.mode==='control')?sceneClock(playback.archive,playback.at,replaying,visibleReport):undefined;
- return <main ref={surfaceRef} className={`village-app${playback.open?' timeline-open':''}`}>
+ return <main ref={surfaceRef} style={{'--timeline-height':`${playback.open?drawerSize.height:0}px`} as CSSProperties} className={`village-app${playback.open?' timeline-open':''}`}>
   <Village mode={replaying?'control':ui.mode} demo={demo} actors={presentations} code={codeEvent&&codeActor?{eventId:codeEvent.event_id,actor:codeActor}:undefined} clock={clock} latestReport={visibleReport?{id:visibleReport.report_id,title:visibleReport.title,createdAt:visibleReport.created_at}:undefined} onActorClick={actorClick} onCodeClick={()=>{if(ui.mode==='assets'&&!replaying){const e=localEvent('planner',demo.nonce);e.type='art-demo.assignment';e.provider='art-demo';e.input={instruction:'합성 조사 분담을 코드로 배정합니다.'};e.output={assignments:['조사관 1: 자료 확인','조사관 2: 근거 비교'],actual_model_requests:0};void showEvent(e.event_id,e);}else if(codeEvent)void showEvent(codeEvent.event_id);}} onPaperClick={()=>{if(visibleReport)void showReport(visibleReport.report_id);else open({kind:'안내'});}}/>
   <button ref={menuRef} className="menu-toggle icon-button" data-testid="menu-toggle" aria-label="메뉴 열기" aria-expanded={ui.drawer} onClick={()=>dispatch({type:'drawer'})}><Icon/></button>
   {((!replaying&&ui.mode==='assets')||(!actual&&visibleSnapshot))&&<span className="mock-badge">{!replaying&&ui.mode==='assets'?'합성 장면 · 모의 응답':'모의 응답'}</span>}
@@ -105,6 +108,6 @@ export function App(){
     <button data-testid="command-submit" className="primary" type="submit" disabled={replaying||busy||!ui.draft.trim()}>{replaying?'기록 재생 중':busy?'확인 중':'지시 보내기'}</button>
    </form>
   </div>
- <Timeline open={playback.open} runs={snapshot?.runs??[]} runId={playback.runId} archive={playback.archive} at={playback.at} replay={replaying} playing={playback.playing} loading={playback.loading} error={playback.error} onToggle={()=>playback.setOpen(!playback.open)} onSelect={playback.select} onSeek={playback.seek} onPlay={playback.play} onStage={playback.stage} onLive={()=>{playback.live();void refresh().catch(()=>{});}} onRetry={playback.retry} onEvent={id=>void showEvent(id)}/>
+ <Timeline height={drawerSize.height} minHeight={drawerSize.min} maxHeight={drawerSize.max} onHeightChange={drawerSize.setPreferred} open={playback.open} runs={snapshot?.runs??[]} runId={playback.runId} archive={playback.archive} at={playback.at} replay={replaying} playing={playback.playing} loading={playback.loading} error={playback.error} onToggle={()=>playback.setOpen(!playback.open)} onSelect={playback.select} onSeek={playback.seek} onPlay={playback.play} onStage={playback.stage} onLive={()=>{playback.live();void refresh().catch(()=>{});}} onRetry={playback.retry} onEvent={id=>void showEvent(id)}/>
  </main>;
 }

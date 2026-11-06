@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "scope": "타임라인 조작부/시점/눈금 고정·행 전용 스크롤·상단 경계 높이 조절",
+  "baseline_commit": "b745662",
+  "user_url": "http://127.0.0.1:8768/#/control",
+  "requirements_reference": "기술 명세22절",
+  "frontend": {
+    "tests": 67,
+    "passed": 67,
+    "files": 16
+  },
+  "typecheck": "PASS",
+  "build": "PASS_WITH_EXISTING_CHUNK_WARNING",
+  "build_main_chunk_kb": 522.94,
+  "actual_workflow": "타임라인드로어_최종검사/타임라인드로어_실사용검사.json",
+  "actual_check_groups": 8,
+  "viewports": [
+    [
+      1440,
+      900
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      844,
+      390
+    ]
+  ],
+  "fixed_controls_after_bottom_scroll": true,
+  "play_pause_seek_stage_scroll_position_preserved": true,
+  "pointer_touch_keyboard_resize": true,
+  "close_reopen_height_preserved": true,
+  "temporary_viewport_popup_clamp_preserves_preference": true,
+  "menu_input_close_reachable": true,
+  "time_axis_and_track_lanes_aligned": true,
+  "same_canvas_full_viewport": true,
+  "pending_draft_preserved": true,
+  "posts": [],
+  "model_attempts_before": 27,
+  "model_attempts_after": 27,
+  "new_model_requests": 0,
+  "db_unchanged": true,
+  "report_unchanged": true,
+  "report_sha256": "19c6f5f980533a7e001beecc6f3f2852f44869800c4ad0a7afd3dea0e4d242cd",
+  "browser_errors": [],
+  "layout_detector": {
+    "findings": [],
+    "exit_code": 0
+  },
+  "visual_review": "최종 하단 스크롤/좁은 창 캡처 직접 시각 검수. 고정 조작/시점/눈금·메뉴·입력 가림 없음. 첫 검수의 최대 높이 메뉴 가림은 보완 후 실제 hit-test 재확인",
+  "capture_files": [
+    "타임라인_하단스크롤.png",
+    "타임라인_높이확대.png",
+    "타임라인_좁은창.png",
+    "타임라인_낮은창.png",
+    "타임라인_넓은창.png",
+    "타임라인_팝업병행.png"
+  ],
+  "height_preference_lifetime": "현재 페이지에서 접기/재열기 유지. 새 전역 설정/DB 저장 없음",
+  "out_of_scope": [
+    "연구/모델/백엔드/DB/정본 변경",
+    "새 데이터/이미지/패키지 설치",
+    "원격 공개/태그"
+  ],
+  "local_git_policy": "현재 코드·문서·근거를 같은 로컬 검증 단위로 기록; 정확한 최종 해시는 실제 Git으로 확인",
+  "backups_created": false,
+  "source_sha256": {
+    "02_구현/전체화면_스파이크/화면/src/실행타임라인.tsx": "428fb2ba01b9345e8f758e900c6ac399a1aa2250dedfa0ab057f944f63e77539",
+    "02_구현/전체화면_스파이크/화면/src/실행타임라인.css": "3baaa185ceae33c6d5e13d77c4be54e85d9a9032965de648040b1eeff37d0b1c",
+    "02_구현/전체화면_스파이크/화면/src/실행타임라인.test.tsx": "2252e7cc0a4f2512d55432dd62090d23d347295c6cc9081a160dfb97fdf16b2d",
+    "02_구현/전체화면_스파이크/화면/src/앱.tsx": "9c1b3a97046071288ed9fab20b05cb558a8db4208a3b4cf0bc0d19eb0d07f00f",
+    "02_구현/전체화면_스파이크/화면/src/앱.test.tsx": "e5b2ce55044f8ecbccf2767b697ef2f5b6997f5c717becab42ec53ec27b4691a",
+    "02_구현/전체화면_스파이크/화면/src/화면.css": "1c4ae8a74ee6201acc185d3bbda511769bf1bce23f83c684a390ca86bfbdbe30",
+    "02_구현/전체화면_스파이크/화면/src/드로어크기.ts": "89d58ee5eb7a916fe02e70c606046034abea04a0de170113b2de78e1c5e7dd4c",
+    "02_구현/전체화면_스파이크/화면/src/드로어크기.test.ts": "a893dfec41a66e6a9ecf83ab1ca666ca6689aa627c658efc3cb85a28420fd363"
+  }
+}

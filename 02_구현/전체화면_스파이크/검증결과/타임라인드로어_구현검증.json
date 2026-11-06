@@ -1,0 +1,130 @@
+{
+  "status": "구현 및 대상 합성/SSR 검사 통과; 실제 브라우저·전체회귀는 메인 인수 대상",
+  "project_root": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트",
+  "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면",
+  "modified_files": [
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\실행타임라인.tsx",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\실행타임라인.css",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\실행타임라인.test.tsx",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\앱.tsx",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\앱.test.tsx",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\화면.css"
+  ],
+  "created_source_files": [
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\드로어크기.ts",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\드로어크기.test.ts"
+  ],
+  "behavior": {
+    "pinned": "timeline-toolbar는 실행 선택/닫기·재생·단계·실시간·현재시각·유일한 scrubber/axis를 포함. timeline-track-scroll은 Tracks만 포함.",
+    "scroll": "scrollTop을 대입하는 효과 없음. scroller/Tracks 컴포넌트와 track key 유지, overflow-anchor:none. 실제 scrollTop 보존은 메인 검증 대상.",
+    "horizontal_alignment": "toolbar overflow-y:hidden + scrollbar-gutter:stable, 행 scroller overflow-y:auto + scrollbar-gutter:stable. seek/axis/rows 동일110px(좁은창76px) 레이블 열과 우측28px 여유.",
+    "pointer": "상단10px 경계, ns-resize/touch-action:none. primary button0만 시작, focus/setPointerCapture, 같은 pointerId move/up/cancel/lostcapture. 닫기·unmount effect가 capture 해제.",
+    "keyboard": "ArrowUp +20, ArrowDown -20, Shift 50; Home min/End max. 수평 separator tabIndex0 + ARIA min/max/now/valuetext.",
+    "lifecycle": "useDrawerHeight의 preferred는 App 생존 동안 유지. viewport/popup/notice 제한은 effective만 clamp. close/reopen·replay tick에 preferred reset 없음. 저장소/DB/sessionStorage 새설정 없음.",
+    "layout": "App inline --timeline-height가 유일한 유효 높이. drawer/composer/toggle/popup에서 공유. 예전 timeline-open/:has popup/media 높이 덮어쓰기 제거. App popup measurement effect에 drawerSize.height를 추가하여 높이만 바뀌어 composer 위치가 움직여도 재측정.",
+    "identity": "마을 renderer/canvas/배치/에셋 및 실행·재생 API 변경 없음."
+  },
+  "geometry": {
+    "default_preferred": "min(360,innerHeight*0.4); SSR360",
+    "normal_min_px": 252,
+    "low_height_threshold_px": 560,
+    "low_min_px": 184,
+    "max_formula": "floor(viewportHeight - measuredComposerHeight - composerGap - reserve), floor0; min=min(nominalMin,max)",
+    "composer_gap_px": "36; <=560px 높이에서는31",
+    "reserve": "팝업없음16; 팝업있음 actualPopupTop+12+140(낮은창92)",
+    "popup_reservation_revision": "초기 낮은창68px은 헤더+본문 여유가 부족할 수 있어 별도 관측 RED→GREEN으로92px 보존으로 보완.",
+    "compact": "effective<300 또는 낮은창은 보조 summary/legend 숨김; 주요 controls/seek/axis는 숨기지 않음. 좁은창 재생버튼4열+상태/시간2행.",
+    "examples": {
+      "normal_no_popup": {
+        "space": "900/1440/composer110/gap36",
+        "min": 252,
+        "max": 738
+      },
+      "normal_popup_top72": {
+        "min": 252,
+        "max": 530
+      },
+      "low_no_popup": {
+        "space": "390/844/composer80/gap31",
+        "min": 184,
+        "max": 263
+      },
+      "low_popup_top12": {
+        "min": 163,
+        "max": 163
+      }
+    }
+  },
+  "tdd_observed": [
+    {
+      "behavior": "고정 toolbar와 rows-only 경계",
+      "command": "'C:/nvm4w/nodejs/node.exe' node_modules/vitest/vitest.mjs run src/실행타임라인.test.tsx",
+      "red": "19:27:50, 1 failed/5 passed; expected empty toolbar to contain timeline-run-select",
+      "green": "19:29:09, 6 passed"
+    },
+    {
+      "behavior": "높이 bounds/임시 clamp와 선호 복원",
+      "command": "'C:/nvm4w/nodejs/node.exe' node_modules/vitest/vitest.mjs run src/드로어크기.test.ts",
+      "red": "19:29:42, 1 failed; {min:0,max:1000} != {min:252,max:738}",
+      "green": "19:30:04, 1 passed"
+    },
+    {
+      "behavior": "드래그 부호·키보드·separator ARIA",
+      "command": "'C:/nvm4w/nodejs/node.exe' node_modules/vitest/vitest.mjs run src/드로어크기.test.ts src/실행타임라인.test.tsx",
+      "red": "19:30:49, 3 failed/7 passed; 360!=490, null!=380, missing role=separator",
+      "green": "19:31:58, 10 passed"
+    },
+    {
+      "behavior": "App 단일 유효높이 연결",
+      "command": "'C:/nvm4w/nodejs/node.exe' node_modules/vitest/vitest.mjs run src/앱.test.tsx -t '단일 유효 높이'",
+      "red": "19:32:26, 1 failed/4 skipped; missing --timeline-height:360px",
+      "green": "19:35:10, 관련4파일19 passed + TypeScript exit0"
+    },
+    {
+      "behavior": "다른 포인터의 종료를 무시·취소 정리·seek/play/stage/toggle 무호출",
+      "command": "'C:/nvm4w/nodejs/node.exe' node_modules/vitest/vitest.mjs run src/실행타임라인.test.tsx -t '실제 경계 핸들러'",
+      "red": "19:35:43, 1 failed/7 skipped; unrelated pointerup 후 last callback490 !=500",
+      "green": "19:36:14, 관련4파일20 passed + TypeScript exit0"
+    },
+    {
+      "behavior": "낮은창 popup 본문 공간92 보존",
+      "command": "'C:/nvm4w/nodejs/node.exe' node_modules/vitest/vitest.mjs run src/드로어크기.test.ts",
+      "red": "19:37:26, 1 failed/3 passed; bounds184/187 !=163/163",
+      "green": "19:37:55, 4 passed"
+    }
+  ],
+  "final_verification": {
+    "command": "'C:/nvm4w/nodejs/node.exe' node_modules/vitest/vitest.mjs run src/드로어크기.test.ts src/실행타임라인.test.tsx src/앱.test.tsx src/실제연구표시.test.tsx",
+    "exit_code": 0,
+    "test_files": 4,
+    "tests": 21,
+    "baseline_selected_tests": 13,
+    "added_tests": 8,
+    "raw_log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\타임라인드로어_검사\\구현\\최종_대상테스트.log",
+    "typescript_command": "'C:/nvm4w/nodejs/node.exe' node_modules/typescript/bin/tsc --noEmit",
+    "typescript_exit_code": 0,
+    "typescript_log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\타임라인드로어_검사\\구현\\최종_TypeScript.log"
+  },
+  "exclusions": [
+    "빌드·서버 기동/재시작 미실행",
+    "사용자/실제/격리 브라우저 조작 미실행",
+    "모델·외부 API·새 연구 미실행",
+    "백엔드·공유계약·시간계약·장면계약·마을 렌더러·에셋·패키지·lock·문서·Git·env·DB·정본 보고서 미수정",
+    "전체 프론트58/15파일 회귀·기존 실제 연구27카운터/DB/보고서해시 불변은 메인 담당"
+  ],
+  "limitations": [
+    "SSR은 실제 CSS 높이/스크롤/히트테스트/canvas 인스턴스를 증명하지 않는다. 메인 검증/타임라인드로어_실사용검사.py의 실제1440x900/390x844/844x390 검사가 필요하다.",
+    "포인터 합성 검사는 실제 Timeline JSX의 핸들러를 SSR probe에서 추출하여 명시적 capture target 대역으로 실행한다. 새 DOM 의존성/가짜 DOM 환경 없음.",
+    "기하학적으로 극단적으로 작은 viewport와 큰 알림/팝업을 동시에 요구하면 min이 max까지 낮아진다. 승인된 대표3해상도 실제 검증 결과를 최종 판정으로 삼는다."
+  ],
+  "issues": [
+    "write_file이39행 전체 read_file 후에도 partial-view로 오판하여 가독성-only overwrite를 거절했다. 파일은 변경되지 않았고 기능코드는 기존 검증 상태로 유지했다."
+  ],
+  "parent_verification": {
+    "frontend_tests": 67,
+    "frontend_passed": 67,
+    "actual_checks": 8,
+    "actual_status": "PASS",
+    "additional_fix": "최대 높이에서 좁은 창 메뉴 가림을 관측하고, 실제 메뉴/입력 가로 겹침을 측정한 topClearance를 추가. 신규 행동 검사16<68 실패 후 통과"
+  }
+}

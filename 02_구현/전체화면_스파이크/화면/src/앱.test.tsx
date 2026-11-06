@@ -7,6 +7,15 @@ const replayOverride=vi.hoisted(()=>({value:null as any}));
 vi.mock('./기록재생연결',async original=>{const mod=await original<typeof import('./기록재생연결')>();return {useRecordedReplay:(snapshot:any)=>replayOverride.value??mod.useRecordedReplay(snapshot)};});
 vi.mock('./마을',()=>({Village:(props:any)=> <canvas data-testid="village-canvas" data-code={props.code?.eventId} data-report={props.latestReport?.id} data-at={props.clock?.at_ms}/>}));
 vi.mock('./실행기록',()=>({useJournal:()=>({snapshot:{protocol_version:1,provider:'test-double',mode:'spike',runs:[],events:[],waiting:[],queue:[],current_run_id:null,queue_paused:false,queue_pause_reason:null,high_watermark_seq:0,events_has_more:false,mock_requests:0,actual_model_requests:0},refresh:vi.fn(),connection:'test',error:''})}));
+it('앱은 드로어·입력·팝업이 공유할 단일 유효 높이와 실제 크기 변경 콜백을 연결한다',()=>{
+ vi.stubGlobal('location',{hash:'#/control'});
+ replayOverride.value={open:true,runId:null,archive:null,at:0,replay:false,playing:false,projection:null,loading:false,error:'',setOpen:vi.fn(),select:vi.fn(),seek:vi.fn(),play:vi.fn(),stage:vi.fn(),live:vi.fn(),retry:vi.fn()};
+ const html=renderToStaticMarkup(<App/>);
+ expect(html).toContain('--timeline-height:360px');
+ expect(html).toContain('aria-valuenow="360"');
+ expect(html).toContain('aria-valuemax="738"');
+ expect(html).toContain('data-testid="command-input"');
+});
 afterEach(()=>{vi.unstubAllGlobals();replayOverride.value=null;});
 it('에셋 실험의 기존 독립 연출에는 live 기록 clock을 강제하지 않는다',()=>{
  vi.stubGlobal('location',{hash:'#/assets'});

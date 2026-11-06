@@ -17,6 +17,42 @@ it('객체별 실제 구간과 정확한 시간축·scrubber를 제공하고 leg
  const legacy=renderToStaticMarkup(<Timeline {...base} archive={{...archive,spans:[],has_measured_spans:false}} runs={[archive.run]}/>);
  expect(legacy).toContain('미측정');expect(legacy).not.toContain('timeline-span-real-span');expect(legacy).toContain('real-event');
 });
+it('재생·시점·시간축은 고정 조작부에 있고 행 전용 스크롤에는 트랙만 있다',()=>{
+ const html=renderToStaticMarkup(<Timeline {...base} archive={archive}/>);
+ const toolbar=html.split('data-testid="timeline-toolbar"')[1]?.split('data-testid="timeline-track-scroll"')[0]??'';
+ for(const id of ['timeline-run-select','replay-prev','replay-play','replay-next','replay-live','replay-time','timeline-scrubber'])expect(toolbar).toContain(`data-testid="${id}"`);
+ expect(toolbar).toContain('timeline-axis');
+ expect(toolbar).not.toContain('timeline-track-planner');
+ const rows=html.split('data-testid="timeline-track-scroll"')[1]??'';
+ expect(rows).toContain('timeline-track-document');expect(rows).not.toContain('timeline-scrubber');expect(rows).not.toContain('timeline-controls');
+ expect(html.match(/data-testid="timeline-scrubber"/g)).toHaveLength(1);
+});
+it('상단 경계는 포커스 가능한 수평 separator로 높이와 키보드 조작을 설명한다',()=>{
+ const html=renderToStaticMarkup(<Timeline {...base} height={360} minHeight={252} maxHeight={738} onHeightChange={vi.fn()}/>);
+ const handle=html.split('data-testid="timeline-resize-handle"')[1]?.split('>')[0]??'';
+ for(const attr of ['role="separator"','tabindex="0"','aria-orientation="horizontal"','aria-valuenow="360"','aria-valuemin="252"','aria-valuemax="738"','aria-controls="timing-drawer"'])expect(handle).toContain(attr);
+ expect(handle).toContain('타임라인 높이');
+});
+it('실제 경계 핸들러는 포인터를 캡처하고 같은 포인터만 이동·종료하며 취소 후 재생을 건드리지 않는다',()=>{
+ let handle:any;
+ const changed=vi.fn(),seek=vi.fn(),play=vi.fn(),stage=vi.fn(),toggle=vi.fn();
+ function find(node:any):any {if(!node||typeof node!=='object')return null;if(node.props?.['data-testid']==='timeline-resize-handle')return node;return [node.props?.children].flat(Infinity).map(find).find(Boolean);}
+ function Probe(){const tree=Timeline({...base,height:360,minHeight:252,maxHeight:738,onHeightChange:changed,onSeek:seek,onPlay:play,onStage:stage,onToggle:toggle});handle=find(tree).props;return tree;}
+ renderToStaticMarkup(<Probe/>);
+ let captured:number|null=null;
+ const target={focus:vi.fn(),setPointerCapture:vi.fn((id:number)=>{captured=id;}),hasPointerCapture:(id:number)=>captured===id,releasePointerCapture:vi.fn(()=>{captured=null;})};
+ const event=(id:number,y:number)=>({pointerId:id,clientY:y,isPrimary:true,button:0,pointerType:'touch',currentTarget:target,preventDefault:vi.fn(),stopPropagation:vi.fn()});
+ handle.onPointerDown(event(7,540));expect(target.setPointerCapture).toHaveBeenCalledWith(7);
+ handle.onPointerMove(event(8,10));expect(changed).not.toHaveBeenCalled();
+ handle.onPointerMove(event(7,410));expect(changed).toHaveBeenLastCalledWith(490);
+ handle.onPointerUp(event(8,410));
+ handle.onPointerMove(event(7,400));expect(changed).toHaveBeenLastCalledWith(500);
+ handle.onPointerCancel(event(7,400));expect(target.releasePointerCapture).toHaveBeenCalledTimes(1);
+ changed.mockClear();handle.onPointerMove(event(7,300));expect(changed).not.toHaveBeenCalled();
+ const key={key:'ArrowUp',shiftKey:false,preventDefault:vi.fn(),stopPropagation:vi.fn()};handle.onKeyDown(key);
+ expect(changed).toHaveBeenLastCalledWith(380);expect(key.preventDefault).toHaveBeenCalled();
+ for(const action of [seek,play,stage,toggle])expect(action).not.toHaveBeenCalled();
+});
 const base:TimelineProps={open:true,runs:[],runId:null,archive:null,at:0,replay:false,playing:false,loading:false,error:'',onToggle:vi.fn(),onSelect:vi.fn(),onSeek:vi.fn(),onPlay:vi.fn(),onStage:vi.fn(),onLive:vi.fn(),onRetry:vi.fn(),onEvent:vi.fn()};
 it('단계 전체와 응답 대기를 범례·이름·객체별 경과로 구분한다',()=>{
  const wait={...archive.spans[0],span_id:'wait',kind:'model_wait' as const,label:'model',duration_ms:1500};

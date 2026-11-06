@@ -133,9 +133,9 @@
       "name": "객체별 시간창",
       "kind": "custom",
       "refersTo": "timing-drawer",
-      "description": "접이식 기록 드로어의 객체 행·전체/대기 범례. 정적 스타일 미리보기이며 실제 실행 기록이 아니다.",
+      "description": "고정 조작/시점/눈금과 행 전용 스크롤·높이 조절을 갖춘 기록 창. 이 예시는 정적 스타일 미리보기이며 실제 동작은 Timeline/App에서 검증한다.",
       "html": "<section class=\"ds-timing\"><header>실행 타임라인</header><div class=\"ds-legend\"><span class=\"ds-node\">단계 전체</span><span class=\"ds-wait\">응답 대기</span></div><div class=\"ds-row\"><strong>조사관</strong><div><span class=\"ds-bar ds-node\">조사</span><span class=\"ds-bar ds-wait\">응답 대기</span></div></div></section>",
-      "css": ".ds-timing{font-family:\"Segoe UI\",\"Malgun Gothic\",system-ui,sans-serif;background:#fcfaef;color:#294033;border-top:1px solid #9aa990;padding:8px 16px 32px;box-shadow:0 -5px 22px #1b302c40}.ds-timing header{font-size:12px}.ds-legend{display:flex;gap:16px;font-size:10px;margin:8px 0}.ds-legend>span{padding:2px 5px}.ds-row{display:grid;grid-template-columns:110px minmax(0,1fr);min-height:48px;border-top:1px solid #d8dece;font-size:11px}.ds-row>div{display:flex;flex-direction:column;gap:4px;padding:4px}.ds-bar{min-height:17px;padding:1px 5px;border-radius:3px;font-size:10px}.ds-node{background:#b6d7c4;color:#1f4331;border:1px solid #58836b}.ds-wait{background:#f2cf8d;color:#553d18;border:1px dashed #9f773b}"
+      "css": ".ds-timing{font-family:\"Segoe UI\",\"Malgun Gothic\",system-ui,sans-serif;background:#fcfaef;color:#294033;border-top:1px solid #9aa990;padding:12px 16px max(12px,env(safe-area-inset-bottom));box-shadow:0 -5px 22px #1b302c40}.ds-timing header{font-size:12px}.ds-legend{display:flex;gap:16px;font-size:10px;margin:8px 0}.ds-legend>span{padding:2px 5px}.ds-row{display:grid;grid-template-columns:110px minmax(0,1fr);min-height:48px;border-top:1px solid #d8dece;font-size:11px}.ds-row>div{display:flex;flex-direction:column;gap:4px;padding:4px}.ds-bar{min-height:17px;padding:1px 5px;border-radius:3px;font-size:10px}.ds-node{background:#b6d7c4;color:#1f4331;border:1px solid #58836b}.ds-wait{background:#f2cf8d;color:#553d18;border:1px dashed #9f773b}"
     }
   ],
   "narrative": {
