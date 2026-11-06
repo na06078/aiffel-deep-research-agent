@@ -217,7 +217,9 @@ def fetch_phase():
                 text = article.get("text") or ""
                 record.update(
                     title=article.get("title"),
-                    published_at=article.get("date"),
+                    extracted_date_candidate=article.get("date"),
+                    published_at=None,
+                    date_verified=False,
                     text_characters=len(text),
                 )
                 if len(text.strip()) < 200:
