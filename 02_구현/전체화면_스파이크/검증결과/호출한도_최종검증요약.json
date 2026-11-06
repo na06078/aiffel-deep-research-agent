@@ -51,7 +51,13 @@
     "integrity": "ok",
     "row_digest_matches": true
   },
-  "backup_disposition": "awaiting_user_choice",
+  "backup_disposition": "deleted_by_user_choice",
+  "backup_cleanup": {
+    "deleted_at_kst": "2026-11-06T23:16:06.757557+09:00",
+    "file_exists": false,
+    "empty_task_backup_directory_removed": true,
+    "scope": "이번 작업의 임시 스냅샷만 삭제; 실제 장부/기존 이력/연구 자료 보존"
+  },
   "visual_review": {
     "status": "PASS_WITH_SCOPE_NOTE",
     "captures": [
