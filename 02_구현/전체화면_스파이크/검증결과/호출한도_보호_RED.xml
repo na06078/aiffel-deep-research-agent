@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="0.373" timestamp="2026-11-06T23:02:04.320682+09:00" hostname="z13flow"><testcase classname="테스트.테스트_호출한도초기화" name="test_27회이력을남기고_0회100한도2달러로_초기화와재시작" time="0.164" /><testcase classname="테스트.테스트_호출한도초기화" name="test_미정산호출이있으면_초기화거절과_정책이력보존" time="0.011"><failure message="Failed: DID NOT RAISE BudgetError">tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/호출한도_보호_RED/test_미정산호출이있으면_초기화거절과_정책이력보존0')
+
+    def test_미정산호출이있으면_초기화거절과_정책이력보존(tmp_path):
+        path = tmp_path / "불명.sqlite3"
+        budget = CallBudget(path)
+        budget.reserve(10000, 4096, {})
+        before = budget.usage()
+        historical_rows = rows(path)
+    
+&gt;       with pytest.raises(BudgetError, match="unsettled_attempts"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE BudgetError
+
+테스트\테스트_호출한도초기화.py:49: Failed</failure></testcase></testsuite></testsuites>

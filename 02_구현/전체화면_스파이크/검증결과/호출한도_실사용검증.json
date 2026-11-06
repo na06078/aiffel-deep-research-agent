@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "checked_at_kst": "2026-11-06T23:08:44.864862+09:00",
+  "url": "http://127.0.0.1:8768/#/control",
+  "health": {
+    "status": "ok",
+    "mode": "research",
+    "provider": "openai",
+    "actual_model_requests": 0
+  },
+  "budget": {
+    "attempt_count": 0,
+    "max_attempts": 100,
+    "remaining_attempts": 100,
+    "spent_usd": 0.04250905,
+    "reserved_usd": 0.0,
+    "max_usd": 2.0,
+    "input_tokens": 133489,
+    "output_tokens": 7614,
+    "unknown_count": 0
+  },
+  "historical_run_requests": 26,
+  "checks": [
+    "실제 메뉴의 호출0/100·잔여100·누적비용 보존·$2와 두 해상도",
+    "새로고침 후 동일 호출 정책",
+    "기존 실제 보고서 뷰어·다운로드·바이트 재열기 동일",
+    "과거27회 원장 행·기존연구DB/정본/HTML/PDF·실행/큐 불변·POST0"
+  ],
+  "captures": [
+    "02_구현\\전체화면_스파이크\\검증결과\\호출한도_실사용\\호출한도_넓은화면.png",
+    "02_구현\\전체화면_스파이크\\검증결과\\호출한도_실사용\\호출한도_좁은화면.png",
+    "02_구현\\전체화면_스파이크\\검증결과\\호출한도_실사용\\호출한도_기존보고서.png"
+  ],
+  "post_requests": [],
+  "external_requests": [],
+  "browser_errors": [],
+  "protected_matches": {
+    "03_실행데이터/실제연구/실행기록.sqlite3": true,
+    "03_실행데이터/실제연구/🧾 실제 연구 보고서_44f307dedcbf4c8282d9b4e8a3a207bb.md": true,
+    "03_실행데이터/실제연구/형식변환/15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.html": true,
+    "03_실행데이터/실제연구/형식변환/15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.json": true,
+    "03_실행데이터/실제연구/형식변환/a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.json": true,
+    "03_실행데이터/실제연구/형식변환/a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.pdf": true
+  },
+  "new_model_requests": 0,
+  "historical_attempt_rows": 27
+}

@@ -1,0 +1,107 @@
+{
+  "status": "PASS",
+  "checked_at_kst": "2026-11-06T23:13:34.789540+09:00",
+  "scope": "호출 카운터0/100·비용한도$2·과거이력/누적비용보존·새모델호출0",
+  "backend": {
+    "tests": 142,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "targeted_tests": {
+    "tests": 42,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "frontend_source_unchanged": true,
+  "frontend_tests_rerun": false,
+  "build_rerun": false,
+  "ruff": "PASS",
+  "format": "PASS",
+  "actual_workflow": "호출한도_실사용검증.json",
+  "actual_ui_checks": 4,
+  "budget": {
+    "attempt_count": 0,
+    "max_attempts": 100,
+    "remaining_attempts": 100,
+    "spent_usd": 0.04250905,
+    "reserved_usd": 0.0,
+    "max_usd": 2.0,
+    "input_tokens": 133489,
+    "output_tokens": 7614,
+    "unknown_count": 0
+  },
+  "historical_attempt_rows": 27,
+  "historical_attempt_rows_sha256": "58723dd3a5735ccf523e97f89a89d2fc27a49c97d3cea395236ed139eb24c963",
+  "protected_files_unchanged": {
+    "03_실행데이터/실제연구/실행기록.sqlite3": true,
+    "03_실행데이터/실제연구/🧾 실제 연구 보고서_44f307dedcbf4c8282d9b4e8a3a207bb.md": true,
+    "03_실행데이터/실제연구/형식변환/15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.html": true,
+    "03_실행데이터/실제연구/형식변환/15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.json": true,
+    "03_실행데이터/실제연구/형식변환/a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.json": true,
+    "03_실행데이터/실제연구/형식변환/a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.pdf": true
+  },
+  "post_requests": [],
+  "new_model_requests": 0,
+  "backup": {
+    "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\호출한도_보호\\호출예산_변경전.sqlite3",
+    "bytes": 12288,
+    "sha256": "bcf166df751456d66d30a51cc6f796abd1223e958451de24e553151c78420522",
+    "integrity": "ok",
+    "row_digest_matches": true
+  },
+  "backup_disposition": "awaiting_user_choice",
+  "visual_review": {
+    "status": "PASS_WITH_SCOPE_NOTE",
+    "captures": [
+      "02_구현\\전체화면_스파이크\\검증결과\\호출한도_실사용\\호출한도_넓은화면.png",
+      "02_구현\\전체화면_스파이크\\검증결과\\호출한도_실사용\\호출한도_좁은화면.png",
+      "02_구현\\전체화면_스파이크\\검증결과\\호출한도_실사용\\호출한도_기존보고서.png"
+    ],
+    "note": "예산 카운터0과 과거 실행26회 표시는 서로 다른 집계. 입력/닫기/예산 표시 확인. 보고서 본문은 기존 팝업 내부 스크롤로 열람하며 내용 정확성은 기존 CONDITIONAL 유지."
+  },
+  "server": {
+    "port": 8768,
+    "pid": 7372,
+    "executable": "C:\\Users\\YH\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크",
+    "command": [
+      "C:\\Users\\YH\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "-m",
+      "서버.연구앱",
+      "--port",
+      "8768"
+    ]
+  },
+  "prior_8768_listener": false,
+  "spike_8766_preserved": true,
+  "source_sha256": {
+    "02_구현/전체화면_스파이크/서버/호출예산.py": "42216cb8f6fe9e36602214a7c01079b157ddcb7c8a56ca6434fc6b5d18366bfb",
+    "02_구현/전체화면_스파이크/테스트/테스트_호출한도초기화.py": "6bcb9732e3fd2db017a86891016a7b6dbbb1e61c640477c94424c1944c6874c2",
+    "02_구현/전체화면_스파이크/테스트/테스트_실제모델.py": "cb63c4d4c8d22beecfa58d60d3af3e81b2359aba22ff67e8a4e7b9f819f28003"
+  },
+  "raw_red_whitespace_exceptions": [
+    {
+      "path": "02_구현/전체화면_스파이크/검증결과/호출한도_RED.xml",
+      "lines": [
+        11,
+        13
+      ],
+      "reason": "pytest 실패 원문 traceback 공백 보존; 코드/문서 공백 검사와 분리"
+    },
+    {
+      "path": "02_구현/전체화면_스파이크/검증결과/호출한도_보호_RED.xml",
+      "lines": [
+        9
+      ],
+      "reason": "pytest 실패 원문 traceback 공백 보존; 코드/문서 공백 검사와 분리"
+    }
+  ],
+  "out_of_scope": [
+    "새 연구/실제 제공자 호출",
+    "보고서 내용 수정",
+    "웹 검색",
+    "원격/push/태그"
+  ]
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.270" timestamp="2026-11-06T23:00:07.722132+09:00" hostname="z13flow"><testcase classname="테스트.테스트_호출한도초기화" name="test_27회이력을남기고_0회100한도2달러로_초기화와재시작" time="0.128"><failure message="assert 27 == 0">tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/호출한도_RED/test_27회이력을남기고_0회100한도2달러로_초기화0')
+
+    def test_27회이력을남기고_0회100한도2달러로_초기화와재시작(tmp_path):
+        path = tmp_path / "예산.sqlite3"
+        budget = CallBudget(path)
+        for _ in range(27):
+            attempt = budget.reserve(10000, 4096, {})
+            budget.settle(attempt, 100, 30)
+        historical_rows = rows(path)
+        previous = budget.usage()
+    
+        budget.reset_attempt_counter(max_attempts=100, max_usd=2)
+    
+        current = CallBudget(path).usage()
+&gt;       assert current["attempt_count"] == 0
+E       assert 27 == 0
+
+테스트\테스트_호출한도초기화.py:26: AssertionError</failure></testcase></testsuite></testsuites>

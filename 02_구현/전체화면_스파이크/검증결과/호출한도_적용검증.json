@@ -1,0 +1,43 @@
+{
+  "status": "APPLIED_LOCAL_PENDING_HTTP_UI",
+  "applied_at_kst": "2026-11-06T23:07:44.457810+09:00",
+  "budget": {
+    "attempt_count": 0,
+    "max_attempts": 100,
+    "remaining_attempts": 100,
+    "spent_usd": 0.04250905,
+    "reserved_usd": 0.0,
+    "max_usd": 2.0,
+    "input_tokens": 133489,
+    "output_tokens": 7614,
+    "unknown_count": 0
+  },
+  "historical_attempt_rows": 27,
+  "historical_attempt_rows_sha256": "58723dd3a5735ccf523e97f89a89d2fc27a49c97d3cea395236ed139eb24c963",
+  "policy": [
+    [
+      1,
+      100,
+      2000000000,
+      27
+    ]
+  ],
+  "protected_sha256": {
+    "03_실행데이터/실제연구/실행기록.sqlite3": "027493e97aaa855197d1f7264aca2263021718530b0c55191165d12157ade90b",
+    "03_실행데이터/실제연구/🧾 실제 연구 보고서_44f307dedcbf4c8282d9b4e8a3a207bb.md": "19c6f5f980533a7e001beecc6f3f2852f44869800c4ad0a7afd3dea0e4d242cd",
+    "03_실행데이터/실제연구/형식변환/15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.html": "cf1d54941222acc2777e052c4e6b3e37e9a86ef626ed04b1f8f43bf6ea414c77",
+    "03_실행데이터/실제연구/형식변환/15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.json": "7173ea8538e61eccb39292398883a39055993acfe599e1c9c2195def459d499c",
+    "03_실행데이터/실제연구/형식변환/a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.json": "691262a1b9dcf6b92323c94d2cb815b9a056431f702cf385e5c573d05088e812",
+    "03_실행데이터/실제연구/형식변환/a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.pdf": "251af212f7b9b6910e9fec90e1de427164aececaac4d8866eac504fc5ad343ec"
+  },
+  "protected_unchanged": true,
+  "new_model_requests": 0,
+  "backup": {
+    "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\호출한도_보호\\호출예산_변경전.sqlite3",
+    "bytes": 12288,
+    "sha256": "bcf166df751456d66d30a51cc6f796abd1223e958451de24e553151c78420522",
+    "integrity": "ok",
+    "row_digest_matches": true
+  },
+  "prior_8768_listener": false
+}

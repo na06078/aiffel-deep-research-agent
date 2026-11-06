@@ -340,6 +340,35 @@ def test_40번째전송후_41번째는_콜백도HTTP도없음(tmp_path):
     assert model.usage()["attempt_count"] == 40
 
 
+def test_초기화한100회상한은_101번째콜백과전송을차단(tmp_path):
+    sent, callbacks = [], []
+
+    def handler(request):
+        sent.append(request)
+        return httpx.Response(429, json={"error": {"message": "dummy-limit"}})
+
+    model = model_for(tmp_path, handler)
+    model.budget.reset_attempt_counter(max_attempts=100, max_usd=2)
+
+    async def run():
+        try:
+            for _ in range(100):
+                with pytest.raises(ModelCallError) as caught:
+                    await model.complete("dummy", "dummy", context=CTX, on_attempt=callbacks.append)
+                assert caught.value.code == "provider_http"
+            with pytest.raises(ModelCallError) as caught:
+                await model.complete("dummy", "dummy", context=CTX, on_attempt=callbacks.append)
+            assert caught.value.code == "budget_exceeded"
+            assert caught.value.attempt_id is None
+        finally:
+            await model.aclose()
+
+    asyncio.run(run())
+    assert len(sent) == len(callbacks) == 100
+    assert model.usage()["attempt_count"] == 100
+    assert model.usage()["remaining_attempts"] == 0
+
+
 @pytest.mark.parametrize(
     "text",
     [
