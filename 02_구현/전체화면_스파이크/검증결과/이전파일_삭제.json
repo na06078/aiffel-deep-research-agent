@@ -1,0 +1,21 @@
+{
+  "approved_scope": "이전 코드·시험 산출물·빈 실행 기록·전용 시험 캐시·이전 화면 기준 삭제",
+  "checked_at_kst": "2026-11-06T11:40:37.480044+09:00",
+  "deleted": [
+    {"path": "02_구현/스파이크", "files": 5498, "bytes": 181837665},
+    {"path": "03_실행데이터/스파이크", "files": 1, "bytes": 53248},
+    {"path": ".cache/스파이크_통합검사", "files": 22, "bytes": 3398109},
+    {"path": ".impeccable/스파이크_화면_기준.md", "files": 1, "bytes": 2230},
+    {"path": ".impeccable/surfaces/02-src-tsx.md", "files": 1, "bytes": 2395}
+  ],
+  "deleted_files": 5523,
+  "deleted_bytes": 185293647,
+  "all_targets_absent_after_deletion": true,
+  "preserved": [".venv", ".cache/assets", ".cache/npm", ".cache/uv", ".cache/playwright", "01_참고자료/원본데이터", ".git"],
+  "notes": [
+    "삭제 전 실행 DB의 runs·queue·events·calls·reports가 모두 0건임을 확인했다.",
+    "기존 8766 포트의 listener와 이전 폴더 cwd 소유자가 없어 다른 프로세스를 종료하지 않았다.",
+    "새 경로의 검증된 로직·클라이언트·에셋 재사용은 Git269fd63의 바이트와 대조했다. 이전 대시보드 App/레이아웃은 복사하지 않았다.",
+    "별도 백업·파일 이동·Git 이력 재작성은 하지 않았다. 이후 새 surface brief 등록은 새 target을 사용하며 이전 내용은 유지하지 않는다."
+  ]
+}

@@ -45,7 +45,7 @@ def create_app(data_dir: Path | None = None, static_dir: Path | None = None):
         data_dir = Path(configured).resolve()
         if not data_dir.is_relative_to(root):
             raise ValueError("SPIKE_DATA_DIR는 프로젝트 내부 경로여야 합니다.")
-    data_dir = data_dir or root / "03_실행데이터" / "스파이크"
+    data_dir = data_dir or root / "03_실행데이터" / "전체화면_스파이크"
     static_dir = static_dir or Path(__file__).resolve().parents[1] / "화면" / "dist"
 
     @asynccontextmanager

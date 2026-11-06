@@ -1,0 +1,25 @@
+{
+  "checked_at_kst": "2026-11-06T12:00:28.647626+09:00",
+  "backend": {
+    "tests": 21,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "default_data_binding_red_green_observed": true,
+  "legacy_code_data_test_cache_absent": [
+    "02_구현/스파이크",
+    "03_실행데이터/스파이크",
+    ".cache/스파이크_통합검사",
+    ".impeccable/스파이크_화면_기준.md"
+  ],
+  "new_surface_registered": true,
+  "health": {
+    "status": "ok",
+    "mode": "spike",
+    "provider": "test-double",
+    "actual_model_requests": 0
+  },
+  "ui_verification": "pending",
+  "setup_note": "첫 전체 회귀는 시험 상위 폴더 생성과 병행되어 setup 오류였다. 폴더 준비 뒤 동일 회귀21개를 다시 실행해 통과했으며 이를 행동 RED로 세지 않는다."
+}
