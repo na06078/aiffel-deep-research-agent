@@ -8,6 +8,7 @@ from 서버.모델대역 import FakeModel
 from 서버.시험문서 import DOCUMENTS, evaluate_candidate
 from 서버.연구그래프 import build_graph
 from 서버.저장소 import ApiError, Repository, encode, now, uid
+from 서버.활동기록 import measured_call, measured_node, measured_publish, start_call
 
 
 class ExecutionService:
@@ -193,6 +194,7 @@ class ExecutionService:
                     encode(gate) if gate else None,
                 ),
             )
+            start_call(db, state, actor, call_id)
             self.repo.event(
                 db,
                 state["run_id"],
@@ -200,11 +202,12 @@ class ExecutionService:
                 "model.started",
                 actor,
                 input=payload,
-                output={"gate_id": gate["gate_id"]} if gate else None,
+                output={"call_id": call_id, **({"gate_id": gate["gate_id"]} if gate else {})},
                 status="waiting" if gate else "running",
             )
         return call_id
 
+    @measured_node("plan", "planner", "actor")
     async def plan(self, state):
         payload = {"instruction": state["instruction"], "synthetic": True}
         with self.repo.transaction() as (db, data):
@@ -217,7 +220,7 @@ class ExecutionService:
         call_id = self.call_start(state, "planner", payload)
         if call_id is None:
             return {"plan": []}
-        plan = await self.model.plan(payload)
+        plan = await measured_call(self.repo, call_id, self.model.plan(payload))
         with self.repo.transaction() as (db, data):
             db.execute(
                 "UPDATE calls SET status='completed',output=? WHERE call_id=?",
@@ -259,6 +262,7 @@ class ExecutionService:
             )
         return {"plan": plan}
 
+    @measured_node("dispatch", "dispatcher", "code")
     async def dispatch(self, state):
         with self.repo.transaction() as (db, data):
             if not self.repo.fenced(data, state["run_id"], state["revision"]):
@@ -286,6 +290,7 @@ class ExecutionService:
             )
         return {}
 
+    @measured_node("research", None, "actor")
     async def research(self, state):
         assignment = state["assignment"]
         gate_id = uid()
@@ -309,7 +314,7 @@ class ExecutionService:
             future.cancel()
             return {"results": []}
         try:
-            output = await self.model.research(future, payload)
+            output = await measured_call(self.repo, call_id, self.model.research(future, payload))
             with self.repo.transaction() as (db, data):
                 db.execute(
                     "UPDATE calls SET status='completed',output=? WHERE call_id=?",
@@ -346,6 +351,7 @@ class ExecutionService:
         finally:
             self.gates.pop(gate_id, None)
 
+    @measured_node("review", "reviewer", "code")
     async def review(self, state):
         with self.repo.transaction() as (db, data):
             if self.repo.fenced(data, state["run_id"], state["revision"]):
@@ -361,6 +367,7 @@ class ExecutionService:
                 )
         return {}
 
+    @measured_node("synthesize", "editor", "actor")
     async def synthesize(self, state):
         with self.repo.transaction() as (db, data):
             if not self.repo.fenced(data, state["run_id"], state["revision"]):
@@ -369,7 +376,7 @@ class ExecutionService:
         call_id = self.call_start(state, "editor", payload)
         if call_id is None:
             return {}
-        draft = await self.model.synthesize(payload)
+        draft = await measured_call(self.repo, call_id, self.model.synthesize(payload))
         with self.repo.transaction() as (db, data):
             db.execute(
                 "UPDATE calls SET status='completed',output=? WHERE call_id=?",
@@ -392,6 +399,7 @@ class ExecutionService:
                 self.repo.save_revision(db, run)
         return {"draft": draft}
 
+    @measured_node("evaluate", "evaluator", "code")
     async def evaluate(self, state):
         with self.repo.transaction() as (db, data):
             run = self.repo.fenced(data, state["run_id"], state["revision"])
@@ -420,6 +428,7 @@ class ExecutionService:
             self.start_next_queue()
         return {}
 
+    @measured_publish
     def publish(self, db, data, run_id, revision):
         # 파일 쓰기·최종 참조·제출 모두 같은 commit 경계에서 버전/종료 상태를 검사한다.
         run = self.repo.fenced(data, run_id, revision)

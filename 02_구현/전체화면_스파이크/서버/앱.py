@@ -145,6 +145,10 @@ def create_app(data_dir: Path | None = None, static_dir: Path | None = None):
             },
         )
 
+    @app.get("/api/spike/runs/{run_id}/archive")
+    async def run_archive(run_id: str):
+        return app.state.service.repo.archive(run_id)
+
     @app.get("/api/spike/events/{event_id}")
     async def event_detail(event_id: str):
         return app.state.service.repo.get_event(event_id)

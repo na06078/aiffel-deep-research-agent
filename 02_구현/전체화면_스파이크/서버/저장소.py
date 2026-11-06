@@ -47,6 +47,8 @@ class Repository:
                     request_id TEXT PRIMARY KEY, body TEXT, response TEXT);
                 CREATE TABLE IF NOT EXISTS reports (
                     report_id TEXT PRIMARY KEY, body TEXT, filename TEXT);
+                CREATE TABLE IF NOT EXISTS activity_spans (
+                    span_id TEXT PRIMARY KEY, run_id TEXT NOT NULL, body TEXT NOT NULL);
             """)
             initial = {
                 "current_run_id": None,
@@ -63,6 +65,17 @@ class Repository:
         db = sqlite3.connect(self.path, timeout=10)
         db.row_factory = sqlite3.Row
         try:
+            yield db
+        finally:
+            db.close()
+
+    @contextmanager
+    def read_connection(self):
+        db = sqlite3.connect(self.path.as_uri() + "?mode=ro", uri=True, timeout=10)
+        db.row_factory = sqlite3.Row
+        try:
+            db.execute("PRAGMA query_only=ON")
+            db.execute("BEGIN")
             yield db
         finally:
             db.close()
@@ -131,6 +144,9 @@ class Repository:
         )
         event["seq"] = cursor.lastrowid
         db.execute("UPDATE events SET body=? WHERE seq=?", (encode(event), event["seq"]))
+        from 서버.활동기록 import attach_event
+
+        attach_event(db, event)
         return event
 
     def save_revision(self, db, run):
@@ -159,7 +175,8 @@ class Repository:
         return {k: v for k, v in event.items() if k not in {"input", "output", "error", "provider"}}
 
     def snapshot(self):
-        with self.transaction() as (db, state):
+        with self.read_connection() as db:
+            state = json.loads(db.execute("SELECT body FROM state WHERE id=1").fetchone()[0])
             calls = db.execute("SELECT * FROM calls").fetchall()
             waiting = []
             for call in calls:
@@ -185,6 +202,63 @@ class Repository:
                 "actual_model_requests": 0,
             }
 
+    def archive(self, run_id):
+        # 독립 읽기 전용 연결의 일관된 스냅샷. 실행 제어/모델/저널 쓰기 경로와 분리한다.
+        with self.read_connection() as db:
+            state = json.loads(db.execute("SELECT body FROM state WHERE id=1").fetchone()[0])
+            run = self.run(state, run_id)
+            if run is None:
+                raise ApiError(404, "not_found", "실행이 없습니다.")
+            revisions = [
+                json.loads(r[0])
+                for r in db.execute(
+                    "SELECT body FROM revisions WHERE run_id=? ORDER BY revision", (run_id,)
+                )
+            ]
+            events = [
+                json.loads(r[0])
+                for r in db.execute(
+                    "SELECT body FROM events WHERE json_extract(body,'$.run_id')=? ORDER BY seq",
+                    (run_id,),
+                )
+            ]
+            spans = []
+            if db.execute("SELECT 1 FROM sqlite_master WHERE name='activity_spans'").fetchone():
+                spans = [
+                    json.loads(r[0])
+                    for r in db.execute(
+                        "SELECT body FROM activity_spans WHERE run_id=? ORDER BY rowid", (run_id,)
+                    )
+                ]
+            recorded = now()
+            times = [run["created_at"], run["updated_at"]]
+            times.extend(e["occurred_at"] for e in events)
+            for span in spans:
+                times.append(span["started_at"])
+                if span["ended_at"]:
+                    times.append(span["ended_at"])
+                elif span["status"] == "running":
+                    times.append(recorded)
+            start = datetime.fromisoformat(run["created_at"])
+            duration = max(
+                0.0, max((datetime.fromisoformat(t) - start).total_seconds() * 1000 for t in times)
+            )
+            return {
+                "protocol_version": 1,
+                "provider": "test-double",
+                "run": run,
+                "revisions": revisions,
+                "events": events,
+                "spans": spans,
+                "high_watermark_seq": max((e["seq"] for e in events), default=0),
+                "started_at": run["created_at"],
+                "ended_at": None if run["status"] == "running" else run["updated_at"],
+                "recorded_at": recorded,
+                "duration_ms": duration,
+                "has_measured_spans": bool(spans),
+                "truncated": False,
+            }
+
     def get_event(self, event_id):
         with self.connection() as db:
             row = db.execute("SELECT body FROM events WHERE event_id=?", (event_id,)).fetchone()
@@ -204,6 +278,20 @@ class Repository:
     def restore(self):
         # 앱 저널 복원이며 LangGraph 체크포인터 재개가 아니다. 대역도 재호출하지 않는다.
         with self.transaction() as (db, state):
+            # 다른 프로세스의 perf_counter 기준점은 복원할 수 없다. 종료시각/경과를 추정하지 않는다.
+            for row in db.execute("SELECT span_id,body FROM activity_spans").fetchall():
+                span = json.loads(row["body"])
+                if span["status"] == "running":
+                    span.update(
+                        status="interrupted",
+                        ended_at=None,
+                        duration_ms=None,
+                        timing_source="incomplete",
+                    )
+                    db.execute(
+                        "UPDATE activity_spans SET body=? WHERE span_id=?",
+                        (encode(span), row["span_id"]),
+                    )
             interrupted = False
             for run in state["runs"]:
                 if run["status"] == "running":

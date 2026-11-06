@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "actual_socket": "http://127.0.0.1:49883",
+  "run_id": "2a388dc11a0347e7ba1b93f560bcaa02",
+  "events": 22,
+  "spans": 16,
+  "archive_schema_exact": true,
+  "parallel_model_wait_ms": [
+    258.40249998145737,
+    259.83549997908995,
+    260.7776999939233,
+    262.400899984641
+  ],
+  "same_database_bytes": true,
+  "database_sha256": "24f49a2c2c4e7f7a161855642862990d3af8b4d2d6b8f38754c563c0f4a43c14",
+  "same_report_sha256": "275c709c9860e041c7d5e436cb0e24463f0d26871962760bc2b4f70716e868e5",
+  "mock_requests": 6,
+  "actual_model_requests": 0,
+  "missing404_checked": true
+}
