@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "scope": "장면 컴포넌트만; 최종 앱 연결은 미판정",
+  "unit_tests": 3,
+  "scene_actions": [
+    "move",
+    "work",
+    "deliver"
+  ],
+  "viewports": [
+    [
+      1440,
+      900
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "console_errors": [],
+  "visual_inspection": "실제 캡처 2종과 타일 좌표표를 열어 확인. 집 벽/문·나무 복원 및 resize 준비 대기 후 6 NPC/이름 확인.",
+  "typescript": "tsc -p tsconfig.json --noEmit exit0",
+  "files_sha256": {
+    "화면/src/마을.tsx": "c39f84659a8adbecfd6f11d943bcb6d97bcfe16158a93c1fc06ed37efcd73c76",
+    "화면/src/마을.css": "338062f3da06431e0bd2219644a4dd0eace93c8f2b510a6cf0d61954575d496e",
+    "화면/src/장면계약.ts": "32ae3c4c8e11a43f5e3b49f6e16a5fd8a3eba14fbdd35e9ffdedb3242e36cd5d",
+    "화면/src/마을배치.ts": "eb76c737e54508307dec08e1e091d5d5b7482f6f7c9654553d8f072bdad72cde",
+    "화면/src/장면상태.ts": "13a4843baaab526825e124af4ffb2989a8e9360623f90cc4b9c7f1a4c5d9bd84"
+  }
+}

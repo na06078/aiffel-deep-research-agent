@@ -203,6 +203,8 @@ def main(label):
         page.set_viewport_size({"width": width, "height": height})
         page.evaluate("document.fonts.ready")
         page.wait_for_selector('[data-testid="world"][data-render-ready="true"]')
+        page.wait_for_function("""() => {const w=document.querySelector('[data-testid=world]');
+          return Math.abs(Number(w?.dataset.layoutWidth)-innerWidth)<4 && Math.abs(Number(w?.dataset.layoutHeight)-innerHeight)<4;}""")
         metrics = geometry(name)
         hit(page.get_by_test_id("command-input"))
         # 반드시 viewport만 저장한다. 긴 문서 전체 캡처로 화면 배치를 숨기지 않는다.
