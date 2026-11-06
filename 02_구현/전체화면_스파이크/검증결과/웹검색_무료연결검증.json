@@ -1,0 +1,139 @@
+{
+  "status": "PARTIAL",
+  "query_count": 4,
+  "query_success": 1,
+  "page_count": 1,
+  "page_success": 1,
+  "queries": [
+    {
+      "query_id": "검색_01",
+      "query": "파이썬 asyncio 공식 문서",
+      "region": "kr-kr",
+      "backend": "duckduckgo",
+      "status": "ok",
+      "results": [
+        {
+          "title": "asyncio — 비동기 I/O — Python 3.15.2 문서",
+          "href": "https://docs.python.org/ko/3/library/asyncio.html",
+          "body": "Hello World!: asyncio는 async/await 구문을 사용하여 동시성 코드를 작성하는 라이브러리입니다. asyncio는 고성능 네트워크 및 웹 서버, 데이터베이스 연결 라이브러리, 분산 작업 큐 등을 제공하는 여러 파이썬 비동기 프레임워크의 기반으로 사용됩니다. asyncio는 종종 IO 병목이면서 고수준의 구조화된 ..."
+        },
+        {
+          "title": "파이썬 비동기 프로그래밍: asyncio 이해하기 — 이벤트 루프와 코루틴 핵심 정리(기본/개요, 기능/스펙, 장단점, 추천 ...",
+          "href": "https://inforboo.com/entry/파이썬-비동기-프로그래밍-asyncio-이해하기-—-이벤트-루프와-코루틴-핵심-정리",
+          "body": "파이썬 비동기 프로그래밍: asyncio 이해 1. 기본/개요 asyncio는 파이썬 표준 라이브러리에 포함된 비동기 I/O 모듈로, 공식 문서에 따르면 코루틴을 사용해 단일 스레드 기반의 동시성 (concurrent) 코드를 작성하기 위한 인프라를 제공하며, 소켓과 기타 리소스에 대한 I/O 접근을 멀티플렉싱하고, 네트워크 ..."
+        },
+        {
+          "title": "파이썬 asyncio로 비동기 프로그래밍 정복하기: 초보자도 OK! | 코드한스푼",
+          "href": "https://bae3559.github.io/2026/10/06/파이썬-asyncio-비동기-프로그래밍/",
+          "body": "파이썬 asyncio 로 비동기 프로그래밍 정복하기: 초보자도 OK! 안녕하세요, 여러분! 개발 블로그 작가 얄코입니다. 😊 프로그래밍을 하다 보면 가끔 \"아, 이 프로그램 너무 느린데?\" 하는 답답함을 느끼실 때가 있을 거예요. 특히 웹 서버나 데이터베이스와 통신하는 등 \"어떤 결과가 나올 때까지 ..."
+        },
+        {
+          "title": "asyncio | Python Standard Library - Real Python",
+          "href": "https://realpython.com/ref/stdlib/asyncio/",
+          "body": "The Python asyncio module provides a framework for writing asynchronous programs using coroutines, event loops, and tasks. It allows you to write concurrent code using the async and await keywords, making it easier to manage I/O-bound tasks in your code."
+        },
+        {
+          "title": "[Python Cheatsheet] 63. asyncio - 비동기 최소 패턴 - 42JerryKim",
+          "href": "https://42jerrykim.github.io/post/python-cheatsheet/async-io-patterns-concurrency-coroutine-async-await-guide/",
+          "body": "[Python Cheatsheet] 63. asyncio - 비동기 최소 패턴 파이썬 비동기 프로그래밍을 빠르게 시작하기 위한 치트시트입니다. async/await 기본 문법, asyncio.run/gather/create_task, 타임아웃, 동기 코드와의 혼용 주의점을 최소 예제로 정리합니다."
+        }
+      ],
+      "elapsed_ms": 749.5391000120435,
+      "requests": [
+        {
+          "method": "POST",
+          "url": "https://html.duckduckgo.com/html/",
+          "started_at": "2026-11-06T15:01:55.359952+00:00",
+          "status": 200,
+          "challenge_marker": false,
+          "ended_at": "2026-11-06T15:01:56.096162+00:00"
+        }
+      ]
+    },
+    {
+      "query_id": "검색_02",
+      "query": "공공데이터포털 OpenAPI 활용 가이드",
+      "region": "kr-kr",
+      "backend": "brave",
+      "status": "failed",
+      "error_type": "DDGSException",
+      "results": [],
+      "elapsed_ms": 169.80740000144579,
+      "requests": [
+        {
+          "method": "GET",
+          "url": "https://search.brave.com/search",
+          "started_at": "2026-11-06T15:01:57.102494+00:00",
+          "status": 429,
+          "challenge_marker": true,
+          "ended_at": "2026-11-06T15:01:57.270830+00:00"
+        }
+      ]
+    },
+    {
+      "query_id": "검색_03",
+      "query": "Python asyncio documentation",
+      "region": "us-en",
+      "backend": "duckduckgo",
+      "status": "failed",
+      "error_type": "DDGSException",
+      "results": [],
+      "elapsed_ms": 288.4011999994982,
+      "requests": [
+        {
+          "method": "POST",
+          "url": "https://html.duckduckgo.com/html/",
+          "started_at": "2026-11-06T15:01:58.272677+00:00",
+          "status": 202,
+          "challenge_marker": true,
+          "ended_at": "2026-11-06T15:01:58.560676+00:00"
+        }
+      ]
+    },
+    {
+      "query_id": "검색_04",
+      "query": "LangGraph Send documentation",
+      "region": "us-en",
+      "backend": "brave",
+      "status": "failed",
+      "error_type": "DDGSException",
+      "results": [],
+      "elapsed_ms": 171.0486999945715,
+      "requests": [
+        {
+          "method": "GET",
+          "url": "https://search.brave.com/search",
+          "started_at": "2026-11-06T15:01:59.562584+00:00",
+          "status": 429,
+          "challenge_marker": true,
+          "ended_at": "2026-11-06T15:01:59.731835+00:00"
+        }
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "source_id": "자료_01",
+      "url": "https://docs.python.org/ko/3/library/asyncio.html",
+      "query_id": "검색_01",
+      "search_title": "asyncio — 비동기 I/O — Python 3.15.2 문서",
+      "fetched_at": "2026-11-06T15:02:01.356445+00:00",
+      "http_status": 200,
+      "final_url": "https://docs.python.org/ko/3/library/asyncio.html",
+      "html_bytes": 27688,
+      "html_sha256": "4741857075a2008cb16348190a1053a1d2feae1262ea9a0bd6086e127640c956",
+      "title": "asyncio — 비동기 I/O",
+      "published_at": "2001-01-01",
+      "text_characters": 1621,
+      "status": "ok",
+      "text_sha256": "43d1ab4eb52df592d6b9f26f14fd1ec92b4781f9b23a775404a0901b135eb688",
+      "text_preview": "asyncio — 비동기 I/O¶\nasyncio는 async/await 구문을 사용하여 동시성 코드를 작성하는 라이브러리입니다.\nasyncio는 고성능 네트워크 및 웹 서버, 데이터베이스 연결 라이브러리, 분산 작업 큐 등을 제공하는 여러 파이썬 비동기 프레임워크의 기반으로 사용됩니다.\nasyncio는 종종 IO 병목이면서 고수준의 구조화된 네트워크 코드에 가장 적합합니다.\n더 보기\n- A conceptual overview of asyncio\n- Explanation of the fundamentals of asyncio.\nasyncio는 다음과 같은 작업을 위한 고수준 API 집합을 제공합니다:\n- 파이썬 코루틴들을 동시에 실행하고 실행을 완전히 제어할 수 있습니다.\n- 네트워크 IO와 IPC를 수행합니",
+      "elapsed_ms": 810.8716999995522
+    }
+  ],
+  "new_model_requests": 0,
+  "library_http_observation": "DDGS Python HTTP client request boundary; native redirects are not separately counted",
+  "probe_scope": "네 검색어와 명시한 무료 두 엔진·허용한 공개 문서 도메인에서만 확인; 일반 웹 성공률 보장 아님",
+  "installed_backend_caveat": "Bing text backend is disabled in9.16.1; auto also includes encyclopedia engines, so duckduckgo/brave are explicit",
+  "measured_at": "2026-11-06T15:02:02.169137+00:00"
+}
