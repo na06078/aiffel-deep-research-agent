@@ -90,3 +90,24 @@ export interface Report {
   download_url: string;
 }
 export interface ErrorEnvelope { error: { code: string; message: string } }
+
+// 기술 명세23절: 변환은 연구/큐와 독립이며 동일 정본에 결합한다.
+export type ExportFormat = 'html' | 'pdf';
+export type ExportStatus = 'not_requested' | 'generating' | 'ready' | 'failed';
+export interface ReportExport {
+  report_id: string;
+  source_report_hash: string;
+  format: ExportFormat;
+  renderer_version: string;
+  status: ExportStatus;
+  created_at: string | null;
+  updated_at: string | null;
+  sha256: string | null;
+  download_url: string | null;
+  error: { code: string; message: string } | null;
+}
+export interface ReportExports {
+  report_id: string;
+  source_report_hash: string;
+  exports: ReportExport[];
+}

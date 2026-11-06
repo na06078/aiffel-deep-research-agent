@@ -1,0 +1,21 @@
+{
+  "scope": "요청형 HTML/PDF 변환; 추가 모델 호출 없음",
+  "baseline_commit": "045bb30",
+  "branch": "main",
+  "worktree_clean_at_start": true,
+  "user_url": "http://127.0.0.1:8768/#/control",
+  "provider": "openai",
+  "model_attempts": 27,
+  "max_attempts": 40,
+  "unknown_attempts": 0,
+  "queue": [],
+  "runs": [{"run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76", "status": "completed", "report_id": "44f307dedcbf4c8282d9b4e8a3a207bb"}],
+  "protected_files": {
+    "03_실행데이터/실제연구/실행기록.sqlite3": {"size": 2408448, "sha256": "027493e97aaa855197d1f7264aca2263021718530b0c55191165d12157ade90b"},
+    "03_실행데이터/실제연구/호출예산.sqlite3": {"size": 12288, "sha256": "f712bbb1010f526aaf1a3e38c688eea404cea4b809acfca8a0dddb9b336fee45"},
+    "03_실행데이터/실제연구/🧾 실제 연구 보고서_44f307dedcbf4c8282d9b4e8a3a207bb.md": {"size": 11811, "sha256": "19c6f5f980533a7e001beecc6f3f2852f44869800c4ad0a7afd3dea0e4d242cd"}
+  },
+  "backups_created": false,
+  "implementation_verified": false,
+  "historical_content_verdict": "CONDITIONAL; 형식 변환으로 내용 오류를 수정하지 않음"
+}
