@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="0.019" timestamp="2026-11-07T00:53:52.245761+09:00" hostname="z13flow"><testcase classname="테스트.테스트_명령해석" name="test_웹_명령만보내면_질문없이_자료모드선택" time="0.002" /></testsuite></testsuites>

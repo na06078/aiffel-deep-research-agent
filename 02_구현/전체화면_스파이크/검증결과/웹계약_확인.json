@@ -1,0 +1,62 @@
+{
+  "status": "CONTRACT_AND_PURE_PARSER_VERIFIED",
+  "scope": "확정된자료명령·공유타입·정적연결계약;실제API/저장/UI/웹모델연구는미구현",
+  "backend_baseline": {
+    "tests": 168,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "command_tests": {
+    "tests": 26,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "typescript": "PASS exit0",
+  "ruff": "PASS",
+  "format": "PASS",
+  "mode_defaults": {
+    "initial": "local",
+    "selection_persists": true,
+    "active_mode_locked": true,
+    "web_prefix": "/웹",
+    "local_prefixes": [
+      "/디비",
+      "/DB",
+      "/데이터셋"
+    ]
+  },
+  "model_call_theoretical_upper_bound": 62,
+  "new_model_requests": 0,
+  "source_sha256": {
+    "02_구현/전체화면_스파이크/서버/웹계약.py": "756d8c68d8df98dbf95dc01a6c2f363a84bc821b32b6fa1a5fcd36a056e1b9cb",
+    "02_구현/전체화면_스파이크/서버/명령해석.py": "a8bb23168a535dc9a40dac63ad0299e932328cfccb6a3a2950e960cdb2ad9a0c",
+    "02_구현/전체화면_스파이크/테스트/테스트_명령해석.py": "e10a69661edf9b16435b0559d6020a0af3cafbffc7037ca195735e372a996e84",
+    "02_구현/전체화면_스파이크/화면/src/계약.ts": "36395310e3c89eee24f6d66174219261b851d63652c66baa534ea110cb84365b"
+  },
+  "raw_red_whitespace_exceptions": [
+    {
+      "path": "02_구현/전체화면_스파이크/검증결과/웹명령_RED.xml",
+      "lines": [
+        5
+      ],
+      "reason": "pytest의행동실패원문공백보존;코드/문서공백오류와분리"
+    },
+    {
+      "path": "02_구현/전체화면_스파이크/검증결과/웹명령_별칭_RED.xml",
+      "lines": [
+        8,
+        19,
+        30
+      ],
+      "reason": "pytest의행동실패원문공백보존;코드/문서공백오류와분리"
+    }
+  ],
+  "remaining": [
+    "실제자료클라이언트/불변저장소",
+    "지시/큐/API/그래프자료분기",
+    "실제모드인디케이터/전송/재생",
+    "실제모델실행범위확정/실행"
+  ]
+}

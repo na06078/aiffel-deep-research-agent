@@ -1,0 +1,40 @@
+{
+  "kind": "read_only_static_integration_review",
+  "delegation_id": "deleg_7441d7b1",
+  "runtime_tests": false,
+  "source_code_changed_by_reviewer": false,
+  "reviewed_baseline": "4b5ba36812055d43eb7a21ad0f465712c769fab1",
+  "parent_verified_connections": [
+    {"path": "02_구현/전체화면_스파이크/서버/앱.py", "finding": "Command와명령처리에text/client_request_id만있음"},
+    {"path": "02_구현/전체화면_스파이크/서버/실행제어.py", "finding": "admit/start/take_next가질문만전달하고큐에source_mode없음;실행중일반지시는같은run의revision증가"},
+    {"path": "02_구현/전체화면_스파이크/서버/교안연구.py", "finding": "parse_plan의유효코퍼스seed와evaluate_report의corpus.docs인용검사;위키전용assemble_report"},
+    {"path": "02_구현/전체화면_스파이크/서버/실제연구제어.py", "finding": "6단계/Send·2라운드·공유complete와펜스·평가/출판재사용가능;tool_event는read_one에고정"},
+    {"path": "02_구현/전체화면_스파이크/화면/src/계약.ts", "finding": "mode=research/spike및Admission.mode=immediate/queued와별개인source_mode가필요"},
+    {"path": "02_구현/전체화면_스파이크/화면/src/시간재생.ts", "finding": "instruction.received사건으로run을재구성하므로모드를사건에도저장해야함"},
+    {"path": "02_구현/전체화면_스파이크/화면/src/앱.tsx", "finding": "명령payload와재시도정체성에text만전달;입력/선택모드수명연결필요"},
+    {"path": "02_구현/전체화면_스파이크/서버/연구앱.py", "finding": "장부경로가target에종속;새자료루트가독립40/$1장부를생성하지않도록기존장부경로보존필요"}
+  ],
+  "design_direction": {
+    "preserve": ["mode=research", "provider=openai", "기존6단계/마을/기록/변환", "기존100회/$2장부"],
+    "additive_source_mode": ["local", "web"],
+    "legacy_missing_mode": "local",
+    "search_timing": "이미제안하고동의받은기획/검색어배정뒤조사관검색을유지;기존자료를웹자료로미리위장하지않음",
+    "source_identity": "실행/변경버전/불변sourceID/URL/실제추출본문해시;검색결과·본문·모델메모분리",
+    "publication_dates": "확인되지않은추출날짜는후보;published_at은null",
+    "search_provider": "첫실측의PARTIAL보존;Yahoo대안4/4를근거로무료경로연결",
+    "read_only_replay": "저장한사건/본문만재사용;검색/fetch/모델호출없음"
+  },
+  "pending_user_decisions": [],
+  "user_resolved_source_policy": {
+    "initial_mode": "local",
+    "persist_explicit_selection": true,
+    "active_mode_locked": true,
+    "web_prefix": "/웹",
+    "local_prefixes": ["/디비", "/DB", "/데이터셋"],
+    "standalone_prefix_is_mode_change_without_research": true,
+    "indicator": "좌상단 메뉴 옆",
+    "queued_mode_captured_at_admission": true
+  },
+  "next_step": "기술명세25.6절과공통타입을기준으로비중첩구현배정;실제모델실행은별도확정",
+  "not_proven_by_this_review": ["무료실측성공은별도근거", "웹앱구현", "실제모델웹연구", "외부제공자취소성공"]
+}

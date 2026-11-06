@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="5" time="0.150" timestamp="2026-11-07T00:54:27.558591+09:00" hostname="z13flow"><testcase classname="테스트.테스트_명령해석" name="test_웹_명령만보내면_질문없이_자료모드선택" time="0.001" /><testcase classname="테스트.테스트_명령해석" name="test_세가지_데이터셋별칭은_웹선택에서_local로_전환[/\ub514\ube44]" time="0.001"><failure message="AssertionError: assert 'web' == 'local'&#10;  &#10;  - local&#10;  + web">prefix = '/디비'
+
+    @pytest.mark.parametrize("prefix", ["/디비", "/DB", "/데이터셋"])
+    def test_세가지_데이터셋별칭은_웹선택에서_local로_전환(prefix):
+        result = parse_command(prefix, selected_mode="web")
+&gt;       assert result["source_mode"] == "local"
+E       AssertionError: assert 'web' == 'local'
+E         
+E         - local
+E         + web
+
+테스트\테스트_명령해석.py:18: AssertionError</failure></testcase><testcase classname="테스트.테스트_명령해석" name="test_세가지_데이터셋별칭은_웹선택에서_local로_전환[/DB]" time="0.001"><failure message="AssertionError: assert 'web' == 'local'&#10;  &#10;  - local&#10;  + web">prefix = '/DB'
+
+    @pytest.mark.parametrize("prefix", ["/디비", "/DB", "/데이터셋"])
+    def test_세가지_데이터셋별칭은_웹선택에서_local로_전환(prefix):
+        result = parse_command(prefix, selected_mode="web")
+&gt;       assert result["source_mode"] == "local"
+E       AssertionError: assert 'web' == 'local'
+E         
+E         - local
+E         + web
+
+테스트\테스트_명령해석.py:18: AssertionError</failure></testcase><testcase classname="테스트.테스트_명령해석" name="test_세가지_데이터셋별칭은_웹선택에서_local로_전환[/\ub370\uc774\ud130\uc14b]" time="0.000"><failure message="AssertionError: assert 'web' == 'local'&#10;  &#10;  - local&#10;  + web">prefix = '/데이터셋'
+
+    @pytest.mark.parametrize("prefix", ["/디비", "/DB", "/데이터셋"])
+    def test_세가지_데이터셋별칭은_웹선택에서_local로_전환(prefix):
+        result = parse_command(prefix, selected_mode="web")
+&gt;       assert result["source_mode"] == "local"
+E       AssertionError: assert 'web' == 'local'
+E         
+E         - local
+E         + web
+
+테스트\테스트_명령해석.py:18: AssertionError</failure></testcase><testcase classname="테스트.테스트_명령해석" name="test_접두어와_질문을_함께전달" time="0.000" /></testsuite></testsuites>
