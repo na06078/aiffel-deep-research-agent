@@ -266,13 +266,48 @@ def main(label):
             assert page.get_by_test_id("command-input").input_value() == "아직 보내지 않은 지시"
             passed("장면 메뉴·이동/작업/운반·상세 팝업·초안 보존·대역 무호출")
             page.get_by_test_id("command-input").fill("")
-            page.goto(base + "/#/control")
-            page.wait_for_selector('[data-testid="world"][data-render-ready="true"]')
-            page.evaluate("window.__verifiedCanvas=document.querySelector('canvas')")
+            page.get_by_test_id("menu-toggle").click()
+            page.get_by_test_id("drawer").get_by_role(
+                "button", name="실행 제어", exact=True
+            ).click()
+            page.wait_for_url("**/#/control")
+            page.keyboard.press("Escape")
+            geometry("메뉴에서 모드 변경")
             a = "전체 화면 A: 이전 응답은 기다리게 합니다."
             submit(a)
             state = wait_state(base, lambda s: len(waits(s)) == 4, "A 조사 대기")
             run_id = state["current_run_id"]
+            page.wait_for_function(
+                'document.querySelectorAll("[data-testid^=npc-researcher-][data-status=waiting]").length===4'
+            )
+            page.get_by_test_id("bubble-researcher-1").wait_for(state="visible", timeout=5000)
+            assert "model.started" not in page.get_by_test_id("bubble-researcher-1").inner_text()
+            planner_box = page.get_by_test_id("bubble-planner").bounding_box()
+            code_box = page.get_by_test_id("bubble-workstation").bounding_box()
+            overlap = max(
+                0,
+                min(planner_box["x"] + planner_box["width"], code_box["x"] + code_box["width"])
+                - max(planner_box["x"], code_box["x"]),
+            ) * max(
+                0,
+                min(planner_box["y"] + planner_box["height"], code_box["y"] + code_box["height"])
+                - max(planner_box["y"], code_box["y"]),
+            )
+            assert overlap == 0, {"planner": planner_box, "code": code_box}
+            proof["planner_code_overlap_area"] = overlap
+            page.get_by_test_id("bubble-researcher-1").click(position={"x": 7, "y": 7})
+            page.get_by_test_id("event-detail").wait_for()
+            assert a in page.get_by_test_id("event-detail").inner_text()
+            geometry("실제 조사관 사건")
+            close_popup()
+            page.get_by_test_id("bubble-workstation").click(position={"x": 7, "y": 7})
+            page.get_by_test_id("event-detail").wait_for()
+            selected_id = page.get_by_test_id("event-detail").locator("dd").first.inner_text()
+            selected_event = request_json(base, f"/api/spike/events/{selected_id}")
+            assert not selected_event["type"].startswith("model.")
+            geometry("실제 코드 처리 사건")
+            close_popup()
+            passed("메뉴 모드 전환·실제 조사관4 동시 대기·NPC/코드 말풍선의 원본 사건 연결")
             submit("/큐 전체 화면 C: 최종 제출 뒤 시작합니다.")
             wait_state(base, lambda s: len(s["queue"]) == 1, "큐 보관")
             page.get_by_test_id("bubble-planner").click()
@@ -369,6 +404,19 @@ def main(label):
             assert hashlib.sha256(downloaded.read_bytes()).hexdigest() == report["sha256"]
             assert downloaded.read_text(encoding="utf-8") == report["markdown"]
             capture("보고서_팝업.png")
+            scroll = page.get_by_test_id("popup").locator(".popup-body")
+            scroll.hover()
+            before_scroll = scroll.evaluate("e=>e.scrollTop")
+            page.mouse.wheel(0, 480)
+            page.wait_for_function("document.querySelector('.popup-body').scrollTop>0")
+            after_scroll = scroll.evaluate("e=>e.scrollTop")
+            assert after_scroll > before_scroll
+            geometry("보고서 내부 휠 스크롤")
+            proof["popup_scroll"] = {
+                "before": before_scroll,
+                "after": after_scroll,
+                "window_scroll_y": page.evaluate("scrollY"),
+            }
             close_popup()
             assert (
                 page.get_by_test_id("command-input").input_value() == "보고서 팝업 중 보존할 지시"
@@ -424,7 +472,17 @@ def main(label):
             done = wait_state(base, lambda s: current(s)["status"] == "completed", "일반 지시 완료")
             assert done["queue_paused"] and len(done["queue"]) == 1
             passed("실패/불합격 보존·명시적 큐 계속·일반 지시가 기존 정지를 풀지 않음")
-            submit("전체 화면 G: 재시작 전에 대기")
+            submit("전체 화면 G: 현재 실행 취소 확인")
+            wait_state(
+                base,
+                lambda s: current(s)["status"] == "running" and len(waits(s)) == 4,
+                "취소 준비",
+            )
+            control("현재 실행 취소")
+            cancelled = wait_state(base, lambda s: current(s)["status"] == "cancelled", "UI 취소")
+            assert cancelled["queue_paused"] and len(cancelled["queue"]) == 1
+            passed("실제 현재 실행 취소 버튼·기록/큐 보존")
+            submit("전체 화면 H: 재시작 전에 대기")
             before = wait_state(
                 base,
                 lambda s: current(s)["status"] == "running" and len(waits(s)) == 4,

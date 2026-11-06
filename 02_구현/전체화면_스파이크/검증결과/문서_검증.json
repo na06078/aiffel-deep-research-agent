@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "component_tokens": 4,
+  "token_refs": 11,
+  "source_colors": 11,
+  "requirement_scenario_ids": 73,
+  "checked_links": 7,
+  "protected_environment_originals_preserved": true,
+  "exact_tested_source_preserved": true
+}

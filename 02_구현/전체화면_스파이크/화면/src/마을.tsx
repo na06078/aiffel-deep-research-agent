@@ -246,6 +246,11 @@ export function Village(props: VillageProps) {
   const plannerBubble = props.mode === 'assets' ? demoActive : Boolean(props.actors.planner.eventId);
   const codeActor = props.code?.actor || 'researcher-1';
   const codePoint = frame.layout.sites[codeActor];
+  const viewportWidth = frame.layout.width * scale;
+  const codeWidth = viewportWidth < 600 ? 135 : 155;
+  const codeCenter = viewportWidth < 600
+    ? (codePoint.x * scale < viewportWidth / 2 ? viewportWidth - codeWidth / 2 - 8 : codeWidth / 2 + 8)
+    : Math.min(viewportWidth - codeWidth / 2 - 8, (codePoint.x + 24) * scale + 120);
   const codeVisible = props.mode === 'assets' ? ['working', 'worked', 'delivering', 'submitted'].includes(frame.phase) : Boolean(props.code);
   return <div className="village-world" data-testid="world" data-render-ready={String(ready)} data-phase={frame.phase}
     data-layout-width={frame.layout.width * scale} data-layout-height={frame.layout.height * scale}>
@@ -262,8 +267,14 @@ export function Village(props: VillageProps) {
       <span>{props.mode === 'assets' ? '각자 맡은 일을 시작해 주세요.' : props.actors.planner.summary || '현재 지시와 배정을 확인하세요.'}</span>
       <small>(클릭해서 더 자세히)</small>
     </button>}
+    {ready && props.mode === 'control' && actorIds.filter(actor => actor !== 'planner' && props.actors[actor].eventId).map(actor =>
+      <button key={`bubble-${actor}`} type="button" className="village-bubble village-secondary-bubble" data-testid={`bubble-${actor}`}
+        style={toPixels(frame.points[actor], scale)} onClick={() => props.onActorClick(actor)}>
+        <span>{props.actors[actor].summary || `${names[actor]}의 보존된 작업 사건`}</span>
+        <small>(클릭해서 더 자세히)</small>
+      </button>)}
     {ready && codeVisible && <button type="button" className="village-bubble village-code-bubble" data-testid="bubble-workstation"
-      style={toPixels({ x: codePoint.x + 24, y: codePoint.y + 2 }, scale)} onClick={props.onCodeClick}>
+      style={{ left: codeCenter, top: (codePoint.y + 2) * scale }} onClick={props.onCodeClick}>
       <span>...</span><small>(클릭해서 더 자세히)</small>
     </button>}
     {ready && frame.paperVisible && <button type="button" className="village-paper" data-testid="paper-document"

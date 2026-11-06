@@ -1,96 +1,144 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-05T14:51:22.242116+00:00",
-  "title": "Design System: 딥리서치 에이전트 · 두 스파이크",
+  "generatedAt": "2026-11-06T04:18:38.895845+00:00",
+  "title": "Design System: 딥리서치 에이전트 · 전체 화면 마을 스파이크",
   "extensions": {
     "colorMeta": {
-      "green": {
+      "primary": {
         "role": "primary",
         "displayName": "짙은 작업 녹색",
-        "canonical": "#286442",
-        "tonalRamp": ["oklch(15% 0.08409 155.884)", "oklch(26% 0.08409 155.884)", "oklch(38% 0.08409 155.884)", "oklch(49% 0.08409 155.884)", "oklch(61% 0.08409 155.884)", "oklch(72% 0.08409 155.884)", "oklch(84% 0.08409 155.884)", "oklch(95% 0.08409 155.884)"]
+        "canonical": "#285a3c",
+        "tonalRamp": [
+          "oklch(15.00% 0.07417 155.132)",
+          "oklch(26.43% 0.07417 155.132)",
+          "oklch(37.86% 0.07417 155.132)",
+          "oklch(49.29% 0.07417 155.132)",
+          "oklch(60.71% 0.07417 155.132)",
+          "oklch(72.14% 0.07417 155.132)",
+          "oklch(83.57% 0.07417 155.132)",
+          "oklch(95.00% 0.07417 155.132)"
+        ]
       }
     },
     "typographyMeta": {
-      "body": {"displayName": "시스템 한국어 본문", "purpose": "읽기·조작 중심 본문과 상속 글꼴. 외부 웹폰트 없음."},
-      "headline": {"displayName": "작은 앱 제목", "purpose": "상단 브랜드 제목. 마케팅 display 역할 아님."},
-      "code": {"displayName": "불변 입출력", "purpose": "선택 사건의 JSON. 줄바꿈과 긴 식별자 보존."}
+      "body": {
+        "displayName": "한국어 시스템 본문",
+        "purpose": "팝업과 실제 입력"
+      },
+      "title": {
+        "displayName": "업무 창 제목",
+        "purpose": "상시 페이지 제목이 아님"
+      },
+      "code": {
+        "displayName": "고정된 원문",
+        "purpose": "줄바꿈되는 JSON과 Markdown"
+      }
     },
     "shadows": [
-      {"name": "speech-bubble", "value": "0 3px 8px #2e4e2420", "purpose": "말풍선의 부드러운 오프셋 깊이. 일반 패널은 경계로 구분."}
+      {
+        "name": "popup",
+        "value": "0 14px 44px #233e2c45",
+        "purpose": "마을 위 업무 창"
+      },
+      {
+        "name": "composer",
+        "value": "0 5px 22px #233e2c45",
+        "purpose": "하단 입력"
+      },
+      {
+        "name": "speech",
+        "value": "0 5px 14px #344b252b",
+        "purpose": "NPC 사건 말풍선"
+      }
     ],
     "motion": [
-      {"name": "button-feedback", "value": "background .12s,border-color .12s", "purpose": "버튼 상태 전환. prefers-reduced-motion:reduce에서 transition:none."},
-      {"name": "scene-move", "value": "1500ms", "purpose": "정면 포즈의 코드 이동. 걷기 프레임 아님."},
-      {"name": "scene-work", "value": "1600ms", "purpose": "로컬 합성 작업 상태 표시 시간."},
-      {"name": "scene-deliver", "value": "2200ms", "purpose": "문서 운반 연출. 실제 모델 사건과 분리."}
+      {
+        "name": "scene-move",
+        "value": "1500ms",
+        "purpose": "합성 장면 이동"
+      },
+      {
+        "name": "scene-work",
+        "value": "1600ms",
+        "purpose": "합성 장면 작업"
+      },
+      {
+        "name": "document-delivery",
+        "value": "2200ms",
+        "purpose": "제출 확정 뒤 후행 운반"
+      }
     ],
     "breakpoints": [
-      {"name": "wide-inspector-min", "value": "1400px"},
-      {"name": "compact-workspace-max", "value": "1050px"},
-      {"name": "stacked-workspace-max", "value": "780px"}
+      {
+        "name": "narrow",
+        "value": "600px"
+      },
+      {
+        "name": "short-height",
+        "value": "520px"
+      }
     ],
-    "extractionNotes": "화면.css·앱.tsx·마을.tsx·상세보기.tsx와 기존 최종검사 캡처/JSON에서 추출. 두 스파이크만 해당. tonalRamp는 원본 green의 OKLCH 색상각·채도에 명도를 배분한 패널 미리보기 메타데이터이며 앱 토큰이 아니다. 스니펫은 원본 데스크톱 컴포넌트를 독립 표시하도록 ds- 접두사와 글꼴/줄높이, CSS 변수 fallback만 보완했다. 원본에 없는 textarea/nav hover나 전용 오류 상태를 추가하지 않았다. Pixi ticker에는 reduced-motion 대응이 없다."
+    "extractionNotes": "새 화면.css·마을.css·마을.tsx와 실제 viewport에서 추출. 이전 대시보드 기록을 교체했다. tonalRamp는 계산한 패널 미리보기일 뿐 앱 팔레트를 추가하지 않는다. 컴포넌트는 실제 스타일의 독립 ds- 스니펫이다. 정면 포즈의 코드 이동이며 실모델은 호출하지 않는다."
   },
   "components": [
     {
       "name": "지시 전송",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "composer의 녹색 전송 버튼. 비어 있거나 전송 중이면 비활성.",
-      "html": "<button type=\"button\" class=\"ds-primary\">지시 보내기</button>",
-      "css": ".ds-primary{font-family:\"Segoe UI\",\"Malgun Gothic\",system-ui,sans-serif;font-size:14px;line-height:1.6;cursor:pointer;min-height:38px;border:1px solid var(--green,#286442);border-radius:5px;background:var(--green,#286442);color:#fffef9;padding:12px 22px;transition:background .12s,border-color .12s}.ds-primary:hover:not(:disabled){background:#204f34}.ds-primary:active:not(:disabled){background:var(--green,#286442)}.ds-primary:hover:active:not(:disabled){background:#204f34}.ds-primary:disabled{cursor:not-allowed;background:#dfe7d9;border-color:#c8d1c0;color:#59694f}.ds-primary:focus-visible{outline:3px solid #367546;outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+      "description": "실제 composer의 녹색 전송 조작",
+      "html": "<button class=\"ds-primary\">지시 보내기</button>",
+      "css": ".ds-primary{font-family:\"Segoe UI\",\"Malgun Gothic\",system-ui,sans-serif;font-size:14px;border:1px solid #a4b599;border-radius:6px;padding:10px 14px;min-height:42px;cursor:pointer;background:var(--accent,#285a3c);color:#fffdf4}.ds-primary:hover{background:#214d32}.ds-primary:disabled{background:#e6ebdf;color:#5c6a55;cursor:not-allowed}.ds-primary:focus-visible{outline:3px solid #416c39;outline-offset:3px}"
     },
     {
-      "name": "일반 조작",
-      "kind": "button",
-      "refersTo": "button-secondary",
-      "description": "장면·대역 제어에 사용하는 밝은 일반 버튼.",
-      "html": "<button type=\"button\" class=\"ds-secondary\">이동 보기</button>",
-      "css": ".ds-secondary{font-family:\"Segoe UI\",\"Malgun Gothic\",system-ui,sans-serif;font-size:14px;line-height:1.6;cursor:pointer;min-height:38px;border:1px solid #b4bfac;border-radius:5px;background:#fffef9;color:#26382e;padding:7px 13px;transition:background .12s,border-color .12s}.ds-secondary:hover:not(:disabled){background:#eaf0e3;border-color:#6d8665}.ds-secondary:active:not(:disabled){background:#dce8d4}.ds-secondary:disabled{cursor:not-allowed;color:#687363;background:#eeefe8;border-color:#d9ddd2}.ds-secondary:focus-visible{outline:3px solid #367546;outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
-    },
-    {
-      "name": "지시 입력",
+      "name": "하단 지시 입력",
       "kind": "input",
       "refersTo": "textarea",
-      "description": "세로 크기를 조절하는 실제 지시 입력. 전용 hover/오류 테두리는 없음.",
-      "html": "<textarea class=\"ds-command\" rows=\"2\" aria-label=\"작업 지시\" placeholder=\"예: 도시 녹지의 효과를 조사해 주세요. 다음 작업은 /큐 로 보관합니다.\"></textarea>",
-      "css": ".ds-command{font-family:\"Segoe UI\",\"Malgun Gothic\",system-ui,sans-serif;font-size:13px;line-height:1.6;min-width:0;resize:vertical;min-height:68px;max-height:300px;background:#fffef9;color:#26382e;border:1px solid #b6c1ae;border-radius:4px;padding:11px 12px;caret-color:#286442}.ds-command::placeholder{color:#61705a;opacity:1}.ds-command:focus-visible{outline:3px solid #367546;outline-offset:3px}"
+      "description": "작은 두 줄 입력, 원문은 보존",
+      "html": "<textarea class=\"ds-command\" rows=\"2\" aria-label=\"연구 지시\" placeholder=\"연구 지시를 입력하세요\"></textarea>",
+      "css": ".ds-command{font-family:\"Segoe UI\",\"Malgun Gothic\",system-ui,sans-serif;font-size:14px;height:56px;resize:none;background:var(--paper,#fffdf4);color:var(--ink,#253c2c);border:0;padding:7px 10px;line-height:1.5;caret-color:#285a3c}.ds-command::placeholder{color:#536a49}.ds-command:focus-visible{outline:3px solid #416c39;outline-offset:3px}"
     },
     {
-      "name": "실험 모드 탐색",
-      "kind": "nav",
-      "refersTo": "mode-nav",
-      "description": "에셋 실험과 실행 제어. 현재 링크만 강조하고 별도 hover 색은 없음.",
-      "html": "<nav class=\"ds-modes\" aria-label=\"실험 모드\"><a href=\"#/assets\" aria-current=\"page\">에셋 실험</a><a href=\"#/control\">실행 제어</a></nav>",
-      "css": ".ds-modes{display:flex;gap:4px;font-family:\"Segoe UI\",\"Malgun Gothic\",system-ui,sans-serif;font-size:14px;line-height:1.6}.ds-modes a{padding:5px 12px;text-decoration:none;border-radius:4px;color:#53614c}.ds-modes a[aria-current]{color:#245b3b;background:#e3ebdc;font-weight:650}.ds-modes a:focus-visible{outline:3px solid #367546;outline-offset:3px}"
+      "name": "모의 응답 표시",
+      "kind": "chip",
+      "description": "우측 상단의 비대화형 고지",
+      "html": "<span class=\"ds-badge\">모의 응답</span>",
+      "css": ".ds-badge{font-family:\"Segoe UI\",\"Malgun Gothic\",system-ui,sans-serif;font-size:14px;display:inline-block;padding:5px 9px;border:1px solid #829871;background:#fffdf4ed;color:#36522b;border-radius:4px;font-size:11px}"
     },
     {
       "name": "사건 말풍선",
       "kind": "custom",
       "refersTo": "speech-bubble",
-      "description": "전체 클릭으로 선택 사건을 여는 말풍선. 작업대 변형의 본문은 ... 이며 사건 부재 시 disabled.",
-      "html": "<button type=\"button\" class=\"ds-bubble\"><strong>기획자</strong><span>합성 문서 운반</span><small>(클릭해서 더 자세히)</small></button>",
-      "css": ".ds-bubble{position:relative;display:flex;flex-direction:column;align-items:flex-start;text-align:left;font-family:\"Segoe UI\",\"Malgun Gothic\",system-ui,sans-serif;font-size:14px;line-height:1.45;cursor:pointer;background:#fffef3f5;border:1px solid #657e50;box-shadow:0 3px 8px #2e4e2420;border-radius:7px;padding:10px 12px 7px;min-height:0;color:#263b2a;transition:background .12s,border-color .12s}.ds-bubble::after{content:\"\";position:absolute;bottom:-6px;left:22px;width:10px;height:10px;background:#fffef3;border-bottom:1px solid #657e50;border-right:1px solid #657e50;transform:rotate(45deg)}.ds-bubble strong{font-size:11px;color:#3f5b35;margin-bottom:3px}.ds-bubble>span{font-size:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:clip;overflow-wrap:anywhere}.ds-bubble small{align-self:flex-end;font-size:9px;opacity:.76;white-space:nowrap;margin-top:5px}.ds-bubble:hover:not(:disabled){background:#eaf0e3;border-color:#6d8665}.ds-bubble:active:not(:disabled){background:#dce8d4}.ds-bubble:disabled{cursor:not-allowed;background:#fffef3eb;border-color:#7a8d68;color:#43583c}.ds-bubble:focus-visible{outline:3px solid #367546;outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-bubble{transition:none}}"
+      "description": "전체 클릭으로 고정 ID의 원본을 열며 코드 변형은 ...",
+      "html": "<button class=\"ds-bubble\"><span>배정된 조사 · 모의 응답 대기</span><small>(클릭해서 더 자세히)</small></button>",
+      "css": ".ds-bubble{font-family:\"Segoe UI\",\"Malgun Gothic\",system-ui,sans-serif;font-size:14px;display:flex;flex-direction:column;gap:5px;text-align:left;padding:10px 12px;background:#fff5dcef;border:1px solid #78664c;border-radius:8px;box-shadow:0 5px 14px #344b252b;color:#302b20;cursor:pointer}.ds-bubble small{align-self:flex-end;font-size:10px;opacity:.72}.ds-bubble:hover{background:#e4edd9}.ds-bubble:focus-visible{outline:3px solid #fcf3ce;outline-offset:4px}"
+    },
+    {
+      "name": "중앙 업무 창",
+      "kind": "custom",
+      "refersTo": "popup",
+      "description": "마을을 축소하지 않는 창과 고정 닫기 헤더",
+      "html": "<section class=\"ds-popup\"><header>사건 상세<button aria-label=\"닫기\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><path d=\"m6 6 12 12M18 6 6 18\"/></svg></button></header><p>선택한 사건의 원본 입출력</p></section>",
+      "css": ".ds-popup{font-family:\"Segoe UI\",\"Malgun Gothic\",system-ui,sans-serif;font-size:14px;border:1px solid #7f946e;border-radius:9px;background:#fffdf4;box-shadow:0 14px 44px #233e2c45;color:#253c2c;overflow:hidden}.ds-popup header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid #c0cbb6;background:#f3f5e9;font-size:19px;font-weight:700}.ds-popup button{border:1px solid #a4b599;background:#fffdf4;border-radius:6px;width:44px;height:44px;cursor:pointer}.ds-popup button:hover{background:#e4edd9}.ds-popup button:focus-visible{outline:3px solid #416c39;outline-offset:3px}.ds-popup p{padding:22px 26px;line-height:1.7}"
     }
   ],
   "narrative": {
-    "northStar": "작은 픽셀 마을의 작업 도구",
-    "overview": "에셋 실험과 실행 제어, 두 프로토타입의 구현값을 추출한 잠정 기록입니다. 밝은 중성 작업 바탕에 짙은 글자와 녹색 조작색을 쓰고, Kenney 픽셀 마을 옆에서 선택한 사건의 입출력을 읽습니다. 새 브랜드 승인이나 정식 앱·실제 GPT 연구 UI의 완성을 뜻하지 않습니다.",
+    "northStar": "마을이 작업 화면",
+    "overview": "픽셀 마을이 브라우저 작업 영역 전체이며 상세·큐·기록은 필요할 때 그 위에서 엽니다. 작은 지도를 대시보드 안에 넣던 이전 배치를 폐기했습니다. 현재 구현의 기록이지 정식 앱 전체나 새 브랜드를 승인받았다는 증거가 아닙니다.",
     "keyCharacteristics": [
-      "작은 픽셀 장면과 읽기 쉬운 시스템 한국어 UI.",
-      "선택 사건의 불변 상세와 실제 하단 지시 입력.",
-      "합성 장면·서버 테스트 대역·실제 모델을 구분하는 고지."
+      "전체 viewport의 마을과 실제 역할의 NPC·작업대·제출 문서.",
+      "작은 햄버거·모의 응답 표시·하단 입력만 기본 노출.",
+      "같은 세계 위의 한 팝업과 보존되는 입력·고정 사건 선택."
     ],
     "rules": [],
     "dos": [
-      "**Do** 픽셀 경계와 실무적인 한국어 시스템 글꼴을 유지합니다.",
-      "**Do** 선택한 사건의 상세와 현재 실행·이전 문서를 구분합니다.",
-      "**Do** 합성 자료와 실제 모델 미호출 고지를 읽을 수 있게 유지합니다."
+      "**Do** 전체 마을·작은 하단 입력·필요할 때 여는 창의 관계를 유지합니다.",
+      "**Do** 고정 사건/보고서 ID와 실제 입출력·KST/원본 UTC를 구별합니다.",
+      "**Do** 모의 응답과 실제 모델 미호출을 명확히 표시합니다."
     ],
     "donts": [
-      "**Don't** 코드 이동을 검증된 걷기 애니메이션이나 실제 추론으로 설명하지 않습니다.",
-      "**Don't** 두 스파이크의 스타일 기록을 정식 제품·새 브랜드 승인으로 확대하지 않습니다."
+      "**Don't** 상시 오른쪽 칼럼·표·로그로 마을을 둘러싸거나 축소하지 않습니다.",
+      "**Don't** 관측하지 않은 진행률·가짜 대화를 실제 연구로 표시하지 않습니다.",
+      "**Don't** 이 스파이크를 정식 앱 전체·실제 GPT 연구·HTML/PDF 완료로 확대하지 않습니다."
     ]
   }
 }

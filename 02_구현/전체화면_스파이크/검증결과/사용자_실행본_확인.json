@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "url": "http://127.0.0.1:8766/#/control",
+  "health": {
+    "status": "ok",
+    "mode": "spike",
+    "provider": "test-double",
+    "actual_model_requests": 0
+  },
+  "html_sha256": "07b4b13c2857e2ee70c828f62789659d50c8281c46e89d1c12b805dc37cebfe2",
+  "served_assets": [
+    {
+      "asset": "/assets/index-DKqyFPI_.js",
+      "sha256": "849f63da23649c2b129eb0c2ccd0af8e24361cd2e0e868012abafa0663b90c75"
+    },
+    {
+      "asset": "/assets/CanvasPool-DzuCm1vb.js",
+      "sha256": "edde6aa9084e7f5958ad3f9a1437ea82c2406913957ef01be12296ca951373f1"
+    },
+    {
+      "asset": "/assets/Filter-vpEaIMwd.js",
+      "sha256": "e802a7ce1c4d21948131c5d247ee9db7f33376b17678d973d22ae0296f1935fc"
+    },
+    {
+      "asset": "/assets/canvasUtils-U4WZZEj-.js",
+      "sha256": "c0a01018402f30d7e9ad35ae43fafc8c490899236e6f28c8c4c8095fd066d448"
+    },
+    {
+      "asset": "/assets/Cache-CTROkX_m.js",
+      "sha256": "1362d81633b62e495b282f17617beb74083f16064864156e04949a07fa9ae0cf"
+    },
+    {
+      "asset": "/assets/GCManagedHash-DCvVepMX.js",
+      "sha256": "f9c36545f614350af3b653bd4e603e590afad27332ad79133fb661180406b312"
+    },
+    {
+      "asset": "/assets/RenderTargetSystem-BK2ifv01.js",
+      "sha256": "76151e37944ac1989dd3632f63fdc2a7f8b897cd226583baa060db0c71ccd6b0"
+    },
+    {
+      "asset": "/assets/getTextureBatchBindGroup-CEQHRttu.js",
+      "sha256": "f820ad942542bd39943bfcbc6073fa6d5237ee8fe574a36f8a4d22ae67c9558a"
+    },
+    {
+      "asset": "/assets/GraphicsContext-48tzdr3Q.js",
+      "sha256": "26553fe11bde03fcc13af77e92b26890e5b7f7ec1b791ad26634a133b670a7dc"
+    },
+    {
+      "asset": "/assets/getTexelRangeRects-Bdv1rQ51.js",
+      "sha256": "baa0c3c95a387acb0bf72e4b440a0ffc947f8bfcb34bfd462c32a10bbe53c665"
+    },
+    {
+      "asset": "/assets/index-o87NBHk2.css",
+      "sha256": "20249c48cd01535757c5c6f27f170b4be1056a32d99fbf0f29efb97c535cda2a"
+    }
+  ],
+  "browser_errors": [],
+  "operation": "실행 생성 없이 실제 URL·메뉴/팝업·동일 최종 번들을 읽기 전용 확인"
+}
