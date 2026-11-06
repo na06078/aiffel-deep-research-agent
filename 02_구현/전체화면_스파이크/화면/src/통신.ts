@@ -5,7 +5,9 @@ export async function request<T>(path:string,body?:unknown):Promise<T> {
  return response.json();
 }
 export async function sendCommand(text:string,id:string):Promise<Admission> { return request<Admission>('/api/spike/commands',{text,client_request_id:id}); }
+import type {RunArchive} from './시간계약';
 export const api={
+ archive:(id:string)=>request<RunArchive>(`/api/spike/runs/${encodeURIComponent(id)}/archive`),
  snapshot:()=>request<Snapshot>('/api/spike/snapshot'),
  detail:(id:string)=>request<EventDetail>(`/api/spike/events/${encodeURIComponent(id)}`),
  report:(id:string)=>request<Report>(`/api/spike/reports/${encodeURIComponent(id)}`),

@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "scope": "시간UI만; 새 마을 구성 최종 수용 전",
+  "unit_tests": 35,
+  "unit_files": 10,
+  "actual_groups": 8,
+  "readonly": {
+    "before": "4bf13119098662c6539478de9c1b07702181ec21ac096f10419ed7ff2fe5bfcf",
+    "after": "4bf13119098662c6539478de9c1b07702181ec21ac096f10419ed7ff2fe5bfcf",
+    "mock_requests_before": 11,
+    "mock_requests_after": 11,
+    "actual_model_requests": 0,
+    "report_sha256": "064b324289d76eb0b7db747a3d58e9e42acaf1093641accd5a4265ea9bf41506"
+  },
+  "posts_during_replay": [],
+  "known_warning": "Vite main chunk>500kB; 경고를 숨기지 않음"
+}

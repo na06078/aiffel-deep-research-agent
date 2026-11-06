@@ -1,0 +1,254 @@
+{
+  "started_at": "2026-11-06T05:49:58.412414+00:00",
+  "base_url": "http://127.0.0.1:53398",
+  "checks": [
+    {
+      "name": "실제 새 경로 HTTP 서버",
+      "status": "PASS",
+      "pid": 45716
+    },
+    {
+      "name": "첫 viewport 전체 마을·여백/바탕스크롤 없음·동일 canvas",
+      "status": "PASS"
+    },
+    {
+      "name": "장면 메뉴·이동/작업/운반·상세 팝업·초안 보존·대역 무호출",
+      "status": "PASS"
+    },
+    {
+      "name": "메뉴 모드 전환·실제 조사관4 동시 대기·NPC/코드 말풍선의 원본 사건 연결",
+      "status": "PASS"
+    },
+    {
+      "name": "실제 입력·팝업 중 개입·새 계획 선반영·선택 고정·새로고침 무재호출",
+      "status": "PASS"
+    },
+    {
+      "name": "전체 제출 후 FIFO·이전 결과의 원고/평가/정본 적용 차단",
+      "status": "PASS"
+    },
+    {
+      "name": "이전 제출 문서의 팝업·입력 접근·실제 다운로드 재열기",
+      "status": "PASS",
+      "sha256": "c25f3fdd32c3ffd583e8da35e746d4d7bee3e7c1b5d2a4a12316dfbae862d937"
+    },
+    {
+      "name": "햄버거·과거 기록·같은 중앙 창 상세/목록 복귀",
+      "status": "PASS"
+    },
+    {
+      "name": "실패/불합격 보존·명시적 큐 계속·일반 지시가 기존 정지를 풀지 않음",
+      "status": "PASS"
+    },
+    {
+      "name": "실제 현재 실행 취소 버튼·기록/큐 보존",
+      "status": "PASS"
+    },
+    {
+      "name": "실제 서버 프로세스 재시작·SSE·DB 복원·대역 무재실행",
+      "status": "PASS",
+      "pids": [
+        45716,
+        46420
+      ]
+    }
+  ],
+  "captures": [
+    {
+      "file": "마을_첫화면.png",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 900,
+      "scrollX": 0,
+      "scrollY": 0,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvasCount": 1,
+      "sameCanvas": true
+    },
+    {
+      "file": "마을_넓은화면.png",
+      "width": 1920,
+      "height": 1080,
+      "scrollWidth": 1920,
+      "scrollHeight": 1080,
+      "scrollX": 0,
+      "scrollY": 0,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+      "canvasCount": 1,
+      "sameCanvas": true
+    },
+    {
+      "file": "마을_좁은화면.png",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "scrollX": 0,
+      "scrollY": 0,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "canvasCount": 1,
+      "sameCanvas": true
+    },
+    {
+      "file": "장면_사건팝업.png",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 900,
+      "scrollX": 0,
+      "scrollY": 0,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvasCount": 1,
+      "sameCanvas": true
+    },
+    {
+      "file": "실행_상세팝업.png",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 900,
+      "scrollX": 0,
+      "scrollY": 0,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvasCount": 1,
+      "sameCanvas": true
+    },
+    {
+      "file": "마을_실행중.png",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 900,
+      "scrollX": 0,
+      "scrollY": 0,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvasCount": 1,
+      "sameCanvas": true
+    },
+    {
+      "file": "보고서_팝업.png",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 900,
+      "scrollX": 0,
+      "scrollY": 0,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvasCount": 1,
+      "sameCanvas": true
+    },
+    {
+      "file": "실패_큐팝업_좁은화면.png",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "scrollX": 0,
+      "scrollY": 0,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "canvasCount": 1,
+      "sameCanvas": true
+    }
+  ],
+  "browser_errors": [],
+  "external_requests": [],
+  "scope": "실제 전체 viewport/팝업/입력·HTTP/SSE/SQLite/파일·모델 응답 대역",
+  "chromium": "156.0.8078.4",
+  "planner_code_overlap_area": 0,
+  "popup_scroll": {
+    "before": 0,
+    "after": 480,
+    "window_scroll_y": 0
+  },
+  "status": "PASS",
+  "finished_at": "2026-11-06T05:50:49.533760+00:00"
+}
