@@ -10,3 +10,5 @@ pillow==13.0.0
 ruff==0.17.3
 markdown-it-py==4.2.0
 pypdfium2==5.14.0
+ddgs==9.16.1
+trafilatura==2.3.1
