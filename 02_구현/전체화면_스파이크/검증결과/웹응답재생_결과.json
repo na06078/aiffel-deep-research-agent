@@ -1,0 +1,82 @@
+{
+  "status": "REPLAY_PASS",
+  "scope": "저장한 실제 응답 1건의 오프라인 재생. 실제 검색·모델·본문 요청 없음. 현재 응답이 같은 레이아웃이라는 보장이 아니라 저장한 응답에 대한 파서 동작 확인",
+  "measured_at": "2026-11-07T07:50:59.292497+00:00",
+  "saved_response": {
+    "path": ".cache/웹진단실측/r1_primp.html (Git 제외)",
+    "sha256": "1fe8549059f322e81667908037119d1c7824ef99eb4e640199ccd2299b6d03cb",
+    "matches_diagnostic_record": true,
+    "bytes": 183807
+  },
+  "before_fix": "ddgs 9.16.1 기본 파서: 같은 응답에서 No results found.(0건), 진단 기록 참조",
+  "mock_requests": 1,
+  "parsed_count": 10,
+  "result_hosts": [
+    "docs.python.org",
+    "inforboo.com",
+    "bae3559.github.io",
+    "42jerrykim.github.io",
+    "pi000.tistory.com",
+    "realpython.com",
+    "kdw9502.tistory.com",
+    "velog.io",
+    "docs.python.org",
+    "devguide.python.org"
+  ],
+  "unwrapped_urls": true,
+  "results": [
+    {
+      "title": "asyncio — 비동기 I/O — Python 3.15.2 문서",
+      "url": "https://docs.python.org/ko/3/library/asyncio.html",
+      "snippet_characters": 109
+    },
+    {
+      "title": "파이썬 비동기 프로그래밍: asyncio 이해하기 — 이벤트 루프와 코루틴...",
+      "url": "https://inforboo.com/entry/파이썬-비동기-프로그래밍-asyncio-이해하기-—-이벤트-루프와-코루틴-핵심-정리",
+      "snippet_characters": 125
+    },
+    {
+      "title": "파이썬 `asyncio`로 비동기 프로그래밍 정복하기: 초보자도 OK!",
+      "url": "https://bae3559.github.io/2026/10/06/파이썬-asyncio-비동기-프로그래밍/",
+      "snippet_characters": 122
+    },
+    {
+      "title": "[Python Cheatsheet] 63. asyncio - 비동기 최소 패턴 - 42JerryKim",
+      "url": "https://42jerrykim.github.io/post/python-cheatsheet/async-io-patterns-concurrency-coroutine-async-await-guide/",
+      "snippet_characters": 134
+    },
+    {
+      "title": "[PYTHON]asyncio: 파이썬 비동기 프로그래밍 완벽 가이드",
+      "url": "https://pi000.tistory.com/125",
+      "snippet_characters": 127
+    },
+    {
+      "title": "asyncio | Python Standard Library – Real Python",
+      "url": "https://realpython.com/ref/stdlib/asyncio/",
+      "snippet_characters": 170
+    },
+    {
+      "title": "Python3.8 asyncio, async/await 기초 - 코루틴과 태스크",
+      "url": "https://kdw9502.tistory.com/6",
+      "snippet_characters": 125
+    },
+    {
+      "title": "파이썬 asyncio 코루틴과 태스크 - 벨로그",
+      "url": "https://velog.io/@stresszero/python-asyncio-ct",
+      "snippet_characters": 115
+    },
+    {
+      "title": "Coroutines and tasks — Python 3.15.2 문서",
+      "url": "https://docs.python.org/ko/3/library/asyncio-task.html",
+      "snippet_characters": 133
+    },
+    {
+      "title": "Python Developer’s Guide",
+      "url": "https://devguide.python.org/",
+      "snippet_characters": 0
+    }
+  ],
+  "warnings": [
+    "python_http_boundary_only"
+  ]
+}

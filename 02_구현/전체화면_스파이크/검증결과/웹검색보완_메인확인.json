@@ -1,0 +1,135 @@
+{
+  "checked_at": "2026-11-07T16:53:43.153301+09:00",
+  "status": "SEARCH_PATH_REPAIRED_LIVE_SEARCH_PASS_LIMITED",
+  "scope": "사용자 위임('너가 적절한 방안을 모색해서 적용해주고 나한테 보고만해')에 따른 무료 검색 경로 보완. 검색 진단2회+보완 후 검증1회, 본문 수집·모델 호출·사용자 실행본 교체 없음",
+  "diagnosis": {
+    "record": "웹진단실측_결과.json",
+    "r1_primp_old_transport": {
+      "http_status": 200,
+      "bytes": 183807,
+      "div_relsrch": 0,
+      "section_algo": 10,
+      "ddgs_outcome": {
+        "status": "failed",
+        "error_type": "DDGSException",
+        "message": "No results found."
+      }
+    },
+    "r2_httpx_new_transport": {
+      "http_status": 500,
+      "body_bytes": 0,
+      "user_agent": "python-httpx/0.28.1",
+      "server": "ATS"
+    },
+    "established": [
+      "저장한 예전 전송 응답은 신규 section.s-algo 결과 블록 10개이고 DDGS 9.16.1 파서가 읽는 div.relsrch는 0개다",
+      "새 httpx 기본 요청의 HTTP500(본문 0바이트)은 첫 실측과 진단에서 2/2 재현됐고 같은 시간대 예전 전송은 200이었다"
+    ],
+    "not_established": [
+      "새 httpx 요청이 거절되는 정확한 원인(UA·TLS 지문·압축 협상·HTTP 버전 중 무엇인지)",
+      "2026-11-06에는 4/4 성공했던 기존 레이아웃이 오늘 바뀐 이유와 앞으로의 지속 여부"
+    ]
+  },
+  "fix": {
+    "parser": "서버/야후결과파서.py: section.s-algo를 직계 자식 경로로 읽음(중첩 결과 보호), 기존 div.relsrch 파서가 비면 보강",
+    "transport": "검색 기본 전송을 DDGS 기본(primp)으로 환원. 주입한 httpx 전송은 시험·강화 구성으로 유지",
+    "zero_results": "200 응답이 결과 구조(알려진 표식 또는 h3 3개 이상)처럼 보이는데 0건이면 빈 결과가 아니라 search_unparsed"
+  },
+  "red_green": {
+    "red": {
+      "file": "웹검색보완_파서_RED.xml",
+      "tests": 6,
+      "failures": 5,
+      "errors": 0,
+      "skipped": 0
+    },
+    "red_note": "5 failed·1 passed. 통과 1건은 결과 표식 없는 빈 페이지가 기존처럼 빈 결과인 양성 대조. 실패 5건은 모두 동작 불일치(빈 결과·DID NOT RAISE·httpx 교체)이며 설정 오류가 아니다",
+    "green": {
+      "file": "웹검색보완_파서_GREEN.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "neighbors_first_run": {
+      "file": "웹검색보완_이웃_GREEN.xml",
+      "tests": 85,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "note": "1 error는 pytest basetemp의 상위 폴더(.cache/웹보완검증)가 없어 tmp_path를 만들지 못한 러너 준비 오류이며 코드 실패가 아니다. 통과 근거로 쓰지 않는다"
+    },
+    "neighbors_rerun": {
+      "file": "웹검색보완_이웃_GREEN_재실행.xml",
+      "tests": 91,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "full_backend": {
+      "file": "웹검색보완_전체회귀.xml",
+      "tests": 270,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "before": 264
+    },
+    "ruff": "PASS 서버·테스트·검증 68파일 서식"
+  },
+  "replay_saved_real_response": {
+    "record": "웹응답재생_결과.json",
+    "status": "REPLAY_PASS",
+    "parsed_count": 10,
+    "hash_matches_diagnostic": true,
+    "unwrapped_urls": true,
+    "before_fix_count": 0
+  },
+  "live_verification": {
+    "record": "웹보완검증실측_결과.json",
+    "status": "PASS_LIMITED",
+    "client": "서버.웹자료.FreeWebClient() — 대역·주입 없음(기본 전송 primp)",
+    "http_status": 200,
+    "result_count": 7,
+    "first_result_is_official_doc": true,
+    "unwrapped_urls": true,
+    "requests": {
+      "search_started": 1,
+      "refused": 0,
+      "fetch_started": 0
+    },
+    "model_requests": 0,
+    "protected_unchanged": true,
+    "live_dist_unchanged": true
+  },
+  "delegation_budget": {
+    "diagnostic_searches": 2,
+    "verification_searches": 1,
+    "fetches": 0,
+    "model_requests": 0,
+    "used": "진단2+검증1, 모두 사용"
+  },
+  "source_sha256": {
+    "서버/웹자료.py": "fe56b648598925f89000c1b0819ec5e44e2274bb2f21c5a67dafc7c81d484b1b",
+    "서버/야후결과파서.py": "64e602c20a5df7081fac1bc8828ba40e75715a71ad539c741530ab6a7f338ed7",
+    "테스트/테스트_야후결과파서.py": "daab3249a2185f68b8b48bfb31845d8bb63f905cc1058827523bafde4511873b",
+    "검증/웹진단실측.py": "259d9ded5a0641b8789342b2b694435c682538a4eddbd7d83c477ae43fa326fd",
+    "검증/웹응답재생검사.py": "391ede80002d13a92fffaa2958eedf6da4d6526c53c5e7752c6939b7c8e0947c",
+    "검증/웹보완검증실측.py": "5ea7752b19a965f75e388c77b82f0656d7f58246e0abd61d0a4012da942f1321"
+  },
+  "tradeoffs": [
+    "기본 검색 전송이 primp라 trust_env=False·follow_redirects=False(환경 프록시 무시·redirect 직접 관측)를 쓰지 못한다. primp의 환경 프록시 사용 여부는 타입 정보에 없어 미확인이고 redirect 기본값은 True(최대 20)다",
+    "transport 단계 취소 gate는 주입한 httpx 전송에만 적용되고 기본 전송은 Python 래퍼의 gate 확인(관측 콜백 앞뒤)까지다",
+    "본문 수집은 기존 고정 IP·TLS 검증·redirect 검사 전송을 그대로 유지한다"
+  ],
+  "known_limitations": [
+    "Yahoo 레이아웃은 다시 바뀔 수 있다. 오늘 검증 검색1회의 성공이 지속성을 보장하지 않는다",
+    "알려진 구조 표식이 없는 제3의 레이아웃은 h3 3개 이상일 때만 search_unparsed로 구별하는 휴리스틱이며, 진짜 빈 결과와 구별하지 못하면 빈 결과로 처리한다",
+    "검증 검색의 결과 수(7)는 같은 시간대 진단 응답의 결과 블록 수(10)와 다르다. 응답 본문을 저장하지 않아 차이의 원인은 확인하지 못했다",
+    "서버 모듈이 lxml을 직접 가져오지만(기존 코드도 같음) 직접 고정 목록(필수패키지.txt)에는 lxml이 없다. 패키지 변경은 이번 범위가 아니라 그대로 두었다"
+  ],
+  "not_done": [
+    "웹 연구 앱 종단 간(API·저장·화면·재시작)",
+    "실제 모델 연구",
+    "사용자 실행본(8768) 적용"
+  ]
+}

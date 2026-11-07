@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="6" time="0.548" timestamp="2026-11-07T16:47:08.689486+09:00" hostname="z13flow"><testcase classname="테스트.테스트_야후결과파서" name="test_중첩된_algo_결과를_섞지않고_직계_경로로_제목_링크_설명을_읽는다" time="0.001"><failure message="AssertionError: assert [] == ['첫 번째 예시 제목'... '세 번째 예시 제목']&#10;  &#10;  Right contains 3 more items, first extra item: '첫 번째 예시 제목'&#10;  Use -v to get more diff">def test_중첩된_algo_결과를_섞지않고_직계_경로로_제목_링크_설명을_읽는다():
+        rows = parse_algo_results(html.fromstring(FIXTURE))
+&gt;       assert [row["title"] for row in rows] == ["첫 번째 예시 제목", "두 번째 예시 제목", "세 번째 예시 제목"]
+E       AssertionError: assert [] == ['첫 번째 예시 제목'... '세 번째 예시 제목']
+E         
+E         Right contains 3 more items, first extra item: '첫 번째 예시 제목'
+E         Use -v to get more diff
+
+테스트\테스트_야후결과파서.py:63: AssertionError</failure></testcase><testcase classname="테스트.테스트_야후결과파서" name="test_결과_구조_표식_판정은_알려진_레이아웃과_h3_밀도를_본다" time="0.001"><failure message="assert False&#10; +  where False = looks_like_results(&lt;Element html at 0x1e7c2ea0e10&gt;)&#10; +    where &lt;Element html at 0x1e7c2ea0e10&gt; = &lt;function fromstring at 0x000001E7C2BC5260&gt;('&lt;html&gt;&lt;head&gt;&lt;title&gt;예시 질문 - Yahoo Search Results&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;section class=&quot;reg searchCenterMiddle&quot;&gt;&lt;section ...-negmlrEdges&quot;&gt;&lt;/div&gt;\n&lt;/section&gt;&lt;/div&gt;\n&lt;/section&gt;&lt;/div&gt;\n&lt;/section&gt;&lt;/div&gt;&lt;/section&gt;&lt;/section&gt;&lt;/section&gt;&lt;/body&gt;&lt;/html&gt;')&#10; +      where &lt;function fromstring at 0x000001E7C2BC5260&gt; = html.fromstring">def test_결과_구조_표식_판정은_알려진_레이아웃과_h3_밀도를_본다():
+        def page(body):
+            return html.fromstring(f"&lt;html&gt;&lt;body&gt;{body}&lt;/body&gt;&lt;/html&gt;")
+    
+&gt;       assert looks_like_results(html.fromstring(FIXTURE))
+E       assert False
+E        +  where False = looks_like_results(&lt;Element html at 0x1e7c2ea0e10&gt;)
+E        +    where &lt;Element html at 0x1e7c2ea0e10&gt; = &lt;function fromstring at 0x000001E7C2BC5260&gt;('&lt;html&gt;&lt;head&gt;&lt;title&gt;예시 질문 - Yahoo Search Results&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;section class="reg searchCenterMiddle"&gt;&lt;section ...-negmlrEdges"&gt;&lt;/div&gt;\n&lt;/section&gt;&lt;/div&gt;\n&lt;/section&gt;&lt;/div&gt;\n&lt;/section&gt;&lt;/div&gt;&lt;/section&gt;&lt;/section&gt;&lt;/section&gt;&lt;/body&gt;&lt;/html&gt;')
+E        +      where &lt;function fromstring at 0x000001E7C2BC5260&gt; = html.fromstring
+
+테스트\테스트_야후결과파서.py:73: AssertionError</failure></testcase><testcase classname="테스트.테스트_야후결과파서" name="test_새_레이아웃_응답이_FreeWebClient_검색_결과가_된다" time="0.028"><failure message="AssertionError: assert [] == ['https://exa...le.com/third']&#10;  &#10;  Right contains 3 more items, first extra item: 'https://example.com/first'&#10;  Use -v to get more diff">def test_새_레이아웃_응답이_FreeWebClient_검색_결과가_된다():
+        async def scenario():
+            client = client_for(FIXTURE)
+            try:
+                return await client.search("예시 질문")
+            finally:
+                await client.aclose()
+    
+        result = asyncio.run(scenario())
+&gt;       assert sorted(row["url"] for row in result["results"]) == [
+            "https://example.com/first",
+            "https://example.com/second",
+            "https://example.com/third",
+        ]
+E       AssertionError: assert [] == ['https://exa...le.com/third']
+E         
+E         Right contains 3 more items, first extra item: 'https://example.com/first'
+E         Use -v to get more diff
+
+테스트\테스트_야후결과파서.py:99: AssertionError</failure></testcase><testcase classname="테스트.테스트_야후결과파서" name="test_알려진_구조_표식이_있는데_0건이면_빈_결과가_아니라_search_unparsed" time="0.004"><failure message="Failed: DID NOT RAISE WebSourceError">def test_알려진_구조_표식이_있는데_0건이면_빈_결과가_아니라_search_unparsed():
+        changed = '&lt;html&gt;&lt;body&gt;&lt;section class="s-algo"&gt;&lt;div&gt;구조가 바뀐 결과&lt;/div&gt;&lt;/section&gt;&lt;/body&gt;&lt;/html&gt;'
+    
+        async def scenario():
+            client, events = client_for(changed), []
+            try:
+                with pytest.raises(WebSourceError, match="^search_unparsed$"):
+                    await client.search("질문", observer=lambda kind, payload: events.append(kind))
+            finally:
+                await client.aclose()
+            return events
+    
+        # HTTP 요청 자체는 200으로 끝났으므로 request.failed 없이 started/completed만 남는다.
+&gt;       assert asyncio.run(scenario()) == ["request.started", "request.completed"]
+               ^^^^^^^^^^^^^^^^^^^^^^^
+
+테스트\테스트_야후결과파서.py:124: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def scenario():
+        client, events = client_for(changed), []
+        try:
+&gt;           with pytest.raises(WebSourceError, match="^search_unparsed$"):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           Failed: DID NOT RAISE WebSourceError
+
+테스트\테스트_야후결과파서.py:117: Failed</failure></testcase><testcase classname="테스트.테스트_야후결과파서" name="test_결과_구조_표식이_없는_빈_페이지는_기존처럼_빈_결과" time="0.004" /><testcase classname="테스트.테스트_야후결과파서" name="test_기본_검색_전송은_DDGS_기본_클라이언트를_교체하지_않는다" time="0.144"><failure message="assert &lt;httpx.Client object at 0x000001E7C2F215E0&gt; is &lt;테스트_야후결과파서.NativeClient object at 0x000001E7C2F20590&gt;&#10; +  where &lt;httpx.Client object at 0x000001E7C2F215E0&gt; = namespace(client=&lt;httpx.Client object at 0x000001E7C2F215E0&gt;, request=&lt;function FreeWebClient._search_sync.&lt;locals&gt;.request at 0x000001E7C2F11940&gt;).client&#10;[+1 more line; full report in element text]">def test_기본_검색_전송은_DDGS_기본_클라이언트를_교체하지_않는다():
+        native, seen = NativeClient(), []
+    
+        class Engine:
+            name, disabled = "yahoo", False
+    
+            def __init__(self):
+                self.http_client = SimpleNamespace(client=native, request=self.request)
+    
+            def request(self, method, url, *args, **kwargs):
+                seen.append((method, url, kwargs.get("params")))
+                page = "&lt;html&gt;&lt;/html&gt;"
+                return SimpleNamespace(
+                    status_code=200, content=page.encode(), text=page, _resp=SimpleNamespace(headers={})
+                )
+    
+            def extract_results(self, text):
+                return []
+    
+        engine = Engine()
+    
+        class Sdk:
+            def __init__(self, **kwargs):
+                pass
+    
+            def _get_engines(self, category, backend):
+                return [engine]
+    
+            def text(self, query, **kwargs):
+                engine.http_client.request("GET", "https://search.yahoo.com/search", params={"p": query})
+                return [{"title": "제목", "href": "https://example.com/", "body": "설명"}]
+    
+        async def scenario():
+            client = FreeWebClient(ddgs_factory=Sdk)
+            try:
+                return await client.search("질문")
+            finally:
+                await client.aclose()
+    
+        result = asyncio.run(scenario())
+&gt;       assert engine.http_client.client is native
+E       assert &lt;httpx.Client object at 0x000001E7C2F215E0&gt; is &lt;테스트_야후결과파서.NativeClient object at 0x000001E7C2F20590&gt;
+E        +  where &lt;httpx.Client object at 0x000001E7C2F215E0&gt; = namespace(client=&lt;httpx.Client object at 0x000001E7C2F215E0&gt;, request=&lt;function FreeWebClient._search_sync.&lt;locals&gt;.request at 0x000001E7C2F11940&gt;).client
+E        +    where namespace(client=&lt;httpx.Client object at 0x000001E7C2F215E0&gt;, request=&lt;function FreeWebClient._search_sync.&lt;locals&gt;.request at 0x000001E7C2F11940&gt;) = &lt;테스트_야후결과파서.test_기본_검색_전송은_DDGS_기본_클라이언트를_교체하지_않는다.&lt;locals&gt;.Engine object at 0x000001E7C2F20980&gt;.http_client
+
+테스트\테스트_야후결과파서.py:182: AssertionError</failure></testcase></testsuite></testsuites>

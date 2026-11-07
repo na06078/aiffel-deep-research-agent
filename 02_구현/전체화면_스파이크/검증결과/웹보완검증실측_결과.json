@@ -1,0 +1,87 @@
+{
+  "status": "PASS_LIMITED",
+  "scope": "운영 기본 FreeWebClient()의 검색1회. 본문 수집·모델·앱 실행 없음. 일반 웹 가용성·지속 안정성·앱 종단 간 검증이 아님",
+  "measured_at": "2026-11-07T07:52:18.010523+00:00",
+  "client": "서버.웹자료.FreeWebClient() — 대역·주입 없음(기본 전송 primp)",
+  "search": {
+    "status": "ok",
+    "result_count": 7,
+    "elapsed_ms": 1015.9999999996217,
+    "observed_requests": 1,
+    "warnings": [
+      "python_http_boundary_only",
+      "native_redirects_unobserved"
+    ],
+    "unwrapped_urls": true,
+    "docs_python_hits": 2,
+    "exact_page_in_results": true,
+    "results": [
+      {
+        "title": "asyncio — 비동기 I/O — Python 3.15.2 문서",
+        "url": "https://docs.python.org/ko/3/library/asyncio.html",
+        "snippet_characters": 138
+      },
+      {
+        "title": "파이썬 비동기 프로그래밍: asyncio 이해하기 — 이벤트 루프와 코루틴...",
+        "url": "https://inforboo.com/entry/파이썬-비동기-프로그래밍-asyncio-이해하기-—-이벤트-루프와-코루틴-핵심-정리",
+        "snippet_characters": 172
+      },
+      {
+        "title": "파이썬 `asyncio`로 비동기 프로그래밍 정복하기: 초보자도 OK!",
+        "url": "https://bae3559.github.io/2026/10/06/파이썬-asyncio-비동기-프로그래밍/",
+        "snippet_characters": 164
+      },
+      {
+        "title": "[Python Cheatsheet] 63. asyncio - 비동기 최소 패턴 - 42JerryKim",
+        "url": "https://42jerrykim.github.io/post/python-cheatsheet/async-io-patterns-concurrency-coroutine-async-await-guide/",
+        "snippet_characters": 137
+      },
+      {
+        "title": "Coroutines and tasks — Python 3.15.2 문서",
+        "url": "https://docs.python.org/ko/3/library/asyncio-task.html",
+        "snippet_characters": 200
+      },
+      {
+        "title": "Our Documentation | Python.org",
+        "url": "https://www.python.org/doc/",
+        "snippet_characters": 263
+      },
+      {
+        "title": "Python Developer’s Guide",
+        "url": "https://devguide.python.org/",
+        "snippet_characters": 401
+      }
+    ]
+  },
+  "request_counts": {
+    "search_started": 1,
+    "refused": 0,
+    "fetch_started": 0
+  },
+  "http_events": [
+    {
+      "kind": "request.started",
+      "status_code": null,
+      "elapsed_ms": null,
+      "error_code": null,
+      "guard": "allowed"
+    },
+    {
+      "kind": "request.completed",
+      "status_code": 200,
+      "elapsed_ms": 984.9999999996726,
+      "error_code": null,
+      "guard": null
+    }
+  ],
+  "new_model_requests": 0,
+  "paid_search_api_requests": 0,
+  "automatic_retries": 0,
+  "protected_matches_resume_baseline": true,
+  "protected_unchanged_by_probe": true,
+  "live_dist_unchanged_by_probe": true,
+  "probe_script_sha256": "5ea7752b19a965f75e388c77b82f0656d7f58246e0abd61d0a4012da942f1321",
+  "client_source_sha256": "fe56b648598925f89000c1b0819ec5e44e2274bb2f21c5a67dafc7c81d484b1b",
+  "parser_source_sha256": "64e602c20a5df7081fac1bc8828ba40e75715a71ad539c741530ab6a7f338ed7",
+  "raw_records": "프로젝트 .cache/웹보완검증실측/ (Git 제외)"
+}

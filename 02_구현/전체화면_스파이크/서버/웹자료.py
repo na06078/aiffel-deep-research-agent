@@ -5,6 +5,7 @@
 # CancelledError(BaseException)는 잡지 않는다.
 
 import asyncio
+import contextlib
 import hashlib
 import ipaddress
 import socket
@@ -21,6 +22,7 @@ import httpcore
 import httpx
 import trafilatura
 
+from 서버.야후결과파서 import extract_algo_results, looks_like_results_html
 from 서버.웹계약 import WebSourceError
 
 SAFE_ERROR_CODES = frozenset(
@@ -29,6 +31,7 @@ SAFE_ERROR_CODES = frozenset(
         "fetch_failed",
         "search_timeout",
         "search_failed",
+        "search_unparsed",
         "rate_limited",
         "challenge_detected",
         "cooldown_active",
@@ -176,7 +179,8 @@ class FreeWebClient:
         clock=time.monotonic,
         sleep=asyncio.sleep,
     ):
-        self._search_http_client_factory = search_http_client_factory or httpx.Client
+        # None이면 DDGS 기본 전송(primp)을 쓴다. 주입하면 그 httpx 전송으로 바꾼다(시험·강화 구성).
+        self._search_http_client_factory = search_http_client_factory
         self._resolver = resolver or _resolve
         self._network_backend = network_backend or httpcore.AnyIOBackend()
         self._ddgs_factory = ddgs_factory
@@ -490,7 +494,8 @@ class FreeWebClient:
             "results": result,
             "elapsed_ms": (self._clock() - started) * 1000,
             "observed_requests": count,
-            "warnings": ["python_http_boundary_only"],
+            "warnings": ["python_http_boundary_only"]
+            + ([] if self._search_http_client_factory else ["native_redirects_unobserved"]),
         }
 
     def _search_sync(self, query, observer, gate):
@@ -510,19 +515,34 @@ class FreeWebClient:
             raise WebSourceError("search_backend_unavailable")
         sdk._get_engines = lambda category, backend: engines
         engine = engines[0]
-        count, failures = [], []
-        with self._search_http_client_factory(
-            timeout=12, verify=True, trust_env=False, follow_redirects=False
-        ) as client:
-            # primp에는 trust_env가 없다. 인스턴스의 Python HTTP 경계만
-            # httpx로 대체하여 환경 proxy·네이티브 자동 redirect를 사용하지 않는다.
-            # HTTPX의 인스턴스별 transport 선택을 감싼다. SDK/global 상태는 불변.
-            # shortcut: httpx 0.28.1의 비공개 _transport_for_url에 결합한다.
-            # httpx 갱신 때 test_logically_finished_search_cannot_start_late_http가 먼저 깨진다.
-            select_transport = client._transport_for_url
-            client._transport_for_url = lambda url: _SearchTransport(select_transport(url), gate)
-            engine.http_client.client = client
+        count, failures, pages = [], [], []
+        # 기본값은 DDGS 기본 전송(primp)이다. 2026-11-07 실측에서 같은 요청이 primp는 HTTP200,
+        # httpx 기본 헤더는 HTTP500(본문 0바이트)이었다(검증결과/웹진단실측_결과.json).
+        # 주입한 httpx 전송은 그것으로 바꾸고 환경 proxy·자동 redirect를 쓰지 않는다(시험·강화 구성).
+        # primp에는 trust_env가 없고 follow_redirects 기본값이 True라 기본 전송의 redirect는 관측하지 못한다.
+        with contextlib.ExitStack() as stack:
+            if self._search_http_client_factory is not None:
+                client = stack.enter_context(
+                    self._search_http_client_factory(
+                        timeout=12, verify=True, trust_env=False, follow_redirects=False
+                    )
+                )
+                # HTTPX의 인스턴스별 transport 선택을 감싼다. SDK/global 상태는 불변.
+                # shortcut: httpx 0.28.1의 비공개 _transport_for_url에 결합한다.
+                # httpx 갱신 때 test_logically_finished_search_cannot_start_late_http가 먼저 깨진다.
+                select_transport = client._transport_for_url
+                client._transport_for_url = lambda url: _SearchTransport(
+                    select_transport(url), gate
+                )
+                engine.http_client.client = client
             original = engine.http_client.request
+            original_extract = engine.extract_results
+
+            def extract_results(html_text):
+                # ddgs 9.16.1은 신규 section.s-algo 레이아웃을 읽지 못해 기존 파서가 비면 보강한다.
+                return original_extract(html_text) or extract_algo_results(engine, html_text)
+
+            engine.extract_results = extract_results
 
             def request(method, url, *args, **kwargs):
                 payload = {
@@ -548,6 +568,7 @@ class FreeWebClient:
                             retry_after = self._retry_after(response._resp.headers)
                             self._cooldown_until = self._clock() + max(60.0, retry_after)
                         raise WebSourceError(code)
+                    pages.append(response.text)
                     self._emit(
                         observer,
                         "request.completed",
@@ -581,10 +602,13 @@ class FreeWebClient:
             except DDGSException as exc:
                 if failures:
                     raise WebSourceError(failures[0]) from None
-                if str(exc) == "No results found.":
-                    rows = []
-                else:
+                if str(exc) != "No results found.":
                     raise WebSourceError("search_failed") from None
+                # DDGS는 차단·파서 불일치·진짜 빈 결과를 같은 문구로 보고한다. 200 응답이 결과 페이지처럼
+                # 보이는데 0건이면 빈 결과가 아니라 파서 불일치로 구별한다.
+                if pages and looks_like_results_html(pages[-1]):
+                    raise WebSourceError("search_unparsed") from None
+                rows = []
             if failures:
                 raise WebSourceError(failures[0])
         return [
