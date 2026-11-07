@@ -1,0 +1,79 @@
+{
+  "started_at": "2026-11-07T15:43:33.760728+00:00",
+  "checks": [
+    {
+      "name": "하단 트랙에서도 실행/재생/시점/시간 눈금 즉시 조작",
+      "status": "PASS",
+      "scroll_top": 272
+    },
+    {
+      "name": "재생/정지·단계/키보드/포인터 시점 변경 후 같은 행 유지",
+      "status": "PASS"
+    },
+    {
+      "name": "경계 커서·마우스 드래그·닫기/재열기·키보드 높이 조절",
+      "status": "PASS",
+      "before": 252,
+      "after": 382
+    },
+    {
+      "name": "터치 포인터 상단 경계 높이 조절",
+      "status": "PASS"
+    },
+    {
+      "name": "좁은창 고정 조작·최대 높이·입력·동일 세계",
+      "status": "PASS"
+    },
+    {
+      "name": "낮은창 고정 조작·최대 높이·입력·동일 세계",
+      "status": "PASS"
+    },
+    {
+      "name": "넓은창 고정 조작·최대 높이·입력·동일 세계",
+      "status": "PASS"
+    },
+    {
+      "name": "최대 높이에서 원본 상세 팝업·입력 병행",
+      "status": "PASS"
+    }
+  ],
+  "captures": [
+    "타임라인_하단스크롤.png",
+    "타임라인_높이확대.png",
+    "타임라인_좁은창.png",
+    "타임라인_낮은창.png",
+    "타임라인_넓은창.png",
+    "타임라인_팝업병행.png"
+  ],
+  "browser_errors": [],
+  "posts": [],
+  "failures": [],
+  "scope": "기존 실제 완료 기록·읽기 전용 UI 조작; 새 연구/모델 호출 없음",
+  "budget_before": {
+    "attempt_count": 100,
+    "max_attempts": 100,
+    "remaining_attempts": 0,
+    "spent_usd": 0.19670855,
+    "reserved_usd": 0.0,
+    "max_usd": 2.0,
+    "input_tokens": 379871,
+    "output_tokens": 84784,
+    "unknown_count": 0
+  },
+  "report_sha256": "4d2838ef698f43ff7cefac20c2461a110c1ba3470070c696422f41535e959cbf",
+  "budget_after": {
+    "attempt_count": 100,
+    "max_attempts": 100,
+    "remaining_attempts": 0,
+    "spent_usd": 0.19670855,
+    "reserved_usd": 0.0,
+    "max_usd": 2.0,
+    "input_tokens": 379871,
+    "output_tokens": 84784,
+    "unknown_count": 0
+  },
+  "db_unchanged": true,
+  "report_unchanged": true,
+  "status": "PASS",
+  "finished_at": "2026-11-07T15:43:50.780689+00:00"
+}

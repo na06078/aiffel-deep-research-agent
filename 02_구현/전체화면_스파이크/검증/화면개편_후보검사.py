@@ -175,12 +175,22 @@ def install_rewrite(page, rewrite, collectors):
     )
 
 
+# 머리글은 데이터가 오기 전에 '불러오는 중'으로 먼저 그려진다. 읽기 전에 data-run-id가 붙거나
+# 실패·없음처럼 로딩이 끝난 상태가 될 때까지 기다려, 서버 속도 차이로 생기는 경쟁 상태를 없앤다.
+# (제품 결함으로 로딩이 끝나지 않으면 이 대기가 시간 초과로 실패하므로 검사는 약해지지 않는다.)
+SUBJECT_SETTLED_JS = """() => {
+  const e = document.querySelector('[data-testid="timeline-subject"]');
+  return !!e && (!!e.dataset.runId || !e.innerText.includes('불러오는 중'));
+}"""
+
+
 def open_timeline(page):
     toggle = page.get_by_test_id("timeline-toggle")
     was = toggle.get_attribute("aria-expanded")
     if was != "true":
         toggle.click()
     page.get_by_test_id("timeline-subject").wait_for(state="visible")
+    page.wait_for_function(SUBJECT_SETTLED_JS, timeout=15000)
     return was
 
 
@@ -595,20 +605,33 @@ def main(base, label):
     live_after = api_get(LIVE_SERVER, "/api/spike/snapshot")
     sig_b, sig_a = snapshot_signature(live_before), snapshot_signature(live_after)
     base_json = json.loads((ROOT / ".cache/화면개편_dist기준.json").read_text(encoding="utf-8"))
+    manifest_file = ROOT / ".cache/화면개편_후보_매니페스트.json"
     dist = FE / "dist"
     now = {p.relative_to(dist).as_posix(): sha256_file(p) for p in dist.rglob("*") if p.is_file()}
+
+    def diff_against(want):
+        return {"changed": [k for k in want if k in now and now[k] != want[k]],
+                "missing": [k for k in want if k not in now], "added": [k for k in now if k not in want]}
+
+    # 채택 전에는 dist가 착수 기준 그대로여야 하고, 채택 뒤에는 검증한 후보 매니페스트와 같아야 한다.
+    # 둘 다 아니면(다른 변경이 섞였으면) 실패하며, 이때 dist_diff는 착수 기준과의 차이를 보여 준다.
     want = base_json["files"]
-    diff_files = {"changed": [k for k in want if k in now and now[k] != want[k]],
-                  "missing": [k for k in want if k not in now], "added": [k for k in now if k not in want]}
+    diff_files = diff_against(want)
+    dist_state = "착수 기준(채택 전)" if not any(diff_files.values()) else None
+    if dist_state is None and manifest_file.exists():
+        candidate_files = json.loads(manifest_file.read_text(encoding="utf-8"))["files"]
+        if not any(diff_against(candidate_files).values()):
+            want, diff_files = candidate_files, diff_against(candidate_files)
+            dist_state = "검증한 후보 매니페스트(채택 후)"
     non_get = [(m_, u) for m_, u in collectors["requests"] if m_ != "GET"]
     add("C8 보호 검사",
         not non_get and not collectors["console_errors"] and not collectors["pageerrors"]
-        and sig_b == sig_a and not any(diff_files.values()),
+        and sig_b == sig_a and dist_state is not None,
         total_requests=len(collectors["requests"]), non_get_requests=non_get,
         aborted_non_get_by_route=collectors["aborted_non_get"],
         console_errors=collectors["console_errors"], pageerrors=collectors["pageerrors"],
         live_8768_unchanged=sig_b == sig_a, live_before=sig_b, live_after=sig_a,
-        dist_file_count=len(now), dist_baseline_count=len(want), dist_diff=diff_files,
+        dist_file_count=len(now), dist_baseline_count=len(want), dist_state=dist_state, dist_diff=diff_files,
         dist_aggregate_note="파일별 SHA-256 비교")
     result = {"base": base, "label": label, "base_info": base_info, "checks": checks,
               "screenshots": shots, "summary": {"total": len(checks), "failed": [c["name"] for c in checks if not c["passed"]]}}

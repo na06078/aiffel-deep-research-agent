@@ -1,0 +1,66 @@
+{
+ "started_at": "2026-11-07T15:42:31.619158+00:00",
+ "mode": "apply",
+ "dist": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/dist",
+ "server": "http://127.0.0.1:8768",
+ "plan": {
+  "new": [],
+  "replaced": [],
+  "removed": []
+ },
+ "already_applied": true,
+ "candidate_aggregate": "d0d857efe30fde22ecb825313d745c75f9d2a585f61d82e8a83b61e2278dbfe0",
+ "tree_matches_candidate": true,
+ "served": {
+  "files_checked": 25,
+  "mismatches": [],
+  "root_matches_index": true
+ },
+ "api_before": {
+  "runs": [
+   [
+    "9aa1aeeb5b0c4724b0e435563f6a5c76",
+    "completed",
+    "2026-11-06T07:42:18.270229+00:00"
+   ],
+   [
+    "6d0214c0c03140be840a4508e11b4330",
+    "blocked",
+    "2026-11-07T11:45:16.141090+00:00"
+   ],
+   [
+    "05f7695ed6a54f018bea6319a1ca790d",
+    "completed",
+    "2026-11-07T11:49:13.178146+00:00"
+   ]
+  ],
+  "current_run_id": "05f7695ed6a54f018bea6319a1ca790d",
+  "high_watermark_seq": 358,
+  "attempt_count": 100
+ },
+ "api_after": {
+  "runs": [
+   [
+    "9aa1aeeb5b0c4724b0e435563f6a5c76",
+    "completed",
+    "2026-11-06T07:42:18.270229+00:00"
+   ],
+   [
+    "6d0214c0c03140be840a4508e11b4330",
+    "blocked",
+    "2026-11-07T11:45:16.141090+00:00"
+   ],
+   [
+    "05f7695ed6a54f018bea6319a1ca790d",
+    "completed",
+    "2026-11-07T11:49:13.178146+00:00"
+   ]
+  ],
+  "current_run_id": "05f7695ed6a54f018bea6319a1ca790d",
+  "high_watermark_seq": 358,
+  "attempt_count": 100
+ },
+ "api_runs_and_budget_unchanged": true,
+ "status": "적용 완료",
+ "finished_at": "2026-11-07T15:42:32.175985+00:00"
+}
