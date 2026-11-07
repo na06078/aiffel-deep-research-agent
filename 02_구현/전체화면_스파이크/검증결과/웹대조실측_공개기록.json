@@ -1,0 +1,44 @@
+{
+  "retrieved_at": "2026-11-07 KST",
+  "purpose": "대조 실측 결과(Yahoo HTTP200·결과0건, 새 경로는 HTTP500)를 공개 기록과 대조한다. 읽기 전용 조회이며 앱의 검색·본문·모델 요청은 0이다.",
+  "sources": [
+    {
+      "name": "PyPI ddgs",
+      "url": "https://pypi.org/pypi/ddgs/json",
+      "finding": "최신 9.16.1(2026-10-23). 프로젝트 설치본과 같고 그 뒤 릴리스는 없다."
+    },
+    {
+      "name": "GitHub issue #498",
+      "url": "https://github.com/deedy5/ddgs/issues/498",
+      "state": "closed(completed) 2026-11-04, 닫은 사람 deedy5, 댓글 0",
+      "finding": "외부 사용자의 보고(ddgs 9.16.1, Windows 11). 모든 text 엔진이 'No results found.'를 낸다고 함. yahoo는 HTTP200이지만 0건 파싱이며 차단이 아니라 마크업 변경으로 보인다고 적었다.",
+      "quotes": [
+        "mojeek / startpage / yahoo / wikipedia / grokipedia: HTTP 200, zero parsed results (9.16.1)",
+        "yahoo also returns the section.algo layout that the 9.8–9.16 parser does not read"
+      ],
+      "limits": "제3자 보고다. 질문·지역·환경이 달라 같은 증상 부류의 증거일 뿐 우리 응답이 같은 레이아웃이었다는 증거가 아니다. 닫힌 사유는 completed이나 코드 수정 커밋은 확인되지 않았다."
+    },
+    {
+      "name": "GitHub issue #497",
+      "url": "https://github.com/deedy5/ddgs/issues/497",
+      "state": "closed 2026-11-04",
+      "finding": "엔진의 HTTP 403·429가 상태 코드 없이 'No results found.'로 보고된다. 호출자가 차단과 빈 결과를 구별하지 못한다."
+    },
+    {
+      "name": "GitHub commits: ddgs/engines/yahoo.py",
+      "url": "https://api.github.com/repos/deedy5/ddgs/commits?path=ddgs/engines/yahoo.py&since=2026-10-01T00:00:00Z",
+      "finding": "2026-10-01 이후 Yahoo 엔진 파일 변경 0건."
+    },
+    {
+      "name": "GitHub commits: default branch",
+      "url": "https://api.github.com/repos/deedy5/ddgs/commits?per_page=8",
+      "finding": "최신 커밋은 8e749591(2026-10-23, 9.16.1 bump). 그 뒤 코드 변경이 보이지 않는다."
+    }
+  ],
+  "reading": "Yahoo가 200 응답을 주는데 ddgs 9.16.1의 Yahoo 파서가 0건을 내는 현상은 우리 한 번의 관측만이 아니라 제3자도 같은 버전에서 보고한 증상 부류다. 업스트림에 사용할 수 있는 수정 릴리스는 아직 없다. 패키지 갱신으로는 해결되지 않는다.",
+  "implication": "DDGS는 파서 불일치·엔진 차단을 모두 'No results found.'로 보고한다. FreeWebClient는 이 문구를 빈 결과(results=[])로 처리하므로 파서가 깨진 경우와 진짜 빈 결과를 앱이 구별하지 못한다. 별도 설계 결정이 필요한 위험이다.",
+  "not_established": [
+    "우리 대조 응답이 section.algo 레이아웃이었는지",
+    "새 경로 HTTP500의 원인"
+  ]
+}
