@@ -1,0 +1,110 @@
+{
+  "status": "applied_verified_cleaned",
+  "source_commit": "08dade2ef42512fb350a7ec983ebd386c5342d83",
+  "approval": "8768 적용 — 연구 서버 재시작·사후 확인 후 이번 검증 사본과 미리보기 정리",
+  "checks": {
+    "snapshot_equal": true,
+    "database_tables_equal": true,
+    "data_files_equal": true
+  },
+  "listeners": [
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 8768,
+      "OwningProcess": 29324
+    }
+  ],
+  "served_files": {
+    "files_verified": 25,
+    "mismatches": [],
+    "root_removed": true
+  },
+  "original_run_count": 3,
+  "budget_attempt_count": 100,
+  "new_model_requests": 0,
+  "user_records_test_deleted": false,
+  "browser_evidence": "적용_설치본/확인.json",
+  "browser_checks_passed": 10,
+  "browser_non_GET_requests": 0,
+  "browser_console_errors": 0,
+  "cleanup_evidence": "적용_사본정리.json",
+  "cleanup": {
+    "approval": "8768 적용·사후 확인 성공 후 이번 검증 사본/미리보기 정리",
+    "deleted": [
+      {
+        "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_011856_970645_S1_S4",
+        "bytes": 6702416
+      },
+      {
+        "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_011921_981952_S1_S4",
+        "bytes": 6344704
+      },
+      {
+        "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_011942_634022_S5",
+        "bytes": 6502118
+      },
+      {
+        "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_011954_227382_S6",
+        "bytes": 6702416
+      },
+      {
+        "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_012115_621038_S1_S4",
+        "bytes": 6344704
+      },
+      {
+        "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_012140_380460_S5",
+        "bytes": 6502118
+      },
+      {
+        "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_012153_712525_S6",
+        "bytes": 6702416
+      },
+      {
+        "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_015241_213836_S1_S4",
+        "bytes": 6344704
+      },
+      {
+        "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_015305_691264_S5",
+        "bytes": 6502118
+      },
+      {
+        "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_015318_842364_S6",
+        "bytes": 6702416
+      },
+      {
+        "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_015919_928549_S1_S4",
+        "bytes": 6344704
+      },
+      {
+        "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_015943_399757_S5",
+        "bytes": 6502118
+      },
+      {
+        "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_015956_525775_S6",
+        "bytes": 6702416
+      },
+      {
+        "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_020221_851554_실제변환_html",
+        "bytes": 6370527
+      },
+      {
+        "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_020222_626442_실제변환_pdf",
+        "bytes": 6488106
+      },
+      {
+        "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\채택확인_20261108",
+        "bytes": 6702416
+      }
+    ],
+    "deleted_directory_count": 16,
+    "deleted_bytes": 104460417,
+    "copy_root_absent": true,
+    "preview_stop": "Preview PID36888 stopped; port8793 free",
+    "live_run_count": 3,
+    "live_attempt_count": 100,
+    "completed_at": "2026-11-07T17:35:51.751610+00:00"
+  },
+  "backend_tests": 338,
+  "frontend_tests": 219,
+  "independent_review": "pass"
+}

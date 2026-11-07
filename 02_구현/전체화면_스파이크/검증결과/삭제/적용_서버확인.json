@@ -1,0 +1,147 @@
+{
+  "captured_at": "2026-11-07T17:31:18.669965+00:00",
+  "snapshot": {
+    "runs": [
+      {
+        "run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+        "control_revision": 1,
+        "status": "completed",
+        "report_id": "44f307dedcbf4c8282d9b4e8a3a207bb",
+        "parent_report_id": null,
+        "updated_at": "2026-11-06T07:42:18.270229+00:00",
+        "source_mode": "local"
+      },
+      {
+        "run_id": "6d0214c0c03140be840a4508e11b4330",
+        "control_revision": 1,
+        "status": "blocked",
+        "report_id": null,
+        "parent_report_id": "44f307dedcbf4c8282d9b4e8a3a207bb",
+        "updated_at": "2026-11-07T11:45:16.141090+00:00",
+        "source_mode": "local"
+      },
+      {
+        "run_id": "05f7695ed6a54f018bea6319a1ca790d",
+        "control_revision": 1,
+        "status": "completed",
+        "report_id": "32927cf0a32240348029148500e54b87",
+        "parent_report_id": "44f307dedcbf4c8282d9b4e8a3a207bb",
+        "updated_at": "2026-11-07T11:49:13.178146+00:00",
+        "source_mode": "web"
+      }
+    ],
+    "current_run_id": "05f7695ed6a54f018bea6319a1ca790d",
+    "selected_source_mode": "web",
+    "queue": [],
+    "queue_paused": true,
+    "queue_pause_reason": "quality_failed",
+    "high_watermark_seq": 358,
+    "budget": {
+      "attempt_count": 100,
+      "max_attempts": 100,
+      "remaining_attempts": 0,
+      "spent_usd": 0.19670855,
+      "reserved_usd": 0.0,
+      "max_usd": 2.0,
+      "input_tokens": 379871,
+      "output_tokens": 84784,
+      "unknown_count": 0
+    }
+  },
+  "files": {
+    "실행기록.sqlite3": "5064798f4bf300db5cdb12ad0a0d3c7b1e6b55d271d0105d468876cd591916f1",
+    "호출예산.sqlite3": "7b91fc1e31faf3912ef6a97877966fc48aab8beef158eeca472e10b2b2c028b3",
+    "🧾 실제 연구 보고서_32927cf0a32240348029148500e54b87.md": "4d2838ef698f43ff7cefac20c2461a110c1ba3470070c696422f41535e959cbf",
+    "🧾 실제 연구 보고서_44f307dedcbf4c8282d9b4e8a3a207bb.md": "19c6f5f980533a7e001beecc6f3f2852f44869800c4ad0a7afd3dea0e4d242cd",
+    "웹자료/자료.sqlite3": "1ee777d0e3e6b3e7267997125d469758a31e5cc51f139ba3ca95da6ba9771f1d",
+    "형식변환/15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.html": "cf1d54941222acc2777e052c4e6b3e37e9a86ef626ed04b1f8f43bf6ea414c77",
+    "형식변환/15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.json": "7173ea8538e61eccb39292398883a39055993acfe599e1c9c2195def459d499c",
+    "형식변환/a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.json": "691262a1b9dcf6b92323c94d2cb815b9a056431f702cf385e5c573d05088e812",
+    "형식변환/a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.pdf": "251af212f7b9b6910e9fec90e1de427164aececaac4d8866eac504fc5ad343ec",
+    "형식변환/cec916ab47ce07e5eb32c05dfd2a7dedabba4d0f08163109a5974cfa173bc0c8.json": "d261629f191ed9fa18008541d536c9fc6c9a876bfafddf71d233752e85ef2c1a",
+    "형식변환/cec916ab47ce07e5eb32c05dfd2a7dedabba4d0f08163109a5974cfa173bc0c8.pdf": "d78880de16056735043c6bad97ca35b17d81770613e13eb6ddd167b3dd7e38e5",
+    "형식변환/d9371c0fc7bb85161068e626dc824f7e180e4d320b27d08ae1d1be3b8dee1e63.html": "ecc96e8610eec6d885549c72eba5b96877d361c330edf7816f0c92eca3e1b2d8",
+    "형식변환/d9371c0fc7bb85161068e626dc824f7e180e4d320b27d08ae1d1be3b8dee1e63.json": "615963b1a39739506e856e2a9a2cb00cef5dde3c4daec39fa1f71a4bfe4dfd12"
+  },
+  "databases": {
+    "실행기록.sqlite3": {
+      "counts": {
+        "activity_spans": 103,
+        "calls": 70,
+        "events": 358,
+        "reports": 2,
+        "requests": 6,
+        "revisions": 3,
+        "sqlite_sequence": 1,
+        "state": 1
+      },
+      "table_sha256": {
+        "activity_spans": "b41f56ab24dba2b900a5b0eb9556757b0278b0034a6b4aa1ca95b87c2e58ee37",
+        "calls": "cf3121a6bbd79f61359e54a84c0b76542b0a171280245a6e8a542a5e39e154f2",
+        "events": "b10a653c16720f651e2339a45b93746ad61201e7c1120d55eb000cdc920d60a8",
+        "reports": "c14a17a5a9b28378c831e6e6b520d09290addc10ccaae8b5a2026ed1ced15c61",
+        "requests": "ec85c40adb9c06bed1842e4ca557c5cb88c2462fa30d8c94df2db1027f434a1a",
+        "revisions": "0a065591fb5c686c55ab9a343c54ec4821deb683d7634717ed704b7763c72ec9",
+        "sqlite_sequence": "925ae580eb5385532338445a6cdff851642d0919ff4d535ecd35009e788cfdae",
+        "state": "09e74f15aa046787f85f342dd9ce2bb19e3e0ba777d976b66e0a9e284389ae99"
+      }
+    },
+    "호출예산.sqlite3": {
+      "counts": {
+        "attempts": 127,
+        "budget_policy": 1
+      },
+      "table_sha256": {
+        "attempts": "0bcd698c289e4dc79694529ac396205b99e778cd6d652fe7c64d202e50acbd9e",
+        "budget_policy": "69a965597adc8d8da84a50b4fd00a89069a5a6b18f130c3f1c5ddf817f0062df"
+      }
+    },
+    "웹자료/자료.sqlite3": {
+      "counts": {
+        "web_history": 11,
+        "web_reads": 13,
+        "web_sources": 66
+      },
+      "table_sha256": {
+        "web_history": "683b9fae8ec9f995da7035df9c6cf2291c636292fe0be2993ab811b95f2db847",
+        "web_reads": "51dcd684f179a3fdca748223c42a9d0d2c5eb730857f954c84ea8e26133ecb8f",
+        "web_sources": "fa4d2108d0a65a7d1cb17537493966fb900667326829d7f2c9cea05b4ff891b2"
+      }
+    }
+  },
+  "source_commit": "08dade2ef42512fb350a7ec983ebd386c5342d83",
+  "approved": "8768 적용 및 연구 서버 재시작·사후 확인 후 이번 검증 사본/미리보기 정리; 실제 기록 시험 삭제·모델 호출 없음",
+  "process_after": {
+    "PID": 29324,
+    "Executable": "C:\\Users\\YH\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "Started": "2026-11-08T02:30:47.2203188+09:00",
+    "IsResearch": true
+  },
+  "new_api_checks": [
+    {
+      "run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+      "status": 200,
+      "deletable": false,
+      "blockers": [
+        "has_dependents"
+      ]
+    },
+    {
+      "run_id": "6d0214c0c03140be840a4508e11b4330",
+      "status": 200,
+      "deletable": true,
+      "blockers": []
+    },
+    {
+      "run_id": "05f7695ed6a54f018bea6319a1ca790d",
+      "status": 200,
+      "deletable": true,
+      "blockers": []
+    }
+  ],
+  "comparison": {
+    "snapshot_equal": true,
+    "database_tables_equal": true,
+    "all_data_file_hashes_equal": true
+  }
+}

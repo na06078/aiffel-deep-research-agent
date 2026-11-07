@@ -1,0 +1,27 @@
+{
+ "started_at": "2026-11-07T17:27:16.191577+00:00",
+ "mode": "dry-run",
+ "dist": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/dist",
+ "server": "http://127.0.0.1:8768",
+ "plan": {
+  "new": [
+   "assets/browserAll-BhM1n7th.js",
+   "assets/index-Ce86qAsB.js",
+   "assets/index-hKyqr4Xw.css",
+   "assets/webworkerAll-Bo3HniYj.js"
+  ],
+  "replaced": [
+   "index.html"
+  ],
+  "removed": [
+   "assets/browserAll-CRj9sfM3.js",
+   "assets/index-5ZwJf3pT.js",
+   "assets/index-DxJ8Wg1k.css",
+   "assets/webworkerAll-RLlB_UEk.js"
+  ]
+ },
+ "already_applied": false,
+ "candidate_aggregate": "c6dfa372b0b09e13ca2770b432cdc3c31f33305e00fe1751458d7b6d8842b4ab",
+ "status": "드라이런 완료(변경 없음)",
+ "finished_at": "2026-11-07T17:27:16.223699+00:00"
+}

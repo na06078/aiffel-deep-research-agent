@@ -1,0 +1,588 @@
+{
+  "checks": [
+    {
+      "name": "삭제 진입·취소·부모 보호 1440",
+      "passed": true,
+      "controls": [
+        {
+          "x": 320,
+          "y": 528.53125,
+          "w": 89.84375,
+          "h": 42,
+          "inView": true,
+          "hit": true,
+          "top": "BUTTON.danger"
+        },
+        {
+          "x": 417.84375,
+          "y": 528.53125,
+          "w": 58,
+          "h": 42,
+          "inView": true,
+          "hit": true,
+          "top": "BUTTON."
+        }
+      ]
+    },
+    {
+      "name": "기존 md 다운로드·재열기 1440",
+      "passed": true,
+      "bytes": 17427,
+      "sha256": "4d2838ef698f43ff7cefac20c2461a110c1ba3470070c696422f41535e959cbf",
+      "pdf_pages": null
+    },
+    {
+      "name": "기존 html 다운로드·재열기 1440",
+      "passed": true,
+      "bytes": 18860,
+      "sha256": "ecc96e8610eec6d885549c72eba5b96877d361c330edf7816f0c92eca3e1b2d8",
+      "pdf_pages": null
+    },
+    {
+      "name": "기존 pdf 다운로드·재열기 1440",
+      "passed": true,
+      "bytes": 162717,
+      "sha256": "d78880de16056735043c6bad97ca35b17d81770613e13eb6ddd167b3dd7e38e5",
+      "pdf_pages": 5
+    },
+    {
+      "name": "기록 재생·새로고침·실시간 복귀 1440",
+      "passed": true
+    },
+    {
+      "name": "삭제 진입·취소·부모 보호 390",
+      "passed": true,
+      "controls": [
+        {
+          "x": 42,
+          "y": 538.328125,
+          "w": 89.84375,
+          "h": 42,
+          "inView": true,
+          "hit": true,
+          "top": "BUTTON.danger"
+        },
+        {
+          "x": 139.84375,
+          "y": 538.328125,
+          "w": 58,
+          "h": 42,
+          "inView": true,
+          "hit": true,
+          "top": "BUTTON."
+        }
+      ]
+    },
+    {
+      "name": "기존 md 다운로드·재열기 390",
+      "passed": true,
+      "bytes": 17427,
+      "sha256": "4d2838ef698f43ff7cefac20c2461a110c1ba3470070c696422f41535e959cbf",
+      "pdf_pages": null
+    },
+    {
+      "name": "기존 html 다운로드·재열기 390",
+      "passed": true,
+      "bytes": 18860,
+      "sha256": "ecc96e8610eec6d885549c72eba5b96877d361c330edf7816f0c92eca3e1b2d8",
+      "pdf_pages": null
+    },
+    {
+      "name": "기존 pdf 다운로드·재열기 390",
+      "passed": true,
+      "bytes": 162717,
+      "sha256": "d78880de16056735043c6bad97ca35b17d81770613e13eb6ddd167b3dd7e38e5",
+      "pdf_pages": 5
+    },
+    {
+      "name": "기록 재생·새로고침·실시간 복귀 390",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "denied": [],
+  "requests": [
+    [
+      "GET",
+      "http://127.0.0.1:8768/"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/index-Ce86qAsB.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/CanvasPool-DzuCm1vb.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/Filter-vpEaIMwd.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/canvasUtils-U4WZZEj-.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/Cache-CTROkX_m.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/GCManagedHash-DCvVepMX.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/RenderTargetSystem-BK2ifv01.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/GraphicsContext-48tzdr3Q.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/getTexelRangeRects-Bdv1rQ51.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/index-hKyqr4Xw.css"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/snapshot"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/browserAll-BhM1n7th.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/init-DoUXYMOj.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/events?after=358"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/runs/05f7695ed6a54f018bea6319a1ca790d/archive"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/reports/32927cf0a32240348029148500e54b87"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/runs/6d0214c0c03140be840a4508e11b4330/delete-preview"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/runs/9aa1aeeb5b0c4724b0e435563f6a5c76/delete-preview"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/reports/32927cf0a32240348029148500e54b87"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/reports/32927cf0a32240348029148500e54b87/exports"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/runs/05f7695ed6a54f018bea6319a1ca790d/archive"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/index-Ce86qAsB.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/CanvasPool-DzuCm1vb.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/Filter-vpEaIMwd.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/canvasUtils-U4WZZEj-.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/Cache-CTROkX_m.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/GCManagedHash-DCvVepMX.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/RenderTargetSystem-BK2ifv01.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/GraphicsContext-48tzdr3Q.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/getTexelRangeRects-Bdv1rQ51.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/index-hKyqr4Xw.css"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/snapshot"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/runs/05f7695ed6a54f018bea6319a1ca790d/archive"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/browserAll-BhM1n7th.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/init-DoUXYMOj.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/events?after=358"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/reports/32927cf0a32240348029148500e54b87"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/snapshot"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/runs/05f7695ed6a54f018bea6319a1ca790d/archive"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/index-Ce86qAsB.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/CanvasPool-DzuCm1vb.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/Filter-vpEaIMwd.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/canvasUtils-U4WZZEj-.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/Cache-CTROkX_m.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/GCManagedHash-DCvVepMX.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/RenderTargetSystem-BK2ifv01.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/GraphicsContext-48tzdr3Q.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/getTexelRangeRects-Bdv1rQ51.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/index-hKyqr4Xw.css"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/snapshot"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/browserAll-BhM1n7th.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/init-DoUXYMOj.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/events?after=358"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/runs/05f7695ed6a54f018bea6319a1ca790d/archive"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/reports/32927cf0a32240348029148500e54b87"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/runs/6d0214c0c03140be840a4508e11b4330/delete-preview"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/runs/9aa1aeeb5b0c4724b0e435563f6a5c76/delete-preview"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/reports/32927cf0a32240348029148500e54b87"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/reports/32927cf0a32240348029148500e54b87/exports"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/runs/05f7695ed6a54f018bea6319a1ca790d/archive"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/index-Ce86qAsB.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/CanvasPool-DzuCm1vb.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/Filter-vpEaIMwd.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/canvasUtils-U4WZZEj-.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/Cache-CTROkX_m.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/GCManagedHash-DCvVepMX.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/RenderTargetSystem-BK2ifv01.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/GraphicsContext-48tzdr3Q.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/getTexelRangeRects-Bdv1rQ51.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/index-hKyqr4Xw.css"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/snapshot"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/runs/05f7695ed6a54f018bea6319a1ca790d/archive"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/browserAll-BhM1n7th.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/assets/init-DoUXYMOj.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/events?after=358"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/reports/32927cf0a32240348029148500e54b87"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/snapshot"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8768/api/spike/runs/05f7695ed6a54f018bea6319a1ca790d/archive"
+    ]
+  ],
+  "before": {
+    "runs": [
+      [
+        "9aa1aeeb5b0c4724b0e435563f6a5c76",
+        "completed",
+        1,
+        "2026-11-06T07:42:18.270229+00:00"
+      ],
+      [
+        "6d0214c0c03140be840a4508e11b4330",
+        "blocked",
+        1,
+        "2026-11-07T11:45:16.141090+00:00"
+      ],
+      [
+        "05f7695ed6a54f018bea6319a1ca790d",
+        "completed",
+        1,
+        "2026-11-07T11:49:13.178146+00:00"
+      ]
+    ],
+    "current": "05f7695ed6a54f018bea6319a1ca790d",
+    "queue": [],
+    "queue_paused": true,
+    "watermark": 358,
+    "budget": {
+      "attempt_count": 100,
+      "max_attempts": 100,
+      "remaining_attempts": 0,
+      "spent_usd": 0.19670855,
+      "reserved_usd": 0.0,
+      "max_usd": 2.0,
+      "input_tokens": 379871,
+      "output_tokens": 84784,
+      "unknown_count": 0
+    }
+  },
+  "after": {
+    "runs": [
+      [
+        "9aa1aeeb5b0c4724b0e435563f6a5c76",
+        "completed",
+        1,
+        "2026-11-06T07:42:18.270229+00:00"
+      ],
+      [
+        "6d0214c0c03140be840a4508e11b4330",
+        "blocked",
+        1,
+        "2026-11-07T11:45:16.141090+00:00"
+      ],
+      [
+        "05f7695ed6a54f018bea6319a1ca790d",
+        "completed",
+        1,
+        "2026-11-07T11:49:13.178146+00:00"
+      ]
+    ],
+    "current": "05f7695ed6a54f018bea6319a1ca790d",
+    "queue": [],
+    "queue_paused": true,
+    "watermark": 358,
+    "budget": {
+      "attempt_count": 100,
+      "max_attempts": 100,
+      "remaining_attempts": 0,
+      "spent_usd": 0.19670855,
+      "reserved_usd": 0.0,
+      "max_usd": 2.0,
+      "input_tokens": 379871,
+      "output_tokens": 84784,
+      "unknown_count": 0
+    }
+  },
+  "unchanged": true,
+  "new_model_requests": 0,
+  "screenshots": [
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\적용_설치본\\삭제확인_1440x900.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\적용_설치본\\기존보고서_1440x900.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\적용_설치본\\삭제확인_390x844.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\적용_설치본\\기존보고서_390x844.png"
+  ]
+}
