@@ -46,3 +46,17 @@ it('release는 명시한 이전 gate만 전송하고 서버 거절을 숨기지 
  await expect(api.cancel('A',2)).rejects.toThrow('revision_conflict: 버전 충돌');
  expect(fetcher).toHaveBeenCalledTimes(2);
 });
+it('deletePreview는 인코딩한 실행 ID의 delete-preview만 GET한다',async()=>{
+ const body={run_id:'old/A',deletable:true,blockers:[],counts:{events:1}};
+ const fetcher=vi.fn().mockResolvedValue(new Response(JSON.stringify(body)));vi.stubGlobal('fetch',fetcher);
+ const result=await api.deletePreview('old/A');
+ expect(result).toEqual(body);
+ expect(fetcher).toHaveBeenCalledExactlyOnceWith('/api/spike/runs/old%2FA/delete-preview',undefined);
+});
+it('deleteRun은 요청 ID와 확인용 실행 ID를 본문에 담아 POST하고 오류 코드를 보존한다',async()=>{
+ const body={status:'deleted',run_id:'old/A',counts:{},warnings:[],current_run_id:null};
+ const fetcher=vi.fn().mockResolvedValueOnce(new Response(JSON.stringify(body))).mockResolvedValueOnce(new Response(JSON.stringify({error:{code:'has_dependents',message:'후속 실행 있음'}}),{status:409}));vi.stubGlobal('fetch',fetcher);
+ expect(await api.deleteRun('old/A','req-1')).toEqual(body);
+ expect(fetcher).toHaveBeenNthCalledWith(1,'/api/spike/runs/old%2FA/delete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({client_request_id:'req-1',confirm_run_id:'old/A'})});
+ await expect(api.deleteRun('old/A','req-1')).rejects.toThrow('has_dependents: 후속 실행 있음');
+});

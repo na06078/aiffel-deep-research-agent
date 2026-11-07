@@ -1,0 +1,446 @@
+F.FFFFFFFFFFFFFFFFFFFFFFF                                                [100%]
+================================== FAILURES ===================================
+________________ test_preview_개수는_실제_행과_파일과_일치하고_아무것도_바꾸지_않는다 _________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_preview_개수는_실제_행과_파일과_일치하0')
+
+    async def test_preview_개수는_실제_행과_파일과_일치하고_아무것도_바꾸지_않는다(tmp_path):
+        async with deletion_client(tmp_path, WebDoubleService) as (client, app):
+            run_id = await finish(client, app, "삭제 대상 합성 질문", "r1")
+            other = await finish(client, app, "남길 합성 질문", "r2")
+            report_id = run_of(await snapshot(client), run_id)["report_id"]
+            seed_exports(app, report_id)
+            seed_web(tmp_path, run_id, other)
+            before_db = app.state.service.repo.path.read_bytes()
+            before_web = (tmp_path / "웹자료/자료.sqlite3").read_bytes()
+    
+            response = await client.get(f"/api/spike/runs/{run_id}/delete-preview")
+    
+>           assert response.status_code == 200, response.text
+E           AssertionError: {"error":{"code":"not_found","message":"요청한 경로를 찾을 수 없습니다."}}
+E           assert 404 == 200
+E            +  where 404 = <Response [404 Not Found]>.status_code
+
+테스트\테스트_실행삭제.py:180: AssertionError
+_________________ test_preview에서_웹자료_DB가_없으면_0이고_파일을_만들지_않는다 __________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_preview에서_웹자료_DB가_없으면_0이고0')
+
+    async def test_preview에서_웹자료_DB가_없으면_0이고_파일을_만들지_않는다(tmp_path):
+        async with deletion_client(tmp_path, WebDoubleService) as (client, app):
+            run_id = await finish(client, app, "웹 DB 없음", "r1")
+            body = (await client.get(f"/api/spike/runs/{run_id}/delete-preview")).json()
+>           assert body["counts"]["web_sources"] == body["counts"]["web_reads"] == 0
+                   ^^^^^^^^^^^^^^
+E           KeyError: 'counts'
+
+테스트\테스트_실행삭제.py:212: KeyError
+___________________ test_preview는_진행중_실행을_run_running으로_막는다 ___________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_preview는_진행중_실행을_run_runn0')
+
+    async def test_preview는_진행중_실행을_run_running으로_막는다(tmp_path):
+        async with deletion_client(tmp_path) as (client, _app):
+            run_id = await start(client, "진행 중 합성 질문", "r1")
+            body = (await client.get(f"/api/spike/runs/{run_id}/delete-preview")).json()
+>           assert body["deletable"] is False
+                   ^^^^^^^^^^^^^^^^^
+E           KeyError: 'deletable'
+
+테스트\테스트_실행삭제.py:221: KeyError
+______________ test_preview의_dependents는_후속_실행의_ID_질문_생성시각을_담는다 _______________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_preview의_dependents는_후속_실0')
+
+    async def test_preview의_dependents는_후속_실행의_ID_질문_생성시각을_담는다(tmp_path):
+        async with deletion_client(tmp_path) as (client, app):
+            first = await finish(client, app, "첫 합성 질문", "r1")
+            second = await finish(client, app, "둘째 합성 질문", "r2")
+            body = (await client.get(f"/api/spike/runs/{first}/delete-preview")).json()
+>           blocker = body["blockers"][0]
+                      ^^^^^^^^^^^^^^^^
+E           KeyError: 'blockers'
+
+테스트\테스트_실행삭제.py:231: KeyError
+________________ test_삭제는_DB_상태_보고서_변환_웹자료를_모두_지우고_예산_장부는_그대로다 ________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_삭제는_DB_상태_보고서_변환_웹자료를_모두_0')
+
+    async def test_삭제는_DB_상태_보고서_변환_웹자료를_모두_지우고_예산_장부는_그대로다(tmp_path):
+        ledger = CallBudget(tmp_path / "호출예산.sqlite3").path
+        ledger_before = ledger.read_bytes()
+        async with deletion_client(tmp_path, WebDoubleService) as (client, app):
+            keep = await finish(client, app, "남길 합성 질문", "r1")
+            target = await finish(client, app, "지울 합성 질문", "r2")
+            state = await snapshot(client)
+            report_id = run_of(state, target)["report_id"]
+            keep_report = run_of(state, keep)["report_id"]
+            md = tmp_path / app.state.service.report_bytes(report_id)[2]
+            keep_md = tmp_path / app.state.service.report_bytes(keep_report)[2]
+            assert md.exists()
+            exports = seed_exports(app, report_id)
+            keep_exports = seed_exports(app, keep_report)
+            seed_web(tmp_path, target, keep)
+            preview = (await client.get(f"/api/spike/runs/{target}/delete-preview")).json()
+            keep_rows = rows_of_run(app, keep)
+            keep_run = run_of(state, keep)
+    
+            response = await delete(client, target)
+    
+>           assert response.status_code == 200, response.text
+E           AssertionError: {"error":{"code":"http_error","message":"요청한 경로를 찾을 수 없습니다."}}
+E           assert 405 == 200
+E            +  where 405 = <Response [405 Method Not Allowed]>.status_code
+
+테스트\테스트_실행삭제.py:263: AssertionError
+____________________ test_삭제_뒤_archive_event_report는_404다 _____________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_삭제_뒤_archive_event_report0')
+
+    async def test_삭제_뒤_archive_event_report는_404다(tmp_path):
+        async with deletion_client(tmp_path) as (client, app):
+            await finish(client, app, "남길", "r1")
+            target = await finish(client, app, "지울", "r2")
+            archive = (await client.get(f"/api/spike/runs/{target}/archive")).json()
+            event_id = archive["events"][0]["event_id"]
+            report_id = archive["run"]["report_id"]
+            assert (await client.get(f"/api/spike/events/{event_id}")).status_code == 200
+>           assert (await delete(client, target)).status_code == 200
+E           assert 405 == 200
+E            +  where 405 = <Response [405 Method Not Allowed]>.status_code
+
+테스트\테스트_실행삭제.py:293: AssertionError
+____________________ test_웹자료_저장소가_없는_서비스는_웹_단계를_오류없이_건너뛴다 ____________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_웹자료_저장소가_없는_서비스는_웹_단계를_오류0')
+
+    async def test_웹자료_저장소가_없는_서비스는_웹_단계를_오류없이_건너뛴다(tmp_path):
+        async with deletion_client(tmp_path) as (client, app):  # 기본 대역: web_store 없음
+            assert not hasattr(app.state.service, "web_store")
+            target = await finish(client, app, "웹 없음", "r1")
+            response = await delete(client, target)
+>           assert response.status_code == 200, response.text
+E           AssertionError: {"error":{"code":"http_error","message":"요청한 경로를 찾을 수 없습니다."}}
+E           assert 405 == 200
+E            +  where 405 = <Response [405 Method Not Allowed]>.status_code
+
+테스트\테스트_실행삭제.py:310: AssertionError
+_____________________ test_웹자료_DB가_없으면_삭제가_DB를_새로_만들지_않는다 _____________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_웹자료_DB가_없으면_삭제가_DB를_새로_만들0')
+
+    async def test_웹자료_DB가_없으면_삭제가_DB를_새로_만들지_않는다(tmp_path):
+        async with deletion_client(tmp_path, WebDoubleService) as (client, app):
+            target = await finish(client, app, "웹 DB 없음", "r1")
+>           assert (await delete(client, target)).status_code == 200
+E           assert 405 == 200
+E            +  where 405 = <Response [405 Method Not Allowed]>.status_code
+
+테스트\테스트_실행삭제.py:319: AssertionError
+_________________ test_진행중_실행은_409_run_running이고_아무것도_바꾸지_않는다 _________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_진행중_실행은_409_run_running이고0')
+
+    async def test_진행중_실행은_409_run_running이고_아무것도_바꾸지_않는다(tmp_path):
+        async with deletion_client(tmp_path) as (client, app):
+            run_id = await start(client, "진행 중", "r1")
+            db_before = app.state.service.repo.path.read_bytes()
+            response = await delete(client, run_id)
+>           assert response.status_code == 409
+E           assert 405 == 409
+E            +  where 405 = <Response [405 Method Not Allowed]>.status_code
+
+테스트\테스트_실행삭제.py:331: AssertionError
+_____________________ test_다른_실행이_진행_중이어도_끝난_실행은_지울_수_있다 ______________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_다른_실행이_진행_중이어도_끝난_실행은_지울_0')
+
+    async def test_다른_실행이_진행_중이어도_끝난_실행은_지울_수_있다(tmp_path):
+        async with deletion_client(tmp_path) as (client, app):
+            await finish(client, app, "완료 기준", "r1")
+            # 두 번째 실행을 취소해 보고서 없는 끝난 실행으로 만든다(후속 실행이 이어받지 않음).
+            second = await start(client, "취소될 질문", "r2")
+            cancel = await client.post(
+                "/api/spike/cancel",
+                json={"run_id": second, "control_revision": 1, "client_request_id": "c1"},
+            )
+            assert cancel.status_code == 200, cancel.text
+            third = await start(client, "진행 중인 세 번째", "r3")
+            before = await snapshot(client)
+            assert run_of(before, third)["status"] == "running"
+            assert before["current_run_id"] == third
+    
+            response = await delete(client, second)
+    
+>           assert response.status_code == 200, response.text
+E           AssertionError: {"error":{"code":"http_error","message":"요청한 경로를 찾을 수 없습니다."}}
+E           assert 405 == 200
+E            +  where 405 = <Response [405 Method Not Allowed]>.status_code
+
+테스트\테스트_실행삭제.py:353: AssertionError
+___________ test_후속_실행이_보고서를_쓰면_409_has_dependents_이고_후속을_지우면_허용된다 ____________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_후속_실행이_보고서를_쓰면_409_has_de0')
+
+    async def test_후속_실행이_보고서를_쓰면_409_has_dependents_이고_후속을_지우면_허용된다(tmp_path):
+        async with deletion_client(tmp_path) as (client, app):
+            first = await finish(client, app, "부모 질문", "r1")
+            second = await finish(client, app, "자식 질문", "r2")
+            assert run_of(await snapshot(client), second)["parent_report_id"] == (
+                run_of(await snapshot(client), first)["report_id"]
+            )
+            db_before = app.state.service.repo.path.read_bytes()
+    
+            blocked = await delete(client, first, request_id="d-first")
+    
+>           assert blocked.status_code == 409
+E           assert 405 == 409
+E            +  where 405 = <Response [405 Method Not Allowed]>.status_code
+
+테스트\테스트_실행삭제.py:377: AssertionError
+____________ test_확인_ID가_다르면_422_confirm_mismatch이고_없는_실행이_먼저_404다 ____________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_확인_ID가_다르면_422_confirm_mi0')
+
+    async def test_확인_ID가_다르면_422_confirm_mismatch이고_없는_실행이_먼저_404다(tmp_path):
+        async with deletion_client(tmp_path) as (client, app):
+            run_id = await finish(client, app, "확인 불일치", "r1")
+            db_before = app.state.service.repo.path.read_bytes()
+            mismatch = await delete(client, run_id, confirm="다른-ID")
+>           assert mismatch.status_code == 422
+E           assert 405 == 422
+E            +  where 405 = <Response [405 Method Not Allowed]>.status_code
+
+테스트\테스트_실행삭제.py:392: AssertionError
+_______________________ test_진행중이면서_확인_ID가_다르면_422가_먼저다 _______________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_진행중이면서_확인_ID가_다르면_422가_먼저0')
+
+    async def test_진행중이면서_확인_ID가_다르면_422가_먼저다(tmp_path):
+        async with deletion_client(tmp_path) as (client, _app):
+            run_id = await start(client, "순서 검사", "r1")
+            response = await delete(client, run_id, confirm="다른-ID")
+>           assert response.status_code == 422
+E           assert 405 == 422
+E            +  where 405 = <Response [405 Method Not Allowed]>.status_code
+
+테스트\테스트_실행삭제.py:405: AssertionError
+__________________________ test_본문_검증은_빈_요청_ID를_거절한다 __________________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_본문_검증은_빈_요청_ID를_거절한다0')
+
+    async def test_본문_검증은_빈_요청_ID를_거절한다(tmp_path):
+        async with deletion_client(tmp_path) as (client, _app):
+            response = await client.post(
+                "/api/spike/runs/x/delete", json={"client_request_id": "", "confirm_run_id": "x"}
+            )
+>           assert response.status_code == 422
+E           assert 405 == 422
+E            +  where 405 = <Response [405 Method Not Allowed]>.status_code
+
+테스트\테스트_실행삭제.py:414: AssertionError
+______________________________ test_없는_실행은_404다 _______________________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_없는_실행은_404다0')
+
+    async def test_없는_실행은_404다(tmp_path):
+        async with deletion_client(tmp_path) as (client, _app):
+            response = await delete(client, "없는실행")
+>           assert response.status_code == 404
+E           assert 405 == 404
+E            +  where 405 = <Response [405 Method Not Allowed]>.status_code
+
+테스트\테스트_실행삭제.py:420: AssertionError
+_________________ test_같은_요청_ID_재전송은_실행이_사라진_뒤에도_저장된_응답을_돌려준다 _________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_같은_요청_ID_재전송은_실행이_사라진_뒤에도0')
+
+    async def test_같은_요청_ID_재전송은_실행이_사라진_뒤에도_저장된_응답을_돌려준다(tmp_path):
+        async with deletion_client(tmp_path) as (client, app):
+            run_id = await finish(client, app, "멱등 검사", "r1")
+            first = await delete(client, run_id, request_id="once")
+>           assert first.status_code == 200
+E           assert 405 == 200
+E            +  where 405 = <Response [405 Method Not Allowed]>.status_code
+
+테스트\테스트_실행삭제.py:431: AssertionError
+_______________ test_현재_실행을_지우면_남은_실행_중_가장_최근으로_바뀌고_없으면_null이다 ________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_현재_실행을_지우면_남은_실행_중_가장_최근으0')
+
+    async def test_현재_실행을_지우면_남은_실행_중_가장_최근으로_바뀌고_없으면_null이다(tmp_path):
+        async with deletion_client(tmp_path) as (client, app):
+            first = await finish(client, app, "첫째", "r1")
+            second = await finish(client, app, "둘째", "r2")
+            assert (await snapshot(client))["current_run_id"] == second
+            response = await delete(client, second, request_id="d2")
+>           assert response.status_code == 200
+E           assert 405 == 200
+E            +  where 405 = <Response [405 Method Not Allowed]>.status_code
+
+테스트\테스트_실행삭제.py:455: AssertionError
+_____________ test_흔적_사건은_질문을_담지_않고_high_watermark_seq가_반드시_증가한다 ______________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_흔적_사건은_질문을_담지_않고_high_wat0')
+
+    async def test_흔적_사건은_질문을_담지_않고_high_watermark_seq가_반드시_증가한다(tmp_path):
+        question = "비밀스러운 고유 질문 문장 ZXQ-7731"
+        async with deletion_client(tmp_path) as (client, app):
+            await finish(client, app, "남길 질문", "r1")
+            target = await finish(client, app, question, "r2")
+            before = (await snapshot(client))["high_watermark_seq"]
+            # 삭제할 실행이 가장 큰 seq를 소유한다(MAX(seq)가 줄어들 수 있는 최악의 경우).
+            assert sql(
+                app,
+                "SELECT MAX(seq) FROM events WHERE json_extract(body,'$.run_id')=?",
+                target,
+            )[0][0] == before
+    
+>           assert (await delete(client, target)).status_code == 200
+E           assert 405 == 200
+E            +  where 405 = <Response [405 Method Not Allowed]>.status_code
+
+테스트\테스트_실행삭제.py:480: AssertionError
+_______________________ test_마지막_실행을_지워도_seq가_되돌아가지_않는다 _______________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_마지막_실행을_지워도_seq가_되돌아가지_않는0')
+
+    async def test_마지막_실행을_지워도_seq가_되돌아가지_않는다(tmp_path):
+        async with deletion_client(tmp_path) as (client, app):
+            target = await finish(client, app, "유일한 실행", "r1")
+            before = (await snapshot(client))["high_watermark_seq"]
+>           assert (await delete(client, target)).status_code == 200
+E           assert 405 == 200
+E            +  where 405 = <Response [405 Method Not Allowed]>.status_code
+
+테스트\테스트_실행삭제.py:507: AssertionError
+_________________ test_보고서_파일_삭제가_실패하면_200과_경고이고_DB는_이미_깨끗하다 __________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_보고서_파일_삭제가_실패하면_200과_경고이고0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001EE91A50DD0>
+
+    async def test_보고서_파일_삭제가_실패하면_200과_경고이고_DB는_이미_깨끗하다(tmp_path, monkeypatch):
+        async with deletion_client(tmp_path) as (client, app):
+            await finish(client, app, "남길", "r1")
+            target = await finish(client, app, "지울", "r2")
+            report_id = run_of(await snapshot(client), target)["report_id"]
+            md = tmp_path / app.state.service.report_bytes(report_id)[2]
+            original = Path.unlink
+    
+            def failing(self, *args, **kwargs):
+                if self.name == md.name:
+                    raise PermissionError("잠긴 파일")
+                return original(self, *args, **kwargs)
+    
+            monkeypatch.setattr(Path, "unlink", failing)
+    
+            response = await delete(client, target)
+    
+>           assert response.status_code == 200, response.text
+E           AssertionError: {"error":{"code":"http_error","message":"요청한 경로를 찾을 수 없습니다."}}
+E           assert 405 == 200
+E            +  where 405 = <Response [405 Method Not Allowed]>.status_code
+
+테스트\테스트_실행삭제.py:531: AssertionError
+__________________ test_변환_파일_삭제가_실패하면_경고로_돌려주고_나머지는_계속_지운다 ___________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_변환_파일_삭제가_실패하면_경고로_돌려주고_나0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001EE919FBB00>
+
+    async def test_변환_파일_삭제가_실패하면_경고로_돌려주고_나머지는_계속_지운다(tmp_path, monkeypatch):
+        async with deletion_client(tmp_path) as (client, app):
+            await finish(client, app, "남길", "r1")
+            target = await finish(client, app, "지울", "r2")
+            report_id = run_of(await snapshot(client), target)["report_id"]
+            files = seed_exports(app, report_id)
+            stuck = next(p for p in files if p.suffix == ".pdf")
+            original = Path.unlink
+    
+            def failing(self, *args, **kwargs):
+                if self == stuck:
+                    raise PermissionError("잠긴 파일")
+                return original(self, *args, **kwargs)
+    
+            monkeypatch.setattr(Path, "unlink", failing)
+    
+            response = await delete(client, target)
+    
+>           assert response.status_code == 200, response.text
+E           AssertionError: {"error":{"code":"http_error","message":"요청한 경로를 찾을 수 없습니다."}}
+E           assert 405 == 200
+E            +  where 405 = <Response [405 Method Not Allowed]>.status_code
+
+테스트\테스트_실행삭제.py:559: AssertionError
+____________________ test_보고서_파일명이_저장소_밖을_가리키면_지우지_않고_경고한다 ____________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_보고서_파일명이_저장소_밖을_가리키면_지우지_0')
+
+    async def test_보고서_파일명이_저장소_밖을_가리키면_지우지_않고_경고한다(tmp_path):
+        outside = tmp_path / "밖" / "건드리면안됨.md"
+        outside.parent.mkdir()
+        outside.write_text("외부 파일", encoding="utf-8")
+        data = tmp_path / "데이터"
+        async with deletion_client(data) as (client, app):
+            target = await finish(client, app, "경로 이탈", "r1")
+            report_id = run_of(await snapshot(client), target)["report_id"]
+            with sqlite3.connect(app.state.service.repo.path) as db:
+                db.execute("UPDATE reports SET filename=? WHERE report_id=?", ("../밖/건드리면안됨.md", report_id))
+            response = await delete(client, target)
+>           assert response.status_code == 200, response.text
+E           AssertionError: {"error":{"code":"http_error","message":"요청한 경로를 찾을 수 없습니다."}}
+E           assert 405 == 200
+E            +  where 405 = <Response [405 Method Not Allowed]>.status_code
+
+테스트\테스트_실행삭제.py:576: AssertionError
+_________________ test_purge는_해당_보고서의_항목과_본문만_지우고_폴더가_없으면_0이다 _________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_purge는_해당_보고서의_항목과_본문만_지우0')
+
+    async def test_purge는_해당_보고서의_항목과_본문만_지우고_폴더가_없으면_0이다(tmp_path):
+        async with deletion_client(tmp_path) as (client, app):
+            first = await finish(client, app, "A", "r1")
+            second = await finish(client, app, "B", "r2")
+            state = await snapshot(client)
+            exports = app.state.exports
+>           assert exports.purge({run_of(state, first)["report_id"]}) == {"deleted": 0, "errors": []}
+                   ^^^^^^^^^^^^^
+E           AttributeError: 'ReportExports' object has no attribute 'purge'
+
+테스트\테스트_실행삭제.py:590: AttributeError
+__________________ test_WebSourceStore_count_run과_delete_run __________________
+
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제_basetemp/test_WebSourceStore_count_run과0')
+
+    async def test_WebSourceStore_count_run과_delete_run(tmp_path):
+        store = seed_web(tmp_path, "run-a", "run-b")
+>       assert store.count_run("run-a") == {"web_sources": 2, "web_reads": 1}
+               ^^^^^^^^^^^^^^^
+E       AttributeError: 'WebSourceStore' object has no attribute 'count_run'
+
+테스트\테스트_실행삭제.py:605: AttributeError
+=========================== short test summary info ===========================
+FAILED 테스트/테스트_실행삭제.py::test_preview_개수는_실제_행과_파일과_일치하고_아무것도_바꾸지_않는다
+FAILED 테스트/테스트_실행삭제.py::test_preview에서_웹자료_DB가_없으면_0이고_파일을_만들지_않는다
+FAILED 테스트/테스트_실행삭제.py::test_preview는_진행중_실행을_run_running으로_막는다
+FAILED 테스트/테스트_실행삭제.py::test_preview의_dependents는_후속_실행의_ID_질문_생성시각을_담는다
+FAILED 테스트/테스트_실행삭제.py::test_삭제는_DB_상태_보고서_변환_웹자료를_모두_지우고_예산_장부는_그대로다
+FAILED 테스트/테스트_실행삭제.py::test_삭제_뒤_archive_event_report는_404다
+FAILED 테스트/테스트_실행삭제.py::test_웹자료_저장소가_없는_서비스는_웹_단계를_오류없이_건너뛴다
+FAILED 테스트/테스트_실행삭제.py::test_웹자료_DB가_없으면_삭제가_DB를_새로_만들지_않는다
+FAILED 테스트/테스트_실행삭제.py::test_진행중_실행은_409_run_running이고_아무것도_바꾸지_않는다
+FAILED 테스트/테스트_실행삭제.py::test_다른_실행이_진행_중이어도_끝난_실행은_지울_수_있다
+FAILED 테스트/테스트_실행삭제.py::test_후속_실행이_보고서를_쓰면_409_has_dependents_이고_후속을_지우면_허용된다
+FAILED 테스트/테스트_실행삭제.py::test_확인_ID가_다르면_422_confirm_mismatch이고_없는_실행이_먼저_404다
+FAILED 테스트/테스트_실행삭제.py::test_진행중이면서_확인_ID가_다르면_422가_먼저다
+FAILED 테스트/테스트_실행삭제.py::test_본문_검증은_빈_요청_ID를_거절한다 - as...
+FAILED 테스트/테스트_실행삭제.py::test_없는_실행은_404다 - assert 405 == 404
+FAILED 테스트/테스트_실행삭제.py::test_같은_요청_ID_재전송은_실행이_사라진_뒤에도_저장된_응답을_돌려준다
+FAILED 테스트/테스트_실행삭제.py::test_현재_실행을_지우면_남은_실행_중_가장_최근으로_바뀌고_없으면_null이다
+FAILED 테스트/테스트_실행삭제.py::test_흔적_사건은_질문을_담지_않고_high_watermark_seq가_반드시_증가한다
+FAILED 테스트/테스트_실행삭제.py::test_마지막_실행을_지워도_seq가_되돌아가지_않는다
+FAILED 테스트/테스트_실행삭제.py::test_보고서_파일_삭제가_실패하면_200과_경고이고_DB는_이미_깨끗하다
+FAILED 테스트/테스트_실행삭제.py::test_변환_파일_삭제가_실패하면_경고로_돌려주고_나머지는_계속_지운다
+FAILED 테스트/테스트_실행삭제.py::test_보고서_파일명이_저장소_밖을_가리키면_지우지_않고_경고한다
+FAILED 테스트/테스트_실행삭제.py::test_purge는_해당_보고서의_항목과_본문만_지우고_폴더가_없으면_0이다
+FAILED 테스트/테스트_실행삭제.py::test_WebSourceStore_count_run과_delete_run
+24 failed, 1 passed in 8.45s

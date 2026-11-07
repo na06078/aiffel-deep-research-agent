@@ -208,10 +208,30 @@ class ReportExports:
         finally:
             temporary.unlink(missing_ok=True)
 
+    def write_if_current(self, report, format, suffix, content):
+        """정본 존재·해시 판정부터 파일 교체까지 삭제 트랜잭션과 직렬화한다.
+
+        await 없는 짧은 경계다. 삭제 전에 썼으면 purge가 지우고, 삭제 커밋 후면
+        본문/실패/취소/재시작 메타데이터 어느 것도 다시 쓰지 않는다.
+        메모리 무효화 집합이 아니므로 새 변환 소유자에서도 같은 판정이다.
+        """
+        with self.service.repo.connection() as db:
+            db.execute("BEGIN IMMEDIATE")
+            row = db.execute(
+                "SELECT body FROM reports WHERE report_id=?", (report["report_id"],)
+            ).fetchone()
+            if row is None or json.loads(row[0])["sha256"] != report["sha256"]:
+                return False
+            self.atomic(self.path(report, format, suffix), content)
+            db.commit()
+        return True
+
     def save(self, report, entry):
         try:
-            self.atomic(
-                self.path(report, entry["format"], "json"),
+            self.write_if_current(
+                report,
+                entry["format"],
+                "json",
                 json.dumps(entry, ensure_ascii=False).encode(),
             )
         except OSError as error:
@@ -354,7 +374,8 @@ class ReportExports:
                     rendered = await self.convert(content, entry["format"], report)
             else:
                 rendered = await self.convert(content, entry["format"], report)
-            self.atomic(self.path(report, entry["format"], entry["format"]), rendered)
+            if not self.write_if_current(report, entry["format"], entry["format"], rendered):
+                return
             entry.update(
                 status="ready",
                 updated_at=now(),
@@ -398,6 +419,45 @@ class ReportExports:
     def binding(report, source_hash, renderer_version=RENDERER_VERSION):
         if source_hash != report["sha256"] or renderer_version != RENDERER_VERSION:
             raise ApiError(409, "report_hash_mismatch", "현재 정본·렌더러와 요청이 다릅니다.")
+
+    def files_of(self, report_ids):
+        """보고서 ID 집합에 속한 변환 파일 경로 목록(읽기 전용).
+
+        항목 `<key>.json`의 report_id로 소속을 판정하고, 같은 이름의 `.html`/`.pdf`
+        본문을 함께 돌려준다. 폴더가 없거나 읽을 수 없는 항목은 건너뛴다.
+        """
+        ids = set(report_ids)
+        if not ids or not self.root.is_dir():
+            return []
+        found = []
+        for entry in sorted(self.root.glob("*.json")):
+            try:
+                value = json.loads(entry.read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                continue
+            if not isinstance(value, dict) or value.get("report_id") not in ids:
+                continue
+            found.append(entry)
+            found.extend(
+                body
+                for body in (entry.with_suffix(".html"), entry.with_suffix(".pdf"))
+                if body.is_file()
+            )
+        return found
+
+    def count_files(self, report_ids):
+        return len(self.files_of(report_ids))
+
+    def purge(self, report_ids):
+        """보고서들의 변환 항목과 파일을 지운다. 실패는 예외가 아니라 errors로 모은다."""
+        deleted, errors = 0, []
+        for path in self.files_of(report_ids):
+            try:
+                path.unlink()
+                deleted += 1
+            except OSError:
+                errors.append(f"변환 파일을 지우지 못했습니다: {path.name}")
+        return {"deleted": deleted, "errors": errors}
 
     async def close(self):
         tasks = list(self.tasks.values())

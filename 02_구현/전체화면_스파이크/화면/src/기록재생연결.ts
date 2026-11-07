@@ -1,4 +1,4 @@
-import {useEffect,useMemo,useState} from 'react';
+import {useEffect,useMemo,useRef,useState} from 'react';
 import type {Snapshot} from './계약';
 import type {RunArchive} from './시간계약';
 import {api} from './통신';
@@ -11,11 +11,20 @@ function restored():{runId:string|null;at:number}{
 // Only GET archive lives here; cursor movement never calls the execution service.
 export function useRecordedReplay(snapshot:Snapshot|null){
  const [saved]=useState(restored);
- const [runId,setRunId]=useState<string|null>(saved.runId),[cursor,setCursor]=useState(saved.at);
+ const [selectedId,setRunId]=useState<string|null>(saved.runId),[cursor,setCursor]=useState(saved.at);
  const [open,setOpen]=useState(!!saved.runId),[playing,setPlaying]=useState(false);
  const [loaded,setLoaded]=useState<{archive:RunArchive;received:number}|null>(null);
  const [loading,setLoading]=useState(false),[error,setError]=useState(''),[retry,setRetry]=useState(0),[now,setNow]=useState(0);
- const wanted=runId??snapshot?.current_run_id??null;
+ const [deletedRuns,setDeletedRuns]=useState<ReadonlySet<string>>(()=>new Set());
+ const knownRuns=useRef(new Set<string>());
+ // Absence is deletion evidence only after this mounted hook saw the run in a snapshot.
+ // Initial null snapshots and manually selected unknown IDs still get their normal GET/error.
+ const missing=!!selectedId&&!!snapshot&&knownRuns.current.has(selectedId)&&!snapshot.runs.some(run=>run.run_id===selectedId);
+ const runId=selectedId&&!deletedRuns.has(selectedId)&&!missing?selectedId:null;
+ useEffect(()=>{snapshot?.runs.forEach(run=>knownRuns.current.add(run.run_id));},[snapshot]);
+ useEffect(()=>{if(selectedId&&!runId)live();},[selectedId,runId]);
+ const candidate=runId??snapshot?.current_run_id??null;
+ const wanted=candidate&&!deletedRuns.has(candidate)?candidate:null;
  const watermark=runId?null:snapshot?.high_watermark_seq;
  useEffect(()=>{
   if(!wanted){setLoaded(null);setError('');setLoading(false);return;}
@@ -45,5 +54,7 @@ export function useRecordedReplay(snapshot:Snapshot|null){
  function play(){if(!archive)return;if(playing){setPlaying(false);return;}if(!replay){setRunId(archive.run.run_id);setCursor(0);}else if(cursor>=end)setCursor(0);setPlaying(true);}
  function stage(direction:-1|1){if(archive)seek(adjacentStage(archive,at,direction));}
  function live(){setPlaying(false);setRunId(null);setCursor(0);}
- return {open,setOpen,runId,archive,at,replay,playing,projection,loading,error,select,seek,play,stage,live,retry:()=>setRetry(n=>n+1)};
+ // POST success is authoritative even while the journal still names this run.
+ function deleted(id:string){setDeletedRuns(ids=>new Set([...ids,id]));if(runId===id)live();}
+ return {open,setOpen,runId,archive,at,replay,playing,projection,loading,error,select,seek,play,stage,live,deleted,retry:()=>setRetry(n=>n+1)};
 }

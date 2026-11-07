@@ -1,0 +1,19 @@
+{
+  "pid": 34252,
+  "command": [
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\웹연구_격리서버.py",
+    "--port",
+    "8793",
+    "--data-dir",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_011954_227382_S6",
+    "--ledger",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_011954_227382_S6\\호출예산.sqlite3",
+    "--static",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\화면삭제_후보"
+  ],
+  "log": [
+    "READY port=8793 data=20261108_011954_227382_S6 ledger=호출예산.sqlite3"
+  ],
+  "returncode": 1
+}

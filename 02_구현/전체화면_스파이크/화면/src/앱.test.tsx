@@ -4,6 +4,7 @@ import {App} from './앱';
 import {projectArchive} from './시간재생';
 import type {RunArchive} from './시간계약';
 import {PastRecordList} from './과거기록목록';
+import {DeleteButton,DeleteConfirm} from './실행삭제.tsx';
 // Explicit no-DOM hook unit harness: executes App's real command handlers, not HTTP/E2E.
 const hooks=vi.hoisted(()=>({active:false,cursor:0,slots:[] as any[],snapshot:null as any,refresh:vi.fn()}));
 vi.mock('react',async original=>{
@@ -151,4 +152,107 @@ it('에셋 모드의 전송 시도는 주소 해시로 실행 제어에 들어�
  const fetcher=vi.fn();vi.stubGlobal('fetch',fetcher);
  let tree=commandRender();findNode(tree,n=>n.props['data-testid']==='command-input').props.onChange({target:{value:'질문'}});tree=commandRender();findNode(tree,n=>n.type==='form').props.onSubmit({preventDefault:vi.fn()});await settle();tree=commandRender();
  expect(findNode(tree,n=>n.props.className==='composer-notice').props.children[0]).toBe('장면 실험에서는 전송하지 않습니다. 주소 끝을 #/control로 바꿔 실행 제어로 들어가 주세요.');expect(fetcher).not.toHaveBeenCalled();
+});
+
+// ---- 실행 삭제 연결 (SPEC 28.5) ----
+const delCounts={events:12,calls:4,activity_spans:6,requests:3,reports:1,report_files:1,export_files:2,web_sources:5,web_reads:7};
+const delRun=(id:string,at:string,status='completed')=>({run_id:id,question:`질문 ${id}`,control_revision:1,status,phase:'submitted',plan:[],draft:null,report_id:null,quality:{passed:null,reasons:[]},parent_report_id:null,created_at:at,updated_at:at,mock_requests:0,actual_model_requests:0});
+function deleteFixture(replayRunId:string|null){
+  hooks.active=true;
+  hooks.snapshot={provider:'openai',mode:'research',selected_source_mode:'local',high_watermark_seq:1,runs:[delRun('A','2026-11-06T00:00:00Z'),delRun('B','2026-11-07T00:00:00Z')],events:[],waiting:[],queue:[],current_run_id:'B'};
+  vi.stubGlobal('location',{hash:'#/control'});
+  const live=vi.fn(),deleted=vi.fn();
+  replayOverride.value={open:false,runId:replayRunId,replay:replayRunId!==null,archive:null,projection:null,at:0,loading:false,error:'',setOpen:vi.fn(),select:vi.fn(),live,deleted,seek:vi.fn(),play:vi.fn(),stage:vi.fn(),retry:vi.fn()};
+  const fetcher=vi.fn().mockImplementation(async(path:string,init?:any)=>init?.method==='POST'
+    ?new Response(JSON.stringify({status:'deleted',run_id:'A',counts:delCounts,warnings:['변환 파일 1개를 지우지 못했습니다.'],current_run_id:'B'}))
+    :new Response(JSON.stringify({run_id:'A',deletable:true,blockers:[],counts:delCounts})));
+  vi.stubGlobal('fetch',fetcher);
+  return {live,deleted,fetcher};
+}
+function openPastRecords(){
+  let tree=commandRender();findNode(tree,n=>n.props['data-testid']==='menu-toggle').props.onClick();
+  tree=commandRender();findNode(tree,n=>n.type==='button'&&n.props.children==='과거 기록').props.onClick();
+  return commandRender();
+}
+it('삭제: 목록에서 시작하면 서버 개수로 확인 상태가 되고, 확인하면 같은 요청 ID로 POST한다',async()=>{
+  const {fetcher}=deleteFixture(null);
+  let tree=openPastRecords();
+  findNode(tree,n=>n.type===PastRecordList).props.onDeleteStart('A');await settle();
+  tree=commandRender();
+  expect(findNode(tree,n=>n.type===PastRecordList).props.deleteFlow).toMatchObject({phase:'ready',runId:'A'});
+  expect(fetcher.mock.calls[0]).toEqual(['/api/spike/runs/A/delete-preview',undefined]);
+  findNode(tree,n=>n.type===PastRecordList).props.onDeleteConfirm();await settle();
+  const post=fetcher.mock.calls[1];
+  expect(post[0]).toBe('/api/spike/runs/A/delete');
+  const body=JSON.parse(post[1].body);
+  expect(body.confirm_run_id).toBe('A');expect(body.client_request_id).toBeTruthy();
+  expect(hooks.refresh).toHaveBeenCalled();
+  tree=commandRender();
+  expect(findNode(tree,n=>n.type===PastRecordList)).toBeDefined();
+  expect(findNode(tree,n=>n.type===PastRecordList).props.deleteFlow.phase).toBe('done');
+});
+it('삭제 성공: 재생 중이던 실행이면 실시간으로 복귀하고, 다른 실행이면 복귀하지 않는다',async()=>{
+  for(const [replayRunId,expected] of [['A',1],['B',0]] as const){
+    const {live,deleted}=deleteFixture(replayRunId);
+    let tree=openPastRecords();
+    findNode(tree,n=>n.type===PastRecordList).props.onDeleteStart('A');await settle();
+    tree=commandRender();findNode(tree,n=>n.type===PastRecordList).props.onDeleteConfirm();await settle();
+    expect(live).toHaveBeenCalledTimes(expected);
+    expect(deleted).toHaveBeenCalledExactlyOnceWith('A');
+    hooks.slots=[];hooks.cursor=0;replayOverride.value=null;hooks.refresh.mockReset();
+  }
+});
+it.each([null,'B'])('삭제 성공 알림: 다른 실행 %s 재생 여부와 무관하게 개수 요약과 경고를 보인다',async replayRunId=>{
+  const {live}=deleteFixture(replayRunId);
+  let tree=openPastRecords();
+  findNode(tree,n=>n.type===PastRecordList).props.onDeleteStart('A');await settle();
+  tree=commandRender();findNode(tree,n=>n.type===PastRecordList).props.onDeleteConfirm();await settle();
+  tree=commandRender();
+  const notice=findNode(tree,n=>n.props.className==='composer-notice');
+  expect(notice).toBeDefined();
+  expect(notice.props.children[0]).toBe('실행을 삭제했습니다. 사건 12건 · 보고서 1건 · 변환 파일 2개 · 웹 자료 5건 변환 파일 1개를 지우지 못했습니다.');
+  expect(live).not.toHaveBeenCalled();
+});
+it('삭제 실패: 오류 문구를 확인 상태에 두고 같은 요청 ID로 다시 보낸다',async()=>{
+  const {fetcher}=deleteFixture(null);
+  fetcher.mockImplementation(async(path:string,init?:any)=>init?.method==='POST'
+    ?new Response(JSON.stringify({error:{code:'run_running',message:'실행 중'}}),{status:409})
+    :new Response(JSON.stringify({run_id:'A',deletable:true,blockers:[],counts:delCounts})));
+  let tree=openPastRecords();
+  findNode(tree,n=>n.type===PastRecordList).props.onDeleteStart('A');await settle();
+  tree=commandRender();findNode(tree,n=>n.type===PastRecordList).props.onDeleteConfirm();await settle();
+  tree=commandRender();
+  const flow=findNode(tree,n=>n.type===PastRecordList).props.deleteFlow;
+  expect(flow.phase).toBe('error');expect(flow.message).toContain('진행 중인 실행');
+  findNode(tree,n=>n.type===PastRecordList).props.onDeleteConfirm();await settle();
+  const ids=fetcher.mock.calls.filter(c=>c[1]?.method==='POST').map(c=>JSON.parse(c[1].body).client_request_id);
+  expect(ids).toHaveLength(2);expect(ids[0]).toBe(ids[1]);
+  expect(hooks.refresh).not.toHaveBeenCalled();
+});
+it('실행 상세에도 같은 삭제 진입점과 확인이 있고, 성공하면 과거 기록 목록으로 돌아간다',async()=>{
+  deleteFixture(null);
+  let tree=openPastRecords();
+  findNode(tree,n=>n.type===PastRecordList).props.onDetail('A');
+  tree=commandRender();
+  expect(findNode(tree,n=>n.type===PastRecordList)).toBeUndefined();
+  findNode(tree,n=>n.type===DeleteButton).props.onStart('A');await settle();
+  tree=commandRender();
+  const confirm=findNode(tree,n=>n.type===DeleteConfirm);
+  expect(confirm.props.flow).toMatchObject({phase:'ready',runId:'A'});
+  confirm.props.onConfirm();await settle();
+  tree=commandRender();
+  expect(findNode(tree,n=>n.type===PastRecordList)).toBeDefined();
+  expect(findNode(tree,n=>n.type==='button'&&n.props.children==='목록으로')).toBeUndefined();
+});
+it('사건 기록 목록은 run.deleted 흔적 사건을 숨긴다',()=>{
+  hooks.active=true;
+  const ev=(id:string,type:string,seq:number)=>({event_id:id,run_id:id==='tomb'?'deletions':'B',control_revision:1,seq,occurred_at:'2026-11-08T00:00:00Z',type,actor:'dispatcher',recipient:'x',status:'applied',summary:`요약 ${id}`});
+  hooks.snapshot={provider:'openai',mode:'research',selected_source_mode:'local',high_watermark_seq:3,runs:[delRun('B','2026-11-07T00:00:00Z')],events:[ev('e1','plan.created',1),ev('tomb','run.deleted',3)],waiting:[],queue:[],current_run_id:'B'};
+  vi.stubGlobal('location',{hash:'#/control'});replayOverride.value={open:false,replay:false,archive:null,projection:null,at:0};
+  let tree=commandRender();findNode(tree,n=>n.props['data-testid']==='menu-toggle').props.onClick();
+  tree=commandRender();findNode(tree,n=>n.type==='button'&&n.props.children==='사건 기록').props.onClick();
+  tree=commandRender();
+  const html=renderToStaticMarkup(findNode(tree,n=>n.props.className==='popup-body'));
+  expect(html).toContain('요약 e1');
+  expect(html).not.toContain('요약 tomb');
 });

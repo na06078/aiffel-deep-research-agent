@@ -1,6 +1,10 @@
 import type {RunSnapshot} from './계약';
 import {sourceLabel} from './자료모드';
 import {formatRunTime,runStatusLabel,runStatusTone} from './실행표시';
+// 같은 이름의 실행삭제.ts(논리)와 실행삭제.tsx(화면)가 있어 확장자를 붙여야 의도한 파일을 가리킨다.
+import {DeleteButton,DeleteConfirm} from './실행삭제.tsx';
+import {armedFlowFor} from './실행삭제.ts';
+import type {DeleteFlow} from './실행삭제.ts';
 
 export interface PastRecordListProps{
   runs:RunSnapshot[];
@@ -8,6 +12,11 @@ export interface PastRecordListProps{
   replayRunId:string|null;
   onDetail:(runId:string)=>void;
   onReplay:(runId:string)=>void;
+  // 삭제 확인은 한 번에 하나만 열리므로 흐름 하나와 콜백만 받는다. 생략하면 삭제 확인이 닫힌 목록이다.
+  deleteFlow?:DeleteFlow;
+  onDeleteStart?:(runId:string)=>void;
+  onDeleteConfirm?:()=>void;
+  onDeleteCancel?:()=>void;
 }
 
 // 최신 실행이 위로 오도록 created_at 내림차순으로 정렬한다.
@@ -34,6 +43,7 @@ function renderItem(run:RunSnapshot,props:PastRecordListProps){
   const isCurrent=run.run_id===props.currentRunId;
   const isReplaying=run.run_id===props.replayRunId;
   const status=run.status;
+  const armed=props.deleteFlow?armedFlowFor(props.deleteFlow,run.run_id):null;
   return (
     <li key={run.run_id} data-testid="history-item" data-run-id={run.run_id} data-current={isCurrent} data-replaying={isReplaying}>
       <h3 className="record-question" title={run.question}>{run.question}</h3>
@@ -45,11 +55,12 @@ function renderItem(run:RunSnapshot,props:PastRecordListProps){
         {isReplaying&&<span className="record-chip" data-kind="replaying">재생 중</span>}
       </div>
       <p className="record-report">{reportLine(run)}</p>
-      {/* 다음 단위에서 삭제 버튼이 같은 행에 들어올 수 있도록 버튼 전용 행으로 분리해 둔다. */}
       <div className="history-actions">
         <button onClick={()=>props.onDetail(run.run_id)}>자세히 보기</button>
         <button onClick={()=>props.onReplay(run.run_id)}>기록 재생</button>
+        <DeleteButton run={run} onStart={runId=>props.onDeleteStart?.(runId)}/>
       </div>
+      {armed&&<DeleteConfirm flow={armed} onConfirm={()=>props.onDeleteConfirm?.()} onCancel={()=>props.onDeleteCancel?.()}/>}
     </li>
   );
 }

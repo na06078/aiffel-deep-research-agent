@@ -1,0 +1,133 @@
+{
+  "verdict": "pass",
+  "scope": "명세 §28/§28.8에 한정한 최종 소스 독립 재검토의 자문 판정입니다. 최종 수용·운영 적용·커밋 완료 판정이 아닙니다. 원 독립검토_원문.json의 changes_requested는 변경하지 않았습니다.",
+  "findings": [],
+  "resolved_original_findings": [
+    {
+      "id": "F-01",
+      "status": "resolved",
+      "file": "서버/저장소.py:24-41,137-155; 서버/활동기록.py:36-51,120-135,184-198",
+      "rationale": "기존 전역 run.deleted/input.run_id 영속 흔적을 검사하며, 독립 연결에서는 BEGIN IMMEDIATE를 먼저 잡아 검사와 INSERT/UPSERT 사이에 삭제가 끼지 못합니다. 삭제 전 기록은 삭제 트랜잭션에서 제거되고, 삭제 커밋 후 늦은 사건과 finally 구간은 기록하지 않습니다. 취소/버전 변경 자체는 tombstone이 아니므로 비삭제 result.superseded를 보존합니다. event None 반환을 실제 사용하는 접수 소비자는 실행제어.py:180-190,213-223,282-293의 신규/현존 실행이며 같은 쓰기 트랜잭션 안에 있어 늦은 삭제 완료 경로와 충돌하지 않습니다.",
+      "producer_consumer_evidence": [
+        "서버/실제연구제어.py:228-244,289-365: calls 신규 생성은 fenced 뒤, 늦은 완료/실패/취소는 UPDATE여서 삭제 행을 만들지 않으며 event/fail은 저장소 삭제 펜스를 통과한다.",
+        "서버/실행제어.py:45-82,321-352,514-544,575-612: 늦은 초안/실패 사건은 공통 event, draft/revision/report/md 신규 저장은 fenced 조건으로 차단된다.",
+        "서버/웹연구.py:167-193,349-366,397-419,445-503: observer 및 모든 sidecar 신규/실패/읽음 쓰기는 repo.transaction의 fenced 판정 뒤에 있다. 삭제가 먼저 커밋되면 SupersededResearch, 웹 쓰기가 먼저면 저널 쓰기 잠금을 놓은 다음 삭제와 sidecar 정리가 이어진다. WebSourceStore 자체의 임의 호출까지 삭제 펜스를 보장한다고 확대하지 않는다."
+      ],
+      "verification": "독립 신규 실행: 테스트_삭제후기록차단.py의 27개 대역 시험 통과. 실제 synthesize 및 RealResearchService.plan→complete의 지연 성공/실패/Task 취소 × 삭제/비삭제 취소/버전 변경, 다른 활성 실행 보존, 새 Repository/Activity, 지연 search/fetch 및 worker observer를 검사했다."
+    },
+    {
+      "id": "F-02",
+      "status": "resolved",
+      "file": "서버/보고서변환.py:211-240,283-294,370-393; 서버/실행삭제.py:75-91,233-234",
+      "rationale": "reports 행 존재와 sha256 판정부터 atomic 파일 교체까지 BEGIN IMMEDIATE 잠금 경계 하나이다. 생산 atomic 호출은 write_if_current:225 한 곳뿐이다. 성공 artifact 저장뿐 아니라 save의 모든 metadata 저장, timeout/일반 예외/CancelledError/재시작·무결성 처리도 이 경계를 사용한다. 삭제 전 쓰기는 purge가 제거하고 삭제 커밋 후는 atomic에 진입하지 않는다. 공개 purge 반환 및 삭제 정책은 바꾸지 않았다.",
+      "verification": "독립 신규 실행: 테스트_삭제중변환.py 10개 통과(HTML/PDF 성공·실패·취소·timeout, PDF 슬롯 대기 성공·취소, 다른 보고서 유지). 추가 독립 probe에서 실제 generate의 ready metadata atomic에 OSError 주입 → ApiError 수거 및 generating json+본문 2개 확인 → 실제 RunDeletion.delete 후 둘 다 제거 → 삭제된 report의 generating/ready/failed stale save 모두 atomic 미진입 확인. 실제 renderer는 대역이고 브라우저는 실행하지 않았다."
+    },
+    {
+      "id": "F-03",
+      "status": "resolved",
+      "file": "테스트/테스트_실행삭제.py:150-170,264-289,623-634",
+      "rationale": "삭제 전에 대상 source_id 2개와 history=2를 확보하고 삭제 뒤 동일 ID 목록으로 history를 직접 조회한다. 통합/단위 시험 모두 더 이상 삭제된 web_sources 하위 쿼리의 공집합에 의존하지 않는다.",
+      "verification": "독립 신규 정상 실행 2개 통과. 별도 프로세스에서 WebSourceStore._connection proxy로 DELETE FROM web_history만 생략하고 생산 파일은 변경하지 않은 변이 실행: 두 시험 모두 정확히 history 2 != 0으로 실패(테스트_실행삭제.py:287,634). 의도된 2 failed는 검출력 증거이며 현재 제품 실패가 아니다."
+    }
+  ],
+  "replay_review": {
+    "status": "pass",
+    "evidence": [
+      "화면/src/실행삭제.tsx:117-124와 앱.tsx:50: POST 성공 시 onDeletedRun을 live/refresh보다 먼저 호출한다. 기록재생연결.ts:18-34,57-58은 삭제 ID를 기억하여 오래된 current snapshot이나 retry/watermark 변경이 삭제 대상 archive GET을 재개하지 못하게 한다.",
+      "기록재생연결.ts:19-25: 실제로 관측했던 ID가 새 snapshot에서 사라지면 렌더 단계에서 runId를 null로 내려 이전 projection을 즉시 숨긴다. effect cleanup disposed가 늦은 성공/오류를 폐기한다(:29-35). 최초 null snapshot 복원/아직 관측하지 못한 ID와 네트워크·404 오류는 일반 조회/표시/재시도 경로를 유지한다. unaffected replay는 wanted/watermark가 불변이므로 cursor/GET/저장 키를 유지한다.",
+      "실행기록.ts:9,19-20 → 상태.ts:25의 watermark 역행 방지 → 기록재생연결.ts와 앱.tsx:76-85,137 → 실행타임라인.tsx:49-52,73-75까지 실제 소비 경로를 대조했다. 관련 hook 시험은 React effect를 무시하는 SSR이 아니라 cleanup·dependency·상태 재렌더를 구현한 대역 harness임을 확인했다. 실제 React 브라우저 검증 자체와 동일하다고 주장하지 않는다.",
+      "기록재생연결.test.ts:61-169는 POST-first/snapshot-first, 지연 성공·오류, 다른 실행 삭제, 재생 전환 중 응답, 초기 복원, 실제 오류 유지/재시도, 빈 목록을 다룬다.",
+      "메인 추가 보완 확인: 앱.tsx:109-110,133은 삭제 결과 접두어만 재생 중 알림 예외로 허용한다. deleteNotice 생산자는 실행삭제.ts:86-87로 일치한다. 앱.test.tsx:205-214는 다른 실행 재생 유지 상태에서 개수·warnings를 정확히 확인한다. 메인_재생삭제알림_RED.log:9-17의 notice undefined와 GREEN.log:5-6의 2 passed를 읽었다. 기존 일반 live 알림 숨김은 유지된다."
+    ],
+    "fresh_frontend_execution": "독립 FE 실행/빌드/브라우저는 하지 않았다. 메인_최종화면회귀.json은 직접 파싱하여 declared=219, 실제 assertionResults=219, passed=219, nonpassed=[] 일치를 확인했다. 메인의 진행 중 최종 브라우저 결과를 이 자문이 대신 승인하지 않는다."
+  },
+  "execution_evidence": {
+    "independent_targeted_pytest": {
+      "result": "39 passed in 9.37s",
+      "exit_code": 0,
+      "targets": [
+        "테스트/테스트_삭제후기록차단.py",
+        "테스트/테스트_삭제중변환.py",
+        "테스트/테스트_실행삭제.py::test_WebSourceStore_count_run과_delete_run",
+        "테스트/테스트_실행삭제.py::test_삭제는_DB_상태_보고서_변환_웹자료를_모두_지우고_예산_장부는_그대로다"
+      ],
+      "junit": "ROOT/.cache/삭제_독립재검토/대상회귀.xml"
+    },
+    "independent_F03_mutation": {
+      "result": "2 failed in 3.45s (expected)",
+      "exit_code": 1,
+      "fault": "프로세스 내 proxy로 DELETE FROM web_history만 생략",
+      "junit": "ROOT/.cache/삭제_독립재검토/F03변이.xml"
+    },
+    "independent_metadata_save_failure": "PASS: ready metadata OSError collected; delete purged body+metadata; all stale metadata saves skipped atomic",
+    "main_saved_backend_log": "메인_최종서버회귀.log:6의 338 passed를 열람했다. 독립 전체 suite 재실행 결과로 합산하지 않는다.",
+    "isolation": "프로젝트 venv -B, PYTHONDONTWRITEBYTECODE=1, tracing=false, pytest cacheprovider 비활성. ASGITransport, 가짜 모델/웹/renderer, 독립 .cache/삭제_독립재검토 basetemp만 사용. 전체 suite/네트워크/브라우저/서버 기동 없음."
+  },
+  "checked_paths": [
+    "ROOT/📘 딥리서치 에이전트 기술 명세서.md:904-982",
+    "검증결과/삭제/독립검토_원문.json",
+    "서버/저장소.py",
+    "서버/활동기록.py",
+    "서버/보고서변환.py",
+    "서버/실행삭제.py",
+    "서버/실행제어.py",
+    "서버/실제연구제어.py",
+    "서버/웹연구.py",
+    "서버/웹자료저장소.py",
+    "서버/앱.py",
+    "테스트/테스트_삭제후기록차단.py",
+    "테스트/테스트_삭제중변환.py",
+    "테스트/테스트_실행삭제.py",
+    "화면/src/기록재생연결.ts",
+    "화면/src/기록재생연결.test.ts",
+    "화면/src/실행삭제.tsx",
+    "화면/src/실행삭제.ts",
+    "화면/src/앱.tsx",
+    "화면/src/앱.test.tsx",
+    "화면/src/통신.ts",
+    "화면/src/실행기록.ts",
+    "화면/src/상태.ts",
+    "화면/src/실행타임라인.tsx",
+    "테스트/테스트_실행제어.py:1-155",
+    "테스트/테스트_웹연구.py:1-155",
+    "화면/package.json",
+    "검증결과/삭제/보완S_인계.json",
+    "검증결과/삭제/보완S_F03_MUTATION_RED.log",
+    "검증결과/삭제/보완S_F03_통합변이_RED.log",
+    "검증결과/삭제/메인_재생삭제알림_RED.log",
+    "검증결과/삭제/메인_재생삭제알림_GREEN.log",
+    "검증결과/삭제/메인_최종화면회귀.json",
+    "검증결과/삭제/메인_최종서버회귀.log"
+  ],
+  "not_verified": [
+    "운영 03_실행데이터/.env/실제 제공자/실제 네트워크/브라우저 및 메인 격리 서버·임시 폴더는 접근·변경하지 않았다. 메인 최종 copy-browser/build 수용은 메인 소유다.",
+    "실제 Playwright/PDF renderer와 삭제 경합, Windows 백신·권한·디스크 실패의 OS 실측, 멀티프로세스 잠금/timeout·규모 성능은 이번 독립 시험 대상이 아니다. 단일 로컬 작업자 계약 밖 가정만으로 결함을 추가하지 않았다.",
+    "삭제 시점의 파일 정리 실패 warning/재전송 경고 소실, 원 commands 요청 ID 삭제 후 재접수 가능성은 기존 승인 계약의 알려진 caveat이며 새 회귀로 올리지 않았다.",
+    "본문/meta atomic 사이 디스크 저장 실패는 독립 대역 OSError probe로 확인했으나 모든 파일시스템 고장·손상 metadata 조합과 crash 복구를 전수 검증한 것은 아니다.",
+    "Git 명령/쓰기, 생산 코드/테스트/FE dist 수정, 스킬 수정은 하지 않았다. 증거 JSON과 승인 독립 scratch의 시험 산출물만 만들었다."
+  ],
+  "source_sha256": {
+    "서버/저장소.py": "bff9ea9d64fff72203c57ae1bf4f4045db2dc084e16241309855ecfb0a00db8c",
+    "서버/활동기록.py": "a9bbd77a72954d6e339fb8edd61038b3432d23ed76cbc3081e750c7078ea186a",
+    "서버/보고서변환.py": "179b0a673b3e5291f515a09576f7861c5b046aa13b0a1ad36e8a95c8f83c24d5",
+    "서버/실행삭제.py": "1c0d2fc411355595efe20f177c0e4ecabea440201c9732193664fe90c70b2b9b",
+    "서버/실행제어.py": "6fe218510f555c41f7e362ed0e763d8b2106170affb6b0edefc611382f23ea7a",
+    "서버/실제연구제어.py": "69596d250bfb95e232aca2075e99e6c9aef0b2a95b9d7291202d0b677cfb2eaf",
+    "서버/웹연구.py": "bc99d3a3bbab26a513e3874f3d7e4bf1688da0785278bc2e576eeaabf38ced1c",
+    "서버/웹자료저장소.py": "5a7d7fa231631a64ddb5da283a8f27231b440e106982a0e99f8795379c030d04",
+    "서버/앱.py": "505ea5942dc4dd3fdb2f5114afafc85be9b0125094b7ebe2fe9d566ac4950bac",
+    "테스트/테스트_삭제후기록차단.py": "1bd3a72a8e8c31cedb88cd5083b22a6a21c23d8215f59ffbaffd375946f8aa23",
+    "테스트/테스트_삭제중변환.py": "1c200f557607e5299c65305d83a6f523a2c58781df097b9ef705cd2fde28b5f4",
+    "테스트/테스트_실행삭제.py": "b3c1c2278de9a36b60998ba61f626c131311e641cadacb51f7fc5a16ce291726",
+    "화면/src/기록재생연결.ts": "0e466209d552391cc9d2fe19a48ee3aa7f850ee59e913d40c60406f592c51feb",
+    "화면/src/기록재생연결.test.ts": "77c82969961fcbd9b2edfad8db0ca61828fc4050038dc83bb4a0825c232dffbb",
+    "화면/src/실행삭제.tsx": "9c9246cc0324b5cf1dc488eaa7523314c37bebf597c4303c7303bbf7e65986af",
+    "화면/src/실행삭제.ts": "d7d667c7ade13b37959ac09fd253554bd2acc43aecda8758d491c55992472aef",
+    "화면/src/앱.tsx": "3cf58990f19bdb016ad038c631d204bbaf0a2c8deb2a67033700c7267f06d34c",
+    "화면/src/앱.test.tsx": "1669775a34adcdd4153996c318b55293dc275ca34b1f8f92298da0ec1db9a36b",
+    "화면/src/통신.ts": "a26a20a6567aee4981cb16f7c1291fdf5ed7fdac12f904b9aa1f0fbff3996d81",
+    "화면/src/실행기록.ts": "7a38c783f11ac7caa316ce369bce0e862b54a3e9bfb6732018418e4246f78a09",
+    "화면/src/상태.ts": "67dc2a6dae4e7adc65b3a232ec45cf03c0969431eaf206896c4b4ababe1e5beb",
+    "화면/src/실행타임라인.tsx": "9449d512423c8819aa351a6804dcf1dd063e7d639c674eeaa73f2c5af80cdfc4"
+  }
+}

@@ -222,3 +222,37 @@ class WebSourceStore:
     def get(self, run_id, revision, source_id):
         with self._connection() as db:
             return self._get(db, run_id, revision, source_id)
+
+    @staticmethod
+    def count_run_in(db, run_id):
+        return {
+            "web_sources": db.execute(
+                "SELECT COUNT(*) FROM web_sources WHERE run_id=?", (run_id,)
+            ).fetchone()[0],
+            "web_reads": db.execute(
+                "SELECT COUNT(*) FROM web_reads WHERE run_id=?", (run_id,)
+            ).fetchone()[0],
+        }
+
+    def count_run(self, run_id):
+        """실행 삭제 미리보기용 읽기 전용 개수. 아무것도 바꾸지 않는다."""
+        with self._connection() as db:
+            return self.count_run_in(db, run_id)
+
+    def delete_run(self, run_id):
+        """한 실행의 출처·읽음 기록과 그 출처에 딸린 이력을 한 트랜잭션으로 지운다.
+
+        web_history에는 run_id 열이 없고 source_id로만 이어지므로, 출처 행을 지우기
+        전에 이력을 먼저 지워야 연결 고리를 잃지 않는다.
+        """
+        with self._connection() as db:
+            db.execute("BEGIN IMMEDIATE")
+            counts = self.count_run_in(db, run_id)
+            db.execute(
+                "DELETE FROM web_history WHERE source_id IN "
+                "(SELECT source_id FROM web_sources WHERE run_id=?)",
+                (run_id,),
+            )
+            db.execute("DELETE FROM web_sources WHERE run_id=?", (run_id,))
+            db.execute("DELETE FROM web_reads WHERE run_id=?", (run_id,))
+            return counts

@@ -1,0 +1,1879 @@
+{
+  "checks": [
+    {
+      "scenario": "S1",
+      "status": "PASS",
+      "failed_checks": [],
+      "measured": {
+        "dependent_count": 2,
+        "dependents_ok": true,
+        "confirm_yes_count": 0,
+        "confirm_absent_ok": true,
+        "blocked_text": "이 보고서를 문맥으로 쓴 실행이 있어 삭제할 수 없습니다. 먼저 그 실행을 삭제하세요.\nllm 서빙 엔진 스트라타에 대해서 알려줘\nllm 서빙 엔진 스트라타에 대해 알려줘",
+        "runs": 3,
+        "db_before": {
+          "실행기록.sqlite3": {
+            "state": 1,
+            "events": 358,
+            "sqlite_sequence": 1,
+            "revisions": 3,
+            "calls": 70,
+            "requests": 6,
+            "reports": 2,
+            "activity_spans": 103
+          },
+          "호출예산.sqlite3": {
+            "attempts": 127,
+            "budget_policy": 1
+          },
+          "웹자료\\자료.sqlite3": {
+            "web_sources": 66,
+            "web_history": 11,
+            "web_reads": 13
+          }
+        },
+        "db_after": {
+          "실행기록.sqlite3": {
+            "state": 1,
+            "events": 358,
+            "sqlite_sequence": 1,
+            "revisions": 3,
+            "calls": 70,
+            "requests": 6,
+            "reports": 2,
+            "activity_spans": 103
+          },
+          "호출예산.sqlite3": {
+            "attempts": 127,
+            "budget_policy": 1
+          },
+          "웹자료\\자료.sqlite3": {
+            "web_sources": 66,
+            "web_history": 11,
+            "web_reads": 13
+          }
+        },
+        "unchanged_ok": true,
+        "cancel_ok": true
+      }
+    },
+    {
+      "scenario": "S2",
+      "status": "PASS",
+      "failed_checks": [],
+      "measured": {
+        "request_rows_evidence": [
+          {
+            "body": {
+              "action": "delete",
+              "run_id": "6d0214c0c03140be840a4508e11b4330"
+            },
+            "response": {
+              "status": "deleted",
+              "run_id": "6d0214c0c03140be840a4508e11b4330",
+              "counts": {
+                "events": 28,
+                "calls": 7,
+                "activity_spans": 16,
+                "requests": 1,
+                "reports": 0,
+                "report_files": 0,
+                "export_files": 0,
+                "web_sources": 0,
+                "web_reads": 0
+              },
+              "warnings": [],
+              "current_run_id": "05f7695ed6a54f018bea6319a1ca790d"
+            }
+          }
+        ],
+        "tombstone_last": {
+          "event_id": "74c07cbbc0fa411b8f5e0fc34cfc8055",
+          "run_id": "deletions",
+          "control_revision": 0,
+          "seq": 359,
+          "occurred_at": "2026-11-07T16:52:52.921116+00:00",
+          "type": "run.deleted",
+          "actor": "dispatcher",
+          "recipient": null,
+          "status": "applied",
+          "summary": "실행 삭제",
+          "input": {
+            "run_id": "6d0214c0c03140be840a4508e11b4330"
+          },
+          "output": {
+            "run_id": "6d0214c0c03140be840a4508e11b4330",
+            "counts": {
+              "events": 28,
+              "calls": 7,
+              "activity_spans": 16,
+              "requests": 1,
+              "reports": 0,
+              "report_files": 0,
+              "export_files": 0,
+              "web_sources": 0,
+              "web_reads": 0
+            },
+            "deleted_at": "2026-11-07T16:52:52.911430+00:00"
+          },
+          "error": null,
+          "provider": "openai",
+          "source_mode": "local"
+        },
+        "counts_before": {
+          "calls": 7,
+          "activity_spans": 16,
+          "events": 28,
+          "reports": 0,
+          "requests": 1,
+          "web_sources": 0,
+          "web_reads": 0,
+          "report_files": 0,
+          "export_files": 0
+        },
+        "preview_counts": {
+          "events": 28,
+          "calls": 7,
+          "activity_spans": 16,
+          "requests": 1,
+          "reports": 0,
+          "report_files": 0,
+          "export_files": 0,
+          "web_sources": 0,
+          "web_reads": 0
+        },
+        "counts_ok": true,
+        "scope_text": "사건 28건 · 보고서 0건 · 변환 파일 0개 · 웹 자료 0건을 영구 삭제합니다.",
+        "scope_ok": true,
+        "delete_response": {
+          "status": "deleted",
+          "run_id": "6d0214c0c03140be840a4508e11b4330",
+          "counts": {
+            "events": 28,
+            "calls": 7,
+            "activity_spans": 16,
+            "requests": 1,
+            "reports": 0,
+            "report_files": 0,
+            "export_files": 0,
+            "web_sources": 0,
+            "web_reads": 0
+          },
+          "warnings": [],
+          "current_run_id": "05f7695ed6a54f018bea6319a1ca790d"
+        },
+        "remaining": 2,
+        "remaining_ok": true,
+        "rows_after": {
+          "revisions": 0,
+          "calls": 0,
+          "activity_spans": 0,
+          "events": 0,
+          "reports": 0,
+          "requests": 1,
+          "web_sources": 0,
+          "web_reads": 0
+        },
+        "content_rows_zero_ok": true,
+        "delete_receipt_ok": true,
+        "web_source_ids_before": [],
+        "web_history_before": 0,
+        "web_history_after": 0,
+        "web_history_gone_ok": true,
+        "tombstones_before": 0,
+        "tombstones_after": 1,
+        "tombstone_ok": true,
+        "watermark_before": 358,
+        "watermark_after": 359,
+        "watermark_ok": true,
+        "ledger_sha_before": "09253e5a46b64e84e0595afaca94dc59f191b1ebd2eb77551027e2908ee98f7f",
+        "ledger_sha_after": "09253e5a46b64e84e0595afaca94dc59f191b1ebd2eb77551027e2908ee98f7f",
+        "ledger_ok": true,
+        "archive_status": 404,
+        "archive_ok": true,
+        "files_before": {
+          "reports": {},
+          "exports": {}
+        },
+        "files_gone_ok": true,
+        "notice_ok": true
+      }
+    },
+    {
+      "scenario": "S3",
+      "status": "PASS",
+      "failed_checks": [],
+      "measured": {
+        "request_rows_evidence": [
+          {
+            "body": {
+              "action": "delete",
+              "run_id": "05f7695ed6a54f018bea6319a1ca790d"
+            },
+            "response": {
+              "status": "deleted",
+              "run_id": "05f7695ed6a54f018bea6319a1ca790d",
+              "counts": {
+                "events": 236,
+                "calls": 37,
+                "activity_spans": 51,
+                "requests": 1,
+                "reports": 1,
+                "report_files": 1,
+                "export_files": 4,
+                "web_sources": 66,
+                "web_reads": 13
+              },
+              "warnings": [],
+              "current_run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76"
+            }
+          }
+        ],
+        "tombstone_last": {
+          "event_id": "bbb11357dae447cdb3b17312572545ad",
+          "run_id": "deletions",
+          "control_revision": 0,
+          "seq": 360,
+          "occurred_at": "2026-11-07T16:52:56.963426+00:00",
+          "type": "run.deleted",
+          "actor": "dispatcher",
+          "recipient": null,
+          "status": "applied",
+          "summary": "실행 삭제",
+          "input": {
+            "run_id": "05f7695ed6a54f018bea6319a1ca790d"
+          },
+          "output": {
+            "run_id": "05f7695ed6a54f018bea6319a1ca790d",
+            "counts": {
+              "events": 236,
+              "calls": 37,
+              "activity_spans": 51,
+              "requests": 1,
+              "reports": 1,
+              "report_files": 1,
+              "export_files": 4,
+              "web_sources": 66,
+              "web_reads": 13
+            },
+            "deleted_at": "2026-11-07T16:52:56.958957+00:00"
+          },
+          "error": null,
+          "provider": "openai",
+          "source_mode": "local"
+        },
+        "counts_before": {
+          "calls": 37,
+          "activity_spans": 51,
+          "events": 236,
+          "reports": 1,
+          "requests": 1,
+          "web_sources": 66,
+          "web_reads": 13,
+          "report_files": 1,
+          "export_files": 4
+        },
+        "preview_counts": {
+          "events": 236,
+          "calls": 37,
+          "activity_spans": 51,
+          "requests": 1,
+          "reports": 1,
+          "report_files": 1,
+          "export_files": 4,
+          "web_sources": 66,
+          "web_reads": 13
+        },
+        "counts_ok": true,
+        "scope_text": "사건 236건 · 보고서 1건 · 변환 파일 4개 · 웹 자료 66건을 영구 삭제합니다.",
+        "scope_ok": true,
+        "delete_response": {
+          "status": "deleted",
+          "run_id": "05f7695ed6a54f018bea6319a1ca790d",
+          "counts": {
+            "events": 236,
+            "calls": 37,
+            "activity_spans": 51,
+            "requests": 1,
+            "reports": 1,
+            "report_files": 1,
+            "export_files": 4,
+            "web_sources": 66,
+            "web_reads": 13
+          },
+          "warnings": [],
+          "current_run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76"
+        },
+        "remaining": 1,
+        "remaining_ok": true,
+        "rows_after": {
+          "revisions": 0,
+          "calls": 0,
+          "activity_spans": 0,
+          "events": 0,
+          "reports": 0,
+          "requests": 1,
+          "web_sources": 0,
+          "web_reads": 0
+        },
+        "content_rows_zero_ok": true,
+        "delete_receipt_ok": true,
+        "web_source_ids_before": [
+          "dc48bf7577044051a0f5d889d7317ede",
+          "08b98f3324cc4d999e9f8c91b4f961e3",
+          "11da2d1251bb422b95d087291efd2370",
+          "3005f2e42e2c4e5a85b4d33b6ae264b0",
+          "562508521e8a45e1ada96c9fe6d7505a",
+          "6591a636a4714701bb8c53e717bd537b",
+          "caaaaf98ba8c4258aa39a05501d2c1eb",
+          "0552fbde700f47c3b33cccd2438e2a84",
+          "691575fd9d8540489f56706bf2415c82",
+          "1847557a7e244676ae337dcded18fb79",
+          "74a03800ab19431cb62e173124bedcbd",
+          "3dd3067d01af42ada54845e5c3995a6c",
+          "12d991cd151a4af1990aa8805b15d9ad",
+          "61243fc13e604ad1af4b7b99c1761da8",
+          "aaf924edfff8406e9c7f6240398eb562",
+          "230fd20ef1d24b45a15e24e9a046b751",
+          "ca90def76f80456e9db4d44943060c06",
+          "baa451e1240a4684bd0d001e13d03eb7",
+          "d7d3e5639e134c6db6187ac716347611",
+          "4da9130b98bf4f18aaa44df9d8be36bf",
+          "e8b3f274e2d74a25ae53f1bb5200d80f",
+          "3c785ae998864ba28fcd429b24c3970e",
+          "b2ec38f04503452db281f1424ca8666d",
+          "376684f2fd1e4d13baa73f0896ec7bed",
+          "4a7ffbd1f2514600a124f5ad419da871",
+          "5e7a250fc87c49f8a8030fe55f569c0d",
+          "b3366cb7a60b48369b88393fa2211879",
+          "cb36cb46319c47d483ba5b095eb21deb",
+          "9183974f0e2d494b963232cec575dc0b",
+          "6dfd407814274a29910b126f53fb6cf1",
+          "c768af0d11494fceb850b443b9397fb8",
+          "f51efa32781d46cbb16af583f7c25764",
+          "f7a34cc99eac4f658b3a391505f2cad4",
+          "075f4e8e91b841b4915b430fa4e24c21",
+          "529dd1fb9933410295304fd33abcb53b",
+          "5b2d0cf77c5e47518452edcb855103dd",
+          "d3606a5b4d114607abce50b0650f6a60",
+          "4e7ed49398dc4043bd29a389afe6f41f",
+          "7ad1c835223f477d873e63513e86d8cc",
+          "f75b550151b243558b251b80d5729550",
+          "cc478a992e574e339546833e9845bfee",
+          "b687771e73fd489fb0efdecc65d8dc4c",
+          "aa696688627641b18d86bf0eb9f33167",
+          "f895bdee1c74493c9e663061e1041233",
+          "2eeaaff35b764a558d164d5d2977d01d",
+          "80b15c6819cd4c79917b89522804dc9c",
+          "933dab9c570c46b08e751b24e4126bac",
+          "c33c33d96d6b4a11916a27fd4152cbeb",
+          "7f2a4f7cbd74402da4b69510bf7d7d91",
+          "459e24cde9da459e8987bdfbc32036e5",
+          "cd02db20032f4fa08823dd45a15dbf9d",
+          "6a0aa29fed8b46139d62dae8b125f089",
+          "a9c4076cfee24958b171a2c68313f63c",
+          "26a88141068b4d1e87ec083e1fd5001c",
+          "6451ad74fddc43769deea37d55cc472c",
+          "1e439bcdd835414faeed28c6f9e00ae9",
+          "ef2cdba120534ffeb839fb56d07fda38",
+          "4200b59c87a840b49df69893dc14d46f",
+          "821562986ed04f1482c93e3e40f41c4a",
+          "581b4da830e449f9a6e3029039e08351",
+          "8990f032be484602b01122a7dda34687",
+          "565386b72ecc462ea306538c20f269d6",
+          "3b4e55aac24f4b12807094abc4a18f24",
+          "d3946bb0a53141078ba8bcc317e8d689",
+          "c703edebf96d49a5bed2fbb9982be77e",
+          "285f72dea0104929bb9caeb2a5ba0225"
+        ],
+        "web_history_before": 11,
+        "web_history_after": 0,
+        "web_history_gone_ok": true,
+        "tombstones_before": 1,
+        "tombstones_after": 2,
+        "tombstone_ok": true,
+        "watermark_before": 359,
+        "watermark_after": 360,
+        "watermark_ok": true,
+        "ledger_sha_before": "09253e5a46b64e84e0595afaca94dc59f191b1ebd2eb77551027e2908ee98f7f",
+        "ledger_sha_after": "09253e5a46b64e84e0595afaca94dc59f191b1ebd2eb77551027e2908ee98f7f",
+        "ledger_ok": true,
+        "archive_status": 404,
+        "archive_ok": true,
+        "files_before": {
+          "reports": {
+            "🧾 실제 연구 보고서_32927cf0a32240348029148500e54b87.md": "4d2838ef698f43ff7cefac20c2461a110c1ba3470070c696422f41535e959cbf"
+          },
+          "exports": {
+            "형식변환\\cec916ab47ce07e5eb32c05dfd2a7dedabba4d0f08163109a5974cfa173bc0c8.json": "d261629f191ed9fa18008541d536c9fc6c9a876bfafddf71d233752e85ef2c1a",
+            "형식변환\\cec916ab47ce07e5eb32c05dfd2a7dedabba4d0f08163109a5974cfa173bc0c8.pdf": "d78880de16056735043c6bad97ca35b17d81770613e13eb6ddd167b3dd7e38e5",
+            "형식변환\\d9371c0fc7bb85161068e626dc824f7e180e4d320b27d08ae1d1be3b8dee1e63.json": "615963b1a39739506e856e2a9a2cb00cef5dde3c4daec39fa1f71a4bfe4dfd12",
+            "형식변환\\d9371c0fc7bb85161068e626dc824f7e180e4d320b27d08ae1d1be3b8dee1e63.html": "ecc96e8610eec6d885549c72eba5b96877d361c330edf7816f0c92eca3e1b2d8"
+          }
+        },
+        "files_gone_ok": true,
+        "notice_ok": true,
+        "parent_rows_before": {
+          "revisions": 1,
+          "calls": 26,
+          "activity_spans": 36,
+          "events": 91,
+          "reports": 1,
+          "requests": 1,
+          "web_sources": 0,
+          "web_reads": 0
+        },
+        "parent_rows_after": {
+          "revisions": 1,
+          "calls": 26,
+          "activity_spans": 36,
+          "events": 91,
+          "reports": 1,
+          "requests": 1,
+          "web_sources": 0,
+          "web_reads": 0
+        },
+        "parent_ok": true,
+        "current_run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+        "current_ok": true,
+        "subject": "실시간\n1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?\n완료 · 2026-11-06 16:41"
+      }
+    },
+    {
+      "scenario": "S4",
+      "status": "PASS",
+      "failed_checks": [],
+      "measured": {
+        "request_rows_evidence": [
+          {
+            "body": {
+              "action": "delete",
+              "run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76"
+            },
+            "response": {
+              "status": "deleted",
+              "run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+              "counts": {
+                "events": 91,
+                "calls": 26,
+                "activity_spans": 36,
+                "requests": 1,
+                "reports": 1,
+                "report_files": 1,
+                "export_files": 4,
+                "web_sources": 0,
+                "web_reads": 0
+              },
+              "warnings": [],
+              "current_run_id": null
+            }
+          }
+        ],
+        "tombstone_last": {
+          "event_id": "7229fa621cb54337ab99168d35bfb9ed",
+          "run_id": "deletions",
+          "control_revision": 0,
+          "seq": 361,
+          "occurred_at": "2026-11-07T16:53:02.221692+00:00",
+          "type": "run.deleted",
+          "actor": "dispatcher",
+          "recipient": null,
+          "status": "applied",
+          "summary": "실행 삭제",
+          "input": {
+            "run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76"
+          },
+          "output": {
+            "run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+            "counts": {
+              "events": 91,
+              "calls": 26,
+              "activity_spans": 36,
+              "requests": 1,
+              "reports": 1,
+              "report_files": 1,
+              "export_files": 4,
+              "web_sources": 0,
+              "web_reads": 0
+            },
+            "deleted_at": "2026-11-07T16:53:02.221692+00:00"
+          },
+          "error": null,
+          "provider": "openai",
+          "source_mode": "local"
+        },
+        "counts_before": {
+          "calls": 26,
+          "activity_spans": 36,
+          "events": 91,
+          "reports": 1,
+          "requests": 1,
+          "web_sources": 0,
+          "web_reads": 0,
+          "report_files": 1,
+          "export_files": 4
+        },
+        "preview_counts": {
+          "events": 91,
+          "calls": 26,
+          "activity_spans": 36,
+          "requests": 1,
+          "reports": 1,
+          "report_files": 1,
+          "export_files": 4,
+          "web_sources": 0,
+          "web_reads": 0
+        },
+        "counts_ok": true,
+        "scope_text": "사건 91건 · 보고서 1건 · 변환 파일 4개 · 웹 자료 0건을 영구 삭제합니다.",
+        "scope_ok": true,
+        "delete_response": {
+          "status": "deleted",
+          "run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+          "counts": {
+            "events": 91,
+            "calls": 26,
+            "activity_spans": 36,
+            "requests": 1,
+            "reports": 1,
+            "report_files": 1,
+            "export_files": 4,
+            "web_sources": 0,
+            "web_reads": 0
+          },
+          "warnings": [],
+          "current_run_id": null
+        },
+        "remaining": 0,
+        "remaining_ok": true,
+        "rows_after": {
+          "revisions": 0,
+          "calls": 0,
+          "activity_spans": 0,
+          "events": 0,
+          "reports": 0,
+          "requests": 1,
+          "web_sources": 0,
+          "web_reads": 0
+        },
+        "content_rows_zero_ok": true,
+        "delete_receipt_ok": true,
+        "web_source_ids_before": [],
+        "web_history_before": 0,
+        "web_history_after": 0,
+        "web_history_gone_ok": true,
+        "tombstones_before": 2,
+        "tombstones_after": 3,
+        "tombstone_ok": true,
+        "watermark_before": 360,
+        "watermark_after": 361,
+        "watermark_ok": true,
+        "ledger_sha_before": "09253e5a46b64e84e0595afaca94dc59f191b1ebd2eb77551027e2908ee98f7f",
+        "ledger_sha_after": "09253e5a46b64e84e0595afaca94dc59f191b1ebd2eb77551027e2908ee98f7f",
+        "ledger_ok": true,
+        "archive_status": 404,
+        "archive_ok": true,
+        "files_before": {
+          "reports": {
+            "🧾 실제 연구 보고서_44f307dedcbf4c8282d9b4e8a3a207bb.md": "19c6f5f980533a7e001beecc6f3f2852f44869800c4ad0a7afd3dea0e4d242cd"
+          },
+          "exports": {
+            "형식변환\\15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.json": "7173ea8538e61eccb39292398883a39055993acfe599e1c9c2195def459d499c",
+            "형식변환\\15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.html": "cf1d54941222acc2777e052c4e6b3e37e9a86ef626ed04b1f8f43bf6ea414c77",
+            "형식변환\\a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.json": "691262a1b9dcf6b92323c94d2cb815b9a056431f702cf385e5c573d05088e812",
+            "형식변환\\a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.pdf": "251af212f7b9b6910e9fec90e1de427164aececaac4d8866eac504fc5ad343ec"
+          }
+        },
+        "files_gone_ok": true,
+        "notice_ok": true,
+        "empty_ok": true,
+        "current_ok": true,
+        "subject": "실시간\n실행 없음",
+        "subject_ok": true,
+        "all_run_rows": {
+          "9aa1aeeb5b0c4724b0e435563f6a5c76": {
+            "revisions": 0,
+            "calls": 0,
+            "activity_spans": 0,
+            "events": 0,
+            "reports": 0,
+            "requests": 1,
+            "web_sources": 0,
+            "web_reads": 0
+          },
+          "6d0214c0c03140be840a4508e11b4330": {
+            "revisions": 0,
+            "calls": 0,
+            "activity_spans": 0,
+            "events": 0,
+            "reports": 0,
+            "requests": 1,
+            "web_sources": 0,
+            "web_reads": 0
+          },
+          "05f7695ed6a54f018bea6319a1ca790d": {
+            "revisions": 0,
+            "calls": 0,
+            "activity_spans": 0,
+            "events": 0,
+            "reports": 0,
+            "requests": 1,
+            "web_sources": 0,
+            "web_reads": 0
+          }
+        },
+        "all_run_rows_ok": true,
+        "all_delete_receipts_ok": true
+      }
+    },
+    {
+      "scenario": "사건목록",
+      "status": "PASS",
+      "failed_checks": [],
+      "measured": {
+        "tombstone_visible_count": 0,
+        "hidden_ok": true
+      }
+    },
+    {
+      "scenario": "S5",
+      "status": "FAIL",
+      "failed_checks": [
+        "other_delete_ok"
+      ],
+      "measured": {
+        "other_delete": {
+          "request_rows_evidence": [
+            {
+              "body": {
+                "action": "delete",
+                "run_id": "6d0214c0c03140be840a4508e11b4330"
+              },
+              "response": {
+                "status": "deleted",
+                "run_id": "6d0214c0c03140be840a4508e11b4330",
+                "counts": {
+                  "events": 28,
+                  "calls": 7,
+                  "activity_spans": 16,
+                  "requests": 1,
+                  "reports": 0,
+                  "report_files": 0,
+                  "export_files": 0,
+                  "web_sources": 0,
+                  "web_reads": 0
+                },
+                "warnings": [],
+                "current_run_id": "05f7695ed6a54f018bea6319a1ca790d"
+              }
+            }
+          ],
+          "tombstone_last": {
+            "event_id": "054705500bc547b3979e6016270f88e7",
+            "run_id": "deletions",
+            "control_revision": 0,
+            "seq": 359,
+            "occurred_at": "2026-11-07T16:53:14.396534+00:00",
+            "type": "run.deleted",
+            "actor": "dispatcher",
+            "recipient": null,
+            "status": "applied",
+            "summary": "실행 삭제",
+            "input": {
+              "run_id": "6d0214c0c03140be840a4508e11b4330"
+            },
+            "output": {
+              "run_id": "6d0214c0c03140be840a4508e11b4330",
+              "counts": {
+                "events": 28,
+                "calls": 7,
+                "activity_spans": 16,
+                "requests": 1,
+                "reports": 0,
+                "report_files": 0,
+                "export_files": 0,
+                "web_sources": 0,
+                "web_reads": 0
+              },
+              "deleted_at": "2026-11-07T16:53:14.386784+00:00"
+            },
+            "error": null,
+            "provider": "openai",
+            "source_mode": "local"
+          },
+          "counts_before": {
+            "calls": 7,
+            "activity_spans": 16,
+            "events": 28,
+            "reports": 0,
+            "requests": 1,
+            "web_sources": 0,
+            "web_reads": 0,
+            "report_files": 0,
+            "export_files": 0
+          },
+          "preview_counts": {
+            "events": 28,
+            "calls": 7,
+            "activity_spans": 16,
+            "requests": 1,
+            "reports": 0,
+            "report_files": 0,
+            "export_files": 0,
+            "web_sources": 0,
+            "web_reads": 0
+          },
+          "counts_ok": true,
+          "scope_text": "사건 28건 · 보고서 0건 · 변환 파일 0개 · 웹 자료 0건을 영구 삭제합니다.",
+          "scope_ok": true,
+          "delete_response": {
+            "status": "deleted",
+            "run_id": "6d0214c0c03140be840a4508e11b4330",
+            "counts": {
+              "events": 28,
+              "calls": 7,
+              "activity_spans": 16,
+              "requests": 1,
+              "reports": 0,
+              "report_files": 0,
+              "export_files": 0,
+              "web_sources": 0,
+              "web_reads": 0
+            },
+            "warnings": [],
+            "current_run_id": "05f7695ed6a54f018bea6319a1ca790d"
+          },
+          "remaining": 2,
+          "remaining_ok": true,
+          "rows_after": {
+            "revisions": 0,
+            "calls": 0,
+            "activity_spans": 0,
+            "events": 0,
+            "reports": 0,
+            "requests": 1,
+            "web_sources": 0,
+            "web_reads": 0
+          },
+          "content_rows_zero_ok": true,
+          "delete_receipt_ok": true,
+          "web_source_ids_before": [],
+          "web_history_before": 0,
+          "web_history_after": 0,
+          "web_history_gone_ok": true,
+          "tombstones_before": 0,
+          "tombstones_after": 1,
+          "tombstone_ok": true,
+          "watermark_before": 358,
+          "watermark_after": 359,
+          "watermark_ok": true,
+          "ledger_sha_before": "09253e5a46b64e84e0595afaca94dc59f191b1ebd2eb77551027e2908ee98f7f",
+          "ledger_sha_after": "09253e5a46b64e84e0595afaca94dc59f191b1ebd2eb77551027e2908ee98f7f",
+          "ledger_ok": true,
+          "archive_status": 404,
+          "archive_ok": true,
+          "files_before": {
+            "reports": {},
+            "exports": {}
+          },
+          "files_gone_ok": true,
+          "notice_ok": false
+        },
+        "other_delete_ok": false,
+        "other_replay_preserved_ok": true,
+        "mode": "live",
+        "session_value": null,
+        "session_removed_ok": true,
+        "detail_return_list_ok": true
+      },
+      "screenshot": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\메인_최종사본\\S5_실패.png"
+    },
+    {
+      "scenario": "S6",
+      "status": "PASS",
+      "failed_checks": [],
+      "measured": {
+        "disabled_ok": true,
+        "title": "진행 중인 실행은 삭제할 수 없습니다. 먼저 취소하세요.",
+        "title_ok": true,
+        "preview_requests_before": 6,
+        "preview_requests_after": 6,
+        "no_preview_ok": true
+      }
+    },
+    {
+      "scenario": "S7",
+      "status": "PASS",
+      "failed_checks": [],
+      "measured": {
+        "measurements": [
+          {
+            "sw": 1440,
+            "cw": 1440,
+            "state": "blocked",
+            "viewport": [
+              1440,
+              900
+            ],
+            "buttons": [
+              {
+                "x": 320,
+                "y": 692.515625,
+                "w": 58,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              }
+            ],
+            "block": {
+              "sw": 824,
+              "cw": 824
+            },
+            "layout_ok": true
+          },
+          {
+            "sw": 390,
+            "cw": 390,
+            "state": "blocked",
+            "viewport": [
+              390,
+              844
+            ],
+            "buttons": [
+              {
+                "x": 42,
+                "y": 678.703125,
+                "w": 58,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              }
+            ],
+            "block": {
+              "sw": 330,
+              "cw": 330
+            },
+            "layout_ok": true
+          },
+          {
+            "sw": 1440,
+            "cw": 1440,
+            "state": "ready_6d0214",
+            "viewport": [
+              1440,
+              900
+            ],
+            "buttons": [
+              {
+                "x": 320,
+                "y": 528.53125,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON.danger"
+              },
+              {
+                "x": 417.84375,
+                "y": 528.53125,
+                "w": 58,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              }
+            ],
+            "block": {
+              "sw": 824,
+              "cw": 824
+            },
+            "layout_ok": true
+          },
+          {
+            "sw": 390,
+            "cw": 390,
+            "state": "ready_6d0214",
+            "viewport": [
+              390,
+              844
+            ],
+            "buttons": [
+              {
+                "x": 42,
+                "y": 538.328125,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON.danger"
+              },
+              {
+                "x": 139.84375,
+                "y": 538.328125,
+                "w": 58,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              }
+            ],
+            "block": {
+              "sw": 330,
+              "cw": 330
+            },
+            "layout_ok": true
+          },
+          {
+            "sw": 1440,
+            "cw": 1440,
+            "state": "after_delete",
+            "viewport": [
+              1440,
+              900
+            ],
+            "buttons": [],
+            "block": null,
+            "layout_ok": true
+          },
+          {
+            "sw": 390,
+            "cw": 390,
+            "state": "after_delete",
+            "viewport": [
+              390,
+              844
+            ],
+            "buttons": [],
+            "block": null,
+            "layout_ok": true
+          },
+          {
+            "sw": 1440,
+            "cw": 1440,
+            "state": "ready_05f769",
+            "viewport": [
+              1440,
+              900
+            ],
+            "buttons": [
+              {
+                "x": 320,
+                "y": 371.359375,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON.danger"
+              },
+              {
+                "x": 417.84375,
+                "y": 371.359375,
+                "w": 58,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              }
+            ],
+            "block": {
+              "sw": 824,
+              "cw": 824
+            },
+            "layout_ok": true
+          },
+          {
+            "sw": 390,
+            "cw": 390,
+            "state": "ready_05f769",
+            "viewport": [
+              390,
+              844
+            ],
+            "buttons": [
+              {
+                "x": 42,
+                "y": 381.15625,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON.danger"
+              },
+              {
+                "x": 139.84375,
+                "y": 381.15625,
+                "w": 58,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              }
+            ],
+            "block": {
+              "sw": 330,
+              "cw": 330
+            },
+            "layout_ok": true
+          },
+          {
+            "sw": 1440,
+            "cw": 1440,
+            "state": "ready_9aa1ae",
+            "viewport": [
+              1440,
+              900
+            ],
+            "buttons": [
+              {
+                "x": 320,
+                "y": 371.359375,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON.danger"
+              },
+              {
+                "x": 417.84375,
+                "y": 371.359375,
+                "w": 58,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              }
+            ],
+            "block": {
+              "sw": 824,
+              "cw": 824
+            },
+            "layout_ok": true
+          },
+          {
+            "sw": 390,
+            "cw": 390,
+            "state": "ready_9aa1ae",
+            "viewport": [
+              390,
+              844
+            ],
+            "buttons": [
+              {
+                "x": 42,
+                "y": 404.34375,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON.danger"
+              },
+              {
+                "x": 139.84375,
+                "y": 404.34375,
+                "w": 58,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              }
+            ],
+            "block": {
+              "sw": 330,
+              "cw": 330
+            },
+            "layout_ok": true
+          },
+          {
+            "sw": 1440,
+            "cw": 1440,
+            "state": "empty",
+            "viewport": [
+              1440,
+              900
+            ],
+            "buttons": [],
+            "block": null,
+            "layout_ok": true
+          },
+          {
+            "sw": 390,
+            "cw": 390,
+            "state": "empty",
+            "viewport": [
+              390,
+              844
+            ],
+            "buttons": [],
+            "block": null,
+            "layout_ok": true
+          },
+          {
+            "sw": 1440,
+            "cw": 1440,
+            "state": "ready_6d0214",
+            "viewport": [
+              1440,
+              900
+            ],
+            "buttons": [
+              {
+                "x": 320,
+                "y": 586.921875,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON.danger"
+              },
+              {
+                "x": 417.84375,
+                "y": 586.921875,
+                "w": 58,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              }
+            ],
+            "block": {
+              "sw": 824,
+              "cw": 824
+            },
+            "layout_ok": true
+          },
+          {
+            "sw": 390,
+            "cw": 390,
+            "state": "ready_6d0214",
+            "viewport": [
+              390,
+              844
+            ],
+            "buttons": [
+              {
+                "x": 42,
+                "y": 633.703125,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON.danger"
+              },
+              {
+                "x": 139.84375,
+                "y": 633.703125,
+                "w": 58,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              }
+            ],
+            "block": {
+              "sw": 330,
+              "cw": 330
+            },
+            "layout_ok": true
+          }
+        ],
+        "measurement_count": 14,
+        "layout_ok": true
+      }
+    },
+    {
+      "scenario": "보호검사",
+      "status": "PASS",
+      "failed_checks": [],
+      "measured": {
+        "request_count": 102,
+        "non_get": {
+          "http://127.0.0.1:8793/api/spike/runs/6d0214c0c03140be840a4508e11b4330/delete": 2,
+          "http://127.0.0.1:8793/api/spike/runs/05f7695ed6a54f018bea6319a1ca790d/delete": 2,
+          "http://127.0.0.1:8793/api/spike/runs/9aa1aeeb5b0c4724b0e435563f6a5c76/delete": 1
+        },
+        "denied": [],
+        "requests_ok": true,
+        "errors": [],
+        "console_error_count": 0,
+        "errors_ok": true,
+        "live_before": {
+          "runs": [
+            [
+              "05f7695ed6a54f018bea6319a1ca790d",
+              "completed",
+              "2026-11-07T11:49:13.178146+00:00"
+            ],
+            [
+              "6d0214c0c03140be840a4508e11b4330",
+              "blocked",
+              "2026-11-07T11:45:16.141090+00:00"
+            ],
+            [
+              "9aa1aeeb5b0c4724b0e435563f6a5c76",
+              "completed",
+              "2026-11-06T07:42:18.270229+00:00"
+            ]
+          ],
+          "attempt_count": 100,
+          "high_watermark_seq": 358
+        },
+        "live_after": {
+          "runs": [
+            [
+              "05f7695ed6a54f018bea6319a1ca790d",
+              "completed",
+              "2026-11-07T11:49:13.178146+00:00"
+            ],
+            [
+              "6d0214c0c03140be840a4508e11b4330",
+              "blocked",
+              "2026-11-07T11:45:16.141090+00:00"
+            ],
+            [
+              "9aa1aeeb5b0c4724b0e435563f6a5c76",
+              "completed",
+              "2026-11-06T07:42:18.270229+00:00"
+            ]
+          ],
+          "attempt_count": 100,
+          "high_watermark_seq": 358
+        },
+        "live_ok": true,
+        "dist_files": 25,
+        "dist_unchanged_ok": true,
+        "manifest_ok": true
+      }
+    }
+  ],
+  "fatal": null,
+  "copies": [
+    {
+      "destination": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_015241_213836_S1_S4",
+      "databases": {
+        "실행기록.sqlite3": {
+          "integrity_check": "ok",
+          "source": {
+            "state": 1,
+            "events": 358,
+            "sqlite_sequence": 1,
+            "revisions": 3,
+            "calls": 70,
+            "requests": 6,
+            "reports": 2,
+            "activity_spans": 103
+          },
+          "copy": {
+            "state": 1,
+            "events": 358,
+            "sqlite_sequence": 1,
+            "revisions": 3,
+            "calls": 70,
+            "requests": 6,
+            "reports": 2,
+            "activity_spans": 103
+          }
+        },
+        "웹자료\\자료.sqlite3": {
+          "integrity_check": "ok",
+          "source": {
+            "web_sources": 66,
+            "web_history": 11,
+            "web_reads": 13
+          },
+          "copy": {
+            "web_sources": 66,
+            "web_history": 11,
+            "web_reads": 13
+          }
+        },
+        "호출예산.sqlite3": {
+          "integrity_check": "ok",
+          "source": {
+            "attempts": 127,
+            "budget_policy": 1
+          },
+          "copy": {
+            "attempts": 127,
+            "budget_policy": 1
+          }
+        }
+      },
+      "files": [
+        "형식변환\\15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.html",
+        "형식변환\\15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.json",
+        "형식변환\\a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.json",
+        "형식변환\\a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.pdf",
+        "형식변환\\cec916ab47ce07e5eb32c05dfd2a7dedabba4d0f08163109a5974cfa173bc0c8.json",
+        "형식변환\\cec916ab47ce07e5eb32c05dfd2a7dedabba4d0f08163109a5974cfa173bc0c8.pdf",
+        "형식변환\\d9371c0fc7bb85161068e626dc824f7e180e4d320b27d08ae1d1be3b8dee1e63.html",
+        "형식변환\\d9371c0fc7bb85161068e626dc824f7e180e4d320b27d08ae1d1be3b8dee1e63.json",
+        "🧾 실제 연구 보고서_32927cf0a32240348029148500e54b87.md",
+        "🧾 실제 연구 보고서_44f307dedcbf4c8282d9b4e8a3a207bb.md"
+      ]
+    },
+    {
+      "destination": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_015305_691264_S5",
+      "databases": {
+        "실행기록.sqlite3": {
+          "integrity_check": "ok",
+          "source": {
+            "state": 1,
+            "events": 358,
+            "sqlite_sequence": 1,
+            "revisions": 3,
+            "calls": 70,
+            "requests": 6,
+            "reports": 2,
+            "activity_spans": 103
+          },
+          "copy": {
+            "state": 1,
+            "events": 358,
+            "sqlite_sequence": 1,
+            "revisions": 3,
+            "calls": 70,
+            "requests": 6,
+            "reports": 2,
+            "activity_spans": 103
+          }
+        },
+        "웹자료\\자료.sqlite3": {
+          "integrity_check": "ok",
+          "source": {
+            "web_sources": 66,
+            "web_history": 11,
+            "web_reads": 13
+          },
+          "copy": {
+            "web_sources": 66,
+            "web_history": 11,
+            "web_reads": 13
+          }
+        },
+        "호출예산.sqlite3": {
+          "integrity_check": "ok",
+          "source": {
+            "attempts": 127,
+            "budget_policy": 1
+          },
+          "copy": {
+            "attempts": 127,
+            "budget_policy": 1
+          }
+        }
+      },
+      "files": [
+        "형식변환\\15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.html",
+        "형식변환\\15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.json",
+        "형식변환\\a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.json",
+        "형식변환\\a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.pdf",
+        "형식변환\\cec916ab47ce07e5eb32c05dfd2a7dedabba4d0f08163109a5974cfa173bc0c8.json",
+        "형식변환\\cec916ab47ce07e5eb32c05dfd2a7dedabba4d0f08163109a5974cfa173bc0c8.pdf",
+        "형식변환\\d9371c0fc7bb85161068e626dc824f7e180e4d320b27d08ae1d1be3b8dee1e63.html",
+        "형식변환\\d9371c0fc7bb85161068e626dc824f7e180e4d320b27d08ae1d1be3b8dee1e63.json",
+        "🧾 실제 연구 보고서_32927cf0a32240348029148500e54b87.md",
+        "🧾 실제 연구 보고서_44f307dedcbf4c8282d9b4e8a3a207bb.md"
+      ]
+    },
+    {
+      "destination": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_015318_842364_S6",
+      "databases": {
+        "실행기록.sqlite3": {
+          "integrity_check": "ok",
+          "source": {
+            "state": 1,
+            "events": 358,
+            "sqlite_sequence": 1,
+            "revisions": 3,
+            "calls": 70,
+            "requests": 6,
+            "reports": 2,
+            "activity_spans": 103
+          },
+          "copy": {
+            "state": 1,
+            "events": 358,
+            "sqlite_sequence": 1,
+            "revisions": 3,
+            "calls": 70,
+            "requests": 6,
+            "reports": 2,
+            "activity_spans": 103
+          }
+        },
+        "웹자료\\자료.sqlite3": {
+          "integrity_check": "ok",
+          "source": {
+            "web_sources": 66,
+            "web_history": 11,
+            "web_reads": 13
+          },
+          "copy": {
+            "web_sources": 66,
+            "web_history": 11,
+            "web_reads": 13
+          }
+        },
+        "호출예산.sqlite3": {
+          "integrity_check": "ok",
+          "source": {
+            "attempts": 127,
+            "budget_policy": 1
+          },
+          "copy": {
+            "attempts": 127,
+            "budget_policy": 1
+          }
+        }
+      },
+      "files": [
+        "형식변환\\15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.html",
+        "형식변환\\15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.json",
+        "형식변환\\a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.json",
+        "형식변환\\a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.pdf",
+        "형식변환\\cec916ab47ce07e5eb32c05dfd2a7dedabba4d0f08163109a5974cfa173bc0c8.json",
+        "형식변환\\cec916ab47ce07e5eb32c05dfd2a7dedabba4d0f08163109a5974cfa173bc0c8.pdf",
+        "형식변환\\d9371c0fc7bb85161068e626dc824f7e180e4d320b27d08ae1d1be3b8dee1e63.html",
+        "형식변환\\d9371c0fc7bb85161068e626dc824f7e180e4d320b27d08ae1d1be3b8dee1e63.json",
+        "🧾 실제 연구 보고서_32927cf0a32240348029148500e54b87.md",
+        "🧾 실제 연구 보고서_44f307dedcbf4c8282d9b4e8a3a207bb.md"
+      ]
+    }
+  ],
+  "screenshots": [
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\메인_최종사본\\blocked_1440x900.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\메인_최종사본\\blocked_390x844.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\메인_최종사본\\ready_6d0214_1440x900.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\메인_최종사본\\ready_6d0214_390x844.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\메인_최종사본\\after_delete_1440x900.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\메인_최종사본\\after_delete_390x844.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\메인_최종사본\\ready_05f769_1440x900.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\메인_최종사본\\ready_05f769_390x844.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\메인_최종사본\\ready_9aa1ae_1440x900.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\메인_최종사본\\ready_9aa1ae_390x844.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\메인_최종사본\\empty_1440x900.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\메인_최종사본\\empty_390x844.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\메인_최종사본\\ready_6d0214_1440x900.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\메인_최종사본\\ready_6d0214_390x844.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\메인_최종사본\\S5_실패.png"
+  ],
+  "requests": [
+    [
+      "GET",
+      "http://127.0.0.1:8793/"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/index-BTqjRmtx.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/CanvasPool-DzuCm1vb.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/Filter-vpEaIMwd.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/canvasUtils-U4WZZEj-.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/Cache-CTROkX_m.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/GCManagedHash-DCvVepMX.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/RenderTargetSystem-BK2ifv01.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/GraphicsContext-48tzdr3Q.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/getTexelRangeRects-Bdv1rQ51.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/index-hKyqr4Xw.css"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/snapshot"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/browserAll-j4O37eA3.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/init-DoUXYMOj.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/events?after=358"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/runs/05f7695ed6a54f018bea6319a1ca790d/archive"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/reports/32927cf0a32240348029148500e54b87"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/runs/9aa1aeeb5b0c4724b0e435563f6a5c76/delete-preview"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/runs/6d0214c0c03140be840a4508e11b4330/delete-preview"
+    ],
+    [
+      "POST",
+      "http://127.0.0.1:8793/api/spike/runs/6d0214c0c03140be840a4508e11b4330/delete"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/snapshot"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/snapshot"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/runs/05f7695ed6a54f018bea6319a1ca790d/archive"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/runs/05f7695ed6a54f018bea6319a1ca790d/delete-preview"
+    ],
+    [
+      "POST",
+      "http://127.0.0.1:8793/api/spike/runs/05f7695ed6a54f018bea6319a1ca790d/delete"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/snapshot"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/snapshot"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/runs/9aa1aeeb5b0c4724b0e435563f6a5c76/archive"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/reports/44f307dedcbf4c8282d9b4e8a3a207bb"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/runs/9aa1aeeb5b0c4724b0e435563f6a5c76/delete-preview"
+    ],
+    [
+      "POST",
+      "http://127.0.0.1:8793/api/spike/runs/9aa1aeeb5b0c4724b0e435563f6a5c76/delete"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/snapshot"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/snapshot"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/index-BTqjRmtx.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/CanvasPool-DzuCm1vb.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/Filter-vpEaIMwd.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/canvasUtils-U4WZZEj-.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/Cache-CTROkX_m.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/GCManagedHash-DCvVepMX.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/RenderTargetSystem-BK2ifv01.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/GraphicsContext-48tzdr3Q.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/getTexelRangeRects-Bdv1rQ51.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/index-hKyqr4Xw.css"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/snapshot"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/browserAll-j4O37eA3.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/init-DoUXYMOj.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/events?after=358"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/runs/05f7695ed6a54f018bea6319a1ca790d/archive"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/reports/32927cf0a32240348029148500e54b87"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/runs/05f7695ed6a54f018bea6319a1ca790d/archive"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/runs/6d0214c0c03140be840a4508e11b4330/delete-preview"
+    ],
+    [
+      "POST",
+      "http://127.0.0.1:8793/api/spike/runs/6d0214c0c03140be840a4508e11b4330/delete"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/snapshot"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/snapshot"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/runs/05f7695ed6a54f018bea6319a1ca790d/delete-preview"
+    ],
+    [
+      "POST",
+      "http://127.0.0.1:8793/api/spike/runs/05f7695ed6a54f018bea6319a1ca790d/delete"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/snapshot"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/snapshot"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/runs/9aa1aeeb5b0c4724b0e435563f6a5c76/archive"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/reports/44f307dedcbf4c8282d9b4e8a3a207bb"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/index-BTqjRmtx.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/CanvasPool-DzuCm1vb.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/Filter-vpEaIMwd.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/canvasUtils-U4WZZEj-.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/Cache-CTROkX_m.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/GCManagedHash-DCvVepMX.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/RenderTargetSystem-BK2ifv01.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/GraphicsContext-48tzdr3Q.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/getTexelRangeRects-Bdv1rQ51.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/index-hKyqr4Xw.css"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/snapshot"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/browserAll-j4O37eA3.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/assets/init-DoUXYMOj.js"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/events?after=358"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/runs/05f7695ed6a54f018bea6319a1ca790d/archive"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/api/spike/reports/32927cf0a32240348029148500e54b87"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png"
+    ],
+    [
+      "GET",
+      "http://127.0.0.1:8793/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png"
+    ]
+  ],
+  "unverified": [],
+  "script_sha256": {
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\삭제_실사용검사.py": "399897d670df72dc7ccd56575d5cc43004a2d3ce33121b829a1ebd6c0c1e73b7",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\삭제_사본만들기.py": "36ac3a01b6c7d51b9b6eb74b66a693ade24a3f9adbc12d39cf2cf228c97816be"
+  },
+  "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" 검증/삭제_실사용검사.py --port 8793 --label 메인_최종사본",
+  "evidence": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\메인_최종사본\\확인.json"
+}

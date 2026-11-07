@@ -16,6 +16,7 @@ from pydantic import BaseModel, Field, field_validator
 from starlette.exceptions import HTTPException
 
 from 서버.보고서변환 import ReportExports
+from 서버.실행삭제 import RunDeletion
 from 서버.실행제어 import ExecutionService
 from 서버.저장소 import ApiError, encode
 from 서버.접근경계 import LoopbackOnly
@@ -49,6 +50,11 @@ class Cancel(Continue):
     control_revision: int = Field(gt=0)
 
 
+class DeleteRun(BaseModel):
+    client_request_id: str = Field(min_length=1, max_length=200)
+    confirm_run_id: str
+
+
 class ExportRequest(BaseModel):
     format: Literal["html", "pdf"]
     source_report_hash: str = Field(pattern=r"^[0-9a-f]{64}$")
@@ -75,6 +81,7 @@ def create_app(
         factory = app.state.service_factory or ExecutionService
         app.state.service = factory(data_dir)
         app.state.exports = ReportExports(app.state.service, export_renderer)
+        app.state.deletion = RunDeletion(app.state.service, app.state.exports)
         try:
             yield
         finally:
@@ -192,6 +199,14 @@ def create_app(
     @app.get("/api/spike/runs/{run_id}/archive")
     async def run_archive(run_id: str):
         return app.state.service.repo.archive(run_id)
+
+    @app.get("/api/spike/runs/{run_id}/delete-preview")
+    async def run_delete_preview(run_id: str):
+        return app.state.deletion.preview(run_id)
+
+    @app.post("/api/spike/runs/{run_id}/delete")
+    async def run_delete(run_id: str, body: DeleteRun):
+        return app.state.deletion.delete(run_id, body.confirm_run_id, body.client_request_id)
 
     @app.get("/api/spike/events/{event_id}")
     async def event_detail(event_id: str):

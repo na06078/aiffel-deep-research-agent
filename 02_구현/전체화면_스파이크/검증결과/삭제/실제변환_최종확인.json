@@ -1,0 +1,173 @@
+{
+  "checks": [
+    {
+      "format": "html",
+      "status": "PASS",
+      "copy": {
+        "destination": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_020221_851554_실제변환_html",
+        "databases": {
+          "실행기록.sqlite3": {
+            "integrity_check": "ok",
+            "source": {
+              "state": 1,
+              "events": 358,
+              "sqlite_sequence": 1,
+              "revisions": 3,
+              "calls": 70,
+              "requests": 6,
+              "reports": 2,
+              "activity_spans": 103
+            },
+            "copy": {
+              "state": 1,
+              "events": 358,
+              "sqlite_sequence": 1,
+              "revisions": 3,
+              "calls": 70,
+              "requests": 6,
+              "reports": 2,
+              "activity_spans": 103
+            }
+          },
+          "웹자료\\자료.sqlite3": {
+            "integrity_check": "ok",
+            "source": {
+              "web_sources": 66,
+              "web_history": 11,
+              "web_reads": 13
+            },
+            "copy": {
+              "web_sources": 66,
+              "web_history": 11,
+              "web_reads": 13
+            }
+          },
+          "호출예산.sqlite3": {
+            "integrity_check": "ok",
+            "source": {
+              "attempts": 127,
+              "budget_policy": 1
+            },
+            "copy": {
+              "attempts": 127,
+              "budget_policy": 1
+            }
+          }
+        },
+        "files": [
+          "형식변환\\15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.html",
+          "형식변환\\15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.json",
+          "형식변환\\a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.json",
+          "형식변환\\a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.pdf",
+          "형식변환\\cec916ab47ce07e5eb32c05dfd2a7dedabba4d0f08163109a5974cfa173bc0c8.json",
+          "형식변환\\cec916ab47ce07e5eb32c05dfd2a7dedabba4d0f08163109a5974cfa173bc0c8.pdf",
+          "형식변환\\d9371c0fc7bb85161068e626dc824f7e180e4d320b27d08ae1d1be3b8dee1e63.html",
+          "형식변환\\d9371c0fc7bb85161068e626dc824f7e180e4d320b27d08ae1d1be3b8dee1e63.json",
+          "🧾 실제 연구 보고서_32927cf0a32240348029148500e54b87.md",
+          "🧾 실제 연구 보고서_44f307dedcbf4c8282d9b4e8a3a207bb.md"
+        ]
+      },
+      "target_render": {
+        "bytes": 18860,
+        "sha256": "ecc96e8610eec6d885549c72eba5b96877d361c330edf7816f0c92eca3e1b2d8"
+      },
+      "target_files_after": {
+        "d9371c0fc7bb85161068e626dc824f7e180e4d320b27d08ae1d1be3b8dee1e63.html": false,
+        "d9371c0fc7bb85161068e626dc824f7e180e4d320b27d08ae1d1be3b8dee1e63.json": false
+      },
+      "preserved_export_bytes": 13364,
+      "pdf_pages": null,
+      "ledger_unchanged": true,
+      "transport": "real ASGI API / actual renderer; renderer return delayed after actual conversion",
+      "new_model_requests": 0,
+      "new_search_requests": 0
+    },
+    {
+      "format": "pdf",
+      "status": "PASS",
+      "copy": {
+        "destination": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제검증_사본\\20261108_020222_626442_실제변환_pdf",
+        "databases": {
+          "실행기록.sqlite3": {
+            "integrity_check": "ok",
+            "source": {
+              "state": 1,
+              "events": 358,
+              "sqlite_sequence": 1,
+              "revisions": 3,
+              "calls": 70,
+              "requests": 6,
+              "reports": 2,
+              "activity_spans": 103
+            },
+            "copy": {
+              "state": 1,
+              "events": 358,
+              "sqlite_sequence": 1,
+              "revisions": 3,
+              "calls": 70,
+              "requests": 6,
+              "reports": 2,
+              "activity_spans": 103
+            }
+          },
+          "웹자료\\자료.sqlite3": {
+            "integrity_check": "ok",
+            "source": {
+              "web_sources": 66,
+              "web_history": 11,
+              "web_reads": 13
+            },
+            "copy": {
+              "web_sources": 66,
+              "web_history": 11,
+              "web_reads": 13
+            }
+          },
+          "호출예산.sqlite3": {
+            "integrity_check": "ok",
+            "source": {
+              "attempts": 127,
+              "budget_policy": 1
+            },
+            "copy": {
+              "attempts": 127,
+              "budget_policy": 1
+            }
+          }
+        },
+        "files": [
+          "형식변환\\15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.html",
+          "형식변환\\15e145b36b9b8dc6f18484dab4a7ef7e1a7a9402a8a446a11fe834deb4764440.json",
+          "형식변환\\a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.json",
+          "형식변환\\a5e8244c9737a0358c9c80328071580ec92d2dd2ba4b71d128a0ee37f4746aac.pdf",
+          "형식변환\\cec916ab47ce07e5eb32c05dfd2a7dedabba4d0f08163109a5974cfa173bc0c8.json",
+          "형식변환\\cec916ab47ce07e5eb32c05dfd2a7dedabba4d0f08163109a5974cfa173bc0c8.pdf",
+          "형식변환\\d9371c0fc7bb85161068e626dc824f7e180e4d320b27d08ae1d1be3b8dee1e63.html",
+          "형식변환\\d9371c0fc7bb85161068e626dc824f7e180e4d320b27d08ae1d1be3b8dee1e63.json",
+          "🧾 실제 연구 보고서_32927cf0a32240348029148500e54b87.md",
+          "🧾 실제 연구 보고서_44f307dedcbf4c8282d9b4e8a3a207bb.md"
+        ]
+      },
+      "target_render": {
+        "bytes": 162717,
+        "sha256": "908cfc262a30233205c5ceae3b2ee88d77ba26180b3bd6d98a3e4ca5ef6318ba"
+      },
+      "target_files_after": {
+        "cec916ab47ce07e5eb32c05dfd2a7dedabba4d0f08163109a5974cfa173bc0c8.pdf": false,
+        "cec916ab47ce07e5eb32c05dfd2a7dedabba4d0f08163109a5974cfa173bc0c8.json": false
+      },
+      "preserved_export_bytes": 130945,
+      "pdf_pages": 3,
+      "ledger_unchanged": true,
+      "transport": "real ASGI API / actual renderer; renderer return delayed after actual conversion",
+      "new_model_requests": 0,
+      "new_search_requests": 0
+    }
+  ],
+  "expected_formats": [
+    "html",
+    "pdf"
+  ],
+  "all_passed": true
+}

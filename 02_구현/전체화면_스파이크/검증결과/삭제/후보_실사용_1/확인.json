@@ -1,0 +1,92 @@
+{
+  "checks": [
+    {
+      "scenario": "S7",
+      "status": "FAIL",
+      "failed_checks": [
+        "layout_ok"
+      ],
+      "measured": {
+        "measurements": [],
+        "measurement_count": 0,
+        "layout_ok": false
+      }
+    },
+    {
+      "scenario": "보호검사",
+      "status": "PASS",
+      "failed_checks": [],
+      "measured": {
+        "request_count": 0,
+        "non_get": {},
+        "denied": [],
+        "requests_ok": true,
+        "errors": [],
+        "console_error_count": 0,
+        "errors_ok": true,
+        "live_before": {
+          "runs": [
+            [
+              "05f7695ed6a54f018bea6319a1ca790d",
+              "completed",
+              "2026-11-07T11:49:13.178146+00:00"
+            ],
+            [
+              "6d0214c0c03140be840a4508e11b4330",
+              "blocked",
+              "2026-11-07T11:45:16.141090+00:00"
+            ],
+            [
+              "9aa1aeeb5b0c4724b0e435563f6a5c76",
+              "completed",
+              "2026-11-06T07:42:18.270229+00:00"
+            ]
+          ],
+          "attempt_count": 100,
+          "high_watermark_seq": 358
+        },
+        "live_after": {
+          "runs": [
+            [
+              "05f7695ed6a54f018bea6319a1ca790d",
+              "completed",
+              "2026-11-07T11:49:13.178146+00:00"
+            ],
+            [
+              "6d0214c0c03140be840a4508e11b4330",
+              "blocked",
+              "2026-11-07T11:45:16.141090+00:00"
+            ],
+            [
+              "9aa1aeeb5b0c4724b0e435563f6a5c76",
+              "completed",
+              "2026-11-06T07:42:18.270229+00:00"
+            ]
+          ],
+          "attempt_count": 100,
+          "high_watermark_seq": 358
+        },
+        "live_ok": true,
+        "dist_files": 25,
+        "dist_unchanged_ok": true,
+        "manifest_ok": true
+      }
+    }
+  ],
+  "fatal": {
+    "error": "Cannot operate on a closed database.",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\삭제_실사용검사.py\", line 231, in main\n    with server(args,out,'S1_S4',copies) as (folder,base):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\YH\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\contextlib.py\", line 137, in __enter__\n    return next(self.gen)\n           ^^^^^^^^^^^^^^\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\삭제_실사용검사.py\", line 106, in server\n    summary = make_copy(dest)\n              ^^^^^^^^^^^^^^^\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\삭제_사본만들기.py\", line 32, in make_copy\n    with ExitStack() as stack:\n         ^^^^^^^^^^^\n  File \"C:\\Users\\YH\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\contextlib.py\", line 610, in __exit__\n    raise exc_details[1]\n  File \"C:\\Users\\YH\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\contextlib.py\", line 595, in __exit__\n    if cb(*exc_details):\n       ^^^^^^^^^^^^^^^^\nsqlite3.ProgrammingError: Cannot operate on a closed database.\n"
+  },
+  "copies": [],
+  "screenshots": [],
+  "requests": [],
+  "unverified": [
+    "중단 이후 시나리오"
+  ],
+  "script_sha256": {
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\삭제_실사용검사.py": "4be0fdd2d76e935bdfdb3fddafc1c3088e6d342cd07d700ea715aaeb3aa8962a",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\삭제_사본만들기.py": "58e86e1b53a044b600e07bd9dd1dd3df529fa8ef81758105a5554edef537c272"
+  },
+  "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" \"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증/삭제_실사용검사.py\" --port 8793 --label 후보_실사용_1",
+  "evidence": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\후보_실사용_1\\확인.json"
+}

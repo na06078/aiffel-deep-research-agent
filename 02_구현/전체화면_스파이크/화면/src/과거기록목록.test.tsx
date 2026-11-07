@@ -1,7 +1,8 @@
 import {expect,it,vi} from 'vitest';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {PastRecordList} from './과거기록목록';
-import type {RunSnapshot} from './계약';
+import type {RunDeletePreview,RunSnapshot} from './계약';
+import type {DeleteFlow} from './실행삭제.ts';
 
 function makeRun(overrides:Partial<RunSnapshot>&{run_id:string}):RunSnapshot{
   return {
@@ -94,11 +95,59 @@ it('두 버튼은 기존 문구로 같은 조작 행에 있고 각 콜백에 run
   expect(buttons.map((b:any)=>b.props.children)).toEqual(['자세히 보기','기록 재생']);
   buttons[0].props.onClick();expect(onDetail).toHaveBeenCalledWith('run-new');expect(onReplay).not.toHaveBeenCalled();
   buttons[1].props.onClick();expect(onReplay).toHaveBeenCalledWith('run-new');
-  expect(renderToStaticMarkup(<PastRecordList runs={[newer]} currentRunId={null} replayRunId={null} onDetail={onDetail} onReplay={onReplay}/>)).not.toContain('삭제');
+  // 삭제 버튼은 별도 구성요소로 같은 행에 추가되며 앞의 두 버튼은 그대로다(삭제 확인은 열기 전에는 없다).
+  expect(render([newer])).not.toContain('history-delete-confirm');
 });
 
 it('비어 있으면 안내 문구만 보인다',()=>{
   const html=render([]);
   expect(html).toContain('보존된 실행이 없습니다.');
   expect(html).not.toContain('record-list');
+});
+
+// ---- 삭제 진입점과 카드 안 확인 (SPEC 28.5) ----
+const counts={events:12,calls:4,activity_spans:6,requests:3,reports:1,report_files:1,export_files:2,web_sources:5,web_reads:7};
+const readyPreview:RunDeletePreview={run_id:'run-new',deletable:true,blockers:[],counts};
+const readyFlow=(runId:string):DeleteFlow=>({phase:'ready',runId,requestId:'req-1',preview:readyPreview});
+const items=(html:string)=>html.split('<li ').slice(1);
+const itemOf=(html:string,id:string)=>items(html).find(s=>s.includes(`data-run-id="${id}"`))!;
+
+it('모든 카드의 조작 행에 삭제 버튼이 있고 기존 두 버튼 뒤에 온다',()=>{
+  const html=render([older,newer]);
+  expect(html.match(/data-testid="history-delete"/g)).toHaveLength(2);
+  const row=itemOf(html,'run-new').match(/<div class="history-actions">(.*?)<\/div>/)![1];
+  expect(row.indexOf('자세히 보기')).toBeLessThan(row.indexOf('기록 재생'));
+  expect(row.indexOf('기록 재생')).toBeLessThan(row.indexOf('history-delete'));
+});
+
+it('running 실행의 삭제 버튼만 비활성이고 title이 있다',()=>{
+  const running=makeRun({run_id:'run-live',status:'running',created_at:'2026-11-08T00:00:00Z'});
+  const html=render([running,newer]);
+  const live=itemOf(html,'run-live').match(/<button[^>]*history-delete"[^>]*>/)![0];
+  expect(live).toContain('disabled=""');
+  expect(live).toContain('title="진행 중인 실행은 삭제할 수 없습니다. 먼저 취소하세요."');
+  expect(itemOf(html,'run-new').match(/<button[^>]*history-delete"[^>]*>/)![0]).not.toContain('disabled');
+});
+
+it('확인 상태는 해당 카드 안에만 나타난다(한 번에 하나)',()=>{
+  const html=render([older,newer],{deleteFlow:readyFlow('run-new')});
+  expect(html.match(/data-testid="history-delete-confirm"/g)).toHaveLength(1);
+  expect(itemOf(html,'run-new')).toContain('history-delete-confirm');
+  expect(itemOf(html,'run-new')).toContain('사건 12건 · 보고서 1건 · 변환 파일 2개 · 웹 자료 5건을 영구 삭제합니다.');
+  expect(itemOf(html,'run-old')).not.toContain('history-delete-confirm');
+});
+
+it('삭제 흐름이 없으면 확인 상태가 없다',()=>{
+  expect(render([newer])).not.toContain('history-delete-confirm');
+  expect(render([newer],{deleteFlow:{phase:'idle'}})).not.toContain('history-delete-confirm');
+});
+
+it('삭제 시작·확인·취소 콜백을 연결한다',()=>{
+  const onDeleteStart=vi.fn(),onDeleteConfirm=vi.fn(),onDeleteCancel=vi.fn();
+  const tree=PastRecordList({runs:[newer],currentRunId:null,replayRunId:null,onDetail:noop,onReplay:noop,deleteFlow:readyFlow('run-new'),onDeleteStart,onDeleteConfirm,onDeleteCancel});
+  const deleteButton=findNode(tree,n=>n.props.onStart!==undefined);
+  deleteButton.props.onStart('run-new');expect(onDeleteStart).toHaveBeenCalledWith('run-new');
+  const confirm=findNode(tree,n=>n.props.onConfirm!==undefined);
+  confirm.props.onConfirm();confirm.props.onCancel();
+  expect(onDeleteConfirm).toHaveBeenCalledOnce();expect(onDeleteCancel).toHaveBeenCalledOnce();
 });

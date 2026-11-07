@@ -1,4 +1,4 @@
-import type { Admission, Snapshot, EventDetail, Report, ReportExport, ReportExports, ExportFormat, ReleaseOutcome, SourceMode } from './계약';
+import type { Admission, Snapshot, EventDetail, Report, ReportExport, ReportExports, ExportFormat, ReleaseOutcome, SourceMode, RunDeletePreview, RunDeleteResult } from './계약';
 export async function request<T>(path:string,body?:unknown):Promise<T> {
  const response=await fetch(path, body===undefined?undefined:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
  if(!response.ok){const data=await response.json().catch(()=>null);throw new Error(data?.error?`${data.error.code}: ${data.error.message}`:`HTTP ${response.status}`);}
@@ -16,4 +16,6 @@ export const api={
  release:(ids:string[],outcome:ReleaseOutcome)=>request<{released_gate_ids:string[]}>('/api/spike/releases',{gate_ids:ids,outcome}),
  cancel:(run_id:string,control_revision:number)=>request('/api/spike/cancel',{run_id,control_revision,client_request_id:crypto.randomUUID()}),
  continue:()=>request('/api/spike/queue/continue',{client_request_id:crypto.randomUUID()}),
+ deletePreview:(id:string)=>request<RunDeletePreview>(`/api/spike/runs/${encodeURIComponent(id)}/delete-preview`),
+ deleteRun:(id:string,clientRequestId:string)=>request<RunDeleteResult>(`/api/spike/runs/${encodeURIComponent(id)}/delete`,{client_request_id:clientRequestId,confirm_run_id:id}),
 };

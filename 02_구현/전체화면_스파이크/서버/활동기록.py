@@ -6,7 +6,7 @@ from contextvars import ContextVar
 from functools import wraps
 from time import perf_counter
 
-from 서버.저장소 import encode, now, uid
+from 서버.저장소 import encode, now, run_deleted, uid
 
 # task별 독립 목록. Send 병렬 작업은 노드 진입에서 새 context를 설정한다.
 _current = ContextVar("activity_spans", default=())
@@ -34,6 +34,8 @@ class Activity:
         }
 
     def save(self, db):
+        if run_deleted(db, self.body["run_id"]):
+            return
         db.execute(
             "INSERT INTO activity_spans(span_id,run_id,body) VALUES(?,?,?) "
             "ON CONFLICT(span_id) DO UPDATE SET body=excluded.body",

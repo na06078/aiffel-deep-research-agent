@@ -132,3 +132,22 @@ export interface ReportExports {
   source_report_hash: string;
   exports: ReportExport[];
 }
+
+// 기술 명세28절: 실행 삭제(즉시 영구 삭제). 서버와 화면이 같은 모양을 쓴다.
+export interface RunDeleteCounts {
+  events: number; calls: number; activity_spans: number; requests: number;
+  reports: number; report_files: number; export_files: number;
+  web_sources: number; web_reads: number;
+}
+export interface RunDeleteDependent { run_id: string; question: string; created_at: string }
+export interface RunDeleteBlocker {
+  code: 'run_running' | 'has_dependents';
+  message: string;
+  dependents?: RunDeleteDependent[];
+}
+export interface RunDeletePreview {
+  run_id: string; deletable: boolean; blockers: RunDeleteBlocker[]; counts: RunDeleteCounts;
+}
+export interface RunDeleteResult {
+  status: 'deleted'; run_id: string; counts: RunDeleteCounts; warnings: string[]; current_run_id: string | null;
+}

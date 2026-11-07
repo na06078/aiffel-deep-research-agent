@@ -1,0 +1,214 @@
+{
+  "status": "구현 및 격리 인접 회귀 통과. 최종 수용 판정은 메인 담당.",
+  "scope": {
+    "root": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트",
+    "spike": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크",
+    "python": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe",
+    "basetemp": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제보완S_테스트",
+    "no_live_data_server_network_models": true,
+    "git_operations": false,
+    "schema_changes": false
+  },
+  "changed_files": [
+    {
+      "path": "서버/저장소.py",
+      "sha256": "bff9ea9d64fff72203c57ae1bf4f4045db2dc084e16241309855ecfb0a00db8c",
+      "kind": "modified"
+    },
+    {
+      "path": "서버/활동기록.py",
+      "sha256": "a9bbd77a72954d6e339fb8edd61038b3432d23ed76cbc3081e750c7078ea186a",
+      "kind": "modified"
+    },
+    {
+      "path": "서버/보고서변환.py",
+      "sha256": "179b0a673b3e5291f515a09576f7861c5b046aa13b0a1ad36e8a95c8f83c24d5",
+      "kind": "modified"
+    },
+    {
+      "path": "테스트/테스트_실행삭제.py",
+      "sha256": "b3c1c2278de9a36b60998ba61f626c131311e641cadacb51f7fc5a16ce291726",
+      "kind": "modified"
+    },
+    {
+      "path": "테스트/테스트_삭제후기록차단.py",
+      "sha256": "1bd3a72a8e8c31cedb88cd5083b22a6a21c23d8215f59ffbaffd375946f8aa23",
+      "kind": "created"
+    },
+    {
+      "path": "테스트/테스트_삭제중변환.py",
+      "sha256": "1c200f557607e5299c65305d83a6f523a2c58781df097b9ef705cd2fde28b5f4",
+      "kind": "created"
+    }
+  ],
+  "root_causes": {
+    "F-01": "취소는 실행 상태만 바꾸고 이미 기다리는 coroutine은 계속된다. event()는 무조건 INSERT, Activity.save는 finally에서도 UPSERT하여 삭제 행이 복원되었다.",
+    "F-02": "purge는 현재 파일만 제거했다. renderer await 뒤 atomic/save 및 실패·취소 종료 save는 보고서 삭제 여부를 재판정하지 않았다.",
+    "F-03": "삭제한 web_sources의 하위쿼리로 history를 세므로 고아 이력의 잔존을 발견하지 못했다."
+  },
+  "mechanisms": {
+    "F-01": "저장소.run_deleted(db,run_id)가 기존 deletions/run.deleted/input.run_id 영속 흔적을 검사한다. 필요하면 BEGIN IMMEDIATE를 먼저 시작하여 삭제 커밋과 check→INSERT/UPSERT를 직렬화한다. Repository.event는 삭제 대상만 None 무기록 반환, Activity.save는 삭제 대상만 무기록 종료. 비삭제 취소/이전 버전은 기존 사건과 활동을 보존한다.",
+    "F-02": "ReportExports.write_if_current가 BEGIN IMMEDIATE 연결에서 reports 행 존재와 sha256 일치를 확인하고 같은 잠금 경계 안에서 파일 atomic 교체한다. 모든 production atomic 호출이 이 경계 하나로 모인다. save()도 이 경계를 사용하여 성공·실패·취소·재시작 메타데이터 전부 차단. 삭제 전에 쓴 파일은 purge, 삭제 커밋 뒤에는 무기록. purge 공개 반환 형태 및 source hash 바인딩 유지.",
+    "F-03": "통합 삭제 및 WebSourceStore 단위시험에서 삭제 전 source_id 목록과 이력 2건을 확보하고 삭제 뒤 그 ID로 web_history를 직접 검사한다. 다른 실행 source/read/history 보존 대조 유지."
+  },
+  "behavior_first_evidence": [
+    {
+      "finding": "F-01",
+      "red_log": "보완S_F01_RED.log",
+      "red_result": "1 failed; 삭제 직후 0이던 events=1, activity_spans=2 복원 단언 실패",
+      "green_log": "보완S_F01_GREEN.log",
+      "green_result": "1 passed"
+    },
+    {
+      "finding": "F-02",
+      "red_log": "보완S_F02_RED.log",
+      "red_result": "1 failed; 삭제 후 지연 renderer 해제 시 .html 및 .json 두 파일 복원 단언 실패",
+      "green_log": "보완S_F02_GREEN.log",
+      "green_result": "1 passed"
+    },
+    {
+      "finding": "F-03",
+      "red_log": "보완S_F03_통합변이_RED.log",
+      "red_result": "2 failed; 프로세스 내 _connection proxy로 DELETE FROM web_history만 건너뛰었을 때 단위/실제 삭제 API 통합 모두 history=2 대 0 단언 실패. production 파일 변경 없음.",
+      "green_log": "보완S_최종_확정회귀.log",
+      "green_result": "동일 강화 시험 포함 113 passed, 1 deselected"
+    }
+  ],
+  "regression_coverage": {
+    "new_tests": 37,
+    "new_modules": {
+      "테스트_삭제후기록차단.py": 27,
+      "테스트_삭제중변환.py": 10
+    },
+    "matrix": "실제 ExecutionService.synthesize 및 RealResearchService.plan→complete: 지연 성공/실패/Task 취소 × 삭제/비삭제 취소/비삭제 revision 교체. 삭제 시 다른 활성 실행과 queue 상태 불변, 새 Repository/Activity에서도 차단. 웹 실제 research 경로는 지연 search/fetch × 성공/오류 × observer 없음/worker thread 콜백, 실제 웹 sidecar에서 source/read/history 무복원. HTML/PDF 변환 성공/오류/취소/timeout, PDF 슬롯 대기 성공/취소, 새 ReportExports 소유자의 stale save 차단, 다른 보고서 변환 보존.",
+    "final_per_module": {
+      "테스트.테스트_삭제후기록차단": 27,
+      "테스트.테스트_삭제중변환": 10,
+      "테스트.테스트_실행삭제": 25,
+      "테스트.테스트_실행제어": 8,
+      "테스트.테스트_활동기록": 6,
+      "테스트.테스트_커밋경계": 3,
+      "테스트.테스트_웹자료저장소": 3,
+      "테스트.테스트_보고서변환_API": 31
+    },
+    "final_result": "113 passed, 1 deselected in 27.14s",
+    "junit": "보완S_최종_확정회귀.xml",
+    "source_hashes_stable_across_final_test_and_ruff": true,
+    "ruff": "check: All checks passed!; format --check: 6 files already formatted",
+    "excluded": "테스트_보고서변환_API.py::test_실제ASGI_PDF생성다운로드도_기본렌더러를_통과한다 (실제 Chromium 실행 제외). 실제 연구 기존 모듈의 .cache 고정 fixture 회귀 및 전체 suite는 메인 최종 게이트에 남김."
+  },
+  "reviewed_boundaries": [
+    "event 반환값 소비는 실행제어.py admit(mode change/queued)와 start의 seq뿐. 새 ID/존재하는 현재 실행의 동일 transaction이며 삭제 대상 늦은 완료 경로는 반환값을 사용하지 않는다. 새로운 public API 응답 모양 변경 없음.",
+    "calls INSERT와 publish/report/file, 상태/revision 변경은 기존 fenced 검사 안에 있다. 늦은 calls 경로는 UPDATE이므로 지운 행을 만들지 않는다.",
+    "웹연구.py register_candidates/save_fetch/mark_failed/receipt 및 observer 모두 repo.transaction+fenced 검사 뒤 쓰며 보완 생산코드 변경 불필요. 지연 통합 시험으로 무복원 확인.",
+    "ReportExports 생성자 및 atomic 호출을 서버/테스트 파일에서 검색: production atomic은 write_if_current 한 곳. 테스트 seed_exports의 atomic은 삭제 전 fixture만 생성한다."
+  ],
+  "invariants": [
+    "즉시 영구 삭제/2단계 확인/삭제 차단 정책 및 멱등 응답 변경 없음",
+    "기존 run.deleted 흔적 원문과 독립검토 changes_requested 보존",
+    "예산 코드/장부 변경 없음; 기존 삭제시험에서 임시 예산 장부 바이트 불변 통과",
+    "다른 실행 작업을 취소하거나 예산을 초기화하지 않음",
+    "운영 03_실행데이터 접근 없음, 서버/포트/실제 모델/네트워크 호출 없음, 실제 PDF는 대역",
+    "삭제 대상 coroutine/renderer는 실행을 마칠 수 있으나 영속 결과만 저장 경계에서 거절한다. in-memory 취소 집합에 의존하지 않음"
+  ],
+  "issues_encountered": [
+    {
+      "log": "보완S_F01_설정오류.log",
+      "note": "최초 pytest --basetemp 부모 폴더 미생성으로 setup error. 승인 cache 경로 부모 생성 후 의도한 단언 RED 재실행. setup error를 RED로 계산하지 않음."
+    },
+    {
+      "log": "보완S_F03_MUTATION_설정오류.log",
+      "note": "최초 mutation proxy executescript 위임 누락. __getattr__ 위임 추가 후 정확한 history 단언 RED 관측. 이 오류를 행동 RED로 계산하지 않음."
+    },
+    {
+      "note": "추가 행렬은 기존 두 저장 경계 수정의 회귀 확장이다. 각 행렬 조합에 별도 선행 RED가 있었다고 주장하지 않는다."
+    }
+  ],
+  "remaining_unverified": [
+    "메인 담당 전체 backend suite 최종 게이트",
+    "사본 격리 서버 실제 브라우저 삭제/재생/현재 실행 교체/빈 목록/지연 응답 흐름",
+    "실제 PDF/브라우저 렌더링과 삭제 경합 및 최종 독립 검토",
+    "운영 적용/8768 재시작은 승인 범위 아님"
+  ],
+  "commands": [
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -m pytest 테스트/테스트_삭제후기록차단.py -q --basetemp='C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제보완S_테스트\\F01_RED'",
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -m pytest 테스트/테스트_삭제후기록차단.py -q --basetemp='C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제보완S_테스트\\F01_RED'",
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -m pytest 테스트/테스트_삭제후기록차단.py -q --basetemp='C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제보완S_테스트\\F01_GREEN'",
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -m pytest 테스트/테스트_삭제중변환.py -q --basetemp='C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제보완S_테스트\\F02_RED'",
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -m pytest 테스트/테스트_삭제중변환.py -q --basetemp='C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제보완S_테스트\\F02_GREEN'",
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -m pytest 테스트/테스트_삭제후기록차단.py -q --basetemp='C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제보완S_테스트\\F01_확장'",
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -c 'import contextlib\nimport pytest\nfrom 서버.웹자료저장소 import WebSourceStore\noriginal = WebSourceStore._connection\n@contextlib.contextmanager\ndef connection(self):\n    with original(self) as db:\n        class SkipHistory:\n            def execute(self, sql, *args):\n                if sql.startswith(\"DELETE FROM web_history\"):\n                    return db.execute(\"SELECT 1\")\n                return db.execute(sql, *args)\n        yield SkipHistory()\nWebSourceStore._connection = connection\nraise SystemExit(pytest.main([\"테스트/테스트_실행삭제.py::test_WebSourceStore_count_run과_delete_run\", \"-q\", \"--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제보완S_테스트/F03_MUTATION\"]))\n'",
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -m pytest 테스트/테스트_실행삭제.py -q --basetemp='C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제보완S_테스트\\F03_GREEN'",
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -c 'import contextlib\nimport pytest\nfrom 서버.웹자료저장소 import WebSourceStore\noriginal = WebSourceStore._connection\n@contextlib.contextmanager\ndef connection(self):\n    with original(self) as db:\n        class SkipHistory:\n            def __getattr__(self, name):\n                return getattr(db, name)\n            def execute(self, sql, *args):\n                if sql.startswith(\"DELETE FROM web_history\"):\n                    return db.execute(\"SELECT 1\")\n                return db.execute(sql, *args)\n        yield SkipHistory()\nWebSourceStore._connection = connection\nraise SystemExit(pytest.main([\"테스트/테스트_실행삭제.py::test_WebSourceStore_count_run과_delete_run\", \"-q\", \"--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제보완S_테스트/F03_MUTATION\"]))\n'",
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -m pytest 테스트/테스트_삭제후기록차단.py 테스트/테스트_삭제중변환.py -q --basetemp='C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제보완S_테스트\\경합확장_GREEN'",
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -m ruff check '서버/저장소.py' '서버/활동기록.py' '서버/보고서변환.py' '테스트/테스트_실행삭제.py' '테스트/테스트_삭제후기록차단.py' '테스트/테스트_삭제중변환.py'",
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -m ruff format --check '서버/저장소.py' '서버/활동기록.py' '서버/보고서변환.py' '테스트/테스트_실행삭제.py' '테스트/테스트_삭제후기록차단.py' '테스트/테스트_삭제중변환.py'",
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -m ruff format --diff '서버/저장소.py' '서버/활동기록.py' '서버/보고서변환.py' '테스트/테스트_실행삭제.py' '테스트/테스트_삭제후기록차단.py' '테스트/테스트_삭제중변환.py'",
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -m pytest 테스트/테스트_삭제후기록차단.py 테스트/테스트_삭제중변환.py 테스트/테스트_실행삭제.py 테스트/테스트_실행제어.py 테스트/테스트_활동기록.py 테스트/테스트_커밋경계.py 테스트/테스트_웹자료저장소.py 테스트/테스트_보고서변환_API.py -k \"not 실제ASGI_PDF\" --junitxml='C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\보완S_최종_인접회귀.xml' -q --basetemp='C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제보완S_테스트\\최종_인접회귀'",
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -m ruff check '서버/저장소.py' '서버/활동기록.py' '서버/보고서변환.py' '테스트/테스트_실행삭제.py' '테스트/테스트_삭제후기록차단.py' '테스트/테스트_삭제중변환.py'",
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -m ruff format --check '서버/저장소.py' '서버/활동기록.py' '서버/보고서변환.py' '테스트/테스트_실행삭제.py' '테스트/테스트_삭제후기록차단.py' '테스트/테스트_삭제중변환.py'",
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -c 'import contextlib\nimport pytest\nfrom 서버.웹자료저장소 import WebSourceStore\noriginal = WebSourceStore._connection\n@contextlib.contextmanager\ndef connection(self):\n    with original(self) as db:\n        class SkipHistory:\n            def __getattr__(self, name):\n                return getattr(db, name)\n            def execute(self, sql, *args):\n                if sql.startswith(\"DELETE FROM web_history\"):\n                    return db.execute(\"SELECT 1\")\n                return db.execute(sql, *args)\n        yield SkipHistory()\nWebSourceStore._connection = connection\nraise SystemExit(pytest.main([\"테스트/테스트_실행삭제.py::test_WebSourceStore_count_run과_delete_run\", \"테스트/테스트_실행삭제.py::test_삭제는_DB_상태_보고서_변환_웹자료를_모두_지우고_예산_장부는_그대로다\", \"-q\", \"--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/삭제보완S_테스트/F03_통합변이\"]))\n'",
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -m pytest 테스트/테스트_삭제후기록차단.py 테스트/테스트_삭제중변환.py 테스트/테스트_실행삭제.py 테스트/테스트_실행제어.py 테스트/테스트_활동기록.py 테스트/테스트_커밋경계.py 테스트/테스트_웹자료저장소.py 테스트/테스트_보고서변환_API.py -k \"not 실제ASGI_PDF\" --junitxml='C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\삭제\\보완S_최종_확정회귀.xml' -q --basetemp='C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\삭제보완S_테스트\\최종_확정회귀'",
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -m ruff check '서버/저장소.py' '서버/활동기록.py' '서버/보고서변환.py' '테스트/테스트_실행삭제.py' '테스트/테스트_삭제후기록차단.py' '테스트/테스트_삭제중변환.py'",
+    "'C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe' -m ruff format --check '서버/저장소.py' '서버/활동기록.py' '서버/보고서변환.py' '테스트/테스트_실행삭제.py' '테스트/테스트_삭제후기록차단.py' '테스트/테스트_삭제중변환.py'"
+  ],
+  "evidence_files": {
+    "보완S_F01_GREEN.log": {
+      "sha256": "18d7ed42ae2657f5e655109e8219c4de53db53651e2cb8b297569b3b68056dcb"
+    },
+    "보완S_F01_RED.log": {
+      "sha256": "46d1c909babb766453a0e2d3f1f0902d59ba88a65105fb55059cc1a842d3c527"
+    },
+    "보완S_F01_설정오류.log": {
+      "sha256": "075d0a96ce167bd0e880abce990a8bd3fdfa264158eaa4f2996bff6d80357436"
+    },
+    "보완S_F01_확장.log": {
+      "sha256": "3454034daa5026142140b7f0e6067f188967b934b7111277dad57c3a137426d9"
+    },
+    "보완S_F02_GREEN.log": {
+      "sha256": "4cd578acaa79d6dfc8b52c71635309430e39428f946de9981a53003e6e3e2c86"
+    },
+    "보완S_F02_RED.log": {
+      "sha256": "2dcd8bd5f6441ba1efc20ad61f6c3fb16737a6c8fa3f8ed7f5cad324ea2ed860"
+    },
+    "보완S_F03_GREEN.log": {
+      "sha256": "0ac7dbff25d7e190eae3114bb72f969decc58d37a543bb530a06d16e02fd7f90"
+    },
+    "보완S_F03_MUTATION_RED.log": {
+      "sha256": "03c9d87028d63d2ab045f0a264574bb5ac969b912501aedc4bcf530151cd2fb2"
+    },
+    "보완S_F03_MUTATION_설정오류.log": {
+      "sha256": "59f5346e0ef7d337463a3c86fc0d7df7f604a1d0c36bccf01e989b220d3b66a7"
+    },
+    "보완S_F03_통합변이_RED.log": {
+      "sha256": "898dc55f33439a095b31bb63ac9278163cf93507335f910860cc40c7eb8c495d"
+    },
+    "보완S_Ruff_check.log": {
+      "sha256": "5a91c9269b27f9ad310db9dd40614d11c4510bf0eae41d497157aa26bf52af8c"
+    },
+    "보완S_Ruff_check_최종.log": {
+      "sha256": "5a91c9269b27f9ad310db9dd40614d11c4510bf0eae41d497157aa26bf52af8c"
+    },
+    "보완S_Ruff_format.log": {
+      "sha256": "6644e5b0bc8b5b0a41e4afa5eee9a6c3050bf8eb679fc1407102da936442b294"
+    },
+    "보완S_Ruff_format_최종.log": {
+      "sha256": "6644e5b0bc8b5b0a41e4afa5eee9a6c3050bf8eb679fc1407102da936442b294"
+    },
+    "보완S_경합확장_GREEN.log": {
+      "sha256": "467bbd2159eba7c15952669bf6041128e5ea11d9e6a63aa259621ebe067e8eea"
+    },
+    "보완S_최종_인접회귀.log": {
+      "sha256": "7c366b637f47d11b825316cd8a97129a5e252118ae572517a56098b303021db1"
+    },
+    "보완S_최종_인접회귀.xml": {
+      "sha256": "edf357e1a0ac127e4569ee0cf4d3864efff64c12edc58bc6d26dc1a68bcc67b6"
+    },
+    "보완S_최종_확정회귀.log": {
+      "sha256": "f870b0acf568337eb625e301cefa7bc74cd59123fd93fc39e89d1402159dea27"
+    },
+    "보완S_최종_확정회귀.xml": {
+      "sha256": "17badf1b742575bc6cbb1e88cbfde11f1790b6095a6311a6013345f2b25fbfa7"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+ "worker": "F",
+ "files_modified": {
+  "과거기록목록.tsx": "c8d4c7ad7d8410a64a41f407d215561291855cf48320b8997a6efc151f01be6f",
+  "과거기록목록.test.tsx": "8793bd9cb55e24f70dc824b98fa5d5ecdfc2197a6074157f278aef520d50e37d",
+  "앱.tsx": "68c54feb49a156cee2469dbb423dc7fd17b350db076d14365a3eb62518fc548d",
+  "앱.test.tsx": "8cea1081ae4968ee84bb82a909616abed891f171588076bd532906e18305bf68",
+  "통신.ts": "a26a20a6567aee4981cb16f7c1291fdf5ed7fdac12f904b9aa1f0fbff3996d81",
+  "통신.test.ts": "3b8a3e581ef7336a17eede2eabc2e43f053611c251feca7e0d62b93b3926c6fe",
+  "화면.css": "6a8868ea296a630d2d3b9fedab46782851ddf9d744c43c93b407563718f683d1"
+ },
+ "files_created": {
+  "실행삭제.ts": "d7d667c7ade13b37959ac09fd253554bd2acc43aecda8758d491c55992472aef",
+  "실행삭제.tsx": "5476c32d26dee6e4e12fb0688c7026bce2d78607430f7b0d6e8a31dda608ec4b",
+  "실행삭제.test.ts": "1d9aa7766259668c6da0de66ba79d5b43e767cb39b76bab496ab0135c7e52861",
+  "실행삭제.test.tsx": "94f57691afbc625609e7d2b44f534324d072c52e3e80d4a035ce714cd43e0244"
+ },
+ "red_evidence": {
+  "log": "작업자F_RED.log",
+  "summary": "Test Files 5 failed | 19 passed; Tests 6 failed | 150 passed (신규 3개 스위트는 모듈 부재로 수집 실패)",
+  "failing": [
+   "FAIL  src/과거기록목록.test.tsx > running 실행의 삭제 버튼만 비활성이고 title이 있다",
+   "FAIL  src/과거기록목록.test.tsx > 모든 카드의 조작 행에 삭제 버튼이 있고 기존 두 버튼 뒤에 온다",
+   "FAIL  src/과거기록목록.test.tsx > 삭제 시작·확인·취소 콜백을 연결한다",
+   "FAIL  src/과거기록목록.test.tsx > 확인 상태는 해당 카드 안에만 나타난다(한 번에 하나)",
+   "FAIL  src/실행삭제.test.ts [ src/실행삭제.test.ts ]",
+   "FAIL  src/실행삭제.test.tsx [ src/실행삭제.test.tsx ]",
+   "FAIL  src/앱.test.tsx [ src/앱.test.tsx ]",
+   "FAIL  src/통신.test.ts > deletePreview는 인코딩한 실행 ID의 delete-preview만 GET한다",
+   "FAIL  src/통신.test.ts > deleteRun은 요청 ID와 확인용 실행 ID를 본문에 담아 POST하고 오류 코드를 보존한다"
+  ]
+ },
+ "green": {
+  "log": "작업자F_GREEN.log",
+  "test_files": 24,
+  "tests": 205,
+  "baseline": "22 files / 163 tests",
+  "tsc_exit": 0
+ },
+ "assumptions": [
+  "실행삭제.ts와 실행삭제.tsx는 확장자만 달라 번들러가 확장자 없는 import를 .ts로 풀기 때문에, 화면 파일은 반드시 ./실행삭제.tsx 처럼 확장자를 붙여 import한다(tsconfig allowImportingTsExtensions=true).",
+  "오류 코드별 한국어 문구(run_running, confirm_mismatch, not_found)와 막힘 목록의 빈 blockers 대체 문구는 명세에 없어 구현자가 작성했다. has_dependents 문구는 명세 예문을 그대로 썼다.",
+  "조회 중 상태에는 명세에 취소 버튼이 없어 두지 않았다. 미리보기 조회가 실패하면(preview 없음) 알림과 취소만 보이고 삭제 확인은 없다.",
+  "확인 상태는 popup을 열거나 닫을 때 취소된다(삭제 중에는 취소 무시). 삭제 중에는 다른 실행의 확인을 열 수 없다.",
+  "열린 사건·보고서·실행 상세 창은 삭제된 실행 소속 여부와 관계없이 과거 기록 목록으로 돌린다(명세 문구 그대로, 창이 run_id를 갖고 있지 않음).",
+  "run.deleted 숨김은 eventList(사건 기록·실행 상세)와 앱의 현재 실행 사건 목록(events)에 적용했다. 스냅샷 원본·기록 재생 아카이브 내부는 변경하지 않았다.",
+  "running 판정은 run.status===running 이다. 서버가 삭제 시점에 409로 다시 판정한다."
+ ],
+ "unverified": [
+  "실제 서버 호출 없음(no real server call made): 모든 API는 stub fetch로 시험했다.",
+  "실제 브라우저·390px 폭 렌더링·터치 크기는 확인하지 않았다(CSS는 min-height 42px, flex-wrap, overflow-wrap 사용, 시각 검증 안 함).",
+  "vite 빌드는 실행하지 않았다(금지).",
+  "FE/dist 미접촉, 서버/포트 미접촉."
+ ]
+}

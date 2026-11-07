@@ -1,0 +1,53 @@
+{
+  "status": "offline_hooks_fixed_and_verified",
+  "cwd": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면",
+  "scope": "프론트엔드 replay/delete 경합만 수정. 서버/API/계약/실행기록.ts 변경 없음. 브라우저·서버·빌드·설치·Git·네트워크·모델·운영 데이터 접근 없음.",
+  "root_cause": "삭제 POST 성공 후 useRunDelete가 playback.live()를 호출할 때 snapshot.current_run_id는 여전히 C일 수 있다. useRecordedReplay wanted는 C를 유지하지만 watermark가 null에서 기존 snapshot seq로 바뀌어 C archive GET을 다시 실행했다. SSE snapshot이 먼저 C를 제거하는 반대 순서에서는 명시 재생 runId와 로드된 C 투영이 그대로 남았다.",
+  "prior_evidence": {
+    "path": "후보_실사용_3/확인.json",
+    "finding_source": "작업자V_인계.json findings",
+    "S5": "모드 live·sessionStorage 제거·비대상 재생 보존은 PASS였으나 보호검사는 삭제 대상 archive console 404 1건으로 FAIL. 이 404를 허용하거나 필터링하지 않았다.",
+    "deleted_archive_run_id": "05f7695ed6a54f018bea6319a1ca790d"
+  },
+  "mechanism": [
+    "App이 useRunDelete의 onDeletedRun에 playback.deleted를 연결한다. 모든 삭제 성공 ID를 live/refresh보다 먼저 replay 훅에 전달한다.",
+    "성공이 확인된 삭제 ID를 훅 내부 Set에 유지하여 오래된 current snapshot, watermark 갱신, retry로도 해당 archive를 새로 요청하지 않는다. 다른 재생 대상에는 영향을 주지 않는다.",
+    "이 마운트에서 snapshot으로 실제 관측했던 재생 ID가 이후 snapshot에서 사라지면 유효 runId를 렌더 시점부터 null로 계산한다. 과거 archive/projection은 즉시 숨기고 effect로 재생 상태와 저장 키를 정리한다.",
+    "최초 null snapshot 및 한 번도 목록에서 관측되지 않은 복원/수동 ID의 부재는 삭제 증거로 쓰지 않는다. 이 경우 GET과 정상 오류 표시·재시도를 유지한다.",
+    "기존 archive effect의 cleanup/disposed 경계를 유지하여 대상 전환 후 늦은 성공·실패를 폐기한다. live high_watermark 갱신과 읽기 전용 seek/play를 유지한다."
+  ],
+  "test_boundary": "새 기록재생연결.test.ts는 실제 useRecordedReplay와 useRunDelete를 함께 호출한다. 설치된 Vitest만 사용하고 React useState/useReducer/useRef, 의존성 비교·effect commit·cleanup·상태 갱신 rerender를 제어하는 no-DOM harness를 사용한다. effect를 no-op으로 만들지 않는다. 삭제 Promise와 snapshot 입력을 독립적으로 전진시킨다. 앱 기존 시험도 onDeletedRun 연결을 별도 검증한다. 실제 React DOM 스케줄러·SSE 전송·HTTP 서버·브라우저 콘솔은 이 시험 경계 밖이다.",
+  "red": [
+    {"tests": 1, "failed": 1, "reason": "제품 수정 전 삭제 성공/refresh 미완료 상태에서 C archive 호출이 1회여야 하나 2회였다.", "log": "보완F_RED.log:1-40"},
+    {"tests": 2, "passed": 1, "failed": 1, "reason": "1차 수정 후 SSE snapshot이 먼저 C를 제거한 첫 렌더에서 projection=null 기대와 달리 C 투영이 남았다.", "log": "보완F_RED.log:41-97"}
+  ],
+  "green": {
+    "focused": {"files": 4, "passed": 62, "exit_code": 0},
+    "full": {"files": 25, "passed": 218, "exit_code": 0, "duration_seconds": 2.21},
+    "baseline": {"files": 24, "passed": 205},
+    "added": {"files": 1, "tests": 13},
+    "tsc_noEmit_exit_code": 0,
+    "log": "보완F_GREEN.log",
+    "cases": ["POST 성공이 snapshot보다 먼저", "SSE snapshot이 POST 응답보다 먼저", "최신 current=A 또는 null/빈 목록", "실시간 current 삭제와 오래된 watermark/retry", "B 삭제 중 C 재생·cursor·storage 보존", "POST 대기 중 다른 재생 선택", "늦은 archive 성공·실패 폐기", "최초 snapshot=null 복원 및 미관측 ID 보존", "수동 미확인 ID의 정상 404·네트워크 오류·재시도", "live watermark 갱신과 seek/play 무조회", "삭제 실패 유지·동일 ID 재시도", "snapshot만으로 마지막 대상 소멸", "삭제 대상 sessionStorage 키 정리"]
+  },
+  "commands": [
+    "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/기록재생연결.test.ts > '../검증결과/삭제/보완F_RED.log' 2>&1",
+    "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/기록재생연결.test.ts > '../검증결과/삭제/보완F_GREEN.log' 2>&1",
+    "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/기록재생연결.test.ts >> '../검증결과/삭제/보완F_RED.log' 2>&1",
+    "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/기록재생연결.test.ts >> '../검증결과/삭제/보완F_GREEN.log' 2>&1",
+    "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/기록재생연결.test.ts src/실행삭제.test.ts src/실행삭제.test.tsx src/앱.test.tsx >> '../검증결과/삭제/보완F_GREEN.log' 2>&1",
+    "\"C:/nvm4w/nodejs/node.exe\" node_modules/typescript/bin/tsc --noEmit >> '../검증결과/삭제/보완F_GREEN.log' 2>&1",
+    "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run >> '../검증결과/삭제/보완F_GREEN.log' 2>&1"
+  ],
+  "issues": ["신규 시험 refresh mock의 넓은 ReturnType<typeof vi.fn>이 TS2322를 일으켰다. 호출 시그니처를 명시한 mock 타입으로 수정한 뒤 최종 tsc exit=0. 초기 오류 로그는 보존했다.", "search_files가 실제 존재하는 시험 경로에서 빈 결과를 반환하여 pathlib로 25개 시험 파일과 외부 호출 표식을 확인한 뒤 전체 Vitest를 실행했다."],
+  "unverified": ["실제 브라우저의 삭제→실시간 복귀와 콘솔/network 재검증", "정적 번들 빌드/적용 및 실제 React DOM 스케줄링", "사본 서버의 SSE/HTTP 통합 순서 검증"],
+  "files_sha256": {
+    "src/기록재생연결.ts": "0e466209d552391cc9d2fe19a48ee3aa7f850ee59e913d40c60406f592c51feb",
+    "src/기록재생연결.test.ts": "77c82969961fcbd9b2edfad8db0ca61828fc4050038dc83bb4a0825c232dffbb",
+    "src/실행삭제.tsx": "9c9246cc0324b5cf1dc488eaa7523314c37bebf597c4303c7303bbf7e65986af",
+    "src/앱.tsx": "e8f036055a80a3b34c7c84f2c9728aa073b19564cb0be2000094a8b467670522",
+    "src/앱.test.tsx": "d5401c7431b9ea3b86134ff05a84c58abe00aa4d646720ff1c62f4928fbc2f03",
+    "../검증결과/삭제/보완F_RED.log": "590fab5b017f4db286c5248236be045401f58d9cbfb340cc30b1209c3ad2077c",
+    "../검증결과/삭제/보완F_GREEN.log": "f22b5213d9a082d387bcb6db6e849753459030ae444ff60adac2dc20620ed9d4"
+  }
+}

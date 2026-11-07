@@ -1,0 +1,21 @@
+{
+  "scope": "삭제 사본 통합 검사 기준 보완. 제품 완료 판정이 아님",
+  "contract": "기술 명세 28.3.5 및 28.8",
+  "original_evidence": "후보_실사용_3/확인.json",
+  "original_verdict_preserved": true,
+  "correction": "개인정보가 있는 원래 요청은 삭제하되 삭제 요청 자신의 멱등 응답 1행은 남긴다. 모든 requests 행의 0건을 요구한 이전 검사는 계약과 모순이었다.",
+  "observed_controls": {
+    "S2": {"exact_receipt": true, "reject_empty": true, "reject_extra_receipt": true, "reject_wrong_run": true, "reject_original_text": true, "reject_response_content": true},
+    "S3": {"exact_receipt": true, "reject_empty": true, "reject_extra_receipt": true, "reject_wrong_run": true, "reject_original_text": true, "reject_response_content": true},
+    "S4": {"exact_receipt": true, "reject_empty": true, "reject_extra_receipt": true, "reject_wrong_run": true, "reject_original_text": true, "reject_response_content": true}
+  },
+  "changes": [
+    "내용 행 0건과 정확한 삭제 receipt 한 행 보존을 별도 단언한다.",
+    "삭제 전에 웹 source_id를 수집하고 삭제 후 그 ID로 history를 센다.",
+    "S5 중첩 삭제 검사의 실패도 상위 결과로 전파한다.",
+    "SQLite 읽기/백업 연결은 명시적으로 닫는다.",
+    "기존 작업자V 인계 파일을 덮어쓰지 않고 실행별 확인.json에만 결과를 저장한다."
+  ],
+  "script_checks": {"ruff_check": "All checks passed!", "ruff_format_check": "2 files already formatted", "exit_code": 0},
+  "remaining": ["서버·화면 보완 인수", "최종 후보로 사본 브라우저 전체 검사 재실행", "독립 지적 재확인", "운영 적용 별도 승인"]
+}

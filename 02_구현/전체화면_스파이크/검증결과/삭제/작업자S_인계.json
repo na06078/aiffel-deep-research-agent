@@ -1,0 +1,64 @@
+{
+  "created": {
+    "서버/실행삭제.py": "1c0d2fc411355595efe20f177c0e4ecabea440201c9732193664fe90c70b2b9b",
+    "테스트/테스트_실행삭제.py": "0346aa1a2be031b5a73af035aa5be3d30741f967c0eff794eddfd40d7ecd26a9"
+  },
+  "changed": {
+    "서버/앱.py": "505ea5942dc4dd3fdb2f5114afafc85be9b0125094b7ebe2fe9d566ac4950bac",
+    "서버/보고서변환.py": "a4815e1f9848ea2918ced5bc051c22136653da6b3c07f69c85340373e9f6fc3c",
+    "서버/웹자료저장소.py": "5a7d7fa231631a64ddb5da283a8f27231b440e106982a0e99f8795379c030d04"
+  },
+  "extra_files_touched": [],
+  "red": {
+    "file": "검증결과/삭제/작업자S_RED.txt",
+    "summary": "24 failed, 1 passed",
+    "failing_tests": [
+      "test_preview_개수는_실제_행과_파일과_일치하고_아무것도_바꾸지_않는다",
+      "test_preview에서_웹자료_DB가_없으면_0이고_파일을_만들지_않는다",
+      "test_preview는_진행중_실행을_run_running으로_막는다",
+      "test_preview의_dependents는_후속_실행의_ID_질문_생성시각을_담는다",
+      "test_삭제는_DB_상태_보고서_변환_웹자료를_모두_지우고_예산_장부는_그대로다",
+      "test_삭제_뒤_archive_event_report는_404다",
+      "test_웹자료_저장소가_없는_서비스는_웹_단계를_오류없이_건너뛴다",
+      "test_웹자료_DB가_없으면_삭제가_DB를_새로_만들지_않는다",
+      "test_진행중_실행은_409_run_running이고_아무것도_바꾸지_않는다",
+      "test_다른_실행이_진행_중이어도_끝난_실행은_지울_수_있다",
+      "test_후속_실행이_보고서를_쓰면_409_has_dependents_이고_후속을_지우면_허용된다",
+      "test_확인_ID가_다르면_422_confirm_mismatch이고_없는_실행이_먼저_404다",
+      "test_진행중이면서_확인_ID가_다르면_422가_먼저다",
+      "test_본문_검증은_빈_요청_ID를_거절한다",
+      "test_없는_실행은_404다",
+      "test_같은_요청_ID_재전송은_실행이_사라진_뒤에도_저장된_응답을_돌려준다",
+      "test_현재_실행을_지우면_남은_실행_중_가장_최근으로_바뀌고_없으면_null이다",
+      "test_흔적_사건은_질문을_담지_않고_high_watermark_seq가_반드시_증가한다",
+      "test_마지막_실행을_지워도_seq가_되돌아가지_않는다",
+      "test_보고서_파일_삭제가_실패하면_200과_경고이고_DB는_이미_깨끗하다",
+      "test_변환_파일_삭제가_실패하면_경고로_돌려주고_나머지는_계속_지운다",
+      "test_보고서_파일명이_저장소_밖을_가리키면_지우지_않고_경고한다",
+      "test_purge는_해당_보고서의_항목과_본문만_지우고_폴더가_없으면_0이다",
+      "test_WebSourceStore_count_run과_delete_run"
+    ]
+  },
+  "green": {
+    "deletion_tests": "25 passed"
+  },
+  "full_suite": {
+    "baseline": "276 passed",
+    "final": "301 passed (=276+25)"
+  },
+  "ruff": {
+    "check": "All checks passed (5 files)",
+    "format_check": "5 files already formatted"
+  },
+  "assumptions": [
+    "저장된(멱등) 응답의 warnings는 커밋 전이라 항상 []; 최초 응답만 실제 경고를 담는다.",
+    "web_store 유무는 hasattr(type(service),'web_store')로 판정하고 DB 파일이 있을 때만 접근(지연 생성 property가 DB를 만들지 않게).",
+    "ReportExports에 읽기 전용 files_of/count_files와 purge를 추가(기존 동작 불변).",
+    "'다른 실행 진행 중에도 삭제 가능' 시험은 완료→취소→진행중 3실행으로 구성(완료 실행은 후속 진행 실행의 부모가 되어 has_dependents로 막히기 때문, 명세 28.1과 일치).",
+    "report_files 개수는 repo.root 안에 실제 존재하는 .md만 센다."
+  ],
+  "unverified": [
+    "실제 RealResearchService(openai)와 실제 웹 자료 DB 경로에서의 end-to-end는 미실행(WebDoubleService 대역으로 검증)",
+    "8768 라이브 데이터 미접촉"
+  ]
+}

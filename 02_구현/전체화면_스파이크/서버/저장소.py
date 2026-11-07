@@ -21,6 +21,26 @@ def encode(value):
     return json.dumps(value, ensure_ascii=False)
 
 
+def run_deleted(db, run_id):
+    """쓰기 경계의 영구 삭제 펜스. 판정과 후속 쓰기를 삭제 커밋과 직렬화한다.
+
+    state 존재만 검사하면 접수 중인 새 실행/기존 fixture도 거절하므로 영속 흔적을 쓴다.
+    독립 연결의 활동 finally도 먼저 쓰기 잠금을 잡아 check→UPSERT 경합을 막는다.
+    커밋/롤백은 연결을 소유한 호출자가 담당한다.
+    """
+    if not db.in_transaction:
+        db.execute("BEGIN IMMEDIATE")
+    return (
+        db.execute(
+            "SELECT 1 FROM events WHERE json_extract(body,'$.run_id')='deletions' "
+            "AND json_extract(body,'$.type')='run.deleted' "
+            "AND json_extract(body,'$.input.run_id')=? LIMIT 1",
+            (run_id,),
+        ).fetchone()
+        is not None
+    )
+
+
 class ApiError(Exception):
     def __init__(self, status, code, message):
         self.status, self.code, self.message = status, code, message
@@ -129,6 +149,10 @@ class Repository:
         error=None,
         summary=None,
     ):
+        # 늦은 응답은 삭제하지 않은 취소/이전 버전에만 보존한다. 호출부 중 반환값을
+        # 쓰는 접수 경로는 새 ID 또는 현재 실행만 사용하므로 이 무기록 반환을 받지 않는다.
+        if run_deleted(db, run_id):
+            return None
         event = {
             "event_id": uid(),
             "run_id": run_id,
