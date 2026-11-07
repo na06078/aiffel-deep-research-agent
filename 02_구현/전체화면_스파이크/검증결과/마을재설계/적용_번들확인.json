@@ -1,0 +1,30 @@
+{
+  "at": "2026-11-07T22:52:43.402534+09:00",
+  "status": "PASS",
+  "copied": [
+    "assets/browserAll-BYzxBhRF.js",
+    "assets/index-iShvzInm.js",
+    "assets/webworkerAll-DfpLrP0I.js",
+    "index.html"
+  ],
+  "removed_generated_assets": [
+    "assets/browserAll-ButQcpEv.js",
+    "assets/index-BuI_4peP.js",
+    "assets/webworkerAll-BeLIB5kA.js"
+  ],
+  "installed_files": 25,
+  "served_files_verified": 25,
+  "installed_equals_candidate": true,
+  "data_files_unchanged": 9,
+  "api_state_unchanged": true,
+  "process_unchanged": {
+    "pid": 31544,
+    "exe": "C:\\Users\\YH\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "create_time": 1794050148.5441031,
+    "name": "python.exe"
+  },
+  "server_restarted": false,
+  "new_builds": 0,
+  "new_research_calls": 0,
+  "backup_created": false
+}

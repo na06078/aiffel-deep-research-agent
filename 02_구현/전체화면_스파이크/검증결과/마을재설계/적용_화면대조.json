@@ -1,0 +1,23 @@
+[
+  {
+    "viewport": "1440_900",
+    "same_dimensions": true,
+    "pixel_equal": true,
+    "candidate_sha256": "089058d615c4758032b9abc49dd4b84578d040f410a5db18d7b496cf5b46d1e7",
+    "installed_sha256": "089058d615c4758032b9abc49dd4b84578d040f410a5db18d7b496cf5b46d1e7"
+  },
+  {
+    "viewport": "390_844",
+    "same_dimensions": true,
+    "pixel_equal": true,
+    "candidate_sha256": "cde83c8999d03d1a89aaada7a1a12f068c0940ec916da57ef06f6eafb5e9242d",
+    "installed_sha256": "cde83c8999d03d1a89aaada7a1a12f068c0940ec916da57ef06f6eafb5e9242d"
+  },
+  {
+    "viewport": "844_390",
+    "same_dimensions": true,
+    "pixel_equal": true,
+    "candidate_sha256": "56f8e205eb62a628afa075bc020e1d9777ff370a2901e3327e45f6e0c5aa4d98",
+    "installed_sha256": "56f8e205eb62a628afa075bc020e1d9777ff370a2901e3327e45f6e0c5aa4d98"
+  }
+]

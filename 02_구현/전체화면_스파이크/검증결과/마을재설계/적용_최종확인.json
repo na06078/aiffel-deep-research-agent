@@ -1,0 +1,26 @@
+{
+  "at": "2026-11-07T22:58:11.548235+09:00",
+  "status": "PASS_APPLIED",
+  "user_adopted": true,
+  "user_url": "http://127.0.0.1:8768/",
+  "candidate_source_commit": "4eafe701a84af1916403e85e9ac4def056b5e6d6",
+  "installed_files": 25,
+  "served_files_verified": 25,
+  "ui_checks_passed": 10,
+  "ui_check_count": 10,
+  "pixel_equal_viewports": [
+    "1440_900",
+    "390_844",
+    "844_390"
+  ],
+  "protected_data_files": 9,
+  "data_and_api_state_unchanged": true,
+  "server_pid": 31544,
+  "server_start_unchanged": true,
+  "server_restarted": false,
+  "new_research_or_model_calls": 0,
+  "new_builds": 0,
+  "backup_created": false,
+  "prior_unit_tests_reexecuted": false,
+  "prior_verified_unit_tests": 130
+}
