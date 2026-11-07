@@ -1,0 +1,161 @@
+{
+  "status": "서버 소유 범위 구현 및 무전송 관련 회귀 통과. 전체 제품 완료 아님.",
+  "baseline": "9709aa520b60c71100f837e8f5de69669d88645b",
+  "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크",
+  "files_modified": [
+    "서버/실행제어.py",
+    "서버/저장소.py",
+    "서버/실제연구제어.py",
+    "서버/앱.py"
+  ],
+  "files_created": [
+    "서버/웹연구.py",
+    "테스트/테스트_자료모드제어.py",
+    "테스트/테스트_웹연구.py",
+    "검증결과/웹서버_인계.json"
+  ],
+  "existing_tests_modified": [],
+  "interfaces": {
+    "service": "RealResearchService(data_dir, model, corpus_path, *, web_client=None, web_store=None)",
+    "admit": "ExecutionService.admit(text, request_id, *, source_mode=None)",
+    "start": "start(db, state, text, instruction_id, *, source_mode=None, raw_text=None)",
+    "complete": "str 반환 유지. 선택형 on_complete_receipt(call_id)는 현재 revision의 성공한 앱 calls 행/model.completed 저장 후 호출.",
+    "store": "web_client 미주입은 local만. 주입되고 store 미주입이면 web_store 최초 접근에서 WebSourceStore(repo.root / 웹자료/자료.sqlite3)를 한 번 생성.",
+    "events": "source_mode.changed는 run_id=selection/revision=0인 전역 선택 사건. Admission.state_seq는 해당 사건 seq. instruction.queued의 source_mode는 큐에 캡처된 자료이며 현재 실행 모드 변경이 아님.",
+    "journal": "기존 SQL 스키마 유지. 선택은 state JSON, 자료/사용량은 run/revision JSON, source_mode는 사건/정본 메타데이터에 저장. 과거 누락값은 읽기 결과에서 local로 보정하되 원행 일괄 덮어쓰기 없음."
+  },
+  "accomplished": [
+    "메인 순수 parser 재사용. 저장 선택 유지, 단독 모드 명령 무실행, active source lock, 다른 자료 큐 캡처 및 실제 시작 시 선택 채택.",
+    "멱등 조회를 현재 잠금/지원 모드 검사보다 먼저 수행. 원문+최초 캡처 모드 비교. 누락 모드 재전송은 전역 선택이 바뀌어도 기존 receipt 반환; 과거 선택을 재적용하지 않음.",
+    "HTTP source_mode 누락 허용, 명시 null/잘못된 값 422, 새 접수 prefix 충돌 422, 같은 ID의 다른 명시 자료는 409. 잠금/지원 불가 실패는 state/events/requests/revisions/calls 행 불변으로 검증.",
+    "기존 6노드 graph, dispatch/review/synthesize/evaluate/publish를 재사용하고 Graph state 및 각 Send에 source_mode 고정. 로컬 카드/seed/링크 연구 로직 및 모델/예산 구현 미변경.",
+    "웹 절 최대4, 쿼리 최대2, 읽기 선택 최대3/라운드, 최대2라운드. 검색16/본문24 슬롯은 외부 호출 전 저널 트랜잭션에서 예약; 네트워크 await는 SQL 쓰기 트랜잭션 밖.",
+    "observer의 web.request.*와 논리 tool.* 및 model.* 사건을 분리. native thread callback은 새 Repository 연결 사용. 관측 HTTP 수는 별도 web_usage에 보존.",
+    "성공한 현재 app model_call_id로 실제 20000자 이하 prefix/해시/6000자 이하 메모를 mark_read. 평가 시 run/revision/actor/section/source 상태, 실제 모델 입력, read/note 해시, 성공 calls 행, 원문 fetch 저널 receipt와 교차 검증.",
+    "읽기 불가 시 코드 기원 부족을 반환하고 재위임 후 필수 품질 차단/큐 정지. 실패한 출처를 다음 라운드에서 재시도하지 않음. 실제 저장 URL/수집 시각/source ID/원문 및 읽은 발췌 해시를 정본에 보존; 웹에 Wikipedia URL/CC BY-SA 합성 없음."
+  ],
+  "verification": {
+    "environment": {
+      "LANGSMITH_TRACING": "false",
+      "LANGCHAIN_TRACING_V2": "false",
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+    },
+    "python": "../../.venv/Scripts/python.exe",
+    "commands": [
+      "LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 ../../.venv/Scripts/python.exe -c 'import pytest; from pathlib import Path; import 테스트.테스트_실제연구제어 as m; m.EVIDENCE=Path(\"../../.cache/웹서버_단위/로컬회귀\").resolve(); targets=[\\'자료모드제어\\', \\'웹연구\\', \\'실행제어\\', \\'실제연구제어\\', \\'실제연결경계\\', \\'연구앱\\', \\'기본경로\\', \\'접근경계\\', \\'실행아카이브\\', \\'사건흐름\\', \\'검토보완\\', \\'커밋경계\\']; raise SystemExit(pytest.main([\"-p\",\"pytest_asyncio.plugin\",\"--import-mode=importlib\",\"--basetemp=../../.cache/웹서버_단위/최종회귀\",\"--junitxml=../../.cache/웹서버_단위/최종회귀.xml\",\"-q\"]+[\"테스트/테스트_\"+n+\".py\" for n in targets]))'",
+      "../../.venv/Scripts/python.exe -m ruff check 서버/실행제어.py 서버/저장소.py 서버/실제연구제어.py 서버/앱.py 서버/웹연구.py 테스트/테스트_자료모드제어.py 테스트/테스트_웹연구.py",
+      "../../.venv/Scripts/python.exe -m ruff format 서버/실행제어.py 서버/저장소.py 서버/실제연구제어.py 서버/앱.py 서버/웹연구.py 테스트/테스트_자료모드제어.py 테스트/테스트_웹연구.py"
+    ],
+    "final_result": {
+      "tests": 81,
+      "failures": 0,
+      "errors": 0,
+      "warnings": 0,
+      "seconds": 21.02,
+      "per_module": {
+        "테스트.테스트_자료모드제어": 10,
+        "테스트.테스트_웹연구": 20,
+        "테스트.테스트_실행제어": 8,
+        "테스트.테스트_실제연구제어": 14,
+        "테스트.테스트_실제연결경계": 3,
+        "테스트.테스트_연구앱": 1,
+        "테스트.테스트_기본경로": 1,
+        "테스트.테스트_접근경계": 7,
+        "테스트.테스트_실행아카이브": 4,
+        "테스트.테스트_사건흐름": 2,
+        "테스트.테스트_검토보완": 8,
+        "테스트.테스트_커밋경계": 3
+      },
+      "ruff": "All checks passed!"
+    },
+    "source_snapshot_stable_during_final_test": true,
+    "owned_sha256": {
+      "서버/실행제어.py": "e5fca3ebd1df33732315ce718f796105955af3545ac9a22ecc22659f3693a13c",
+      "서버/저장소.py": "4dd3d467ae42ee0367b802e20f615f6ea612a594a526b8c00d3cfd63aed33046",
+      "서버/실제연구제어.py": "956071023a37641ba8e6ecb960c64bd0171d2aeab6c2df0638a46011a7970145",
+      "서버/앱.py": "a02c2f2e61d96997108e88a8cccbdd72ac50253ee2163ee6f1ccc38ecfbbf806",
+      "서버/웹연구.py": "c01c2e89fd4ec5fbe92bd0bb8f481240ee6ab04fdc9625788fcfccbe7dcfeef9",
+      "테스트/테스트_자료모드제어.py": "f60adf16bfd7637c3e4895478d43de6f3643c49bd92574bd8847a5db71b2f323",
+      "테스트/테스트_웹연구.py": "70fe232ffd16a1625cb6f4f89d2679be1fc18f92065943e1a0dea8d88834b1fb"
+    },
+    "junit_xml": ".cache/웹서버_단위/최종회귀.xml",
+    "fake_max_case": {
+      "sections": 4,
+      "rounds": 2,
+      "logical_searches": 16,
+      "logical_fetches": 24,
+      "observed_fake_http_requests": 40,
+      "fake_model_attempts": 62,
+      "read_claims": 24
+    },
+    "real_provider_calls": 0,
+    "real_web_requests": 0,
+    "no_secret_or_user_database_access": true,
+    "red_green": [
+      {
+        "case": "단독 선택/잠금/HTTP null/지원 불가",
+        "red": "초기 자료 모드 시험에서 mode_change 누락, 잠금 거절 부재, null 접수 202, /웹 지원 불가 거절 부재를 관측. base spawn 대역 보강 뒤 의도한 DID NOT RAISE를 재확인.",
+        "green": "메인 parser 기반 접수·영속·HTTP 검증 구현 후5개 통과."
+      },
+      {
+        "case": "웹 graph 진입/읽기/부족 처리",
+        "red": "생성자 seam만 추가한 상태에서 웹 성공 실행은 failed, 무자료 실행은 blocked 대신 failed. 웹 분기 미구현을 확인.",
+        "green": "웹 분기 연결 뒤 실제6노드 대역 연구/receipt/부족 차단 통과. 모델 기대값은 독립 산식 1+3+3+1+1=9로 수정."
+      },
+      {
+        "case": "revision별 웹 슬롯",
+        "red": "새 revision이 이전16/24/90 사용량을 유지함.",
+        "green": "start에서 새 revision의 web_usage를0으로 설정하고 이전 revision 값 불변 통과."
+      },
+      {
+        "case": "과거 멱등 응답/명시 모드 충돌",
+        "red": "과거 응답 source_mode 누락, 같은 ID prefix+명시자료 불일치가409 대신422.",
+        "green": "local 읽기 보정/원문 및 explicit 모드 재시도 검사 선행 후 행 불변 통과."
+      },
+      {
+        "case": "실제 모델 입력과 읽기 해시 바인딩",
+        "red": "sidecar/메타 해시는 정상인데 calls.input.user만 다른 본문으로 변조한 경우 completed로 제출됨.",
+        "green": "실제 read user를 source prefix와 대조한 뒤 blocked. 현재 부정확한읽기receipt 매개변수 actual_user로 동일 반례 유지."
+      },
+      {
+        "case": "정본 출처 메타데이터",
+        "red": "성공한 웹 정본에 sources 목록이 없음.",
+        "green": "검증된 읽기 source의 URL/수집시각/원문 및 발췌 해시 메타데이터3건 보존."
+      },
+      {
+        "case": "legacy 보고서/사건 읽기 보정",
+        "red": "기존 정본 source_mode 누락이 None 반환.",
+        "green": "조회에서만 local 보정하고 원행 불변."
+      },
+      {
+        "case": "재시작 후 큐 자료 미구성",
+        "red": "local-only 구성에서 기존 web 큐가 시작됨.",
+        "green": "큐 pop/선택/실행/continue receipt 쓰기 전 source_mode_unavailable409, 모든 행 불변."
+      },
+      {
+        "case": "실패 출처 재시도 및 실패 inspector 정보",
+        "red": "2라운드에서 같은 실패 URL을6회/고유3회 재시도; tool.failed에 URL 누락.",
+        "green": "실패 후보 제외 및 최신 snapshot 재조회, 시작/성공/실패 논리 사건의 query/URL 기록 후 통과."
+      },
+      {
+        "case": "전역 선택의 과거 archive 혼입",
+        "red": "완료 후 /웹 선택 사건이 이전 local 실행 archive에 추가됨.",
+        "green": "선택 사건을 전역 selection에 기록해 과거 실행 events 불변."
+      }
+    ],
+    "test_method_limit": "일부 초기 검사를 묶음 RED로 실행했고 긴메모 검사는 초기에는 앞선 미구현 기획 실패로 통과한 약한 음성이었음. 최종에는 read_one 진입 양성 대조를 추가했다. 후속 슬롯/취소/receipt 변조 확장 시험은 구현 후 보강 회귀이며 개별 RED를 새로 주장하지 않는다.",
+    "coverage": "잘못된 section/run/revision/실패 calls/orphan provider call ID/read 해시/note 해시/failed source/부재 fetch receipt/실제 user 불일치10반례 모두 양성 읽기3건 뒤 변조하여 출판 차단. 늦은 search/fetch/read 응답, 원자 슬롯 상한, queue 시작 모드, reload/restart, legacy 및 HTTP 포함."
+  },
+  "issues": [
+    "초기 넓은 읽기 출력이 잘려 후속 파일별 읽기로 보완했다.",
+    "첫 로컬14+앱/검토 회귀 실행23개는 선행 import로 pytest 플러그인 assert-rewrite 경고2건이 발생했다. 최종은 plugin autoload를 끄고 pytest_asyncio.plugin을 명시해81개 무경고 통과.",
+    "기존 실제연구 시험의 fixture는 원래 별도 .cache 경로를 사용한다. 소유 외 fixture 파일은 수정하지 않고 importlib runner에서 EVIDENCE만 .cache/웹서버_단위/로컬회귀로 바인딩했다."
+  ],
+  "remaining_for_parent": [
+    "create_research_app 조립은 메인 소유로 읽기만 했다. 최종 factory와 실제 FreeWebClient/WebSourceStore 결합, 공유 전체 회귀, UI/replay/다운로드 확인은 부모가 수행해야 한다.",
+    "실제 검색·제공자 모델 연구·브라우저/서버 실사용 검증은 이 단계에서0회이며 별도 승인/기존100회/$2 공유 장부와 예상 호출 수 확인이 필요하다.",
+    "모델 gpt-5.6-luna 및 기존 예산 장부/기록27은 읽거나 수정하지 않았다. 62는 explicit fake graph 최대 경로의 검증치이지 실제 요청 승인/실행 횟수가 아니다.",
+    "보고서 의미적 품질 개선은 승인 범위대로 보류했다. 기존 evaluate_report의 인용·길이 필수 검사를 재사용했으며 자동 검사로 의미적 지지를 증명하지 않는다.",
+    "Git 조작/커밋 없음. 기존 교안연구.py, 연구앱.py, 공통 계약/순수 parser, source boundary, UI, 패키지/문서 편집 없음."
+  ]
+}

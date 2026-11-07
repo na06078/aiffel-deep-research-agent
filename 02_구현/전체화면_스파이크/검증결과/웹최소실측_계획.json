@@ -1,0 +1,29 @@
+{
+  "approved_scope": "검토 지적 필수 보완 후 새 클라이언트의 무료 연결만 검증; 실제 웹 연구·모델 호출·사용자 실행본 교체 없음",
+  "production_client": "서버.웹자료.FreeWebClient",
+  "client_injection": "없음; 실제 기본 resolver/network backend/DDGS/httpx 사용",
+  "search": {
+    "query": "파이썬 asyncio 공식 문서",
+    "backend": "yahoo",
+    "logical_attempt_limit": 1,
+    "python_http_start_limit": 1,
+    "allowed_host": "search.yahoo.com",
+    "expected_result": "정상 검색 응답, 비어 있지 않은 제목·URL 결과; 설명과 실제 읽은 본문 구별"
+  },
+  "fetch": {
+    "url": "https://docs.python.org/ko/3/library/asyncio.html",
+    "logical_attempt_limit": 1,
+    "python_http_start_limit": 2,
+    "start_limit_note": "원 요청 1회 + 같은 호스트(docs.python.org) redirect 1회까지만 본문 1건으로 허용. 다른 호스트·추가 요청은 전송 전 거절",
+    "allowed_host": "docs.python.org",
+    "expected_result": "HTTP200, TLS검증 켬, 공개IP로 연결, asyncio 관련 추출본문·해시 확인"
+  },
+  "retries": 0,
+  "fallbacks": 0,
+  "research_app_model_requests": 0,
+  "reservation_policy": "전송 전에 프로젝트 .cache/웹최소실측/실행시작.json을 배타 생성. 이미 존재하면 재실행 금지. 요청별 시작·종료·실패를 JSONL로 즉시 기록. 타임아웃·오류도 사용한 시도로 보존",
+  "transmission_guard": "검사 프로세스의 observer에서 허용 URL/쿼리와 요청 수를 전송 전에 확인. 다른 호스트/다음 요청은 거절하며 본체 기본 구현을 가짜 전송으로 대체하지 않음",
+  "preservation_reference": "웹재개_기준.json의 protected_runtime_sha256/live_dist_sha256",
+  "evidence_limit": "1검색/1본문의 연결 증거이지 전체 웹 조사·앱 종단 간·일반웹 가용성·본문 완전성·의미 품질 검증이 아님",
+  "execution_status": "2026-11-07 1회 실행 완료. 결과는 웹최소실측_결과.json(PARTIAL: 검색 HTTP500·본문 HTTP200). 실행 표식이 남아 있어 같은 스크립트는 재실행되지 않는다"
+}

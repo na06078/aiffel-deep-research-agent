@@ -1,0 +1,287 @@
+{
+  "checked_at": "2026-11-07T16:20:49.641609+09:00",
+  "status": "REVIEW_FIXES_LOCAL_TESTS_PASS_LIVE_SEARCH_FAILED_FETCH_PASS",
+  "scope": "독립 검토 후보 SOURCE-01~04의 재현·보완, 메인 추가 발견 SOURCE-02b, 새 FreeWebClient의 검색1회·본문1건 실측. 실제 웹 연구·사용자 실행본 교체·모델 호출은 포함하지 않음",
+  "worker": {
+    "delegation": "deleg_fe6fd4e0",
+    "final_status": "interrupted",
+    "handoff_json_written": false,
+    "main_verification": "메인이 변경 소스·시험·증거 XML을 직접 읽고 전체 회귀를 재실행함. 하위 작업자의 자기 보고에 의존하지 않음"
+  },
+  "reviews": {
+    "server": {
+      "delegation": "deleg_8538d396",
+      "original_record": "웹검토_원문.json",
+      "original_verdict": "정적 검토 결함 후보4건"
+    },
+    "screen": {
+      "delegation": "deleg_f27b1fdd",
+      "original_record": "웹화면_독립검토_원문.json",
+      "original_verdict": "추가 차단 결함 없음(정적 판정)"
+    }
+  },
+  "findings": [
+    {
+      "id": "SOURCE-01",
+      "severity": "P1",
+      "reproduced": true,
+      "red_failure": "읽기 입력 URL·fetch receipt URL·저장 출처 final_url 중 하나만 바꿔도 assert 'completed' == 'blocked' (3개 변형)",
+      "fix": "웹연구.evidence가 읽기 입력 url과 web.source.fetched receipt의 output.url을 저장 출처 final_url과 함께 대조",
+      "red": [
+        "웹검토_SOURCE01_RED.xml"
+      ],
+      "green": [
+        "웹검토_SOURCE01_GREEN.xml",
+        "웹검토_SOURCE01_SIDECAR_VERIFIED.xml"
+      ],
+      "note": "웹검토_SOURCE01_SIDECAR_GREEN.xml의 1건은 시험 준비 오류(property setter 없음)이며 통과 근거가 아니다. 수정 뒤 SIDECAR_VERIFIED가 근거다.",
+      "files": [
+        "서버/웹연구.py",
+        "테스트/테스트_웹연구.py"
+      ],
+      "red_totals": {
+        "웹검토_SOURCE01_RED.xml": {
+          "tests": 3,
+          "failures": 3,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "green_totals": {
+        "웹검토_SOURCE01_GREEN.xml": {
+          "tests": 23,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "웹검토_SOURCE01_SIDECAR_VERIFIED.xml": {
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "id": "SOURCE-02",
+      "severity": "P2",
+      "reproduced": true,
+      "red_failure": "과거 저장 형식의 '/웹 …'·'/웹' 재전송이 409 request_id_conflict, 충돌 토큰은 422 invalid_command_combination; 재전송 경로가 transaction 쓰기를 수행",
+      "fix": "실행제어.admit이 자료 누락 접수를 읽기 전용 경로에서 최초 local receipt로 반환하고 새 접두어 문법으로 재해석하지 않음",
+      "red": [
+        "웹검토_SOURCE02_RED.xml",
+        "웹검토_SOURCE02_NOWRITE_RED.xml"
+      ],
+      "green": [
+        "웹검토_SOURCE02_GREEN.xml",
+        "웹검토_SOURCE02_NOWRITE_GREEN.xml"
+      ],
+      "files": [
+        "서버/실행제어.py",
+        "테스트/테스트_자료모드제어.py"
+      ],
+      "red_totals": {
+        "웹검토_SOURCE02_RED.xml": {
+          "tests": 4,
+          "failures": 3,
+          "errors": 0,
+          "skipped": 0
+        },
+        "웹검토_SOURCE02_NOWRITE_RED.xml": {
+          "tests": 4,
+          "failures": 4,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "green_totals": {
+        "웹검토_SOURCE02_GREEN.xml": {
+          "tests": 13,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "웹검토_SOURCE02_NOWRITE_GREEN.xml": {
+          "tests": 13,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "id": "SOURCE-02b",
+      "severity": "P2",
+      "reproduced": true,
+      "found_by": "메인 인수 검토(하위 작업자 수정이 source_mode 생략 경로에만 적용된 것을 확인)",
+      "red_failure": "과거 접수에 source_mode='local'을 명시해 재전송하면 '/웹'으로 시작하는 원문 3개가 422",
+      "fix": "같은 읽기 전용 경로를 source_mode 생략 또는 local 명시에 적용하고 다른 자료 명시는 409",
+      "red": [
+        "웹검토_SOURCE02_EXPLICIT_RED.xml"
+      ],
+      "green": [
+        "웹검토_SOURCE02_EXPLICIT_GREEN.xml"
+      ],
+      "note": "RED 실행은 -k '명시local or 과거응답_자료누락'으로 3 failed·5 passed(양성 대조 1+기존 4). GREEN은 파일 전체 17 passed.",
+      "files": [
+        "서버/실행제어.py",
+        "테스트/테스트_자료모드제어.py"
+      ],
+      "red_totals": {
+        "웹검토_SOURCE02_EXPLICIT_RED.xml": {
+          "tests": 8,
+          "failures": 3,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "green_totals": {
+        "웹검토_SOURCE02_EXPLICIT_GREEN.xml": {
+          "tests": 17,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "id": "SOURCE-03",
+      "severity": "P2",
+      "reproduced": true,
+      "red_failure": "취소 또는 12초 만료 뒤에도 실행기 대기·초기화·콜백·전송 직전 단계에서 첫 HTTP가 늦게 전송됨(8개 변형)",
+      "fix": "논리 수명 gate(취소·만료)를 native 자원 소유권과 분리하고 callback·SDK 초기화·httpx transport 진입 직전에 확인. 이미 진입한 요청은 종료까지 소유하고 search slot·aclose 대기는 유지",
+      "red": [
+        "웹검토_SOURCE03_RED.xml"
+      ],
+      "green": [
+        "웹검토_SOURCE03_GREEN.xml"
+      ],
+      "files": [
+        "서버/웹자료.py",
+        "테스트/테스트_웹자료.py"
+      ],
+      "red_totals": {
+        "웹검토_SOURCE03_RED.xml": {
+          "tests": 8,
+          "failures": 8,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "green_totals": {
+        "웹검토_SOURCE03_GREEN.xml": {
+          "tests": 40,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "id": "SOURCE-04",
+      "severity": "P2",
+      "reproduced": true,
+      "red_failure": "Location='http://[' 에서 ValueError: Invalid IPv6 URL이 안전 코드 밖으로 전파되어 다른 정상 후보까지 연구 실패",
+      "fix": "urljoin ValueError를 invalid_url로 정규화하고 두 번째 연결 전에 중단",
+      "red": [
+        "웹검토_SOURCE04_RED.xml"
+      ],
+      "green": [
+        "웹검토_SOURCE04_GREEN_VERIFIED.xml"
+      ],
+      "note": "웹검토_SOURCE04_GREEN.xml의 1건은 첫 기대값(정상 읽기3)이 기존 선택 시도3회 계약과 달라 정정한 이력이다(실패 1+정상 2). GREEN_FINAL.xml의 25 setup error는 하위 작업자가 추가한 socket.connect 차단 줄이 이벤트 루프 준비를 막은 것이며 그 줄을 제거했다. 기존 3종 네트워크 차단 fixture는 유지된다.",
+      "files": [
+        "서버/웹자료.py",
+        "테스트/테스트_웹자료.py",
+        "테스트/테스트_웹연구.py"
+      ],
+      "red_totals": {
+        "웹검토_SOURCE04_RED.xml": {
+          "tests": 2,
+          "failures": 2,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "green_totals": {
+        "웹검토_SOURCE04_GREEN_VERIFIED.xml": {
+          "tests": 79,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      }
+    }
+  ],
+  "regression": {
+    "backend": {
+      "tests": 264,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "backend_before_review_fixes": {
+      "tests": 242,
+      "source": "웹통합_최종회귀.xml(이전 기록)"
+    },
+    "ruff_check": "PASS 서버·테스트·검증",
+    "ruff_format": "PASS 62파일",
+    "network_guard": "비-loopback socket connect 차단 wrapper + 시험별 getaddrinfo/HTTPTransport/connect_tcp 차단",
+    "ui": {
+      "tests": 113,
+      "passed": 113,
+      "failed": 0,
+      "typescript": "PASS",
+      "note": "화면 소스는 이번 보완에서 변경하지 않음"
+    }
+  },
+  "live_probe": {
+    "record": "웹최소실측_결과.json",
+    "status": "PARTIAL",
+    "search": {
+      "status": "failed",
+      "error_code": "http_error",
+      "http_status": 500,
+      "requests": 1
+    },
+    "fetch": {
+      "status": "ok",
+      "http_status": 200,
+      "requests": 1,
+      "text_characters": 1621,
+      "text_sha256": "43d1ab4eb52df592d6b9f26f14fd1ec92b4781f9b23a775404a0901b135eb688",
+      "html_sha256": "4741857075a2008cb16348190a1053a1d2feae1262ea9a0bd6086e127640c956",
+      "identical_to_first_probe": true
+    },
+    "model_requests": 0,
+    "paid_search_requests": 0,
+    "automatic_retries": 0,
+    "protected_unchanged": true,
+    "live_dist_unchanged": true
+  },
+  "source_sha256": {
+    "서버/실행제어.py": "fbcfdd364d29c325be89faf4915288f04f4faf200f9c1855e8b989c771272a48",
+    "서버/웹연구.py": "9e8322dd048f5bc0713ef1112896c9db83bf87a3b009ad452b8c30489d38d845",
+    "서버/웹자료.py": "bd7f7f2c079c41c47978ff0b6987a2c53a9af5b4c787332ed75878545605787f",
+    "테스트/테스트_웹연구.py": "3b9dcd47cf9f16de352804599362ba2c52745efd61871f7daf2703125f71d533",
+    "테스트/테스트_웹자료.py": "d67d899897b6ad66e508d54d0d5f3ca5b9a8de22c3730a8521536aa769ff79a1",
+    "테스트/테스트_자료모드제어.py": "2cb6020d4c38026ffa6354a437fe1dbc8dddfaf697086671a7379d0cc91be0b4",
+    "검증/웹최소실측.py": "043b631301c8b04d3698b083fafc11946becf17edbc2abef7343c361cf83a209"
+  },
+  "established": [
+    "승인된 검색1회·본문1건만 전송했고 가드가 거절한 요청은 0건",
+    "본문 경로는 이전 독립 실측과 HTML·텍스트 SHA-256이 같음",
+    "검색 요청 1건에 Yahoo가 HTTP 500을 반환함(관측)"
+  ],
+  "not_established": [
+    "검색 500의 원인(요청 헤더·TLS 지문 차단, Yahoo 일시 오류, 요청 형식 등 후보만 있음)",
+    "일반 웹 가용성·본문 완전성",
+    "웹 연구 앱 종단 간·실제 모델 연구",
+    "사용자 실행 번들 적용"
+  ],
+  "known_limitations": [
+    "선택 시도 3회 중 실패 후보도 1회를 소모하므로 한 후보가 수집에 실패하면 한 절이 정상 읽기 2건만 근거로 삼을 수 있음(기존 계약)",
+    "gate가 httpx 0.28.1의 비공개 _transport_for_url에 결합됨(시험이 갱신 시 먼저 감지)",
+    "redirect 중 request.completed 이후 invalid_url 실패는 request.failed가 아니라 상위 tool.failed로 기록됨"
+  ]
+}

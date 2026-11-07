@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="3" time="1.116" timestamp="2026-11-07T01:30:18.889560+09:00" hostname="z13flow"><testcase classname="테스트.테스트_연구조립" name="test_격리데이터의실제모델에는_장부경로를반드시명시" time="0.006" /><testcase classname="테스트.테스트_연구조립" name="test_자료루트가달라도_명시한공유장부와_자료클라이언트를연결" time="0.009"><failure message="AssertionError: assert WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/웹조립_장부_RED/test_자료루트가달라도_명시한공유장부와_자료클라이언트0/프로젝트/시험/호출예산.sqlite3') == WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/웹조립_장부_RED/test_자료루트가달라도_명시한공유장부와_자료클라이언트0/프로젝트/공유/호출예산.sqlite3')">assembly = (WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/웹조립_장부_RED/test_자료루트가달라도_명시한공유장부와_자료클...명시한공유장부와_자료클라이언트0/프로젝트/시험'), 'service_factory': &lt;function create_research_app.&lt;locals&gt;.factory at 0x000002C2AB5A3600&gt;})
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000002C2AB456990&gt;
+
+    def test_자료루트가달라도_명시한공유장부와_자료클라이언트를연결(assembly, monkeypatch):
+        root, captured = assembly
+        ledger = root / "공유/호출예산.sqlite3"
+        budget = CallBudget(ledger)
+        budget.reset_attempt_counter(max_attempts=100, max_usd=2)
+        before = hashlib.sha256(ledger.read_bytes()).hexdigest()
+        model, web = object(), object()
+        seen = {}
+    
+        def fake_model(env_path, ledger_path):
+            seen.update(env_path=env_path, ledger_path=ledger_path)
+            return model
+    
+        def fake_service(path, provider, corpus_path, **kwargs):
+            seen.update(path=path, provider=provider, corpus_path=corpus_path, **kwargs)
+            return object()
+    
+        monkeypatch.setattr(연구앱, "OpenAIModel", fake_model)
+        monkeypatch.setattr(연구앱, "RealResearchService", fake_service)
+        app = 연구앱.create_research_app(
+            data_dir=root / "시험", ledger_path=ledger, web_client=web, static_dir=root / "화면"
+        )
+        app.state.service_factory(root / "시험")
+&gt;       assert seen["ledger_path"] == ledger
+E       AssertionError: assert WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/웹조립_장부_RED/test_자료루트가달라도_명시한공유장부와_자료클라이언트0/프로젝트/시험/호출예산.sqlite3') == WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/웹조립_장부_RED/test_자료루트가달라도_명시한공유장부와_자료클라이언트0/프로젝트/공유/호출예산.sqlite3')
+
+테스트\테스트_연구조립.py:56: AssertionError</failure></testcase><testcase classname="테스트.테스트_연구조립" name="test_장부없는실제기동을_새40회장부로대체하지않음" time="0.003"><failure message="Failed: DID NOT RAISE ValueError">assembly = (WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/웹조립_장부_RED/test_장부없는실제기동을_새40회장부로대체하지...체하지않음0/프로젝트/03_실행데이터/실제연구'), 'service_factory': &lt;function create_research_app.&lt;locals&gt;.factory at 0x000002C2AB6C00E0&gt;})
+
+    def test_장부없는실제기동을_새40회장부로대체하지않음(assembly):
+&gt;       with pytest.raises(ValueError, match="예산 장부"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+테스트\테스트_연구조립.py:64: Failed</failure></testcase></testsuite></testsuites>

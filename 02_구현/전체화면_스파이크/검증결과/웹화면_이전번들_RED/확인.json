@@ -1,0 +1,12 @@
+{
+  "started_at": "2026-11-06T17:02:28.283498+00:00",
+  "scope": "후보 화면+기존 실제 API GET; 자료 명령/새 웹 연구/API 통합 미검증",
+  "assets": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\dist",
+  "checks": [],
+  "captures": [],
+  "blocked_requests": [],
+  "browser_errors": [],
+  "status": "FAIL",
+  "error_type": "AssertionError",
+  "error": "source_mode_indicator_missing"
+}

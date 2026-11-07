@@ -1,0 +1,133 @@
+{
+  "status": "프론트 소스 및 격리 단위검증 인계 — 실제 통합/배포 완료 아님",
+  "scope": "기술 명세25.6 additive DTO 소비, 명령/전송/재시도/표시만. 기존 마을 renderer와 자료축/화면축 분리 유지.",
+  "files": [
+    {
+      "path": "화면/src/앱.tsx",
+      "sha256": "b0f48120763766cbf30f9933971bef980dcfddcc622f26378e6e775ffc434b09"
+    },
+    {
+      "path": "화면/src/화면.css",
+      "sha256": "eb58be292c242d2465bda8a28f58a306c1113390d712c54765424cca43ad1352"
+    },
+    {
+      "path": "화면/src/통신.ts",
+      "sha256": "bfce32a8f2ecdc208191f9830605f3e13e8311035fb9e4c77f639cf7d3efdc12"
+    },
+    {
+      "path": "화면/src/통신.test.ts",
+      "sha256": "68808066733066edf5673a5fcf28a410716dc0f469fb41c29801fa1d83dc0c84"
+    },
+    {
+      "path": "화면/src/장면상태.ts",
+      "sha256": "a96e6baf3716c2bb7f9c5a92e085dc423962d90beb389efd36788e6d33111879"
+    },
+    {
+      "path": "화면/src/시간재생.ts",
+      "sha256": "75d3f084b0c43e98bcf34e720ba4832becaddb9b8412b5a2ac9c3aa759fcf31f"
+    },
+    {
+      "path": "화면/src/시간재생.test.ts",
+      "sha256": "95448a11fec1a2c2231f0778fccc6384de4d2df86bd39a6167aa124b9a6aabbd"
+    },
+    {
+      "path": "화면/src/앱.test.tsx",
+      "sha256": "c1553c6f00293e49893c75bbdad6efb40111cab89e6df21a483837a8f93d6616"
+    },
+    {
+      "path": "화면/src/실제연구표시.test.tsx",
+      "sha256": "ed157c39db64c8f4e0f040c50348af756d862ae2cf21b66c54fcbbeddbb21422"
+    },
+    {
+      "path": "화면/src/자료모드.ts",
+      "sha256": "c89b99c72a5a947cead2a434a5ea803fb49a93343eb02ad696975dd2839c87b5"
+    },
+    {
+      "path": "화면/src/자료모드.test.ts",
+      "sha256": "bbc74cff9dec4ed0f3cb8d600cfe6e22b869712ab65d369b2c138f9571fb82d0"
+    }
+  ],
+  "created": [
+    "화면/src/자료모드.ts",
+    "화면/src/자료모드.test.ts",
+    "검증결과/웹화면_인계.json"
+  ],
+  "red": [
+    {
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/통신.test.ts",
+      "result": "1 failed / 5 passed: 원문+명시 source_mode 전송에서 source_mode 누락"
+    },
+    {
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/자료모드.test.ts",
+      "result": "최초 1 failed: retryIdentity 자료 누락; 다음 cycle 8 failed / 5 passed: 지정 접두어 우선순위와 state_seq 병합 누락"
+    },
+    {
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/시간재생.test.ts",
+      "result": "1 failed / 14 passed: instruction.received.input.source_mode 재생 누락"
+    },
+    {
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/실제연구표시.test.tsx",
+      "result": "순차 cycle: 인디케이터 없음 1 failed/4 passed; 팝업 자료/카운터 없음 1 failed/5 passed; 재생 팝업이 live 자료를 노출 1 failed/6 passed"
+    },
+    {
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/앱.test.tsx",
+      "result": "순차 cycle: 이전 ack 알림이 최신 선택과 불일치 1 failed/10 passed; 종료 전 늦은 active GET이 최신 선택 indicator를 덮음 1 failed/11 passed"
+    }
+  ],
+  "green": {
+    "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면",
+    "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/앱.test.tsx src/통신.test.ts src/장면상태.test.ts src/자료모드.test.ts src/시간재생.test.ts src/역할투영.test.ts src/실제연구표시.test.tsx src/상세보기.test.tsx src/보고서변환.test.tsx src/실행타임라인.test.tsx src/현재투영.test.ts src/상태.test.ts src/창상태.test.ts src/드로어크기.test.ts",
+    "exit_code": 0,
+    "test_files": 14,
+    "tests": 100,
+    "failed": 0,
+    "typescript": {
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/typescript/bin/tsc --noEmit",
+      "exit_code": 0,
+      "output": ""
+    }
+  },
+  "verified_behaviors": [
+    "정확한 /웹 /디비 /DB /데이터셋 독립 토큰, /큐 앞뒤 조합과 원문 공백 보존; 지정하지 않은 별칭/본문 토큰은 선택하지 않음",
+    "명시 접두어가 저장 선택보다 우선, 모드 미확인 시 source_mode 필드 생략(명시 null 없음)",
+    "최초 원문/자료/ID 재시도 payload 동결; 일반 질문/미확인 질문도 배경 폴링으로 재해석하지 않음; 기존 retryIdentity 3인자 호출 보존",
+    "mode_change 선택 전용 알림, 큐 접수로 선택 바꾸지 않음, state_seq가 늦은 GET/과거 ack/이전 active 실행 indicator rollback 방지",
+    "실패/잠금/보내는 중 새 초안 보존과 /큐·다음 연구 복구 문구",
+    "작은 표시전용 source-mode-indicator/status/aria-live: active 실행자료, idle 저장선택, 조회전 미확인, replay instruction의 역사값/시작전 미확인",
+    "현재 실행/대기 큐/과거 목록·상세 자료 및 raw_text, WebUsage 논리 검색/본문 시도와 관측 HTTP 및 모델수 구별",
+    "재생 실행 팝업은 visibleCurrent/visibleSnapshot 사용; 미래 live 자료 노출 안 함",
+    "tool.* operation search / web.request.*은 모델 요청 카운트 아님; 기존 raw inspector·보고서/변환·timeline·창상태 회귀 통과"
+  ],
+  "test_boundary": "fetch/useJournal/React hook harness는 명시적 단위대역. DOM/browser/API/E2E/모델 결과가 아님. 각 기능의 행동 RED 뒤 GREEN; 추가 호출부/회귀 시험은 최초 GREEN인 것도 있으며 RED로 과장하지 않음.",
+  "issues_resolved": [
+    "TypeScript가 신규 재생 fixture의 부족한 RunArchive 필드를 검출하여 실제 계약을 채운 뒤 통과",
+    "과거 mode_change ack 알림과 종료 직전 active GET의 indicator 경합을 추가 RED로 발견·수정",
+    "재생 팝업의 live 자료 노출을 추가 RED로 발견·수정"
+  ],
+  "layout_notes": [
+    "root palette/renderer/canvas 초기화·크기 불변",
+    "indicator는 메뉴 오른쪽 left68px, top 메뉴+8px, 표시만 하며 pointer-events:none",
+    "높이560px 이하 팝업 top을72px로 두어 메뉴/indicator 줄 확보; 입력·닫기/스크롤의 실제 1440·390·844x390 검수는 부모 필요"
+  ],
+  "unchanged_scopes": [
+    "계약.ts",
+    "시간계약.ts",
+    "실행기록.ts",
+    "역할투영.ts(기존 status/event 처리와 모델 카운트 경계로 충분; 관련 회귀 통과)",
+    "renderer/에셋/마을배치",
+    "서버/패키지/문서/Git",
+    "화면/dist"
+  ],
+  "not_run": [
+    "build/dist 생성",
+    "서버 기동/브라우저/실제 API/웹 HTTP/모델 요청",
+    "기존 사용자DB/예산/비밀 파일 열람",
+    "전체18개 프론트 시험 전수(관련14개만 실행)"
+  ],
+  "parent_remaining": [
+    "최종 서버 통합 후 실제 standalone/질문/큐·잠금·동일모드 추가지시 HTTP 동작과 재시작 선택 유지 확인",
+    "실제 1440·390·844x390 메뉴/닫기/입력/indicator·낮은 창 팝업 공간 시각 검수",
+    "실제 web tool/transport 사건 inspector 및 큐 시작 자료 유지 검수",
+    "전체 통합 회귀·빌드·롤아웃은 부모 소유"
+  ]
+}

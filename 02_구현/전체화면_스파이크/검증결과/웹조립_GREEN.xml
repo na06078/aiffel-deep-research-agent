@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="0.776" timestamp="2026-11-07T01:28:15.363348+09:00" hostname="z13flow"><testcase classname="테스트.테스트_연구조립" name="test_격리데이터의실제모델에는_장부경로를반드시명시" time="0.005" /></testsuite></testsuites>

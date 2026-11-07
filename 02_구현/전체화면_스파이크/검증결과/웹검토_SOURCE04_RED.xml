@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="0.831" timestamp="2026-11-07T16:03:21.091115+09:00" hostname="z13flow"><testcase classname="테스트.테스트_웹자료" name="test_malformed_redirect_is_safe_and_stops_before_second_connect" time="0.020"><failure message="ValueError: Invalid IPv6 URL">def test_malformed_redirect_is_safe_and_stops_before_second_connect():
+        async def scenario():
+            wire = WireBackend(response(status=302, headers={"Location": "http://["}))
+            events = []
+            client = FreeWebClient(resolver=public_dns, network_backend=wire)
+            try:
+                with pytest.raises(WebSourceError, match="^invalid_url$"):
+                    await client.fetch("https://example.com/", observer=lambda k, p: events.append((k, p)))
+                assert wire.connects == [("93.184.216.34", 443)]
+                assert [kind for kind, _ in events] == ["request.started", "request.completed"]
+                assert events[-1][1]["status_code"] == 302
+            finally:
+                await client.aclose()
+    
+&gt;       asyncio.run(scenario())
+
+테스트\테스트_웹자료.py:131: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+테스트\테스트_웹자료.py:124: in scenario
+    await client.fetch("https://example.com/", observer=lambda k, p: events.append((k, p)))
+서버\웹자료.py:257: in fetch
+    return await self._own(self._fetch(url, observer))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+서버\웹자료.py:250: in _own
+    return await asyncio.shield(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+서버\웹자료.py:426: in _fetch
+    current = urljoin(current, location)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\urllib\parse.py:571: in urljoin
+    urlparse(url, bscheme, allow_fragments)
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\urllib\parse.py:395: in urlparse
+    splitresult = urlsplit(url, scheme, allow_fragments)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+url = '', scheme = 'http', allow_fragments = True
+
+    @functools.lru_cache(typed=True)
+    def urlsplit(url, scheme='', allow_fragments=True):
+        """Parse a URL into 5 components:
+        &lt;scheme&gt;://&lt;netloc&gt;/&lt;path&gt;?&lt;query&gt;#&lt;fragment&gt;
+    
+        The result is a named 5-tuple with fields corresponding to the
+        above. It is either a SplitResult or SplitResultBytes object,
+        depending on the type of the url parameter.
+    
+        The username, password, hostname, and port sub-components of netloc
+        can also be accessed as attributes of the returned object.
+    
+        The scheme argument provides the default value of the scheme
+        component when no scheme is found in url.
+    
+        If allow_fragments is False, no attempt is made to separate the
+        fragment component from the previous component, which can be either
+        path or query.
+    
+        Note that % escapes are not expanded.
+        """
+    
+        url, scheme, _coerce_result = _coerce_args(url, scheme)
+        # Only lstrip url as some applications rely on preserving trailing space.
+        # (https://url.spec.whatwg.org/#concept-basic-url-parser would strip both)
+        url = url.lstrip(_WHATWG_C0_CONTROL_OR_SPACE)
+        scheme = scheme.strip(_WHATWG_C0_CONTROL_OR_SPACE)
+    
+        for b in _UNSAFE_URL_BYTES_TO_REMOVE:
+            url = url.replace(b, "")
+            scheme = scheme.replace(b, "")
+    
+        allow_fragments = bool(allow_fragments)
+        netloc = query = fragment = ''
+        i = url.find(':')
+        if i &gt; 0 and url[0].isascii() and url[0].isalpha():
+            for c in url[:i]:
+                if c not in scheme_chars:
+                    break
+            else:
+                scheme, url = url[:i].lower(), url[i+1:]
+        if url[:2] == '//':
+            netloc, url = _splitnetloc(url, 2)
+            if (('[' in netloc and ']' not in netloc) or
+                    (']' in netloc and '[' not in netloc)):
+&gt;               raise ValueError("Invalid IPv6 URL")
+E               ValueError: Invalid IPv6 URL
+
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\urllib\parse.py:514: ValueError</failure></testcase><testcase classname="테스트.테스트_웹연구" name="test_malformed_redirect_candidate_does_not_abort_other_sources" time="0.141"><failure message="AssertionError: {'run_id': '8c26a1a69be44aae9a368d92e9dc8f4a', 'question': '공개 자료', 'control_revision': 1, 'status': 'failed', ...}&#10;assert 'failed' == 'completed'&#10;  &#10;  - completed&#10;  + failed">async def test_malformed_redirect_candidate_does_not_abort_other_sources():
+        from 서버.웹자료 import FreeWebClient
+        from 테스트.테스트_웹자료 import WireBackend, public_dns, response
+    
+        wire = WireBackend(response(status=302, headers={"Location": "http://["}),
+                           response(), response(), response())
+        real_fetch = FreeWebClient(resolver=public_dns, network_backend=wire)
+    
+        class FetchBoundary(FakeWebClient):
+            async def fetch(self, url, *, observer=None):
+                self.calls.append(("fetch", url))
+                return await real_fetch.fetch(url, observer=observer)
+    
+        service = make(client=FetchBoundary())
+        try:
+            admitted = service.admit("/웹 공개 자료", "redirect")
+            await settle(service)
+            run = service.repo.snapshot()["runs"][0]
+&gt;           assert run["status"] == "completed", run
+E           AssertionError: {'run_id': '8c26a1a69be44aae9a368d92e9dc8f4a', 'question': '공개 자료', 'control_revision': 1, 'status': 'failed', ...}
+E           assert 'failed' == 'completed'
+E             
+E             - completed
+E             + failed
+
+테스트\테스트_웹연구.py:368: AssertionError</failure></testcase></testsuite></testsuites>

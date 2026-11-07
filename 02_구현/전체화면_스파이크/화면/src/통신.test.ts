@@ -1,6 +1,13 @@
 import { it, expect, vi, afterEach } from 'vitest';
 import { sendCommand, api } from './통신';
 afterEach(()=>vi.unstubAllGlobals());
+it('자료를 캡처한 명령은 원문과 선택을 함께 전송하고 미확인 자료는 생략한다',async()=>{
+ const fetcher=vi.fn().mockImplementation(async()=>new Response('{}'));vi.stubGlobal('fetch',fetcher);
+ await sendCommand('  /큐 /웹 질문  ','frozen-web','web');
+ await sendCommand('/DB','unknown');
+ expect(JSON.parse(fetcher.mock.calls[0][1].body)).toEqual({text:'  /큐 /웹 질문  ',client_request_id:'frozen-web',source_mode:'web'});
+ expect(JSON.parse(fetcher.mock.calls[1][1].body)).toEqual({text:'/DB',client_request_id:'unknown'});
+});
 it('createExport는 해당 정본 해시와 형식만 POST하며 202 메타데이터와 409 사유를 보존한다',async()=>{
  const body={report_id:'B/C',source_report_hash:'exact-hash',format:'pdf',status:'generating'};
  const fetcher=vi.fn().mockResolvedValueOnce(new Response(JSON.stringify(body),{status:202})).mockResolvedValueOnce(new Response(JSON.stringify({error:{code:'report_hash_mismatch',message:'정본 해시 불일치'}}),{status:409}));vi.stubGlobal('fetch',fetcher);

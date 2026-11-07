@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="0.473" timestamp="2026-11-07T02:24:10.461180+09:00" hostname="z13flow"><testcase classname="테스트.테스트_웹자료" name="test_unsafe_targets_never_reach_network[http://[fec0::1]/-addresses2-unsafe_target]" time="0.042"><failure message="Failed: DID NOT RAISE WebSourceError">url = 'http://[fec0::1]/', addresses = ['93.184.216.34'], code = 'unsafe_target'
+
+    @pytest.mark.parametrize(
+        "url,addresses,code",
+        [
+            ("http://127.0.0.1/", ["93.184.216.34"], "unsafe_target"),
+            ("http://[::1]/", ["93.184.216.34"], "unsafe_target"),
+            ("http://[fec0::1]/", ["93.184.216.34"], "unsafe_target"),
+            ("http://[::ffff:127.0.0.1]/", ["93.184.216.34"], "unsafe_target"),
+            ("http://169.254.169.254/", ["93.184.216.34"], "unsafe_target"),
+            ("http://10.1.1.1/", ["93.184.216.34"], "unsafe_target"),
+            ("https://public.example/", ["93.184.216.34", "192.168.1.1"], "unsafe_target"),
+            ("file:///etc/passwd", [], "invalid_url"),
+            ("https://u:p@example.com/", [], "invalid_url"),
+            ("https://example.com:8443/", [], "invalid_url"),
+            ("https://example.com\\@127.0.0.1/", [], "invalid_url"),
+        ],
+    )
+    def test_unsafe_targets_never_reach_network(url, addresses, code):
+        async def scenario():
+            wire = WireBackend()
+    
+            async def dns(host, port):
+                return addresses
+    
+            client = FreeWebClient(resolver=dns, network_backend=wire)
+            with pytest.raises(WebSourceError, match=f"^{code}$"):
+                await client.fetch(url)
+            assert wire.connects == []
+            await client.aclose()
+    
+&gt;       asyncio.run(scenario())
+
+테스트\테스트_웹자료.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def scenario():
+        wire = WireBackend()
+    
+        async def dns(host, port):
+            return addresses
+    
+        client = FreeWebClient(resolver=dns, network_backend=wire)
+&gt;       with pytest.raises(WebSourceError, match=f"^{code}$"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE WebSourceError
+
+테스트\테스트_웹자료.py:109: Failed</failure></testcase><testcase classname="테스트.테스트_웹자료" name="test_redirect_request_timings_are_not_cumulative" time="0.032"><failure message="assert [2000.0, 4000.0] == [2000.0, 2000.0]&#10;  &#10;  At index 1 diff: 4000.0 != 2000.0&#10;  Use -v to get more diff">def test_redirect_request_timings_are_not_cumulative():
+        async def scenario():
+            now = [0.0]
+    
+            class TimedBackend(WireBackend):
+                async def connect_tcp(self, *args, **kwargs):
+                    now[0] += 2.0
+                    return await super().connect_tcp(*args, **kwargs)
+    
+            wire = TimedBackend(response(status=302, headers={"Location": "/final"}), response())
+            events = []
+            client = FreeWebClient(
+                resolver=public_dns, network_backend=wire, clock=lambda: now[0]
+            )
+            page = await client.fetch(
+                "https://example.com/", observer=lambda kind, payload: events.append((kind, payload))
+            )
+            completed = [payload for kind, payload in events if kind == "request.completed"]
+            assert len(wire.connects) == 2
+            assert [item["elapsed_ms"] for item in completed] == [2000.0, 2000.0]
+            assert page["elapsed_ms"] == 4000.0
+            await client.aclose()
+    
+&gt;       asyncio.run(scenario())
+
+테스트\테스트_웹자료.py:160: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def scenario():
+        now = [0.0]
+    
+        class TimedBackend(WireBackend):
+            async def connect_tcp(self, *args, **kwargs):
+                now[0] += 2.0
+                return await super().connect_tcp(*args, **kwargs)
+    
+        wire = TimedBackend(response(status=302, headers={"Location": "/final"}), response())
+        events = []
+        client = FreeWebClient(
+            resolver=public_dns, network_backend=wire, clock=lambda: now[0]
+        )
+        page = await client.fetch(
+            "https://example.com/", observer=lambda kind, payload: events.append((kind, payload))
+        )
+        completed = [payload for kind, payload in events if kind == "request.completed"]
+        assert len(wire.connects) == 2
+&gt;       assert [item["elapsed_ms"] for item in completed] == [2000.0, 2000.0]
+E       assert [2000.0, 4000.0] == [2000.0, 2000.0]
+E         
+E         At index 1 diff: 4000.0 != 2000.0
+E         Use -v to get more diff
+
+테스트\테스트_웹자료.py:156: AssertionError</failure></testcase></testsuite></testsuites>

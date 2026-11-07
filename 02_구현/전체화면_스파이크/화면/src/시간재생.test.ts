@@ -4,6 +4,18 @@ import {projectArchive,offsetMs,sceneClock,stageTimes,replayEnd,measuredElapsed,
 import type {RunArchive} from './시간계약';
 import {projectionSnapshot} from './시간재생';
 import {actorState} from './역할투영';
+it('웹 논리 도구와 관측 HTTP 시작은 model.started와 구별하여 모델 요청 수를 늘리지 않는다',()=>{
+ const a:RunArchive={...archive,provider:'openai',events:[event(1,0,'instruction.received',null,{text:'/웹 Q',source_mode:'web'}),{...event(2,10,'tool.started',null,{operation:'search'}),actor:'tool',status:'running',provider:null},{...event(3,20,'web.request.started',{web_request_id:'http-1'},{operation:'search'}),actor:'tool',status:'running',provider:null},{...event(4,30,'model.started'),provider:'openai'}]};
+ const network=vi.fn();vi.stubGlobal('fetch',network);
+ expect(projectArchive(a,25).run.actual_model_requests).toBe(0);expect(projectArchive(a,25).run.mock_requests).toBe(0);expect(projectArchive(a,35).run.actual_model_requests).toBe(1);expect(network).not.toHaveBeenCalled();
+});
+it('자료 재생은 instruction의 역사값만 사용하며 시작 전과 미래 최종값을 구별한다',()=>{
+ const a={...archive,run:{...run,source_mode:'local' as const},events:[event(1,100,'instruction.received',null,{text:'/웹 Q',source_mode:'web'}),event(2,200,'instruction.received',null,{text:'legacy'},2)]};
+ expect(projectArchive(a,150).run.source_mode).toBe('web');
+ expect(projectArchive(a,50).run.source_mode).toBeUndefined();
+ expect(projectArchive(a,250).run.source_mode).toBe('local');
+ expect(projectArchive(a,150).run.actual_model_requests).toBe(0);
+});
 it('실제 재생은 제공자와 관측된 시도 수를 보존하고 gate 없이 모델 작업 중을 투영한다',()=>{
  const a:RunArchive={...archive,provider:'openai',events:[{...event(1,0,'instruction.received',null,{text:'Q'}),provider:null},{...event(2,100,'model.started'),provider:'openai',status:'started'},{...event(3,200,'model.completed','비밀 없는 출력'),provider:'openai'}]};
  const network=vi.fn();vi.stubGlobal('fetch',network);const frozen=JSON.stringify(a);

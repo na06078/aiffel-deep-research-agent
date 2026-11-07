@@ -1,0 +1,62 @@
+{
+  "status": "PARTIAL",
+  "scope": "새 FreeWebClient 기본 구성의 검색1회·공개 본문1건. 일반 웹 가용성·본문 완전성·앱 종단 간·의미 품질 검증이 아님",
+  "measured_at": "2026-11-07T07:18:08.527867+00:00",
+  "client": "서버.웹자료.FreeWebClient() — 대역·주입 없음",
+  "search": {
+    "status": "failed",
+    "error_code": "http_error",
+    "started_at": "2026-11-07T07:18:07.417332+00:00"
+  },
+  "fetch": {
+    "status": "ok",
+    "started_at": "2026-11-07T07:18:08.030314+00:00",
+    "requested_url": "https://docs.python.org/ko/3/library/asyncio.html",
+    "final_url": "https://docs.python.org/ko/3/library/asyncio.html",
+    "title": "asyncio — 비동기 I/O",
+    "text_characters": 1621,
+    "contains_asyncio": true,
+    "contains_korean": true,
+    "text_sha256": "43d1ab4eb52df592d6b9f26f14fd1ec92b4781f9b23a775404a0901b135eb688",
+    "html_sha256": "4741857075a2008cb16348190a1053a1d2feae1262ea9a0bd6086e127640c956",
+    "fetched_at": "2026-11-07T07:18:08.526867+00:00",
+    "published_at": null,
+    "extracted_date_candidate": "2001-01-01",
+    "warnings": [
+      "extraction_not_verified"
+    ],
+    "elapsed_ms": 500.0,
+    "observed_requests": 1,
+    "text_preview": "asyncio — 비동기 I/O¶\nasyncio는 async/await 구문을 사용하여 동시성 코드를 작성하는 라이브러리입니다.\nasyncio는 고성능 네트워크 및 웹 서버, 데이터베이스 연결 라이브러리, 분산 작업 큐 등을 제공하는 여러 파이썬 비동기 프레임워크의 기반으로 사용됩니다.\nasyncio는 종종 IO 병목이면서 고수준의 구조화된 네트워크 코드에 가장 적합합니다.\n더 보기\n- A conceptual overview of asyncio\n- Explanation of the fundamentals of asyncio.\nasy"
+  },
+  "request_counts": {
+    "search_started": 1,
+    "fetch_started": 1,
+    "refused": 0
+  },
+  "http_completed": [
+    {
+      "operation": "fetch",
+      "status_code": 200,
+      "elapsed_ms": 219.00000000005093,
+      "url": "https://docs.python.org/ko/3/library/asyncio.html"
+    }
+  ],
+  "http_failed": [
+    {
+      "operation": "search",
+      "error_code": "http_error",
+      "status_code": 500,
+      "retry_after_seconds": null
+    }
+  ],
+  "new_model_requests": 0,
+  "paid_search_api_requests": 0,
+  "automatic_retries": 0,
+  "protected_matches_resume_baseline": true,
+  "protected_unchanged_by_probe": true,
+  "live_dist_unchanged_by_probe": true,
+  "probe_script_sha256": "043b631301c8b04d3698b083fafc11946becf17edbc2abef7343c361cf83a209",
+  "client_source_sha256": "bd7f7f2c079c41c47978ff0b6987a2c53a9af5b4c787332ed75878545605787f",
+  "raw_records": "프로젝트 .cache/웹최소실측/ (Git 제외)"
+}

@@ -6,4 +6,7 @@ export function scenePhase(action:SceneAction,elapsed:number):Phase {
  if(action==='deliver')return elapsed<2200?'delivering':'submitted';
  return 'idle';
 }
-export function retryIdentity(previous:{text:string;id:string}|null,text:string,make:()=>string){return previous?.text===text?previous:{text,id:make()};}
+import type {SourceMode} from './계약';
+export interface RetryCommand {text:string;id:string;source_mode?:SourceMode}
+// A retry is the original payload, not a fresh interpretation of background selection.
+export function retryIdentity(previous:RetryCommand|null,text:string,make:()=>string,source_mode?:SourceMode):RetryCommand{return previous?.text===text?previous:{text,id:make(),...(source_mode===undefined?{}:{source_mode})};}

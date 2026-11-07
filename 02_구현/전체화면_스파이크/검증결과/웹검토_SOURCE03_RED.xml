@@ -1,0 +1,1065 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="8" skipped="0" tests="8" time="1.152" timestamp="2026-11-07T16:01:47.677388+09:00" hostname="z13flow"><testcase classname="테스트.테스트_웹자료" name="test_logically_finished_search_cannot_start_late_http[cancel-executor]" time="0.059"><failure message="AssertionError: cancelled/expired call transmitted its first HTTP later&#10;assert ['https://sea...CGll0?p=late'] == []&#10;  &#10;  Left contains one more item: 'https://search.yahoo.com/search;_ylt=BrgY0KTqmVg0Sb09JOMwAdql;_ylu=i_IdLV3U0s8df078z-0kxFPNESvduhJ-C6c9hl8ddkCGll0?p=late'&#10;  Use -v to get more diff">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000013C168B72F0&gt;
+stage = 'executor', ending = 'cancel'
+
+    @pytest.mark.parametrize("stage", ["executor", "initialization", "observer", "transport"])
+    @pytest.mark.parametrize("ending", ["cancel", "timeout"])
+    def test_logically_finished_search_cannot_start_late_http(monkeypatch, stage, ending):
+        import threading
+        from concurrent.futures import ThreadPoolExecutor
+    
+        import httpx
+        from ddgs.ddgs import DDGS
+    
+        entered, release = threading.Event(), threading.Event()
+        calls = []
+        original_timeout = asyncio.timeout
+        if ending == "timeout":
+            monkeypatch.setattr(asyncio, "timeout", lambda seconds: original_timeout(0.08))
+    
+        def pause():
+            entered.set()
+            assert release.wait(5)
+    
+        def sdk_factory(**kwargs):
+            if stage == "initialization":
+                pause()
+            return DDGS(**kwargs)
+    
+        def observer(kind, payload):
+            if stage == "observer" and kind == "request.started":
+                pause()
+    
+        def handler(request):
+            calls.append(str(request.url))
+            return httpx.Response(200, text="&lt;html&gt;No results&lt;/html&gt;")
+    
+        class DelayedClient(httpx.Client):
+            def send(self, *args, **kwargs):
+                if stage == "transport":
+                    pause()
+                return super().send(*args, **kwargs)
+    
+        def factory(**kwargs):
+            return DelayedClient(transport=httpx.MockTransport(handler), **kwargs)
+    
+        async def scenario():
+            loop = asyncio.get_running_loop()
+            blocker = None
+            if stage == "executor":
+                loop.set_default_executor(ThreadPoolExecutor(max_workers=1))
+                blocker = loop.run_in_executor(None, pause)
+            client = FreeWebClient(ddgs_factory=sdk_factory, search_http_client_factory=factory)
+            first = asyncio.create_task(client.search("late", observer=observer))
+            try:
+                for _ in range(1000):
+                    if entered.is_set() and client._native:
+                        break
+                    await asyncio.sleep(0.001)
+                assert entered.is_set() and client._native
+                assert calls == []
+                if ending == "cancel":
+                    first.cancel()
+                    with pytest.raises(asyncio.CancelledError):
+                        await first
+                else:
+                    with pytest.raises(WebSourceError, match="^search_timeout$"):
+                        await first
+                closing = asyncio.create_task(client.aclose())
+                await asyncio.sleep(0.005)
+                assert not closing.done(), "native resource ownership must survive logical exit"
+                assert client._search_lock.locked()
+                release.set()
+                await closing
+                if blocker is not None:
+                    await blocker
+                assert calls == [], "cancelled/expired call transmitted its first HTTP later"
+                assert not client._owned and not client._native
+            finally:
+                release.set()
+                await client.aclose()
+    
+        try:
+&gt;           asyncio.run(scenario())
+
+테스트\테스트_웹자료.py:705: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def scenario():
+        loop = asyncio.get_running_loop()
+        blocker = None
+        if stage == "executor":
+            loop.set_default_executor(ThreadPoolExecutor(max_workers=1))
+            blocker = loop.run_in_executor(None, pause)
+        client = FreeWebClient(ddgs_factory=sdk_factory, search_http_client_factory=factory)
+        first = asyncio.create_task(client.search("late", observer=observer))
+        try:
+            for _ in range(1000):
+                if entered.is_set() and client._native:
+                    break
+                await asyncio.sleep(0.001)
+            assert entered.is_set() and client._native
+            assert calls == []
+            if ending == "cancel":
+                first.cancel()
+                with pytest.raises(asyncio.CancelledError):
+                    await first
+            else:
+                with pytest.raises(WebSourceError, match="^search_timeout$"):
+                    await first
+            closing = asyncio.create_task(client.aclose())
+            await asyncio.sleep(0.005)
+            assert not closing.done(), "native resource ownership must survive logical exit"
+            assert client._search_lock.locked()
+            release.set()
+            await closing
+            if blocker is not None:
+                await blocker
+&gt;           assert calls == [], "cancelled/expired call transmitted its first HTTP later"
+E           AssertionError: cancelled/expired call transmitted its first HTTP later
+E           assert ['https://sea...CGll0?p=late'] == []
+E             
+E             Left contains one more item: 'https://search.yahoo.com/search;_ylt=BrgY0KTqmVg0Sb09JOMwAdql;_ylu=i_IdLV3U0s8df078z-0kxFPNESvduhJ-C6c9hl8ddkCGll0?p=late'
+E             Use -v to get more diff
+
+테스트\테스트_웹자료.py:698: AssertionError</failure></testcase><testcase classname="테스트.테스트_웹자료" name="test_logically_finished_search_cannot_start_late_http[cancel-initialization]" time="0.006"><failure message="AssertionError: cancelled/expired call transmitted its first HTTP later&#10;assert ['https://sea...2SEFM?p=late'] == []&#10;  &#10;  Left contains one more item: 'https://search.yahoo.com/search;_ylt=OkTrjnrOCWjk1DWY2uwl1_0a;_ylu=T7z3YUM_WSpTSWvaOlI2npIP8umNrGzeRtmItOBvPd2SEFM?p=late'&#10;  Use -v to get more diff">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000013C168B6900&gt;
+stage = 'initialization', ending = 'cancel'
+
+    @pytest.mark.parametrize("stage", ["executor", "initialization", "observer", "transport"])
+    @pytest.mark.parametrize("ending", ["cancel", "timeout"])
+    def test_logically_finished_search_cannot_start_late_http(monkeypatch, stage, ending):
+        import threading
+        from concurrent.futures import ThreadPoolExecutor
+    
+        import httpx
+        from ddgs.ddgs import DDGS
+    
+        entered, release = threading.Event(), threading.Event()
+        calls = []
+        original_timeout = asyncio.timeout
+        if ending == "timeout":
+            monkeypatch.setattr(asyncio, "timeout", lambda seconds: original_timeout(0.08))
+    
+        def pause():
+            entered.set()
+            assert release.wait(5)
+    
+        def sdk_factory(**kwargs):
+            if stage == "initialization":
+                pause()
+            return DDGS(**kwargs)
+    
+        def observer(kind, payload):
+            if stage == "observer" and kind == "request.started":
+                pause()
+    
+        def handler(request):
+            calls.append(str(request.url))
+            return httpx.Response(200, text="&lt;html&gt;No results&lt;/html&gt;")
+    
+        class DelayedClient(httpx.Client):
+            def send(self, *args, **kwargs):
+                if stage == "transport":
+                    pause()
+                return super().send(*args, **kwargs)
+    
+        def factory(**kwargs):
+            return DelayedClient(transport=httpx.MockTransport(handler), **kwargs)
+    
+        async def scenario():
+            loop = asyncio.get_running_loop()
+            blocker = None
+            if stage == "executor":
+                loop.set_default_executor(ThreadPoolExecutor(max_workers=1))
+                blocker = loop.run_in_executor(None, pause)
+            client = FreeWebClient(ddgs_factory=sdk_factory, search_http_client_factory=factory)
+            first = asyncio.create_task(client.search("late", observer=observer))
+            try:
+                for _ in range(1000):
+                    if entered.is_set() and client._native:
+                        break
+                    await asyncio.sleep(0.001)
+                assert entered.is_set() and client._native
+                assert calls == []
+                if ending == "cancel":
+                    first.cancel()
+                    with pytest.raises(asyncio.CancelledError):
+                        await first
+                else:
+                    with pytest.raises(WebSourceError, match="^search_timeout$"):
+                        await first
+                closing = asyncio.create_task(client.aclose())
+                await asyncio.sleep(0.005)
+                assert not closing.done(), "native resource ownership must survive logical exit"
+                assert client._search_lock.locked()
+                release.set()
+                await closing
+                if blocker is not None:
+                    await blocker
+                assert calls == [], "cancelled/expired call transmitted its first HTTP later"
+                assert not client._owned and not client._native
+            finally:
+                release.set()
+                await client.aclose()
+    
+        try:
+&gt;           asyncio.run(scenario())
+
+테스트\테스트_웹자료.py:705: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def scenario():
+        loop = asyncio.get_running_loop()
+        blocker = None
+        if stage == "executor":
+            loop.set_default_executor(ThreadPoolExecutor(max_workers=1))
+            blocker = loop.run_in_executor(None, pause)
+        client = FreeWebClient(ddgs_factory=sdk_factory, search_http_client_factory=factory)
+        first = asyncio.create_task(client.search("late", observer=observer))
+        try:
+            for _ in range(1000):
+                if entered.is_set() and client._native:
+                    break
+                await asyncio.sleep(0.001)
+            assert entered.is_set() and client._native
+            assert calls == []
+            if ending == "cancel":
+                first.cancel()
+                with pytest.raises(asyncio.CancelledError):
+                    await first
+            else:
+                with pytest.raises(WebSourceError, match="^search_timeout$"):
+                    await first
+            closing = asyncio.create_task(client.aclose())
+            await asyncio.sleep(0.005)
+            assert not closing.done(), "native resource ownership must survive logical exit"
+            assert client._search_lock.locked()
+            release.set()
+            await closing
+            if blocker is not None:
+                await blocker
+&gt;           assert calls == [], "cancelled/expired call transmitted its first HTTP later"
+E           AssertionError: cancelled/expired call transmitted its first HTTP later
+E           assert ['https://sea...2SEFM?p=late'] == []
+E             
+E             Left contains one more item: 'https://search.yahoo.com/search;_ylt=OkTrjnrOCWjk1DWY2uwl1_0a;_ylu=T7z3YUM_WSpTSWvaOlI2npIP8umNrGzeRtmItOBvPd2SEFM?p=late'
+E             Use -v to get more diff
+
+테스트\테스트_웹자료.py:698: AssertionError</failure></testcase><testcase classname="테스트.테스트_웹자료" name="test_logically_finished_search_cannot_start_late_http[cancel-observer]" time="0.021"><failure message="AssertionError: cancelled/expired call transmitted its first HTTP later&#10;assert ['https://sea...9Z0G4?p=late'] == []&#10;  &#10;  Left contains one more item: 'https://search.yahoo.com/search;_ylt=WKQHqSfqM6hscDZSgqOXOIZu;_ylu=23gJIy93eQ2WBdsuy1s9MGrzZssvjCbD9U_eQn6sFF9Z0G4?p=late'&#10;  Use -v to get more diff">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000013C16CC2270&gt;
+stage = 'observer', ending = 'cancel'
+
+    @pytest.mark.parametrize("stage", ["executor", "initialization", "observer", "transport"])
+    @pytest.mark.parametrize("ending", ["cancel", "timeout"])
+    def test_logically_finished_search_cannot_start_late_http(monkeypatch, stage, ending):
+        import threading
+        from concurrent.futures import ThreadPoolExecutor
+    
+        import httpx
+        from ddgs.ddgs import DDGS
+    
+        entered, release = threading.Event(), threading.Event()
+        calls = []
+        original_timeout = asyncio.timeout
+        if ending == "timeout":
+            monkeypatch.setattr(asyncio, "timeout", lambda seconds: original_timeout(0.08))
+    
+        def pause():
+            entered.set()
+            assert release.wait(5)
+    
+        def sdk_factory(**kwargs):
+            if stage == "initialization":
+                pause()
+            return DDGS(**kwargs)
+    
+        def observer(kind, payload):
+            if stage == "observer" and kind == "request.started":
+                pause()
+    
+        def handler(request):
+            calls.append(str(request.url))
+            return httpx.Response(200, text="&lt;html&gt;No results&lt;/html&gt;")
+    
+        class DelayedClient(httpx.Client):
+            def send(self, *args, **kwargs):
+                if stage == "transport":
+                    pause()
+                return super().send(*args, **kwargs)
+    
+        def factory(**kwargs):
+            return DelayedClient(transport=httpx.MockTransport(handler), **kwargs)
+    
+        async def scenario():
+            loop = asyncio.get_running_loop()
+            blocker = None
+            if stage == "executor":
+                loop.set_default_executor(ThreadPoolExecutor(max_workers=1))
+                blocker = loop.run_in_executor(None, pause)
+            client = FreeWebClient(ddgs_factory=sdk_factory, search_http_client_factory=factory)
+            first = asyncio.create_task(client.search("late", observer=observer))
+            try:
+                for _ in range(1000):
+                    if entered.is_set() and client._native:
+                        break
+                    await asyncio.sleep(0.001)
+                assert entered.is_set() and client._native
+                assert calls == []
+                if ending == "cancel":
+                    first.cancel()
+                    with pytest.raises(asyncio.CancelledError):
+                        await first
+                else:
+                    with pytest.raises(WebSourceError, match="^search_timeout$"):
+                        await first
+                closing = asyncio.create_task(client.aclose())
+                await asyncio.sleep(0.005)
+                assert not closing.done(), "native resource ownership must survive logical exit"
+                assert client._search_lock.locked()
+                release.set()
+                await closing
+                if blocker is not None:
+                    await blocker
+                assert calls == [], "cancelled/expired call transmitted its first HTTP later"
+                assert not client._owned and not client._native
+            finally:
+                release.set()
+                await client.aclose()
+    
+        try:
+&gt;           asyncio.run(scenario())
+
+테스트\테스트_웹자료.py:705: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def scenario():
+        loop = asyncio.get_running_loop()
+        blocker = None
+        if stage == "executor":
+            loop.set_default_executor(ThreadPoolExecutor(max_workers=1))
+            blocker = loop.run_in_executor(None, pause)
+        client = FreeWebClient(ddgs_factory=sdk_factory, search_http_client_factory=factory)
+        first = asyncio.create_task(client.search("late", observer=observer))
+        try:
+            for _ in range(1000):
+                if entered.is_set() and client._native:
+                    break
+                await asyncio.sleep(0.001)
+            assert entered.is_set() and client._native
+            assert calls == []
+            if ending == "cancel":
+                first.cancel()
+                with pytest.raises(asyncio.CancelledError):
+                    await first
+            else:
+                with pytest.raises(WebSourceError, match="^search_timeout$"):
+                    await first
+            closing = asyncio.create_task(client.aclose())
+            await asyncio.sleep(0.005)
+            assert not closing.done(), "native resource ownership must survive logical exit"
+            assert client._search_lock.locked()
+            release.set()
+            await closing
+            if blocker is not None:
+                await blocker
+&gt;           assert calls == [], "cancelled/expired call transmitted its first HTTP later"
+E           AssertionError: cancelled/expired call transmitted its first HTTP later
+E           assert ['https://sea...9Z0G4?p=late'] == []
+E             
+E             Left contains one more item: 'https://search.yahoo.com/search;_ylt=WKQHqSfqM6hscDZSgqOXOIZu;_ylu=23gJIy93eQ2WBdsuy1s9MGrzZssvjCbD9U_eQn6sFF9Z0G4?p=late'
+E             Use -v to get more diff
+
+테스트\테스트_웹자료.py:698: AssertionError</failure></testcase><testcase classname="테스트.테스트_웹자료" name="test_logically_finished_search_cannot_start_late_http[cancel-transport]" time="0.005"><failure message="AssertionError: cancelled/expired call transmitted its first HTTP later&#10;assert ['https://sea...zr_MA?p=late'] == []&#10;  &#10;  Left contains one more item: 'https://search.yahoo.com/search;_ylt=R3lSc9VN5TxJUny2U04GMgmq;_ylu=3dI5Se9vbblxisF4AMjYtib65yzkt2BWx4RpTdrixpzr_MA?p=late'&#10;  Use -v to get more diff">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000013C16CC1700&gt;
+stage = 'transport', ending = 'cancel'
+
+    @pytest.mark.parametrize("stage", ["executor", "initialization", "observer", "transport"])
+    @pytest.mark.parametrize("ending", ["cancel", "timeout"])
+    def test_logically_finished_search_cannot_start_late_http(monkeypatch, stage, ending):
+        import threading
+        from concurrent.futures import ThreadPoolExecutor
+    
+        import httpx
+        from ddgs.ddgs import DDGS
+    
+        entered, release = threading.Event(), threading.Event()
+        calls = []
+        original_timeout = asyncio.timeout
+        if ending == "timeout":
+            monkeypatch.setattr(asyncio, "timeout", lambda seconds: original_timeout(0.08))
+    
+        def pause():
+            entered.set()
+            assert release.wait(5)
+    
+        def sdk_factory(**kwargs):
+            if stage == "initialization":
+                pause()
+            return DDGS(**kwargs)
+    
+        def observer(kind, payload):
+            if stage == "observer" and kind == "request.started":
+                pause()
+    
+        def handler(request):
+            calls.append(str(request.url))
+            return httpx.Response(200, text="&lt;html&gt;No results&lt;/html&gt;")
+    
+        class DelayedClient(httpx.Client):
+            def send(self, *args, **kwargs):
+                if stage == "transport":
+                    pause()
+                return super().send(*args, **kwargs)
+    
+        def factory(**kwargs):
+            return DelayedClient(transport=httpx.MockTransport(handler), **kwargs)
+    
+        async def scenario():
+            loop = asyncio.get_running_loop()
+            blocker = None
+            if stage == "executor":
+                loop.set_default_executor(ThreadPoolExecutor(max_workers=1))
+                blocker = loop.run_in_executor(None, pause)
+            client = FreeWebClient(ddgs_factory=sdk_factory, search_http_client_factory=factory)
+            first = asyncio.create_task(client.search("late", observer=observer))
+            try:
+                for _ in range(1000):
+                    if entered.is_set() and client._native:
+                        break
+                    await asyncio.sleep(0.001)
+                assert entered.is_set() and client._native
+                assert calls == []
+                if ending == "cancel":
+                    first.cancel()
+                    with pytest.raises(asyncio.CancelledError):
+                        await first
+                else:
+                    with pytest.raises(WebSourceError, match="^search_timeout$"):
+                        await first
+                closing = asyncio.create_task(client.aclose())
+                await asyncio.sleep(0.005)
+                assert not closing.done(), "native resource ownership must survive logical exit"
+                assert client._search_lock.locked()
+                release.set()
+                await closing
+                if blocker is not None:
+                    await blocker
+                assert calls == [], "cancelled/expired call transmitted its first HTTP later"
+                assert not client._owned and not client._native
+            finally:
+                release.set()
+                await client.aclose()
+    
+        try:
+&gt;           asyncio.run(scenario())
+
+테스트\테스트_웹자료.py:705: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def scenario():
+        loop = asyncio.get_running_loop()
+        blocker = None
+        if stage == "executor":
+            loop.set_default_executor(ThreadPoolExecutor(max_workers=1))
+            blocker = loop.run_in_executor(None, pause)
+        client = FreeWebClient(ddgs_factory=sdk_factory, search_http_client_factory=factory)
+        first = asyncio.create_task(client.search("late", observer=observer))
+        try:
+            for _ in range(1000):
+                if entered.is_set() and client._native:
+                    break
+                await asyncio.sleep(0.001)
+            assert entered.is_set() and client._native
+            assert calls == []
+            if ending == "cancel":
+                first.cancel()
+                with pytest.raises(asyncio.CancelledError):
+                    await first
+            else:
+                with pytest.raises(WebSourceError, match="^search_timeout$"):
+                    await first
+            closing = asyncio.create_task(client.aclose())
+            await asyncio.sleep(0.005)
+            assert not closing.done(), "native resource ownership must survive logical exit"
+            assert client._search_lock.locked()
+            release.set()
+            await closing
+            if blocker is not None:
+                await blocker
+&gt;           assert calls == [], "cancelled/expired call transmitted its first HTTP later"
+E           AssertionError: cancelled/expired call transmitted its first HTTP later
+E           assert ['https://sea...zr_MA?p=late'] == []
+E             
+E             Left contains one more item: 'https://search.yahoo.com/search;_ylt=R3lSc9VN5TxJUny2U04GMgmq;_ylu=3dI5Se9vbblxisF4AMjYtib65yzkt2BWx4RpTdrixpzr_MA?p=late'
+E             Use -v to get more diff
+
+테스트\테스트_웹자료.py:698: AssertionError</failure></testcase><testcase classname="테스트.테스트_웹자료" name="test_logically_finished_search_cannot_start_late_http[timeout-executor]" time="0.085"><failure message="AssertionError: cancelled/expired call transmitted its first HTTP later&#10;assert ['https://sea...daG-8?p=late'] == []&#10;  &#10;  Left contains one more item: 'https://search.yahoo.com/search;_ylt=L-a51BtHnWTj8vaYZKIeazhq;_ylu=sC3r3QzBSTlIf1mBfXOsX3kaXQZpTtP9W9MZAKqmUYdaG-8?p=late'&#10;  Use -v to get more diff">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000013C16CC2A50&gt;
+stage = 'executor', ending = 'timeout'
+
+    @pytest.mark.parametrize("stage", ["executor", "initialization", "observer", "transport"])
+    @pytest.mark.parametrize("ending", ["cancel", "timeout"])
+    def test_logically_finished_search_cannot_start_late_http(monkeypatch, stage, ending):
+        import threading
+        from concurrent.futures import ThreadPoolExecutor
+    
+        import httpx
+        from ddgs.ddgs import DDGS
+    
+        entered, release = threading.Event(), threading.Event()
+        calls = []
+        original_timeout = asyncio.timeout
+        if ending == "timeout":
+            monkeypatch.setattr(asyncio, "timeout", lambda seconds: original_timeout(0.08))
+    
+        def pause():
+            entered.set()
+            assert release.wait(5)
+    
+        def sdk_factory(**kwargs):
+            if stage == "initialization":
+                pause()
+            return DDGS(**kwargs)
+    
+        def observer(kind, payload):
+            if stage == "observer" and kind == "request.started":
+                pause()
+    
+        def handler(request):
+            calls.append(str(request.url))
+            return httpx.Response(200, text="&lt;html&gt;No results&lt;/html&gt;")
+    
+        class DelayedClient(httpx.Client):
+            def send(self, *args, **kwargs):
+                if stage == "transport":
+                    pause()
+                return super().send(*args, **kwargs)
+    
+        def factory(**kwargs):
+            return DelayedClient(transport=httpx.MockTransport(handler), **kwargs)
+    
+        async def scenario():
+            loop = asyncio.get_running_loop()
+            blocker = None
+            if stage == "executor":
+                loop.set_default_executor(ThreadPoolExecutor(max_workers=1))
+                blocker = loop.run_in_executor(None, pause)
+            client = FreeWebClient(ddgs_factory=sdk_factory, search_http_client_factory=factory)
+            first = asyncio.create_task(client.search("late", observer=observer))
+            try:
+                for _ in range(1000):
+                    if entered.is_set() and client._native:
+                        break
+                    await asyncio.sleep(0.001)
+                assert entered.is_set() and client._native
+                assert calls == []
+                if ending == "cancel":
+                    first.cancel()
+                    with pytest.raises(asyncio.CancelledError):
+                        await first
+                else:
+                    with pytest.raises(WebSourceError, match="^search_timeout$"):
+                        await first
+                closing = asyncio.create_task(client.aclose())
+                await asyncio.sleep(0.005)
+                assert not closing.done(), "native resource ownership must survive logical exit"
+                assert client._search_lock.locked()
+                release.set()
+                await closing
+                if blocker is not None:
+                    await blocker
+                assert calls == [], "cancelled/expired call transmitted its first HTTP later"
+                assert not client._owned and not client._native
+            finally:
+                release.set()
+                await client.aclose()
+    
+        try:
+&gt;           asyncio.run(scenario())
+
+테스트\테스트_웹자료.py:705: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def scenario():
+        loop = asyncio.get_running_loop()
+        blocker = None
+        if stage == "executor":
+            loop.set_default_executor(ThreadPoolExecutor(max_workers=1))
+            blocker = loop.run_in_executor(None, pause)
+        client = FreeWebClient(ddgs_factory=sdk_factory, search_http_client_factory=factory)
+        first = asyncio.create_task(client.search("late", observer=observer))
+        try:
+            for _ in range(1000):
+                if entered.is_set() and client._native:
+                    break
+                await asyncio.sleep(0.001)
+            assert entered.is_set() and client._native
+            assert calls == []
+            if ending == "cancel":
+                first.cancel()
+                with pytest.raises(asyncio.CancelledError):
+                    await first
+            else:
+                with pytest.raises(WebSourceError, match="^search_timeout$"):
+                    await first
+            closing = asyncio.create_task(client.aclose())
+            await asyncio.sleep(0.005)
+            assert not closing.done(), "native resource ownership must survive logical exit"
+            assert client._search_lock.locked()
+            release.set()
+            await closing
+            if blocker is not None:
+                await blocker
+&gt;           assert calls == [], "cancelled/expired call transmitted its first HTTP later"
+E           AssertionError: cancelled/expired call transmitted its first HTTP later
+E           assert ['https://sea...daG-8?p=late'] == []
+E             
+E             Left contains one more item: 'https://search.yahoo.com/search;_ylt=L-a51BtHnWTj8vaYZKIeazhq;_ylu=sC3r3QzBSTlIf1mBfXOsX3kaXQZpTtP9W9MZAKqmUYdaG-8?p=late'
+E             Use -v to get more diff
+
+테스트\테스트_웹자료.py:698: AssertionError</failure></testcase><testcase classname="테스트.테스트_웹자료" name="test_logically_finished_search_cannot_start_late_http[timeout-initialization]" time="0.094"><failure message="AssertionError: cancelled/expired call transmitted its first HTTP later&#10;assert ['https://sea...Dyqfk?p=late'] == []&#10;  &#10;  Left contains one more item: 'https://search.yahoo.com/search;_ylt=qM_INWjs4y1DQTcKuuAz7OcR;_ylu=kQd2zP-lOhQHNGvSg7j_gfR_KfnpgZU6juFixNF5c6Dyqfk?p=late'&#10;  Use -v to get more diff">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000013C16CA3E00&gt;
+stage = 'initialization', ending = 'timeout'
+
+    @pytest.mark.parametrize("stage", ["executor", "initialization", "observer", "transport"])
+    @pytest.mark.parametrize("ending", ["cancel", "timeout"])
+    def test_logically_finished_search_cannot_start_late_http(monkeypatch, stage, ending):
+        import threading
+        from concurrent.futures import ThreadPoolExecutor
+    
+        import httpx
+        from ddgs.ddgs import DDGS
+    
+        entered, release = threading.Event(), threading.Event()
+        calls = []
+        original_timeout = asyncio.timeout
+        if ending == "timeout":
+            monkeypatch.setattr(asyncio, "timeout", lambda seconds: original_timeout(0.08))
+    
+        def pause():
+            entered.set()
+            assert release.wait(5)
+    
+        def sdk_factory(**kwargs):
+            if stage == "initialization":
+                pause()
+            return DDGS(**kwargs)
+    
+        def observer(kind, payload):
+            if stage == "observer" and kind == "request.started":
+                pause()
+    
+        def handler(request):
+            calls.append(str(request.url))
+            return httpx.Response(200, text="&lt;html&gt;No results&lt;/html&gt;")
+    
+        class DelayedClient(httpx.Client):
+            def send(self, *args, **kwargs):
+                if stage == "transport":
+                    pause()
+                return super().send(*args, **kwargs)
+    
+        def factory(**kwargs):
+            return DelayedClient(transport=httpx.MockTransport(handler), **kwargs)
+    
+        async def scenario():
+            loop = asyncio.get_running_loop()
+            blocker = None
+            if stage == "executor":
+                loop.set_default_executor(ThreadPoolExecutor(max_workers=1))
+                blocker = loop.run_in_executor(None, pause)
+            client = FreeWebClient(ddgs_factory=sdk_factory, search_http_client_factory=factory)
+            first = asyncio.create_task(client.search("late", observer=observer))
+            try:
+                for _ in range(1000):
+                    if entered.is_set() and client._native:
+                        break
+                    await asyncio.sleep(0.001)
+                assert entered.is_set() and client._native
+                assert calls == []
+                if ending == "cancel":
+                    first.cancel()
+                    with pytest.raises(asyncio.CancelledError):
+                        await first
+                else:
+                    with pytest.raises(WebSourceError, match="^search_timeout$"):
+                        await first
+                closing = asyncio.create_task(client.aclose())
+                await asyncio.sleep(0.005)
+                assert not closing.done(), "native resource ownership must survive logical exit"
+                assert client._search_lock.locked()
+                release.set()
+                await closing
+                if blocker is not None:
+                    await blocker
+                assert calls == [], "cancelled/expired call transmitted its first HTTP later"
+                assert not client._owned and not client._native
+            finally:
+                release.set()
+                await client.aclose()
+    
+        try:
+&gt;           asyncio.run(scenario())
+
+테스트\테스트_웹자료.py:705: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def scenario():
+        loop = asyncio.get_running_loop()
+        blocker = None
+        if stage == "executor":
+            loop.set_default_executor(ThreadPoolExecutor(max_workers=1))
+            blocker = loop.run_in_executor(None, pause)
+        client = FreeWebClient(ddgs_factory=sdk_factory, search_http_client_factory=factory)
+        first = asyncio.create_task(client.search("late", observer=observer))
+        try:
+            for _ in range(1000):
+                if entered.is_set() and client._native:
+                    break
+                await asyncio.sleep(0.001)
+            assert entered.is_set() and client._native
+            assert calls == []
+            if ending == "cancel":
+                first.cancel()
+                with pytest.raises(asyncio.CancelledError):
+                    await first
+            else:
+                with pytest.raises(WebSourceError, match="^search_timeout$"):
+                    await first
+            closing = asyncio.create_task(client.aclose())
+            await asyncio.sleep(0.005)
+            assert not closing.done(), "native resource ownership must survive logical exit"
+            assert client._search_lock.locked()
+            release.set()
+            await closing
+            if blocker is not None:
+                await blocker
+&gt;           assert calls == [], "cancelled/expired call transmitted its first HTTP later"
+E           AssertionError: cancelled/expired call transmitted its first HTTP later
+E           assert ['https://sea...Dyqfk?p=late'] == []
+E             
+E             Left contains one more item: 'https://search.yahoo.com/search;_ylt=qM_INWjs4y1DQTcKuuAz7OcR;_ylu=kQd2zP-lOhQHNGvSg7j_gfR_KfnpgZU6juFixNF5c6Dyqfk?p=late'
+E             Use -v to get more diff
+
+테스트\테스트_웹자료.py:698: AssertionError</failure></testcase><testcase classname="테스트.테스트_웹자료" name="test_logically_finished_search_cannot_start_late_http[timeout-observer]" time="0.104"><failure message="AssertionError: cancelled/expired call transmitted its first HTTP later&#10;assert ['https://sea...8haw8?p=late'] == []&#10;  &#10;  Left contains one more item: 'https://search.yahoo.com/search;_ylt=8BbP9jkrKpsNCcc8PxBQdJrd;_ylu=zR7IjzCHIYP5DF3xue_QiX4M9gytROgkHzrMOeKATT8haw8?p=late'&#10;  Use -v to get more diff">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000013C16CA2CC0&gt;
+stage = 'observer', ending = 'timeout'
+
+    @pytest.mark.parametrize("stage", ["executor", "initialization", "observer", "transport"])
+    @pytest.mark.parametrize("ending", ["cancel", "timeout"])
+    def test_logically_finished_search_cannot_start_late_http(monkeypatch, stage, ending):
+        import threading
+        from concurrent.futures import ThreadPoolExecutor
+    
+        import httpx
+        from ddgs.ddgs import DDGS
+    
+        entered, release = threading.Event(), threading.Event()
+        calls = []
+        original_timeout = asyncio.timeout
+        if ending == "timeout":
+            monkeypatch.setattr(asyncio, "timeout", lambda seconds: original_timeout(0.08))
+    
+        def pause():
+            entered.set()
+            assert release.wait(5)
+    
+        def sdk_factory(**kwargs):
+            if stage == "initialization":
+                pause()
+            return DDGS(**kwargs)
+    
+        def observer(kind, payload):
+            if stage == "observer" and kind == "request.started":
+                pause()
+    
+        def handler(request):
+            calls.append(str(request.url))
+            return httpx.Response(200, text="&lt;html&gt;No results&lt;/html&gt;")
+    
+        class DelayedClient(httpx.Client):
+            def send(self, *args, **kwargs):
+                if stage == "transport":
+                    pause()
+                return super().send(*args, **kwargs)
+    
+        def factory(**kwargs):
+            return DelayedClient(transport=httpx.MockTransport(handler), **kwargs)
+    
+        async def scenario():
+            loop = asyncio.get_running_loop()
+            blocker = None
+            if stage == "executor":
+                loop.set_default_executor(ThreadPoolExecutor(max_workers=1))
+                blocker = loop.run_in_executor(None, pause)
+            client = FreeWebClient(ddgs_factory=sdk_factory, search_http_client_factory=factory)
+            first = asyncio.create_task(client.search("late", observer=observer))
+            try:
+                for _ in range(1000):
+                    if entered.is_set() and client._native:
+                        break
+                    await asyncio.sleep(0.001)
+                assert entered.is_set() and client._native
+                assert calls == []
+                if ending == "cancel":
+                    first.cancel()
+                    with pytest.raises(asyncio.CancelledError):
+                        await first
+                else:
+                    with pytest.raises(WebSourceError, match="^search_timeout$"):
+                        await first
+                closing = asyncio.create_task(client.aclose())
+                await asyncio.sleep(0.005)
+                assert not closing.done(), "native resource ownership must survive logical exit"
+                assert client._search_lock.locked()
+                release.set()
+                await closing
+                if blocker is not None:
+                    await blocker
+                assert calls == [], "cancelled/expired call transmitted its first HTTP later"
+                assert not client._owned and not client._native
+            finally:
+                release.set()
+                await client.aclose()
+    
+        try:
+&gt;           asyncio.run(scenario())
+
+테스트\테스트_웹자료.py:705: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def scenario():
+        loop = asyncio.get_running_loop()
+        blocker = None
+        if stage == "executor":
+            loop.set_default_executor(ThreadPoolExecutor(max_workers=1))
+            blocker = loop.run_in_executor(None, pause)
+        client = FreeWebClient(ddgs_factory=sdk_factory, search_http_client_factory=factory)
+        first = asyncio.create_task(client.search("late", observer=observer))
+        try:
+            for _ in range(1000):
+                if entered.is_set() and client._native:
+                    break
+                await asyncio.sleep(0.001)
+            assert entered.is_set() and client._native
+            assert calls == []
+            if ending == "cancel":
+                first.cancel()
+                with pytest.raises(asyncio.CancelledError):
+                    await first
+            else:
+                with pytest.raises(WebSourceError, match="^search_timeout$"):
+                    await first
+            closing = asyncio.create_task(client.aclose())
+            await asyncio.sleep(0.005)
+            assert not closing.done(), "native resource ownership must survive logical exit"
+            assert client._search_lock.locked()
+            release.set()
+            await closing
+            if blocker is not None:
+                await blocker
+&gt;           assert calls == [], "cancelled/expired call transmitted its first HTTP later"
+E           AssertionError: cancelled/expired call transmitted its first HTTP later
+E           assert ['https://sea...8haw8?p=late'] == []
+E             
+E             Left contains one more item: 'https://search.yahoo.com/search;_ylt=8BbP9jkrKpsNCcc8PxBQdJrd;_ylu=zR7IjzCHIYP5DF3xue_QiX4M9gytROgkHzrMOeKATT8haw8?p=late'
+E             Use -v to get more diff
+
+테스트\테스트_웹자료.py:698: AssertionError</failure></testcase><testcase classname="테스트.테스트_웹자료" name="test_logically_finished_search_cannot_start_late_http[timeout-transport]" time="0.101"><failure message="AssertionError: cancelled/expired call transmitted its first HTTP later&#10;assert ['https://sea...CEbEA?p=late'] == []&#10;  &#10;  Left contains one more item: 'https://search.yahoo.com/search;_ylt=nFlxgIdldmCNI4U1JGRLUfBZ;_ylu=qAFMIGXIcYatTghtuY3FLDecswpC6k-Y8u98dGdao9CEbEA?p=late'&#10;  Use -v to get more diff">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000013C16CC0FE0&gt;
+stage = 'transport', ending = 'timeout'
+
+    @pytest.mark.parametrize("stage", ["executor", "initialization", "observer", "transport"])
+    @pytest.mark.parametrize("ending", ["cancel", "timeout"])
+    def test_logically_finished_search_cannot_start_late_http(monkeypatch, stage, ending):
+        import threading
+        from concurrent.futures import ThreadPoolExecutor
+    
+        import httpx
+        from ddgs.ddgs import DDGS
+    
+        entered, release = threading.Event(), threading.Event()
+        calls = []
+        original_timeout = asyncio.timeout
+        if ending == "timeout":
+            monkeypatch.setattr(asyncio, "timeout", lambda seconds: original_timeout(0.08))
+    
+        def pause():
+            entered.set()
+            assert release.wait(5)
+    
+        def sdk_factory(**kwargs):
+            if stage == "initialization":
+                pause()
+            return DDGS(**kwargs)
+    
+        def observer(kind, payload):
+            if stage == "observer" and kind == "request.started":
+                pause()
+    
+        def handler(request):
+            calls.append(str(request.url))
+            return httpx.Response(200, text="&lt;html&gt;No results&lt;/html&gt;")
+    
+        class DelayedClient(httpx.Client):
+            def send(self, *args, **kwargs):
+                if stage == "transport":
+                    pause()
+                return super().send(*args, **kwargs)
+    
+        def factory(**kwargs):
+            return DelayedClient(transport=httpx.MockTransport(handler), **kwargs)
+    
+        async def scenario():
+            loop = asyncio.get_running_loop()
+            blocker = None
+            if stage == "executor":
+                loop.set_default_executor(ThreadPoolExecutor(max_workers=1))
+                blocker = loop.run_in_executor(None, pause)
+            client = FreeWebClient(ddgs_factory=sdk_factory, search_http_client_factory=factory)
+            first = asyncio.create_task(client.search("late", observer=observer))
+            try:
+                for _ in range(1000):
+                    if entered.is_set() and client._native:
+                        break
+                    await asyncio.sleep(0.001)
+                assert entered.is_set() and client._native
+                assert calls == []
+                if ending == "cancel":
+                    first.cancel()
+                    with pytest.raises(asyncio.CancelledError):
+                        await first
+                else:
+                    with pytest.raises(WebSourceError, match="^search_timeout$"):
+                        await first
+                closing = asyncio.create_task(client.aclose())
+                await asyncio.sleep(0.005)
+                assert not closing.done(), "native resource ownership must survive logical exit"
+                assert client._search_lock.locked()
+                release.set()
+                await closing
+                if blocker is not None:
+                    await blocker
+                assert calls == [], "cancelled/expired call transmitted its first HTTP later"
+                assert not client._owned and not client._native
+            finally:
+                release.set()
+                await client.aclose()
+    
+        try:
+&gt;           asyncio.run(scenario())
+
+테스트\테스트_웹자료.py:705: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def scenario():
+        loop = asyncio.get_running_loop()
+        blocker = None
+        if stage == "executor":
+            loop.set_default_executor(ThreadPoolExecutor(max_workers=1))
+            blocker = loop.run_in_executor(None, pause)
+        client = FreeWebClient(ddgs_factory=sdk_factory, search_http_client_factory=factory)
+        first = asyncio.create_task(client.search("late", observer=observer))
+        try:
+            for _ in range(1000):
+                if entered.is_set() and client._native:
+                    break
+                await asyncio.sleep(0.001)
+            assert entered.is_set() and client._native
+            assert calls == []
+            if ending == "cancel":
+                first.cancel()
+                with pytest.raises(asyncio.CancelledError):
+                    await first
+            else:
+                with pytest.raises(WebSourceError, match="^search_timeout$"):
+                    await first
+            closing = asyncio.create_task(client.aclose())
+            await asyncio.sleep(0.005)
+            assert not closing.done(), "native resource ownership must survive logical exit"
+            assert client._search_lock.locked()
+            release.set()
+            await closing
+            if blocker is not None:
+                await blocker
+&gt;           assert calls == [], "cancelled/expired call transmitted its first HTTP later"
+E           AssertionError: cancelled/expired call transmitted its first HTTP later
+E           assert ['https://sea...CEbEA?p=late'] == []
+E             
+E             Left contains one more item: 'https://search.yahoo.com/search;_ylt=nFlxgIdldmCNI4U1JGRLUfBZ;_ylu=qAFMIGXIcYatTghtuY3FLDecswpC6k-Y8u98dGdao9CEbEA?p=late'
+E             Use -v to get more diff
+
+테스트\테스트_웹자료.py:698: AssertionError</failure></testcase></testsuite></testsuites>

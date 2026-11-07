@@ -15,6 +15,7 @@ class ExecutionService:
     def __init__(self, data_dir, *, provider="test-double", mode="spike"):
         self.repo = Repository(data_dir, provider=provider, mode=mode)
         self.repo.restore()
+        self.repo.source_modes = list(self.source_modes)
         self.model = FakeModel()
         self.report_title = "합성 실행 제어 시험 보고서"
         self.report_filename_prefix = "🧪 스파이크 보고서"
@@ -78,23 +79,118 @@ class ExecutionService:
         await asyncio.gather(*tasks, return_exceptions=True)
         self.gates.clear()
 
-    def admit(self, text, request_id):
-        raw_text = text
-        text = text.strip()
-        queued_command = text == "/큐" or text.startswith("/큐 ")
-        instruction = text[2:].strip() if queued_command else text
-        instruction_id = uid()
-        body = {"action": "commands", "text": raw_text}
+    @property
+    def source_modes(self):
+        return ["local"]
+
+    def admit(self, text, request_id, *, source_mode=None):
+        from 서버.명령해석 import CommandError, parse_command
+
+        # 자료 모드 도입 전에 저장된 접수의 재전송은 최초 해석(local) 그대로 읽기 경로로 돌려준다.
+        # 지금의 접두어 문법으로 원문을 다시 해석하지 않고 transaction에도 들어가지 않는다.
+        with self.repo.read_connection() as db:
+            prior = db.execute(
+                "SELECT body,response FROM requests WHERE request_id=?", (request_id,)
+            ).fetchone()
+        if prior:
+            original, response = json.loads(prior["body"]), json.loads(prior["response"])
+            if "source_mode" not in original and "source_mode" not in response:
+                if source_mode not in (None, "local"):
+                    raise ApiError(
+                        409, "request_id_conflict", "요청 ID가 다른 자료에 사용되었습니다."
+                    )
+                if original.get("action") != "commands" or original.get("text") != text:
+                    raise ApiError(
+                        409, "request_id_conflict", "요청 ID가 다른 내용에 사용되었습니다."
+                    )
+                return {**response, "source_mode": "local"}
+
         with self.repo.transaction() as (db, state):
-            duplicate = self.repo.duplicate(db, request_id, body)
-            if duplicate is not None:
-                return duplicate
-            if not instruction:
-                raise ApiError(422, "empty_instruction", "지시 내용을 입력해 주세요.")
+            # 재시도는 현재 선택/잠금이 아니라 최초 접수에 귀속된다.
+            row = db.execute(
+                "SELECT body,response FROM requests WHERE request_id=?", (request_id,)
+            ).fetchone()
+            captured = None
+            if row:
+                original, response = json.loads(row["body"]), json.loads(row["response"])
+                captured = response.setdefault("source_mode", "local")
+                if source_mode is not None and source_mode != captured:
+                    raise ApiError(
+                        409, "request_id_conflict", "요청 ID가 다른 자료에 사용되었습니다."
+                    )
+                if original.get("action") != "commands" or original.get("text") != text:
+                    raise ApiError(
+                        409, "request_id_conflict", "요청 ID가 다른 내용에 사용되었습니다."
+                    )
+            try:
+                command = parse_command(
+                    text,
+                    selected_mode=captured or state.get("selected_source_mode", "local"),
+                    explicit_mode=source_mode,
+                )
+            except CommandError as error:
+                raise ApiError(422, str(error), "자료 명령과 지시 내용을 확인해 주세요.") from error
+            selected = command["source_mode"]
+            if row:
+                if selected != captured:
+                    raise ApiError(
+                        409, "request_id_conflict", "요청 ID가 다른 자료에 사용되었습니다."
+                    )
+                return response
+            if selected not in self.source_modes:
+                raise ApiError(
+                    409,
+                    "source_mode_unavailable",
+                    "이 실행에서는 요청한 자료를 사용할 수 없습니다.",
+                )
             run = self.repo.run(state, state["current_run_id"])
-            if queued_command and (state["queue_paused"] or run and run["status"] == "running"):
+            if (
+                not command["queued"]
+                and run
+                and run["status"] == "running"
+                and run.get("source_mode", "local") != selected
+            ):
+                raise ApiError(
+                    409,
+                    "source_mode_locked",
+                    "진행 중에는 자료를 바꿀 수 없습니다. /큐로 예약해 주세요.",
+                )
+            instruction_id = uid()
+            body = {"action": "commands", "text": text, "source_mode": selected}
+            if command["mode_only"]:
+                state["selected_source_mode"] = selected
+                admission = {
+                    "instruction_id": instruction_id,
+                    "kind": "mode_change",
+                    "source_mode": selected,
+                    "run_id": None,
+                    "control_revision": None,
+                    "mode": "immediate",
+                    "status": "applied",
+                }
+                event = self.repo.event(
+                    db,
+                    "selection",
+                    0,
+                    "source_mode.changed",
+                    "planner",
+                    input={"text": text, "source_mode": selected},
+                    output=admission,
+                    status="applied",
+                )
+                admission["state_seq"] = event["seq"]
+                self.repo.remember(db, request_id, body, admission)
+                return admission
+            instruction = command["text"]
+            if command["queued"] and (state["queue_paused"] or run and run["status"] == "running"):
                 state["queue"].append(
-                    {"instruction_id": instruction_id, "text": instruction, "status": "queued"}
+                    {
+                        "instruction_id": instruction_id,
+                        "text": instruction,
+                        "raw_text": text,
+                        "source_mode": selected,
+                        "status": "queued",
+                    }
                 )
                 admission = {
                     "instruction_id": instruction_id,
@@ -102,25 +198,32 @@ class ExecutionService:
                     "mode": "queued",
                     "status": "queued",
                     "control_revision": None,
+                    "kind": "research",
+                    "source_mode": selected,
                 }
-                self.repo.event(
+                event = self.repo.event(
                     db,
                     run["run_id"] if run else "queue",
                     run["control_revision"] if run else 0,
                     "instruction.queued",
                     "planner",
-                    input={"text": text},
+                    input={"text": text, "source_mode": selected},
                     output=admission,
                     status="queued",
                 )
+                admission["state_seq"] = event["seq"]
                 self.repo.remember(db, request_id, body, admission)
                 return admission
-            run, admission = self.start(db, state, instruction, instruction_id)
+            run, admission = self.start(
+                db, state, instruction, instruction_id, source_mode=selected, raw_text=text
+            )
             self.repo.remember(db, request_id, body, admission)
         self.spawn(run["run_id"], run["control_revision"], instruction)
         return admission
 
-    def start(self, db, state, text, instruction_id):
+    def start(self, db, state, text, instruction_id, *, source_mode=None, raw_text=None):
+        source_mode = source_mode or state.get("selected_source_mode", "local")
+        state["selected_source_mode"] = source_mode
         run = self.repo.run(state, state["current_run_id"])
         if run and run["status"] == "running":
             self.repo.save_revision(db, run)
@@ -157,23 +260,27 @@ class ExecutionService:
             }
             state["runs"].append(run)
             state["current_run_id"] = run["run_id"]
+        run["source_mode"] = source_mode
         admission = {
+            "kind": "research",
+            "source_mode": source_mode,
             "instruction_id": instruction_id,
             "run_id": run["run_id"],
             "mode": "immediate",
             "status": "received",
             "control_revision": run["control_revision"],
         }
-        self.repo.event(
+        event = self.repo.event(
             db,
             run["run_id"],
             run["control_revision"],
             "instruction.received",
             "planner",
-            input={"text": text},
+            input={"text": raw_text if raw_text is not None else text, "source_mode": source_mode},
             output=admission,
             status="received",
         )
+        admission["state_seq"] = event["seq"]
         self.repo.save_revision(db, run)
         return run, admission
 
@@ -189,8 +296,18 @@ class ExecutionService:
         current = self.repo.run(data, data["current_run_id"])
         if data["queue_paused"] or not data["queue"] or current and current["status"] == "running":
             return None
-        item = data["queue"].pop(0)
-        return self.start(db, data, item["text"], item["instruction_id"])[0]
+        item = data["queue"][0]
+        if item.get("source_mode", "local") not in self.source_modes:
+            raise ApiError(409, "source_mode_unavailable", "예약된 자료 연결을 사용할 수 없습니다.")
+        data["queue"].pop(0)
+        return self.start(
+            db,
+            data,
+            item["text"],
+            item["instruction_id"],
+            source_mode=item.get("source_mode", "local"),
+            raw_text=item.get("raw_text", item["text"]),
+        )[0]
 
     def call_start(self, state, actor, payload, gate=None):
         with self.repo.transaction() as (db, data):
@@ -469,7 +586,10 @@ class ExecutionService:
             "sha256": hashlib.sha256(checked).hexdigest(),
             "created_at": now(),
             "download_url": f"/api/spike/reports/{report_id}/download",
+            "source_mode": run.get("source_mode", "local"),
         }
+        if run.get("source_mode", "local") == "web":
+            report["sources"] = run.get("source_provenance", [])
         db.execute("INSERT INTO reports VALUES(?,?,?)", (report_id, encode(report), filename))
         self.repo.event(
             db,
@@ -490,6 +610,7 @@ class ExecutionService:
             if row is None:
                 raise ApiError(404, "not_found", "최종 보고서가 없습니다.")
             report = json.loads(row["body"])
+            report.setdefault("source_mode", "local")
             path = self.repo.root / row["filename"]
             try:
                 content = path.read_bytes()

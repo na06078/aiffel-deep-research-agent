@@ -1,0 +1,61 @@
+{
+  "checked_at": "2026-11-06T16:46:26.365543+00:00",
+  "status": "ASSEMBLY_UNIT_PASS_INTEGRATION_PENDING",
+  "scope": "명시 공유 장부·프로젝트 경로·의존성 주입의 조립 단위, 실제 서비스/클라이언트 생성자와 HTTP/UI 결합은 미검증",
+  "suites": {
+    "웹조립_GREEN.xml": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "웹조립_RED.xml": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "웹조립_장부_GREEN.xml": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "웹조립_장부_RED.xml": {
+      "tests": 3,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "웹조립_최종.xml": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "ruff": "PASS",
+  "format": "PASS",
+  "new_real_model_requests": 0,
+  "source_sha256": {
+    "02_구현/전체화면_스파이크/서버/연구앱.py": "c4d36470f42fc5a38c9952e05c204a5078f8f57d4e205e0cdc35aafae3fdb548",
+    "02_구현/전체화면_스파이크/테스트/테스트_연구조립.py": "883521694f879fa51c6559e2df23b41e73e1788390f8aff72b954c23cbbf7ccb"
+  },
+  "raw_red_whitespace_exceptions": [
+    {
+      "path": "02_구현/전체화면_스파이크/검증결과/웹조립_장부_RED.xml",
+      "lines": [
+        12,
+        16,
+        20
+      ],
+      "reason": "pytest 행동 실패 원문의 공백 보존"
+    }
+  ],
+  "remaining": [
+    "자료 경계·서버·화면 담당 결과 인수",
+    "실제 생성자/API/저장/브라우저 결합",
+    "실제 모델 실행 범위 확정 및 실행",
+    "조립 최종 검증 후 코드·문서 로컬 커밋"
+  ]
+}

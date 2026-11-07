@@ -1,0 +1,50 @@
+{
+  "checked_at": "2026-11-06T17:26:57.608274+00:00",
+  "status": "SOURCE_UNIT_PASS_NATIVE_PROVIDER_AND_SERVER_INTEGRATION_PENDING",
+  "original_handoff": "웹자료_인계.json",
+  "original_six_hashes_verified_before_parent_fix": true,
+  "parent_red": {
+    "tests": 2,
+    "failures": 2,
+    "errors": 0,
+    "skipped": 0
+  },
+  "final": {
+    "tests": 35,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "ruff": "PASS",
+  "format": "PASS",
+  "parent_findings": [
+    {
+      "id": "SRC-01",
+      "issue": "IPv6 site-local fec0::1은 현재stdlib에서is_global=True여서거절되지않음",
+      "fix": "is_site_local도전송전에거절",
+      "evidence": "행동RED DID NOT RAISE, 이후원래public성공대조와전체35개통과"
+    },
+    {
+      "id": "SRC-02",
+      "issue": "redirect뒤request.completed.elapsed_ms가각요청이아닌누적시간",
+      "fix": "요청별request_started기준, FetchedPage.elapsed_ms전체시간은유지",
+      "evidence": "RED [2000,4000] != [2000,2000], GREEN각2000/전체4000"
+    }
+  ],
+  "source_sha256": {
+    "02_구현/전체화면_스파이크/서버/웹자료.py": "cebcfd92516af92298644644fe87de21a083cdb5e2e9df1ccfd7c2136de1f31b",
+    "02_구현/전체화면_스파이크/서버/웹자료저장소.py": "fc498c1ae1487707c5451dd92574ad3e5fe90246258c315deb9979782ec16a2f",
+    "02_구현/전체화면_스파이크/테스트/테스트_웹자료.py": "ba53b4805b7885a805c3d17bc4528fd22479e249f01ac123342086a2ea8c1058",
+    "02_구현/전체화면_스파이크/테스트/테스트_웹자료저장소.py": "d0c6aa81e101b0ffecc3beb927ea77aaf3bff30d37b96eaed03de6f806c4784a",
+    "02_구현/전체화면_스파이크/서버/웹계약.py": "756d8c68d8df98dbf95dc01a6c2f363a84bc821b32b6fa1a5fcd36a056e1b9cb",
+    "02_구현/전체화면_스파이크/서버/명령해석.py": "a8bb23168a535dc9a40dac63ad0299e932328cfccb6a3a2950e960cdb2ad9a0c"
+  },
+  "real_network_requests": 0,
+  "real_model_requests": 0,
+  "remaining": [
+    "primp실측을새httpx전송의성공으로전용하지말것",
+    "새실제클라이언트의최소검색/본문/TLS연결범위확정",
+    "서버저널성공receipt+revision fence와결합",
+    "전체회귀/실제앱/로컬커밋"
+  ]
+}

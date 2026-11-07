@@ -21,9 +21,9 @@ export function useDrawerHeight(surfaceRef:RefObject<HTMLElement|null>,composerR
   const measure=()=>{
    const popup=surface.querySelector<HTMLElement>('.popup');
    const inputRect=composer.getBoundingClientRect();
-   const menuRect=surface.querySelector<HTMLElement>('.menu-toggle')?.getBoundingClientRect();
-   // A full-width input must not cover the menu when the drawer reaches its maximum.
-   const topClearance=menuRect&&inputRect.left<menuRect.right&&inputRect.right>menuRect.left?menuRect.bottom+8:16;
+   // A centered input can overlap the source badge even when it misses the menu.
+   const topRects=['.menu-toggle','.source-mode-indicator'].map(selector=>surface.querySelector<HTMLElement>(selector)?.getBoundingClientRect());
+   const topClearance=Math.max(16,...topRects.filter((rect):rect is DOMRect=>!!rect&&inputRect.left<rect.right&&inputRect.right>rect.left).map(rect=>rect.bottom+8));
    const next:DrawerSpace={viewportHeight:window.innerHeight,viewportWidth:window.innerWidth,composerHeight:inputRect.height,composerGap:parseFloat(getComputedStyle(surface).getPropertyValue('--composer-lift-gap'))||36,popupTop:popup?.getBoundingClientRect().top??null,topClearance};
    setSpace(old=>Object.keys(next).every(key=>old[key as keyof DrawerSpace]===next[key as keyof DrawerSpace])?old:next);
   };

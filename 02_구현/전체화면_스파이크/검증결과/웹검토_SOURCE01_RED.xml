@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="1.669" timestamp="2026-11-07T15:59:43.254781+09:00" hostname="z13flow"><testcase classname="테스트.테스트_웹연구" name="test_부정확한읽기receipt는_출처claim만으로_제출불가[source_url]" time="0.313"><failure message="AssertionError: assert 'completed' == 'blocked'&#10;  &#10;  - blocked&#10;  + completed">tamper = 'source_url'
+
+    @pytest.mark.parametrize(
+        "tamper",
+        [
+            "actual_user",
+            "source_url",
+            "read_url",
+            "fetch_url",
+            "wrong_section",
+            "wrong_run",
+            "wrong_revision",
+            "failed_call",
+            "wrong_read_hash",
+            "wrong_note_hash",
+            "failed_source",
+            "no_fetch_receipt",
+            "orphan_call",
+        ],
+    )
+    async def test_부정확한읽기receipt는_출처claim만으로_제출불가(tamper):
+        entered = asyncio.Event()
+        release = asyncio.Event()
+    
+        class DelayedEditor(WebModel):
+            async def complete(self, system, user, *, context, **kwargs):
+                if context["operation"] == "synthesize":
+                    entered.set()
+                    await release.wait()
+                return await super().complete(system, user, context=context, **kwargs)
+    
+        service = make(model=DelayedEditor())
+        try:
+            service.admit("/웹 자료", "first")
+            await asyncio.wait_for(entered.wait(), 3)
+            assert len(service.web_store.claims) == 3  # 실제 읽기가 완료된 양성 대조 뒤 변조.
+            with service.repo.transaction() as (db, _data):
+                for row in db.execute("SELECT call_id,input FROM calls").fetchall():
+                    payload = json.loads(row["input"])
+                    if payload["context"]["operation"] == "read_one":
+                        if tamper == "read_url":
+                            payload["inputs"]["url"] = "https://other.example/"
+                            db.execute("UPDATE calls SET input=? WHERE call_id=?",
+                                       (json.dumps(payload), row["call_id"]))
+                        if tamper == "actual_user":
+                            payload["user"] = "읽지 않은 다른 본문"
+                            db.execute(
+                                "UPDATE calls SET input=? WHERE call_id=?",
+                                (json.dumps(payload), row["call_id"]),
+                            )
+                        elif tamper == "wrong_run":
+                            db.execute(
+                                "UPDATE calls SET run_id='different-run' WHERE call_id=?",
+                                (row["call_id"],),
+                            )
+                        elif tamper == "wrong_revision":
+                            db.execute(
+                                "UPDATE calls SET revision=999 WHERE call_id=?", (row["call_id"],)
+                            )
+                        elif tamper == "failed_call":
+                            db.execute(
+                                "UPDATE calls SET status='failed' WHERE call_id=?", (row["call_id"],)
+                            )
+                if tamper == "fetch_url":
+                    db.execute("UPDATE events SET body=json_set(body, '$.output.url', 'https://other.example/') WHERE json_extract(body,'$.type')='web.source.fetched'")
+                if tamper == "no_fetch_receipt":
+                    db.execute(
+                        "DELETE FROM events WHERE json_extract(body,'$.type')='web.source.fetched'"
+                    )
+            for claim in service.web_store.claims.values():
+                if tamper == "wrong_section":
+                    claim["section_id"] = "section-not-assigned"
+                elif tamper == "wrong_read_hash":
+                    claim["read_text_sha256"] = "0" * 64
+                elif tamper == "wrong_note_hash":
+                    claim["note_sha256"] = "0" * 64
+                elif tamper == "orphan_call":
+                    claim["model_call_id"] = "provider-not-app-call"
+            if tamper == "source_url":
+                for source in service.web_store.rows.values():
+                    source["final_url"] = "https://other.example/"
+            if tamper == "failed_source":
+                for source in service.web_store.rows.values():
+                    source["status"] = "failed"
+            release.set()
+            await settle(service)
+            run = service.repo.snapshot()["runs"][0]
+&gt;           assert run["status"] == "blocked"
+E           AssertionError: assert 'completed' == 'blocked'
+E             
+E             - blocked
+E             + completed
+
+테스트\테스트_웹연구.py:474: AssertionError</failure></testcase><testcase classname="테스트.테스트_웹연구" name="test_부정확한읽기receipt는_출처claim만으로_제출불가[read_url]" time="0.311"><failure message="AssertionError: assert 'completed' == 'blocked'&#10;  &#10;  - blocked&#10;  + completed">tamper = 'read_url'
+
+    @pytest.mark.parametrize(
+        "tamper",
+        [
+            "actual_user",
+            "source_url",
+            "read_url",
+            "fetch_url",
+            "wrong_section",
+            "wrong_run",
+            "wrong_revision",
+            "failed_call",
+            "wrong_read_hash",
+            "wrong_note_hash",
+            "failed_source",
+            "no_fetch_receipt",
+            "orphan_call",
+        ],
+    )
+    async def test_부정확한읽기receipt는_출처claim만으로_제출불가(tamper):
+        entered = asyncio.Event()
+        release = asyncio.Event()
+    
+        class DelayedEditor(WebModel):
+            async def complete(self, system, user, *, context, **kwargs):
+                if context["operation"] == "synthesize":
+                    entered.set()
+                    await release.wait()
+                return await super().complete(system, user, context=context, **kwargs)
+    
+        service = make(model=DelayedEditor())
+        try:
+            service.admit("/웹 자료", "first")
+            await asyncio.wait_for(entered.wait(), 3)
+            assert len(service.web_store.claims) == 3  # 실제 읽기가 완료된 양성 대조 뒤 변조.
+            with service.repo.transaction() as (db, _data):
+                for row in db.execute("SELECT call_id,input FROM calls").fetchall():
+                    payload = json.loads(row["input"])
+                    if payload["context"]["operation"] == "read_one":
+                        if tamper == "read_url":
+                            payload["inputs"]["url"] = "https://other.example/"
+                            db.execute("UPDATE calls SET input=? WHERE call_id=?",
+                                       (json.dumps(payload), row["call_id"]))
+                        if tamper == "actual_user":
+                            payload["user"] = "읽지 않은 다른 본문"
+                            db.execute(
+                                "UPDATE calls SET input=? WHERE call_id=?",
+                                (json.dumps(payload), row["call_id"]),
+                            )
+                        elif tamper == "wrong_run":
+                            db.execute(
+                                "UPDATE calls SET run_id='different-run' WHERE call_id=?",
+                                (row["call_id"],),
+                            )
+                        elif tamper == "wrong_revision":
+                            db.execute(
+                                "UPDATE calls SET revision=999 WHERE call_id=?", (row["call_id"],)
+                            )
+                        elif tamper == "failed_call":
+                            db.execute(
+                                "UPDATE calls SET status='failed' WHERE call_id=?", (row["call_id"],)
+                            )
+                if tamper == "fetch_url":
+                    db.execute("UPDATE events SET body=json_set(body, '$.output.url', 'https://other.example/') WHERE json_extract(body,'$.type')='web.source.fetched'")
+                if tamper == "no_fetch_receipt":
+                    db.execute(
+                        "DELETE FROM events WHERE json_extract(body,'$.type')='web.source.fetched'"
+                    )
+            for claim in service.web_store.claims.values():
+                if tamper == "wrong_section":
+                    claim["section_id"] = "section-not-assigned"
+                elif tamper == "wrong_read_hash":
+                    claim["read_text_sha256"] = "0" * 64
+                elif tamper == "wrong_note_hash":
+                    claim["note_sha256"] = "0" * 64
+                elif tamper == "orphan_call":
+                    claim["model_call_id"] = "provider-not-app-call"
+            if tamper == "source_url":
+                for source in service.web_store.rows.values():
+                    source["final_url"] = "https://other.example/"
+            if tamper == "failed_source":
+                for source in service.web_store.rows.values():
+                    source["status"] = "failed"
+            release.set()
+            await settle(service)
+            run = service.repo.snapshot()["runs"][0]
+&gt;           assert run["status"] == "blocked"
+E           AssertionError: assert 'completed' == 'blocked'
+E             
+E             - blocked
+E             + completed
+
+테스트\테스트_웹연구.py:474: AssertionError</failure></testcase><testcase classname="테스트.테스트_웹연구" name="test_부정확한읽기receipt는_출처claim만으로_제출불가[fetch_url]" time="0.305"><failure message="AssertionError: assert 'completed' == 'blocked'&#10;  &#10;  - blocked&#10;  + completed">tamper = 'fetch_url'
+
+    @pytest.mark.parametrize(
+        "tamper",
+        [
+            "actual_user",
+            "source_url",
+            "read_url",
+            "fetch_url",
+            "wrong_section",
+            "wrong_run",
+            "wrong_revision",
+            "failed_call",
+            "wrong_read_hash",
+            "wrong_note_hash",
+            "failed_source",
+            "no_fetch_receipt",
+            "orphan_call",
+        ],
+    )
+    async def test_부정확한읽기receipt는_출처claim만으로_제출불가(tamper):
+        entered = asyncio.Event()
+        release = asyncio.Event()
+    
+        class DelayedEditor(WebModel):
+            async def complete(self, system, user, *, context, **kwargs):
+                if context["operation"] == "synthesize":
+                    entered.set()
+                    await release.wait()
+                return await super().complete(system, user, context=context, **kwargs)
+    
+        service = make(model=DelayedEditor())
+        try:
+            service.admit("/웹 자료", "first")
+            await asyncio.wait_for(entered.wait(), 3)
+            assert len(service.web_store.claims) == 3  # 실제 읽기가 완료된 양성 대조 뒤 변조.
+            with service.repo.transaction() as (db, _data):
+                for row in db.execute("SELECT call_id,input FROM calls").fetchall():
+                    payload = json.loads(row["input"])
+                    if payload["context"]["operation"] == "read_one":
+                        if tamper == "read_url":
+                            payload["inputs"]["url"] = "https://other.example/"
+                            db.execute("UPDATE calls SET input=? WHERE call_id=?",
+                                       (json.dumps(payload), row["call_id"]))
+                        if tamper == "actual_user":
+                            payload["user"] = "읽지 않은 다른 본문"
+                            db.execute(
+                                "UPDATE calls SET input=? WHERE call_id=?",
+                                (json.dumps(payload), row["call_id"]),
+                            )
+                        elif tamper == "wrong_run":
+                            db.execute(
+                                "UPDATE calls SET run_id='different-run' WHERE call_id=?",
+                                (row["call_id"],),
+                            )
+                        elif tamper == "wrong_revision":
+                            db.execute(
+                                "UPDATE calls SET revision=999 WHERE call_id=?", (row["call_id"],)
+                            )
+                        elif tamper == "failed_call":
+                            db.execute(
+                                "UPDATE calls SET status='failed' WHERE call_id=?", (row["call_id"],)
+                            )
+                if tamper == "fetch_url":
+                    db.execute("UPDATE events SET body=json_set(body, '$.output.url', 'https://other.example/') WHERE json_extract(body,'$.type')='web.source.fetched'")
+                if tamper == "no_fetch_receipt":
+                    db.execute(
+                        "DELETE FROM events WHERE json_extract(body,'$.type')='web.source.fetched'"
+                    )
+            for claim in service.web_store.claims.values():
+                if tamper == "wrong_section":
+                    claim["section_id"] = "section-not-assigned"
+                elif tamper == "wrong_read_hash":
+                    claim["read_text_sha256"] = "0" * 64
+                elif tamper == "wrong_note_hash":
+                    claim["note_sha256"] = "0" * 64
+                elif tamper == "orphan_call":
+                    claim["model_call_id"] = "provider-not-app-call"
+            if tamper == "source_url":
+                for source in service.web_store.rows.values():
+                    source["final_url"] = "https://other.example/"
+            if tamper == "failed_source":
+                for source in service.web_store.rows.values():
+                    source["status"] = "failed"
+            release.set()
+            await settle(service)
+            run = service.repo.snapshot()["runs"][0]
+&gt;           assert run["status"] == "blocked"
+E           AssertionError: assert 'completed' == 'blocked'
+E             
+E             - blocked
+E             + completed
+
+테스트\테스트_웹연구.py:474: AssertionError</failure></testcase></testsuite></testsuites>

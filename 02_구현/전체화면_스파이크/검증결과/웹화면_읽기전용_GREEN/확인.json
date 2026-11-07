@@ -1,0 +1,710 @@
+{
+  "started_at": "2026-11-06T17:09:12.020606+00:00",
+  "scope": "후보 화면+기존 실제 API GET; 자료 명령/새 웹 연구/API 통합 미검증",
+  "assets": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\웹화면_후보_보완",
+  "checks": [
+    {
+      "name": "1440_900_최대타임라인",
+      "status": "PASS",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900,
+        "right": 1440,
+        "bottom": 900
+      },
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      },
+      "input": {
+        "x": 349,
+        "y": 25,
+        "width": 626.15625,
+        "height": 56,
+        "right": 975.15625,
+        "bottom": 81
+      },
+      "menu": {
+        "x": 16,
+        "y": 16,
+        "width": 44,
+        "height": 44,
+        "right": 60,
+        "bottom": 60
+      },
+      "close": null,
+      "popup": null,
+      "menuHit": true,
+      "inputHit": true,
+      "closeHit": true
+    },
+    {
+      "name": "1440_900_자료팝업",
+      "status": "PASS",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900,
+        "right": 1440,
+        "bottom": 900
+      },
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      },
+      "input": {
+        "x": 349,
+        "y": 799,
+        "width": 626.15625,
+        "height": 56,
+        "right": 975.15625,
+        "bottom": 855
+      },
+      "menu": {
+        "x": 16,
+        "y": 16,
+        "width": 44,
+        "height": 44,
+        "right": 60,
+        "bottom": 60
+      },
+      "close": {
+        "x": 1095,
+        "y": 87,
+        "width": 44,
+        "height": 44,
+        "right": 1139,
+        "bottom": 131
+      },
+      "popup": {
+        "x": 280,
+        "y": 72,
+        "width": 880,
+        "height": 706,
+        "right": 1160,
+        "bottom": 778
+      },
+      "menuHit": true,
+      "inputHit": true,
+      "closeHit": true
+    },
+    {
+      "name": "1440_900_팝업과타임라인",
+      "status": "PASS",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900,
+        "right": 1440,
+        "bottom": 900
+      },
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      },
+      "input": {
+        "x": 349,
+        "y": 233,
+        "width": 626.15625,
+        "height": 56,
+        "right": 975.15625,
+        "bottom": 289
+      },
+      "menu": {
+        "x": 16,
+        "y": 16,
+        "width": 44,
+        "height": 44,
+        "right": 60,
+        "bottom": 60
+      },
+      "close": {
+        "x": 1095,
+        "y": 87,
+        "width": 44,
+        "height": 44,
+        "right": 1139,
+        "bottom": 131
+      },
+      "popup": {
+        "x": 280,
+        "y": 72,
+        "width": 880,
+        "height": 140,
+        "right": 1160,
+        "bottom": 212
+      },
+      "menuHit": true,
+      "inputHit": true,
+      "closeHit": true
+    },
+    {
+      "name": "390_844_최대타임라인",
+      "status": "PASS",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844,
+        "right": 390,
+        "bottom": 844
+      },
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      },
+      "input": {
+        "x": 21,
+        "y": 77,
+        "width": 255.703125,
+        "height": 56,
+        "right": 276.703125,
+        "bottom": 133
+      },
+      "menu": {
+        "x": 16,
+        "y": 16,
+        "width": 44,
+        "height": 44,
+        "right": 60,
+        "bottom": 60
+      },
+      "close": null,
+      "popup": null,
+      "menuHit": true,
+      "inputHit": true,
+      "closeHit": true
+    },
+    {
+      "name": "390_844_자료팝업",
+      "status": "PASS",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844,
+        "right": 390,
+        "bottom": 844
+      },
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      },
+      "input": {
+        "x": 21,
+        "y": 743,
+        "width": 255.703125,
+        "height": 56,
+        "right": 276.703125,
+        "bottom": 799
+      },
+      "menu": {
+        "x": 16,
+        "y": 16,
+        "width": 44,
+        "height": 44,
+        "right": 60,
+        "bottom": 60
+      },
+      "close": {
+        "x": 319,
+        "y": 81,
+        "width": 44,
+        "height": 44,
+        "right": 363,
+        "bottom": 125
+      },
+      "popup": {
+        "x": 12,
+        "y": 70,
+        "width": 366,
+        "height": 652,
+        "right": 378,
+        "bottom": 722
+      },
+      "menuHit": true,
+      "inputHit": true,
+      "closeHit": true
+    },
+    {
+      "name": "390_844_팝업과타임라인",
+      "status": "PASS",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844,
+        "right": 390,
+        "bottom": 844
+      },
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      },
+      "input": {
+        "x": 21,
+        "y": 231,
+        "width": 255.703125,
+        "height": 56,
+        "right": 276.703125,
+        "bottom": 287
+      },
+      "menu": {
+        "x": 16,
+        "y": 16,
+        "width": 44,
+        "height": 44,
+        "right": 60,
+        "bottom": 60
+      },
+      "close": {
+        "x": 319,
+        "y": 81,
+        "width": 44,
+        "height": 44,
+        "right": 363,
+        "bottom": 125
+      },
+      "popup": {
+        "x": 12,
+        "y": 70,
+        "width": 366,
+        "height": 140,
+        "right": 378,
+        "bottom": 210
+      },
+      "menuHit": true,
+      "inputHit": true,
+      "closeHit": true
+    },
+    {
+      "name": "844_390_최대타임라인",
+      "status": "PASS",
+      "width": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 390,
+        "right": 844,
+        "bottom": 390
+      },
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      },
+      "input": {
+        "x": 48,
+        "y": 77,
+        "width": 632.15625,
+        "height": 36,
+        "right": 680.15625,
+        "bottom": 113
+      },
+      "menu": {
+        "x": 16,
+        "y": 16,
+        "width": 44,
+        "height": 44,
+        "right": 60,
+        "bottom": 60
+      },
+      "close": null,
+      "popup": null,
+      "menuHit": true,
+      "inputHit": true,
+      "closeHit": true
+    },
+    {
+      "name": "844_390_자료팝업",
+      "status": "PASS",
+      "width": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 390,
+        "right": 844,
+        "bottom": 390
+      },
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      },
+      "input": {
+        "x": 48,
+        "y": 314,
+        "width": 632.15625,
+        "height": 36,
+        "right": 680.15625,
+        "bottom": 350
+      },
+      "menu": {
+        "x": 16,
+        "y": 16,
+        "width": 44,
+        "height": 44,
+        "right": 60,
+        "bottom": 60
+      },
+      "close": {
+        "x": 739,
+        "y": 76,
+        "width": 44,
+        "height": 44,
+        "right": 783,
+        "bottom": 120
+      },
+      "popup": {
+        "x": 50,
+        "y": 72,
+        "width": 744,
+        "height": 221,
+        "right": 794,
+        "bottom": 293
+      },
+      "menuHit": true,
+      "inputHit": true,
+      "closeHit": true
+    },
+    {
+      "name": "844_390_팝업과타임라인",
+      "status": "PASS",
+      "width": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 390,
+        "right": 844,
+        "bottom": 390
+      },
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      },
+      "input": {
+        "x": 48,
+        "y": 185,
+        "width": 632.15625,
+        "height": 36,
+        "right": 680.15625,
+        "bottom": 221
+      },
+      "menu": {
+        "x": 16,
+        "y": 16,
+        "width": 44,
+        "height": 44,
+        "right": 60,
+        "bottom": 60
+      },
+      "close": {
+        "x": 739,
+        "y": 76,
+        "width": 44,
+        "height": 44,
+        "right": 783,
+        "bottom": 120
+      },
+      "popup": {
+        "x": 50,
+        "y": 72,
+        "width": 744,
+        "height": 92,
+        "right": 794,
+        "bottom": 164
+      },
+      "menuHit": true,
+      "inputHit": true,
+      "closeHit": true
+    },
+    {
+      "name": "1000_700_최대타임라인",
+      "status": "PASS",
+      "width": 1000,
+      "height": 700,
+      "scrollWidth": 1000,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1000,
+        "height": 700,
+        "right": 1000,
+        "bottom": 700
+      },
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      },
+      "input": {
+        "x": 129,
+        "y": 71,
+        "width": 626.15625,
+        "height": 56,
+        "right": 755.15625,
+        "bottom": 127
+      },
+      "menu": {
+        "x": 16,
+        "y": 16,
+        "width": 44,
+        "height": 44,
+        "right": 60,
+        "bottom": 60
+      },
+      "close": null,
+      "popup": null,
+      "menuHit": true,
+      "inputHit": true,
+      "closeHit": true
+    },
+    {
+      "name": "1000_700_자료팝업",
+      "status": "PASS",
+      "width": 1000,
+      "height": 700,
+      "scrollWidth": 1000,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1000,
+        "height": 700,
+        "right": 1000,
+        "bottom": 700
+      },
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      },
+      "input": {
+        "x": 129,
+        "y": 599,
+        "width": 626.15625,
+        "height": 56,
+        "right": 755.15625,
+        "bottom": 655
+      },
+      "menu": {
+        "x": 16,
+        "y": 16,
+        "width": 44,
+        "height": 44,
+        "right": 60,
+        "bottom": 60
+      },
+      "close": {
+        "x": 875,
+        "y": 87,
+        "width": 44,
+        "height": 44,
+        "right": 919,
+        "bottom": 131
+      },
+      "popup": {
+        "x": 60,
+        "y": 72,
+        "width": 880,
+        "height": 506,
+        "right": 940,
+        "bottom": 578
+      },
+      "menuHit": true,
+      "inputHit": true,
+      "closeHit": true
+    },
+    {
+      "name": "1000_700_팝업과타임라인",
+      "status": "PASS",
+      "width": 1000,
+      "height": 700,
+      "scrollWidth": 1000,
+      "scrollX": 0,
+      "scrollY": 0,
+      "canvasCount": 1,
+      "sameCanvas": true,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1000,
+        "height": 700,
+        "right": 1000,
+        "bottom": 700
+      },
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      },
+      "input": {
+        "x": 129,
+        "y": 233,
+        "width": 626.15625,
+        "height": 56,
+        "right": 755.15625,
+        "bottom": 289
+      },
+      "menu": {
+        "x": 16,
+        "y": 16,
+        "width": 44,
+        "height": 44,
+        "right": 60,
+        "bottom": 60
+      },
+      "close": {
+        "x": 875,
+        "y": 87,
+        "width": 44,
+        "height": 44,
+        "right": 919,
+        "bottom": 131
+      },
+      "popup": {
+        "x": 60,
+        "y": 72,
+        "width": 880,
+        "height": 140,
+        "right": 940,
+        "bottom": 212
+      },
+      "menuHit": true,
+      "inputHit": true,
+      "closeHit": true
+    }
+  ],
+  "captures": [
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\웹화면_읽기전용_GREEN\\1440_900_최대타임라인.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\웹화면_읽기전용_GREEN\\1440_900_자료팝업.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\웹화면_읽기전용_GREEN\\390_844_최대타임라인.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\웹화면_읽기전용_GREEN\\390_844_자료팝업.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\웹화면_읽기전용_GREEN\\844_390_최대타임라인.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\웹화면_읽기전용_GREEN\\844_390_자료팝업.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\웹화면_읽기전용_GREEN\\1000_700_최대타임라인.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\웹화면_읽기전용_GREEN\\1000_700_자료팝업.png"
+  ],
+  "blocked_requests": [],
+  "browser_errors": [],
+  "status": "PASS_READ_ONLY_COMPATIBILITY",
+  "live_state_unchanged": true,
+  "live_dist_unchanged": true
+}

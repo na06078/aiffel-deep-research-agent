@@ -12,7 +12,7 @@ from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from starlette.exceptions import HTTPException
 
 from 서버.보고서변환 import ReportExports
@@ -23,6 +23,15 @@ from 서버.접근경계 import LoopbackOnly
 
 class Command(BaseModel):
     text: str
+    source_mode: Literal["local", "web"] | None = None
+
+    @field_validator("source_mode")
+    @classmethod
+    def reject_explicit_null(cls, value):
+        if value is None:
+            raise ValueError("source_mode must not be null")
+        return value
+
     client_request_id: str = Field(min_length=1, max_length=200)
 
 
@@ -131,7 +140,9 @@ def create_app(
 
     @app.post("/api/spike/commands", status_code=202)
     async def commands(body: Command):
-        return app.state.service.admit(body.text, body.client_request_id)
+        return app.state.service.admit(
+            body.text, body.client_request_id, source_mode=body.source_mode
+        )
 
     @app.post("/api/spike/releases")
     async def releases(body: Release):

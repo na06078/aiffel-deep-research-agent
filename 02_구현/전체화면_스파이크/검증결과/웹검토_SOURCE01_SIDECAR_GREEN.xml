@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="3" time="2.061" timestamp="2026-11-07T16:06:42.607807+09:00" hostname="z13flow"><testcase classname="테스트.테스트_웹연구" name="test_웹6노드_진짜읽기receipt_출처정본_모델과HTTP분리[False]" time="0.381" /><testcase classname="테스트.테스트_웹연구" name="test_웹6노드_진짜읽기receipt_출처정본_모델과HTTP분리[True]" time="0.271" /><testcase classname="테스트.테스트_웹연구" name="test_single_sidecar_url_change_cannot_publish_cited_source" time="0.792"><failure message="AttributeError: property 'web_store' of 'RealResearchService' object has no setter">async def test_single_sidecar_url_change_cannot_publish_cited_source():
+        import sqlite3
+    
+        from 서버.웹자료저장소 import WebSourceStore
+        from 테스트.테스트_웹통합 import IntegrationModel
+    
+        entered, release = asyncio.Event(), asyncio.Event()
+    
+        class DelayedEditor(IntegrationModel):
+            async def complete(self, system, user, *, context, **kwargs):
+                if context["operation"] == "synthesize":
+                    entered.set()
+                    await release.wait()
+                return await super().complete(system, user, context=context, **kwargs)
+    
+        service = make(model=DelayedEditor())
+&gt;       service.web_store = WebSourceStore(service.repo.root / "웹자료/자료.sqlite3")
+        ^^^^^^^^^^^^^^^^^
+E       AttributeError: property 'web_store' of 'RealResearchService' object has no setter
+
+테스트\테스트_웹연구.py:560: AttributeError</failure></testcase></testsuite></testsuites>

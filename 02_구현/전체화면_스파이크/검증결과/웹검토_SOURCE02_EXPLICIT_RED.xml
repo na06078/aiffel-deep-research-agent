@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="8" time="1.018" timestamp="2026-11-07T16:15:14.787602+09:00" hostname="z13flow"><testcase classname="테스트.테스트_자료모드제어" name="test_과거응답_명시local_재전송도_새접두어문법으로_재해석하지않는다[\uacfc\uac70 \uc9c8\ubb38]" time="0.050" /><testcase classname="테스트.테스트_자료모드제어" name="test_과거응답_명시local_재전송도_새접두어문법으로_재해석하지않는다[/\uc6f9 \uacf5\uac1c \uc790\ub8cc]" time="0.028"><failure message="서버.저장소.ApiError: (422, 'source_mode_conflict', '자료 명령과 지시 내용을 확인해 주세요.')">self = &lt;테스트_자료모드제어.QuietService object at 0x0000020AF863BD40&gt;, text = '/웹 공개 자료'
+request_id = 'legacy', source_mode = 'local'
+
+    def admit(self, text, request_id, *, source_mode=None):
+        from 서버.명령해석 import CommandError, parse_command
+    
+        # 레거시 재전송은 transaction의 동일값 UPDATE조차 하지 않는 읽기 경로다.
+        if source_mode is None:
+            with self.repo.read_connection() as db:
+                prior = db.execute(
+                    "SELECT body,response FROM requests WHERE request_id=?", (request_id,)
+                ).fetchone()
+                if prior:
+                    original, response = json.loads(prior["body"]), json.loads(prior["response"])
+                    if "source_mode" not in original and "source_mode" not in response:
+                        if original.get("action") != "commands" or original.get("text") != text:
+                            raise ApiError(
+                                409, "request_id_conflict", "요청 ID가 다른 내용에 사용되었습니다."
+                            )
+                        return {**response, "source_mode": "local"}
+    
+        with self.repo.transaction() as (db, state):
+            # 재시도는 현재 선택/잠금이 아니라 최초 접수에 귀속된다.
+            row = db.execute(
+                "SELECT body,response FROM requests WHERE request_id=?", (request_id,)
+            ).fetchone()
+            captured = None
+            if row:
+                original, response = json.loads(row["body"]), json.loads(row["response"])
+                captured = response.setdefault("source_mode", "local")
+                if source_mode is not None and source_mode != captured:
+                    raise ApiError(
+                        409, "request_id_conflict", "요청 ID가 다른 자료에 사용되었습니다."
+                    )
+                if original.get("action") != "commands" or original.get("text") != text:
+                    raise ApiError(
+                        409, "request_id_conflict", "요청 ID가 다른 내용에 사용되었습니다."
+                    )
+            try:
+&gt;               command = parse_command(
+                    text,
+                    selected_mode=captured or state.get("selected_source_mode", "local"),
+                    explicit_mode=source_mode,
+                )
+
+서버\실행제어.py:122: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+text = '/웹 공개 자료', selected_mode = 'local', explicit_mode = 'local'
+
+    def parse_command(text, *, selected_mode="local", explicit_mode=None) -&gt; ParsedCommand:
+        """자료 접두어와 /큐를 해석한다. 상태 변경은 실행 감독자의 책임이다."""
+        if not isinstance(text, str):
+            raise CommandError("invalid_instruction")
+        if selected_mode not in ("local", "web") or (
+            explicit_mode is not None and explicit_mode not in ("local", "web")
+        ):
+            raise CommandError("invalid_source_mode")
+        content = text.strip()
+        if not content:
+            raise CommandError("empty_instruction")
+        queued = False
+        requested_mode = None
+        while content:
+            parts = content.split(maxsplit=1)
+            token = parts[0]
+            if token == "/큐":
+                if queued:
+                    raise CommandError("invalid_command_combination")
+                queued = True
+            elif token in SOURCE_PREFIXES:
+                if requested_mode is not None:
+                    raise CommandError("invalid_command_combination")
+                requested_mode = SOURCE_PREFIXES[token]
+            else:
+                break
+            content = parts[1].strip() if len(parts) == 2 else ""
+        if requested_mode is not None and explicit_mode is not None and requested_mode != explicit_mode:
+&gt;           raise CommandError("source_mode_conflict")
+E           서버.명령해석.CommandError: source_mode_conflict
+
+서버\명령해석.py:38: CommandError
+
+The above exception was the direct cause of the following exception:
+
+service = &lt;테스트_자료모드제어.QuietService object at 0x0000020AF863BD40&gt;
+text = '/웹 공개 자료'
+
+    @pytest.mark.parametrize("text", LEGACY_TEXTS)
+    def test_과거응답_명시local_재전송도_새접두어문법으로_재해석하지않는다(service, text):
+        service.admit("/웹 질문", "new")
+        remember_legacy_request(service, text)
+        before = saved(service)
+        spawned = list(service.spawned)
+&gt;       response = service.admit(text, "legacy", source_mode="local")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+테스트\테스트_자료모드제어.py:169: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;테스트_자료모드제어.QuietService object at 0x0000020AF863BD40&gt;, text = '/웹 공개 자료'
+request_id = 'legacy', source_mode = 'local'
+
+    def admit(self, text, request_id, *, source_mode=None):
+        from 서버.명령해석 import CommandError, parse_command
+    
+        # 레거시 재전송은 transaction의 동일값 UPDATE조차 하지 않는 읽기 경로다.
+        if source_mode is None:
+            with self.repo.read_connection() as db:
+                prior = db.execute(
+                    "SELECT body,response FROM requests WHERE request_id=?", (request_id,)
+                ).fetchone()
+                if prior:
+                    original, response = json.loads(prior["body"]), json.loads(prior["response"])
+                    if "source_mode" not in original and "source_mode" not in response:
+                        if original.get("action") != "commands" or original.get("text") != text:
+                            raise ApiError(
+                                409, "request_id_conflict", "요청 ID가 다른 내용에 사용되었습니다."
+                            )
+                        return {**response, "source_mode": "local"}
+    
+        with self.repo.transaction() as (db, state):
+            # 재시도는 현재 선택/잠금이 아니라 최초 접수에 귀속된다.
+            row = db.execute(
+                "SELECT body,response FROM requests WHERE request_id=?", (request_id,)
+            ).fetchone()
+            captured = None
+            if row:
+                original, response = json.loads(row["body"]), json.loads(row["response"])
+                captured = response.setdefault("source_mode", "local")
+                if source_mode is not None and source_mode != captured:
+                    raise ApiError(
+                        409, "request_id_conflict", "요청 ID가 다른 자료에 사용되었습니다."
+                    )
+                if original.get("action") != "commands" or original.get("text") != text:
+                    raise ApiError(
+                        409, "request_id_conflict", "요청 ID가 다른 내용에 사용되었습니다."
+                    )
+            try:
+                command = parse_command(
+                    text,
+                    selected_mode=captured or state.get("selected_source_mode", "local"),
+                    explicit_mode=source_mode,
+                )
+            except CommandError as error:
+&gt;               raise ApiError(422, str(error), "자료 명령과 지시 내용을 확인해 주세요.") from error
+E               서버.저장소.ApiError: (422, 'source_mode_conflict', '자료 명령과 지시 내용을 확인해 주세요.')
+
+서버\실행제어.py:128: ApiError</failure></testcase><testcase classname="테스트.테스트_자료모드제어" name="test_과거응답_명시local_재전송도_새접두어문법으로_재해석하지않는다[/\uc6f9]" time="0.044"><failure message="서버.저장소.ApiError: (422, 'source_mode_conflict', '자료 명령과 지시 내용을 확인해 주세요.')">self = &lt;테스트_자료모드제어.QuietService object at 0x0000020AF863A900&gt;, text = '/웹'
+request_id = 'legacy', source_mode = 'local'
+
+    def admit(self, text, request_id, *, source_mode=None):
+        from 서버.명령해석 import CommandError, parse_command
+    
+        # 레거시 재전송은 transaction의 동일값 UPDATE조차 하지 않는 읽기 경로다.
+        if source_mode is None:
+            with self.repo.read_connection() as db:
+                prior = db.execute(
+                    "SELECT body,response FROM requests WHERE request_id=?", (request_id,)
+                ).fetchone()
+                if prior:
+                    original, response = json.loads(prior["body"]), json.loads(prior["response"])
+                    if "source_mode" not in original and "source_mode" not in response:
+                        if original.get("action") != "commands" or original.get("text") != text:
+                            raise ApiError(
+                                409, "request_id_conflict", "요청 ID가 다른 내용에 사용되었습니다."
+                            )
+                        return {**response, "source_mode": "local"}
+    
+        with self.repo.transaction() as (db, state):
+            # 재시도는 현재 선택/잠금이 아니라 최초 접수에 귀속된다.
+            row = db.execute(
+                "SELECT body,response FROM requests WHERE request_id=?", (request_id,)
+            ).fetchone()
+            captured = None
+            if row:
+                original, response = json.loads(row["body"]), json.loads(row["response"])
+                captured = response.setdefault("source_mode", "local")
+                if source_mode is not None and source_mode != captured:
+                    raise ApiError(
+                        409, "request_id_conflict", "요청 ID가 다른 자료에 사용되었습니다."
+                    )
+                if original.get("action") != "commands" or original.get("text") != text:
+                    raise ApiError(
+                        409, "request_id_conflict", "요청 ID가 다른 내용에 사용되었습니다."
+                    )
+            try:
+&gt;               command = parse_command(
+                    text,
+                    selected_mode=captured or state.get("selected_source_mode", "local"),
+                    explicit_mode=source_mode,
+                )
+
+서버\실행제어.py:122: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+text = '/웹', selected_mode = 'local', explicit_mode = 'local'
+
+    def parse_command(text, *, selected_mode="local", explicit_mode=None) -&gt; ParsedCommand:
+        """자료 접두어와 /큐를 해석한다. 상태 변경은 실행 감독자의 책임이다."""
+        if not isinstance(text, str):
+            raise CommandError("invalid_instruction")
+        if selected_mode not in ("local", "web") or (
+            explicit_mode is not None and explicit_mode not in ("local", "web")
+        ):
+            raise CommandError("invalid_source_mode")
+        content = text.strip()
+        if not content:
+            raise CommandError("empty_instruction")
+        queued = False
+        requested_mode = None
+        while content:
+            parts = content.split(maxsplit=1)
+            token = parts[0]
+            if token == "/큐":
+                if queued:
+                    raise CommandError("invalid_command_combination")
+                queued = True
+            elif token in SOURCE_PREFIXES:
+                if requested_mode is not None:
+                    raise CommandError("invalid_command_combination")
+                requested_mode = SOURCE_PREFIXES[token]
+            else:
+                break
+            content = parts[1].strip() if len(parts) == 2 else ""
+        if requested_mode is not None and explicit_mode is not None and requested_mode != explicit_mode:
+&gt;           raise CommandError("source_mode_conflict")
+E           서버.명령해석.CommandError: source_mode_conflict
+
+서버\명령해석.py:38: CommandError
+
+The above exception was the direct cause of the following exception:
+
+service = &lt;테스트_자료모드제어.QuietService object at 0x0000020AF863A900&gt;, text = '/웹'
+
+    @pytest.mark.parametrize("text", LEGACY_TEXTS)
+    def test_과거응답_명시local_재전송도_새접두어문법으로_재해석하지않는다(service, text):
+        service.admit("/웹 질문", "new")
+        remember_legacy_request(service, text)
+        before = saved(service)
+        spawned = list(service.spawned)
+&gt;       response = service.admit(text, "legacy", source_mode="local")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+테스트\테스트_자료모드제어.py:169: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;테스트_자료모드제어.QuietService object at 0x0000020AF863A900&gt;, text = '/웹'
+request_id = 'legacy', source_mode = 'local'
+
+    def admit(self, text, request_id, *, source_mode=None):
+        from 서버.명령해석 import CommandError, parse_command
+    
+        # 레거시 재전송은 transaction의 동일값 UPDATE조차 하지 않는 읽기 경로다.
+        if source_mode is None:
+            with self.repo.read_connection() as db:
+                prior = db.execute(
+                    "SELECT body,response FROM requests WHERE request_id=?", (request_id,)
+                ).fetchone()
+                if prior:
+                    original, response = json.loads(prior["body"]), json.loads(prior["response"])
+                    if "source_mode" not in original and "source_mode" not in response:
+                        if original.get("action") != "commands" or original.get("text") != text:
+                            raise ApiError(
+                                409, "request_id_conflict", "요청 ID가 다른 내용에 사용되었습니다."
+                            )
+                        return {**response, "source_mode": "local"}
+    
+        with self.repo.transaction() as (db, state):
+            # 재시도는 현재 선택/잠금이 아니라 최초 접수에 귀속된다.
+            row = db.execute(
+                "SELECT body,response FROM requests WHERE request_id=?", (request_id,)
+            ).fetchone()
+            captured = None
+            if row:
+                original, response = json.loads(row["body"]), json.loads(row["response"])
+                captured = response.setdefault("source_mode", "local")
+                if source_mode is not None and source_mode != captured:
+                    raise ApiError(
+                        409, "request_id_conflict", "요청 ID가 다른 자료에 사용되었습니다."
+                    )
+                if original.get("action") != "commands" or original.get("text") != text:
+                    raise ApiError(
+                        409, "request_id_conflict", "요청 ID가 다른 내용에 사용되었습니다."
+                    )
+            try:
+                command = parse_command(
+                    text,
+                    selected_mode=captured or state.get("selected_source_mode", "local"),
+                    explicit_mode=source_mode,
+                )
+            except CommandError as error:
+&gt;               raise ApiError(422, str(error), "자료 명령과 지시 내용을 확인해 주세요.") from error
+E               서버.저장소.ApiError: (422, 'source_mode_conflict', '자료 명령과 지시 내용을 확인해 주세요.')
+
+서버\실행제어.py:128: ApiError</failure></testcase><testcase classname="테스트.테스트_자료모드제어" name="test_과거응답_명시local_재전송도_새접두어문법으로_재해석하지않는다[/\uc6f9 /DB \ucda9\ub3cc]" time="0.026"><failure message="서버.저장소.ApiError: (422, 'invalid_command_combination', '자료 명령과 지시 내용을 확인해 주세요.')">self = &lt;테스트_자료모드제어.QuietService object at 0x0000020AF8671BB0&gt;
+text = '/웹 /DB 충돌', request_id = 'legacy', source_mode = 'local'
+
+    def admit(self, text, request_id, *, source_mode=None):
+        from 서버.명령해석 import CommandError, parse_command
+    
+        # 레거시 재전송은 transaction의 동일값 UPDATE조차 하지 않는 읽기 경로다.
+        if source_mode is None:
+            with self.repo.read_connection() as db:
+                prior = db.execute(
+                    "SELECT body,response FROM requests WHERE request_id=?", (request_id,)
+                ).fetchone()
+                if prior:
+                    original, response = json.loads(prior["body"]), json.loads(prior["response"])
+                    if "source_mode" not in original and "source_mode" not in response:
+                        if original.get("action") != "commands" or original.get("text") != text:
+                            raise ApiError(
+                                409, "request_id_conflict", "요청 ID가 다른 내용에 사용되었습니다."
+                            )
+                        return {**response, "source_mode": "local"}
+    
+        with self.repo.transaction() as (db, state):
+            # 재시도는 현재 선택/잠금이 아니라 최초 접수에 귀속된다.
+            row = db.execute(
+                "SELECT body,response FROM requests WHERE request_id=?", (request_id,)
+            ).fetchone()
+            captured = None
+            if row:
+                original, response = json.loads(row["body"]), json.loads(row["response"])
+                captured = response.setdefault("source_mode", "local")
+                if source_mode is not None and source_mode != captured:
+                    raise ApiError(
+                        409, "request_id_conflict", "요청 ID가 다른 자료에 사용되었습니다."
+                    )
+                if original.get("action") != "commands" or original.get("text") != text:
+                    raise ApiError(
+                        409, "request_id_conflict", "요청 ID가 다른 내용에 사용되었습니다."
+                    )
+            try:
+&gt;               command = parse_command(
+                    text,
+                    selected_mode=captured or state.get("selected_source_mode", "local"),
+                    explicit_mode=source_mode,
+                )
+
+서버\실행제어.py:122: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+text = '/웹 /DB 충돌', selected_mode = 'local', explicit_mode = 'local'
+
+    def parse_command(text, *, selected_mode="local", explicit_mode=None) -&gt; ParsedCommand:
+        """자료 접두어와 /큐를 해석한다. 상태 변경은 실행 감독자의 책임이다."""
+        if not isinstance(text, str):
+            raise CommandError("invalid_instruction")
+        if selected_mode not in ("local", "web") or (
+            explicit_mode is not None and explicit_mode not in ("local", "web")
+        ):
+            raise CommandError("invalid_source_mode")
+        content = text.strip()
+        if not content:
+            raise CommandError("empty_instruction")
+        queued = False
+        requested_mode = None
+        while content:
+            parts = content.split(maxsplit=1)
+            token = parts[0]
+            if token == "/큐":
+                if queued:
+                    raise CommandError("invalid_command_combination")
+                queued = True
+            elif token in SOURCE_PREFIXES:
+                if requested_mode is not None:
+&gt;                   raise CommandError("invalid_command_combination")
+E                   서버.명령해석.CommandError: invalid_command_combination
+
+서버\명령해석.py:32: CommandError
+
+The above exception was the direct cause of the following exception:
+
+service = &lt;테스트_자료모드제어.QuietService object at 0x0000020AF8671BB0&gt;
+text = '/웹 /DB 충돌'
+
+    @pytest.mark.parametrize("text", LEGACY_TEXTS)
+    def test_과거응답_명시local_재전송도_새접두어문법으로_재해석하지않는다(service, text):
+        service.admit("/웹 질문", "new")
+        remember_legacy_request(service, text)
+        before = saved(service)
+        spawned = list(service.spawned)
+&gt;       response = service.admit(text, "legacy", source_mode="local")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+테스트\테스트_자료모드제어.py:169: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;테스트_자료모드제어.QuietService object at 0x0000020AF8671BB0&gt;
+text = '/웹 /DB 충돌', request_id = 'legacy', source_mode = 'local'
+
+    def admit(self, text, request_id, *, source_mode=None):
+        from 서버.명령해석 import CommandError, parse_command
+    
+        # 레거시 재전송은 transaction의 동일값 UPDATE조차 하지 않는 읽기 경로다.
+        if source_mode is None:
+            with self.repo.read_connection() as db:
+                prior = db.execute(
+                    "SELECT body,response FROM requests WHERE request_id=?", (request_id,)
+                ).fetchone()
+                if prior:
+                    original, response = json.loads(prior["body"]), json.loads(prior["response"])
+                    if "source_mode" not in original and "source_mode" not in response:
+                        if original.get("action") != "commands" or original.get("text") != text:
+                            raise ApiError(
+                                409, "request_id_conflict", "요청 ID가 다른 내용에 사용되었습니다."
+                            )
+                        return {**response, "source_mode": "local"}
+    
+        with self.repo.transaction() as (db, state):
+            # 재시도는 현재 선택/잠금이 아니라 최초 접수에 귀속된다.
+            row = db.execute(
+                "SELECT body,response FROM requests WHERE request_id=?", (request_id,)
+            ).fetchone()
+            captured = None
+            if row:
+                original, response = json.loads(row["body"]), json.loads(row["response"])
+                captured = response.setdefault("source_mode", "local")
+                if source_mode is not None and source_mode != captured:
+                    raise ApiError(
+                        409, "request_id_conflict", "요청 ID가 다른 자료에 사용되었습니다."
+                    )
+                if original.get("action") != "commands" or original.get("text") != text:
+                    raise ApiError(
+                        409, "request_id_conflict", "요청 ID가 다른 내용에 사용되었습니다."
+                    )
+            try:
+                command = parse_command(
+                    text,
+                    selected_mode=captured or state.get("selected_source_mode", "local"),
+                    explicit_mode=source_mode,
+                )
+            except CommandError as error:
+&gt;               raise ApiError(422, str(error), "자료 명령과 지시 내용을 확인해 주세요.") from error
+E               서버.저장소.ApiError: (422, 'invalid_command_combination', '자료 명령과 지시 내용을 확인해 주세요.')
+
+서버\실행제어.py:128: ApiError</failure></testcase><testcase classname="테스트.테스트_자료모드제어" name="test_과거응답_자료누락은_local_현재web선택과무관_원행불변[\uacfc\uac70 \uc9c8\ubb38]" time="0.029" /><testcase classname="테스트.테스트_자료모드제어" name="test_과거응답_자료누락은_local_현재web선택과무관_원행불변[/\uc6f9 \uacf5\uac1c \uc790\ub8cc]" time="0.025" /><testcase classname="테스트.테스트_자료모드제어" name="test_과거응답_자료누락은_local_현재web선택과무관_원행불변[/\uc6f9]" time="0.027" /><testcase classname="테스트.테스트_자료모드제어" name="test_과거응답_자료누락은_local_현재web선택과무관_원행불변[/\uc6f9 /DB \ucda9\ub3cc]" time="0.026" /></testsuite></testsuites>

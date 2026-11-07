@@ -32,6 +32,7 @@ class Repository:
             raise ValueError("저장소 제공자와 실행 모드의 조합을 확인해 주세요.")
         self.provider = provider
         self.mode = mode
+        self.source_modes = ["local"]
         self.root = data_dir.resolve()
         self.root.mkdir(parents=True, exist_ok=True)
         self.path = self.root / "실행기록.sqlite3"
@@ -55,6 +56,7 @@ class Repository:
                     span_id TEXT PRIMARY KEY, run_id TEXT NOT NULL, body TEXT NOT NULL);
             """)
             initial = {
+                "selected_source_mode": "local",
                 "current_run_id": None,
                 "runs": [],
                 "queue": [],
@@ -147,6 +149,26 @@ class Repository:
             "INSERT INTO events(event_id,body) VALUES(?,?)", (event["event_id"], encode(event))
         )
         event["seq"] = cursor.lastrowid
+        source = next(
+            (
+                v.get("source_mode")
+                for v in (output, input)
+                if isinstance(v, dict) and v.get("source_mode") in ("local", "web")
+            ),
+            None,
+        )
+        if source is None:
+            row = db.execute(
+                "SELECT body FROM revisions WHERE run_id=? AND revision=?", (run_id, revision)
+            ).fetchone()
+            source = json.loads(row[0]).get("source_mode", "local") if row else "local"
+        event["source_mode"] = source
+        if kind in {
+            "instruction.received",
+            "instruction.queued",
+            "source_mode.changed",
+        } and isinstance(event["output"], dict):
+            event["output"]["state_seq"] = event["seq"]
         db.execute("UPDATE events SET body=? WHERE seq=?", (encode(event), event["seq"]))
         from 서버.활동기록 import attach_event
 
@@ -176,11 +198,17 @@ class Repository:
 
     @staticmethod
     def summary(event):
-        return {k: v for k, v in event.items() if k not in {"input", "output", "error", "provider"}}
+        return {
+            "source_mode": event.get("source_mode", "local"),
+            **{k: v for k, v in event.items() if k not in {"input", "output", "error", "provider"}},
+        }
 
     def snapshot(self):
         with self.read_connection() as db:
             state = json.loads(db.execute("SELECT body FROM state WHERE id=1").fetchone()[0])
+            state.setdefault("selected_source_mode", "local")
+            for record in state["runs"] + state["queue"]:
+                record.setdefault("source_mode", "local")
             calls = db.execute("SELECT * FROM calls").fetchall()
             waiting = []
             for call in calls:
@@ -196,6 +224,7 @@ class Repository:
             return {
                 **copy.deepcopy(state),
                 "protocol_version": 1,
+                "source_modes": list(self.source_modes),
                 "mode": self.mode,
                 "provider": self.provider,
                 "waiting": waiting,
@@ -311,6 +340,11 @@ class Repository:
                     (run_id,),
                 )
             ]
+            run.setdefault("source_mode", "local")
+            for event in events:
+                event.setdefault("source_mode", "local")
+            for revision in revisions:
+                revision.setdefault("source_mode", "local")
             spans = []
             if db.execute("SELECT 1 FROM sqlite_master WHERE name='activity_spans'").fetchone():
                 spans = [
@@ -355,7 +389,9 @@ class Repository:
             row = db.execute("SELECT body FROM events WHERE event_id=?", (event_id,)).fetchone()
             if row is None:
                 raise ApiError(404, "not_found", "사건이 없습니다.")
-            return json.loads(row[0])
+            event = json.loads(row[0])
+            event.setdefault("source_mode", "local")
+            return event
 
     def events_after(self, cursor):
         with self.connection() as db:

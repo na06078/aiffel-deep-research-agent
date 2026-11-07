@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.178" timestamp="2026-11-07T01:27:17.079747+09:00" hostname="z13flow"><testcase classname="테스트.테스트_연구조립" name="test_격리데이터의실제모델에는_장부경로를반드시명시" time="0.005"><failure message="Failed: DID NOT RAISE ValueError">assembly = (WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/웹조립_RED/test_격리데이터의실제모델에는_장부경로를반드시명시0...제모델에는_장부경로를반드시명시0/프로젝트/시험'), 'service_factory': &lt;function create_research_app.&lt;locals&gt;.factory at 0x000001F88144B2E0&gt;})
+
+    def test_격리데이터의실제모델에는_장부경로를반드시명시(assembly):
+        root, _ = assembly
+&gt;       with pytest.raises(ValueError, match="ledger_path"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+테스트\테스트_연구조립.py:27: Failed</failure></testcase></testsuite></testsuites>

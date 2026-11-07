@@ -1,0 +1,63 @@
+{
+  "status": "isolated_boundaries_verified",
+  "baseline_as_supplied": "main/9709aa520b60c71100f837e8f5de69669d88645b",
+  "implementation_root": "02_구현/전체화면_스파이크",
+  "owned_files": ["서버/웹자료.py", "서버/웹자료저장소.py", "테스트/테스트_웹자료.py", "테스트/테스트_웹자료저장소.py", "검증결과/웹자료_인계.json"],
+  "sha256": {
+    "서버/웹자료.py": "aa2c8e4ea2e2d6d2cbf56041f1830e113b7d0c9cbd282f17455d6d37fe9112d5",
+    "서버/웹자료저장소.py": "fc498c1ae1487707c5451dd92574ad3e5fe90246258c315deb9979782ec16a2f",
+    "테스트/테스트_웹자료.py": "2745028858d7f1f42014a8cb371909bbe8a16e25ebfbcb7663999b6689fa2736",
+    "테스트/테스트_웹자료저장소.py": "d0c6aa81e101b0ffecc3beb927ea77aaf3bff30d37b96eaed03de6f806c4784a"
+  },
+  "read_only_contract_sha256": {
+    "서버/웹계약.py": "756d8c68d8df98dbf95dc01a6c2f363a84bc821b32b6fa1a5fcd36a056e1b9cb",
+    "서버/명령해석.py": "a8bb23168a535dc9a40dac63ad0299e932328cfccb6a3a2950e960cdb2ad9a0c"
+  },
+  "execution": {
+    "cwd": "02_구현/전체화면_스파이크",
+    "python": "../../.venv/Scripts/python.exe",
+    "pytest": "\"../../.venv/Scripts/python.exe\" -m pytest 테스트/테스트_웹자료.py 테스트/테스트_웹자료저장소.py -q --basetemp=../../.cache/웹자료_단위 --tb=short",
+    "pytest_result": "33 passed in 0.76s",
+    "ruff": "\"../../.venv/Scripts/python.exe\" -m ruff check 서버/웹자료.py 서버/웹자료저장소.py 테스트/테스트_웹자료.py 테스트/테스트_웹자료저장소.py",
+    "ruff_result": "All checks passed!",
+    "real_network_calls": 0,
+    "real_model_calls": 0
+  },
+  "observed_red_green": [
+    {"selection": "테스트/테스트_웹자료저장소.py", "red": "후보 개수 0 != 2; 1 failed", "green": "1 passed in 0.03s"},
+    {"selection": "테스트/테스트_웹자료저장소.py", "red": "discovered != ready; 1 failed, 1 passed", "green": "2 passed in 0.05s"},
+    {"selection": "테스트/테스트_웹자료저장소.py", "red": "잘못된 read prefix가 거절되지 않음; 1 failed, 2 passed", "green": "3 passed in 0.09s"},
+    {"selection": "테스트/테스트_웹자료.py", "red": "requested_url 없음; 1 failed", "green": "1 passed in 0.20s"},
+    {"selection": "테스트/테스트_웹자료.py", "red": "사설 주소 전송과 redirect 미검사; 11 failed, 1 passed", "green": "12 passed, body 상한 RED 1개 유지"},
+    {"selection": "-k redirect_request_limit", "red": "redirect 미제한, 이후 body_too_large 대신 empty_content", "green": "13 passed in 0.26s"},
+    {"selection": "-k search_uses", "red": "실제 Yahoo parser 결과 대신 빈 결과", "green": "14 passed in 0.29s"},
+    {"selection": "-k 'rate_limit or cancelled_search'", "red": "429 미거절, 요청 간격 10/10초; 3 failed", "green": "두 전용 파일 20 passed in 0.46s"},
+    {"selection": "-k 'observer_failure or challenge_document or fetch_timeout or partial_extraction'", "red": "challenge/timeout/200000자 제한; 4 failed, 2 passed", "green": "두 전용 파일 26 passed in 0.57s"},
+    {"selection": "-k 'non_html or search_setup'", "red": "PDF 오분류와 SDK 원문 예외, 이후 DNS timeout 오분류", "green": "두 전용 파일 28 passed in 0.61s"},
+    {"selection": "-k 'cancelled_queued or native_timeout or dns_is_inside'", "red": "취소된 대기 검색 전송, native timeout 미반환; 2 failed, 1 passed; DNS deadline 별도 RED 관측", "green": "31 passed in 0.64s"},
+    {"selection": "-k zero_port", "red": "port 0 허용, 이후 IDNA2008 호스트 오거절", "green": "최종 전용 파일 회귀에 포함"},
+    {"selection": "-k 'cancelling_aclose or zero_port'", "red": "aclose 취소가 native 소유 task까지 취소; 1 failed, 1 passed", "green": "최종 33 passed in 0.76s"}
+  ],
+  "verified": [
+    "실제 httpcore pool을 대역 AsyncNetworkBackend로 실행: 검증된 공개 IP TCP 연결, 원래 Host/TLS SNI, CERT_REQUIRED/check_hostname 전달",
+    "userinfo/port0/비80·443/사설·loopback·link-local·혼합 DNS 거절, redirect별 재검사와 최대4요청",
+    "원 URL 유지와 비ASCII path/query 및 IDNA2008 wire 호스트 인코딩",
+    "2MiB 압축 해제 상한을 zlib max_length로 제한, 15초 DNS 포함 request deadline, 200000자 추출 제한과 부분 경고",
+    "실제 DDGS Yahoo parser + MockTransport; 단일 provider/단일 lane, 완료 후 2초 간격, 12초 caller deadline, 자동 retry/fallback 없음",
+    "429/구조적 challenge cooldown, captcha 언급 기사 정상 처리, observer 실패 시 무전송",
+    "native 시작 후 취소/timeout에도 실제 종료까지 slot 및 소유권 유지; 대기 중 취소는 전송하지 않음; aclose 취소도 native 소유권 보존",
+    "실행+revision별 URL identity, ready 본문/해시 불변, 실패 및 대체 fetch 시도 별도 history 보존, tampered hash 거절",
+    "실제 저장 본문의 정확한 prefix 1..20000자와 note<=6000자 검사, section/app call ID/read hash/note hash receipt 저장"
+  ],
+  "integration_notes": [
+    "WebSourceStore에는 파일 경로 Path를 명시: data_root / '웹자료' / '자료.sqlite3'. 디렉터리 경로나 문자열/default가 아님.",
+    "mark_read는 앱 call ID의 비어있지 않음과 본문 결합을 검사한다. 저널의 성공 여부/현재 revision fence/receipt 대응은 계약대로 통합부가 검사해야 한다. store는 저널을 읽지 않는다.",
+    "search observer는 SDK HTTP worker thread에서 동기 호출될 수 있으므로 callback은 thread-safe여야 한다. timeout/취소 후 늦은 관측 callback도 fence로 처리해야 한다.",
+    "primp에는 trust_env 인자가 없어 DDGS 인스턴스의 HttpClient.client만 httpx.Client(trust_env=False, verify=True, follow_redirects=False)로 교체한다. DDGS_PROXY는 engine 생성 전 해당 sdk._proxy=None으로 격리한다. 전역 env/threads/클래스는 바꾸지 않는다.",
+    "Yahoo registry 및 _get_engines/_proxy와 HttpClient Response._resp는 설치된 DDGS9.16.1 기준 호환 지점이다. 버전 갱신 시 이 전용 시험을 재실행한다.",
+    "검색 cooldown 기본/최소60초이며 Retry-After가 더 길면 보존한다. fetch cooldown은 호스트별이다. 자동 재시도하지 않는다.",
+    "body는 identity/gzip/deflate만 지원하고 기타 인코딩은 안전하게 거절한다. gzip 연결 멤버/손상 압축도 거절한다. Accept-Encoding: identity를 요청한다.",
+    "검증은 실제 pool 호출과 TLS 검증 옵션/SNI 전달까지다. 실제 TLS handshake·실제 제공자 가용성·본문 의미 완전성은 무네트워크 범위에서 검증하지 않았다.",
+    "기존 local34/화면/저널/모델 예산 통합은 다른 담당 범위이며 여기서 전체 suite/실서버/브라우저/Git을 실행하지 않았다. 차단 결정을 기다리는 미결 계약은 없다."
+  ]
+}

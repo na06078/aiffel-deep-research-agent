@@ -1,0 +1,81 @@
+{
+  "source_session": "local-4371b2303681742a38c137d79e923b2b94d1845fb1daf92283d1e70af923d168",
+  "source_message_id": 217134,
+  "original_delegation": "deleg_8538d396",
+  "evidence_level": "original static-only review; findings need reproduction; not rewritten after fixes",
+  "review": {
+    "verdict": "정적 검토에서 수용 계약에 영향을 주는 4개 결함 후보를 확인했습니다. URL 출처 결합, 레거시 재전송, native 검색의 전송 전 취소 경계, 잘못된 redirect의 항목별 실패 처리를 보완해야 합니다. 아래 반례는 소스 경로로 추적한 것이며 실행 재현이나 전체 제품 완료 판정이 아닙니다.",
+    "findings": [
+      {
+        "id": "SOURCE-01",
+        "severity": "P1",
+        "path": "02_구현/전체화면_스파이크/서버/웹연구.py",
+        "lines": "235-267, 370-375, 385-392, 483-486",
+        "issue": "읽기 증거 검증이 저장 출처 URL을 실제 읽기 입력 및 fetch receipt의 URL과 결합하지 않습니다. 본문·발췌·메모 해시는 맞지만 URL만 다른 출처를 정본에 게시할 수 있습니다.",
+        "evidence": "evidence는 calls.input.user와 본문 prefix, section/source ID 및 해시를 검사하지만 inputs.url은 검사하지 않습니다. fetch receipt 조회도 run/revision/source_id/text_sha256만 비교하며 receipt.output.url은 비교하지 않습니다. 반면 읽기 생산자는 inputs.url에 final_url을 기록하고, fetched 사건도 URL을 기록합니다. assemble과 실제연구제어.evaluate는 검증하지 않은 현재 sidecar URL을 정본 출처로 사용합니다. 기술 명세 §25.6의 실제 입력·저널 receipt와 결합된 출처 조건에 빈틈이 있습니다.",
+        "counterexample": "정상 읽기 3건 완료 후 synthesize 응답을 기다리는 동안 sidecar의 한 ready 출처 final_url만 다른 공개 URL로 바꿉니다. source_id, 본문 및 모든 해시, 성공 calls 행, 원래 fetched 사건은 유지합니다. _get도 본문 해시만 검사하므로 통과하고 evidence도 해당 읽기를 인정합니다. 이후 보고서 Markdown 및 sources에는 실제 fetch/read 입력과 다른 URL이 게시됩니다. 최소 수정은 입력 URL과 fetched receipt URL을 저장 출처의 final_url에 함께 대조하는 것입니다."
+      },
+      {
+        "id": "SOURCE-02",
+        "severity": "P2",
+        "path": "02_구현/전체화면_스파이크/서버/실행제어.py",
+        "lines": "95-120",
+        "issue": "레거시 요청의 재전송을 현재 명령 문법으로 다시 해석하여, 과거에는 일반 질문이었던 자료 접두어 문자열의 기존 receipt 반환을 거절합니다.",
+        "evidence": "기존 requests 행을 찾으면 누락 source_mode를 local로 보정하지만, 그대로 반환하기 전에 parse_command를 호출합니다. 명령해석.py:30-40은 현재의 /웹 접두어를 web 요청 또는 모드 변경으로 해석하고, 실행제어.py:115-119는 이를 과거 captured=local과 비교하여 409를 반환합니다. 기술 명세 §25.6은 과거 자료 누락을 local로 읽고 동일 원문 재전송에는 최초 접수 결과를 반환하도록 요구합니다. 기존 레거시 시험은 '과거 질문'만 사용하여 이 경계를 놓칩니다.",
+        "counterexample": "기능 도입 전 저장된 requests 행의 body가 {\"action\":\"commands\",\"text\":\"/웹 공개 자료\"}이고 response에 source_mode가 없는 경우입니다. 동일 request_id와 동일 text를 source_mode 생략 상태로 재전송하면 최초 local receipt 대신 request_id_conflict 409가 됩니다. 레거시 text='/웹'도 같습니다. 기존 행의 원문과 명시 source_mode 충돌을 확인한 후에는 새 문법으로 재해석하지 않고 기존 receipt를 반환해야 합니다."
+      },
+      {
+        "id": "SOURCE-03",
+        "severity": "P2",
+        "path": "02_구현/전체화면_스파이크/서버/웹자료.py",
+        "lines": "206-224, 426-447, 460-498",
+        "issue": "검색이 native 소유 단계에 들어간 뒤 첫 HTTP 전송 전에 timeout 또는 호출자 취소가 발생하면, 아직 시작하지 않은 HTTP 요청을 나중에 전송할 수 있습니다. native 작업의 실제 종료까지 소유권을 유지하는 것과 새 전송을 허용하는 것이 분리되지 않았습니다.",
+        "evidence": "_search는 asyncio.to_thread 실행 전에 owner를 _native에 넣습니다. _own은 그 상태에서 호출자가 취소되면 내부 task를 취소하지 않으며 취소/만료 플래그도 남기지 않습니다. _search_sync의 request.started 직전에도 해당 논리 호출의 유효성을 검사하지 않습니다. 웹연구.py:125-155의 observer는 run/revision만 검사하므로 같은 revision이 계속 running이면 이미 timeout 처리된 논리 호출의 늦은 시작도 허용합니다. 기존 native_timeout 시험은 HTTP handler에 이미 진입한 경우만 다룹니다.",
+        "counterexample": "기본 executor가 포화되어 _search_sync가 큐에 머물거나 DDGS 초기화가 지연된 상태에서 검색 호출의 12초 deadline이 먼저 만료됩니다. 서비스는 search_timeout을 기록하고 같은 revision의 다음 검색 또는 재위임을 계속합니다. 이후 기존 worker가 실행되면 request.started observer가 현재 revision이라는 이유로 통과하고 첫 Yahoo HTTP 요청을 전송합니다. 이미 전송한 native 요청은 종료까지 소유하되, 만료·취소된 논리 호출의 아직 시작하지 않은 전송은 별도 취소 토큰 또는 전송 허가 검사로 막아야 합니다."
+      },
+      {
+        "id": "SOURCE-04",
+        "severity": "P2",
+        "path": "02_구현/전체화면_스파이크/서버/웹자료.py",
+        "lines": "369-400",
+        "issue": "잘못된 Location을 결합하는 예외가 WebSourceError 경계 밖으로 빠져나와, 개별 출처 수집 실패가 전체 연구 실패와 큐 정지로 확대됩니다.",
+        "evidence": "HTTP 요청과 응답 처리의 예외 정규화 try/except는 382행에서 끝납니다. 이후 396행의 urljoin(current, location)은 보호되지 않습니다. 웹연구.request:156은 WebSourceError만 항목 실패로 처리하므로 URL 파싱 ValueError는 전파되고, 실제연구제어.supervise:182-194가 전체 실행을 failed로 처리합니다. 요청은 안전하게 중단되지만 기술 명세 §25.6의 수집 실패 구분 및 읽을 자료 부족 시 재위임 경로를 건너뜁니다.",
+        "counterexample": "첫 후보가 HTTP 302와 잘못된 IPv6 URL 형태의 Location='http://['를 반환하고 다른 후보는 정상 자료인 경우입니다. urljoin의 URL 파싱 실패가 안전 코드 invalid_url로 변환되지 않아 나머지 후보를 조사하지 못하고 전체 연구가 failed가 됩니다. Location 결합을 URL 검증·안전 오류 정규화 경계에 포함해야 합니다."
+      }
+    ],
+    "checked_files": [
+      "📘 딥리서치 에이전트 기술 명세서.md §25.6-25.9",
+      "02_구현/전체화면_스파이크/서버/웹계약.py",
+      "02_구현/전체화면_스파이크/서버/명령해석.py",
+      "02_구현/전체화면_스파이크/서버/실행제어.py",
+      "02_구현/전체화면_스파이크/서버/저장소.py",
+      "02_구현/전체화면_스파이크/서버/실제연구제어.py",
+      "02_구현/전체화면_스파이크/서버/웹연구.py",
+      "02_구현/전체화면_스파이크/서버/웹자료.py",
+      "02_구현/전체화면_스파이크/서버/웹자료저장소.py",
+      "02_구현/전체화면_스파이크/서버/연구앱.py",
+      "02_구현/전체화면_스파이크/서버/앱.py",
+      "02_구현/전체화면_스파이크/서버/교안연구.py",
+      "02_구현/전체화면_스파이크/서버/실제모델.py",
+      "02_구현/전체화면_스파이크/서버/호출예산.py",
+      "02_구현/전체화면_스파이크/테스트/테스트_자료모드제어.py",
+      "02_구현/전체화면_스파이크/테스트/테스트_웹연구.py",
+      "02_구현/전체화면_스파이크/테스트/테스트_웹통합.py",
+      "02_구현/전체화면_스파이크/테스트/테스트_웹자료.py",
+      "02_구현/전체화면_스파이크/검증결과/웹자료_인계.json",
+      "02_구현/전체화면_스파이크/검증결과/웹서버_인계.json",
+      ".venv/Lib/site-packages/ddgs/http_client.py",
+      ".venv/Lib/site-packages/ddgs/ddgs.py",
+      ".venv/Lib/site-packages/ddgs/base.py"
+    ],
+    "limitations": [
+      "읽기 전용 정적 검토입니다. 파일 수정·생성, Git 명령, 테스트 실행, 서버·브라우저 시작, 외부 네트워크 및 실제 모델 호출을 하지 않았습니다.",
+      "비밀 파일과 사용자 실행 DB·예산 장부를 읽지 않았습니다. 기존 100회/$2 정책과 역사적 27건의 실제 보존 상태는 재확인하지 않았습니다. 기본 조립이 기존 장부 경로를 사용하고 모델이 gpt-5.6-luna를 지정하며 예약·정산이 동일 CallBudget을 경유하는 소스 경로만 확인했습니다.",
+      "정상 신규 명령의 선택 유지·source lock·다른 자료 큐 캡처, revision별 전송 전 슬롯 예약, 성공 calls 행과 발췌·메모 해시 대조, 재시작 시 interrupted 처리 및 자동 graph 재실행 부재는 읽은 경로에서 확인했습니다. 실행 검증 통과를 새로 주장하지 않습니다.",
+      "SOURCE-01은 저장 출처 URL 변조·불일치에 대한 무결성 수용 반례입니다. 정상 생산 경로가 스스로 URL을 바꾼다는 주장은 아닙니다. SOURCE-03은 첫 HTTP 이전 worker 지연이 있는 조건부 경로입니다.",
+      "새 httpx 기반 Yahoo 전송의 실제 제공자 성공, TLS handshake 및 공개 페이지 가용성은 검증하지 않았습니다. 과거 primp 실측이나 MockTransport 성공을 새 전송의 실측 증거로 사용하지 않았습니다.",
+      "일부 묶음 읽기 출력이 잘렸으며 핵심 계약·경계·관련 시험 구간은 별도 범위 읽기로 확인했습니다. 전체 파일의 모든 보조 메서드 및 전체 테스트 트리에 대한 완전 검토는 아닙니다.",
+      "보고서 의미적 품질 재설계는 제외했습니다. 인용 문자열이 의미적으로 원문에 의해 지지되는지는 이번 판정 대상이 아닙니다."
+    ]
+  }
+}

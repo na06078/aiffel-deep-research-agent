@@ -9,6 +9,7 @@ from typing import Annotated, TypedDict
 from langgraph.graph import END, START, StateGraph
 from langgraph.types import Send
 
+from 서버 import 웹연구
 from 서버.교안연구 import (
     Corpus,
     ResearchContractError,
@@ -34,6 +35,7 @@ class SupersededResearch(Exception):
 
 
 class RealState(TypedDict, total=False):
+    source_mode: str
     run_id: str
     revision: int
     instruction: str
@@ -78,7 +80,7 @@ def build_real_graph(service):
         sends = []
         for assignment in state["pending"]:
             sid = assignment["section_id"]
-            avoid = {a["seed"] for a in state["plan"] if a["section_id"] != sid}
+            avoid = {a["seed"] for a in state["plan"] if a["section_id"] != sid and "seed" in a}
             avoid |= {d for other, s in latest.items() if other != sid for d in s["읽은문서"]}
             sends.append(
                 Send(
@@ -86,6 +88,7 @@ def build_real_graph(service):
                     {
                         "run_id": state["run_id"],
                         "revision": state["revision"],
+                        "source_mode": state.get("source_mode", "local"),
                         "instruction": state["instruction"],
                         "question": state["question"],
                         "assignment": assignment,
@@ -108,7 +111,9 @@ def build_real_graph(service):
 
 
 class RealResearchService(ExecutionService):
-    def __init__(self, data_dir, model, corpus_path):
+    def __init__(self, data_dir, model, corpus_path, *, web_client=None, web_store=None):
+        self.web_client = web_client
+        self._web_store = web_store
         corpus = Corpus(corpus_path)
         super().__init__(data_dir, provider="openai", mode="research")
         self.model = model
@@ -116,15 +121,35 @@ class RealResearchService(ExecutionService):
         self.report_filename_prefix = "🧾 실제 연구 보고서"
         self.graph = build_real_graph(self)
 
-    def start(self, db, state, text, instruction_id):
+    @property
+    def source_modes(self):
+        return ["local", "web"] if self.web_client is not None else ["local"]
+
+    @property
+    def web_store(self):
+        if self._web_store is None:
+            from 서버.웹자료저장소 import WebSourceStore
+
+            self._web_store = WebSourceStore(self.repo.root / "웹자료/자료.sqlite3")
+        return self._web_store
+
+    def start(self, db, state, text, instruction_id, *, source_mode=None, raw_text=None):
         current = self.repo.run(state, state["current_run_id"])
         history = (
             list(current.get("instruction_history", [current["question"]]))
             if current and current["status"] == "running"
             else []
         )
-        run, admission = super().start(db, state, text, instruction_id)
+        run, admission = super().start(
+            db, state, text, instruction_id, source_mode=source_mode, raw_text=raw_text
+        )
         run["instruction_history"] = history + [text]
+        if run.get("source_mode", "local") == "web":
+            run["web_usage"] = {
+                "search_attempts": 0,
+                "fetch_attempts": 0,
+                "observed_http_requests": 0,
+            }
         self.repo.save_revision(db, run)
         return run, admission
 
@@ -136,8 +161,19 @@ class RealResearchService(ExecutionService):
 
     async def supervise(self, run_id, revision, text):
         try:
+            with self.repo.read_connection() as db:
+                row = db.execute(
+                    "SELECT body FROM revisions WHERE run_id=? AND revision=?", (run_id, revision)
+                ).fetchone()
+                source_mode = json.loads(row[0]).get("source_mode", "local")
             await self.graph.ainvoke(
-                {"run_id": run_id, "revision": revision, "instruction": text, "results": []}
+                {
+                    "run_id": run_id,
+                    "revision": revision,
+                    "instruction": text,
+                    "results": [],
+                    "source_mode": source_mode,
+                }
             )
         except SupersededResearch:
             return
@@ -159,9 +195,23 @@ class RealResearchService(ExecutionService):
 
     async def close(self):
         await super().close()
-        await self.model.aclose()
+        try:
+            await self.model.aclose()
+        finally:
+            if self.web_client is not None:
+                await self.web_client.aclose()
 
-    async def complete(self, state, actor, operation, prompts, *, inputs=None, json_mode=True):
+    async def complete(
+        self,
+        state,
+        actor,
+        operation,
+        prompts,
+        *,
+        inputs=None,
+        json_mode=True,
+        on_complete_receipt=None,
+    ):
         self.check(state)
         system, user = prompts
         context = {
@@ -259,6 +309,9 @@ class RealResearchService(ExecutionService):
                 )
             if not active:
                 raise SupersededResearch()
+            if on_complete_receipt is not None:
+                self.check(state)
+                on_complete_receipt(call_id)
             return response["content"]
         except SupersededResearch:
             with self.repo.transaction() as (db, data):
@@ -328,7 +381,12 @@ class RealResearchService(ExecutionService):
                 "SELECT body FROM reports WHERE report_id=?", (run["parent_report_id"],)
             ).fetchone()
             previous = json.loads(prior[0])["markdown"] if prior else None
-        prompts = plan_prompt(question, self.corpus, previous)
+        web = state.get("source_mode", "local") == "web"
+        prompts = (
+            웹연구.plan_prompt(question, previous)
+            if web
+            else plan_prompt(question, self.corpus, previous)
+        )
         raw = await self.complete(
             state,
             "planner",
@@ -336,7 +394,7 @@ class RealResearchService(ExecutionService):
             prompts,
             inputs={"instruction_history": question, "prior_report_is_primary_evidence": False},
         )
-        title, plan = parse_plan(raw, self.corpus)
+        title, plan = 웹연구.parse_plan(raw) if web else parse_plan(raw, self.corpus)
         with self.repo.transaction() as (db, data):
             run = self.repo.fenced(data, state["run_id"], state["revision"])
             if not run:
@@ -390,6 +448,24 @@ class RealResearchService(ExecutionService):
     @measured_node("research", None, "actor")
     async def research(self, state):
         self.check(state)
+        if state.get("source_mode", "local") == "web":
+            section = await 웹연구.research(self, state)
+            self.check(state)
+            with self.repo.transaction() as (db, data):
+                if not self.repo.fenced(data, state["run_id"], state["revision"]):
+                    raise SupersededResearch()
+                self.repo.event(
+                    db,
+                    state["run_id"],
+                    state["revision"],
+                    "research.completed",
+                    section["assignee"],
+                    input={"assignment": state["assignment"]},
+                    output=section,
+                    recipient="reviewer",
+                    summary=f"{section['title']} · {len(section['읽은문서'])}웹자료",
+                )
+            return {"results": [section]}
         assignment = state["assignment"]
         actor = assignment["assignee"]
         read = list(state["prior"].get("읽은문서", []))
@@ -558,7 +634,11 @@ class RealResearchService(ExecutionService):
         obj = json_object(raw, "synthesize")
         introduction = required_text(obj, "머리말", "synthesize")
         conclusion = required_text(obj, "맺음말", "synthesize")
-        draft = assemble_report(state["title"], introduction, conclusion, sections, self.corpus)
+        if state.get("source_mode", "local") == "web":
+            _, sections, sources = 웹연구.evidence(self, state, sections)
+            draft = 웹연구.assemble(state["title"], introduction, conclusion, sections, sources)
+        else:
+            draft = assemble_report(state["title"], introduction, conclusion, sections, self.corpus)
         with self.repo.transaction() as (db, data):
             run = self.repo.fenced(data, state["run_id"], state["revision"])
             if not run:
@@ -580,6 +660,30 @@ class RealResearchService(ExecutionService):
     @measured_node("evaluate", "evaluator", "code")
     async def evaluate(self, state):
         self.check(state)
+        sections = latest_sections(state["results"])
+        corpus = self.corpus
+        provenance = []
+        if state.get("source_mode", "local") == "web":
+            corpus, sections, sources = 웹연구.evidence(self, state, sections)
+            for source_id in sorted({d for section in sections for d in section["읽은문서"]}):
+                source = sources[source_id]
+                provenance.append(
+                    {
+                        **{
+                            key: source[key]
+                            for key in (
+                                "source_id",
+                                "url",
+                                "final_url",
+                                "title",
+                                "text_sha256",
+                                "fetched_at",
+                                "published_at",
+                            )
+                        },
+                        "read_text_sha256": 웹연구.digest(source["text"][:20000]),
+                    }
+                )
         with self.repo.transaction() as (db, data):
             run = self.repo.fenced(data, state["run_id"], state["revision"])
             if not run:
@@ -595,13 +699,20 @@ class RealResearchService(ExecutionService):
                 )
             quality = evaluate_report(
                 state["draft"],
-                latest_sections(state["results"]),
-                self.corpus,
+                sections,
+                corpus,
                 model_calls=run["actual_model_requests"],
                 coord_chars=chars["coord"],
                 sub_chars=chars["sub"],
             )
+            if state.get("source_mode", "local") == "web" and any(
+                not s["읽은문서"] or s.get("code_origin_insufficiency") for s in sections
+            ):
+                quality["reasons"].append("web_sources_insufficient")
+                quality["passed"] = False
             run["quality"] = quality
+            if state.get("source_mode", "local") == "web":
+                run["source_provenance"] = provenance
             self.repo.event(
                 db,
                 state["run_id"],

@@ -60,7 +60,7 @@ export function projectArchive(archive:RunArchive,at_ms:number):ReplayProjection
   .slice().sort((a,b)=>Date.parse(a.occurred_at)-Date.parse(b.occurred_at)||a.seq-b.seq);
  for(const e of events){
   if(e.type==='instruction.received'){
-   run={...emptyRun(archive),control_revision:e.control_revision,question:typeof (e.input as {text?:unknown})?.text==='string'?(e.input as {text:string}).text:'',phase:'planning',updated_at:e.occurred_at};
+   run={...emptyRun(archive),control_revision:e.control_revision,source_mode:(e.input as {source_mode?:'local'|'web'})?.source_mode??'local',question:typeof (e.input as {text?:unknown})?.text==='string'?(e.input as {text:string}).text:'',phase:'planning',updated_at:e.occurred_at};
    report=null;waiting.clear();
   }
   if(e.control_revision!==run.control_revision||e.type==='result.superseded'||e.status==='superseded')continue;

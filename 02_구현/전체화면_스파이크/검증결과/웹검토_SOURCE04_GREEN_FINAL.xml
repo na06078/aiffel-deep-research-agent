@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="25" failures="0" skipped="0" tests="66" time="1.727" timestamp="2026-11-07T16:04:28.617076+09:00" hostname="z13flow"><testcase classname="테스트.테스트_웹자료" name="test_unsafe_targets_never_reach_network[http://127.0.0.1/-addresses0-unsafe_target]" time="0.002" /><testcase classname="테스트.테스트_웹자료" name="test_unsafe_targets_never_reach_network[http://[::1]/-addresses1-unsafe_target]" time="0.001" /><testcase classname="테스트.테스트_웹자료" name="test_unsafe_targets_never_reach_network[http://[fec0::1]/-addresses2-unsafe_target]" time="0.001" /><testcase classname="테스트.테스트_웹자료" name="test_unsafe_targets_never_reach_network[http://[::ffff:127.0.0.1]/-addresses3-unsafe_target]" time="0.001" /><testcase classname="테스트.테스트_웹자료" name="test_unsafe_targets_never_reach_network[http://169.254.169.254/-addresses4-unsafe_target]" time="0.001" /><testcase classname="테스트.테스트_웹자료" name="test_unsafe_targets_never_reach_network[http://10.1.1.1/-addresses5-unsafe_target]" time="0.001" /><testcase classname="테스트.테스트_웹자료" name="test_unsafe_targets_never_reach_network[https://public.example/-addresses6-unsafe_target]" time="0.001" /><testcase classname="테스트.테스트_웹자료" name="test_unsafe_targets_never_reach_network[file:///etc/passwd-addresses7-invalid_url]" time="0.001" /><testcase classname="테스트.테스트_웹자료" name="test_unsafe_targets_never_reach_network[https://u:p@example.com/-addresses8-invalid_url]" time="0.001" /><testcase classname="테스트.테스트_웹자료" name="test_unsafe_targets_never_reach_network[https://example.com:8443/-addresses9-invalid_url]" time="0.001" /><testcase classname="테스트.테스트_웹자료" name="test_unsafe_targets_never_reach_network[https://example.com\\@127.0.0.1/-addresses10-invalid_url]" time="0.001" /><testcase classname="테스트.테스트_웹자료" name="test_malformed_redirect_is_safe_and_stops_before_second_connect" time="0.018" /><testcase classname="테스트.테스트_웹자료" name="test_redirect_is_followed_then_private_target_rejected" time="0.030" /><testcase classname="테스트.테스트_웹자료" name="test_redirect_request_timings_are_not_cumulative" time="0.033" /><testcase classname="테스트.테스트_웹자료" name="test_redirect_request_limit_and_decompressed_body_bound" time="0.078" /><testcase classname="테스트.테스트_웹자료" name="test_search_uses_only_yahoo_observes_python_request_and_ignores_proxy_env" time="0.026" /><testcase classname="테스트.테스트_웹자료" name="test_rate_limit_has_safe_event_and_cooldown_without_retry[search]" time="0.003" /><testcase classname="테스트.테스트_웹자료" name="test_rate_limit_has_safe_event_and_cooldown_without_retry[fetch]" time="0.015" /><testcase classname="테스트.테스트_웹자료" name="test_cancelled_search_keeps_native_ownership_and_enforces_gap" time="0.071" /><testcase classname="테스트.테스트_웹자료" name="test_observer_failure_is_before_transmission[search]" time="0.003" /><testcase classname="테스트.테스트_웹자료" name="test_observer_failure_is_before_transmission[fetch]" time="0.014" /><testcase classname="테스트.테스트_웹자료" name="test_challenge_document_is_not_an_article_mentioning_captcha[search]" time="0.004" /><testcase classname="테스트.테스트_웹자료" name="test_challenge_document_is_not_an_article_mentioning_captcha[fetch]" time="0.030" /><testcase classname="테스트.테스트_웹자료" name="test_fetch_timeout_is_safe_and_no_retry" time="0.015" /><testcase classname="테스트.테스트_웹자료" name="test_fetch_partial_extraction_has_explicit_warning_and_date_not_publication" time="0.050" /><testcase classname="테스트.테스트_웹자료" name="test_non_html_and_dns_timeout_are_safe_without_extraction" time="0.015" /><testcase classname="테스트.테스트_웹자료" name="test_search_setup_error_and_timeout_never_leak_provider_error" time="0.003" /><testcase classname="테스트.테스트_웹자료" name="test_cancelled_queued_search_never_transmits" time="0.004" /><testcase classname="테스트.테스트_웹자료" name="test_native_timeout_returns_but_keeps_thread_owned" time="0.044" /><testcase classname="테스트.테스트_웹자료" name="test_dns_is_inside_fifteen_second_request_deadline" time="0.014" /><testcase classname="테스트.테스트_웹자료" name="test_cancelling_aclose_does_not_cancel_owned_native_search" time="0.017" /><testcase classname="테스트.테스트_웹자료" name="test_logically_finished_search_cannot_start_late_http[cancel-executor]" time="0.002" /><testcase classname="테스트.테스트_웹자료" name="test_logically_finished_search_cannot_start_late_http[cancel-initialization]" time="0.002" /><testcase classname="테스트.테스트_웹자료" name="test_logically_finished_search_cannot_start_late_http[cancel-observer]" time="0.009" /><testcase classname="테스트.테스트_웹자료" name="test_logically_finished_search_cannot_start_late_http[cancel-transport]" time="0.015" /><testcase classname="테스트.테스트_웹자료" name="test_logically_finished_search_cannot_start_late_http[timeout-executor]" time="0.094" /><testcase classname="테스트.테스트_웹자료" name="test_logically_finished_search_cannot_start_late_http[timeout-initialization]" time="0.094" /><testcase classname="테스트.테스트_웹자료" name="test_logically_finished_search_cannot_start_late_http[timeout-observer]" time="0.108" /><testcase classname="테스트.테스트_웹자료" name="test_logically_finished_search_cannot_start_late_http[timeout-transport]" time="0.109" /><testcase classname="테스트.테스트_웹자료" name="test_zero_port_rejected_and_idna_host_keeps_wire_identity" time="0.036" /><testcase classname="테스트.테스트_웹자료" name="test_fetch_pins_ip_preserves_host_sni_and_original_unicode_url" time="0.017" /><testcase classname="테스트.테스트_웹연구" name="test_웹6노드_진짜읽기receipt_출처정본_모델과HTTP분리[False]" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49272))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_웹6노드_진짜읽기receipt_출처정본_모델과HTTP분리[True]" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49273))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_읽기없는웹은_코드기원부족_2라운드후_품질차단[client0]" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49274))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_읽기없는웹은_코드기원부족_2라운드후_품질차단[client1]" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49275))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_늦은검색은_출처쓰기_후속fetch_읽기_정본없음" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49276))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_malformed_redirect_candidate_does_not_abort_other_sources" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49277))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_긴메모는_읽기claim없음_실패안전" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49278))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_새버전은_웹논리상한_다시0_옛버전사용량불변" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49279))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_부정확한읽기receipt는_출처claim만으로_제출불가[actual_user]" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49280))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_부정확한읽기receipt는_출처claim만으로_제출불가[source_url]" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49281))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_부정확한읽기receipt는_출처claim만으로_제출불가[read_url]" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49282))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_부정확한읽기receipt는_출처claim만으로_제출불가[fetch_url]" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49283))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_section]" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49284))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_run]" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49285))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_revision]" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49286))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_부정확한읽기receipt는_출처claim만으로_제출불가[failed_call]" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49287))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_read_hash]" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49288))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_note_hash]" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49289))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_부정확한읽기receipt는_출처claim만으로_제출불가[failed_source]" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49290))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_부정확한읽기receipt는_출처claim만으로_제출불가[no_fetch_receipt]" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49291))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_부정확한읽기receipt는_출처claim만으로_제출불가[orphan_call]" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49292))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_웹논리슬롯_동시예약은_상한이상_외부요청0" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49293))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_취소후_늦은본문과읽기응답은_추가claim과후속모델0[fetch]" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49294))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_취소후_늦은본문과읽기응답은_추가claim과후속모델0[read_one]" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49295))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase><testcase classname="테스트.테스트_웹연구" name="test_웹4절2라운드_16검색24본문_62모델상한_실제그래프대역" time="0.001"><error message="failed on setup with &quot;AssertionError: real_network_forbidden&quot;">args = (&lt;socket.socket [closed] fd=-1, family=2, type=1, proto=0&gt;, ('127.0.0.1', 49296))
+kwargs = {}
+
+    def denied(*args, **kwargs):
+&gt;       raise AssertionError("real_network_forbidden")
+E       AssertionError: real_network_forbidden
+
+테스트\테스트_웹연구.py:27: AssertionError</error></testcase></testsuite></testsuites>

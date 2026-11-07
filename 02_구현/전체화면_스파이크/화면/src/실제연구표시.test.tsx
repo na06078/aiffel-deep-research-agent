@@ -3,12 +3,34 @@ import {renderToStaticMarkup} from 'react-dom/server';
 import {App} from './앱';
 import {EventViewer,ReportViewer} from './상세보기';
 import type {Snapshot,EventDetail} from './계약';
-const state=vi.hoisted(()=>({snapshot:null as Snapshot|null,popup:null as any,drawer:true}));
+const state=vi.hoisted(()=>({snapshot:null as Snapshot|null,popup:null as any,drawer:true,replay:null as any}));
 vi.mock('react',async original=>{const r=await original<typeof import('react')>();return {...r,useReducer:(reducer:any,initial:any)=>r.useReducer(reducer,{...initial,popup:state.popup,drawer:state.drawer})};});
 vi.mock('./실행기록',()=>({useJournal:()=>({snapshot:state.snapshot,refresh:vi.fn(),connection:'조회 연결됨',error:''})}));
 vi.mock('./마을',()=>({Village:(p:any)=><canvas data-testid="village-canvas" data-mode={p.mode}/>}));
-vi.mock('./기록재생연결',()=>({useRecordedReplay:()=>({open:false,replay:false,archive:null,projection:null,at:0,runs:[],setOpen:vi.fn()})}));
+vi.mock('./기록재생연결',()=>({useRecordedReplay:()=>state.replay??({open:false,replay:false,archive:null,projection:null,at:0,runs:[],setOpen:vi.fn()})}));
 const run={run_id:'A',question:'연구 질문',control_revision:1,status:'running' as const,phase:'researching',plan:[],draft:null,report_id:null,quality:{passed:false,reasons:['인용 검증 실패']},parent_report_id:null,created_at:'2026-11-06T00:00:00Z',updated_at:'2026-11-06T00:00:01Z',mock_requests:0,actual_model_requests:7};
+it('좌상단 자료 표시는 실행중 실행자료·유휴 저장선택·조회전 미확인을 구별하고 조작을 추가하지 않는다',()=>{
+ vi.stubGlobal('location',{hash:'#/control'});
+ state.snapshot={...actual,selected_source_mode:'local',current_run_id:'A',runs:[{...run,source_mode:'web'}]};
+ let html=renderToStaticMarkup(<App/>);
+ expect(html).toMatch(/data-testid="source-mode-indicator"[^>]*role="status"[^>]*>웹 검색<\/span>/);
+ expect(html).not.toContain('<select');
+ state.snapshot={...actual,selected_source_mode:'web',current_run_id:'A',runs:[{...run,status:'completed',source_mode:'local'}]};
+ html=renderToStaticMarkup(<App/>);expect(html).toMatch(/data-testid="source-mode-indicator"[^>]*>웹 검색<\/span>/);
+ state.snapshot=null;html=renderToStaticMarkup(<App/>);expect(html).toContain('자료 미확인');
+});
+it('기존 실행/큐와 과거 상세에 자료와 논리 검색·본문·관측 전송을 모델 수와 분리한다',()=>{
+ vi.stubGlobal('location',{hash:'#/control'});
+ state.snapshot={...actual,current_run_id:'A',selected_source_mode:'web',runs:[{...run,source_mode:'web',web_usage:{search_attempts:2,search_limit:16,fetch_attempts:3,fetch_limit:24,observed_http_requests:6}}],queue:[{instruction_id:'q',text:'다음 질문',raw_text:'/큐 /DB 다음 질문',status:'queued',source_mode:'local'}]};
+ state.popup={kind:'실행/큐'};let html=renderToStaticMarkup(<App/>);
+ for(const label of ['논리 검색 시도 2 / 16','본문 수집 시도 3 / 24','관측 HTTP 요청 6','네이티브 내부','/큐 /DB 다음 질문','데이터셋'])expect(html).toContain(label);
+ state.popup={kind:'history',runId:'A'};html=renderToStaticMarkup(<App/>);expect(html).toContain('자료</dt><dd>웹 검색');expect(html).toContain('관측 HTTP 요청 6');
+});
+it('재생 실행 팝업의 자료는 미래의 live 실행이 아니라 해당 시점의 실행을 따른다',()=>{
+ vi.stubGlobal('location',{hash:'#/control'});state.snapshot={...actual,current_run_id:'A',runs:[{...run,source_mode:'local'}]};
+ state.replay={open:false,replay:true,archive:null,at:100,projection:{provider:'openai',run:{...run,source_mode:'web'},events:[],report:null,waiting:[]}};state.popup={kind:'실행/큐'};
+ const html=renderToStaticMarkup(<App/>);expect(html).toContain('자료</dt><dd>웹 검색');expect(html).not.toContain('자료</dt><dd>데이터셋');
+});
 it('실제 사건 상세는 요청0이라고 단정하지 않고 원문·오류를 안전하게 보존한다',()=>{
  const network=vi.fn();vi.stubGlobal('fetch',network);
  const e:EventDetail={event_id:'safe-e',run_id:'A',seq:1,control_revision:1,occurred_at:run.created_at,type:'model.failed',actor:'planner',recipient:null,status:'failed',summary:'생성 실패',input:{prompt:'<script>safe input</script>'},output:'비밀 없는 긴 출력'.repeat(500),error:{code:'model_unavailable',message:'선택 모델을 사용할 수 없습니다.'},provider:'openai'};
@@ -20,7 +42,7 @@ it('실제 사건 상세는 요청0이라고 단정하지 않고 원문·오류�
  const rh=renderToStaticMarkup(<ReportViewer report={report}/>);expect(rh).toContain('Markdown 다운로드');expect(rh).toContain(report.markdown);expect(rh).toContain(report.download_url);expect(network).not.toHaveBeenCalled();
 });
 const actual:Snapshot={protocol_version:1,provider:'openai',mode:'research',runs:[],events:[],waiting:[],queue:[],current_run_id:null,queue_paused:false,queue_pause_reason:null,high_watermark_seq:0,events_has_more:false,mock_requests:0,actual_model_requests:7};
-afterEach(()=>{vi.unstubAllGlobals();state.popup=null;state.snapshot=null;});
+afterEach(()=>{vi.unstubAllGlobals();state.popup=null;state.snapshot=null;state.replay=null;});
 it('실제 서버 루트는 실행 제어로 열고 실제 요청 수를 표시하되 모의 경고나 연결 성공 장식을 만들지 않는다',()=>{
  vi.stubGlobal('location',{hash:''});state.snapshot=actual;
  const html=renderToStaticMarkup(<App/>);

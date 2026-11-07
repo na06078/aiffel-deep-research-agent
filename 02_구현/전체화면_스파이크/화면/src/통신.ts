@@ -1,10 +1,10 @@
-import type { Admission, Snapshot, EventDetail, Report, ReportExport, ReportExports, ExportFormat, ReleaseOutcome } from './계약';
+import type { Admission, Snapshot, EventDetail, Report, ReportExport, ReportExports, ExportFormat, ReleaseOutcome, SourceMode } from './계약';
 export async function request<T>(path:string,body?:unknown):Promise<T> {
  const response=await fetch(path, body===undefined?undefined:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
  if(!response.ok){const data=await response.json().catch(()=>null);throw new Error(data?.error?`${data.error.code}: ${data.error.message}`:`HTTP ${response.status}`);}
  return response.json();
 }
-export async function sendCommand(text:string,id:string):Promise<Admission> { return request<Admission>('/api/spike/commands',{text,client_request_id:id}); }
+export async function sendCommand(text:string,id:string,source_mode?:SourceMode):Promise<Admission> { return request<Admission>('/api/spike/commands',{text,client_request_id:id,...(source_mode===undefined?{}:{source_mode})}); }
 import type {RunArchive} from './시간계약';
 export const api={
  exports:(id:string)=>request<ReportExports>(`/api/spike/reports/${encodeURIComponent(id)}/exports`),
