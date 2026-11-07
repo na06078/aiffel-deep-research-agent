@@ -1,0 +1,148 @@
+{
+ "files": {
+  "실행표시.ts": {
+   "status": "created",
+   "sha256": "118629b43e3931235f64dbf9349c07f422e13ed1596cbd7116683b1bb8bba059"
+  },
+  "실행표시.test.ts": {
+   "status": "created",
+   "sha256": "164a4c6dccb12f45a3d7c77075e5dc818696a646f6630116facb2d0815d855d8"
+  },
+  "과거기록목록.tsx": {
+   "status": "created",
+   "sha256": "efd52b9eac00062b23d2ce4e4f8d7206dda0cca2de848e824f48d19a94901425"
+  },
+  "과거기록목록.test.tsx": {
+   "status": "created",
+   "sha256": "55974d09a592da9824903ac72ad59b99904e7e631c026b803727e96e82730f0e"
+  },
+  "실행타임라인.tsx": {
+   "status": "modified",
+   "sha256": "4e1f6291179c90afa18b8409c543688fbac9c7650f6b684cf2d4bce8daacea64"
+  },
+  "실행타임라인.css": {
+   "status": "modified",
+   "sha256": "0a3ad9c952f865e11a2b481485c34b30c40dc5cad9aeaa1eff3d2f494828be89"
+  },
+  "실행타임라인.test.tsx": {
+   "status": "modified",
+   "sha256": "2692a6be1ab51f62fcd995f4e63e45a04f3eeffa9d9b627207a882c04475ce2d"
+  },
+  "앱.tsx": {
+   "status": "modified",
+   "sha256": "1d81633ce47175948a85b97c0616fb0b651f814c9857f34666ea8c6953afb9ed"
+  },
+  "앱.test.tsx": {
+   "status": "modified",
+   "sha256": "e6dfee085accf0d9955302b56c8f9a06e2ae406793af12a9d00be822d1c07632"
+  },
+  "화면.css": {
+   "status": "modified",
+   "sha256": "d773e2d2d922480e73479ad7150acc939d571832711a639cd5c73e6f0ac12e51"
+  }
+ },
+ "red": {
+  "summary": "4 files failed | 18 passed; 8 tests failed | 116 passed (124)",
+  "failures": [
+   {
+    "file": "src/실행타임라인.test.tsx",
+    "test": "재생·시점·시간축은 고정 조작부에 있고 행 전용 스크롤에는 트랙만 있다",
+    "message": "AssertionError: expected '><header class=\"timeline-header\"><lab…' to contain 'data-testid=\"timeline-subject\"'"
+   },
+   {
+    "file": "src/실행타임라인.test.tsx",
+    "test": "하단 손잡이와 선택·재생 제어를 보존하고 기록이 없으면 정직하게 안내한다",
+    "message": "AssertionError: expected '<button class=\"timeline-toggle\" data-…' to contain 'data-testid=\"timeline-subject\"'"
+   },
+   {
+    "file": "src/실행타임라인.test.tsx",
+    "test": "툴바에 select·combobox·실행 선택 testid가 없다",
+    "message": "AssertionError: expected '><header class=\"timeline-header\"><lab…' not to contain '<select'"
+   },
+   {
+    "file": "src/실행타임라인.test.tsx",
+    "test": "실시간: archive.run을 모드 칩·질문·상태 · 시각으로 표시한다",
+    "message": "TypeError: Cannot read properties of undefined (reading 'split')"
+   },
+   {
+    "file": "src/실행타임라인.test.tsx",
+    "test": "기록 재생: runId로 runs에서 같은 실행을 찾아 기록 재생 칩과 실패 tone을 보인다",
+    "message": "TypeError: Cannot read properties of undefined (reading 'split')"
+   },
+   {
+    "file": "src/실행타임라인.test.tsx",
+    "test": "기록 재생: runs에 없으면 archive.run으로 대체한다",
+    "message": "AssertionError: expected '' to contain 'saved question'"
+   },
+   {
+    "file": "src/실행타임라인.test.tsx",
+    "test": "대상이 아직 없으면 불러오는 중, 실행이 하나도 없으면 실행 없음",
+    "message": "AssertionError: expected '' to contain '불러오는 중'"
+   },
+   {
+    "file": "src/실행타임라인.test.tsx",
+    "test": "해석할 수 없는 시각은 시각 확인불가, 알 수 없는 상태는 원문으로 표시",
+    "message": "AssertionError: expected '' to contain 'weird · 시각 확인불가'"
+   }
+  ],
+  "log": "작업자A_RED.txt"
+ },
+ "green": {
+  "vitest_files": 22,
+  "vitest_tests": 157,
+  "baseline": "20 files / 130 tests",
+  "tsc_exit": 0,
+  "log": "작업자A_GREEN.txt"
+ },
+ "build": {
+  "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vite/bin/vite.js build --outDir \"../../../.cache/화면개편_후보\" --emptyOutDir (cwd=화면)",
+  "exit": 0,
+  "candidate_files": {
+   "index.html": "7a22e02787c5a89a644eae3e9e33dcf7393b85fc8af3af6d4e210c28e6989d2d",
+   "assets/browserAll-CU5536ZL.js": "02fa66f112c57df767d893f38b469213d3f206d77d94c59e28d89bd07e0dcc99",
+   "assets/Cache-CTROkX_m.js": "1362d81633b62e495b282f17617beb74083f16064864156e04949a07fa9ae0cf",
+   "assets/CanvasPool-DzuCm1vb.js": "edde6aa9084e7f5958ad3f9a1437ea82c2406913957ef01be12296ca951373f1",
+   "assets/canvasUtils-U4WZZEj-.js": "c0a01018402f30d7e9ad35ae43fafc8c490899236e6f28c8c4c8095fd066d448",
+   "assets/Filter-vpEaIMwd.js": "e802a7ce1c4d21948131c5d247ee9db7f33376b17678d973d22ae0296f1935fc",
+   "assets/GCManagedHash-DCvVepMX.js": "f9c36545f614350af3b653bd4e603e590afad27332ad79133fb661180406b312",
+   "assets/getTexelRangeRects-Bdv1rQ51.js": "baa0c3c95a387acb0bf72e4b440a0ffc947f8bfcb34bfd462c32a10bbe53c665",
+   "assets/getTextureBatchBindGroup-CEQHRttu.js": "f820ad942542bd39943bfcbc6073fa6d5237ee8fe574a36f8a4d22ae67c9558a",
+   "assets/GraphicsContext-48tzdr3Q.js": "26553fe11bde03fcc13af77e92b26890e5b7f7ec1b791ad26634a133b670a7dc",
+   "assets/index-5VYJtFeJ.css": "dc865f56cbd92560f7f2d5b5a3a2581946d37d7ae03e95592b5cfaa33a406a37",
+   "assets/index-D0_0BAog.js": "bbe1c5b5323d17157b4dbe527d6a8b34a0f4ef0c8e194a8ba70079deae9cc3aa",
+   "assets/init-DoUXYMOj.js": "8aa920d822fab365c3d8f4dff6dd7daa2ef6d7d8979f4156b928684d79ac0af5",
+   "assets/RenderTargetSystem-BK2ifv01.js": "76151e37944ac1989dd3632f63fdc2a7f8b897cd226583baa060db0c71ccd6b0",
+   "assets/webworkerAll-DYAW0G8U.js": "f87f91f72af7c18d56451b341e082adb381c9b02adf4f1dcb85ed6d2f20e41f7",
+   "에셋/마을_타일.png": "bea430eb9a11074b349587978f7eae8ea9b030a38a046bff240d662e5cb45b17",
+   "에셋/에셋_목록.json": "51306343fb1939344783559b14e70bb4bf9ffbdf101fc51b40cacfcedad91aad",
+   "에셋/인물_라이선스.txt": "97f92c9d60b7ba92e3d08d5061b614abcd01629c9bfcd26ca7b6c6c04e67ce58",
+   "에셋/조사관_1.png": "441290e7e62dfed6359b6fa3d94b07431208a6c99fefdb54e351286f6e464c97",
+   "에셋/조사관_2.png": "6f75115baf28df20b8a04bf9ef0d5608f4e91d306fa3bd198515174c2f05fe5e",
+   "에셋/조사관_3.png": "8a509790890837c4c378209f9aa24aebb54c39a4dde290c6581174782b30c0ca",
+   "에셋/조사관_4.png": "e120fdc8513fbd0c77b0dbc321c45d3e56d4a8b945fc23d7492211874c1a7b1c",
+   "에셋/조정자.png": "66f739c3b5c8d3890d963d04c7998bd310f1a80c4777d36a70d1e1a1dfcfc6c0",
+   "에셋/종합자.png": "13b9807ee13c5c1b860fcfdb988312784109b1316cf70570a8ec5e610eaf3f50",
+   "에셋/타운_라이선스.txt": "587587de795599e3d4795247503c45e023980c5c66b26b90c807909af26b303d"
+  },
+  "log": "작업자A_빌드.txt"
+ },
+ "dist_guard": {
+  "before": "e9acf2035f1c220103f4e2592b6d6dc29667e70c606f6301b11aad186908bf01",
+  "after": "e9acf2035f1c220103f4e2592b6d6dc29667e70c606f6301b11aad186908bf01",
+  "equal_recorded": true,
+  "files": 25
+ },
+ "assumptions": [
+  "report_id는 있으나 report_title이 비면(이전 기록) '보고서: 제목 없음'으로 표시 — 명세에 없는 문구라 가정",
+  "목록의 currentRunId는 snapshot.current_run_id, replayRunId는 재생 중(replaying)일 때 playback.runId",
+  "Subject 대상 없음: runs가 비고 loading이 아니면 '실행 없음', 그 외 '불러오는 중'. 칩은 replay prop 기준(실시간/기록 재생)",
+  "상태 tone 색은 기존 계열 색(#853b2d 등) 재사용, 새 팔레트: warn 배경 #f5e8c8/#b48b2e/#6b4d10, active 배경 #dcecee/#6aa0a4/#1f5f6a(기존 timeline-span 색과 유사한 계열)",
+  "cancelled tone은 명세대로 muted(그 외)",
+  "formatRunTime: new Date(iso) 파싱 — 'garbage'·빈 문자열은 시각 확인불가"
+ ],
+ "unverified": [
+  "실제 브라우저 렌더링·390px 가로 넘침·hit-test·말줄임(메인 세션 검증 대상)",
+  "sourceLabel('local')의 실제 문구는 기존 함수 그대로 사용"
+ ],
+ "contract_problems": []
+}

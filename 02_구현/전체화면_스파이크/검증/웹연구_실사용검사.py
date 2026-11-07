@@ -22,6 +22,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
+from 화면도우미 import open_replay_from_history
 
 SPIKE = Path(__file__).resolve().parents[1]
 ROOT = SPIKE.parents[1]
@@ -297,8 +298,14 @@ class Check:
 
     def open_history_report(self, run_id=None):
         self.panel("과거 기록")
-        item = self.page.get_by_test_id("popup").locator("li")
-        target = item.filter(has_text=run_id) if run_id else item.last
+        items = self.page.get_by_test_id("popup").locator('[data-testid="history-item"]')
+        target = (
+            self.page.get_by_test_id("popup").locator(
+                f'[data-testid="history-item"][data-run-id={json.dumps(run_id)}]'
+            )
+            if run_id
+            else items.last
+        )
         target.get_by_role("button", name="자세히 보기", exact=True).click()
         self.page.get_by_role("button", name="최종 보고서 보기", exact=True).click()
         viewer = self.page.get_by_test_id("report-viewer")
@@ -376,12 +383,15 @@ class Check:
                 def history():
                     self.page.set_viewport_size({"width": 1440, "height": 900})
                     self.panel("과거 기록")
-                    text = self.page.get_by_test_id("popup").inner_text()
-                    assert question in text and "데이터셋 ·" in text, text[:400]
+                    # 새 목록은 실행 id 대신 자료 모드 칩(data-kind=source)과 data-run-id를 쓴다.
+                    item = self.page.get_by_test_id("popup").locator(
+                        f'[data-testid="history-item"][data-run-id={json.dumps(run_id)}]'
+                    )
+                    text = item.inner_text()
+                    chip = item.locator('[data-kind="source"]').inner_text().strip()
+                    assert question in text and chip == "데이터셋", (chip, text[:400])
                     self.capture("읽기전용_과거기록.png")
-                    self.page.get_by_test_id("popup").get_by_role(
-                        "button", name="자세히 보기", exact=True
-                    ).last.click()
+                    item.get_by_role("button", name="자세히 보기", exact=True).click()
                     detail = self.page.get_by_test_id("popup").inner_text()
                     assert "자료" in detail and "데이터셋" in detail, detail[:400]
                     return {"list_has_dataset_label": True}
@@ -419,7 +429,7 @@ class Check:
                     page = self.page
                     page.get_by_test_id("timeline-toggle").click()
                     assert page.get_by_test_id("replay-status").inner_text() == "실시간"
-                    page.get_by_test_id("timeline-run-select").select_option(run_id)
+                    open_replay_from_history(page, run_id)
                     slider = page.get_by_test_id("timeline-scrubber")
                     slider.wait_for()
                     seen = {}
@@ -925,7 +935,7 @@ class Check:
 
         def replay():
             page.get_by_test_id("timeline-toggle").click()
-            page.get_by_test_id("timeline-run-select").select_option(run["run_id"])
+            open_replay_from_history(page, run["run_id"])
             slider = page.get_by_test_id("timeline-scrubber")
             slider.wait_for()
             seen = {}

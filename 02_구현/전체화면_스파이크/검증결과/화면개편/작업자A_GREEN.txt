@@ -1,0 +1,9 @@
+
+ RUN  v5.1.0 C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면
+
+
+ Test Files  22 passed (22)
+      Tests  157 passed (157)
+   Start at  23:38:03
+   Duration  2.16s (tests 51%, import 26%, transform 22%, worker 2%)
+

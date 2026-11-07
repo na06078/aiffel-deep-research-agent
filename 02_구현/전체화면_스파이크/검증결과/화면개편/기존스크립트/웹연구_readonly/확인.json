@@ -1,0 +1,24 @@
+{
+  "started_at": "2026-11-07T14:48:40.557654+00:00",
+  "phase": "readonly",
+  "base_url": "http://127.0.0.1:8791",
+  "checks": [
+    {
+      "name": "새 코드의 스냅샷: 자료 모드 목록·기본 선택·기존 실행 보존",
+      "status": "FAIL",
+      "error": "AssertionError: ",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\웹연구_실사용검사.py\", line 128, in step\n    facts = function() or {}\n            ^^^^^^^^^^\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\웹연구_실사용검사.py\", line 349, in snapshot_facts\n    assert initial[\"selected_source_mode\"] == \"local\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  ],
+  "captures": [],
+  "browser_errors": [],
+  "console_errors": [],
+  "external_requests": [],
+  "blocked_requests": [],
+  "expected_rejection_console_messages": 0,
+  "status": "FAIL",
+  "problems": [
+    "새 코드의 스냅샷: 자료 모드 목록·기본 선택·기존 실행 보존"
+  ],
+  "finished_at": "2026-11-07T14:48:40.599143+00:00"
+}

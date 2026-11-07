@@ -4,6 +4,7 @@ import type {RunSnapshot} from './계약';
 import type {RunArchive} from './시간계약';
 import {measuredElapsed,offsetMs,replayEnd} from './시간재생';
 import {actors,names} from './마을배치';
+import {formatRunTime,runStatusLabel,runStatusTone} from './실행표시';
 import './실행타임라인.css';
 const seconds=(ms:number|null)=>ms!==null&&Number.isFinite(ms)&&ms>=0?(ms<10?`${ms.toFixed(1)}ms`:ms<1000?`${Math.round(ms)}ms`:`${(ms/1000).toFixed(2)}초`):'미측정';
 const phaseNames:Record<string,string>={plan:'기획',dispatch:'업무 배정',research:'조사',review:'검토',synthesize:'종합',evaluate:'품질 검사',publish:'문서 저장',model:'응답 대기'};
@@ -42,7 +43,16 @@ function TimeAxis({p}:{p:TimelineProps}){
  </>;
 }
 
-export interface TimelineProps {height?:number;minHeight?:number;maxHeight?:number;onHeightChange?:(height:number)=>void;open:boolean;runs:RunSnapshot[];runId:string|null;archive:RunArchive|null;at:number;replay:boolean;playing:boolean;loading:boolean;error:string;onToggle:()=>void;onSelect:(id:string)=>void;onSeek:(ms:number)=>void;onPlay:()=>void;onStage:(direction:-1|1)=>void;onLive:()=>void;onRetry:()=>void;onEvent:(id:string)=>void}
+// 드롭다운 대신 지금 보고 있는 실행을 읽기 전용으로 보여 준다(기술 명세 27.3).
+// 대상은 runId가 있으면 runs에서 같은 실행(없으면 archive.run), 실시간이면 archive.run이다.
+function Subject({p}:{p:TimelineProps}){
+ const run=(p.runId?p.runs.find(r=>r.run_id===p.runId):undefined)??p.archive?.run;
+ const mode=p.replay?'replay':'live';
+ if(!run)return <div className="timeline-subject" data-testid="timeline-subject" data-mode={mode}><span className="subject-chip">{p.replay?'기록 재생':'실시간'}</span><span className="subject-state">{p.error?'기록을 불러오지 못했습니다':!p.runs.length&&!p.loading?'실행 없음':'불러오는 중'}</span></div>;
+ return <div className="timeline-subject" data-testid="timeline-subject" data-mode={mode} data-run-id={run.run_id}><span className="subject-chip">{p.replay?'기록 재생':'실시간'}</span><strong className="subject-question" title={run.question}>{run.question}</strong><small className="subject-meta" data-status={run.status} data-tone={runStatusTone(run.status)} title={run.status}>{runStatusLabel(run.status)} · {formatRunTime(run.created_at)}</small></div>;
+}
+
+export interface TimelineProps {height?:number;minHeight?:number;maxHeight?:number;onHeightChange?:(height:number)=>void;open:boolean;runs:RunSnapshot[];runId:string|null;archive:RunArchive|null;at:number;replay:boolean;playing:boolean;loading:boolean;error:string;onToggle:()=>void;onSeek:(ms:number)=>void;onPlay:()=>void;onStage:(direction:-1|1)=>void;onLive:()=>void;onRetry:()=>void;onEvent:(id:string)=>void}
 export function Timeline(p:TimelineProps){
  const drag=useRef<{id:number;y:number;height:number;target:HTMLDivElement}|null>(null);
  function finish(){
@@ -59,7 +69,7 @@ export function Timeline(p:TimelineProps){
    onPointerMove={e=>{const active=drag.current;if(!active||active.id!==e.pointerId)return;e.preventDefault();p.onHeightChange?.(effectiveDrawerHeight(draggedHeight(active.height,active.y,e.clientY),bounds));}}
    onPointerUp={e=>{if(drag.current?.id===e.pointerId)finish();}} onPointerCancel={e=>{if(drag.current?.id===e.pointerId)finish();}} onLostPointerCapture={e=>{if(drag.current?.id===e.pointerId)finish();}}
    onKeyDown={e=>{const height=keyboardHeight(e.key,p.height??360,bounds,e.shiftKey);if(height===null||!p.onHeightChange)return;e.preventDefault();e.stopPropagation();p.onHeightChange(height);}}/>
-  <div className="timeline-toolbar" data-testid="timeline-toolbar"><header className="timeline-header"><label>실행 <select data-testid="timeline-run-select" value={p.runId??''} onChange={e=>p.onSelect(e.target.value)}><option value="">실시간 실행</option>{p.runs.map(r=><option value={r.run_id} key={r.run_id}>{r.question} · {r.status} · {r.run_id}</option>)}</select></label><button aria-label="실행 타임라인 닫기" onClick={p.onToggle}>닫기</button></header>
+  <div className="timeline-toolbar" data-testid="timeline-toolbar"><header className="timeline-header"><Subject p={p}/><button aria-label="실행 타임라인 닫기" onClick={p.onToggle}>닫기</button></header>
   <div className="timeline-controls"><button data-testid="replay-prev" disabled={!p.archive} onClick={()=>p.onStage(-1)}>이전 단계</button><button data-testid="replay-play" disabled={!p.archive} onClick={p.onPlay}>{p.playing?'일시정지':'재생'}</button><button data-testid="replay-next" disabled={!p.archive} onClick={()=>p.onStage(1)}>다음 단계</button><button data-testid="replay-live" onClick={p.onLive}>실시간 복귀</button><span data-testid="replay-status" role="status">{p.replay?`읽기 전용 기록 · ${p.playing?'재생 중':'일시정지'}`:'실시간'}</span><output data-testid="replay-time">{(p.at/1000).toFixed(2)}초</output></div>
   <div className="timeline-messages">{!p.runs.length&&!p.archive&&!p.loading&&<p>보존된 실행이 없습니다. 지시를 실행하면 사건과 측정 구간이 표시됩니다.</p>}{p.loading&&<p role="status">전체 기록을 불러오는 중입니다.</p>}{p.error&&<p role="alert">{p.error} <button onClick={p.onRetry}>기록 다시 조회</button></p>}</div>{p.archive&&<TimeAxis p={p}/>}</div>
   <div className="timeline-track-scroll" data-testid="timeline-track-scroll">{p.archive&&<Tracks p={p}/>}</div>

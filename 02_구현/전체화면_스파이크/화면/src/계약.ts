@@ -27,6 +27,9 @@ export interface RunSnapshot {
   phase: string;
   plan: Assignment[];
   report_id: string | null;
+  // 서버가 이미 보내는 값을 타입에 반영한다(기술 명세27절). 계획 단계의 제목이 보고서 제출 전에도 들어 있으므로
+  // 보고서 제목으로는 report_id가 있을 때만 쓴다. 이 필드가 없던 이전 기록은 undefined다.
+  report_title?: string | null;
   draft: string | null;
   quality: QualitySummary;
   parent_report_id: string | null;

@@ -9,6 +9,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
+from 화면도우미 import open_replay_from_history
 
 SPIKE = Path(__file__).resolve().parents[1]
 ROOT = SPIKE.parents[1]
@@ -121,7 +122,7 @@ def main(label, baseline):
 
     def assert_pinned():
         for testid in (
-            "timeline-run-select",
+            "timeline-subject",
             "replay-prev",
             "replay-play",
             "replay-next",
@@ -173,7 +174,7 @@ def main(label, baseline):
         page.evaluate("window.__drawerCanvas=document.querySelector('canvas')")
         page.get_by_test_id("command-input").fill("드로어 사용성 검사 중인 미전송 초안")
         page.get_by_test_id("timeline-toggle").click()
-        page.get_by_test_id("timeline-run-select").select_option(current["run_id"])
+        open_replay_from_history(page, current["run_id"])
         page.get_by_test_id("timeline-scrubber").wait_for()
         try:
             if not baseline:
@@ -322,6 +323,14 @@ def main(label, baseline):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--label", default="타임라인드로어_검사")
+    parser.add_argument(
+        "--base-url",
+        default=BASE,
+        help="검사할 서버 주소. 기본은 사용자 실행본 8768이며, 후보 미리보기(읽기 전용)에도 쓸 수 있다.",
+    )
+    # --baseline은 실행 선택 상자가 있던 옛 화면의 결함을 재현하던 모드다. 새 화면에서는
+    # 과거 기록 팝업 경로가 필요해 옛 화면에서는 동작하지 않으므로 이전 시점의 커밋에서만 재현할 수 있다.
     parser.add_argument("--baseline", action="store_true")
     args = parser.parse_args()
+    BASE = args.base_url.rstrip("/")
     raise SystemExit(main(args.label, args.baseline))

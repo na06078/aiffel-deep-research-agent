@@ -1,0 +1,167 @@
+{
+  "작성자": "작업자 B1",
+  "files_created": {
+    "화면도우미.py": {
+      "path": "검증/화면도우미.py",
+      "sha256": "087a3600428a02ce37dbc0a020f7314728320fa1f72818adfb7d529a65c0f8cb"
+    },
+    "화면후보_미리보기.mjs": {
+      "path": "검증/화면후보_미리보기.mjs",
+      "sha256": "821d6e6d3f917e2f9f9ab74f88f1409bd5e461a7084875837039c58ea3e2d35b"
+    },
+    "화면후보_정책검사.test.mjs": {
+      "path": "검증/화면후보_정책검사.test.mjs",
+      "sha256": "fcf6079e4e1a55a101a2ffc2d1382869019c3e024a35a77690f7e6e383ad9725"
+    }
+  },
+  "files_changed": {
+    "마을재설계_실사용검사.py": {
+      "path": "검증/마을재설계_실사용검사.py",
+      "sha256": "06c8c55c9c82158fb70e7ff33fe34b9c28a3e19411b944d43d52587fb3052a81",
+      "change": "import 1줄 추가 + 호출 지점 교체"
+    },
+    "보고서변환_재생가시성검사.py": {
+      "path": "검증/보고서변환_재생가시성검사.py",
+      "sha256": "8f63bb7be8f2ce9fc7c7b6d6f4258b46fdeb9d9543c644aa95a89d0c22eecf41",
+      "change": "import 1줄 추가 + 호출 지점 교체"
+    },
+    "시간_시연검사.py": {
+      "path": "검증/시간_시연검사.py",
+      "sha256": "aef10235d3d247c00695d72d2984002a3df77a51f65aa979ce4758683ecb5a8b",
+      "change": "import 1줄 추가 + 호출 지점 교체"
+    },
+    "시간_실사용검사.py": {
+      "path": "검증/시간_실사용검사.py",
+      "sha256": "1e896c5af9ccd4f8179b5a09ce28a26e288703f2a69e48e70a7ae7c0fd591db6",
+      "change": "import 1줄 추가 + 호출 지점 교체"
+    },
+    "실제연구_실사용검사.py": {
+      "path": "검증/실제연구_실사용검사.py",
+      "sha256": "008380b087cf1f252feb74d673b8990bbd42ce144a8705f8ab13d7619306c4bb",
+      "change": "import 1줄 추가 + 호출 지점 교체"
+    },
+    "웹연구_실사용검사.py": {
+      "path": "검증/웹연구_실사용검사.py",
+      "sha256": "fe37386d0ebde5285e5bb1f2a7d8e1fd48f0f09ddec1e53ece7ec2a77ee53a75",
+      "change": "import 1줄 추가 + 호출 지점 교체"
+    },
+    "타임라인드로어_실사용검사.py": {
+      "path": "검증/타임라인드로어_실사용검사.py",
+      "sha256": "b950815e6e2518c10af6fef2be6dced01a3ec9ba6c6fb156b743cae4260731e0",
+      "change": "import 1줄 추가 + 호출 지점 교체"
+    }
+  },
+  "evidence_files": {
+    "작업자B1_RED.log": {
+      "path": "검증결과/화면개편/작업자B1_RED.log",
+      "sha256": "02efca440abcba1b28f6fcfb6447feaee9a01d9282695db0a3d2304802d561df"
+    },
+    "작업자B1_GREEN.log": {
+      "path": "검증결과/화면개편/작업자B1_GREEN.log",
+      "sha256": "f502285f02491af2b10d16f0800a0f56664e3ac24e12974ed918b07fdcf3f987"
+    }
+  },
+  "call_sites": [
+    {
+      "file": "마을재설계_실사용검사.py",
+      "line": "163→164",
+      "expects": "timeline-toggle 클릭 직후 select_option(run_id) → scrubber 대기 → seek(0)·command-submit 비활성 단언",
+      "translation": "select_option 줄만 open_replay_from_history(page, run['run_id'])로 교체; 앞의 timeline-toggle 클릭 유지"
+    },
+    {
+      "file": "보고서변환_재생가시성검사.py",
+      "line": "61→62",
+      "expects": "rewind() 안: select가 안 보이면(=타임라인 서랍 닫힘) timeline-toggle 클릭",
+      "translation": "is_visible 조건을 timeline-drawer 가시성으로 번역(같은 의도: 서랍이 닫혀 있으면 연다)"
+    },
+    {
+      "file": "보고서변환_재생가시성검사.py",
+      "line": "63→64",
+      "expects": "rewind(): 같은 run 선택 후 scrubber Home → report-viewer가 사라졌는지 단언",
+      "translation": "helper로 교체. 주의: 재생 시작이 팝업을 닫으므로 'report-viewer 사라짐' 단언이 약해짐(아래 질문 1)"
+    },
+    {
+      "file": "보고서변환_재생가시성검사.py",
+      "line": "103→104",
+      "expects": "다른 실행 B 선택(open_report 직후, 보고서 뷰어 열린 상태) → Home → 뷰어 사라짐 단언",
+      "translation": "helper로 교체; 같은 약화 위험"
+    },
+    {
+      "file": "시간_시연검사.py",
+      "line": "73→74",
+      "expects": "timeline-toggle 후 select_option(demo run) → scrubber 대기·End 키",
+      "translation": "helper로 교체"
+    },
+    {
+      "file": "시간_실사용검사.py",
+      "line": "272-273→273",
+      "expects": "drawer_open() 후 selection 변수로 select_option(run_id) → scrubber 대기",
+      "translation": "selection 변수는 다른 곳에서 안 쓰여 2줄을 helper 1줄로 교체. select 자체에 대한 단언 없음"
+    },
+    {
+      "file": "시간_실사용검사.py",
+      "line": "415→415",
+      "expects": "page.reload() 후 drawer_open() → select_option(run_id) → seek(mid)",
+      "translation": "helper로 교체(reload 후 메뉴는 닫혀 있으므로 helper가 햄버거부터 연다)"
+    },
+    {
+      "file": "실제연구_실사용검사.py",
+      "line": "205→206",
+      "expects": "timeline-toggle 후 replay-status=='실시간' 단언 → select_option → scrubber 대기",
+      "translation": "helper로 교체; 단언은 재생 시작 전이라 그대로 유효"
+    },
+    {
+      "file": "웹연구_실사용검사.py",
+      "line": "422→423",
+      "expects": "replay(): close_popup, timeline-toggle, replay-status=='실시간' 단언 → select_option",
+      "translation": "helper로 교체"
+    },
+    {
+      "file": "웹연구_실사용검사.py",
+      "line": "928→929",
+      "expects": "timeline-toggle 후 select_option(run) → scrubber, Home/End 인디케이터",
+      "translation": "helper로 교체"
+    },
+    {
+      "file": "타임라인드로어_실사용검사.py",
+      "line": "124→125",
+      "expects": "assert_pinned()의 필수 조작 목록: 각 test id를 hit()로 가려짐 없이 눌리는지 검사",
+      "translation": "'timeline-run-select' → 'timeline-subject'(읽기 전용 머리글도 하단 스크롤 중 보이고 가려지지 않아야 한다는 의도)"
+    },
+    {
+      "file": "타임라인드로어_실사용검사.py",
+      "line": "176→177",
+      "expects": "timeline-toggle 후 select_option(current run) → scrubber 대기",
+      "translation": "helper로 교체"
+    }
+  ],
+  "mjs_test": {
+    "command": "C:/nvm4w/nodejs/node.exe --test 검증/화면후보_정책검사.test.mjs (cwd=전체화면_스파이크)",
+    "red": "구현 전 실행: ERR_MODULE_NOT_FOUND(화면후보_미리보기.mjs 없음), pass 0 / fail 1 (작업자B1_RED.log)",
+    "green": "구현 후: tests 3, pass 3, fail 0 (작업자B1_GREEN.log). GET/HEAD 통과, POST/PUT/PATCH/DELETE 405 + Allow + X-Hermes-Preview + {error:{code,message}} 본문, 실제 통신.ts가 'read_only_preview: <한국어 문장>'을 던지며 'undefined' 없음, 포트 8766/8768/8790·범위 밖 거절",
+    "note": "테스트 서버는 포트 0(임시 포트)·테스트 프로세스 안에서만 열고 닫음. 별도 서버 기동 없음."
+  },
+  "checks_run": [
+    "ast.parse OK: 화면도우미.py + 7개 스크립트 (.venv python -B, __pycache__ 미생성)",
+    "node --check OK: 화면후보_미리보기.mjs, 화면후보_정책검사.test.mjs",
+    "grep 'timeline-run-select' VER/*.py → 0건(의도적 잔존 없음)",
+    "node 화면후보_미리보기.mjs --port 8768 → 서버 시작 전 포트 거절 오류로 종료(네트워크·서버 없음)"
+  ],
+  "not_run": [
+    "7개 수정 스크립트 전부 미실행(새 UI 없음, 브라우저/서버 금지)",
+    "화면도우미.py의 실제 Playwright 동작 미검증(셀렉터는 명세 27.3·27.4 기준)",
+    "화면후보_미리보기.mjs의 실제 vite preview 기동·프록시·assets 검증 미실행(후보 빌드 없음, 서버 기동 금지)",
+    "--assets 존재/경로 이탈 검사 경로 미실행"
+  ],
+  "assumptions": [
+    "재생 시작 시 앱이 타임라인 서랍을 '열림 상태로 설정'한다(토글이 아님). 기존 timeline-toggle 클릭을 남긴 곳(마을재설계·시간_시연·시간_실사용(drawer_open)·실제연구·웹연구×2·타임라인드로어)에서는 서랍이 이미 열린 채 재생을 시작한다.",
+    "history-item은 popup 안에 있고, 재생 후 popup이 닫힘(hidden/detached). 메뉴 서랍은 팝업 열린 뒤 닫힐 수 있어 helper가 필요할 때만 다시 연다.",
+    "스크립트는 VER에서 직접 실행되어 sys.path[0]=VER라 `from 화면도우미 import ...`가 된다(기존 스크립트는 형제 모듈을 importlib 경로 로드로 불러옴; 마을재설계가 웹연구_실사용검사를 importlib로 불러오는 경우에도 메인이 VER 스크립트라 동작).",
+    "helper는 return_to_live를 제공하지만 기존 replay-live 직접 클릭 지점은 'select 사용 지점이 아니어서' 바꾸지 않음(최소 diff)."
+  ],
+  "questions": [
+    "1) 보고서변환_재생가시성검사 rewind·다른 실행 지점: 새 흐름은 재생 시작 때 팝업이 닫혀, '열린 보고서가 재생 진입/되감기로 사라지는지' 단언이 팝업 닫힘만으로 통과할 수 있다. 의도 보존이 필요하면 재생 후 보고서 뷰어 대신 '늦은 응답 미채택(held route)'과 scrubber 시점별 paper-document 비가시성 같은 별도 단언을 승인 후 추가해야 한다.",
+    "2) 타임라인드로어_실사용검사의 baseline 모드(기존 구현 반례 재현)는 옛 UI에 history-item이 없어 새 helper로는 옛 baseline에서 동작하지 않는다.",
+    "3) 서랍이 이미 열린 상태에서 재생 시작 시 타임라인이 토글처럼 닫히지 않는지 후보 UI에서 확인 필요."
+  ]
+}

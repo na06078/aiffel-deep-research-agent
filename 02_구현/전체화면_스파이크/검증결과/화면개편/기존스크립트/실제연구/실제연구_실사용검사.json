@@ -1,0 +1,13 @@
+{
+  "started_at": "2026-11-07T14:45:55.154974+00:00",
+  "base_url": "http://127.0.0.1:8791",
+  "scope": "실제 gpt-5.6-luna/교안/브라우저/보고서·재생",
+  "checks": [],
+  "captures": [],
+  "browser_errors": [],
+  "external_requests": [],
+  "status": "FAIL",
+  "error": "",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\실제연구_실사용검사.py\", line 90, in main\n    assert initial[\"budget\"][\"max_attempts\"] == 40 and initial[\"budget\"][\"max_usd\"] == 1\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+  "finished_at": "2026-11-07T14:45:55.211208+00:00"
+}

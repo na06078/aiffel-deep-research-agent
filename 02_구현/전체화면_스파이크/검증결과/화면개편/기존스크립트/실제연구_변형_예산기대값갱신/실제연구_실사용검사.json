@@ -1,0 +1,289 @@
+{
+  "started_at": "2026-11-07T14:46:11.810792+00:00",
+  "base_url": "http://127.0.0.1:8791",
+  "scope": "실제 gpt-5.6-luna/교안/브라우저/보고서·재생",
+  "checks": [
+    {
+      "name": "실제 모델 응답·6노드·필수 품질 검사와 정본 제출",
+      "status": "PASS",
+      "actual_model_responses": 37
+    }
+  ],
+  "captures": [
+    {
+      "file": "실제연구_첫화면.png",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 900,
+      "scrollX": 0,
+      "scrollY": 0,
+      "world": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 900
+      },
+      "canvasCount": 1,
+      "sameCanvas": true
+    }
+  ],
+  "browser_errors": [],
+  "external_requests": [],
+  "budget_before": {
+    "attempt_count": 100,
+    "max_attempts": 100,
+    "remaining_attempts": 0,
+    "spent_usd": 0.19670855,
+    "reserved_usd": 0.0,
+    "max_usd": 2.0,
+    "input_tokens": 379871,
+    "output_tokens": 84784,
+    "unknown_count": 0
+  },
+  "run": {
+    "run_id": "05f7695ed6a54f018bea6319a1ca790d",
+    "question": "llm 서빙 엔진 스트라타에 대해 알려줘",
+    "control_revision": 1,
+    "status": "completed",
+    "phase": "submitted",
+    "plan": [
+      {
+        "section_id": "section-1",
+        "title": "스트라타의 정체와 핵심 개념",
+        "instruction": "스트라타가 무엇인지, 개발 주체와 공개 시점, 해결하려는 LLM 서빙 문제, 주요 특징과 지원 모델·하드웨어를 확인한다. (재위임: 지난번에 «c33c33d96d6b4a11916a27fd4152cbeb», «4da9130b98bf4f18aaa44df9d8be36bf», «581b4da830e449f9a6e3029039e08351» 를 읽었지만 정확한 최초 공개 시점·공식 출시일은 제공된 자료에 없어 확인할 수 없다.. 그 빈 칸을 채우도록 아직 안 본 문서를 찾아라)",
+        "role": "큰그림 담당",
+        "assignee": "researcher-1",
+        "queries": [
+          "Strata LLM serving engine",
+          "스트라타 LLM 서빙 엔진"
+        ],
+        "budget": 3,
+        "round": 2,
+        "order": 0
+      },
+      {
+        "section_id": "section-2",
+        "title": "구성 요소와 요청 처리 흐름",
+        "instruction": "스트라타의 아키텍처, 추론 서버 구성, 스케줄링·배칭·KV 캐시·분산 처리 방식과 요청이 입력부터 응답까지 처리되는 과정을 조사한다. (재위임: 지난번에 «cb36cb46319c47d483ba5b095eb21deb» 를 읽었지만 현재 스케줄러 알고리즘과 배칭 정책, KV 캐시의 페이지·eviction·prefix 재사용 방식, 다중 GPU 및 다중 호스트 간 분산 처리·통신 방식, HTTP 서버의 프로세스·워커·동시성 세부사항이 자료에 없다.. 그 빈 칸을 채우도록 아직 안 본 문서를 찾아라)",
+        "role": "큰그림 담당",
+        "assignee": "researcher-2",
+        "queries": [
+          "Strata inference engine architecture",
+          "Strata LLM scheduler KV cache"
+        ],
+        "budget": 3,
+        "round": 2,
+        "order": 1
+      },
+      {
+        "section_id": "section-3",
+        "title": "개발·출시와 버전별 변화",
+        "instruction": "스트라타의 발표·출시·업데이트 시점을 시간순으로 정리하고, 버전별 기능 추가와 주요 호환성·성능 개선 내용을 확인한다.",
+        "role": "시간순 담당",
+        "assignee": "researcher-3",
+        "queries": [
+          "Strata LLM release history",
+          "Strata serving engine GitHub releases"
+        ],
+        "budget": 3,
+        "round": 1,
+        "order": 2
+      },
+      {
+        "section_id": "section-4",
+        "title": "다른 LLM 서빙 엔진과의 차이와 한계",
+        "instruction": "스트라타를 vLLM, SGLang, TensorRT-LLM 등과 성능, 지원 모델, 하드웨어, 설치 난이도, 확장성, 라이선스 기준으로 비교하고 공개 자료에 나타난 한계와 실제 적용 사례를 정리한다.",
+        "role": "비교 담당",
+        "assignee": "researcher-4",
+        "queries": [
+          "Strata vs vLLM SGLang TensorRT-LLM",
+          "Strata LLM benchmark"
+        ],
+        "budget": 3,
+        "round": 1,
+        "order": 3
+      }
+    ],
+    "report_id": "32927cf0a32240348029148500e54b87",
+    "quality": {
+      "passed": true,
+      "reasons": [],
+      "warnings": [
+        "자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다.",
+        "조사관 사이에 중복 읽기가 있습니다.",
+        "읽었지만 본문 인용에 쓰이지 않은 문서가 있습니다."
+      ],
+      "metrics": {
+        "문장수": 63,
+        "근거붙은문장": 36,
+        "근거율": 57.1,
+        "허위인용": [],
+        "읽은문서": 11,
+        "읽고안쓴": [
+          "aaf924edfff8406e9c7f6240398eb562",
+          "c768af0d11494fceb850b443b9397fb8",
+          "cb36cb46319c47d483ba5b095eb21deb"
+        ],
+        "인용편중": 24.3,
+        "중복률": 15.4,
+        "절수": 4,
+        "보고서자수": 11285,
+        "인용수": 37,
+        "LLM호출": 37,
+        "격리율": 2.5
+      },
+      "unknown_citations": [],
+      "unread_citations": [],
+      "misattributed_citations": []
+    },
+    "parent_report_id": "44f307dedcbf4c8282d9b4e8a3a207bb",
+    "created_at": "2026-11-07T11:46:06.259461+00:00",
+    "updated_at": "2026-11-07T11:49:13.178146+00:00",
+    "mock_requests": 0,
+    "actual_model_requests": 37,
+    "source_mode": "web",
+    "instruction_history": [
+      "llm 서빙 엔진 스트라타에 대해 알려줘"
+    ],
+    "web_usage": {
+      "search_attempts": 12,
+      "search_limit": 16,
+      "fetch_attempts": 11,
+      "fetch_limit": 24,
+      "observed_http_requests": 23
+    },
+    "report_title": "LLM 서빙 엔진 스트라타(Strata) 조사",
+    "research_stop_reason": "round_exhausted",
+    "source_provenance": [
+      {
+        "source_id": "376684f2fd1e4d13baa73f0896ec7bed",
+        "url": "https://github.com/farhoudjk/STRATA-BENCH/tree/main",
+        "final_url": "https://github.com/farhoudjk/STRATA-BENCH/tree/main",
+        "title": "GitHub - farhoudjk/STRATA-BENCH: STRATA-Bench: A Regime-Aware Benchmark of Execution Strategy Efficiency in LLM Serving",
+        "text_sha256": "90b2eb0c867d4cab04a3d5c1753f74833ed771f32daefdce45c8a6eda5e43268",
+        "fetched_at": "2026-11-07T11:46:39.592678+00:00",
+        "published_at": null,
+        "read_text_sha256": "90b2eb0c867d4cab04a3d5c1753f74833ed771f32daefdce45c8a6eda5e43268"
+      },
+      {
+        "source_id": "3dd3067d01af42ada54845e5c3995a6c",
+        "url": "https://eth-lab.com/en/2026/10/strata-model-benchmarks-en/",
+        "final_url": "https://eth-lab.com/en/2026/10/strata-model-benchmarks-en/",
+        "title": "Strata Model Benchmarks: IQ2_XS, IQ3_XXS and IQ3_S Speed, Quality and RAM Usage - Ethan Lab",
+        "text_sha256": "907d838bf6dac841f2899ac45983faeee5d8b6b8c061ddc0b794bc7e455bda00",
+        "fetched_at": "2026-11-07T11:47:01.961807+00:00",
+        "published_at": null,
+        "read_text_sha256": "9d1fa0fc30b04a0afdbdc53d6fba556e619bcff7bcf0aa600f35f1f5b3985c99"
+      },
+      {
+        "source_id": "4da9130b98bf4f18aaa44df9d8be36bf",
+        "url": "https://github.com/Niko1221/Strata",
+        "final_url": "https://github.com/Niko1221/Strata",
+        "title": "GitHub - Niko1221/Strata: Qwen3.8-Flash-Next on any consumer hardware: one-click install for Windows / Linux. Strata inference engine, OpenAI/Anthropic API on localhost, optional image input.",
+        "text_sha256": "c5581750b178ac245e4f1b71ee1560a15842069e5c683683da8fa4d642469ae4",
+        "fetched_at": "2026-11-07T11:46:43.701154+00:00",
+        "published_at": null,
+        "read_text_sha256": "c5581750b178ac245e4f1b71ee1560a15842069e5c683683da8fa4d642469ae4"
+      },
+      {
+        "source_id": "581b4da830e449f9a6e3029039e08351",
+        "url": "https://www.stratat.com/en",
+        "final_url": "https://www.stratat.com/en",
+        "title": "Local 125B AI",
+        "text_sha256": "6c5a6102be31a8c65ad4c959181297fc72caa167ff20fe1e341117d11b4bf145",
+        "fetched_at": "2026-11-07T11:47:00.540401+00:00",
+        "published_at": null,
+        "read_text_sha256": "6c5a6102be31a8c65ad4c959181297fc72caa167ff20fe1e341117d11b4bf145"
+      },
+      {
+        "source_id": "aaf924edfff8406e9c7f6240398eb562",
+        "url": "https://github.com/Anuragp22/continuous-batching-server",
+        "final_url": "https://github.com/Anuragp22/continuous-batching-server",
+        "title": "GitHub - Anuragp22/continuous-batching-server: From-scratch mini-vLLM clone: continuous-batching scheduler, paged KV cache, streaming SSE inference API.",
+        "text_sha256": "11ef67df8ff3cbc9f87b45115b212d8431b01c469a90c3599adaa4d96e422c45",
+        "fetched_at": "2026-11-07T11:48:29.599749+00:00",
+        "published_at": null,
+        "read_text_sha256": "11ef67df8ff3cbc9f87b45115b212d8431b01c469a90c3599adaa4d96e422c45"
+      },
+      {
+        "source_id": "c33c33d96d6b4a11916a27fd4152cbeb",
+        "url": "https://stratallm.org/",
+        "final_url": "https://stratallm.org/",
+        "title": "Strata LLM – Run 125B+ MoE Models on 12GB VRAM Consumer GPUs (Docs & Setup)",
+        "text_sha256": "4c784775c38ff3a1edbb44bdd6a19dd7fbbe3f9eb5b423b13370ad74dfa29267",
+        "fetched_at": "2026-11-07T11:46:29.302909+00:00",
+        "published_at": null,
+        "read_text_sha256": "4c784775c38ff3a1edbb44bdd6a19dd7fbbe3f9eb5b423b13370ad74dfa29267"
+      },
+      {
+        "source_id": "c703edebf96d49a5bed2fbb9982be77e",
+        "url": "https://www.stratat.com/en/releases",
+        "final_url": "https://www.stratat.com/en/releases",
+        "title": "Releases",
+        "text_sha256": "5897a81e4d10ebee668c896a217e745b6fea3df6becf5a75a6bea43fd0da9e95",
+        "fetched_at": "2026-11-07T11:46:35.190803+00:00",
+        "published_at": null,
+        "read_text_sha256": "5897a81e4d10ebee668c896a217e745b6fea3df6becf5a75a6bea43fd0da9e95"
+      },
+      {
+        "source_id": "c768af0d11494fceb850b443b9397fb8",
+        "url": "https://github.com/sidhartha-patra/kv-cache-batching-simulator/blob/main/README.md",
+        "final_url": "https://github.com/sidhartha-patra/kv-cache-batching-simulator/blob/main/README.md",
+        "title": "kv-cache-batching-simulator/README.md at main · sidhartha-patra/kv-cache-batching-simulator",
+        "text_sha256": "75b8a2e8489d602ed28ad023ad6fffb471aea4d478bbc9f71f468f281ab94553",
+        "fetched_at": "2026-11-07T11:48:45.829905+00:00",
+        "published_at": null,
+        "read_text_sha256": "75b8a2e8489d602ed28ad023ad6fffb471aea4d478bbc9f71f468f281ab94553"
+      },
+      {
+        "source_id": "cb36cb46319c47d483ba5b095eb21deb",
+        "url": "https://github.com/ro99/strata",
+        "final_url": "https://github.com/ro99/strata",
+        "title": "GitHub - ro99/strata: C/C++ MoE inference engine for models exceeding local VRAM",
+        "text_sha256": "cb19558556922837a6e9fa8663210b7308aaeaa6f778fcfe55c756fe29302b5a",
+        "fetched_at": "2026-11-07T11:46:31.573424+00:00",
+        "published_at": null,
+        "read_text_sha256": "cb19558556922837a6e9fa8663210b7308aaeaa6f778fcfe55c756fe29302b5a"
+      },
+      {
+        "source_id": "e8b3f274e2d74a25ae53f1bb5200d80f",
+        "url": "https://github.com/Niko1221/Strata/releases",
+        "final_url": "https://github.com/Niko1221/Strata/releases",
+        "title": "Releases · Niko1221/Strata",
+        "text_sha256": "6013428450bdad00b37ee89d054e7248b9fac82acaa8cd1aa0230777b2a76a3a",
+        "fetched_at": "2026-11-07T11:46:55.482662+00:00",
+        "published_at": null,
+        "read_text_sha256": "f00de4800fcca08663307c1df9a538c2f539fa6ed93f93904518ead945b25477"
+      },
+      {
+        "source_id": "f51efa32781d46cbb16af583f7c25764",
+        "url": "https://github.com/sravani150602/continuous-batching-llm-inference-server",
+        "final_url": "https://github.com/sravani150602/continuous-batching-llm-inference-server",
+        "title": "GitHub - sravani150602/continuous-batching-llm-inference-server: High-throughput LLM serving with continuous batching, paged KV cache, preemption, gRPC streaming, Kafka, Redis, PyTorch, and C++.",
+        "text_sha256": "06a30d130258ca3f9728610660b25bb2e8a7ba003dbb0a34d246348b576c8aed",
+        "fetched_at": "2026-11-07T11:48:08.405300+00:00",
+        "published_at": null,
+        "read_text_sha256": "06a30d130258ca3f9728610660b25bb2e8a7ba003dbb0a34d246348b576c8aed"
+      }
+    ]
+  },
+  "budget_after_research": {
+    "attempt_count": 100,
+    "max_attempts": 100,
+    "remaining_attempts": 0,
+    "spent_usd": 0.19670855,
+    "reserved_usd": 0.0,
+    "max_usd": 2.0,
+    "input_tokens": 379871,
+    "output_tokens": 84784,
+    "unknown_count": 0
+  },
+  "run_id": "05f7695ed6a54f018bea6319a1ca790d",
+  "event_count": 236,
+  "research_stop_reason": "round_exhausted",
+  "status": "FAIL",
+  "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_test_id(\"bubble-planner\")\n",
+  "traceback": "Traceback (most recent call last):\n  File \"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증/실제연구_실사용검사.py\", line 165, in main\n    page.get_by_test_id(\"bubble-planner\").click()\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\sync_api\\_generated.py\", line 11021, in click\n    self._sync(\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\_impl\\_sync_base.py\", line 111, in _sync\n    return task.result()\n           ^^^^^^^^^^^^^\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\_impl\\_locator.py\", line 174, in click\n    return await self._frame._click(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\_impl\\_frame.py\", line 598, in _click\n    await self._channel.send(\"click\", self._timeout, locals_to_params(locals()))\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\_impl\\_connection.py\", line 78, in send\n    return await self._connection.wrap_api_call(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\_impl\\_connection.py\", line 636, in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nplaywright._impl._errors.TimeoutError: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_test_id(\"bubble-planner\")\n\n",
+  "finished_at": "2026-11-07T14:46:45.966581+00:00"
+}

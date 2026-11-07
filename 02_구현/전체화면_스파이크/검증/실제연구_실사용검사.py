@@ -11,6 +11,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
+from 화면도우미 import open_replay_from_history
 
 SPIKE = Path(__file__).resolve().parents[1]
 ROOT = SPIKE.parents[1]
@@ -202,7 +203,7 @@ def main(base, submit, label):
             db_before = hashlib.sha256(data_file.read_bytes()).hexdigest()
             page.get_by_test_id("timeline-toggle").click()
             assert page.get_by_test_id("replay-status").inner_text() == "실시간"
-            page.get_by_test_id("timeline-run-select").select_option(run_id)
+            open_replay_from_history(page, run_id)
             slider = page.get_by_test_id("timeline-scrubber")
             slider.wait_for()
             for key in ("Home", "End", "Home"):

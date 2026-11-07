@@ -1,0 +1,27 @@
+[36mvite v8.3.6 [32mbuilding client environment for production...[36m[39m
+transforming...
+✓ 753 modules transformed.
+rendering chunks...
+computing gzip size...
+../../../.cache/화면개편_후보/index.html                                     1.16 kB │ gzip:   0.52 kB
+../../../.cache/화면개편_후보/assets/index-5VYJtFeJ.css                     20.69 kB │ gzip:   5.24 kB
+../../../.cache/화면개편_후보/assets/webworkerAll-DYAW0G8U.js                0.05 kB │ gzip:   0.06 kB
+../../../.cache/화면개편_후보/assets/getTextureBatchBindGroup-CEQHRttu.js    0.34 kB │ gzip:   0.26 kB
+../../../.cache/화면개편_후보/assets/Cache-CTROkX_m.js                       1.10 kB │ gzip:   0.55 kB
+../../../.cache/화면개편_후보/assets/canvasUtils-U4WZZEj-.js                 6.01 kB │ gzip:   2.04 kB
+../../../.cache/화면개편_후보/assets/getTexelRangeRects-Bdv1rQ51.js         11.35 kB │ gzip:   2.99 kB
+../../../.cache/화면개편_후보/assets/init-DoUXYMOj.js                       15.20 kB │ gzip:   4.73 kB
+../../../.cache/화면개편_후보/assets/GCManagedHash-DCvVepMX.js              19.31 kB │ gzip:   6.27 kB
+../../../.cache/화면개편_후보/assets/Filter-vpEaIMwd.js                     41.94 kB │ gzip:  12.01 kB
+../../../.cache/화면개편_후보/assets/browserAll-CU5536ZL.js                 43.50 kB │ gzip:  11.24 kB
+../../../.cache/화면개편_후보/assets/RenderTargetSystem-BK2ifv01.js         58.79 kB │ gzip:  16.47 kB
+../../../.cache/화면개편_후보/assets/GraphicsContext-48tzdr3Q.js            61.67 kB │ gzip:  20.62 kB
+../../../.cache/화면개편_후보/assets/CanvasPool-DzuCm1vb.js                 71.19 kB │ gzip:  23.29 kB
+../../../.cache/화면개편_후보/assets/index-D0_0BAog.js                     535.15 kB │ gzip: 164.53 kB
+
+[32m✓ built in 339ms[39m
+[33m[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m

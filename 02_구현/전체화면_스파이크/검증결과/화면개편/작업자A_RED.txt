@@ -1,0 +1,183 @@
+
+ RUN  v5.1.0 C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면
+
+ ❯ src/과거기록목록.test.tsx (0 test)
+ ❯ src/실행표시.test.ts (0 test)
+ ❯ src/앱.test.tsx (0 test)
+ ❯ src/실행타임라인.test.tsx (14 tests | 8 failed) 55ms
+   × 재생·시점·시간축은 고정 조작부에 있고 행 전용 스크롤에는 트랙만 있다 10ms
+   × 하단 손잡이와 선택·재생 제어를 보존하고 기록이 없으면 정직하게 안내한다 3ms
+   × 툴바에 select·combobox·실행 선택 testid가 없다 3ms
+   × 실시간: archive.run을 모드 칩·질문·상태 · 시각으로 표시한다 2ms
+   × 기록 재생: runId로 runs에서 같은 실행을 찾아 기록 재생 칩과 실패 tone을 보인다 2ms
+   × 기록 재생: runs에 없으면 archive.run으로 대체한다 3ms
+   × 대상이 아직 없으면 불러오는 중, 실행이 하나도 없으면 실행 없음 1ms
+   × 해석할 수 없는 시각은 시각 확인불가, 알 수 없는 상태는 원문으로 표시 3ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/과거기록목록.test.tsx [ src/과거기록목록.test.tsx ]
+Error: Cannot find module './과거기록목록' imported from C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/과거기록목록.test.tsx
+ ❯ src/과거기록목록.test.tsx:3:1
+      1| import {expect,it,vi} from 'vitest';
+      2| import {renderToStaticMarkup} from 'react-dom/server';
+      3| import {PastRecordList} from './과거기록목록';
+       | ^
+      4| import type {RunSnapshot} from './계약';
+      5|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/11]⎯
+
+ FAIL  src/실행표시.test.ts [ src/실행표시.test.ts ]
+Error: Cannot find module './실행표시' imported from C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/실행표시.test.ts
+ ❯ src/실행표시.test.ts:2:1
+      1| import {describe,expect,it} from 'vitest';
+      2| import {formatRunTime,runStatusLabel,runStatusTone} from './실행표시';
+       | ^
+      3|
+      4| // 상태 문구와 색 의미는 타임라인 머리글과 과거 기록 목록이 공유한다(기술 명세 27.2).
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/11]⎯
+
+ FAIL  src/앱.test.tsx [ src/앱.test.tsx ]
+Error: Cannot find module '/src/과거기록목록' imported from C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/앱.test.tsx
+ ❯ src/앱.test.tsx:6:1
+      4| import {projectArchive} from './시간재생';
+      5| import type {RunArchive} from './시간계약';
+      6| import {PastRecordList} from './과거기록목록';
+       | ^
+      7| // Explicit no-DOM hook unit harness: executes App's real command hand…
+      8| const hooks=vi.hoisted(()=>({active:false,cursor:0,slots:[] as any[],s…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/11]⎯
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/실행타임라인.test.tsx > 재생·시점·시간축은 고정 조작부에 있고 행 전용 스크롤에는 트랙만 있다
+AssertionError: expected '><header class="timeline-header"><lab…' to contain 'data-testid="timeline-subject"'
+
+Expected: "data-testid="timeline-subject""
+Received: "><header class="timeline-header"><label>실행 <select data-testid="timeline-run-select"><option value="" selected="">실시간 실행</option></select></label><button aria-label="실행 타임라인 닫기">닫기</button></header><div class="timeline-controls"><button data-testid="replay-prev">이전 단계</button><button data-testid="replay-play">재생</button><button data-testid="replay-next">다음 단계</button><button data-testid="replay-live">실시간 복귀</button><span data-testid="replay-status" role="status">실시간</span><output data-testid="replay-time">0.00초</output></div><div class="timeline-messages"></div><div class="timing-summary" title="단계 전체는 응답 대기를 포함합니다. 겹친 구간은 한 번만 셉니다.">실제 경과 2.00초 · 겹침 제외 작업 경과 2.00초</div><div class="timeline-legend" aria-label="시간 막대 범례"><span class="kind-node">단계 전체 · 대기 포함</span><span class="kind-wait">응답 대기</span><span class="kind-visual">운반 연출 · 측정 아님</span></div><label class="timeline-seek">기록 시점 <input type="range" data-testid="timeline-scrubber" aria-label="기록 시점 밀리초" min="0" max="2000" step="1" value="0"/></label><div class="timeline-axis"><span>객체 / 역할</span><div><time style="left:0%">0.0ms</time><time style="left:25%">500ms</time><time style="left:50%">1.00초</time><time style="left:75%">1.50초</time><time style="left:100%">2.00초</time></div></div></div><div class="timeline-track-scroll" "
+
+ ❯ src/실행타임라인.test.tsx:24:145
+     22|  const html=renderToStaticMarkup(<Timeline {...base} archive={archive}…
+     23|  const toolbar=html.split('data-testid="timeline-toolbar"')[1]?.split(…
+     24|  for(const id of ['timeline-subject','replay-prev','replay-play','repl…
+       |                                                                                                                                                 ^
+     25|  expect(toolbar).toContain('timeline-axis');
+     26|  expect(toolbar).not.toContain('timeline-track-planner');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/11]⎯
+
+ FAIL  src/실행타임라인.test.tsx > 하단 손잡이와 선택·재생 제어를 보존하고 기록이 없으면 정직하게 안내한다
+AssertionError: expected '<button class="timeline-toggle" data-…' to contain 'data-testid="timeline-subject"'
+
+Expected: "data-testid="timeline-subject""
+Received: "<button class="timeline-toggle" data-testid="timeline-toggle" aria-expanded="true" aria-controls="timing-drawer" aria-label="실행 타임라인 닫기"><span></span>기록 접기</button><section id="timing-drawer" class="timeline-drawer" data-compact="false" data-testid="timeline-drawer" aria-label="실행 시간 기록"><div data-testid="timeline-resize-handle" class="timeline-resize-handle" role="separator" tabindex="0" aria-orientation="horizontal" aria-label="타임라인 높이 조절" aria-controls="timing-drawer" aria-valuemin="184" aria-valuemax="900" aria-valuenow="360" aria-valuetext="360픽셀 · 위/아래 방향키, Home 최소, End 최대" title="위아래로 끌거나 방향키로 높이 조절"></div><div class="timeline-toolbar" data-testid="timeline-toolbar"><header class="timeline-header"><label>실행 <select data-testid="timeline-run-select"><option value="" selected="">실시간 실행</option></select></label><button aria-label="실행 타임라인 닫기">닫기</button></header><div class="timeline-controls"><button data-testid="replay-prev" disabled="">이전 단계</button><button data-testid="replay-play" disabled="">재생</button><button data-testid="replay-next" disabled="">다음 단계</button><button data-testid="replay-live">실시간 복귀</button><span data-testid="replay-status" role="status">실시간</span><output data-testid="replay-time">0.00초</output></div><div class="timeline-messages"><p>보존된 실행이 없습니다. 지시를 실행하면 사건과 측정 구간이 표시됩니다.</p></div></div><div class="timeline-track-scroll" data-testid="timeline-track-scroll"></div></section>"
+
+ ❯ src/실행타임라인.test.tsx:67:174
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/11]⎯
+
+ FAIL  src/실행타임라인.test.tsx > 툴바에 select·combobox·실행 선택 testid가 없다
+AssertionError: expected '><header class="timeline-header"><lab…' not to contain '<select'
+
+Expected: "<select"
+Received: "><header class="timeline-header"><label>실행 <select data-testid="timeline-run-select"><option value="" selected="">실시간 실행</option><option value="A">saved question · completed · A</option><option value="B">두 번째 질문 · failed · B</option></select></label><button aria-label="실행 타임라인 닫기">닫기</button></header><div class="timeline-controls"><button data-testid="replay-prev">이전 단계</button><button data-testid="replay-play">재생</button><button data-testid="replay-next">다음 단계</button><button data-testid="replay-live">실시간 복귀</button><span data-testid="replay-status" role="status">실시간</span><output data-testid="replay-time">0.00초</output></div><div class="timeline-messages"></div><div class="timing-summary" title="단계 전체는 응답 대기를 포함합니다. 겹친 구간은 한 번만 셉니다.">실제 경과 2.00초 · 겹침 제외 작업 경과 2.00초</div><div class="timeline-legend" aria-label="시간 막대 범례"><span class="kind-node">단계 전체 · 대기 포함</span><span class="kind-wait">응답 대기</span><span class="kind-visual">운반 연출 · 측정 아님</span></div><label class="timeline-seek">기록 시점 <input type="range" data-testid="timeline-scrubber" aria-label="기록 시점 밀리초" min="0" max="2000" step="1" value="0"/></label><div class="timeline-axis"><span>객체 / 역할</span><div><time style="left:0%">0.0ms</time><time style="left:25%">500ms</time><time style="left:50%">1.00초</time><time style="left:75%">1.50초</time><time style="left:100%">2.00초</time></div></div></div><div class="timeline-track-scroll" "
+
+ ❯ src/실행타임라인.test.tsx:84:23
+     82|   const html=renderToStaticMarkup(<Timeline {...base} runs={[archive.r…
+     83|   const toolbar=toolbarOf(html);
+     84|   expect(toolbar).not.toContain('<select');expect(toolbar).not.toConta…
+       |                       ^
+     85|   expect(html).not.toContain('timeline-run-select');
+     86|   for(const id of ['replay-prev','replay-play','replay-next','replay-l…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/11]⎯
+
+ FAIL  src/실행타임라인.test.tsx > 실시간: archive.run을 모드 칩·질문·상태 · 시각으로 표시한다
+TypeError: Cannot read properties of undefined (reading 'split')
+ ❯ src/실행타임라인.test.tsx:90:61
+     88| it('실시간: archive.run을 모드 칩·질문·상태 · 시각으로 표시한다',()=>{
+     89|   const html=renderToStaticMarkup(<Timeline {...base} runs={[archive.r…
+     90|   const head=html.split('data-testid="timeline-subject"')[1].split('>'…
+       |                                                             ^
+     91|   expect(head).toContain('data-mode="live"');expect(head).toContain('d…
+     92|   const subject=subjectOf(html);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/11]⎯
+
+ FAIL  src/실행타임라인.test.tsx > 기록 재생: runId로 runs에서 같은 실행을 찾아 기록 재생 칩과 실패 tone을 보인다
+TypeError: Cannot read properties of undefined (reading 'split')
+ ❯ src/실행타임라인.test.tsx:101:61
+     99| it('기록 재생: runId로 runs에서 같은 실행을 찾아 기록 재생 칩과 실패 tone을 보인다',()=>{
+    100|   const html=renderToStaticMarkup(<Timeline {...base} runs={[archive.r…
+    101|   const head=html.split('data-testid="timeline-subject"')[1].split('>'…
+       |                                                             ^
+    102|   expect(head).toContain('data-mode="replay"');expect(head).toContain(…
+    103|   const subject=subjectOf(html);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/11]⎯
+
+ FAIL  src/실행타임라인.test.tsx > 기록 재생: runs에 없으면 archive.run으로 대체한다
+AssertionError: expected '' to contain 'saved question'
+
+- Expected
++ Received
+
+- saved question
+
+ ❯ src/실행타임라인.test.tsx:110:27
+    108| it('기록 재생: runs에 없으면 archive.run으로 대체한다',()=>{
+    109|   const html=renderToStaticMarkup(<Timeline {...base} runs={[]} runId=…
+    110|   expect(subjectOf(html)).toContain('saved question');
+       |                           ^
+    111|   expect(html.split('data-testid="timeline-subject"')[1].split('>')[0]…
+    112| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/11]⎯
+
+ FAIL  src/실행타임라인.test.tsx > 대상이 아직 없으면 불러오는 중, 실행이 하나도 없으면 실행 없음
+AssertionError: expected '' to contain '불러오는 중'
+
+- Expected
++ Received
+
+- 불러오는 중
+
+ ❯ src/실행타임라인.test.tsx:115:30
+    113| it('대상이 아직 없으면 불러오는 중, 실행이 하나도 없으면 실행 없음',()=>{
+    114|   const loading=renderToStaticMarkup(<Timeline {...base} runs={[archiv…
+    115|   expect(subjectOf(loading)).toContain('불러오는 중');
+       |                              ^
+    116|   expect(loading.split('data-testid="timeline-subject"')[1].split('>')…
+    117|   const none=renderToStaticMarkup(<Timeline {...base}/>);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/11]⎯
+
+ FAIL  src/실행타임라인.test.tsx > 해석할 수 없는 시각은 시각 확인불가, 알 수 없는 상태는 원문으로 표시
+AssertionError: expected '' to contain 'weird · 시각 확인불가'
+
+- Expected
++ Received
+
+- weird · 시각 확인불가
+
+ ❯ src/실행타임라인.test.tsx:123:19
+    121|   const odd={...archive,run:{...archive.run,status:'weird' as any,crea…
+    122|   const subject=subjectOf(renderToStaticMarkup(<Timeline {...base} run…
+    123|   expect(subject).toContain('weird · 시각 확인불가');
+       |                   ^
+    124| });
+    125|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/11]⎯
+
+
+ Test Files  4 failed | 18 passed (22)
+      Tests  8 failed | 116 passed (124)
+   Start at  23:37:10
+   Duration  2.14s (tests 52%, transform 23%, import 23%, worker 2%)
+

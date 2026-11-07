@@ -3,6 +3,7 @@ import {renderToStaticMarkup} from 'react-dom/server';
 import {App} from './앱';
 import {projectArchive} from './시간재생';
 import type {RunArchive} from './시간계약';
+import {PastRecordList} from './과거기록목록';
 // Explicit no-DOM hook unit harness: executes App's real command handlers, not HTTP/E2E.
 const hooks=vi.hoisted(()=>({active:false,cursor:0,slots:[] as any[],snapshot:null as any,refresh:vi.fn()}));
 vi.mock('react',async original=>{
@@ -31,6 +32,28 @@ it('앱은 드로어·입력·팝업이 공유할 단일 유효 높이와 실제
  expect(html).toContain('aria-valuenow="360"');
  expect(html).toContain('aria-valuemax="738"');
  expect(html).toContain('data-testid="command-input"');
+});
+it('과거 기록 팝업은 새 목록을 쓰고 자세히 보기·기록 재생을 기존 동작에 연결한다',()=>{
+  hooks.active=true;
+  const mk=(id:string,at:string)=>({run_id:id,question:`질문 ${id}`,control_revision:1,status:'completed',phase:'submitted',plan:[],draft:null,report_id:null,quality:{passed:null,reasons:[]},parent_report_id:null,created_at:at,updated_at:at,mock_requests:0,actual_model_requests:0});
+  hooks.snapshot={provider:'openai',mode:'research',selected_source_mode:'local',high_watermark_seq:1,runs:[mk('A','2026-11-06T00:00:00Z'),mk('B','2026-11-07T00:00:00Z')],events:[],waiting:[],queue:[],current_run_id:'B'};
+  vi.stubGlobal('location',{hash:'#/control'});
+  const select=vi.fn(),live=vi.fn();
+  replayOverride.value={open:false,runId:'A',replay:true,archive:null,projection:null,at:0,loading:false,error:'',setOpen:vi.fn(),select,live,seek:vi.fn(),play:vi.fn(),stage:vi.fn(),retry:vi.fn()};
+  let tree=commandRender();findNode(tree,n=>n.props['data-testid']==='menu-toggle').props.onClick();
+  tree=commandRender();findNode(tree,n=>n.type==='button'&&n.props.children==='과거 기록').props.onClick();
+  tree=commandRender();
+  const list=findNode(tree,n=>n.type===PastRecordList);
+  expect(list.props.runs).toHaveLength(2);expect(list.props.currentRunId).toBe('B');expect(list.props.replayRunId).toBe('A');
+  list.props.onReplay('A');expect(select).toHaveBeenCalledWith('A');
+  tree=commandRender();expect(findNode(tree,n=>n.type===PastRecordList)).toBeUndefined();
+  hooks.cursor=0;
+  tree=commandRender();findNode(tree,n=>n.props['data-testid']==='menu-toggle').props.onClick();
+  tree=commandRender();findNode(tree,n=>n.type==='button'&&n.props.children==='과거 기록').props.onClick();
+  tree=commandRender();findNode(tree,n=>n.type===PastRecordList).props.onDetail('B');
+  tree=commandRender();
+  expect(findNode(tree,n=>n.type===PastRecordList)).toBeUndefined();
+  expect(findNode(tree,n=>n.type==='button'&&n.props.children==='목록으로')).toBeDefined();
 });
 afterEach(()=>{vi.unstubAllGlobals();replayOverride.value=null;hooks.active=false;hooks.slots=[];hooks.cursor=0;hooks.refresh.mockReset();});
 function findNode(node:any,predicate:(p:any)=>boolean):any{

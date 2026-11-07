@@ -16,6 +16,7 @@ from pathlib import Path
 
 from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
+from 화면도우미 import open_replay_from_history
 
 SPIKE = Path(__file__).resolve().parents[1]
 ROOT = SPIKE.parents[1]
@@ -269,8 +270,7 @@ def main(label):
                 events=len(archive["events"]),
             )
             drawer_open()
-            selection = page.get_by_test_id("timeline-run-select")
-            selection.select_option(run_id)
+            open_replay_from_history(page, run_id)
             page.get_by_test_id("timeline-scrubber").wait_for()
             terminal = request_json(base, "/api/spike/snapshot")
             report_id = current(terminal)["report_id"]
@@ -412,7 +412,7 @@ def main(label):
             page.wait_for_selector("[data-testid=world][data-render-ready=true]")
             page.evaluate('window.__timelineCanvas=document.querySelector("canvas")')
             drawer_open()
-            page.get_by_test_id("timeline-run-select").select_option(run_id)
+            open_replay_from_history(page, run_id)
             seek(mid)
             page.wait_for_timeout(120)
             assert not page.get_by_test_id("paper-document").is_visible()

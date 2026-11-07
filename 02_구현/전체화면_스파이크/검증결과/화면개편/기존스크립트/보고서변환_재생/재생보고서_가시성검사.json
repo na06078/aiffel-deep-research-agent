@@ -1,0 +1,24 @@
+{
+  "checks": [
+    {
+      "name": "열린 보고서→스크러버 Home(제출 이전)",
+      "passed": true
+    },
+    {
+      "name": "실시간 명시 재열기",
+      "passed": true
+    },
+    {
+      "name": "조회 대기→스크러버 Home→실제 저장 응답 지연 반환",
+      "passed": true
+    },
+    {
+      "name": "다른 실행 B 재생 시작 시 A 보고서 팝업이 내비게이션으로 닫힘",
+      "passed": true
+    }
+  ],
+  "posts": [],
+  "base_url": "http://127.0.0.1:8791",
+  "report_run_is_live_current": false,
+  "status": "PASS"
+}

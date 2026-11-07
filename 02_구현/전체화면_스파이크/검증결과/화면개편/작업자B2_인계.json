@@ -1,0 +1,83 @@
+{
+ "script": "검증/화면개편_후보검사.py",
+ "script_sha256": "0f326f1d78ce4efaa2e51b555ecb44182a8bf57b679e2181101a92e650f8f30a",
+ "command": "cd 02_구현/전체화면_스파이크/검증 && ../../../.venv/Scripts/python.exe 화면개편_후보검사.py --base http://127.0.0.1:8791 --label 화면개편/후보_실사용",
+ "result": {
+  "C1 타임라인 서랍 실시간 머리글": "PASS",
+  "C2 과거 기록 목록": "PASS",
+  "C3 상세 보기와 목록 복귀": "PASS",
+  "C4 재생 시작과 실시간 복귀": "PASS",
+  "C5 재생 중 새로고침 복원": "PASS",
+  "C6 레이아웃 1440x900": "PASS",
+  "C6 레이아웃 1920x1080": "PASS",
+  "C6 레이아웃 390x844": "PASS",
+  "C6 레이아웃 844x390": "PASS",
+  "C6 레이아웃 1000x700": "PASS",
+  "C7 긴 글 390x844": "PASS",
+  "C7 긴 글 1440x900": "PASS",
+  "C8 보호 검사": "PASS"
+ },
+ "key_numbers": {
+  "runs": 3,
+  "history_items": 3,
+  "order_ok": true,
+  "screenshots": 26,
+  "total_requests": 308,
+  "non_get": 0,
+  "console_errors": 0,
+  "pageerrors": 0,
+  "archive_GET_for_corpus_run": 1,
+  "live_8768_before_after_same": true,
+  "dist_files": 25,
+  "dist_diff": 0,
+  "C6_scrollWidth_eq_innerWidth_all_5": true,
+  "C7_question_lines_390x844": [
+   2,
+   1,
+   2
+  ],
+  "C7_question_lines_1440x900": [
+   2,
+   1,
+   2
+  ]
+ },
+ "evidence_dir": "검증결과/화면개편/후보_실사용/ (확인.json + PNG 26장)",
+ "first_run": "검증결과/화면개편/후보_실사용_1차/ : 스크립트 버그(C7 컨텍스트 종료 시 route.fetch 중단 오류, unroute_all로 수정)로 중단된 부분 실행. 제품 FAIL 아님. 확인.json 없음.",
+ "unverified_or_assumed": [
+  "KST는 UTC+9 고정 오프셋으로 계산(서머타임 없음)",
+  "원본 서버 8768 스냅샷 비교는 start/end 두 시점만 비교",
+  "elementFromPoint 판정은 요소/조상/자손이면 통과(명세대로)",
+  "C7 재생 상태는 150자 질문 실행(1894년 기록)으로만 측정",
+  "원시 영어 상태어 검사는 completed|blocked|failed|running|cancelled|interrupted만 대상",
+  "스크린샷의 시각적 품질은 수치로만 확인하고 눈으로 판정하지 않음"
+ ],
+ "screenshots": [
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C1_타임라인_실시간_1440x900.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C2_과거기록_목록_1440x900.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C3_상세에서_목록복귀_1440x900.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C4_재생상태_1440x900.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C5_새로고침후_재생복원_1440x900.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C6_1440x900_timeline-live.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C6_1440x900_history-list.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C6_1440x900_replay-state.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C6_1920x1080_timeline-live.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C6_1920x1080_history-list.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C6_1920x1080_replay-state.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C6_390x844_timeline-live.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C6_390x844_history-list.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C6_390x844_replay-state.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C6_844x390_timeline-live.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C6_844x390_history-list.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C6_844x390_replay-state.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C6_1000x700_timeline-live.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C6_1000x700_history-list.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C6_1000x700_replay-state.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C7_390x844_긴글_timeline-live.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C7_390x844_긴글_history-list.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C7_390x844_긴글_replay-state.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C7_1440x900_긴글_timeline-live.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C7_1440x900_긴글_history-list.png",
+  "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용\\C7_1440x900_긴글_replay-state.png"
+ ]
+}

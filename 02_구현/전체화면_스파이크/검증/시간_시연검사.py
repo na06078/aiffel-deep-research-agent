@@ -9,6 +9,7 @@ import urllib.request
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
+from 화면도우미 import open_replay_from_history
 
 SPIKE = Path(__file__).resolve().parents[1]
 ROOT = SPIKE.parents[1]
@@ -70,7 +71,7 @@ with sync_playwright() as p:
     else:
         demo = existing
     page.get_by_test_id("timeline-toggle").click()
-    page.get_by_test_id("timeline-run-select").select_option(demo["run_id"])
+    open_replay_from_history(page, demo["run_id"])
     page.get_by_test_id("timeline-scrubber").wait_for()
     slider = page.get_by_test_id("timeline-scrubber")
     slider.press("End")

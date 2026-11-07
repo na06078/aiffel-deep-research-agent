@@ -13,6 +13,7 @@ from pathlib import Path
 
 from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
+from 화면도우미 import open_replay_from_history
 
 SPIKE = Path(__file__).resolve().parents[1]
 ROOT = SPIKE.parents[1]
@@ -160,7 +161,7 @@ def main():
 
                 check.step("과거 기록 → 실행 상세 → 보고서 → 다운로드 재열기", history_and_report)
             page.get_by_test_id("timeline-toggle").click()
-            page.get_by_test_id("timeline-run-select").select_option(run["run_id"])
+            open_replay_from_history(page, run["run_id"])
             page.get_by_test_id("timeline-scrubber").wait_for()
             seek(page, 0)
             assert page.get_by_test_id("command-submit").is_disabled()
@@ -269,7 +270,10 @@ def main():
         raise
     finally:
         if browser:
-            browser.close()
+            try:
+                browser.close()
+            except PlaywrightError:
+                pass  # 예외로 with 블록이 이미 브라우저를 닫은 경우 원래 오류를 가리지 않는다.
         status = check.finish()
     return status
 
