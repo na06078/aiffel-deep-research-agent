@@ -144,3 +144,11 @@ it('실제 앱에 입력 아래 타임라인 손잡이를 연결하고 복원된
  expect(html).toContain('>기록 재생 중</button>');
  expect(html).toContain('village-canvas');
 });
+
+it('에셋 모드의 전송 시도는 주소 해시로 실행 제어에 들어가라고 안내하고 서버로 보내지 않는다',async()=>{
+ hooks.active=true;hooks.snapshot={provider:'openai',mode:'research',selected_source_mode:'local',high_watermark_seq:1,runs:[],events:[],waiting:[],queue:[],current_run_id:null};
+ vi.stubGlobal('location',{hash:'#/assets'});replayOverride.value={open:false,replay:false,archive:null,projection:null,at:0};
+ const fetcher=vi.fn();vi.stubGlobal('fetch',fetcher);
+ let tree=commandRender();findNode(tree,n=>n.props['data-testid']==='command-input').props.onChange({target:{value:'질문'}});tree=commandRender();findNode(tree,n=>n.type==='form').props.onSubmit({preventDefault:vi.fn()});await settle();tree=commandRender();
+ expect(findNode(tree,n=>n.props.className==='composer-notice').props.children[0]).toBe('장면 실험에서는 전송하지 않습니다. 주소 끝을 #/control로 바꿔 실행 제어로 들어가 주세요.');expect(fetcher).not.toHaveBeenCalled();
+});

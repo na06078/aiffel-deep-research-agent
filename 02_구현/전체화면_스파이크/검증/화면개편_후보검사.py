@@ -541,6 +541,54 @@ def main(base, label):
             # 진행 중인 route.fetch가 있는 채로 닫으면 오류가 나므로 라우트를 먼저 정리한다.
             page.unroute_all(behavior="ignoreErrors")
             context.close()
+
+        # ---------------- C9 서랍 정리(SPEC 27.9): 메뉴 6개, 모드 전환·요청 수 줄 0, 실행/큐 예산 일치
+        drawer_menus = ["장면 도구", "실행/큐", "과거 기록", "사건 기록", "제어 도구", "안내"]
+        budget = api_get(base, "/api/spike/snapshot").get("budget")
+        for w, h in ((1440, 900), (390, 844)):
+            tag = f"{w}x{h}"
+            context, page = new_page(browser, base, (w, h), collectors)
+            page.get_by_test_id("menu-toggle").click()
+            drawer = page.get_by_test_id("drawer")
+            drawer.wait_for(state="visible")
+            names = [t.strip() for t in drawer.locator("button").all_inner_texts()]
+            drawer_text = drawer.inner_text()
+            res = {
+                "menu_buttons": names,
+                "mode_options_count": drawer.locator(".mode-options").count(),
+                "has_asset_button": drawer.get_by_role("button", name="에셋 실험").count(),
+                "has_control_button": drawer.get_by_role("button", name="실행 제어").count(),
+                "request_text_in_drawer": "실제 모델 요청" in drawer_text,
+                "has_title": "연구 마을" in drawer_text,
+            }
+            shot(page, f"C9_{tag}_서랍_열림.png")
+            drawer.get_by_role("button", name="실행/큐", exact=True).click()
+            popup = page.get_by_test_id("popup")
+            popup.wait_for(state="visible")
+            popup_text = popup.inner_text()
+            res["budget_api"] = budget
+            m = re.search(r"시도\s*(\d+)\s*/\s*(\d+)", popup_text)
+            res["popup_has_budget_block"] = "호출 예산" in popup_text
+            res["popup_attempts"] = [int(m.group(1)), int(m.group(2))] if m else None
+            shot(page, f"C9_{tag}_실행큐_호출예산.png")
+            fails = []
+            if names != drawer_menus:
+                fails.append(f"서랍 메뉴 {names} != {drawer_menus}")
+            if res["mode_options_count"] or res["has_asset_button"] or res["has_control_button"]:
+                fails.append("서랍에 모드 전환 요소가 남음")
+            if res["request_text_in_drawer"]:
+                fails.append("서랍에 실제 모델 요청 문구가 남음")
+            if not res["has_title"]:
+                fails.append("서랍 제목 없음")
+            if budget:
+                want = [budget["attempt_count"], budget["max_attempts"]]
+                if not res["popup_has_budget_block"] or res["popup_attempts"] != want:
+                    fails.append(f"호출 예산 불일치: 화면 {res['popup_attempts']} != API {want}")
+            elif res["popup_has_budget_block"]:
+                fails.append("API에 budget이 없는데 호출 예산 블록이 보임")
+            add(f"C9 서랍 정리 {tag}", not fails, fails=fails, **res)
+            close_popup(page)
+            context.close()
         browser.close()
 
     # ---------------- C8 보호 검사

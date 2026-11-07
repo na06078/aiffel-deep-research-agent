@@ -42,7 +42,7 @@ it('실제 사건 상세는 요청0이라고 단정하지 않고 원문·오류�
  const rh=renderToStaticMarkup(<ReportViewer report={report}/>);expect(rh).toContain('Markdown 다운로드');expect(rh).toContain(report.markdown);expect(rh).toContain(report.download_url);expect(network).not.toHaveBeenCalled();
 });
 const actual:Snapshot={protocol_version:1,provider:'openai',mode:'research',runs:[],events:[],waiting:[],queue:[],current_run_id:null,queue_paused:false,queue_pause_reason:null,high_watermark_seq:0,events_has_more:false,mock_requests:0,actual_model_requests:7};
-afterEach(()=>{vi.unstubAllGlobals();state.popup=null;state.snapshot=null;state.replay=null;});
+afterEach(()=>{vi.unstubAllGlobals();state.drawer=true;state.popup=null;state.snapshot=null;state.replay=null;});
 const failedRun={...run,status:'failed' as const,phase:'failed',quality:{passed:null,reasons:[]},actual_model_requests:26};
 const failureReason={code:'model_error',message:'web: 사유 문구',actor:'researcher-4'};
 it('실패한 실행의 사유는 실행/큐와 과거 상세에서 사건 상세를 열지 않아도 보이고 사유 필드가 없던 기록은 안내만 한다',()=>{
@@ -65,8 +65,9 @@ it('상한 필드가 없는 이전 웹 사용량도 undefined를 보이지 않�
 });
 it('실제 서버 루트는 실행 제어로 열고 실제 요청 수를 표시하되 모의 경고나 연결 성공 장식을 만들지 않는다',()=>{
  vi.stubGlobal('location',{hash:''});state.snapshot=actual;
- const html=renderToStaticMarkup(<App/>);
- expect(html).toContain('data-mode="control"');expect(html).toContain('실제 모델 요청 7');
+ let html=renderToStaticMarkup(<App/>);
+ expect(html).toContain('data-mode="control"');
+ state.drawer=false;state.popup={kind:'실행/큐'};html=renderToStaticMarkup(<App/>);state.drawer=true;expect(html).toContain('OpenAI · 실제 모델 요청 7');
  expect(html).not.toContain('모의 응답');expect(html).not.toContain('테스트 대역');expect(html).not.toContain('실제 연결');
 });
 it('명시적 에셋 선택은 실제 서버에서도 합성 장면으로 남고 대역 경고와 해제 조작도 유지한다',()=>{
@@ -74,7 +75,7 @@ it('명시적 에셋 선택은 실제 서버에서도 합성 장면으로 남고
  const network=vi.fn();vi.stubGlobal('fetch',network);
  let html=renderToStaticMarkup(<App/>);expect(html).toContain('data-mode="assets"');expect(html).toContain('합성 장면');
  vi.stubGlobal('location',{hash:'#/control'});state.snapshot={...actual,provider:'test-double',mode:'spike',actual_model_requests:0};state.popup={kind:'제어 도구'};
- html=renderToStaticMarkup(<App/>);expect(html).toContain('모의 응답');expect(html).toContain('테스트 대역');expect(html).toContain('실제 모델 요청 0');expect(html).toContain('현재 모두 완료');expect(html).toContain('실패 응답');expect(network).not.toHaveBeenCalled();
+ html=renderToStaticMarkup(<App/>);expect(html).toContain('모의 응답');state.popup={kind:'실행/큐'};expect(renderToStaticMarkup(<App/>)).toContain('테스트 대역 · 실제 모델 요청 0');state.popup={kind:'제어 도구'};expect(html).toContain('현재 모두 완료');expect(html).toContain('실패 응답');expect(network).not.toHaveBeenCalled();
 });
 it('실제 실행 팝업은 예산·품질 사유와 취소를 제공하고 대역 해제 조작은 숨긴다',()=>{
  vi.stubGlobal('location',{hash:'#/control'});state.snapshot={...actual,current_run_id:'A',runs:[run],budget:{attempt_count:7,max_attempts:40,remaining_attempts:33,spent_usd:0.0123,reserved_usd:0.03,max_usd:1,input_tokens:1000,output_tokens:200,unknown_count:1}};
@@ -82,4 +83,35 @@ it('실제 실행 팝업은 예산·품질 사유와 취소를 제공하고 대�
  for(const text of ['시도 7 / 40','남은 시도 33','0.0123','0.0300','1.0000','입력 1000','출력 200','불명 1','실제 청구','인용 검증 실패','현재 실행 취소'])expect(html).toContain(text);
  state.popup={kind:'제어 도구'};const controls=renderToStaticMarkup(<App/>);
  expect(controls).not.toContain('현재 모두 완료');expect(controls).not.toContain('실패 응답');expect(controls).toContain('현재 실행 취소');expect(controls).not.toMatch(/disabled="">현재 실행 취소/);
+});
+
+const MENUS=['장면 도구','실행/큐','과거 기록','사건 기록','제어 도구','안내'];
+const REQUEST_TEXT='실제 모델 요청';
+for(const [name,snap] of [['openai 연구',actual],['test-double',{...actual,provider:'test-double' as const,mode:'spike' as const,actual_model_requests:0}]] as const){
+ it(`서랍(${name})은 제목과 여섯 메뉴만 순서대로 갖고 모드 전환·요청 수 줄이 없다`,()=>{
+  vi.stubGlobal('location',{hash:'#/control'});state.snapshot=snap as Snapshot;state.popup=null;
+  const html=renderToStaticMarkup(<App/>);
+  const m=html.match(/<nav class="drawer" data-testid="drawer"[^>]*>([\s\S]*?)<\/nav>/);expect(m).not.toBeNull();
+  const drawer=m![1];
+  expect(drawer).toContain('<h2>연구 마을</h2>');
+  expect([...drawer.matchAll(/<button[^>]*>([^<]*)<\/button>/g)].map(x=>x[1])).toEqual(MENUS);
+  expect(drawer).not.toContain('mode-options');expect(drawer).not.toContain('에셋 실험');expect(drawer).not.toContain('실행 제어');
+  expect(drawer).not.toContain(REQUEST_TEXT);expect(drawer).not.toContain('<p>');
+ });
+}
+it('실행/큐 팝업은 호출 예산 블록을 그대로 보여 준다',()=>{
+ vi.stubGlobal('location',{hash:'#/control'});
+ state.snapshot={...actual,budget:{attempt_count:7,max_attempts:40,remaining_attempts:33,spent_usd:0.0123,reserved_usd:0.03,max_usd:1,input_tokens:1000,output_tokens:200,unknown_count:1}};
+ state.drawer=false;state.popup={kind:'실행/큐'};const html=renderToStaticMarkup(<App/>);
+ expect(html).toContain('호출 예산');expect(html).toContain('시도 7 / 40 · 남은 시도 33');expect(html).toContain('OpenAI · 실제 모델 요청 7');
+});
+it('토글을 가리키던 문구는 주소 해시 안내로 바뀐다(장면 도구 팝업·안내 팝업·에셋 placeholder)',()=>{
+ vi.stubGlobal('location',{hash:'#/control'});state.snapshot=actual;state.drawer=false;
+ state.popup={kind:'장면 도구'};let html=renderToStaticMarkup(<App/>);
+ expect(html).toContain('연출을 보려면 주소 끝을 #/assets로 바꿔 에셋 실험으로 들어가 주세요.');expect(html).not.toContain('메뉴에서 에셋 실험');
+ state.popup={kind:'안내'};html=renderToStaticMarkup(<App/>);
+ expect(html).toContain('주소 끝이 #/assets이면 합성 장면(에셋 실험), #/control이면 로컬 API와 보존된 기록에 연결된 실행 제어입니다.');expect(html).toContain('OpenAI · 실제 모델 요청 7');
+ expect(html).not.toContain('에셋 실험은 합성 장면입니다.');
+ vi.stubGlobal('location',{hash:'#/assets'});state.popup=null;html=renderToStaticMarkup(<App/>);
+ expect(html).toContain('placeholder="연구 지시 · 주소 끝을 #/control로"');expect(html).not.toContain('메뉴에서 실행 제어');
 });

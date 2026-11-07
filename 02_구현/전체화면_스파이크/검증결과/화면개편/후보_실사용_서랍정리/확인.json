@@ -1,0 +1,2549 @@
+{
+  "base": "http://127.0.0.1:8791",
+  "label": "화면개편/후보_실사용_서랍정리",
+  "base_info": {
+    "runs": [
+      [
+        "9aa1aeeb5b0c4724b0e435563f6a5c76",
+        "completed",
+        "local",
+        "2026-11-06T07:41:38.379884+00:00"
+      ],
+      [
+        "6d0214c0c03140be840a4508e11b4330",
+        "blocked",
+        "local",
+        "2026-11-07T11:44:50.584742+00:00"
+      ],
+      [
+        "05f7695ed6a54f018bea6319a1ca790d",
+        "completed",
+        "web",
+        "2026-11-07T11:46:06.259461+00:00"
+      ]
+    ],
+    "current_run_id": "05f7695ed6a54f018bea6319a1ca790d",
+    "corpus_run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+    "status_labels": {
+      "running": "진행 중",
+      "completed": "완료",
+      "blocked": "차단됨",
+      "failed": "실패",
+      "cancelled": "취소됨",
+      "interrupted": "중단됨"
+    }
+  },
+  "checks": [
+    {
+      "name": "C1 타임라인 서랍 실시간 머리글",
+      "passed": true,
+      "measured": {
+        "was_expanded_before_click": "false",
+        "toolbar_select_count": 0,
+        "toolbar_combobox_count": 0,
+        "subject_visible": true,
+        "data_mode": "live",
+        "data_run_id_equals_current": true,
+        "has_live_chip": true,
+        "has_question": true,
+        "has_status_label": true,
+        "expected_kst": "2026-11-07 20:46",
+        "has_kst_time": true,
+        "hex32_matches": [],
+        "subject_text": "실시간\nllm 서빙 엔진 스트라타에 대해 알려줘\n완료 · 2026-11-07 20:46"
+      }
+    },
+    {
+      "name": "C2 과거 기록 목록",
+      "passed": true,
+      "measured": {
+        "item_count": 3,
+        "snapshot_runs": 3,
+        "order_ok": true,
+        "ids": [
+          "05f7695ed6a54f018bea6319a1ca790d",
+          "6d0214c0c03140be840a4508e11b4330",
+          "9aa1aeeb5b0c4724b0e435563f6a5c76"
+        ],
+        "expected_ids": [
+          "05f7695ed6a54f018bea6319a1ca790d",
+          "6d0214c0c03140be840a4508e11b4330",
+          "9aa1aeeb5b0c4724b0e435563f6a5c76"
+        ],
+        "current_items": [
+          "05f7695ed6a54f018bea6319a1ca790d"
+        ],
+        "rows": [
+          {
+            "run_id": "05f7695ed6a54f018bea6319a1ca790d",
+            "data_current": "true",
+            "has_status_label": true,
+            "source_text": "웹 검색",
+            "source_has_hangul": true,
+            "time_text": "2026-11-07 20:46",
+            "expected_kst": "2026-11-07 20:46",
+            "time_ok": true,
+            "report_text": "보고서: LLM 서빙 엔진 스트라타(Strata) 조사",
+            "report_ok": true,
+            "hex32": [],
+            "raw_status_words": [],
+            "has_current_chip": true,
+            "chip_count": 4
+          },
+          {
+            "run_id": "6d0214c0c03140be840a4508e11b4330",
+            "data_current": "false",
+            "has_status_label": true,
+            "source_text": "데이터셋",
+            "source_has_hangul": true,
+            "time_text": "2026-11-07 20:44",
+            "expected_kst": "2026-11-07 20:44",
+            "time_ok": true,
+            "report_text": "보고서 없음",
+            "report_ok": true,
+            "hex32": [],
+            "raw_status_words": [],
+            "has_current_chip": false,
+            "chip_count": 3
+          },
+          {
+            "run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+            "data_current": "false",
+            "has_status_label": true,
+            "source_text": "데이터셋",
+            "source_has_hangul": true,
+            "time_text": "2026-11-06 16:41",
+            "expected_kst": "2026-11-06 16:41",
+            "time_ok": true,
+            "report_text": "보고서: 1894년 조선의 주요 사건과 발생 원인",
+            "report_ok": true,
+            "hex32": [],
+            "raw_status_words": [],
+            "has_current_chip": false,
+            "chip_count": 3
+          }
+        ]
+      }
+    },
+    {
+      "name": "C3 상세 보기와 목록 복귀",
+      "passed": true,
+      "measured": {
+        "detail_run_id": "05f7695ed6a54f018bea6319a1ca790d",
+        "detail_shows_full_id": true,
+        "ids_after_back": [
+          "05f7695ed6a54f018bea6319a1ca790d",
+          "6d0214c0c03140be840a4508e11b4330",
+          "9aa1aeeb5b0c4724b0e435563f6a5c76"
+        ],
+        "same_as_before": true
+      }
+    },
+    {
+      "name": "C4 재생 시작과 실시간 복귀",
+      "passed": true,
+      "measured": {
+        "popup_hidden": true,
+        "drawer_open": true,
+        "subject_text": "기록 재생\n1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?\n완료 · 2026-11-06 16:41",
+        "replay_status": "읽기 전용 기록 · 일시정지",
+        "banner_visible": true,
+        "banner_text": "읽기 전용 재생 · 입력 보존 · 실행 변경 없음\n실시간 복귀",
+        "archive_get_count": 1,
+        "mode_after_return": "live",
+        "banner_count_after": 0
+      }
+    },
+    {
+      "name": "C5 재생 중 새로고침 복원",
+      "passed": true,
+      "measured": {
+        "mode": "replay",
+        "run_id_restored": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+        "timeline_reopened_by_script": false,
+        "session_storage": {
+          "village-record-replay": "{\"runId\":\"9aa1aeeb5b0c4724b0e435563f6a5c76\",\"at\":0}"
+        },
+        "session_storage_keys_after_live": 0
+      }
+    },
+    {
+      "name": "C6 레이아웃 1440x900",
+      "passed": true,
+      "measured": {
+        "fails": [],
+        "overflow_initial": {
+          "scrollWidth": 1440,
+          "innerWidth": 1440,
+          "ok": true
+        },
+        "timeline_live": {
+          "subject_mode": "live",
+          "subject_run_id_ok": true,
+          "subject_x": {
+            "left": 16,
+            "right": 1351,
+            "vw": 1440,
+            "inside": true
+          },
+          "overflow": {
+            "scrollWidth": 1440,
+            "innerWidth": 1440,
+            "ok": true
+          },
+          "close_btn": {
+            "x": 1363,
+            "y": 553,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "replay_live": {
+            "x": 226.59375,
+            "y": 588,
+            "w": 85.296875,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "scrubber_present": true,
+          "track_before": {
+            "top": 0,
+            "sh": 384,
+            "ch": 184
+          },
+          "track_after": {
+            "top": 200,
+            "sh": 384,
+            "ch": 184
+          },
+          "controls_after_scroll": {
+            "replay-play": {
+              "x": 95.296875,
+              "y": 588,
+              "w": 46,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "replay-live": {
+              "x": 226.59375,
+              "y": 588,
+              "w": 85.296875,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "timeline-scrubber": {
+              "x": 126,
+              "y": 659,
+              "w": 1255,
+              "h": 19,
+              "inView": true,
+              "hit": true,
+              "top": "INPUT."
+            }
+          },
+          "close_btn_after_scroll": {
+            "x": 1363,
+            "y": 553,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "overflow_after_scroll": {
+            "scrollWidth": 1440,
+            "innerWidth": 1440,
+            "ok": true
+          },
+          "fails": []
+        },
+        "history": {
+          "overflow": {
+            "scrollWidth": 1440,
+            "innerWidth": 1440,
+            "ok": true
+          },
+          "popup_rect": {
+            "left": 280,
+            "right": 1160,
+            "top": 72,
+            "bottom": 653.515625
+          },
+          "body": {
+            "sw": 878,
+            "cw": 878,
+            "ok": true
+          },
+          "items": [
+            {
+              "run_id": "05f7695ed6a54f018bea6319a1ca790d",
+              "rect": {
+                "left": 307,
+                "right": 1133,
+                "w": 826
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 307,
+                "y": 252.171875,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 418.84375,
+                "y": 252.171875,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 23.1875,
+                "lineHeight": 23.2,
+                "lines": 1,
+                "clamped": true,
+                "truncated": false
+              }
+            },
+            {
+              "run_id": "6d0214c0c03140be840a4508e11b4330",
+              "rect": {
+                "left": 307,
+                "right": 1133,
+                "w": 826
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 307,
+                "y": 409.34375,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 418.84375,
+                "y": 409.34375,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 23.1875,
+                "lineHeight": 23.2,
+                "lines": 1,
+                "clamped": true,
+                "truncated": false
+              }
+            },
+            {
+              "run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+              "rect": {
+                "left": 307,
+                "right": 1133,
+                "w": 826
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 307,
+                "y": 566.515625,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 418.84375,
+                "y": 566.515625,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 23.1875,
+                "lineHeight": 23.2,
+                "lines": 1,
+                "clamped": true,
+                "truncated": false
+              }
+            }
+          ],
+          "fails": []
+        },
+        "replay": {
+          "subject_mode": "replay",
+          "subject_run_id_ok": true,
+          "subject_x": {
+            "left": 16,
+            "right": 1351,
+            "vw": 1440,
+            "inside": true
+          },
+          "overflow": {
+            "scrollWidth": 1440,
+            "innerWidth": 1440,
+            "ok": true
+          },
+          "close_btn": {
+            "x": 1363,
+            "y": 553,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "replay_live": {
+            "x": 226.59375,
+            "y": 588,
+            "w": 85.296875,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "scrubber_present": true,
+          "track_before": {
+            "top": 0,
+            "sh": 384,
+            "ch": 184
+          },
+          "track_after": {
+            "top": 200,
+            "sh": 384,
+            "ch": 184
+          },
+          "controls_after_scroll": {
+            "replay-play": {
+              "x": 95.296875,
+              "y": 588,
+              "w": 46,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "replay-live": {
+              "x": 226.59375,
+              "y": 588,
+              "w": 85.296875,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "timeline-scrubber": {
+              "x": 126,
+              "y": 659,
+              "w": 1255,
+              "h": 19,
+              "inView": true,
+              "hit": true,
+              "top": "INPUT."
+            }
+          },
+          "close_btn_after_scroll": {
+            "x": 1363,
+            "y": 553,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "overflow_after_scroll": {
+            "scrollWidth": 1440,
+            "innerWidth": 1440,
+            "ok": true
+          },
+          "fails": []
+        }
+      }
+    },
+    {
+      "name": "C6 레이아웃 1920x1080",
+      "passed": true,
+      "measured": {
+        "fails": [],
+        "overflow_initial": {
+          "scrollWidth": 1920,
+          "innerWidth": 1920,
+          "ok": true
+        },
+        "timeline_live": {
+          "subject_mode": "live",
+          "subject_run_id_ok": true,
+          "subject_x": {
+            "left": 16,
+            "right": 1831,
+            "vw": 1920,
+            "inside": true
+          },
+          "overflow": {
+            "scrollWidth": 1920,
+            "innerWidth": 1920,
+            "ok": true
+          },
+          "close_btn": {
+            "x": 1843,
+            "y": 733,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "replay_live": {
+            "x": 226.59375,
+            "y": 768,
+            "w": 85.296875,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "scrubber_present": true,
+          "track_before": {
+            "top": 0,
+            "sh": 384,
+            "ch": 184
+          },
+          "track_after": {
+            "top": 200,
+            "sh": 384,
+            "ch": 184
+          },
+          "controls_after_scroll": {
+            "replay-play": {
+              "x": 95.296875,
+              "y": 768,
+              "w": 46,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "replay-live": {
+              "x": 226.59375,
+              "y": 768,
+              "w": 85.296875,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "timeline-scrubber": {
+              "x": 126,
+              "y": 839,
+              "w": 1735,
+              "h": 19,
+              "inView": true,
+              "hit": true,
+              "top": "INPUT."
+            }
+          },
+          "close_btn_after_scroll": {
+            "x": 1843,
+            "y": 733,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "overflow_after_scroll": {
+            "scrollWidth": 1920,
+            "innerWidth": 1920,
+            "ok": true
+          },
+          "fails": []
+        },
+        "history": {
+          "overflow": {
+            "scrollWidth": 1920,
+            "innerWidth": 1920,
+            "ok": true
+          },
+          "popup_rect": {
+            "left": 520,
+            "right": 1400,
+            "top": 72,
+            "bottom": 653.515625
+          },
+          "body": {
+            "sw": 878,
+            "cw": 878,
+            "ok": true
+          },
+          "items": [
+            {
+              "run_id": "05f7695ed6a54f018bea6319a1ca790d",
+              "rect": {
+                "left": 547,
+                "right": 1373,
+                "w": 826
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 547,
+                "y": 252.171875,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 658.84375,
+                "y": 252.171875,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 23.1875,
+                "lineHeight": 23.2,
+                "lines": 1,
+                "clamped": true,
+                "truncated": false
+              }
+            },
+            {
+              "run_id": "6d0214c0c03140be840a4508e11b4330",
+              "rect": {
+                "left": 547,
+                "right": 1373,
+                "w": 826
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 547,
+                "y": 409.34375,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 658.84375,
+                "y": 409.34375,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 23.1875,
+                "lineHeight": 23.2,
+                "lines": 1,
+                "clamped": true,
+                "truncated": false
+              }
+            },
+            {
+              "run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+              "rect": {
+                "left": 547,
+                "right": 1373,
+                "w": 826
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 547,
+                "y": 566.515625,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 658.84375,
+                "y": 566.515625,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 23.1875,
+                "lineHeight": 23.2,
+                "lines": 1,
+                "clamped": true,
+                "truncated": false
+              }
+            }
+          ],
+          "fails": []
+        },
+        "replay": {
+          "subject_mode": "replay",
+          "subject_run_id_ok": true,
+          "subject_x": {
+            "left": 16,
+            "right": 1831,
+            "vw": 1920,
+            "inside": true
+          },
+          "overflow": {
+            "scrollWidth": 1920,
+            "innerWidth": 1920,
+            "ok": true
+          },
+          "close_btn": {
+            "x": 1843,
+            "y": 733,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "replay_live": {
+            "x": 226.59375,
+            "y": 768,
+            "w": 85.296875,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "scrubber_present": true,
+          "track_before": {
+            "top": 0,
+            "sh": 384,
+            "ch": 184
+          },
+          "track_after": {
+            "top": 200,
+            "sh": 384,
+            "ch": 184
+          },
+          "controls_after_scroll": {
+            "replay-play": {
+              "x": 95.296875,
+              "y": 768,
+              "w": 46,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "replay-live": {
+              "x": 226.59375,
+              "y": 768,
+              "w": 85.296875,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "timeline-scrubber": {
+              "x": 126,
+              "y": 839,
+              "w": 1735,
+              "h": 19,
+              "inView": true,
+              "hit": true,
+              "top": "INPUT."
+            }
+          },
+          "close_btn_after_scroll": {
+            "x": 1843,
+            "y": 733,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "overflow_after_scroll": {
+            "scrollWidth": 1920,
+            "innerWidth": 1920,
+            "ok": true
+          },
+          "fails": []
+        }
+      }
+    },
+    {
+      "name": "C6 레이아웃 390x844",
+      "passed": true,
+      "measured": {
+        "fails": [],
+        "overflow_initial": {
+          "scrollWidth": 390,
+          "innerWidth": 390,
+          "ok": true
+        },
+        "timeline_live": {
+          "subject_mode": "live",
+          "subject_run_id_ok": true,
+          "subject_x": {
+            "left": 8,
+            "right": 309,
+            "vw": 390,
+            "inside": true
+          },
+          "overflow": {
+            "scrollWidth": 390,
+            "innerWidth": 390,
+            "ok": true
+          },
+          "close_btn": {
+            "x": 321,
+            "y": 523.75,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "replay_live": {
+            "x": 280.25,
+            "y": 563.09375,
+            "w": 86.75,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "scrubber_present": true,
+          "track_before": {
+            "top": 0,
+            "sh": 384,
+            "ch": 134
+          },
+          "track_after": {
+            "top": 250,
+            "sh": 384,
+            "ch": 134
+          },
+          "controls_after_scroll": {
+            "replay-play": {
+              "x": 98.75,
+              "y": 563.09375,
+              "w": 86.75,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "replay-live": {
+              "x": 280.25,
+              "y": 563.09375,
+              "w": 86.75,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "timeline-scrubber": {
+              "x": 84,
+              "y": 653.09375,
+              "w": 255,
+              "h": 19,
+              "inView": true,
+              "hit": true,
+              "top": "INPUT."
+            }
+          },
+          "close_btn_after_scroll": {
+            "x": 321,
+            "y": 523.75,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "overflow_after_scroll": {
+            "scrollWidth": 390,
+            "innerWidth": 390,
+            "ok": true
+          },
+          "fails": []
+        },
+        "history": {
+          "overflow": {
+            "scrollWidth": 390,
+            "innerWidth": 390,
+            "ok": true
+          },
+          "popup_rect": {
+            "left": 12,
+            "right": 378,
+            "top": 70,
+            "bottom": 658.703125
+          },
+          "body": {
+            "sw": 364,
+            "cw": 364,
+            "ok": true
+          },
+          "items": [
+            {
+              "run_id": "05f7695ed6a54f018bea6319a1ca790d",
+              "rect": {
+                "left": 29,
+                "right": 361,
+                "w": 332
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 29,
+                "y": 238.171875,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 140.84375,
+                "y": 238.171875,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 23.1875,
+                "lineHeight": 23.2,
+                "lines": 1,
+                "clamped": true,
+                "truncated": false
+              }
+            },
+            {
+              "run_id": "6d0214c0c03140be840a4508e11b4330",
+              "rect": {
+                "left": 29,
+                "right": 361,
+                "w": 332
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 29,
+                "y": 395.34375,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 140.84375,
+                "y": 395.34375,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 23.1875,
+                "lineHeight": 23.2,
+                "lines": 1,
+                "clamped": true,
+                "truncated": false
+              }
+            },
+            {
+              "run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+              "rect": {
+                "left": 29,
+                "right": 361,
+                "w": 332
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 29,
+                "y": 575.703125,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 140.84375,
+                "y": 575.703125,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 46.375,
+                "lineHeight": 23.2,
+                "lines": 2,
+                "clamped": true,
+                "truncated": false
+              }
+            }
+          ],
+          "fails": []
+        },
+        "replay": {
+          "subject_mode": "replay",
+          "subject_run_id_ok": true,
+          "subject_x": {
+            "left": 8,
+            "right": 309,
+            "vw": 390,
+            "inside": true
+          },
+          "overflow": {
+            "scrollWidth": 390,
+            "innerWidth": 390,
+            "ok": true
+          },
+          "close_btn": {
+            "x": 321,
+            "y": 531.84375,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "replay_live": {
+            "x": 280.25,
+            "y": 579.28125,
+            "w": 86.75,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "scrubber_present": true,
+          "track_before": {
+            "top": 0,
+            "sh": 384,
+            "ch": 118
+          },
+          "track_after": {
+            "top": 266,
+            "sh": 384,
+            "ch": 118
+          },
+          "controls_after_scroll": {
+            "replay-play": {
+              "x": 98.75,
+              "y": 579.28125,
+              "w": 86.75,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "replay-live": {
+              "x": 280.25,
+              "y": 579.28125,
+              "w": 86.75,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "timeline-scrubber": {
+              "x": 84,
+              "y": 669.28125,
+              "w": 255,
+              "h": 19,
+              "inView": true,
+              "hit": true,
+              "top": "INPUT."
+            }
+          },
+          "close_btn_after_scroll": {
+            "x": 321,
+            "y": 531.84375,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "overflow_after_scroll": {
+            "scrollWidth": 390,
+            "innerWidth": 390,
+            "ok": true
+          },
+          "fails": []
+        }
+      }
+    },
+    {
+      "name": "C6 레이아웃 844x390",
+      "passed": true,
+      "measured": {
+        "fails": [],
+        "overflow_initial": {
+          "scrollWidth": 844,
+          "innerWidth": 844,
+          "ok": true
+        },
+        "timeline_live": {
+          "subject_mode": "live",
+          "subject_run_id_ok": true,
+          "subject_x": {
+            "left": 16,
+            "right": 761,
+            "vw": 844,
+            "inside": true
+          },
+          "overflow": {
+            "scrollWidth": 844,
+            "innerWidth": 844,
+            "ok": true
+          },
+          "close_btn": {
+            "x": 773,
+            "y": 219,
+            "w": 40,
+            "h": 25,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "replay_live": {
+            "x": 189.03125,
+            "y": 247,
+            "w": 74.015625,
+            "h": 25,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "scrubber_present": true,
+          "track_before": {
+            "top": 0,
+            "sh": 384,
+            "ch": 66
+          },
+          "track_after": {
+            "top": 318,
+            "sh": 384,
+            "ch": 66
+          },
+          "controls_after_scroll": {
+            "replay-play": {
+              "x": 82.015625,
+              "y": 247,
+              "w": 38,
+              "h": 25,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "replay-live": {
+              "x": 189.03125,
+              "y": 247,
+              "w": 74.015625,
+              "h": 25,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "timeline-scrubber": {
+              "x": 126,
+              "y": 275,
+              "w": 659,
+              "h": 19,
+              "inView": true,
+              "hit": true,
+              "top": "INPUT."
+            }
+          },
+          "close_btn_after_scroll": {
+            "x": 773,
+            "y": 219,
+            "w": 40,
+            "h": 25,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "overflow_after_scroll": {
+            "scrollWidth": 844,
+            "innerWidth": 844,
+            "ok": true
+          },
+          "fails": []
+        },
+        "history": {
+          "overflow": {
+            "scrollWidth": 844,
+            "innerWidth": 844,
+            "ok": true
+          },
+          "popup_rect": {
+            "left": 50,
+            "right": 794,
+            "top": 72,
+            "bottom": 293
+          },
+          "body": {
+            "sw": 742,
+            "cw": 742,
+            "ok": true
+          },
+          "items": [
+            {
+              "run_id": "05f7695ed6a54f018bea6319a1ca790d",
+              "rect": {
+                "left": 65,
+                "right": 779,
+                "w": 714
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 65,
+                "y": 218.171875,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 176.84375,
+                "y": 218.171875,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 23.1875,
+                "lineHeight": 23.2,
+                "lines": 1,
+                "clamped": true,
+                "truncated": false
+              }
+            },
+            {
+              "run_id": "6d0214c0c03140be840a4508e11b4330",
+              "rect": {
+                "left": 65,
+                "right": 779,
+                "w": 714
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 65,
+                "y": 234.34375,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 176.84375,
+                "y": 234.34375,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 23.1875,
+                "lineHeight": 23.2,
+                "lines": 1,
+                "clamped": true,
+                "truncated": false
+              }
+            },
+            {
+              "run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+              "rect": {
+                "left": 65,
+                "right": 779,
+                "w": 714
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 65,
+                "y": 228.515625,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 176.84375,
+                "y": 228.515625,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 23.1875,
+                "lineHeight": 23.2,
+                "lines": 1,
+                "clamped": true,
+                "truncated": false
+              }
+            }
+          ],
+          "fails": []
+        },
+        "replay": {
+          "subject_mode": "replay",
+          "subject_run_id_ok": true,
+          "subject_x": {
+            "left": 16,
+            "right": 761,
+            "vw": 844,
+            "inside": true
+          },
+          "overflow": {
+            "scrollWidth": 844,
+            "innerWidth": 844,
+            "ok": true
+          },
+          "close_btn": {
+            "x": 773,
+            "y": 219,
+            "w": 40,
+            "h": 25,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "replay_live": {
+            "x": 189.03125,
+            "y": 247,
+            "w": 74.015625,
+            "h": 25,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "scrubber_present": true,
+          "track_before": {
+            "top": 0,
+            "sh": 384,
+            "ch": 66
+          },
+          "track_after": {
+            "top": 318,
+            "sh": 384,
+            "ch": 66
+          },
+          "controls_after_scroll": {
+            "replay-play": {
+              "x": 82.015625,
+              "y": 247,
+              "w": 38,
+              "h": 25,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "replay-live": {
+              "x": 189.03125,
+              "y": 247,
+              "w": 74.015625,
+              "h": 25,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "timeline-scrubber": {
+              "x": 126,
+              "y": 275,
+              "w": 659,
+              "h": 19,
+              "inView": true,
+              "hit": true,
+              "top": "INPUT."
+            }
+          },
+          "close_btn_after_scroll": {
+            "x": 773,
+            "y": 219,
+            "w": 40,
+            "h": 25,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "overflow_after_scroll": {
+            "scrollWidth": 844,
+            "innerWidth": 844,
+            "ok": true
+          },
+          "fails": []
+        }
+      }
+    },
+    {
+      "name": "C6 레이아웃 1000x700",
+      "passed": true,
+      "measured": {
+        "fails": [],
+        "overflow_initial": {
+          "scrollWidth": 1000,
+          "innerWidth": 1000,
+          "ok": true
+        },
+        "timeline_live": {
+          "subject_mode": "live",
+          "subject_run_id_ok": true,
+          "subject_x": {
+            "left": 16,
+            "right": 911,
+            "vw": 1000,
+            "inside": true
+          },
+          "overflow": {
+            "scrollWidth": 1000,
+            "innerWidth": 1000,
+            "ok": true
+          },
+          "close_btn": {
+            "x": 923,
+            "y": 433,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "replay_live": {
+            "x": 226.59375,
+            "y": 468,
+            "w": 85.296875,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "scrubber_present": true,
+          "track_before": {
+            "top": 0,
+            "sh": 384,
+            "ch": 140
+          },
+          "track_after": {
+            "top": 244,
+            "sh": 384,
+            "ch": 140
+          },
+          "controls_after_scroll": {
+            "replay-play": {
+              "x": 95.296875,
+              "y": 468,
+              "w": 46,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "replay-live": {
+              "x": 226.59375,
+              "y": 468,
+              "w": 85.296875,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "timeline-scrubber": {
+              "x": 126,
+              "y": 503,
+              "w": 815,
+              "h": 19,
+              "inView": true,
+              "hit": true,
+              "top": "INPUT."
+            }
+          },
+          "close_btn_after_scroll": {
+            "x": 923,
+            "y": 433,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "overflow_after_scroll": {
+            "scrollWidth": 1000,
+            "innerWidth": 1000,
+            "ok": true
+          },
+          "fails": []
+        },
+        "history": {
+          "overflow": {
+            "scrollWidth": 1000,
+            "innerWidth": 1000,
+            "ok": true
+          },
+          "popup_rect": {
+            "left": 60,
+            "right": 940,
+            "top": 72,
+            "bottom": 578
+          },
+          "body": {
+            "sw": 878,
+            "cw": 878,
+            "ok": true
+          },
+          "items": [
+            {
+              "run_id": "05f7695ed6a54f018bea6319a1ca790d",
+              "rect": {
+                "left": 87,
+                "right": 913,
+                "w": 826
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 87,
+                "y": 252.171875,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 198.84375,
+                "y": 252.171875,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 23.1875,
+                "lineHeight": 23.2,
+                "lines": 1,
+                "clamped": true,
+                "truncated": false
+              }
+            },
+            {
+              "run_id": "6d0214c0c03140be840a4508e11b4330",
+              "rect": {
+                "left": 87,
+                "right": 913,
+                "w": 826
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 87,
+                "y": 409.34375,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 198.84375,
+                "y": 409.34375,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 23.1875,
+                "lineHeight": 23.2,
+                "lines": 1,
+                "clamped": true,
+                "truncated": false
+              }
+            },
+            {
+              "run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+              "rect": {
+                "left": 87,
+                "right": 913,
+                "w": 826
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 87,
+                "y": 518.515625,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 198.84375,
+                "y": 518.515625,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 23.1875,
+                "lineHeight": 23.2,
+                "lines": 1,
+                "clamped": true,
+                "truncated": false
+              }
+            }
+          ],
+          "fails": []
+        },
+        "replay": {
+          "subject_mode": "replay",
+          "subject_run_id_ok": true,
+          "subject_x": {
+            "left": 16,
+            "right": 911,
+            "vw": 1000,
+            "inside": true
+          },
+          "overflow": {
+            "scrollWidth": 1000,
+            "innerWidth": 1000,
+            "ok": true
+          },
+          "close_btn": {
+            "x": 923,
+            "y": 433,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "replay_live": {
+            "x": 226.59375,
+            "y": 468,
+            "w": 85.296875,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "scrubber_present": true,
+          "track_before": {
+            "top": 0,
+            "sh": 384,
+            "ch": 140
+          },
+          "track_after": {
+            "top": 244,
+            "sh": 384,
+            "ch": 140
+          },
+          "controls_after_scroll": {
+            "replay-play": {
+              "x": 95.296875,
+              "y": 468,
+              "w": 46,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "replay-live": {
+              "x": 226.59375,
+              "y": 468,
+              "w": 85.296875,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "timeline-scrubber": {
+              "x": 126,
+              "y": 503,
+              "w": 815,
+              "h": 19,
+              "inView": true,
+              "hit": true,
+              "top": "INPUT."
+            }
+          },
+          "close_btn_after_scroll": {
+            "x": 923,
+            "y": 433,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "overflow_after_scroll": {
+            "scrollWidth": 1000,
+            "innerWidth": 1000,
+            "ok": true
+          },
+          "fails": []
+        }
+      }
+    },
+    {
+      "name": "C7 긴 글 390x844",
+      "passed": true,
+      "measured": {
+        "fails": [],
+        "overflow_initial": {
+          "scrollWidth": 390,
+          "innerWidth": 390,
+          "ok": true
+        },
+        "lengths": {
+          "current_question": 400,
+          "other_question": 150,
+          "title": 200
+        },
+        "timeline_live": {
+          "subject_mode": "live",
+          "subject_run_id_ok": true,
+          "subject_x": {
+            "left": 8,
+            "right": 309,
+            "vw": 390,
+            "inside": true
+          },
+          "overflow": {
+            "scrollWidth": 390,
+            "innerWidth": 390,
+            "ok": true
+          },
+          "close_btn": {
+            "x": 321,
+            "y": 531.84375,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "replay_live": {
+            "x": 280.25,
+            "y": 579.28125,
+            "w": 86.75,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "scrubber_present": true,
+          "track_before": {
+            "top": 0,
+            "sh": 384,
+            "ch": 118
+          },
+          "track_after": {
+            "top": 266,
+            "sh": 384,
+            "ch": 118
+          },
+          "controls_after_scroll": {
+            "replay-play": {
+              "x": 98.75,
+              "y": 579.28125,
+              "w": 86.75,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "replay-live": {
+              "x": 280.25,
+              "y": 579.28125,
+              "w": 86.75,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "timeline-scrubber": {
+              "x": 84,
+              "y": 669.28125,
+              "w": 255,
+              "h": 19,
+              "inView": true,
+              "hit": true,
+              "top": "INPUT."
+            }
+          },
+          "close_btn_after_scroll": {
+            "x": 321,
+            "y": 531.84375,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "overflow_after_scroll": {
+            "scrollWidth": 390,
+            "innerWidth": 390,
+            "ok": true
+          },
+          "fails": []
+        },
+        "subject_text_has_long_question": true,
+        "history": {
+          "overflow": {
+            "scrollWidth": 390,
+            "innerWidth": 390,
+            "ok": true
+          },
+          "popup_rect": {
+            "left": 12,
+            "right": 378,
+            "top": 70,
+            "bottom": 722
+          },
+          "body": {
+            "sw": 364,
+            "cw": 364,
+            "ok": true
+          },
+          "items": [
+            {
+              "run_id": "05f7695ed6a54f018bea6319a1ca790d",
+              "rect": {
+                "left": 29,
+                "right": 361,
+                "w": 332
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 29,
+                "y": 363.3125,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 140.84375,
+                "y": 363.3125,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 46.375,
+                "lineHeight": 23.2,
+                "lines": 2,
+                "clamped": true,
+                "truncated": true
+              }
+            },
+            {
+              "run_id": "6d0214c0c03140be840a4508e11b4330",
+              "rect": {
+                "left": 29,
+                "right": 361,
+                "w": 332
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 29,
+                "y": 520.484375,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 140.84375,
+                "y": 520.484375,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 23.1875,
+                "lineHeight": 23.2,
+                "lines": 1,
+                "clamped": true,
+                "truncated": false
+              }
+            },
+            {
+              "run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+              "rect": {
+                "left": 29,
+                "right": 361,
+                "w": 332
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 29,
+                "y": 662.796875,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 140.84375,
+                "y": 662.796875,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 46.375,
+                "lineHeight": 23.2,
+                "lines": 2,
+                "clamped": true,
+                "truncated": true
+              }
+            }
+          ],
+          "fails": []
+        },
+        "replay_other": {
+          "subject_mode": "replay",
+          "subject_run_id_ok": true,
+          "subject_x": {
+            "left": 8,
+            "right": 309,
+            "vw": 390,
+            "inside": true
+          },
+          "overflow": {
+            "scrollWidth": 390,
+            "innerWidth": 390,
+            "ok": true
+          },
+          "close_btn": {
+            "x": 321,
+            "y": 531.84375,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "replay_live": {
+            "x": 280.25,
+            "y": 579.28125,
+            "w": 86.75,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "scrubber_present": true,
+          "track_before": {
+            "top": 0,
+            "sh": 384,
+            "ch": 118
+          },
+          "track_after": {
+            "top": 266,
+            "sh": 384,
+            "ch": 118
+          },
+          "controls_after_scroll": {
+            "replay-play": {
+              "x": 98.75,
+              "y": 579.28125,
+              "w": 86.75,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "replay-live": {
+              "x": 280.25,
+              "y": 579.28125,
+              "w": 86.75,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "timeline-scrubber": {
+              "x": 84,
+              "y": 669.28125,
+              "w": 255,
+              "h": 19,
+              "inView": true,
+              "hit": true,
+              "top": "INPUT."
+            }
+          },
+          "close_btn_after_scroll": {
+            "x": 321,
+            "y": 531.84375,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "overflow_after_scroll": {
+            "scrollWidth": 390,
+            "innerWidth": 390,
+            "ok": true
+          },
+          "fails": []
+        }
+      }
+    },
+    {
+      "name": "C7 긴 글 1440x900",
+      "passed": true,
+      "measured": {
+        "fails": [],
+        "overflow_initial": {
+          "scrollWidth": 1440,
+          "innerWidth": 1440,
+          "ok": true
+        },
+        "lengths": {
+          "current_question": 400,
+          "other_question": 150,
+          "title": 200
+        },
+        "timeline_live": {
+          "subject_mode": "live",
+          "subject_run_id_ok": true,
+          "subject_x": {
+            "left": 16,
+            "right": 1351,
+            "vw": 1440,
+            "inside": true
+          },
+          "overflow": {
+            "scrollWidth": 1440,
+            "innerWidth": 1440,
+            "ok": true
+          },
+          "close_btn": {
+            "x": 1363,
+            "y": 553,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "replay_live": {
+            "x": 226.59375,
+            "y": 588,
+            "w": 85.296875,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "scrubber_present": true,
+          "track_before": {
+            "top": 0,
+            "sh": 384,
+            "ch": 184
+          },
+          "track_after": {
+            "top": 200,
+            "sh": 384,
+            "ch": 184
+          },
+          "controls_after_scroll": {
+            "replay-play": {
+              "x": 95.296875,
+              "y": 588,
+              "w": 46,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "replay-live": {
+              "x": 226.59375,
+              "y": 588,
+              "w": 85.296875,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "timeline-scrubber": {
+              "x": 126,
+              "y": 659,
+              "w": 1255,
+              "h": 19,
+              "inView": true,
+              "hit": true,
+              "top": "INPUT."
+            }
+          },
+          "close_btn_after_scroll": {
+            "x": 1363,
+            "y": 553,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "overflow_after_scroll": {
+            "scrollWidth": 1440,
+            "innerWidth": 1440,
+            "ok": true
+          },
+          "fails": []
+        },
+        "subject_text_has_long_question": true,
+        "history": {
+          "overflow": {
+            "scrollWidth": 1440,
+            "innerWidth": 1440,
+            "ok": true
+          },
+          "popup_rect": {
+            "left": 280,
+            "right": 1160,
+            "top": 72,
+            "bottom": 778
+          },
+          "body": {
+            "sw": 878,
+            "cw": 878,
+            "ok": true
+          },
+          "items": [
+            {
+              "run_id": "05f7695ed6a54f018bea6319a1ca790d",
+              "rect": {
+                "left": 307,
+                "right": 1133,
+                "w": 826
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 307,
+                "y": 316.140625,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 418.84375,
+                "y": 316.140625,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 46.375,
+                "lineHeight": 23.2,
+                "lines": 2,
+                "clamped": true,
+                "truncated": true
+              }
+            },
+            {
+              "run_id": "6d0214c0c03140be840a4508e11b4330",
+              "rect": {
+                "left": 307,
+                "right": 1133,
+                "w": 826
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 307,
+                "y": 473.3125,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 418.84375,
+                "y": 473.3125,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 23.1875,
+                "lineHeight": 23.2,
+                "lines": 1,
+                "clamped": true,
+                "truncated": false
+              }
+            },
+            {
+              "run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+              "rect": {
+                "left": 307,
+                "right": 1133,
+                "w": 826
+              },
+              "inside_popup_x": true,
+              "inside_viewport_x": true,
+              "detail_btn": {
+                "x": 307,
+                "y": 694.453125,
+                "w": 103.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "replay_btn": {
+                "x": 418.84375,
+                "y": 694.453125,
+                "w": 89.84375,
+                "h": 42,
+                "inView": true,
+                "hit": true,
+                "top": "BUTTON."
+              },
+              "question": {
+                "height": 46.375,
+                "lineHeight": 23.2,
+                "lines": 2,
+                "clamped": true,
+                "truncated": true
+              }
+            }
+          ],
+          "fails": []
+        },
+        "replay_other": {
+          "subject_mode": "replay",
+          "subject_run_id_ok": true,
+          "subject_x": {
+            "left": 16,
+            "right": 1351,
+            "vw": 1440,
+            "inside": true
+          },
+          "overflow": {
+            "scrollWidth": 1440,
+            "innerWidth": 1440,
+            "ok": true
+          },
+          "close_btn": {
+            "x": 1363,
+            "y": 553,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "replay_live": {
+            "x": 226.59375,
+            "y": 588,
+            "w": 85.296875,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "scrubber_present": true,
+          "track_before": {
+            "top": 0,
+            "sh": 384,
+            "ch": 184
+          },
+          "track_after": {
+            "top": 200,
+            "sh": 384,
+            "ch": 184
+          },
+          "controls_after_scroll": {
+            "replay-play": {
+              "x": 95.296875,
+              "y": 588,
+              "w": 46,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "replay-live": {
+              "x": 226.59375,
+              "y": 588,
+              "w": 85.296875,
+              "h": 30,
+              "inView": true,
+              "hit": true,
+              "top": "BUTTON."
+            },
+            "timeline-scrubber": {
+              "x": 126,
+              "y": 659,
+              "w": 1255,
+              "h": 19,
+              "inView": true,
+              "hit": true,
+              "top": "INPUT."
+            }
+          },
+          "close_btn_after_scroll": {
+            "x": 1363,
+            "y": 553,
+            "w": 46,
+            "h": 30,
+            "inView": true,
+            "hit": true,
+            "top": "BUTTON."
+          },
+          "overflow_after_scroll": {
+            "scrollWidth": 1440,
+            "innerWidth": 1440,
+            "ok": true
+          },
+          "fails": []
+        }
+      }
+    },
+    {
+      "name": "C9 서랍 정리 1440x900",
+      "passed": true,
+      "measured": {
+        "fails": [],
+        "menu_buttons": [
+          "장면 도구",
+          "실행/큐",
+          "과거 기록",
+          "사건 기록",
+          "제어 도구",
+          "안내"
+        ],
+        "mode_options_count": 0,
+        "has_asset_button": 0,
+        "has_control_button": 0,
+        "request_text_in_drawer": false,
+        "has_title": true,
+        "budget_api": {
+          "attempt_count": 100,
+          "max_attempts": 100,
+          "remaining_attempts": 0,
+          "spent_usd": 0.19670855,
+          "reserved_usd": 0.0,
+          "max_usd": 2.0,
+          "input_tokens": 379871,
+          "output_tokens": 84784,
+          "unknown_count": 0
+        },
+        "popup_has_budget_block": true,
+        "popup_attempts": [
+          100,
+          100
+        ]
+      }
+    },
+    {
+      "name": "C9 서랍 정리 390x844",
+      "passed": true,
+      "measured": {
+        "fails": [],
+        "menu_buttons": [
+          "장면 도구",
+          "실행/큐",
+          "과거 기록",
+          "사건 기록",
+          "제어 도구",
+          "안내"
+        ],
+        "mode_options_count": 0,
+        "has_asset_button": 0,
+        "has_control_button": 0,
+        "request_text_in_drawer": false,
+        "has_title": true,
+        "budget_api": {
+          "attempt_count": 100,
+          "max_attempts": 100,
+          "remaining_attempts": 0,
+          "spent_usd": 0.19670855,
+          "reserved_usd": 0.0,
+          "max_usd": 2.0,
+          "input_tokens": 379871,
+          "output_tokens": 84784,
+          "unknown_count": 0
+        },
+        "popup_has_budget_block": true,
+        "popup_attempts": [
+          100,
+          100
+        ]
+      }
+    },
+    {
+      "name": "C8 보호 검사",
+      "passed": true,
+      "measured": {
+        "total_requests": 374,
+        "non_get_requests": [],
+        "aborted_non_get_by_route": [],
+        "console_errors": [],
+        "pageerrors": [],
+        "live_8768_unchanged": true,
+        "live_before": {
+          "runs": [
+            [
+              "05f7695ed6a54f018bea6319a1ca790d",
+              "completed",
+              "2026-11-07T11:49:13.178146+00:00"
+            ],
+            [
+              "6d0214c0c03140be840a4508e11b4330",
+              "blocked",
+              "2026-11-07T11:45:16.141090+00:00"
+            ],
+            [
+              "9aa1aeeb5b0c4724b0e435563f6a5c76",
+              "completed",
+              "2026-11-06T07:42:18.270229+00:00"
+            ]
+          ],
+          "attempt_count": 100
+        },
+        "live_after": {
+          "runs": [
+            [
+              "05f7695ed6a54f018bea6319a1ca790d",
+              "completed",
+              "2026-11-07T11:49:13.178146+00:00"
+            ],
+            [
+              "6d0214c0c03140be840a4508e11b4330",
+              "blocked",
+              "2026-11-07T11:45:16.141090+00:00"
+            ],
+            [
+              "9aa1aeeb5b0c4724b0e435563f6a5c76",
+              "completed",
+              "2026-11-06T07:42:18.270229+00:00"
+            ]
+          ],
+          "attempt_count": 100
+        },
+        "dist_file_count": 25,
+        "dist_baseline_count": 25,
+        "dist_diff": {
+          "changed": [],
+          "missing": [],
+          "added": []
+        },
+        "dist_aggregate_note": "파일별 SHA-256 비교"
+      }
+    }
+  ],
+  "screenshots": [
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C1_타임라인_실시간_1440x900.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C2_과거기록_목록_1440x900.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C3_상세에서_목록복귀_1440x900.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C4_재생상태_1440x900.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C5_새로고침후_재생복원_1440x900.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C6_1440x900_timeline-live.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C6_1440x900_history-list.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C6_1440x900_replay-state.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C6_1920x1080_timeline-live.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C6_1920x1080_history-list.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C6_1920x1080_replay-state.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C6_390x844_timeline-live.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C6_390x844_history-list.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C6_390x844_replay-state.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C6_844x390_timeline-live.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C6_844x390_history-list.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C6_844x390_replay-state.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C6_1000x700_timeline-live.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C6_1000x700_history-list.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C6_1000x700_replay-state.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C7_390x844_긴글_timeline-live.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C7_390x844_긴글_history-list.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C7_390x844_긴글_replay-state.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C7_1440x900_긴글_timeline-live.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C7_1440x900_긴글_history-list.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C7_1440x900_긴글_replay-state.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C9_1440x900_서랍_열림.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C9_1440x900_실행큐_호출예산.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C9_390x844_서랍_열림.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\화면개편\\후보_실사용_서랍정리\\C9_390x844_실행큐_호출예산.png"
+  ],
+  "summary": {
+    "total": 15,
+    "failed": []
+  }
+}

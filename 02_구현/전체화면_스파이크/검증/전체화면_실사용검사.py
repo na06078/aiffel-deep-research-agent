@@ -266,13 +266,13 @@ def main(label):
             assert page.get_by_test_id("command-input").input_value() == "아직 보내지 않은 지시"
             passed("장면 메뉴·이동/작업/운반·상세 팝업·초안 보존·대역 무호출")
             page.get_by_test_id("command-input").fill("")
-            page.get_by_test_id("menu-toggle").click()
-            page.get_by_test_id("drawer").get_by_role(
-                "button", name="실행 제어", exact=True
-            ).click()
+            page.evaluate("location.hash = '/control'")
             page.wait_for_url("**/#/control")
+            page.wait_for_function(
+                'document.querySelector("[data-testid=command-input]").placeholder.includes("/큐")'
+            )
             page.keyboard.press("Escape")
-            geometry("메뉴에서 모드 변경")
+            geometry("주소 해시로 모드 변경")
             a = "전체 화면 A: 이전 응답은 기다리게 합니다."
             submit(a)
             state = wait_state(base, lambda s: len(waits(s)) == 4, "A 조사 대기")
@@ -307,7 +307,7 @@ def main(label):
             assert not selected_event["type"].startswith("model.")
             geometry("실제 코드 처리 사건")
             close_popup()
-            passed("메뉴 모드 전환·실제 조사관4 동시 대기·NPC/코드 말풍선의 원본 사건 연결")
+            passed("주소 해시 모드 전환·실제 조사관4 동시 대기·NPC/코드 말풍선의 원본 사건 연결")
             submit("/큐 전체 화면 C: 최종 제출 뒤 시작합니다.")
             wait_state(base, lambda s: len(s["queue"]) == 1, "큐 보관")
             page.get_by_test_id("bubble-planner").click()

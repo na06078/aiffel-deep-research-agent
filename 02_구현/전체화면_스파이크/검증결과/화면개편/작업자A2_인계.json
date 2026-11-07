@@ -1,0 +1,40 @@
+{
+  "files_changed_sha256": {
+    "화면/src/앱.tsx": "9809ea0d9da911bcef2e86b8d60ef1d090285a1c48b01198bbcb0e8db844424d",
+    "화면/src/앱.test.tsx": "9797e14b70d0c648f986c636fde23f84fd438f91fa37a09adaaea963c1acfff6",
+    "화면/src/실제연구표시.test.tsx": "5abc6f91b46a98f715cc7e6665491f63ed81824102bfea0f6be9f787410690de",
+    "화면/src/화면.css": "ac06409c60919a53022001abc1eab2a4012073b9cfd0ccb6a75ad9d21a6c642f",
+    "검증/전체화면_실사용검사.py": "9791717fc74f74fae21145fcb661619fffa0010910988abb46eb6fae9794b768",
+    "검증/화면개편_후보검사.py": "ea18bc769c304e7912a8aa6ba38d086e2fb847910e10f16ac8dcb7be94df08b8"
+  },
+  "red": {
+    "command": "vitest run src/실제연구표시.test.tsx src/앱.test.tsx (구현 전)",
+    "result": "4 failed | 23 passed",
+    "failing": [
+      "실제연구표시: 서랍(openai 연구)은 제목과 여섯 메뉴만... — 버튼 목록에 '에셋 실험','실행 제어'가 앞에 포함됨",
+      "실제연구표시: 서랍(test-double)... — 같은 이유",
+      "실제연구표시: 토글을 가리키던 문구는 주소 해시 안내로 바뀐다 — 장면 도구 팝업에 새 문구 없음",
+      "앱.test: 에셋 모드의 전송 시도는 주소 해시로... — 받은 값 '...메뉴에서 실행 제어로 바꿔 주세요.'"
+    ]
+  },
+  "green": {
+    "vitest": "22 files / 163 tests passed (기준 158 + 신규 5)",
+    "tsc": "exit 0",
+    "ast_parse": "두 스크립트 OK"
+  },
+  "assertions_moved": [
+    "실제연구표시.test '실제 서버 루트는...': 'real model requests 7'(실제 모델 요청 7)는 서랍의 requestLabel에 의존 → 실행/큐 팝업(drawer=false)에서 'OpenAI · 실제 모델 요청 7' 확인으로 이동",
+    "실제연구표시.test '명시적 에셋 선택...': '테스트 대역'·'실제 모델 요청 0'은 서랍에 의존 → 실행/큐 팝업의 '테스트 대역 · 실제 모델 요청 0'로 이동. '모의 응답' 배지 확인은 유지. 같은 파일 afterEach에 state.drawer=true 복원 추가"
+  ],
+  "other_changes": [
+    "화면.css: 미사용이 된 .drawer p, .mode-options 규칙 4개 삭제",
+    "전체화면_실사용검사.py: 서랍 버튼 클릭 → location.hash='/control' + URL·placeholder 대기, 로그 문구 '주소 해시'로",
+    "화면개편_후보검사.py: C9 추가(1440x900, 390x844, 캡처 C9_*_서랍_열림.png, C9_*_실행큐_호출예산.png), C8 앞에 위치, GET 전용 유지"
+  ],
+  "unverified": [
+    "두 스크립트는 실행하지 않음(ast.parse만)",
+    "C9의 실제 브라우저 동작과 캡처는 메인 세션이 후보 재빌드 후 실행해야 확인됨",
+    "전체화면_실사용검사.py의 해시 전환(placeholder 대기 포함)은 실행 미검증",
+    "dist 빌드 안 함"
+  ]
+}
