@@ -203,10 +203,13 @@ class FakeWebClient:
 
 
 class WebModel:
-    def __init__(self, *, long_note=False):
+    def __init__(self, *, long_note=False, bad_first_read=None):
         self.calls = []
         self.notes = {}
         self.long_note = long_note
+        # "long" | "empty": 첫 읽기 응답만 메모 길이 계약을 어긴다(나머지는 정상).
+        self.bad_first_read = bad_first_read
+        self.reads = 0
 
     async def complete(self, system, user, *, context, on_attempt, **kwargs):
         self.calls.append((system, user, context))
@@ -233,16 +236,23 @@ class WebModel:
             cards = json.loads(user)
             value = {"문서": cards["candidates"][0]["source_id"] if cards["candidates"] else None}
         elif op == "read_one":
-            value = "메모" * (3001 if self.long_note else 8)
+            self.reads += 1
+            if self.long_note or (self.bad_first_read == "long" and self.reads == 1):
+                value = "메모" * 3001
+            elif self.bad_first_read == "empty" and self.reads == 1:
+                value = ""
+            else:
+                value = "메모" * 8
             self.notes[actor] = value
         elif op == "draft_section":
             import re
 
-            ids = re.findall(r"\[(source-[^\]]+)\]", user)
+            # 실제 모델의 관측 동작(2026-11-07 실사용 초안 전 절): 시스템 프롬프트가 source_id 인용을
+            # 지시하면 자료 라벨의 id를 쓰고, 지시가 없으면 자료 메모의 제목을 인용 키로 쓴다.
+            ids = re.findall(r"\[(?:source_id: )?(source-[^\]]+)\]", user)
+            key = ids[0] if "source_id" in system else "메모 제목"
             value = {
-                "본문": (
-                    ("자료에 적힌 범위를 벗어나지 않는 대역 문장입니다. " * 4) + f"«{ids[0]}».\n"
-                )
+                "본문": (("자료에 적힌 범위를 벗어나지 않는 대역 문장입니다. " * 4) + f"«{key}».\n")
                 * 22,
                 "충분": True,
                 "부족": "",
@@ -336,6 +346,30 @@ async def test_웹6노드_진짜읽기receipt_출처정본_모델과HTTP분리(r
         await service.close()
 
 
+async def test_웹초안프롬프트는_source_id_인용을_지시하고_자료라벨이_인용키다():
+    """2026-11-07 실사용: 로컬용 프롬프트(«문서명»=제목)를 써서 모델이 메모 제목을 인용했다.
+
+    4개 절 모두 citation_integrity_error로 막힐 결함이었다. 지시와 자료 라벨이 같은 키(source_id)를
+    가리키는지 프롬프트 경계에서 고정하고, 지시를 따르는 모델이면 품질 검사를 통과하는지 확인한다.
+    """
+    service = make()
+    try:
+        a = service.admit("/웹 자료", "web")
+        await settle(service)
+        run = service.repo.snapshot()["runs"][0]
+        assert run["status"] == "completed", run
+        system, user, _ = next(
+            c for c in service.model.calls if c[2]["operation"] == "draft_section"
+        )
+        ids = [c["source_id"] for c in service.web_store.read_claims(a["run_id"], 1)]
+        assert "«source_id»" in system and "문서 제목" not in system
+        assert all(f"[source_id: {sid}]" in user for sid in ids)
+        assert any(f"예: «{sid}»" in system for sid in ids)  # 예시는 실제 읽은 자료의 id다.
+        assert run["quality"]["passed"] and run["quality"]["unknown_citations"] == []
+    finally:
+        await service.close()
+
+
 @pytest.mark.parametrize("client", [FakeWebClient(empty=True), FakeWebClient(fail=True)])
 async def test_읽기없는웹은_코드기원부족_2라운드후_품질차단(client):
     service = make(client=client)
@@ -411,14 +445,52 @@ async def test_malformed_redirect_candidate_does_not_abort_other_sources():
         await real_fetch.aclose()
 
 
-async def test_긴메모는_읽기claim없음_실패안전():
+@pytest.mark.parametrize(
+    "kind,code", [("long", "read_note_too_long"), ("empty", "read_note_empty")]
+)
+async def test_길이계약을_어긴_메모는_읽기로_인정하지_않고_연구는_계속한다(kind, code):
+    """2026-11-07 실사용: 메모 6,156자(상한 6,000)가 연구 전체를 failed로 끝냈다.
+
+    읽기 claim은 그대로 없다(정본 불변). 다만 모델이 길이를 못 맞춘 출처 하나 때문에 다른
+    출처를 읽은 결과까지 버리지 않고, 거절 사유를 저널에 남긴 채 다음 출처로 계속한다.
+    """
+    service = make(model=WebModel(bad_first_read=kind))
+    try:
+        a = service.admit("/웹 자료", "web")
+        await settle(service)
+        run = service.repo.snapshot()["runs"][0]
+        assert run["status"] == "completed", run
+        claims = service.web_store.read_claims(a["run_id"], 1)
+        assert len(claims) == 2  # 선택 3회 중 첫 읽기는 거절되고 나머지 둘만 인정된다.
+        events = service.repo.archive(a["run_id"])["events"]
+        rejected = [
+            e
+            for e in events
+            if e["type"] == "tool.failed" and (e.get("error") or {}).get("code") == code
+        ]
+        assert len(rejected) == 1
+        rejected_source = rejected[0]["input"]["source_id"]
+        assert rejected_source not in {c["source_id"] for c in claims}
+        report = service.report_bytes(run["report_id"])[0]
+        assert len(report["sources"]) == 2
+        assert all(row["source_id"] != rejected_source for row in report["sources"])
+        assert run["actual_model_requests"] == 9  # 거절된 읽기도 실제 모델 호출이라 센다.
+    finally:
+        await service.close()
+
+
+async def test_모든_메모가_길면_읽기없이_2라운드후_품질차단되고_실패하지_않는다():
     service = make(model=WebModel(long_note=True))
     try:
         a = service.admit("/웹 자료", "web")
         await settle(service)
-        assert any(c[2]["operation"] == "read_one" for c in service.model.calls)
+        run = service.repo.snapshot()["runs"][0]
+        assert run["status"] == "blocked", run
+        assert run["research_stop_reason"] == "round_exhausted"
+        assert "web_sources_insufficient" in run["quality"]["reasons"]
         assert not service.web_store.read_claims(a["run_id"], 1)
-        assert service.repo.snapshot()["runs"][0]["status"] == "failed"
+        assert any(c[2]["operation"] == "read_one" for c in service.model.calls)
+        assert service.repo.snapshot()["queue_paused"]
     finally:
         await service.close()
 

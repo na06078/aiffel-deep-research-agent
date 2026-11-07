@@ -1,0 +1,297 @@
+{
+  "started_at": "2026-11-07T08:39:57.576480+00:00",
+  "phase": "research",
+  "base_url": "http://127.0.0.1:8782",
+  "checks": [
+    {
+      "name": "화면 입력창의 '/웹 질문' 전송: 연구 접수·표시기 '웹 검색'",
+      "status": "PASS",
+      "admission": {
+        "kind": "research",
+        "source_mode": "web",
+        "instruction_id": "abe3c17c9db5480da10b87c89a970ea1",
+        "run_id": "ba66f9e7a4ff48c5b6cecfe80060cd92",
+        "mode": "immediate",
+        "status": "received",
+        "control_revision": 1,
+        "state_seq": 5
+      }
+    },
+    {
+      "name": "진행 중 다른 자료 명령은 409로 거절되고 입력·실행이 보존됨",
+      "status": "PASS",
+      "error": {
+        "code": "source_mode_locked",
+        "message": "진행 중에는 자료를 바꿀 수 없습니다. /큐로 예약해 주세요."
+      },
+      "draft_preserved": true,
+      "queue_unchanged": true
+    },
+    {
+      "name": "실행 결과: 완료·필수 검사 통과·자료 web·모델 요청 상한 이내",
+      "status": "FAIL",
+      "error": "AssertionError: {'status': 'failed', 'phase': 'failed'}",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\웹연구_실사용검사.py\", line 127, in step\n    facts = function() or {}\n            ^^^^^^^^^^\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\웹연구_실사용검사.py\", line 645, in outcome\n    assert run[\"status\"] == \"completed\", {k: run.get(k) for k in (\"status\", \"phase\")}\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'status': 'failed', 'phase': 'failed'}\n"
+    }
+  ],
+  "captures": [
+    {
+      "file": "웹연구_00_첫화면.png",
+      "viewport": [
+        1440,
+        900
+      ],
+      "indicator_text": "데이터셋",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "웹연구_01_조사진행.png",
+      "viewport": [
+        1440,
+        900
+      ],
+      "indicator_text": "웹 검색",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 57.296875,
+        "height": 30,
+        "right": 125.296875,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "웹연구_실패_실행큐.png",
+      "viewport": [
+        1440,
+        900
+      ],
+      "indicator_text": "웹 검색",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 57.296875,
+        "height": 30,
+        "right": 125.296875,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "웹연구_실패_사건기록.png",
+      "viewport": [
+        1440,
+        900
+      ],
+      "indicator_text": "웹 검색",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 57.296875,
+        "height": 30,
+        "right": 125.296875,
+        "bottom": 54
+      }
+    }
+  ],
+  "browser_errors": [],
+  "console_errors": [],
+  "external_requests": [],
+  "blocked_requests": [],
+  "budget_before": {
+    "attempt_count": 0,
+    "max_attempts": 100,
+    "remaining_attempts": 100,
+    "spent_usd": 0.04250905,
+    "reserved_usd": 0.0,
+    "max_usd": 2.0,
+    "input_tokens": 133489,
+    "output_tokens": 7614,
+    "unknown_count": 0
+  },
+  "admission": {
+    "kind": "research",
+    "source_mode": "web",
+    "instruction_id": "abe3c17c9db5480da10b87c89a970ea1",
+    "run_id": "ba66f9e7a4ff48c5b6cecfe80060cd92",
+    "mode": "immediate",
+    "status": "received",
+    "control_revision": 1,
+    "state_seq": 5
+  },
+  "budget_after_research": {
+    "attempt_count": 26,
+    "max_attempts": 100,
+    "remaining_attempts": 74,
+    "spent_usd": 0.08350985,
+    "reserved_usd": 0.0,
+    "max_usd": 2.0,
+    "input_tokens": 186929,
+    "output_tokens": 30648,
+    "unknown_count": 0
+  },
+  "run": {
+    "run_id": "ba66f9e7a4ff48c5b6cecfe80060cd92",
+    "question": "Python asyncio의 TaskGroup과 gather는 오류 처리와 작업 취소가 어떻게 다른가?",
+    "control_revision": 1,
+    "status": "failed",
+    "phase": "failed",
+    "plan": [
+      {
+        "section_id": "section-1",
+        "title": "1. TaskGroup과 gather의 기본 구조",
+        "instruction": "Python 공식 문서를 중심으로 TaskGroup과 asyncio.gather의 목적, 사용 방식, 지원 Python 버전과 기본 동작을 정리한다.",
+        "role": "큰그림 담당",
+        "assignee": "researcher-1",
+        "queries": [
+          "Python asyncio TaskGroup gather 공식 문서",
+          "Python asyncio TaskGroup gather 차이"
+        ],
+        "budget": 3,
+        "round": 1,
+        "order": 0
+      },
+      {
+        "section_id": "section-2",
+        "title": "2. 오류 발생 시 전파와 예외 처리",
+        "instruction": "각 방식에서 여러 작업 중 하나가 예외를 일으켰을 때 어떤 예외가 호출자에게 전달되는지, 다른 작업이 계속 실행되는지, ExceptionGroup이 사용되는지를 자료에 근거해 확인한다.",
+        "role": "원인 담당",
+        "assignee": "researcher-2",
+        "queries": [
+          "asyncio TaskGroup exception handling ExceptionGroup",
+          "asyncio gather return_exceptions 오류 처리"
+        ],
+        "budget": 3,
+        "round": 1,
+        "order": 1
+      },
+      {
+        "section_id": "section-3",
+        "title": "3. 작업 취소의 전파와 동작",
+        "instruction": "TaskGroup 내부 작업의 실패·취소, gather 자체의 취소, gather에 전달된 개별 작업의 취소가 서로에게 어떤 영향을 주는지 구분해 조사한다.",
+        "role": "시간순 담당",
+        "assignee": "researcher-3",
+        "queries": [
+          "asyncio TaskGroup cancellation behavior",
+          "asyncio gather cancellation propagation 공식 문서"
+        ],
+        "budget": 3,
+        "round": 1,
+        "order": 2
+      },
+      {
+        "section_id": "section-4",
+        "title": "4. 같은 상황에서의 차이와 선택 기준",
+        "instruction": "작업 하나의 실패를 기준으로 나머지 작업의 취소, 예외 전달, 정리 완료 보장, 적합한 사용 사례를 같은 기준으로 비교해 정리한다. (재위임: 지난번에 «없음» 를 읽었지만 web_sources_insufficient. 그 빈 칸을 채우도록 아직 안 본 문서를 찾아라)",
+        "role": "비교 담당",
+        "assignee": "researcher-4",
+        "queries": [
+          "TaskGroup vs gather error handling cancellation",
+          "asyncio TaskGroup gather comparison"
+        ],
+        "budget": 3,
+        "round": 2,
+        "order": 3
+      }
+    ],
+    "report_id": null,
+    "quality": {
+      "passed": null,
+      "reasons": []
+    },
+    "parent_report_id": null,
+    "created_at": "2026-11-07T08:39:59.185439+00:00",
+    "updated_at": "2026-11-07T08:42:43.405068+00:00",
+    "mock_requests": 0,
+    "actual_model_requests": 26,
+    "source_mode": "web",
+    "instruction_history": [
+      "Python asyncio의 TaskGroup과 gather는 오류 처리와 작업 취소가 어떻게 다른가?"
+    ],
+    "web_usage": {
+      "search_attempts": 10,
+      "fetch_attempts": 9,
+      "observed_http_requests": 19
+    },
+    "report_title": "Python asyncio의 TaskGroup과 gather: 오류 처리와 작업 취소 비교",
+    "research_stop_reason": "redelegation"
+  },
+  "failure_events": [
+    {
+      "type": "tool.failed",
+      "actor": "tool",
+      "status": "failed",
+      "summary": "tool.failed",
+      "error": {
+        "code": "search_timeout"
+      }
+    },
+    {
+      "type": "tool.failed",
+      "actor": "tool",
+      "status": "failed",
+      "summary": "tool.failed",
+      "error": {
+        "code": "search_timeout"
+      }
+    },
+    {
+      "type": "tool.failed",
+      "actor": "tool",
+      "status": "failed",
+      "summary": "tool.failed",
+      "error": {
+        "code": "search_timeout"
+      }
+    },
+    {
+      "type": "tool.failed",
+      "actor": "tool",
+      "status": "failed",
+      "summary": "tool.failed",
+      "error": {
+        "code": "search_timeout"
+      }
+    },
+    {
+      "type": "web.request.failed",
+      "actor": "tool",
+      "status": "failed",
+      "summary": "web.request.failed",
+      "error": null
+    },
+    {
+      "type": "tool.failed",
+      "actor": "tool",
+      "status": "failed",
+      "summary": "tool.failed",
+      "error": {
+        "code": "challenge_detected"
+      }
+    },
+    {
+      "type": "model.failed",
+      "actor": "researcher-4",
+      "status": "failed",
+      "summary": "model.failed",
+      "error": {
+        "code": "model_error",
+        "message": "web: invalid read note length/receipt",
+        "status": null,
+        "attempt_id": "e953755315704ee393a43a31a9bf5e04"
+      }
+    }
+  ],
+  "expected_rejection_console_messages": 1,
+  "status": "FAIL",
+  "problems": [
+    "실행 결과: 완료·필수 검사 통과·자료 web·모델 요청 상한 이내"
+  ],
+  "finished_at": "2026-11-07T08:42:46.126471+00:00"
+}

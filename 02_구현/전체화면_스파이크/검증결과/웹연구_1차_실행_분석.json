@@ -1,0 +1,189 @@
+{
+ "schema": "웹연구_1차_실행_분석/1",
+ "run": {
+  "run_id": "ba66f9e7a4ff48c5b6cecfe80060cd92",
+  "status": "failed",
+  "stop_reason": "redelegation",
+  "model_requests": 26,
+  "web_usage": {
+   "search_attempts": 10,
+   "fetch_attempts": 9,
+   "observed_http_requests": 19
+  },
+  "ledger_before": {
+   "attempt_count": 0,
+   "remaining_attempts": 100,
+   "spent_usd": 0.04250905
+  },
+  "ledger_after": {
+   "attempt_count": 26,
+   "remaining_attempts": 74,
+   "spent_usd": 0.08350985
+  },
+  "spent_usd_this_run": 0.041001
+ },
+ "defect_1_final_cause": {
+  "error": {
+   "code": "model_error",
+   "message": "web: invalid read note length/receipt",
+   "status": null,
+   "attempt_id": "e953755315704ee393a43a31a9bf5e04"
+  },
+  "operation": "read_one",
+  "actor": "researcher-4",
+  "note_chars_over_limit": 6156,
+  "limit_chars": 6000,
+  "all_read_note_chars": [
+   4358,
+   3064,
+   3488,
+   4504,
+   4898,
+   5751,
+   4536,
+   4848,
+   6156
+  ],
+  "median_chars": 4536
+ },
+ "defect_2_search_deadline_included_queue_wait": {
+  "logical_searches": 10,
+  "timed_out": 4,
+  "timed_out_http_completed_after_deadline": 4,
+  "serialized_gap_after_previous_completion_seconds": [
+   2.0
+  ],
+  "first_batch_http_wait_s": [
+   0.1,
+   4.4,
+   7.8,
+   10.8
+  ],
+  "timed_out_http_wait_s": [
+   11.4,
+   10.7,
+   11.8,
+   11.8
+  ],
+  "logical": [
+   {
+    "t_start_s": 6.5,
+    "outcome": "ok",
+    "http_started_after_s": 0.1,
+    "http_completed_after_deadline": false
+   },
+   {
+    "t_start_s": 6.5,
+    "outcome": "ok",
+    "http_started_after_s": 4.4,
+    "http_completed_after_deadline": false
+   },
+   {
+    "t_start_s": 6.5,
+    "outcome": "ok",
+    "http_started_after_s": 7.8,
+    "http_completed_after_deadline": false
+   },
+   {
+    "t_start_s": 6.5,
+    "outcome": "ok",
+    "http_started_after_s": 10.8,
+    "http_completed_after_deadline": false
+   },
+   {
+    "t_start_s": 8.9,
+    "outcome": "search_timeout",
+    "http_started_after_s": 11.4,
+    "http_completed_after_deadline": true
+   },
+   {
+    "t_start_s": 12.3,
+    "outcome": "search_timeout",
+    "http_started_after_s": 10.7,
+    "http_completed_after_deadline": true
+   },
+   {
+    "t_start_s": 15.3,
+    "outcome": "search_timeout",
+    "http_started_after_s": 11.8,
+    "http_completed_after_deadline": true
+   },
+   {
+    "t_start_s": 18.3,
+    "outcome": "search_timeout",
+    "http_started_after_s": 11.8,
+    "http_completed_after_deadline": true
+   },
+   {
+    "t_start_s": 91.2,
+    "outcome": "ok",
+    "http_started_after_s": 0.0,
+    "http_completed_after_deadline": false
+   },
+   {
+    "t_start_s": 92.4,
+    "outcome": "ok",
+    "http_started_after_s": 2.0,
+    "http_completed_after_deadline": false
+   }
+  ]
+ },
+ "defect_3_found_by_replay_not_by_run": {
+  "quality_passed": false,
+  "quality_reasons": [
+   "citation_integrity_error"
+  ],
+  "unknown_citation_count": 6,
+  "valid_citation_count": 0,
+  "grounded_sentences": 0,
+  "sections_with_misattributed_citations": 3,
+  "evidence_receipts_verified_for_sections": [
+   {
+    "section_id": "section-1",
+    "claimed_reads": 3,
+    "verified_reads": 3,
+    "same_reads": true
+   },
+   {
+    "section_id": "section-2",
+    "claimed_reads": 1,
+    "verified_reads": 1,
+    "same_reads": true
+   },
+   {
+    "section_id": "section-3",
+    "claimed_reads": 2,
+    "verified_reads": 2,
+    "same_reads": true
+   }
+  ],
+  "original_data_unchanged": true,
+  "external_requests": {
+   "model": 0,
+   "search": 0,
+   "fetch": 0
+  }
+ },
+ "regression": {
+  "backend_tests": 275,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "socket_guard": "loopback 밖 소켓 연결 차단 플러그인 사용",
+  "note": "첫 실행의 7건 실패는 --basetemp가 프로젝트 밖(시스템 임시 폴더)이라 SPIKE_DATA_DIR 검사에 걸린 러너 설정 문제였고, 같은 코드를 프로젝트 안 basetemp로 다시 실행해 전부 통과했다."
+ },
+ "changed_source_sha256": {
+  "서버/웹자료.py": "6ba0bbd0fc309e56f1dae056c80dbf119c5b75e91268f7ab3bc002e3043a9d42",
+  "서버/웹연구.py": "3bfebac80e0c9860b9df961d8a6dac64f1e297c8daec8337d3bc04c1823fb286",
+  "서버/웹계약.py": "7a1dfba4d73a7755c7801a04e5c2794f619e2ecd03b4526a9e94c77d0e1afbcb",
+  "테스트/테스트_웹자료.py": "a214621821afde0cee93e5cfef1f26392cd6a562aa51f4c2b8df228a339429c7",
+  "테스트/테스트_웹연구.py": "7d6c1bbc01ae529a437b88274431c093af39309fb12d6c97554446167886fd8c",
+  "테스트/테스트_웹통합.py": "0be0f8cd0f301e62f42f5cb07ff20c4b23c284bbd4511d6b587d48504eec3aac",
+  "검증/웹연구_후단계_저장응답_재생.py": "0aa2a2896c042e40769bb4576c35b7146e6be4fbc43029a104c9537ca8e6195a"
+ },
+ "not_verified": [
+  "새 초안 프롬프트를 실제 모델이 지시대로 따르는지(source_id 32자리 글자 그대로 인용)는 실제 호출 전까지 미검증",
+  "4번째 절·2라운드 점검·종합·품질 통과·보고서 게시·사용자 실행본(8768) 적용은 실제 연구로 아직 한 번도 끝까지 가지 못함",
+  "Yahoo 레이아웃이 다시 바뀌거나 검색이 차단되는 경우의 장기 안정성"
+ ]
+}

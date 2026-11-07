@@ -1,0 +1,106 @@
+{
+ "sections": [
+  {
+   "section_id": "section-1",
+   "claimed_reads": 3,
+   "verified_reads": 3,
+   "same_reads": true
+  },
+  {
+   "section_id": "section-2",
+   "claimed_reads": 1,
+   "verified_reads": 1,
+   "same_reads": true
+  },
+  {
+   "section_id": "section-3",
+   "claimed_reads": 2,
+   "verified_reads": 2,
+   "same_reads": true
+  },
+  {
+   "section_id": "section-4",
+   "claimed_reads": 0,
+   "verified_reads": 2,
+   "same_reads": false
+  }
+ ],
+ "accepted_sections": 4,
+ "provenance_sources": 8,
+ "draft_characters": 7279,
+ "draft_sha256": "a43b9f3272b4228d798fef255d8c61bf1d892fcb86c215cf637f1838a8700f54",
+ "quality_passed": false,
+ "quality_reasons": [
+  "citation_integrity_error"
+ ],
+ "unknown_citations": [
+  "TaskGroup·gather에서 취소와 실패의 전파 구분",
+  "TaskGroup과 gather()의 실패·취소 전파 구분",
+  "asyncio 예외 처리 방식 비교 메모",
+  "메모: `asyncio.TaskGroup`과 `asyncio.gather 비교",
+  "메모: `asyncio.TaskGroup`과 `asyncio.gather`",
+  "메모: `asyncio.TaskGroup`과 `asyncio.gather` 비교"
+ ],
+ "unread_citations": [],
+ "misattributed_citations": [
+  {
+   "section_id": "section-1",
+   "documents": [
+    "메모: `asyncio.TaskGroup`과 `asyncio.gather 비교",
+    "메모: `asyncio.TaskGroup`과 `asyncio.gather`",
+    "메모: `asyncio.TaskGroup`과 `asyncio.gather` 비교"
+   ]
+  },
+  {
+   "section_id": "section-2",
+   "documents": [
+    "asyncio 예외 처리 방식 비교 메모"
+   ]
+  },
+  {
+   "section_id": "section-3",
+   "documents": [
+    "TaskGroup·gather에서 취소와 실패의 전파 구분",
+    "TaskGroup과 gather()의 실패·취소 전파 구분"
+   ]
+  }
+ ],
+ "metrics": {
+  "문장수": 45,
+  "근거붙은문장": 0,
+  "근거율": 0.0,
+  "허위인용": [
+   "TaskGroup·gather에서 취소와 실패의 전파 구분",
+   "TaskGroup과 gather()의 실패·취소 전파 구분",
+   "asyncio 예외 처리 방식 비교 메모",
+   "메모: `asyncio.TaskGroup`과 `asyncio.gather 비교",
+   "메모: `asyncio.TaskGroup`과 `asyncio.gather`",
+   "메모: `asyncio.TaskGroup`과 `asyncio.gather` 비교"
+  ],
+  "읽은문서": 8,
+  "읽고안쓴": [
+   "9ddac9574872498192cf0190c3885b1f",
+   "ba72a540cb31418ba8dd62a72e30af7f",
+   "c454ca2ddda54e20bbdcab57bf9881fd",
+   "ceb2a129dd2546378b4756c06fb8624f",
+   "cf259ed063294abf997178462e75cda7",
+   "e0362fcc910b4f60b9b6c4711b06c298",
+   "e795f784876747678472ac85f1468a6e",
+   "f0425f7bd6124d97a74c1f20d9b9883c"
+  ],
+  "인용편중": 0.0,
+  "중복률": 0.0,
+  "절수": 4,
+  "보고서자수": 7279,
+  "인용수": 0,
+  "LLM호출": 0,
+  "격리율": 0.0
+ },
+ "original_unchanged": true,
+ "external_requests": {
+  "model": 0,
+  "search": 0,
+  "fetch": 0
+ },
+ "run_id": "ba66f9e7a4ff48c5b6cecfe80060cd92"
+}

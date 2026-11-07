@@ -40,12 +40,14 @@ class IntegrationModel(WebModel):
                 system, user, context=context, on_attempt=on_attempt, **kwargs
             )
         # 기존 단위 대역의 source-* 가정 대신 실제 저장소가 발급한 opaque ID를 읽는다.
-        ids = re.findall(r"\[([0-9a-f]{32})\]", user)
+        ids = re.findall(r"\[source_id: ([0-9a-f]{32})\]", user)
         assert len(ids) == 3
+        # 실제 모델의 관측 동작: source_id 인용 지시가 없으면 메모 제목을 인용 키로 쓴다.
+        key = ids[0] if "source_id" in system else "메모 제목"
         self.calls.append((system, user, context))
         attempt = f"integration-{len(self.calls)}"
         on_attempt(attempt)
-        body = (("실제 공개 웹이 아닌 명시적 통합 대역의 문장입니다. " * 4) + f"«{ids[0]}».\n") * 22
+        body = (("실제 공개 웹이 아닌 명시적 통합 대역의 문장입니다. " * 4) + f"«{key}».\n") * 22
         return {
             "content": json.dumps({"본문": body, "충분": True, "부족": ""}, ensure_ascii=False),
             "attempt_id": attempt,

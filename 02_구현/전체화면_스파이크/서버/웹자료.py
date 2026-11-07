@@ -25,6 +25,12 @@ import trafilatura
 from 서버.야후결과파서 import extract_algo_results, looks_like_results_html
 from 서버.웹계약 import WebSourceError
 
+# 검색 한 건이 전송 슬롯을 얻은 뒤 쓸 수 있는 시간(초). _search_sync의 native timeout(12)과 같은 값이다.
+SEARCH_TIMEOUT_SECONDS = 12
+# 직렬화 대기열에서 슬롯을 기다릴 수 있는 시간(초). 동시에 온 검색은 2초 간격으로 순서대로 처리되므로
+# 이 한도는 앞선 native 검색이 멈췄을 때의 무한 대기만 막는다. 대기 시간은 위 마감에 넣지 않는다.
+SEARCH_QUEUE_LIMIT_SECONDS = 120
+
 SAFE_ERROR_CODES = frozenset(
     {
         "fetch_timeout",
@@ -143,9 +149,14 @@ class _SearchGate:
     """논리 수명은 native 자원 소유권과 별개다. 전송 진입과 취소를 직렬화한다."""
 
     def __init__(self, clock):
-        self.clock, self.deadline = clock, clock() + 12
+        # 대기열에서 순서를 기다리는 동안에는 마감이 없다. 전송 슬롯을 얻은 뒤 start()가 정한다.
+        self.clock, self.deadline = clock, float("inf")
         self.lock = threading.Lock()
         self.cancelled = False
+
+    def start(self, seconds):
+        with self.lock:
+            self.deadline = self.clock() + seconds
 
     def cancel(self):
         with self.lock:
@@ -463,14 +474,17 @@ class FreeWebClient:
     async def search(self, query, *, observer=None):
         gate = _SearchGate(self._clock)
         try:
-            async with asyncio.timeout(12):
-                return await self._own(self._search(query, observer, gate))
+            # 순서를 기다리는 동안에는 대기 한도만 적용한다. 슬롯을 얻으면 _search가 timer를
+            # 검색 마감(SEARCH_TIMEOUT_SECONDS)으로 다시 건다. 마감은 호출자 쪽에 둬야 native
+            # 스레드가 끝날 때까지 소유권(_own)을 유지하면서도 논리 호출만 먼저 끝낼 수 있다.
+            async with asyncio.timeout(SEARCH_QUEUE_LIMIT_SECONDS) as timer:
+                return await self._own(self._search(query, observer, gate, timer))
         except TimeoutError:
             raise WebSourceError("search_timeout") from None
         finally:
             gate.cancel()
 
-    async def _search(self, query, observer, gate):
+    async def _search(self, query, observer, gate, timer):
         started = self._clock()
         async with self._search_lock:
             if self._cooldown_until > self._clock():
@@ -482,6 +496,11 @@ class FreeWebClient:
             owner = asyncio.current_task()
             self._native.add(owner)
             try:
+                if timer.expired():
+                    # 대기 한도가 같은 순간에 끝났다. 호출자는 이미 종료됐으므로 전송하지 않는다.
+                    raise WebSourceError("search_timeout")
+                gate.start(SEARCH_TIMEOUT_SECONDS)
+                timer.reschedule(asyncio.get_running_loop().time() + SEARCH_TIMEOUT_SECONDS)
                 result, count = await asyncio.to_thread(self._search_sync, query, observer, gate)
             except Exception as exc:
                 raise WebSourceError(_safe_error(exc, "search")) from None

@@ -544,15 +544,11 @@ def test_native_timeout_returns_but_keeps_thread_owned(monkeypatch):
 
     import httpx
 
+    from 서버 import 웹자료
+
+    assert 웹자료.SEARCH_TIMEOUT_SECONDS == 12  # 슬롯을 얻은 뒤 검색 한 건의 기본 마감
+    monkeypatch.setattr(웹자료, "SEARCH_TIMEOUT_SECONDS", 0.03)
     entered, release = threading.Event(), threading.Event()
-    original_timeout = asyncio.timeout
-    deadlines = []
-
-    def timeout(seconds):
-        deadlines.append(seconds)
-        return original_timeout(0.03)
-
-    monkeypatch.setattr(asyncio, "timeout", timeout)
 
     def handler(request):
         entered.set()
@@ -566,7 +562,7 @@ def test_native_timeout_returns_but_keeps_thread_owned(monkeypatch):
         client = FreeWebClient(search_http_client_factory=factory)
         with pytest.raises(WebSourceError, match="^search_timeout$"):
             await client.search("slow")
-        assert entered.is_set() and deadlines == [12]
+        assert entered.is_set()
         closing = asyncio.create_task(client.aclose())
         await asyncio.sleep(0.01)
         assert not closing.done()
@@ -652,9 +648,10 @@ def test_logically_finished_search_cannot_start_late_http(monkeypatch, stage, en
 
     entered, release = threading.Event(), threading.Event()
     calls = []
-    original_timeout = asyncio.timeout
     if ending == "timeout":
-        monkeypatch.setattr(asyncio, "timeout", lambda seconds: original_timeout(0.08))
+        from 서버 import 웹자료
+
+        monkeypatch.setattr(웹자료, "SEARCH_TIMEOUT_SECONDS", 0.08)
 
     def pause():
         entered.set()
@@ -717,6 +714,87 @@ def test_logically_finished_search_cannot_start_late_http(monkeypatch, stage, en
         finally:
             release.set()
             await client.aclose()
+
+    try:
+        asyncio.run(scenario())
+    finally:
+        release.set()
+
+
+def test_search_deadline_does_not_include_queue_wait(monkeypatch):
+    """직렬화 대기열에서 기다린 시간은 검색 마감에 들어가지 않는다.
+
+    2026-11-07 실사용에서 4절이 동시에 검색하자 마감이 대기열 대기까지 포함해 뒤쪽 검색 4건이
+    전송 직전에 마감을 넘겨 응답이 버려졌다. 같은 구조를 축소해 재현한다.
+    """
+    import time
+
+    import httpx
+
+    from 서버 import 웹자료
+
+    monkeypatch.setattr(웹자료, "SEARCH_TIMEOUT_SECONDS", 0.3)
+    calls = []
+
+    def handler(request):
+        calls.append(str(request.url))
+        # 한 건 0.2초 < 마감 0.3초. 3건이 직렬이면 마지막은 대기 포함 0.6초에 끝난다.
+        time.sleep(0.2)
+        return httpx.Response(200, text="<html>No results</html>")
+
+    def factory(**kwargs):
+        return httpx.Client(transport=httpx.MockTransport(handler), **kwargs)
+
+    async def scenario():
+        client = FreeWebClient(
+            search_http_client_factory=factory, sleep=lambda delay: asyncio.sleep(0)
+        )
+        results = await asyncio.gather(
+            *(client.search(f"q{i}") for i in range(3)), return_exceptions=True
+        )
+        assert [type(r).__name__ for r in results] == ["dict"] * 3, results
+        assert len(calls) == 3
+        await client.aclose()
+
+    asyncio.run(scenario())
+
+
+def test_queue_wait_is_bounded_and_expired_waiter_never_transmits(monkeypatch):
+    """앞선 native 검색이 끝나지 않아도 대기 중인 검색은 대기 한도에서 끝나고 전송하지 않는다."""
+    import threading
+
+    import httpx
+
+    from 서버 import 웹자료
+
+    monkeypatch.setattr(웹자료, "SEARCH_QUEUE_LIMIT_SECONDS", 0.1)
+    entered, release = threading.Event(), threading.Event()
+    calls = []
+
+    def handler(request):
+        calls.append(str(request.url))
+        entered.set()
+        assert release.wait(5)
+        return httpx.Response(200, text="<html>No results</html>")
+
+    def factory(**kwargs):
+        return httpx.Client(transport=httpx.MockTransport(handler), **kwargs)
+
+    async def scenario():
+        client = FreeWebClient(
+            search_http_client_factory=factory, sleep=lambda delay: asyncio.sleep(0)
+        )
+        first = asyncio.create_task(client.search("first"))
+        assert await asyncio.to_thread(entered.wait, 5)
+        try:
+            # 한도가 없으면 첫 검색이 끝날 때까지 영원히 기다리므로 5초 안전장치로 실패시킨다.
+            with pytest.raises(WebSourceError, match="^search_timeout$"):
+                await asyncio.wait_for(client.search("waiting"), 5)
+        finally:
+            release.set()
+        await first
+        await client.aclose()
+        assert len(calls) == 1, "대기 한도에서 끝난 검색이 나중에 전송했다"
 
     try:
         asyncio.run(scenario())

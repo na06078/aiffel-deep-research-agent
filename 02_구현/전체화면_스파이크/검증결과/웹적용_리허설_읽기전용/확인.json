@@ -1,0 +1,171 @@
+{
+  "started_at": "2026-11-07T08:35:20.287971+00:00",
+  "phase": "readonly",
+  "base_url": "http://127.0.0.1:8783",
+  "checks": [
+    {
+      "name": "새 코드의 스냅샷: 자료 모드 목록·기본 선택·기존 실행 보존",
+      "status": "PASS",
+      "selected_source_mode": "local",
+      "source_modes": [
+        "local",
+        "web"
+      ],
+      "runs": [
+        {
+          "run_id": "9aa1aeeb5b0c4724b0e435563f6a5c76",
+          "status": "completed",
+          "source_mode": "local",
+          "control_revision": 1
+        }
+      ],
+      "legacy_runs_without_source_mode": 0,
+      "budget": {
+        "attempt_count": 0,
+        "max_attempts": 100,
+        "remaining_attempts": 100,
+        "spent_usd": 0.04250905,
+        "reserved_usd": 0.0,
+        "max_usd": 2.0,
+        "input_tokens": 133489,
+        "output_tokens": 7614,
+        "unknown_count": 0
+      }
+    },
+    {
+      "name": "첫 화면: 표시기 '데이터셋'·전체 화면 마을·겹침 없음",
+      "status": "PASS",
+      "indicator_rect": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      }
+    },
+    {
+      "name": "과거 기록: 기존 실행이 데이터셋으로 표시",
+      "status": "PASS",
+      "list_has_dataset_label": true
+    },
+    {
+      "name": "기존 보고서: 뷰어·다운로드 파일이 정본과 같음",
+      "status": "PASS",
+      "report_sha256": "19c6f5f980533a7e001beecc6f3f2852f44869800c4ad0a7afd3dea0e4d242cd",
+      "bytes": 11811
+    },
+    {
+      "name": "실행/큐: 호출 예산 표시",
+      "status": "PASS",
+      "budget_line": "시도 0 / 100"
+    },
+    {
+      "name": "읽기 전용 재생: 레거시 실행의 시점별 표시기",
+      "status": "PASS",
+      "indicator_at_home_and_end": {
+        "Home": "데이터셋",
+        "End": "데이터셋"
+      }
+    },
+    {
+      "name": "새로고침 후 표시기 유지",
+      "status": "PASS"
+    },
+    {
+      "name": "실행·큐·예산·DB·장부가 검사 전과 같음(POST 0)",
+      "status": "PASS",
+      "fingerprint": "ee231513a8e36e4d",
+      "blocked_post_requests": 0
+    }
+  ],
+  "captures": [
+    {
+      "file": "읽기전용_첫화면.png",
+      "viewport": [
+        1440,
+        900
+      ],
+      "indicator_text": "데이터셋",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "읽기전용_좁은화면.png",
+      "viewport": [
+        390,
+        844
+      ],
+      "indicator_text": "데이터셋",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "읽기전용_과거기록.png",
+      "viewport": [
+        1440,
+        900
+      ],
+      "indicator_text": "데이터셋",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "읽기전용_실행큐.png",
+      "viewport": [
+        1440,
+        900
+      ],
+      "indicator_text": "데이터셋",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "읽기전용_재생.png",
+      "viewport": [
+        1440,
+        900
+      ],
+      "indicator_text": "데이터셋",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      }
+    }
+  ],
+  "browser_errors": [],
+  "console_errors": [],
+  "external_requests": [],
+  "blocked_requests": [],
+  "status": "PASS",
+  "problems": [],
+  "finished_at": "2026-11-07T08:35:29.411876+00:00"
+}

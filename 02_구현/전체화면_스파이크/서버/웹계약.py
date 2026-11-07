@@ -16,6 +16,9 @@ MAX_WEB_SEARCH_ATTEMPTS = 16
 MAX_WEB_FETCH_ATTEMPTS = 24
 MAX_WEB_READ_CHARACTERS = 20000
 MAX_WEB_NOTE_CHARACTERS = 6000
+# 모델에게 요청하는 메모 길이. 모델은 글자 수를 정확히 세지 못하므로 하드 상한보다 낮게 요청한다.
+# 2026-11-07 실사용에서 "6000자 이하"를 요청한 메모 9건이 3,064~6,156자(중앙 4,536자)였다.
+WEB_NOTE_TARGET_CHARACTERS = 4000
 MAX_WEB_HTML_BYTES = 2 * 1024 * 1024
 MAX_WEB_EXTRACTED_CHARACTERS = 200000
 WebObserver = Callable[[str, dict[str, Any]], None]
