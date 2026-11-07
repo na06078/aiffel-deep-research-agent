@@ -267,6 +267,27 @@ async def test_원고JSON과_bool실패는_최종파일없이_큐정지(data_dir
         await service.close()
 
 
+async def test_실패한_실행은_사유를_run에_보존한다(data_dir):
+    """2026-11-07 실사용: 화면의 실행/큐는 `failed`만 보이고 사유 문구는 사건 상세를 열어야 읽혔다."""
+    model = AlteredModel("draft_section", lambda r: {**r, "content": "not JSON"})
+    service = RealResearchService(data_dir, model, CORPUS)
+    try:
+        service.admit("질문", "first")
+        await settle(service)
+        run = service.repo.snapshot()["runs"][0]
+        assert run["status"] == "failed"
+        failed = [e for e in service.repo.archive(run["run_id"])["events"] if e["error"]]
+        assert len(failed) == 1
+        assert failed[0]["error"]["message"]
+        assert run["failure"] == {
+            "code": failed[0]["error"]["code"],
+            "message": failed[0]["error"]["message"],
+            "actor": failed[0]["actor"],
+        }
+    finally:
+        await service.close()
+
+
 @pytest.mark.parametrize(
     "bad_citation, field", [("없는문서", "unknown_citations"), ("갑오개혁", "unread_citations")]
 )

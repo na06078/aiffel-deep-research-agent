@@ -13,7 +13,13 @@ from 서버.교안연구 import (
     required_text,
     role_sentence,
 )
-from 서버.웹계약 import MAX_WEB_NOTE_CHARACTERS, WEB_NOTE_TARGET_CHARACTERS, WebSourceError
+from 서버.웹계약 import (
+    MAX_WEB_FETCH_ATTEMPTS,
+    MAX_WEB_NOTE_CHARACTERS,
+    MAX_WEB_SEARCH_ATTEMPTS,
+    WEB_NOTE_TARGET_CHARACTERS,
+    WebSourceError,
+)
 from 서버.저장소 import encode, uid
 
 
@@ -100,16 +106,29 @@ def web_section_prompt(assignment, notes):
     )
 
 
+def new_usage():
+    """웹 실행의 사용량 기록 틀. 화면이 `시도 / 상한`을 보이도록 상한도 함께 둔다."""
+    return {
+        "search_attempts": 0,
+        "search_limit": MAX_WEB_SEARCH_ATTEMPTS,
+        "fetch_attempts": 0,
+        "fetch_limit": MAX_WEB_FETCH_ATTEMPTS,
+        "observed_http_requests": 0,
+    }
+
+
 def reserve(service, state, operation, value):
     service.check(state)
-    key, limit = ("search_attempts", 16) if operation == "search" else ("fetch_attempts", 24)
+    key, limit = (
+        ("search_attempts", MAX_WEB_SEARCH_ATTEMPTS)
+        if operation == "search"
+        else ("fetch_attempts", MAX_WEB_FETCH_ATTEMPTS)
+    )
     with service.repo.transaction() as (db, data):
         run = service.repo.fenced(data, state["run_id"], state["revision"])
         if not run:
             service.check(state)
-        usage = run.setdefault(
-            "web_usage", {"search_attempts": 0, "fetch_attempts": 0, "observed_http_requests": 0}
-        )
+        usage = run.setdefault("web_usage", new_usage())
         if usage[key] >= limit:
             service.repo.event(
                 db,

@@ -44,6 +44,16 @@ it('전체105개 사건을 역순 입력해도 seq 동률을 정렬하며 seek�
 it.each([['model.failed','failed'],['execution.failed','failed'],['run.cancelled','cancelled'],['run.interrupted','interrupted']] as const)('%s는 성공 보고서를 만들지 않고 %s 상태로 남는다',(kind,status)=>{
  const a={...archive,events:[archive.events[0],event(6,2000,kind)]};expect(projectArchive(a,2500).run.status).toBe(status);expect(projectArchive(a,2500).report).toBeNull();
 });
+it('실패 사건의 오류는 재생한 run의 failure로 남고 실패 이전 시점과 다른 종료에는 없다',()=>{
+ const failed={...event(6,2000,'model.failed'),actor:'researcher-4',error:{code:'model_error',message:'사유 문구'}};
+ const a={...archive,events:[archive.events[0],failed]};
+ expect(projectArchive(a,2500).run.failure).toEqual({code:'model_error',message:'사유 문구',actor:'researcher-4'});
+ expect(projectArchive(a,1500).run.failure??null).toBeNull();
+ const cancelled={...archive,events:[archive.events[0],event(6,2000,'run.cancelled')]};
+ expect(projectArchive(cancelled,2500).run.failure??null).toBeNull();
+ const noError={...archive,events:[archive.events[0],event(6,2000,'execution.failed')]};
+ expect(projectArchive(noError,2500).run.failure??null).toBeNull();
+});
 it('live의 이전 제출 문서는 새 실행 시작보다 앞선 실제 시각으로 유지하되 replay에는 끼워넣지 않는다',()=>{
  const previous={run_id:'previous-run',report_id:'previous-report',created_at:iso(-1000)} as Report;
  expect(sceneClock(archive,500,false,previous).report_submitted_ms).toBe(-1000);

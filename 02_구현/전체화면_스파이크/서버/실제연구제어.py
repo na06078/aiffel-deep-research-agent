@@ -145,11 +145,7 @@ class RealResearchService(ExecutionService):
         )
         run["instruction_history"] = history + [text]
         if run.get("source_mode", "local") == "web":
-            run["web_usage"] = {
-                "search_attempts": 0,
-                "fetch_attempts": 0,
-                "observed_http_requests": 0,
-            }
+            run["web_usage"] = 웹연구.new_usage()
         self.repo.save_revision(db, run)
         return run, admission
 

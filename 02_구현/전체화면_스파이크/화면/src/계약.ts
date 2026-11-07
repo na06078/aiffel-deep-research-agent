@@ -4,8 +4,8 @@ export type ReleaseOutcome = 'success' | 'failure' | 'quality_fail';
 // 기술 명세25절: 화면/제공자 mode와 다른 자료 선택. 레거시 기록 누락은local.
 export type SourceMode = 'local' | 'web';
 export interface WebUsage {
-  search_attempts: number; search_limit: number;
-  fetch_attempts: number; fetch_limit: number;
+  search_attempts: number; search_limit?: number;
+  fetch_attempts: number; fetch_limit?: number;
   observed_http_requests: number;
 }
 export interface BudgetSummary {
@@ -18,6 +18,7 @@ export interface QualitySummary {
   passed: boolean | null; reasons: string[]; warnings?: string[];
   metrics?: Record<string, unknown>;
 }
+export interface RunFailure { code: string; message: string; actor: string }
 export interface RunSnapshot {
   run_id: string;
   question: string;
@@ -35,6 +36,8 @@ export interface RunSnapshot {
   actual_model_requests: number;
   source_mode?: SourceMode;
   web_usage?: WebUsage;
+  // 실패한 실행의 사유. 이 필드가 생기기 전의 실패 기록에는 없다.
+  failure?: RunFailure | null;
 }
 export interface QueueItem { instruction_id: string; text: string; status: 'queued'; source_mode?: SourceMode; raw_text?: string }
 export interface Gate {

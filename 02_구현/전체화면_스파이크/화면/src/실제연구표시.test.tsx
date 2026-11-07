@@ -43,6 +43,26 @@ it('실제 사건 상세는 요청0이라고 단정하지 않고 원문·오류�
 });
 const actual:Snapshot={protocol_version:1,provider:'openai',mode:'research',runs:[],events:[],waiting:[],queue:[],current_run_id:null,queue_paused:false,queue_pause_reason:null,high_watermark_seq:0,events_has_more:false,mock_requests:0,actual_model_requests:7};
 afterEach(()=>{vi.unstubAllGlobals();state.popup=null;state.snapshot=null;state.replay=null;});
+const failedRun={...run,status:'failed' as const,phase:'failed',quality:{passed:null,reasons:[]},actual_model_requests:26};
+const failureReason={code:'model_error',message:'web: 사유 문구',actor:'researcher-4'};
+it('실패한 실행의 사유는 실행/큐와 과거 상세에서 사건 상세를 열지 않아도 보이고 사유 필드가 없던 기록은 안내만 한다',()=>{
+ vi.stubGlobal('location',{hash:'#/control'});
+ state.snapshot={...actual,current_run_id:'A',runs:[{...failedRun,failure:failureReason}]};
+ state.popup={kind:'실행/큐'};let html=renderToStaticMarkup(<App/>);
+ expect(html).toContain('실행 실패 사유 · researcher-4 · model_error: web: 사유 문구');
+ state.popup={kind:'history',runId:'A'};html=renderToStaticMarkup(<App/>);
+ expect(html).toContain('실행 실패 사유 · researcher-4 · model_error: web: 사유 문구');
+ state.snapshot={...actual,current_run_id:'A',runs:[failedRun]};
+ state.popup={kind:'실행/큐'};html=renderToStaticMarkup(<App/>);expect(html).toContain('실패 사유가 기록되지 않은 실행입니다');
+ state.snapshot={...actual,current_run_id:'A',runs:[run]};
+ html=renderToStaticMarkup(<App/>);expect(html).not.toContain('data-testid="run-failure"');
+});
+it('상한 필드가 없는 이전 웹 사용량도 undefined를 보이지 않는다',()=>{
+ vi.stubGlobal('location',{hash:'#/control'});
+ state.snapshot={...actual,current_run_id:'A',runs:[{...run,source_mode:'web',web_usage:{search_attempts:10,fetch_attempts:9,observed_http_requests:19}}]};
+ state.popup={kind:'실행/큐'};const html=renderToStaticMarkup(<App/>);
+ expect(html).not.toContain('undefined');expect(html).toContain('논리 검색 시도 10');expect(html).toContain('본문 수집 시도 9');
+});
 it('실제 서버 루트는 실행 제어로 열고 실제 요청 수를 표시하되 모의 경고나 연결 성공 장식을 만들지 않는다',()=>{
  vi.stubGlobal('location',{hash:''});state.snapshot=actual;
  const html=renderToStaticMarkup(<App/>);

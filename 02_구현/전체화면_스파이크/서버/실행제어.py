@@ -10,6 +10,9 @@ from 서버.연구그래프 import build_graph
 from 서버.저장소 import ApiError, Repository, encode, now, uid
 from 서버.활동기록 import measured_call, measured_node, measured_publish, start_call
 
+# run에 남기는 실패 사유 문구의 길이 상한. 사건에는 전체가 남고 화면 요약용 사본만 줄인다.
+MAX_FAILURE_MESSAGE_CHARACTERS = 300
+
 
 class ExecutionService:
     def __init__(self, data_dir, *, provider="test-double", mode="spike"):
@@ -68,7 +71,13 @@ class ExecutionService:
             status="failed" if active else "superseded",
         )
         if active:
-            active.update(status="failed", phase="failed", updated_at=now())
+            # 실행/큐 화면이 사건 상세를 열지 않아도 사유를 보이도록 run에도 남긴다.
+            failure = {
+                "code": public_error["code"],
+                "message": str(public_error["message"])[:MAX_FAILURE_MESSAGE_CHARACTERS],
+                "actor": actor,
+            }
+            active.update(status="failed", phase="failed", updated_at=now(), failure=failure)
             data.update(queue_paused=True, queue_pause_reason=reason)
             self.repo.save_revision(db, active)
 

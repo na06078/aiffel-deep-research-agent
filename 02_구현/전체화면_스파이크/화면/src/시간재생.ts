@@ -1,6 +1,7 @@
 import type {RunArchive} from './시간계약';
 import type {SceneClock} from './장면계약';
 import {actors} from './마을배치';
+const MAX_FAILURE_MESSAGE_CHARACTERS=300; // 서버가 run.failure에 남기는 사유 길이 상한과 같다.
 export function sceneClock(archive:RunArchive,at_ms:number,replay:boolean,priorReport?:Report|null):SceneClock {
  const projection=projectArchive(archive,at_ms);
  const clock:SceneClock={at_ms,replay,actor_started_ms:{}};
@@ -80,7 +81,7 @@ export function projectArchive(archive:RunArchive,at_ms:number):ReplayProjection
     run={...run,quality:structuredClone(quality),...(quality.passed===false?{status:'blocked' as const,phase:'quality_failed'}:{})};break;
    }
    case 'report.submitted':report=structuredClone(e.output) as Report;run={...run,report_id:report.report_id,status:'completed',phase:'submitted'};waiting.clear();break;
-   case 'model.failed':case 'execution.failed':run={...run,status:'failed',phase:'failed'};waiting.clear();break;
+   case 'model.failed':case 'execution.failed':run={...run,status:'failed',phase:'failed',failure:e.error?{code:e.error.code,message:e.error.message.slice(0,MAX_FAILURE_MESSAGE_CHARACTERS),actor:e.actor}:null};waiting.clear();break;
    case 'run.cancelled':run={...run,status:'cancelled',phase:'cancelled'};waiting.clear();break;
    case 'run.interrupted':run={...run,status:'interrupted',phase:'interrupted'};waiting.clear();break;
   }

@@ -1,0 +1,144 @@
+{
+ "mode": "new",
+ "checks": [
+  {
+   "name": "질문 접수",
+   "status": "PASS"
+  },
+  {
+   "name": "서버가 run.failure를 만들었다(코드·문구·역할)",
+   "status": "PASS",
+   "failure": {
+    "code": "model_error",
+    "message": "모델 요청 실패: 비밀 없는 오류 정보만 보존합니다.",
+    "actor": "planner"
+   }
+  },
+  {
+   "name": "실행/큐: 실패 사유 문구",
+   "status": "PASS",
+   "text": "실행 실패 사유 · planner · model_error: 모델 요청 실패: 비밀 없는 오류 정보만 보존합니다."
+  },
+  {
+   "name": "실행/큐: role=alert",
+   "status": "PASS"
+  },
+  {
+   "name": "실행/큐: undefined가 보이지 않는다",
+   "status": "PASS"
+  },
+  {
+   "name": "실행/큐: 서버가 보낸 상한(시도 / 상한)",
+   "status": "PASS",
+   "popup": [
+    "논리 검색 시도 0 / 16 · 본문 수집 시도 0 / 24"
+   ]
+  },
+  {
+   "name": "실행/큐: 사유가 화면 안에 보인다",
+   "status": "PASS",
+   "file": "실패사유_실행큐_데스크톱.png",
+   "viewport": [
+    1440,
+    900
+   ],
+   "notice_box": {
+    "x": 307,
+    "y": 426.53125,
+    "width": 826,
+    "height": 23.796875
+   },
+   "inside_viewport": true
+  },
+  {
+   "name": "과거 기록 상세: 같은 사유",
+   "status": "PASS",
+   "text": "실행 실패 사유 · planner · model_error: 모델 요청 실패: 비밀 없는 오류 정보만 보존합니다."
+  },
+  {
+   "name": "기록 재생(끝): 사건의 오류가 사유로 보인다",
+   "status": "PASS",
+   "text": "실행 실패 사유 · planner · model_error: 모델 요청 실패: 비밀 없는 오류 정보만 보존합니다."
+  },
+  {
+   "name": "좁은 화면: 사유가 가로로 잘리지 않는다",
+   "status": "PASS",
+   "file": "실패사유_실행큐_좁은화면.png",
+   "viewport": [
+    390,
+    844
+   ],
+   "notice_box": {
+    "x": 29,
+    "y": 213.53125,
+    "width": 332,
+    "height": 47.59375
+   },
+   "inside_viewport": true
+  }
+ ],
+ "captures": [
+  {
+   "file": "실패사유_실행큐_데스크톱.png",
+   "viewport": [
+    1440,
+    900
+   ],
+   "notice_box": {
+    "x": 307,
+    "y": 426.53125,
+    "width": 826,
+    "height": 23.796875
+   },
+   "inside_viewport": true
+  },
+  {
+   "file": "실패사유_과거기록.png",
+   "viewport": [
+    1440,
+    900
+   ],
+   "notice_box": {
+    "x": 307,
+    "y": 497.765625,
+    "width": 826,
+    "height": 23.796875
+   },
+   "inside_viewport": true
+  },
+  {
+   "file": "실패사유_기록재생.png",
+   "viewport": [
+    1440,
+    900
+   ],
+   "notice_box": {
+    "x": 307,
+    "y": 246.75,
+    "width": 826,
+    "height": 23.796875
+   },
+   "inside_viewport": true
+  },
+  {
+   "file": "실패사유_실행큐_좁은화면.png",
+   "viewport": [
+    390,
+    844
+   ],
+   "notice_box": {
+    "x": 29,
+    "y": 213.53125,
+    "width": 332,
+    "height": 47.59375
+   },
+   "inside_viewport": true
+  }
+ ],
+ "browser_errors": [],
+ "console_errors": [],
+ "external_requests": [],
+ "blocked_requests": [],
+ "status": "PASS",
+ "problems": []
+}

@@ -332,7 +332,9 @@ async def test_웹6노드_진짜읽기receipt_출처정본_모델과HTTP분리(r
         assert "wikipedia.org" not in report["markdown"] and "CC BY-SA" not in report["markdown"]
         assert run["web_usage"] == {
             "search_attempts": 1,
+            "search_limit": 16,
             "fetch_attempts": 3,
+            "fetch_limit": 24,
             "observed_http_requests": 4,
         }
         assert run["actual_model_requests"] == 9  # 기획1 + 선택3 + 읽기3 + 절1 + 종합1
@@ -512,7 +514,9 @@ async def test_새버전은_웹논리상한_다시0_옛버전사용량불변():
         run = service.repo.snapshot()["runs"][0]
         assert run.get("web_usage") == {
             "search_attempts": 0,
+            "search_limit": 16,
             "fetch_attempts": 0,
+            "fetch_limit": 24,
             "observed_http_requests": 0,
         }
         archive = service.repo.archive(first["run_id"])
@@ -798,7 +802,9 @@ async def test_웹4절2라운드_16검색24본문_62모델상한_실제그래프
         assert run["actual_model_requests"] == len(service.model.calls) == 62
         assert run["web_usage"] == {
             "search_attempts": 16,
+            "search_limit": 16,
             "fetch_attempts": 24,
+            "fetch_limit": 24,
             "observed_http_requests": 40,
         }
         assert len(service.web_store.read_claims(a["run_id"], 1)) == 24
