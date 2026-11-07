@@ -1,0 +1,97 @@
+{
+  "at": "2026-11-07T22:39:25.296820+09:00",
+  "phase": "candidate_verified",
+  "frontend_tests": {
+    "passed": 130,
+    "failed": 0
+  },
+  "ui_checks": {
+    "passed": 10,
+    "count": 10,
+    "status": "PASS"
+  },
+  "source_sha256": {
+    "src/마을배치.ts": "73e60a1889b83fff32e2eb85cb36a9d0b732df905ca1e46bbb80fad68e4bc7ec",
+    "src/마을배치.test.ts": "795f238d95bd6683014478518fc95c25ed38689905941b2b8621c2489a825962",
+    "src/마을지도.ts": "67bb00a6f96f58015a10855cd1c1f38e23de170366929fcb7731946299b889d4",
+    "src/마을지도.test.ts": "7502849ef9bec62565026f103f6dc9fe5f7a4a71177053cd7f2e153dd47699df",
+    "src/마을풍경.ts": "5e8b867ddedb675c8661d3864a7240ad37829dc592e28c380b8eb0acbd8a1bf5",
+    "src/마을풍경.test.ts": "5f692f06f57c763e85c83d1fd38130c079f55b92b7c0fe0416fac20b9bb48c7f",
+    "src/장면투영.test.ts": "03a058b1a9135c63d0ff2584fd1826e4d632ae08ccbbd594517d20db50c670d5"
+  },
+  "candidate_bundle": {
+    "index.html": "2e9c85fa7b69e481cb0b3d1d519e9a0535e99869cf5920e20bfb46814e976073",
+    "assets/browserAll-BYzxBhRF.js": "87ae5db5ccb2c20fc04cbde2076fb915374ee3cedfcd373ab74905953ab8e371",
+    "assets/Cache-CTROkX_m.js": "1362d81633b62e495b282f17617beb74083f16064864156e04949a07fa9ae0cf",
+    "assets/CanvasPool-DzuCm1vb.js": "edde6aa9084e7f5958ad3f9a1437ea82c2406913957ef01be12296ca951373f1",
+    "assets/canvasUtils-U4WZZEj-.js": "c0a01018402f30d7e9ad35ae43fafc8c490899236e6f28c8c4c8095fd066d448",
+    "assets/Filter-vpEaIMwd.js": "e802a7ce1c4d21948131c5d247ee9db7f33376b17678d973d22ae0296f1935fc",
+    "assets/GCManagedHash-DCvVepMX.js": "f9c36545f614350af3b653bd4e603e590afad27332ad79133fb661180406b312",
+    "assets/getTexelRangeRects-Bdv1rQ51.js": "baa0c3c95a387acb0bf72e4b440a0ffc947f8bfcb34bfd462c32a10bbe53c665",
+    "assets/getTextureBatchBindGroup-CEQHRttu.js": "f820ad942542bd39943bfcbc6073fa6d5237ee8fe574a36f8a4d22ae67c9558a",
+    "assets/GraphicsContext-48tzdr3Q.js": "26553fe11bde03fcc13af77e92b26890e5b7f7ec1b791ad26634a133b670a7dc",
+    "assets/index-iShvzInm.js": "11668545d97a20f2a00ccba341c468941ebf04aed7b8a7aa04810ea3ecbabc1c",
+    "assets/index-JlZ0pw_q.css": "39ae95c84d5e525e5f12b0e1cf12deb5270193a0facde9a1db168fc2dfec814a",
+    "assets/init-DoUXYMOj.js": "8aa920d822fab365c3d8f4dff6dd7daa2ef6d7d8979f4156b928684d79ac0af5",
+    "assets/RenderTargetSystem-BK2ifv01.js": "76151e37944ac1989dd3632f63fdc2a7f8b897cd226583baa060db0c71ccd6b0",
+    "assets/webworkerAll-DfpLrP0I.js": "10b452ce26112c3ab5a8c11aa3d1683ebf1487db17f5377e74949f45f5efaaf9",
+    "에셋/마을_타일.png": "bea430eb9a11074b349587978f7eae8ea9b030a38a046bff240d662e5cb45b17",
+    "에셋/에셋_목록.json": "51306343fb1939344783559b14e70bb4bf9ffbdf101fc51b40cacfcedad91aad",
+    "에셋/인물_라이선스.txt": "97f92c9d60b7ba92e3d08d5061b614abcd01629c9bfcd26ca7b6c6c04e67ce58",
+    "에셋/조사관_1.png": "441290e7e62dfed6359b6fa3d94b07431208a6c99fefdb54e351286f6e464c97",
+    "에셋/조사관_2.png": "6f75115baf28df20b8a04bf9ef0d5608f4e91d306fa3bd198515174c2f05fe5e",
+    "에셋/조사관_3.png": "8a509790890837c4c378209f9aa24aebb54c39a4dde290c6581174782b30c0ca",
+    "에셋/조사관_4.png": "e120fdc8513fbd0c77b0dbc321c45d3e56d4a8b945fc23d7492211874c1a7b1c",
+    "에셋/조정자.png": "66f739c3b5c8d3890d963d04c7998bd310f1a80c4777d36a70d1e1a1dfcfc6c0",
+    "에셋/종합자.png": "13b9807ee13c5c1b860fcfdb988312784109b1316cf70570a8ec5e610eaf3f50",
+    "에셋/타운_라이선스.txt": "587587de795599e3d4795247503c45e023980c5c66b26b90c807909af26b303d"
+  },
+  "comparison": {
+    "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\마을재설계\\마을_전후비교.png",
+    "sha256": "5634995dceca9bd16282c390a4f8af3cfbb129c22c1ba38b1e38ab7576299420",
+    "size": 183997,
+    "dimensions": [
+      2896,
+      948
+    ]
+  },
+  "visual_review": {
+    "wide": "확정 필수 지도 결함 없음; 골목 확대, tree1x2, union도로 확인",
+    "narrow": "지도 자체 구조 결함 없음, bridge양끝 visible",
+    "corrections_to_initial_impressions": [
+      "bridge는 잘리지 않고 동쪽 도로가 viewport경계까지 이어짐",
+      "집 아래 긴 선은 기둥이 아닌 흙길이며 실제 지면/문 연결됨"
+    ],
+    "boundary": "사용자 취향 채택 전 후보; 기존 낮은가로창 말풍선/오버레이 가림은 별도 UI범위"
+  },
+  "live_build_applied": false,
+  "new_research_calls": 0,
+  "review": {
+    "original": "독립_코드검토.json",
+    "original_passed": false,
+    "standards": "pass",
+    "spec": "pass",
+    "mandatory_findings": [
+      "RUNTIME-01"
+    ],
+    "main_resolution": {
+      "RUNTIME-01": "actual production request consumer RED to GREEN; live candidate rejection UI PASS"
+    },
+    "independent_rereview_claimed": false,
+    "optional_suggestions": [
+      "SUG-01",
+      "SUG-02"
+    ]
+  },
+  "guard_test_count": 2,
+  "guard_actual_ui": "미리보기_차단_화면확인.json",
+  "protected_bundle_files": 25,
+  "protected_data_files": 9,
+  "live_data_unchanged": true,
+  "helper_sha256": {
+    "마을재설계_실사용검사.py": "65e15066f38e1be8ad4423ee4e6b1b8579cfbef991fcc695807a9190357b5edd",
+    "마을후보_미리보기.mjs": "8c6bdde1bebbddaef6356194bf656bfe9af5f8078ff38813b21cd10fa11309ba",
+    "마을후보_정책검사.test.mjs": "d058480f41103cf515e4137fa1391e3dadc299cc5587eced0c89dee3ac5e7b86",
+    "마을후보_거절검사.py": "a459be4478a838c7e5fc53a2587801d439234af19e54a49f24ab08fe3d69c74f"
+  }
+}

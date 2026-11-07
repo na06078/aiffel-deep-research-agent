@@ -1,149 +1,147 @@
 import {Container,Graphics,Sprite,type Texture} from 'pixi.js';
 import {actors,type Actor,type Point,type VillageLayout} from './마을배치';
+import {villageMap,type Home} from './마을지도';
 type Tile=(x:number,y:number)=>Texture;
-/** 기존 CC0 타일을 조립하고 작은 생활 소품은 픽셀 도형으로 그린다. 새 이미지/게임 자산은 없다. */
-export function drawVillage(world:Container,l:VillageLayout,tile:Tile){
- const g=new Graphics();world.addChild(g);
- const rect=(x:number,y:number,w:number,h:number,c:number)=>g.rect(Math.round(x),Math.round(y),w,h).fill(c);
- const sprite=(texture:Texture,x:number,y:number,size=16,parent=world)=>{const s=new Sprite(texture);s.position.set(Math.round(x),Math.round(y));s.width=size;s.height=size;parent.addChild(s);return s;};
- const tree=(x:number,y:number,autumn=false)=>{
-  const group=new Container();group.zIndex=y+12;world.addChild(group);
-  const size=l.narrow?11:14;
-  for(let row=0;row<2;row++)for(let col=0;col<2;col++)sprite(tile((autumn?9:4)+col,row),x+col*size,y-size+row*size,size,group);
+
+/** 도로·수면·집·숲은 같은 순수 지도에서 읽는다. 원본 atlas는 바꾸지 않는다. */
+export function drawVillage(world:Container,l:VillageLayout,tile:Tile) {
+ const map=villageMap(l),compact=l.narrow||l.height<250;
+ const layer=(label:string,z:number)=>{const g=new Graphics();g.label=label;g.zIndex=z;world.addChild(g);return g;};
+ const rect=(g:Graphics,x:number,y:number,w:number,h:number,color:number)=>g.rect(Math.round(x),Math.round(y),w,h).fill(color);
+ const sprite=(parent:Container,x:number,y:number,n:number,cx:number,cy:number)=>{
+  const s=new Sprite(tile(cx,cy));s.position.set(Math.round(x),Math.round(y));s.width=n;s.height=n;parent.addChild(s);return s;
  };
- const path=(points:Point[],width:number)=>{
-  const line=(color:number,w:number)=>{g.moveTo(points[0].x,points[0].y);points.slice(1).forEach(p=>g.lineTo(p.x,p.y));g.stroke({color,width:w,cap:'round',join:'round'});};
-  line(0x87994e,width+3);line(0xc5b67b,width);line(0xd7c38c,Math.max(2,width-4));
- };
- const fence=(x:number,y:number,count:number,vertical=false)=>{
-  for(let i=0;i<count;i++){const a=x+(vertical?0:i*6),b=y+(vertical?i*6:0);rect(a,b,2,7,0x856448);rect(a,b,2,2,0xe1c08a);if(i<count-1)rect(a+1,b+3,vertical?1:6,vertical?6:1,0xb99463);}
- };
- const flowers=(x:number,y:number,count:number,parent=g)=>{for(let i=0;i<count;i++){const a=Math.round(x+(i*7)%19),b=Math.round(y+Math.floor(i/3)*5);parent.rect(a,b,1,4).fill(0x517146).rect(a-1,b,3,2).fill([0xf4d77b,0xd99b8b,0xeae2b0][i%3]);}};
- const bench=(x:number,y:number,parent=g)=>{x=Math.round(x);y=Math.round(y);parent.rect(x,y,13,4).fill(0x8a6645).rect(x,y-3,13,2).fill(0xb68b59).rect(x+1,y+4,2,3).rect(x+10,y+4,2,3).fill(0x684e3c);};
- // 잔디는 가장자리까지 이어진다. 밀도는 숲/빈터/텃밭마다 다르게 구성한다.
- for(let y=0;y<l.height;y+=16)for(let x=0;x<l.width;x+=16){const hash=(x*17+y*13)%97;sprite(tile(hash<5?2:0,0),x,y);}
- // 땅/물은 가장 아래, 나무/건물/사람은 발밑 y 깊이 정렬이다.
- g.zIndex=1;
- const streamX=Math.round(l.width*(l.narrow?.91:.91));
- const water=new Graphics();water.zIndex=.5;world.addChild(water);
- const waterLine=(color:number,width:number)=>{water.moveTo(streamX+11,-20).bezierCurveTo(streamX-30,l.height*.24,streamX+21,l.height*.44,streamX-4,l.height*.65).bezierCurveTo(streamX-17,l.height*.8,streamX+20,l.height*.9,streamX+6,l.height+20).stroke({color,width,cap:'round'});};
- waterLine(0x647f50,l.narrow?25:36);waterLine(0x91ab69,l.narrow?21:31);waterLine(0x508e9a,l.narrow?16:24);waterLine(0x69a4ac,l.narrow?10:17);
- // 작은 연못과 이어진 개울: 뚜렷한 물가 동네, 획일적인 테두리 나무는 두지 않는다.
- const pondX=l.width*.82,pondY=l.height*.39;
- water.ellipse(pondX,pondY,l.narrow?13:30,l.narrow?12:19).fill(0x7d9958).ellipse(pondX,pondY-1,l.narrow?10:26,l.narrow?9:15).fill(0x5996a2);
- for(let i=0;i<8;i++)water.rect(streamX-4+(i%3)*3,i*l.height/8,5,1).fill(0x9cc5bc);
- path(l.street,l.narrow?8:12);
- for(const actor of actors){const p=l.routes[actor];path(p.activity,l.narrow?5:7);path(p.delivery,l.narrow?5:7);}
- const sq=l.square,short=l.height<220;
- // 두 주거 골목은 업무 목적지가 아니다. 화면 비율별로 저작한 집/마당이며 NPC를 늘리지 않는다.
- const positions=l.narrow?[[.15,.17],[.19,.24],[.14,.71],[.35,.80]]:short?[[.06,.61],[.15,.79],[.78,.80],[.84,.88]]:[[.14,.13],[.27,.15],[.30,.30],[.10,.68],[.18,.79],[.36,.88]];
- const styles=['gable','long-roof','porch','lean-to','porch','gable'];
- const homes=positions.map(([x,y],i)=>{const n=l.narrow||short?6:7,columns=i%3===1?4:3;return {id:`cottage-${i}`,pocket:i<positions.length/2?'orchard-lane':'garden-lane',x:Math.round(x*l.width),y:Math.round(y*l.height),width:columns*n,height:4*n,style:styles[i],n,columns};});
- for(const pocket of ['orchard-lane','garden-lane']){
-  const group=homes.filter(h=>h.pocket===pocket).reverse(),entry=group[0],side=entry.x+entry.width/2+6;
-  const junction=pocket==='orchard-lane'?l.street[l.narrow?0:1]:l.street[l.narrow?3:2];
-  const approach=l.narrow&&pocket==='orchard-lane'?[junction,{x:junction.x,y:entry.y+11}]:short&&pocket==='garden-lane'?[sq,{x:sq.x-25,y:sq.y+52},{x:side,y:sq.y+52},{x:side,y:entry.y+11}]:[junction,{x:side,y:junction.y},{x:side,y:entry.y+11}];
-  const lane=group.flatMap((h,i)=>i?[{x:h.x,y:group[i-1].y+11},{x:h.x,y:h.y+11}]:[{x:h.x,y:h.y+11}]);
-  path([...approach,...lane],l.narrow?4:5);
+ const grass=new Container();grass.zIndex=-10;world.addChild(grass);
+ for(let y=0;y<l.height;y+=16)for(let x=0;x<l.width;x+=16)sprite(grass,x,y,16,0,0);
+ const ground=layer('village-ground',-8),water=layer('village-water',-6);
+ // 작은 계단형 둑을 먼저 이어 붙이고 수면을 한 번에 덮는다. 물에는 도로가 없다.
+ for(const b of map.water)water.rect(b.x-4,b.y-2,b.width+8,b.height+4);
+ water.fill(0x78915b);
+ for(const b of map.water)water.rect(b.x-2,b.y,b.width+4,b.height);
+ water.fill(0xa1b579);
+ for(const b of map.water)water.rect(b.x,b.y,b.width,b.height);
+ water.fill(0x568f9d);
+ for(const b of map.water)water.rect(b.x+3,b.y,b.width-6,b.height);
+ water.fill(0x6da5ae);
+ for(const [i,b] of map.water.entries())if(i%9===2)rect(water,b.x+4,b.y+1,Math.min(7,b.width-5),1,0xa9c9be);
+ // 마당은 문 앞을 비우고 집 옆 생활 공간만 받친다.
+ for(const h of map.homes){
+  rect(ground,h.x-h.width/2-3,h.y+1,h.width+6,10,0xaabd75);
+  flowers(ground,h.x-h.width/2,h.y+2,3);
  }
- for(const [i,h] of homes.entries()){
-  const left=h.x-h.width/2,top=h.y-h.height;
-  // 출입구를 남긴 작은 앞마당. 울타리와 화단이 집마다 이어진다.
-  rect(left-3,h.y+1,h.width+6,12,0xa5b76b);fence(left-4,h.y+12,Math.max(2,Math.floor(h.width/6)-1));
-  path([{x:h.x,y:h.y+1},{x:h.x,y:h.y+12}],3);
-  flowers(left-1,h.y+3,3);
-  rect(left+h.width-1,h.y+2,2,8,0x795c40);rect(left+h.width-3,h.y+1,6,4,i%2?0xb57053:0x7b9382); // 우편함
-  const house=new Container();house.label=h.id;house.zIndex=h.y;world.addChild(house);
-  const shade=new Graphics().rect(left+2,top+4,h.width+2,h.height).fill({color:0x3e5939,alpha:.2});house.addChild(shade);
-  for(let row=0;row<4;row++)for(let col=0;col<h.columns;col++){
-   const source=col===0?0:col===h.columns-1?2:1;
-   sprite(tile((i%2?0:4)+source,4+row),left+col*h.n,top+row*h.n,h.n,house);
-  }
-  const detail=new Graphics();house.addChild(detail);
-  const cr=(x:number,y:number,w:number,h:number,c:number)=>detail.rect(Math.round(x),Math.round(y),w,h).fill(c);
-  cr(left+h.width-7,top-3,3,8,0x776557);cr(left+h.width-8,top-3,5,2,0xc4b69b);
-  if(h.style==='porch'){
-   cr(left+3,h.y-7,h.width-6,3,0xb58b55);cr(left+4,h.y-4,1,6,0x74533b);cr(left+h.width-5,h.y-4,1,6,0x74533b);cr(left+3,h.y+1,h.width-6,2,0xd0b47a);
-  }else if(h.style==='lean-to'){
-   cr(left+h.width-8,h.y-12,8,12,0xa4845b);cr(left+h.width-9,h.y-14,10,3,0x79594b);cr(left+h.width-6,h.y-9,3,5,0x5a7971);
-  }else if(h.style==='gable'){
-   cr(h.x-4,top+8,8,7,0x9c684f);cr(h.x-2,top+10,4,4,0xe0ce91);cr(h.x-5,top+7,10,2,0x725047);
-  }else{
-   cr(left+3,h.y-9,6,5,0x658a81);cr(left+2,h.y-4,8,2,0xd6b97d);
-  }
-  if(i%2===0){
-   // 빨랫줄은 길 위가 아닌 집 옆 마당 안에 둔다.
-   rect(left+3,h.y+3,1,7,0x856448);rect(left+h.width-4,h.y+3,1,7,0x856448);rect(left+3,h.y+3,h.width-6,1,0xd8c497);
-   rect(left+6,h.y+4,4,5,0xf2e5be);rect(left+12,h.y+4,3,4,0x819d9b);
-  }
+ const road=layer('village-roads',-4);
+ paintCells(road,map.roads.cells,0xcdbb83);
+ paintCells(road,map.roads.edge,0x9b9c67);
+ const sq=l.square,rx=l.narrow?25:compact?30:50,ry=l.narrow?19:compact?14:28;
+ const plaza=layer('market-square',-3);
+ // 광장에는 따로 테두리를 긋지 않는다. 흙길과 포장은 같은 보행 면이다.
+ rect(plaza,sq.x-rx+1,sq.y-ry+1,rx*2-2,ry*2-2,0xc4bea0);
+ for(let y=sq.y-ry+3;y<sq.y+ry-3;y+=6)for(let x=sq.x-rx+3;x<sq.x+rx-5;x+=9){
+  rect(plaza,x+((y%12)?2:0),y,6,3,0xd3caab);
  }
- // 길의 교차점이 아니라 장터가 둘러싼 돌바닥 광장. 운반 종착점 주변은 비워 둔다.
- const rx=l.narrow?24:short?26:42,ry=l.narrow?19:short?13:25;
- const plaza=new Graphics();plaza.label='market-square';plaza.zIndex=1;world.addChild(plaza);
- plaza.roundRect(sq.x-rx-2,sq.y-ry-2,rx*2+4,ry*2+4,5).fill(0x8c9c65).roundRect(sq.x-rx,sq.y-ry,rx*2,ry*2,4).fill(0xb6b092);
- for(let y=-ry+2;y<ry-2;y+=5)for(let x=-rx+2;x<rx-3;x+=8)plaza.rect(sq.x+x+(y%2?1:0),sq.y+y,6,3).fill((x+y)%3?0xd3c9a4:0xc7be98);
- const furnishings=new Graphics();furnishings.label='square-furnishings';furnishings.zIndex=2;world.addChild(furnishings);
- furnishings.rect(sq.x-11,sq.y-7,10,8).fill(0x777e6c).rect(sq.x-10,sq.y-6,8,3).fill(0x465e60).rect(sq.x-12,sq.y-9,12,3).fill(0xd4c4a3);
- // 집과 다른 열린 실루엣: 줄무늬 차양 아래 농산물 가판대.
+ const bridge=layer('village-bridge',0),b=map.bridge;
+ rect(bridge,b.x,b.y,b.width,b.height,0x77583f);
+ for(let x=b.x+1;x<b.x+b.width-1;x+=4)rect(bridge,x,b.y+2,3,b.height-4,0xc49f69);
+ rect(bridge,b.x,b.y,b.width,2,0x8d704d);rect(bridge,b.x,b.y+b.height-2,b.width,2,0x8d704d);
+ for(const x of [b.x,b.x+b.width-2]){rect(bridge,x,b.y-2,2,5,0x6d513a);rect(bridge,x,b.y+b.height-3,2,5,0x6d513a);}
+ const furnishings=layer('square-furnishings',2);
+ bench(furnishings,sq.x-rx+2,sq.y+ry-4);bench(furnishings,sq.x+rx-15,sq.y+ry-4);
+ flowers(furnishings,sq.x-rx-8,sq.y+ry-6,4);flowers(furnishings,sq.x+rx+2,sq.y+ry-4,4);
  for(let i=0;i<2;i++){
-  const x=sq.x+(i?rx-14:-rx+2),y=sq.y-ry+2,w=l.narrow?13:18;
-  const stall=new Graphics();stall.label=`market-stall-${i}`;stall.zIndex=y+12;world.addChild(stall);
-  stall.rect(x,y+5,2,10).rect(x+w-2,y+5,2,10).fill(0x77573d).rect(x,y+9,w,5).fill(0x977047);
-  stall.rect(x-1,y-1,w+2,6).fill(i?0x799185:0xb57857);
-  for(let a=1;a<w;a+=5)stall.rect(x+a,y-1,2,6).fill(0xe5d4a6);
-  for(let a=2;a<w-2;a+=4)stall.rect(x+a,y+8,3,3).fill(i?0xb1bd68:0xd99750);
+  const x=sq.x+(i?rx-16:-rx+2),y=sq.y-ry+2,w=compact?13:18;
+  const stall=layer(`market-stall-${i}`,y+12);
+  rect(stall,x,y+4,2,11,0x77573d);rect(stall,x+w-2,y+4,2,11,0x77573d);
+  rect(stall,x,y+9,w,5,0x977047);rect(stall,x-1,y-1,w+2,6,i?0x799185:0xb57857);
+  for(let a=1;a<w;a+=5)rect(stall,x+a,y-1,2,6,0xe5d4a6);
+  for(let a=2;a<w-2;a+=4)rect(stall,x+a,y+8,3,3,i?0xb1bd68:0xd99750);
  }
- // 광장 남쪽의 벤치·꽃섬은 작은 이야기를 만든다. 가운데 통로와 문서는 가리지 않는다.
- bench(sq.x-rx+3,sq.y+ry-2,furnishings);bench(sq.x+rx-15,sq.y+ry-2,furnishings);
- flowers(sq.x-rx-5,sq.y+3,6,furnishings);flowers(sq.x+rx-3,sq.y+6,5,furnishings);
- furnishings.rect(sq.x+rx-4,sq.y+ry-6,7,4).fill(0x947347).rect(sq.x+rx-3,sq.y+ry-8,5,3).fill(0xbda570);
- // 개울을 건너는 목교: 길은 물 위에서 끊기지 않는다.
- const bridgeY=l.narrow?l.street.at(-1)!.y:l.street.at(-1)!.y;
- rect(streamX-18,bridgeY-5,38,12,0x73513b);
- for(let x=-17;x<20;x+=4)rect(streamX+x,bridgeY-4,3,10,0xc29c64);
- rect(streamX-19,bridgeY-7,39,2,0x694d3a);rect(streamX-19,bridgeY+7,39,2,0x694d3a);
- // 구성된 숲 무리와 열린 초지. 모든 빈칸을 나무로 채우지 않는다.
- const groves=l.narrow?[[.03,.035],[.13,.05],[.01,.35],[.83,.08],[.92,.16],[.07,.79],[.15,.86],[.02,.93],[.79,.94]]:[[.025,.06],[.07,.10],[.025,.20],[.065,.27],[.84,.08],[.92,.13],[.97,.24],[.025,.76],[.05,.86],[.18,.95],[.24,.97],[.89,.83],[.96,.90]];
- groves.forEach(([x,y],i)=>tree(Math.round(l.width*x),Math.round(l.height*y),i%5===2));
- flowers(l.width*.12,l.height*.58,6);flowers(l.width*.68,l.height*.86,8);flowers(sq.x-28,sq.y-19,5);
+ const house=(id:string,x:number,y:number,columns:number,n:number,red:boolean,rows=4)=>{
+  const group=new Container();group.label=id;group.zIndex=y;world.addChild(group);
+  const left=x-columns*n/2,top=y-rows*n,base=red?4:0;
+  group.addChild(new Graphics().rect(left+2,top+5,columns*n,rows*n-3).fill({color:0x405b37,alpha:.2}));
+  // 지붕은 두 줄의 좌/가운데/우 끝 조각만 반복한다.
+  for(let row=0;row<2;row++)for(let col=0;col<columns;col++){
+   sprite(group,left+col*n,top+row*n,n,base+(col===0?0:col===columns-1?2:1),4+row);
+  }
+  // 벽은 독립된 solid 셀. row7은 통째 밴드가 아니라 창/문 하나씩 얹는다.
+  for(let row=2;row<rows;row++)for(let col=0;col<columns;col++)sprite(group,left+col*n,top+row*n,n,base+1,6);
+  sprite(group,x-n/2,y-n,n,base+1,7);
+  sprite(group,left+n/4,y-n,n,base,7);
+  if(columns>3)sprite(group,left+(columns-1.25)*n,y-n,n,base,7);
+  return group;
+ };
+ for(const [i,h] of map.homes.entries()){
+  house(h.id,h.x,h.y,h.columns,h.n,i%2===1,h.height/h.n);
+  cottageDetails(ground,h,i);
+ }
  for(const actor of actors){
-  const site=l.sites[actor],p=l.routes[actor],n=p.tileSize,w=p.columns*n;
-  const building=new Container();building.zIndex=site.y;world.addChild(building);
-  // 반복 가능한 가운데 지붕과 끝 조각을 조립해 실제 폭이 서로 다른 건물을 만든다.
-  const base=p.red?4:0,left=site.x-w/2,top=site.y-4*n;
-  const shadow=new Graphics().rect(left+3,top+4,w,4*n+2).fill({color:0x3e5939,alpha:.22});building.addChild(shadow);
-  for(let row=0;row<4;row++)for(let col=0;col<p.columns;col++){
-   let source=col===0?0:col===p.columns-1?2:1;
-   if(row===3&&col>0&&col<p.columns-1&&col!==Math.floor(p.columns/2))source=0;
-   sprite(tile(base+source,4+row),left+col*n,top+row*n,n,building);
-  }
-  // 소품은 각 장소의 정체성을 만든다. 모든 집 옆에 같은 PC를 놓지 않는다.
-  const {x,y}=p.work;
-  if(actor==='planner'){
-   rect(x-9,y-6,18,4,0x8c6749);rect(x-7,y-5,14,2,0xd2bb86);rect(x-8,y-2,2,6,0x654f3b);rect(x+6,y-2,2,6,0x654f3b);
-   rect(x-4,y-7,7,2,0xf4eacb);fence(left-8,site.y+3,3,true);flowers(left-13,site.y-7,5);
-  }else if(actor==='researcher-1'){
-   rect(x-9,y-12,15,12,0x785338);for(let i=0;i<5;i++)rect(x-7+i*2,y-10,1,7,[0xbb7457,0x9ca971,0xd6c18f][i%3]);rect(x-9,y-5,15,1,0xbd965c);
-   bench(left-10,site.y+11);tree(left-22,site.y-19);flowers(site.x+18,site.y-1,4);
-  }else if(actor==='researcher-2'){
-   const gardenX=l.narrow?site.x-18:site.x+8,gardenY=site.y+8;
-   rect(gardenX,gardenY, l.narrow?30:43,17,0x8b6c43);
-   for(let row=0;row<3;row++)for(let col=0;col<5;col++){const a=gardenX+3+col*(l.narrow?5:8),b=gardenY+2+row*5;rect(a,b,3,3,0x567a3d);rect(a+1,b-1,1,3,row===1?0xe4ac52:0x9bab4d);}
-   fence(left-5,site.y-4,3,true);fence(gardenX,gardenY+19,l.narrow?5:7);flowers(left-6,site.y-16,4);
-  }else if(actor==='researcher-3'){
-   rect(x-9,y-6,17,4,0x8a6240);rect(x-7,y-2,2,5,0x5c4736);rect(x+5,y-2,2,5,0x5c4736);
-   rect(x-5,y-9,8,3,0xd2b17b);rect(x+3,y-12,2,8,0x626a60);rect(x+1,y-13,7,3,0xa6aea0);
-   for(let i=0;i<4;i++)rect(left-9+i*4,site.y+1,3,8,0xab8355);fence(site.x+15,site.y+9,4);
-  }else if(actor==='researcher-4'){
-   rect(x-7,y-8,13,8,0x684e39);rect(x-6,y-7,11,5,0x9db8aa);rect(x-1,y-11,2,4,0xc6b982);
-   for(let i=0;i<5;i++){rect(x+9+i*3,y-3+(i%2)*3,1,7,0x697e42);rect(x+9+i*3,y-4+(i%2)*3,2,2,0xb29559);}
-   bench(left-4,site.y+12);
-  }else{
-   // 작동 사건의 PC는 편집소의 인쇄 작업대에만 존재한다.
-   rect(x-10,y-5,18,4,0x7c5c43);rect(x-8,y-15,12,10,0x465455);rect(x-7,y-14,10,7,0x8bbab7);rect(x-3,y-6,4,2,0x384748);
-   rect(x+5,y-8,6,6,0xe9dbb7);rect(site.x+16,site.y-3,6,9,0x995c48);rect(site.x+15,site.y-7,8,6,0xba7555);rect(site.x+16,site.y-5,6,1,0x5d4f3b);
-   fence(left-9,site.y+4,3,true);flowers(left-14,site.y-14,4);
+  const p=l.routes[actor],s=l.sites[actor];
+  house(`building-${actor}`,s.x,s.y,p.columns,p.tileSize,p.red);
+  const props=layer(`work-${actor}`,p.work.y-1);
+  workDetails(props,actor,p.work);
+ }
+ for(const [i,t] of map.trees.entries()){
+  const tree=new Container();tree.label=`tree-${i}`;tree.zIndex=t.y;world.addChild(tree);
+  // 원본의 완결된 1열×2행: 주황3/초록4. 인접 수관5/9/10은 섞지 않는다.
+  sprite(tree,t.x-t.size/2,t.y-2*t.size,t.size,t.autumn?3:4,0);
+  sprite(tree,t.x-t.size/2,t.y-t.size,t.size,t.autumn?3:4,1);
+ }
+ return {...map,streamX:Math.round(l.width*.92),pondX:l.width*.87,pondY:l.height*.34};
+}
+
+/** 한 색의 연속 픽셀은 가로 띠로 묶어 draw-call/도형 수를 줄인다. */
+function paintCells(g:Graphics,cells:Point[],color:number) {
+ const rows=new Map<number,number[]>();
+ for(const p of cells){if(!rows.has(p.y))rows.set(p.y,[]);rows.get(p.y)!.push(p.x);}
+ for(const [y,xs] of rows){
+  xs.sort((a,b)=>a-b);let start=xs[0],end=start;
+  for(const x of [...xs.slice(1),Infinity]){
+   if(x===end+1){end=x;continue;}
+   g.rect(start,y,end-start+1,1);start=end=x;
   }
  }
- return {streamX,pondX,pondY,homes};
+ g.fill(color);
+}
+function flowers(g:Graphics,x:number,y:number,count:number) {
+ for(let i=0;i<count;i++){
+  const a=Math.round(x+i%3*4),b=Math.round(y+Math.floor(i/3)*4);
+  g.rect(a,b,1,3).fill(0x5c7e44).rect(a-1,b,3,1).fill(i%2?0xe8cf89:0xe4dcb2);
+ }
+}
+function bench(g:Graphics,x:number,y:number) {
+ g.rect(x,y,13,3).fill(0x977349).rect(x,y-3,13,2).fill(0xb89260);
+ g.rect(x+1,y+3,2,3).rect(x+10,y+3,2,3).fill(0x69513a);
+}
+function cottageDetails(g:Graphics,h:Home,i:number) {
+ const left=h.x-h.width/2;
+ // 짧은 울타리는 현관 양옆에만, 골목 종점과 문 사이에는 놓지 않는다.
+ for(const side of [-1,1]){
+  const x=h.x+side*(h.width/2-3);
+  g.rect(x,h.y+5,2,7).fill(0x896b48).rect(x,h.y+5,2,2).fill(0xd6bc80);
+ }
+ g.rect(left+h.width-1,h.y+3,2,7).fill(0x795c40).rect(left+h.width-3,h.y+2,6,4).fill(i%2?0xab7356:0x7b9382);
+ if(h.style==='porch')g.rect(left+2,h.y-2,h.width-4,2).fill(0xc4a36b);
+ if(h.style==='gable')g.rect(left+h.width-6,h.y-h.height-2,3,5).fill(0x76685a);
+ if(h.style==='long-roof')flowers(g,left-3,h.y+1,4);
+}
+function workDetails(g:Graphics,actor:Actor,p:Point) {
+ const {x,y}=p;
+ const rect=(a:number,b:number,w:number,h:number,c:number)=>g.rect(a,b,w,h).fill(c);
+ if(actor==='researcher-1'){
+  rect(x-8,y-12,15,11,0x785338);
+  for(let i=0;i<5;i++)rect(x-6+i*2,y-10,1,7,[0xbb7457,0x9ca971,0xd6c18f][i%3]);
+  rect(x-8,y-4,15,1,0xbd965c);
+ }else if(actor==='researcher-2'){
+  rect(x-8,y-8,16,7,0x8b6c43);
+  for(let i=0;i<4;i++){rect(x-6+i*3,y-7,2,4,0x567a3d);rect(x-6+i*3,y-8,2,2,0xd8af5d);}
+ }else if(actor==='researcher-4'){
+  rect(x-7,y-8,13,7,0x684e39);rect(x-6,y-7,11,4,0x9db8aa);rect(x-1,y-11,2,4,0xc6b982);
+ }else{
+  rect(x-8,y-5,16,3,0x8c6749);rect(x-7,y-2,2,4,0x654f3b);rect(x+5,y-2,2,4,0x654f3b);
+  if(actor==='editor'){
+   rect(x-6,y-14,10,9,0x465455);rect(x-5,y-13,8,6,0x8bbab7);rect(x+5,y-8,5,5,0xe9dbb7);
+  }else if(actor==='researcher-3'){
+   rect(x-4,y-8,8,3,0xd2b17b);rect(x+2,y-11,2,6,0x626a60);rect(x,y-12,6,2,0xa6aea0);
+  }else rect(x-3,y-7,7,2,0xf4eacb);
+ }
 }

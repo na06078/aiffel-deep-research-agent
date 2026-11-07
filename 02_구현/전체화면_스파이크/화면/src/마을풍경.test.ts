@@ -2,6 +2,32 @@ import {expect,it} from 'vitest';
 import {Container,Graphics,Texture} from 'pixi.js';
 import {drawVillage} from './마을풍경';
 import {actors,villageLayout} from './마을배치';
+it('실제 나무는 단일 열 두 타일이며 발밑 깊이, 지면 길은 합집합 외곽만 그린다',()=>{
+ const world=new Container(),cells=new Map<Texture,number[]>();
+ const l=villageLayout(1440,900);
+ drawVillage(world,l,(x,y)=>{const texture=new Texture({source:Texture.EMPTY.source});cells.set(texture,[x,y]);return texture;});
+ const trees=world.children.filter(c=>c.label?.startsWith('tree-'));
+ expect(trees.length).toBeGreaterThan(10);
+ for(const group of trees){
+  const parts=group.children as import('pixi.js').Sprite[];
+  expect(parts).toHaveLength(2);
+  const first=cells.get(parts[0].texture)!,second=cells.get(parts[1].texture)!;
+  expect([3,4]).toContain(first[0]);expect(first[1]).toBe(0);expect(second).toEqual([first[0],1]);
+  expect(parts[0].x).toBe(parts[1].x);
+  expect(parts[0].y+parts[0].height).toBe(parts[1].y);
+  expect(group.zIndex).toBe(parts[1].y+parts[1].height);
+ }
+ const road=world.children.find(c=>c.label==='village-roads') as Graphics;
+ expect(road).toBeDefined();
+ expect(road.context.instructions.every(i=>i.action!=='stroke')).toBe(true);
+ // 반복 지붕과 문/창 밴드를 구별한다. 한 건물에는 중앙 문 하나만 쓴다.
+ for(const actor of actors){
+  const building=world.children.find(c=>c.label===`building-${actor}`)!;
+  const doors=building.children.filter(c=>cells.get((c as import('pixi.js').Sprite).texture)?.[1]===7&&[1,5].includes(cells.get((c as import('pixi.js').Sprite).texture)![0]));
+  expect(doors).toHaveLength(1);
+ }
+ world.destroy({children:true});
+});
 it('네 화면 크기에서 실제 Pixi 지형·건물 그래프를 조립하며 atlas 범위를 벗어나지 않는다',()=>{
  for(const [width,height] of [[1440,900],[1100,720],[390,844],[844,390]]){
   const l=villageLayout(width,height),world=new Container();

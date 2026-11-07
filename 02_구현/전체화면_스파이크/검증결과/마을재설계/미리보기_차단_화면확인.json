@@ -1,0 +1,14 @@
+{
+  "guard_preflight": "PASS",
+  "checks": [
+    {
+      "name": "실제 앱 입력405·코드/한글 사유·초안 보존",
+      "status": "PASS",
+      "message": "Error: read_only_preview: 마을 디자인 미리보기에서는 새 연구나 변경 요청을 보내지 않습니다. · 입력은 보존됩니다. 같은 내용으로 재시도하면 최초 자료와 같은 요청 ID를 사용합니다.전송 재시도"
+    }
+  ],
+  "unexpected_requests": [],
+  "status": "PASS",
+  "live_state_unchanged": true,
+  "new_research_calls": 0
+}

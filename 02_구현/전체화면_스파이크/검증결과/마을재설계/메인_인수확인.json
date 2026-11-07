@@ -1,0 +1,58 @@
+{
+  "checked_source_files": 7,
+  "source_mismatches": [],
+  "observed_cycles": [
+    {
+      "slice": "01_동선",
+      "red_failed": 1,
+      "green_passed": 4,
+      "green_failed": 0
+    },
+    {
+      "slice": "02_길합집합",
+      "red_failed": 1,
+      "green_passed": 1,
+      "green_failed": 0
+    },
+    {
+      "slice": "03_지도연결",
+      "red_failed": 1,
+      "green_passed": 2,
+      "green_failed": 0
+    },
+    {
+      "slice": "04_수목이격",
+      "red_failed": 1,
+      "green_passed": 3,
+      "green_failed": 0
+    },
+    {
+      "slice": "05_타일조립",
+      "red_failed": 3,
+      "green_passed": 4,
+      "green_failed": 0
+    },
+    {
+      "slice": "06_문턱연결",
+      "red_failed": 1,
+      "green_passed": 4,
+      "green_failed": 0
+    },
+    {
+      "slice": "07_물가연속",
+      "red_failed": 1,
+      "green_passed": 5,
+      "green_failed": 0
+    },
+    {
+      "slice": "08_포장전체폭",
+      "red_failed": 1,
+      "green_passed": 6,
+      "green_failed": 0
+    }
+  ],
+  "saved_full_test_count": 129,
+  "saved_full_failures": 0,
+  "live_dist_changed": [],
+  "live_data_changed": []
+}

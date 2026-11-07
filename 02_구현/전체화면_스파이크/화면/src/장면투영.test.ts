@@ -2,6 +2,7 @@ import {expect,it} from 'vitest';
 import {actors,villageLayout} from './마을배치';
 import type {VillageProps} from './장면계약';
 import {projectScene,routePoint} from './장면투영';
+import {villageMap} from './마을지도';
 const layout=villageLayout(1440,900);
 const base:VillageProps={mode:'control',demo:{action:'reset',nonce:0},actors:Object.fromEntries(actors.map(a=>[a,{status:'idle'}])) as VillageProps['actors'],onActorClick:()=>{},onCodeClick:()=>{},onPaperClick:()=>{}};
 it('기록 시각2200→500→2200은 벽시계/호출 순서와 무관하게 동일한 실제 좌표다',()=>{
@@ -43,6 +44,23 @@ it('자산 실험의 작업 연출은1600ms에 끝나고 그 뒤에는 바운스
  expect(projectScene(layout,state,1599).phase).toBe('working');
  expect(projectScene(layout,state,1600).phase).toBe('worked');
  expect(projectScene(layout,state,1700).points['researcher-1']).toEqual(projectScene(layout,state,1900).points['researcher-1']);
+});
+it('새 지형에서도 실제 busy와 기록된 제출의 좌표는 같은 보행 망을 따르고 종착점·재생 결정성을 보존한다',()=>{
+ for(const [width,height] of [[1440,900],[1100,720],[390,844],[844,390],[640,360]]){
+  const l=villageLayout(width,height),m=villageMap(l);
+  const state:VillageProps={...base,actors:Object.fromEntries(actors.map(a=>[a,{status:'running'}])) as VillageProps['actors'],clock:{at_ms:0,actor_started_ms:Object.fromEntries(actors.map(a=>[a,0])),replay:true}};
+  for(const time of [0,200,650,1000,1300,2200]){
+   const f=projectScene(l,{...state,clock:{...state.clock!,at_ms:time}},88888);
+   for(const actor of actors)expect(m.roads.contains(f.points[actor]),`${width}: ${actor} @ ${time}`).toBe(true);
+   expect(projectScene(l,{...state,clock:{...state.clock!,at_ms:time}},0)).toEqual(f);
+  }
+  const submitted={...state,latestReport:{id:'preserved-report',title:'기록된 제출',createdAt:'2026-11-06T00:00:00Z'}};
+  for(const time of [1000,1300,2100,3199,3200]){
+   const f=projectScene(l,{...submitted,clock:{...state.clock!,at_ms:time,report_submitted_ms:1000}},0);
+   expect(m.roads.contains(f.points.editor)).toBe(true);
+   if(time===3200){expect(f.paper).toEqual(l.paper);expect(f.phase).toBe('submitted');}
+  }
+ }
 });
 it('다중 구간 경로는 길이를 기준으로 진행하며 끝에서 멈춘다',()=>{
  const road=[{x:0,y:0},{x:0,y:10},{x:30,y:10}];

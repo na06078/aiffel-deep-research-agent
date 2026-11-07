@@ -1,0 +1,302 @@
+{
+  "status": "구현 및 정적/단위 회귀 완료, 메인의 후보 빌드·실제 UI 검증 대기",
+  "frontend_root": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면",
+  "changed_files": [
+    "src/마을배치.ts",
+    "src/마을배치.test.ts",
+    "src/마을지도.ts",
+    "src/마을지도.test.ts",
+    "src/마을풍경.ts",
+    "src/마을풍경.test.ts",
+    "src/장면투영.test.ts"
+  ],
+  "created_files": [
+    "src/마을지도.ts",
+    "src/마을지도.test.ts"
+  ],
+  "rationale": [
+    "활동/운반 경로는 기존 Place 의미와 장면투영 소비 계약을 유지하면서 직교 골목으로 구성했습니다. 주 도로·집 현관·여섯 업무 동선·중앙 광장이 같은 합집합 포장을 공유합니다.",
+    "수목 전체 실루엣과 실제 포장 전체 폭을 검사합니다. 문턱 1픽셀 접속 외에는 지붕/벽에 도로가 들어가지 않으며 강은 표시된 다리에서만 건넙니다.",
+    "순수 마을지도 모듈에 지형/주택/길/수목 계획을 모았습니다. 6채(넓음)/4채(좁음·낮음) 주거집, 두 주거 무리와 가판대2개, 열린 광장, 수변 연못/굽이, 저작된12개 숲 무리를 사용하며 난수나 무작위 수백 그루를 쓰지 않습니다.",
+    "원본 나무는 초록4열/주황3열의0·1행만 조립합니다. 집은 지붕2행, solid 벽, 중앙 문 하나와 개별 창으로 조립하고 row7 전체를 반복하지 않습니다.",
+    "마을.tsx/마을.css/생산 장면투영.ts 및 모든 overlay·callback·testid·6명 actor 소비부는 수정하지 않았습니다. 정수 scale2, tileSize16/8을 사용합니다."
+  ],
+  "viewports_tested": [
+    [
+      1440,
+      900
+    ],
+    [
+      1100,
+      720
+    ],
+    [
+      1000,
+      700
+    ],
+    [
+      1920,
+      1080
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      844,
+      390
+    ],
+    [
+      640,
+      360
+    ]
+  ],
+  "observed_tdd": [
+    {
+      "slice": "01_동선",
+      "target": "src/마을배치.test.ts",
+      "red": {
+        "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/마을배치.test.ts --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_01_동선_RED.json\"",
+        "evidence": "구현_01_동선_RED.json",
+        "passed": 4,
+        "failed": 1,
+        "intended_failure": "AssertionError: 1440: diagonal [{\"x\":10,\"y\":144},{\"x\":115,\"y\":136}]: expected false to be true // Object.is equality"
+      },
+      "green": {
+        "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/마을배치.test.ts --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_01_동선_GREEN.json\"",
+        "evidence": "구현_01_동선_GREEN.json",
+        "passed": 4,
+        "failed": 0,
+        "intended_failure": null
+      }
+    },
+    {
+      "slice": "02_길합집합",
+      "target": "src/마을지도.test.ts",
+      "red": {
+        "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/마을지도.test.ts --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_02_길합집합_RED.json\"",
+        "evidence": "구현_02_길합집합_RED.json",
+        "passed": 0,
+        "failed": 1,
+        "intended_failure": "AssertionError: expected [] to have a length of 329 but got +0"
+      },
+      "green": {
+        "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/마을지도.test.ts --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_02_길합집합_GREEN.json\"",
+        "evidence": "구현_02_길합집합_GREEN.json",
+        "passed": 1,
+        "failed": 0,
+        "intended_failure": null
+      }
+    },
+    {
+      "slice": "03_지도연결",
+      "target": "src/마을지도.test.ts",
+      "red": {
+        "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/마을지도.test.ts --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_03_지도연결_RED.json\"",
+        "evidence": "구현_03_지도연결_RED.json",
+        "passed": 1,
+        "failed": 1,
+        "intended_failure": "AssertionError: expected [] to have a length of 6 but got +0"
+      },
+      "green": {
+        "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/마을지도.test.ts --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_03_지도연결_GREEN.json\"",
+        "evidence": "구현_03_지도연결_GREEN.json",
+        "passed": 2,
+        "failed": 0,
+        "intended_failure": null
+      }
+    },
+    {
+      "slice": "04_수목이격",
+      "target": "src/마을지도.test.ts",
+      "red": {
+        "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/마을지도.test.ts --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_04_수목이격_RED.json\"",
+        "evidence": "구현_04_수목이격_RED.json",
+        "passed": 2,
+        "failed": 1,
+        "intended_failure": "AssertionError: 1440: forest: expected 0 to be greater than 10"
+      },
+      "green": {
+        "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/마을지도.test.ts --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_04_수목이격_GREEN.json\"",
+        "evidence": "구현_04_수목이격_GREEN.json",
+        "passed": 3,
+        "failed": 0,
+        "intended_failure": null
+      }
+    },
+    {
+      "slice": "05_타일조립",
+      "target": "src/마을풍경.test.ts",
+      "red": {
+        "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/마을풍경.test.ts --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_05_타일조립_RED.json\"",
+        "evidence": "구현_05_타일조립_RED.json",
+        "passed": 1,
+        "failed": 3,
+        "intended_failure": "AssertionError: expected 0 to be greater than 10"
+      },
+      "green": {
+        "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/마을풍경.test.ts --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_05_타일조립_GREEN.json\"",
+        "evidence": "구현_05_타일조립_GREEN.json",
+        "passed": 4,
+        "failed": 0,
+        "intended_failure": null
+      }
+    },
+    {
+      "slice": "06_문턱연결",
+      "target": "src/마을지도.test.ts",
+      "red": {
+        "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/마을지도.test.ts --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_06_문턱연결_RED.json\"",
+        "evidence": "구현_06_문턱연결_RED.json",
+        "passed": 3,
+        "failed": 1,
+        "intended_failure": "AssertionError: 1440: planner doorstep: expected false to be true // Object.is equality"
+      },
+      "green": {
+        "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/마을지도.test.ts --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_06_문턱연결_GREEN.json\"",
+        "evidence": "구현_06_문턱연결_GREEN.json",
+        "passed": 4,
+        "failed": 0,
+        "intended_failure": null
+      }
+    },
+    {
+      "slice": "07_물가연속",
+      "target": "src/마을지도.test.ts",
+      "red": {
+        "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/마을지도.test.ts --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_07_물가연속_RED.json\"",
+        "evidence": "구현_07_물가연속_RED.json",
+        "passed": 4,
+        "failed": 1,
+        "intended_failure": "AssertionError: expected 4 to be less than or equal to 2"
+      },
+      "green": {
+        "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/마을지도.test.ts --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_07_물가연속_GREEN.json\"",
+        "evidence": "구현_07_물가연속_GREEN.json",
+        "passed": 5,
+        "failed": 0,
+        "intended_failure": null
+      }
+    },
+    {
+      "slice": "08_포장전체폭",
+      "target": "src/마을지도.test.ts",
+      "red": {
+        "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/마을지도.test.ts --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_08_포장전체폭_RED.json\"",
+        "evidence": "구현_08_포장전체폭_RED.json",
+        "passed": 5,
+        "failed": 1,
+        "intended_failure": "AssertionError: 1000: paving hits researcher-3 at 118,167: expected true to be false // Object.is equality"
+      },
+      "green": {
+        "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/마을지도.test.ts --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_08_포장전체폭_GREEN.json\"",
+        "evidence": "구현_08_포장전체폭_GREEN.json",
+        "passed": 6,
+        "failed": 0,
+        "intended_failure": null
+      }
+    }
+  ],
+  "final_verification": {
+    "full_command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/typescript/bin/tsc --noEmit && \"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_전체회귀.json\"",
+    "full_evidence": "구현_전체회귀.json",
+    "full_passed": 129,
+    "full_failed": 0,
+    "baseline": 120,
+    "added_tests": 9,
+    "typescript": "tsc --noEmit exit0 (최종 && 명령 통과)",
+    "command_evidence": "구현_최종명령결과.json",
+    "related_command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/마을배치.test.ts src/마을지도.test.ts src/마을풍경.test.ts src/장면투영.test.ts src/시간재생.test.ts --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_연결부회귀.json\"",
+    "related_passed": 38,
+    "related_failed": 0,
+    "related_evidence": "구현_연결부회귀.json",
+    "mechanical_detector": {
+      "evidence": "구현_디자인기계검사.json",
+      "findings": [],
+      "scope": "세 생산 TS 소스, 마지막 두 기하/검사 보강 전1회; 실제 UI 품질 판정 아님"
+    },
+    "network_test_boundary": "전체 frontend unit tests의 fetch는 vi.stubGlobal 대역이며 실브라우저/모델/실제 HTTP 호출 검사를 실행하지 않음"
+  },
+  "source_sha256": {
+    "src/마을배치.ts": "73e60a1889b83fff32e2eb85cb36a9d0b732df905ca1e46bbb80fad68e4bc7ec",
+    "src/마을배치.test.ts": "795f238d95bd6683014478518fc95c25ed38689905941b2b8621c2489a825962",
+    "src/마을지도.ts": "711e024be0430f198eef915ccd911af1fd1cb723c5c8ae3b7da0b7f055355644",
+    "src/마을지도.test.ts": "20ba28c43202994ff83dd8b52febf8f7135e62e07a1097fec58529bbfbe56df8",
+    "src/마을풍경.ts": "5e8b867ddedb675c8661d3864a7240ad37829dc592e28c380b8eb0acbd8a1bf5",
+    "src/마을풍경.test.ts": "5f692f06f57c763e85c83d1fd38130c079f55b92b7c0fe0416fac20b9bb48c7f",
+    "src/장면투영.test.ts": "03a058b1a9135c63d0ff2584fd1826e4d632ae08ccbbd594517d20db50c670d5"
+  },
+  "atlas_cells_used": {
+    "ground": [
+      [
+        0,
+        0
+      ]
+    ],
+    "green_tree": [
+      [
+        4,
+        0
+      ],
+      [
+        4,
+        1
+      ]
+    ],
+    "orange_tree": [
+      [
+        3,
+        0
+      ],
+      [
+        3,
+        1
+      ]
+    ],
+    "roof": "(0,1,2 또는4,5,6)열 × (4,5)행, 양끝과 가운데를 구별",
+    "solid_wall": [
+      [
+        1,
+        6
+      ],
+      [
+        5,
+        6
+      ]
+    ],
+    "window": [
+      [
+        0,
+        7
+      ],
+      [
+        4,
+        7
+      ]
+    ],
+    "door": [
+      [
+        1,
+        7
+      ],
+      [
+        5,
+        7
+      ]
+    ],
+    "source_unchanged": true
+  },
+  "issues_and_limits": [
+    "RED01에서 실수로 추가한 빈 테스트1개는 바로 제거했습니다. 기존 행동 검사는 제거/완화하지 않았으며 실제 RED는 diagonal assert였습니다.",
+    "RED05의 의도된 실패는 tree count assertion입니다. 함께 실패한 기존 렌더러의 street index TypeError2건은 호환 회귀로 따로 보았고 GREEN에서 모두 해소했습니다. 누락 import나 setup error를 RED로 세지 않았습니다.",
+    "최종 전체 회귀 중 포장 전수 검사에서 assertion 호출 비용으로5000ms timeout1회가 있었습니다. 동일 픽셀 조건을 find+건물별 단일 assertion으로 바꿔 범위를 유지하고129/129 재통과했습니다.",
+    "실제 UI 캡처·시각 채택·후보 빌드·저장자료 불변 확인은 메인 소유로 미수행입니다. 단위 검사 PASS를 시각 승인으로 주장하지 않습니다.",
+    "기존 DESIGN.md의 실제2×2 나무 문구는 관측과 다릅니다. 메인이 정본 문서를1열×2행으로 갱신해야 합니다.",
+    "기존8768 서버·dist·DB/보고서·원본 PNG·패키지 설정은 건드리지 않았고 설치/서버 기동·종료/Git/새 연구는 실행하지 않았습니다."
+  ],
+  "next_owner_checks": [
+    "이7개 소스 해시를 후보 빌드 시점과 대조해 주십시오.",
+    "실제 atlas 합성의 지붕/벽/단일 문·나무 실루엣, 지도 전체 밀도와 bridge 양 끝 육지를 넓음/좁음/가로형에서 확인해 주십시오.",
+    "기존 기록의 모든 말풍선/보고서·다운로드/타임라인 seek·동일시점 재방문/팝업·입력 접근·단일canvas와 연구/자료 불변은 메인 Playwright 경로에서 확인해 주십시오."
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/typescript/bin/tsc --noEmit && \"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_전체회귀.json\"",
+  "cwd": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면",
+  "output": "JSON report written to C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/마을재설계/구현_전체회귀.json",
+  "exit_code": 0,
+  "error": null
+}

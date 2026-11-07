@@ -11,6 +11,27 @@ it('세계의 논리 크기는 viewport를 채우고 여섯 작업장은 좁은 
  expect(villageLayout(390,844).sites.editor.y).toBeGreaterThan(villageLayout(390,844).sites['researcher-2'].y);
  expect(()=>villageLayout(0,900)).toThrow('잘못된 화면 크기');
 });
+it('주 도로와 업무 동선은 직교하고 모든 이동 구간이 다른 건물의 외곽을 비켜간다',()=>{
+ for(const [width,height] of [[1440,900],[1100,720],[1000,700],[1920,1080],[390,844],[844,390],[640,360]]){
+  const l=villageLayout(width,height);
+  for(const path of [l.street,...actors.flatMap(a=>[l.routes[a].activity,l.routes[a].delivery])]){
+   for(let i=1;i<path.length;i++){
+    const a=path[i-1],b=path[i];
+    expect(a.x===b.x||a.y===b.y,`${width}: diagonal ${JSON.stringify([a,b])}`).toBe(true);
+    for(let step=0;step<=20;step++){
+     const x=a.x+(b.x-a.x)*step/20,y=a.y+(b.y-a.y)*step/20;
+     expect(x).toBeGreaterThanOrEqual(0);expect(x).toBeLessThan(l.width);
+     expect(y).toBeGreaterThanOrEqual(0);expect(y).toBeLessThan(l.height-35);
+     for(const actor of actors){
+      const site=l.sites[actor],p=l.routes[actor];
+      expect(x>site.x-p.columns*p.tileSize/2-2&&x<site.x+p.columns*p.tileSize/2+2&&y>site.y-4*p.tileSize-2&&y<site.y+2,`${width}: route hits ${actor} at ${x},${y}`).toBe(false);
+     }
+    }
+   }
+  }
+ }
+});
+
 it('장소는 같은 행의 업무 격자가 아니라 서로 다른 높이의 마을 동네다',()=>{
  const l=villageLayout(1440,900);
  expect(new Set(actors.map(a=>l.sites[a].y)).size).toBeGreaterThanOrEqual(5);

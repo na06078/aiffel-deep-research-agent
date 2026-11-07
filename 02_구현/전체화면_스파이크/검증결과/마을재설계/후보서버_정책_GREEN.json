@@ -1,0 +1,11 @@
+{
+  "at": "2026-11-07T21:33:10.216842+09:00",
+  "command": [
+    "C:/nvm4w/nodejs/node.exe",
+    "--test",
+    "검증/마을후보_정책검사.test.mjs"
+  ],
+  "exit_code": 0,
+  "stdout": "✔ 후보 서버는 GET/HEAD 조회를 허용하고 변경 요청은 후속 처리 전에 막는다 (62.4854ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 154.4173\n",
+  "stderr": ""
+}

@@ -1,0 +1,5 @@
+{
+  "exit_code": 0,
+  "stdout": "✔ 후보 서버는 GET/HEAD 조회를 허용하고 변경 요청은 후속 처리 전에 막는다 (81.0518ms)\n✔ 실제 앱의 오류 소비자가 후보 차단 코드와 한국어 이유를 읽는다 (8.7087ms)\nℹ tests 2\nℹ suites 0\nℹ pass 2\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 193.8521\n",
+  "stderr": ""
+}

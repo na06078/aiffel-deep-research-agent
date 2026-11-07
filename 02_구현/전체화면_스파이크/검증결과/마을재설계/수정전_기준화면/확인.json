@@ -1,0 +1,196 @@
+{
+  "started_at": "2026-11-07T12:37:03.568044+00:00",
+  "phase": "readonly",
+  "base_url": "http://127.0.0.1:8768",
+  "checks": [
+    {
+      "name": "실제상태 전체 화면·입력·메뉴 1440×900",
+      "status": "PASS",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "name": "실제상태 전체 화면·입력·메뉴 1920×1080",
+      "status": "PASS",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "name": "실제상태 전체 화면·입력·메뉴 390×844",
+      "status": "PASS",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "name": "실제상태 전체 화면·입력·메뉴 844×390",
+      "status": "PASS",
+      "width": 844,
+      "height": 390
+    },
+    {
+      "name": "실제상태 전체 화면·입력·메뉴 1000×700",
+      "status": "PASS",
+      "width": 1000,
+      "height": 700
+    },
+    {
+      "name": "기존 실행/큐/예산/DB/보고서/8768 번들 불변·POST/외부0",
+      "status": "PASS",
+      "budget": {
+        "attempt_count": 100,
+        "max_attempts": 100,
+        "remaining_attempts": 0,
+        "spent_usd": 0.19670855,
+        "reserved_usd": 0.0,
+        "max_usd": 2.0,
+        "input_tokens": 379871,
+        "output_tokens": 84784,
+        "unknown_count": 0
+      },
+      "protected_dist_files": 25,
+      "protected_data_files": 9
+    }
+  ],
+  "captures": [
+    {
+      "file": "실제상태_1440_900.png",
+      "viewport": [
+        1440,
+        900
+      ],
+      "indicator_text": "웹 검색",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 57.296875,
+        "height": 30,
+        "right": 125.296875,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "실제상태_1920_1080.png",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "indicator_text": "웹 검색",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 57.296875,
+        "height": 30,
+        "right": 125.296875,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "실제상태_390_844.png",
+      "viewport": [
+        390,
+        844
+      ],
+      "indicator_text": "웹 검색",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 57.296875,
+        "height": 30,
+        "right": 125.296875,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "실제상태_844_390.png",
+      "viewport": [
+        844,
+        390
+      ],
+      "indicator_text": "웹 검색",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 57.296875,
+        "height": 30,
+        "right": 125.296875,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "실제상태_1000_700.png",
+      "viewport": [
+        1000,
+        700
+      ],
+      "indicator_text": "웹 검색",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 57.296875,
+        "height": 30,
+        "right": 125.296875,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "지도_기록시작_1440_900.png",
+      "viewport": [
+        1440,
+        900
+      ],
+      "indicator_text": "데이터셋",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "지도_기록시작_390_844.png",
+      "viewport": [
+        390,
+        844
+      ],
+      "indicator_text": "데이터셋",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "지도_기록시작_844_390.png",
+      "viewport": [
+        844,
+        390
+      ],
+      "indicator_text": "데이터셋",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      }
+    }
+  ],
+  "browser_errors": [],
+  "console_errors": [],
+  "external_requests": [],
+  "blocked_requests": [],
+  "scope": "실제 기존 연구 GET·기록 재생; 새 연구/모델/검색/변환 생성 없음",
+  "live_dist_unchanged": true,
+  "live_data_unchanged": true,
+  "api_db_unchanged": true,
+  "expected_rejection_console_messages": 0,
+  "status": "PASS",
+  "problems": [],
+  "finished_at": "2026-11-07T12:37:07.836342+00:00"
+}

@@ -1,0 +1,277 @@
+{
+  "review_type": "independent_read_only_static_source_review",
+  "language": "ko",
+  "passed": false,
+  "summary": "문서화된 Standards와 승인된 Spec의 소스 경로에서 확정 위반은 찾지 못했으나 후보 405 응답의 기존 오류 계약 불일치 1건으로 종합 통과를 보류합니다. 실제 화면 채택 판정은 하지 않습니다.",
+  "project_root": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트",
+  "base": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크",
+  "baseline_head": "e1e1f800c95369dabf091f33afb6c675fce29769",
+  "observed_git": {
+    "branch": "main",
+    "latest_short": "e1e1f80",
+    "staged_paths": [],
+    "reviewed_scope": "unstaged 지도/풍경 및 테스트, untracked 마을지도와 후보 검증 스크립트; 다른 문서/증거 변경은 보존",
+    "git_writes": false
+  },
+  "standards": {
+    "status": "pass",
+    "scope": "지정된 소스와 소비부의 정적 검토에 한정",
+    "sources": [
+      {
+        "path": "../../AGENTS.md (Aiffel_Work/AGENTS.md)",
+        "sentence": "새 파일명은 기본 한국어. 실행·검증·제출·리뷰 상태를 서로 구분해 기록한다."
+      },
+      {
+        "path": "PRODUCT.md",
+        "sentence": "실제 상태가 정본이고 NPC 연출은 표현이다. 입력·업무·입출력·산출물의 연결을 유지한다."
+      },
+      {
+        "path": "DESIGN.md",
+        "sentence": "Kenney 원본 픽셀과 투명도를 보존하며 nearest·antialias false·roundPixels·CSS pixelated를 사용합니다."
+      }
+    ],
+    "findings": [],
+    "notes": [
+      "순수 위치/지도와 Pixi 조립·기존 사건 소비가 분리되며 추가 연구 엔진·스키마·모델이 들어오지 않습니다.",
+      "DESIGN.md의 기존 2×2 나무 문구는 이미 알려진 정본 보정 대상입니다. 승인 기술명세26.1의 실제 원본 확인 요구를 우선하고 새 구현 결함으로 중복 집계하지 않았습니다."
+    ],
+    "not_assessed_reason": null
+  },
+  "spec": {
+    "status": "pass",
+    "scope": "§26 및 V/D/L의 정적 구현 연결만 검토; 실브라우저 수용/디자인 채택은 제외",
+    "sources": [
+      {
+        "path": "📘 딥리서치 에이전트 기술 명세서.md:765-782",
+        "sentence": "VillageLayout 및 Place.home/work/activity/delivery가 위치와 이동의 정본이다. 후보 빌드는 분리하고 별도 loopback 미리보기는 기존8768 API의 GET을 연결하며 변경 요청을 전송 전에 차단한다."
+      },
+      {
+        "path": "📘 딥리서치 에이전트 작업 명세서.md:83-90,115-118,179-186",
+        "sentence": "NPC는 업무 장소와 목적지 사이를 이동한다. 제출 문서는 클릭 가능하며 같은 실행의 최종 산출물을 연다. 되감기는 저장 사건을 읽어 재구성하며 기존 실행/정본이나 모델/그래프/도구를 다시 실행하지 않는다."
+      }
+    ],
+    "findings": [],
+    "notes": [
+      "정적 경로에서 도로는 기존 활동/운반 점을 포함한 직교 합집합이며 주거 문턱은 큰길 탐색에 연결됩니다. 도로 중심선뿐 아니라 전체 폭·입구·나무 실루엣 제외가 코드/테스트에 있습니다. 테스트를 다시 실행한 판정은 아닙니다.",
+      "다리는 실제 수면 슬라이스의 좌/우 범위보다6논리픽셀씩 넓게 계산하고 같은 mainY에 정렬합니다. 지정7개 viewport의 정적 테스트 조건을 읽었으며 실제 가시성은 메인 검증 대상입니다.",
+      "나무는 atlas 3/4열의0·1행 두 조각, y를 발밑으로 사용합니다. 집은 좌/가운데/우 지붕2행과 solid 벽 및 중앙 문 하나를 조립합니다. 실제 atlas 실루엣과 완결성의 시각 승인을 주장하지 않습니다.",
+      "마을.tsx는 동일 layout/routes를 projectScene에 주고 NPC/paper 위치와 DOM 클릭을 동일 투영에 연결합니다. 기존 앱의 선택ID·보고서ID·재생시계 경로는 그대로입니다.",
+      "설치된 Vite node.js:35740 configurePreviewServer hook 등록이 :35742 proxy 등록보다 먼저입니다. 일반 HTTP POST가 proxy 우선순위 때문에 guard를 우회한다는 근거는 없습니다. 허용된 HEAD는 변경 요청이 아니며 FastAPI 명시 GET 외에는405가 될 수 있습니다."
+    ],
+    "not_assessed_reason": null
+  },
+  "findings": [
+    {
+      "id": "RUNTIME-01",
+      "axis": "runtime_contract",
+      "priority": "P2",
+      "mandatory": true,
+      "title": "읽기 전용 거절 응답이 기존 오류 소비 계약과 달라 차단 이유가 undefined로 표시됩니다.",
+      "source": {
+        "path": "02_구현/전체화면_스파이크/화면/src/통신.ts",
+        "line": 4,
+        "sentence": "기존 request()는 data.error가 있으면 data.error.code와 data.error.message로 사용자 오류를 구성합니다.",
+        "classification": "기존 생산 소비 계약에 대한 정적 논리 결함입니다. 문서의 규칙·명세 문장을 억지로 위반으로 확대하지 않고 별도 실행 경로 발견으로 분류합니다."
+      },
+      "codepath": [
+        {
+          "path": "검증/마을후보_미리보기.mjs",
+          "lines": "12-20",
+          "role": "405 본문은 error 문자열과 최상위 message를 반환합니다."
+        },
+        {
+          "path": "화면/src/통신.ts",
+          "lines": "2-5",
+          "role": "진실값인 error 문자열의 .code/.message는 모두 undefined이므로 Error(\"undefined: undefined\")를 만듭니다."
+        },
+        {
+          "path": "화면/src/앱.tsx",
+          "lines": "92,95",
+          "role": "실시간 전송/실행 변경 catch는 이 Error를 화면에 출력하며 일반 재시도를 안내합니다."
+        },
+        {
+          "path": "서버/앱.py",
+          "lines": "90-105,107-125",
+          "role": "정상 API는 error:{code,message} 구조를 반환합니다."
+        },
+        {
+          "path": "검증/마을후보_정책검사.test.mjs",
+          "lines": "27-32",
+          "role": "현재 테스트는 문자열 error만 검사하므로 실제 앱 소비와의 불일치를 잡지 않습니다."
+        }
+      ],
+      "trigger": "실시간 상태의 후보 미리보기에서 전송하거나 실행/큐 변경 버튼을 눌러 POST가 405로 거절될 때입니다. 기록 재생 중의 전송 차단 경로는 이 응답을 받지 않습니다.",
+      "impact": "변경 요청은 여전히 upstream 전에 차단됩니다. 그러나 이미 작성한 한글 읽기 전용 설명은 소비되지 않아 사용자는 undefined: undefined와 일반 재시도 문구를 보게 됩니다. 데이터 변경/새 모델 요청이 발생한다고 주장하는 발견은 아닙니다.",
+      "evidence_level": "static_producer_consumer_trace_not_reproduced",
+      "fix": "후보 거절 JSON을 기존 error:{code:\"read_only_preview\",message:\"...\"} 계약으로 맞추고 정책검사도 같은 구조와 실제 request 소비를 확인하십시오. 차단 정책은 유지하십시오.",
+      "proposed_probe": "승인된 격리 HTTP에서 후보 거절 응답을 기존 request()에 통과시켜 error.message에 read_only_preview와 한글 설명이 포함되는지 검사하십시오. 실제 연구 POST를 upstream으로 보내는 프로브는 필요 없습니다.",
+      "left_unfixed": true
+    }
+  ],
+  "security_concerns": [],
+  "logic_errors": [
+    {
+      "id": "RUNTIME-01",
+      "axis": "runtime_contract",
+      "priority": "P2",
+      "mandatory": true,
+      "title": "읽기 전용 거절 응답이 기존 오류 소비 계약과 달라 차단 이유가 undefined로 표시됩니다.",
+      "source": {
+        "path": "02_구현/전체화면_스파이크/화면/src/통신.ts",
+        "line": 4,
+        "sentence": "기존 request()는 data.error가 있으면 data.error.code와 data.error.message로 사용자 오류를 구성합니다.",
+        "classification": "기존 생산 소비 계약에 대한 정적 논리 결함입니다. 문서의 규칙·명세 문장을 억지로 위반으로 확대하지 않고 별도 실행 경로 발견으로 분류합니다."
+      },
+      "codepath": [
+        {
+          "path": "검증/마을후보_미리보기.mjs",
+          "lines": "12-20",
+          "role": "405 본문은 error 문자열과 최상위 message를 반환합니다."
+        },
+        {
+          "path": "화면/src/통신.ts",
+          "lines": "2-5",
+          "role": "진실값인 error 문자열의 .code/.message는 모두 undefined이므로 Error(\"undefined: undefined\")를 만듭니다."
+        },
+        {
+          "path": "화면/src/앱.tsx",
+          "lines": "92,95",
+          "role": "실시간 전송/실행 변경 catch는 이 Error를 화면에 출력하며 일반 재시도를 안내합니다."
+        },
+        {
+          "path": "서버/앱.py",
+          "lines": "90-105,107-125",
+          "role": "정상 API는 error:{code,message} 구조를 반환합니다."
+        },
+        {
+          "path": "검증/마을후보_정책검사.test.mjs",
+          "lines": "27-32",
+          "role": "현재 테스트는 문자열 error만 검사하므로 실제 앱 소비와의 불일치를 잡지 않습니다."
+        }
+      ],
+      "trigger": "실시간 상태의 후보 미리보기에서 전송하거나 실행/큐 변경 버튼을 눌러 POST가 405로 거절될 때입니다. 기록 재생 중의 전송 차단 경로는 이 응답을 받지 않습니다.",
+      "impact": "변경 요청은 여전히 upstream 전에 차단됩니다. 그러나 이미 작성한 한글 읽기 전용 설명은 소비되지 않아 사용자는 undefined: undefined와 일반 재시도 문구를 보게 됩니다. 데이터 변경/새 모델 요청이 발생한다고 주장하는 발견은 아닙니다.",
+      "evidence_level": "static_producer_consumer_trace_not_reproduced",
+      "fix": "후보 거절 JSON을 기존 error:{code:\"read_only_preview\",message:\"...\"} 계약으로 맞추고 정책검사도 같은 구조와 실제 request 소비를 확인하십시오. 차단 정책은 유지하십시오.",
+      "proposed_probe": "승인된 격리 HTTP에서 후보 거절 응답을 기존 request()에 통과시켜 error.message에 read_only_preview와 한글 설명이 포함되는지 검사하십시오. 실제 연구 POST를 upstream으로 보내는 프로브는 필요 없습니다.",
+      "left_unfixed": true
+    }
+  ],
+  "suggestions": [
+    {
+      "id": "SUG-01",
+      "priority": "P3",
+      "classification": "검증 강도 개선, 실제 오연결 결함으로 판정하지 않음",
+      "source": "검증/마을재설계_실사용검사.py:99-117",
+      "sentence": "§26.3: 기존 완료 기록의 NPC/코드 말풍선·정확한 사건 상세를 확인한다.",
+      "trigger": "다른 사건의 유효ID를 잘못 여는 회귀가 들어올 때",
+      "impact": "현재 검사는 열린 상세ID를 같은ID의 API로 조회하고 어떤 기존 run에 속하는지만 검사합니다. NPC별 기대 actor/event 및 코드 기대 event를 대조하지 않아 잘못된 유효 사건도 통과할 수 있습니다.",
+      "fix": "snapshot/archive에서 각 컨트롤의 기대 event_id를 고정해 상세ID·actor·입출력과 직접 대조하는 보조 assert를 추가하십시오. 현재 생산 callback 오연결은 확인하지 못했습니다."
+    },
+    {
+      "id": "SUG-02",
+      "priority": "P3",
+      "classification": "조건부 방어 보강, 현재 외부요청 발생을 주장하지 않음",
+      "source": "검증/웹연구_실사용검사.py:192-214",
+      "sentence": "§26.3: 새 모델/검색/POST0을 별도로 검증한다.",
+      "trigger": "향후 프론트엔드가 외부 GET을 시도하도록 바뀔 때",
+      "impact": "공통 readonly gate는 모든 GET을 통과시키며 external_requests는 사후 실패로만 기록합니다. 지금 검토한 새 지도·미리보기 코드는 외부 GET을 만들지 않지만 이 gate 자체는 외부 네트워크0의 사전 보장 장치가 아닙니다.",
+      "fix": "외부요청0을 사전에 보장하려면 같은 base의 GET만 계속하고 다른 http(s) origin은 전송 전 차단하도록 별도 승인 범위에서 강화하십시오. 테스트 PASS를 OS 수준 샌드박스로 설명하지 마십시오."
+    }
+  ],
+  "covered_paths": [
+    "02_구현/전체화면_스파이크/화면/src/마을배치.ts",
+    "02_구현/전체화면_스파이크/화면/src/마을지도.ts",
+    "02_구현/전체화면_스파이크/화면/src/마을풍경.ts",
+    "02_구현/전체화면_스파이크/화면/src/마을배치.test.ts",
+    "02_구현/전체화면_스파이크/화면/src/마을지도.test.ts",
+    "02_구현/전체화면_스파이크/화면/src/마을풍경.test.ts",
+    "02_구현/전체화면_스파이크/화면/src/장면투영.test.ts",
+    "02_구현/전체화면_스파이크/화면/src/마을.tsx",
+    "02_구현/전체화면_스파이크/화면/src/장면투영.ts",
+    "02_구현/전체화면_스파이크/화면/src/시간재생.ts",
+    "02_구현/전체화면_스파이크/화면/src/마을.css",
+    "02_구현/전체화면_스파이크/화면/src/화면.css",
+    "02_구현/전체화면_스파이크/화면/src/앱.tsx",
+    "02_구현/전체화면_스파이크/화면/src/통신.ts",
+    "02_구현/전체화면_스파이크/검증/마을후보_미리보기.mjs",
+    "02_구현/전체화면_스파이크/검증/마을후보_정책검사.test.mjs",
+    "02_구현/전체화면_스파이크/검증/마을재설계_실사용검사.py",
+    "02_구현/전체화면_스파이크/검증/웹연구_실사용검사.py",
+    "02_구현/전체화면_스파이크/서버/앱.py",
+    "02_구현/전체화면_스파이크/검증결과/마을재설계/구현_인계.json",
+    "02_구현/전체화면_스파이크/화면/node_modules/vite/dist/node/chunks/node.js",
+    "PRODUCT.md",
+    "DESIGN.md",
+    "📘 딥리서치 에이전트 기술 명세서.md",
+    "📘 딥리서치 에이전트 작업 명세서.md"
+  ],
+  "source_sha256": {
+    "02_구현/전체화면_스파이크/화면/src/마을배치.ts": "73e60a1889b83fff32e2eb85cb36a9d0b732df905ca1e46bbb80fad68e4bc7ec",
+    "02_구현/전체화면_스파이크/화면/src/마을지도.ts": "711e024be0430f198eef915ccd911af1fd1cb723c5c8ae3b7da0b7f055355644",
+    "02_구현/전체화면_스파이크/화면/src/마을풍경.ts": "5e8b867ddedb675c8661d3864a7240ad37829dc592e28c380b8eb0acbd8a1bf5",
+    "02_구현/전체화면_스파이크/화면/src/마을배치.test.ts": "795f238d95bd6683014478518fc95c25ed38689905941b2b8621c2489a825962",
+    "02_구현/전체화면_스파이크/화면/src/마을지도.test.ts": "20ba28c43202994ff83dd8b52febf8f7135e62e07a1097fec58529bbfbe56df8",
+    "02_구현/전체화면_스파이크/화면/src/마을풍경.test.ts": "5f692f06f57c763e85c83d1fd38130c079f55b92b7c0fe0416fac20b9bb48c7f",
+    "02_구현/전체화면_스파이크/화면/src/장면투영.test.ts": "03a058b1a9135c63d0ff2584fd1826e4d632ae08ccbbd594517d20db50c670d5",
+    "02_구현/전체화면_스파이크/화면/src/마을.tsx": "79817c60c98e567869cabe081c74736317b45d66a216e7af3b46bdbd5e714e86",
+    "02_구현/전체화면_스파이크/화면/src/장면투영.ts": "5affc89e11be73c672fb2d8434375007ce20c1aa1c578c8cbf45715f373d1409",
+    "02_구현/전체화면_스파이크/화면/src/시간재생.ts": "a011e9fddc8c96db8a03848957917a09cad5226055d6c0e192e6c5982145cb77",
+    "02_구현/전체화면_스파이크/화면/src/마을.css": "e4b7403f748af75ea3f2dbf5cb53b4f4dd3b9d6165c78d9d41965b108d7a4dc2",
+    "02_구현/전체화면_스파이크/화면/src/화면.css": "eb58be292c242d2465bda8a28f58a306c1113390d712c54765424cca43ad1352",
+    "02_구현/전체화면_스파이크/화면/src/앱.tsx": "9d74380ff5159b44c3521155a554370986e971256e931ed59c4a5224bd77eb0e",
+    "02_구현/전체화면_스파이크/화면/src/통신.ts": "bfce32a8f2ecdc208191f9830605f3e13e8311035fb9e4c77f639cf7d3efdc12",
+    "02_구현/전체화면_스파이크/검증/마을후보_미리보기.mjs": "f8d0456e1dcac0a97acc693a0883235ba049417139d0e01da98c8cad770a1b89",
+    "02_구현/전체화면_스파이크/검증/마을후보_정책검사.test.mjs": "1f4f92444eedbc9fff6e890f2a8c0f0932d3396032eef065e62753b3ee9ef915",
+    "02_구현/전체화면_스파이크/검증/마을재설계_실사용검사.py": "2a79ea74da41c362dbec33e74524073f68e8c846d68e4bf697b6bf78098f6ff4",
+    "02_구현/전체화면_스파이크/검증/웹연구_실사용검사.py": "9a2af47a5e280421dde5e2136fcd0389e8393b9f215cdaf1d7d676412905598a",
+    "02_구현/전체화면_스파이크/서버/앱.py": "a02c2f2e61d96997108e88a8cccbdd72ac50253ee2163ee6f1ccc38ecfbbf806",
+    "02_구현/전체화면_스파이크/검증결과/마을재설계/구현_인계.json": "6e304db8391731bb0b8acd2b9b9bb48ac87105d311a656f2d29bfb0910bf7c14",
+    "02_구현/전체화면_스파이크/화면/node_modules/vite/dist/node/chunks/node.js": "f090936143c2aad8b6aea6e6306b9617efc5282aa885e5694179b70b81d6d339",
+    "PRODUCT.md": "a2016b02cdb9220c1859fc897ebbb0e3fe18157f48fa3217e26e8d2ed6f4d3f5",
+    "DESIGN.md": "4896918e9d1b828f697d8c76aec359d3246d1aa721caec8468cd1cb922beeb5f",
+    "📘 딥리서치 에이전트 기술 명세서.md": "e5815d4162f3ee71d84ac05013352f157d0a92bfd10803f9ae635ec3bc41b25b",
+    "📘 딥리서치 에이전트 작업 명세서.md": "f9d931236c74c021a388793c2685f1ebc04eef44d804e6ff0d12b24a71967013"
+  },
+  "handoff_manifest_match": {
+    "src/마을배치.ts": true,
+    "src/마을배치.test.ts": true,
+    "src/마을지도.ts": true,
+    "src/마을지도.test.ts": true,
+    "src/마을풍경.ts": true,
+    "src/마을풍경.test.ts": true,
+    "src/장면투영.test.ts": true
+  },
+  "evidence_boundaries": {
+    "executed_tests": false,
+    "executed_build": false,
+    "application_execution": false,
+    "browser_or_network_calls": false,
+    "read_secrets": false,
+    "modified_source": false,
+    "runtime_data_or_live_dist_touched": false,
+    "saved_test_evidence": "구현_인계.json의 RED/GREEN·회귀 보고는 참고만 했으며 이번 리뷰의 신규 실행 결과나 시각 승인 근거로 사용하지 않았습니다.",
+    "deduplication": "RUNTIME-01은 findings와 logic_errors의 같은1건입니다. 축별 강제 규칙 위반으로 중복 계상하지 않습니다."
+  },
+  "not_assessed": [
+    "실제7개 지원 viewport의 렌더, 다리 양안 가시성, 도로/수면 경계, 나무 및 지붕/벽/문의 실제 atlas 시각 완결성",
+    "실브라우저 NPC/코드 말풍선·문서/다운로드·메뉴/팝업/입력 hit target 및 좁은/낮은 화면 접근",
+    "실제 기록 타임라인 앞/중간/끝 및 동일시점 재방문 실행 결과",
+    "8768 실행본 dist·실행DB·보고서·장부의 실제 전후 바이트 불변; source harness가 확인하도록 작성된 것은 읽었으나 실행하지 않았음",
+    "전체 앱 보안 감사 및 백엔드 각 repo/export/model 내부 구현",
+    "사용자 디자인 채택 및 실행본 교체 승인"
+  ],
+  "recommended_order": [
+    "RUNTIME-01의 거절 응답 계약을 좁게 수정/확인한 뒤 후보 거절 이유를 실제 앱에서 확인",
+    "메인 소유의 실제 UI·기록·불변 검증을 마친 뒤 결과와 source_sha256를 대조",
+    "SUG-01/SUG-02는 검증 보강으로 현재 승인 범위와 구분하여 판단"
+  ],
+  "output_file": "02_구현/전체화면_스파이크/검증결과/마을재설계/독립_코드검토.json",
+  "counts": {
+    "unique_mandatory_findings": 1,
+    "security_concerns": 0,
+    "suggestions": 2,
+    "source_hashes": 25,
+    "handoff_hashes_equal": 7
+  }
+}
