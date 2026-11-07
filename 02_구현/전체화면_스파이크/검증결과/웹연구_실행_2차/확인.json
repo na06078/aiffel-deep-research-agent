@@ -1,0 +1,604 @@
+{
+  "started_at": "2026-11-07T10:45:30.379631+00:00",
+  "phase": "research",
+  "base_url": "http://127.0.0.1:8788",
+  "checks": [
+    {
+      "name": "화면 입력창의 '/웹 질문' 전송: 연구 접수·표시기 '웹 검색'",
+      "status": "PASS",
+      "admission": {
+        "kind": "research",
+        "source_mode": "web",
+        "instruction_id": "dadc2cf42c5846fcbd81d8d86b27e608",
+        "run_id": "5578e13fd3254438895d42baa427943e",
+        "mode": "immediate",
+        "status": "received",
+        "control_revision": 1,
+        "state_seq": 3
+      }
+    },
+    {
+      "name": "진행 중 다른 자료 명령은 409로 거절되고 입력·실행이 보존됨",
+      "status": "PASS",
+      "error": {
+        "code": "source_mode_locked",
+        "message": "진행 중에는 자료를 바꿀 수 없습니다. /큐로 예약해 주세요."
+      },
+      "draft_preserved": true,
+      "queue_unchanged": true
+    },
+    {
+      "name": "실행 결과: 완료·필수 검사 통과·자료 web·모델 요청 상한 이내",
+      "status": "PASS",
+      "run_id": "5578e13fd3254438895d42baa427943e",
+      "report_id": "89f1853627444172879d2552840d5394",
+      "actual_model_requests": 26,
+      "web_usage": {
+        "search_attempts": 8,
+        "search_limit": 16,
+        "fetch_attempts": 8,
+        "fetch_limit": 24,
+        "observed_http_requests": 16
+      },
+      "research_stop_reason": "sufficient",
+      "quality_reasons": [],
+      "quality_warnings": [
+        "자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다.",
+        "인용 편중: 같은 문서의 인용 비율이 높습니다.",
+        "조사관 사이에 중복 읽기가 있습니다."
+      ],
+      "metrics": {
+        "문장수": 64,
+        "근거붙은문장": 34,
+        "근거율": 53.1,
+        "허위인용": [],
+        "읽은문서": 7,
+        "읽고안쓴": [],
+        "인용편중": 52.9,
+        "중복률": 22.2,
+        "절수": 4,
+        "보고서자수": 8966,
+        "인용수": 34,
+        "LLM호출": 26,
+        "격리율": 0.3
+      }
+    },
+    {
+      "name": "모델 요청 수: 장부 증가=실행 기록=모델 완료 사건, 미정산 0",
+      "status": "PASS",
+      "ledger_attempt_delta": 26,
+      "model_completed_events": 26,
+      "estimated_cost_delta_usd": 0.038546,
+      "tokens_in_delta": 62273,
+      "tokens_out_delta": 19148,
+      "budget_after": {
+        "attempt_count": 56,
+        "max_attempts": 100,
+        "remaining_attempts": 44,
+        "spent_usd": 0.13038485,
+        "reserved_usd": 0.0,
+        "max_usd": 2.0,
+        "input_tokens": 265973,
+        "output_tokens": 53243,
+        "unknown_count": 0
+      }
+    },
+    {
+      "name": "웹 요청 사건: 논리 시도·관측 HTTP 요청·모델 호출이 서로 다른 사건으로 기록",
+      "status": "PASS",
+      "logical_search_attempts": 8,
+      "logical_fetch_attempts": 8,
+      "observed_http_requests": 16,
+      "failed_http_requests": [
+        {
+          "operation": "fetch",
+          "status_code": 403,
+          "error_code": "challenge_detected"
+        }
+      ],
+      "tool_failed_events": [
+        "challenge_detected"
+      ],
+      "search_hosts": [
+        "search.yahoo.com"
+      ],
+      "model_events_are_separate": true
+    },
+    {
+      "name": "보고서: 웹 출처 URL·인용 ID가 읽은 자료와 일치·위키 문구 없음",
+      "status": "PASS",
+      "report_sha256": "7da48310bc633f8a2faf22d7dca2070d5200f5001f50056a96944ee39a88c532",
+      "characters": 8966,
+      "body_characters": 6545,
+      "sections": 4,
+      "citations": 34,
+      "distinct_cited_sources": 7,
+      "sources": [
+        {
+          "source_id": "380b97fe86b14b7780f047844fadf207",
+          "title": "asyncio — 비동기 I/O",
+          "url": "https://docs.python.org/ko/3/library/asyncio.html",
+          "text_sha256": "43d1ab4eb52df592d6b9f26f14fd1ec92b4781f9b23a775404a0901b135eb688",
+          "fetched_at": "2026-11-07T10:46:12.109116+00:00"
+        },
+        {
+          "source_id": "6309bce465944bad8cfffbe580215a00",
+          "title": "Coroutines and Tasks",
+          "url": "https://docs.python.org/3.11/library/asyncio-task.html",
+          "text_sha256": "c9494e1f7165e94a8fd8e7e0bf07f263813f685dda3a62db2b7f323d8ceab138",
+          "fetched_at": "2026-11-07T10:45:53.587772+00:00"
+        },
+        {
+          "source_id": "7e75e1bc90774ecd8b6d8a14792eff19",
+          "title": "Python Asyncio Task Groups vs Gather for Concurrent API Calls | DebuggedIt",
+          "url": "https://www.debuggedit.com/post/python-asyncio-task-groups-vs-gather-for-concurrent-api-calls",
+          "text_sha256": "7158220f2a433c76ba68b4d37975a12b2a0f8828ec532d319c5484b61a0c87e1",
+          "fetched_at": "2026-11-07T10:46:40.119332+00:00"
+        },
+        {
+          "source_id": "90b236afc05444999b36541064a15b61",
+          "title": "asyncio TaskGroup vs gather: Exceptions, Cancellation and Results, Tested",
+          "url": "https://www.danilchenko.dev/posts/taskgroup-vs-gather/",
+          "text_sha256": "908f493f04c7e4e9d6bcffb3b04e2c236626421588eeefc11cbbaa198a854ecd",
+          "fetched_at": "2026-11-07T10:46:18.200554+00:00"
+        },
+        {
+          "source_id": "bff0b3f6b15449ecbee466d6361883ae",
+          "title": "Coroutines and tasks",
+          "url": "https://docs.python.org/3/library/asyncio-task.html",
+          "text_sha256": "4eb12c941023337ed543dbd2b4d169321a6fab13cd7494167e9d27b01c7fc45f",
+          "fetched_at": "2026-11-07T10:45:57.475468+00:00"
+        },
+        {
+          "source_id": "e9349ad35b714176b722a2a6c164c860",
+          "title": "asyncio — Asynchronous I/O",
+          "url": "https://docs.python.org/3/library/asyncio.html",
+          "text_sha256": "ee821c25557958473d28126977bb1c38ae6e11082d4532d07a29959eba4ef8ed",
+          "fetched_at": "2026-11-07T10:46:16.673346+00:00"
+        },
+        {
+          "source_id": "eb7023a0262a4d69b53c4dbe951d27cf",
+          "title": "python - 비동기 병렬 처리: asyncio.gather()의 예외 처리와 동시성 제어 전략",
+          "url": "https://runebook.dev/ko/docs/python/library/asyncio-task/asyncio.gather",
+          "text_sha256": "b39792890ebd271a610c76c33776b1111b5c8042850e5fa67cc44220a16fe2d2",
+          "fetched_at": "2026-11-07T10:46:30.156738+00:00"
+        }
+      ]
+    },
+    {
+      "name": "출처 저장소: 본문 해시·읽기 증거가 성공한 모델 호출에 연결",
+      "status": "PASS",
+      "source_rows_by_status": {
+        "ready": 7,
+        "discovered": 35,
+        "failed": 1
+      },
+      "ready_text_hashes_verified": 7,
+      "read_claims": 9,
+      "claims_linked_to_completed_model_calls": 9,
+      "failed_sources": [
+        {
+          "url": "https://stackoverflow.com/questions/75250788/how-to-prevent-python3-11-taskgroup-from-canceling-all-the-tasks",
+          "error_code": "challenge_detected"
+        }
+      ]
+    },
+    {
+      "name": "NPC·생산 오브젝트 클릭의 실제 사건 상세",
+      "status": "FAIL",
+      "error": "TimeoutError: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_test_id(\"bubble-planner\")\n",
+      "traceback": "습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\웹연구_실사용검사.py\", line 836, in clicks\n    page.get_by_test_id(\"bubble-planner\").click()\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\sync_api\\_generated.py\", line 11021, in click\n    self._sync(\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\_impl\\_sync_base.py\", line 111, in _sync\n    return task.result()\n           ^^^^^^^^^^^^^\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\_impl\\_locator.py\", line 174, in click\n    return await self._frame._click(self._selector, strict=True, **params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\_impl\\_frame.py\", line 598, in _click\n    await self._channel.send(\"click\", self._timeout, locals_to_params(locals()))\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\_impl\\_connection.py\", line 78, in send\n    return await self._connection.wrap_api_call(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\_impl\\_connection.py\", line 636, in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nplaywright._impl._errors.TimeoutError: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for get_by_test_id(\"bubble-planner\")\n\n"
+    },
+    {
+      "name": "제출 문서 클릭·뷰어·Markdown 다운로드·파일 재열기 동일성",
+      "status": "PASS",
+      "download_bytes": 15005,
+      "sha256": "7da48310bc633f8a2faf22d7dca2070d5200f5001f50056a96944ee39a88c532"
+    },
+    {
+      "name": "실행/큐 팝업: 웹 사용량(논리 시도·관측 요청)과 자료 표시",
+      "status": "PASS",
+      "labels_checked": true
+    },
+    {
+      "name": "과거 기록: 실행이 '웹 검색'으로 표시",
+      "status": "PASS"
+    },
+    {
+      "name": "읽기 전용 재생: 시점별 표시기('웹 검색')와 입력 잠금",
+      "status": "PASS",
+      "indicator_at_home_and_end": {
+        "Home": "웹 검색",
+        "End": "웹 검색"
+      }
+    },
+    {
+      "name": "새로고침 후 선택('웹 검색') 유지",
+      "status": "PASS"
+    },
+    {
+      "name": "열람·재생·새로고침 동안 모델·검색·DB·장부 불변",
+      "status": "PASS",
+      "fingerprint": "a32230b50aae91fd"
+    },
+    {
+      "name": "HTML·PDF 변환: 웹 보고서(긴 URL·출처 절)의 생성·다운로드·재열기",
+      "status": "PASS",
+      "html": {
+        "bytes": 17185,
+        "sha256": "9956593bfac093eb3bf4a91e1632d7ca78c6458e255a5aec8f14f6f264f15e95"
+      },
+      "pdf": {
+        "bytes": 136098,
+        "sha256": "468ea1070404d494884357ddb4e35cfcc080b950bef8571c708ee985d80d0dd4"
+      },
+      "pdf_pages": 4,
+      "pdf_last_page_characters": 2190
+    },
+    {
+      "name": "변환 뒤에도 모델·검색·DB·장부 불변",
+      "status": "PASS",
+      "db_unchanged_by_exports": true
+    }
+  ],
+  "captures": [
+    {
+      "file": "웹연구_00_첫화면.png",
+      "viewport": [
+        1440,
+        900
+      ],
+      "indicator_text": "데이터셋",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 66,
+        "height": 30,
+        "right": 134,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "웹연구_01_조사진행.png",
+      "viewport": [
+        1440,
+        900
+      ],
+      "indicator_text": "웹 검색",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 57.296875,
+        "height": 30,
+        "right": 125.296875,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "웹연구_03_보고서뷰어.png",
+      "viewport": [
+        1440,
+        900
+      ],
+      "indicator_text": "웹 검색",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 57.296875,
+        "height": 30,
+        "right": 125.296875,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "웹연구_04_좁은보고서.png",
+      "viewport": [
+        390,
+        844
+      ],
+      "indicator_text": "웹 검색",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 57.296875,
+        "height": 30,
+        "right": 125.296875,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "웹연구_05_사용량.png",
+      "viewport": [
+        1440,
+        900
+      ],
+      "indicator_text": "웹 검색",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 57.296875,
+        "height": 30,
+        "right": 125.296875,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "웹연구_06_과거기록상세.png",
+      "viewport": [
+        1440,
+        900
+      ],
+      "indicator_text": "웹 검색",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 57.296875,
+        "height": 30,
+        "right": 125.296875,
+        "bottom": 54
+      }
+    },
+    {
+      "file": "웹연구_07_재생.png",
+      "viewport": [
+        1440,
+        900
+      ],
+      "indicator_text": "웹 검색",
+      "indicator": {
+        "x": 68,
+        "y": 24,
+        "width": 57.296875,
+        "height": 30,
+        "right": 125.296875,
+        "bottom": 54
+      }
+    }
+  ],
+  "browser_errors": [],
+  "console_errors": [],
+  "external_requests": [],
+  "blocked_requests": [],
+  "budget_before": {
+    "attempt_count": 30,
+    "max_attempts": 100,
+    "remaining_attempts": 70,
+    "spent_usd": 0.091839,
+    "reserved_usd": 0.0,
+    "max_usd": 2.0,
+    "input_tokens": 203700,
+    "output_tokens": 34095,
+    "unknown_count": 0
+  },
+  "admission": {
+    "kind": "research",
+    "source_mode": "web",
+    "instruction_id": "dadc2cf42c5846fcbd81d8d86b27e608",
+    "run_id": "5578e13fd3254438895d42baa427943e",
+    "mode": "immediate",
+    "status": "received",
+    "control_revision": 1,
+    "state_seq": 3
+  },
+  "budget_after_research": {
+    "attempt_count": 56,
+    "max_attempts": 100,
+    "remaining_attempts": 44,
+    "spent_usd": 0.13038485,
+    "reserved_usd": 0.0,
+    "max_usd": 2.0,
+    "input_tokens": 265973,
+    "output_tokens": 53243,
+    "unknown_count": 0
+  },
+  "run": {
+    "run_id": "5578e13fd3254438895d42baa427943e",
+    "question": "Python asyncio의 TaskGroup과 gather는 오류 처리와 작업 취소가 어떻게 다른가?",
+    "control_revision": 1,
+    "status": "completed",
+    "phase": "submitted",
+    "plan": [
+      {
+        "section_id": "section-1",
+        "title": "TaskGroup과 gather의 기본 구조와 등장 배경",
+        "instruction": "Python asyncio에서 TaskGroup과 gather가 여러 코루틴을 실행하는 방식, 지원 버전, 주요 API 차이를 개괄한다.",
+        "role": "큰그림 담당",
+        "assignee": "researcher-1",
+        "queries": [
+          "Python asyncio TaskGroup gather 공식 문서",
+          "asyncio TaskGroup gather 차이"
+        ],
+        "budget": 3,
+        "round": 1,
+        "order": 0
+      },
+      {
+        "section_id": "section-2",
+        "title": "오류 발생 시 전파와 예외 처리 방식",
+        "instruction": "하나의 작업에서 예외가 발생했을 때 gather의 return_exceptions 설정별 동작과 TaskGroup의 예외 전파·ExceptionGroup 처리 방식을 확인한다.",
+        "role": "원인 담당",
+        "assignee": "researcher-2",
+        "queries": [
+          "Python asyncio gather return_exceptions TaskGroup ExceptionGroup",
+          "Python asyncio TaskGroup exception handling official"
+        ],
+        "budget": 3,
+        "round": 1,
+        "order": 1
+      },
+      {
+        "section_id": "section-3",
+        "title": "형제 작업의 취소와 호출자 취소",
+        "instruction": "작업 하나의 실패, gather 또는 TaskGroup을 기다리는 호출자의 취소, 개별 작업 취소가 나머지 작업에 미치는 영향을 시간 흐름에 따라 정리한다.",
+        "role": "시간순 담당",
+        "assignee": "researcher-3",
+        "queries": [
+          "asyncio gather cancellation behavior",
+          "asyncio TaskGroup cancellation semantics"
+        ],
+        "budget": 3,
+        "round": 1,
+        "order": 2
+      },
+      {
+        "section_id": "section-4",
+        "title": "실무 선택 기준과 동작 차이 비교",
+        "instruction": "오류가 발생하면 관련 작업을 함께 취소해야 하는 경우와 가능한 작업을 끝까지 실행해야 하는 경우를 기준으로 두 API의 장단점과 사용 상황을 비교한다.",
+        "role": "비교 담당",
+        "assignee": "researcher-4",
+        "queries": [
+          "TaskGroup vs gather error handling cancellation",
+          "asyncio TaskGroup gather best practices"
+        ],
+        "budget": 3,
+        "round": 1,
+        "order": 3
+      }
+    ],
+    "report_id": "89f1853627444172879d2552840d5394",
+    "quality": {
+      "passed": true,
+      "reasons": [],
+      "warnings": [
+        "자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다.",
+        "인용 편중: 같은 문서의 인용 비율이 높습니다.",
+        "조사관 사이에 중복 읽기가 있습니다."
+      ],
+      "metrics": {
+        "문장수": 64,
+        "근거붙은문장": 34,
+        "근거율": 53.1,
+        "허위인용": [],
+        "읽은문서": 7,
+        "읽고안쓴": [],
+        "인용편중": 52.9,
+        "중복률": 22.2,
+        "절수": 4,
+        "보고서자수": 8966,
+        "인용수": 34,
+        "LLM호출": 26,
+        "격리율": 0.3
+      },
+      "unknown_citations": [],
+      "unread_citations": [],
+      "misattributed_citations": []
+    },
+    "parent_report_id": null,
+    "created_at": "2026-11-07T10:45:32.134497+00:00",
+    "updated_at": "2026-11-07T10:47:07.434695+00:00",
+    "mock_requests": 0,
+    "actual_model_requests": 26,
+    "source_mode": "web",
+    "instruction_history": [
+      "Python asyncio의 TaskGroup과 gather는 오류 처리와 작업 취소가 어떻게 다른가?"
+    ],
+    "web_usage": {
+      "search_attempts": 8,
+      "search_limit": 16,
+      "fetch_attempts": 8,
+      "fetch_limit": 24,
+      "observed_http_requests": 16
+    },
+    "report_title": "Python asyncio의 TaskGroup과 gather: 오류 처리와 작업 취소 비교",
+    "research_stop_reason": "sufficient",
+    "source_provenance": [
+      {
+        "source_id": "380b97fe86b14b7780f047844fadf207",
+        "url": "https://docs.python.org/ko/3/library/asyncio.html",
+        "final_url": "https://docs.python.org/ko/3/library/asyncio.html",
+        "title": "asyncio — 비동기 I/O",
+        "text_sha256": "43d1ab4eb52df592d6b9f26f14fd1ec92b4781f9b23a775404a0901b135eb688",
+        "fetched_at": "2026-11-07T10:46:12.109116+00:00",
+        "published_at": null,
+        "read_text_sha256": "43d1ab4eb52df592d6b9f26f14fd1ec92b4781f9b23a775404a0901b135eb688"
+      },
+      {
+        "source_id": "6309bce465944bad8cfffbe580215a00",
+        "url": "https://docs.python.org/3.11/library/asyncio-task.html",
+        "final_url": "https://docs.python.org/3.11/library/asyncio-task.html",
+        "title": "Coroutines and Tasks",
+        "text_sha256": "c9494e1f7165e94a8fd8e7e0bf07f263813f685dda3a62db2b7f323d8ceab138",
+        "fetched_at": "2026-11-07T10:45:53.587772+00:00",
+        "published_at": null,
+        "read_text_sha256": "18d829fbe80f9268c66c422a54c5f076f32b0125b159ea78448c8afedbc0ec7b"
+      },
+      {
+        "source_id": "7e75e1bc90774ecd8b6d8a14792eff19",
+        "url": "https://www.debuggedit.com/post/python-asyncio-task-groups-vs-gather-for-concurrent-api-calls",
+        "final_url": "https://www.debuggedit.com/post/python-asyncio-task-groups-vs-gather-for-concurrent-api-calls",
+        "title": "Python Asyncio Task Groups vs Gather for Concurrent API Calls | DebuggedIt",
+        "text_sha256": "7158220f2a433c76ba68b4d37975a12b2a0f8828ec532d319c5484b61a0c87e1",
+        "fetched_at": "2026-11-07T10:46:40.119332+00:00",
+        "published_at": null,
+        "read_text_sha256": "7158220f2a433c76ba68b4d37975a12b2a0f8828ec532d319c5484b61a0c87e1"
+      },
+      {
+        "source_id": "90b236afc05444999b36541064a15b61",
+        "url": "https://www.danilchenko.dev/posts/taskgroup-vs-gather/",
+        "final_url": "https://www.danilchenko.dev/posts/taskgroup-vs-gather/",
+        "title": "asyncio TaskGroup vs gather: Exceptions, Cancellation and Results, Tested",
+        "text_sha256": "908f493f04c7e4e9d6bcffb3b04e2c236626421588eeefc11cbbaa198a854ecd",
+        "fetched_at": "2026-11-07T10:46:18.200554+00:00",
+        "published_at": null,
+        "read_text_sha256": "b473bdee51d384a58e148782e12b68fbb2cf15ca48e9c264938f39758e31cba6"
+      },
+      {
+        "source_id": "bff0b3f6b15449ecbee466d6361883ae",
+        "url": "https://docs.python.org/3/library/asyncio-task.html",
+        "final_url": "https://docs.python.org/3/library/asyncio-task.html",
+        "title": "Coroutines and tasks",
+        "text_sha256": "4eb12c941023337ed543dbd2b4d169321a6fab13cd7494167e9d27b01c7fc45f",
+        "fetched_at": "2026-11-07T10:45:57.475468+00:00",
+        "published_at": null,
+        "read_text_sha256": "f54a1a5ccd52021b956d1708ca87075f7f0aa5e46b219602baa660da7b5ed1e6"
+      },
+      {
+        "source_id": "e9349ad35b714176b722a2a6c164c860",
+        "url": "https://docs.python.org/3/library/asyncio.html",
+        "final_url": "https://docs.python.org/3/library/asyncio.html",
+        "title": "asyncio — Asynchronous I/O",
+        "text_sha256": "ee821c25557958473d28126977bb1c38ae6e11082d4532d07a29959eba4ef8ed",
+        "fetched_at": "2026-11-07T10:46:16.673346+00:00",
+        "published_at": null,
+        "read_text_sha256": "ee821c25557958473d28126977bb1c38ae6e11082d4532d07a29959eba4ef8ed"
+      },
+      {
+        "source_id": "eb7023a0262a4d69b53c4dbe951d27cf",
+        "url": "https://runebook.dev/ko/docs/python/library/asyncio-task/asyncio.gather",
+        "final_url": "https://runebook.dev/ko/docs/python/library/asyncio-task/asyncio.gather",
+        "title": "python - 비동기 병렬 처리: asyncio.gather()의 예외 처리와 동시성 제어 전략",
+        "text_sha256": "b39792890ebd271a610c76c33776b1111b5c8042850e5fa67cc44220a16fe2d2",
+        "fetched_at": "2026-11-07T10:46:30.156738+00:00",
+        "published_at": null,
+        "read_text_sha256": "b39792890ebd271a610c76c33776b1111b5c8042850e5fa67cc44220a16fe2d2"
+      }
+    ]
+  },
+  "event_counts": {
+    "assignment.created": 4,
+    "draft.created": 1,
+    "instruction.applied": 1,
+    "instruction.received": 1,
+    "model.completed": 26,
+    "model.started": 26,
+    "plan.created": 1,
+    "quality.evaluated": 1,
+    "report.submitted": 1,
+    "research.completed": 4,
+    "review.completed": 1,
+    "tool.completed": 24,
+    "tool.failed": 1,
+    "tool.started": 25,
+    "web.request.completed": 15,
+    "web.request.failed": 1,
+    "web.request.started": 16,
+    "web.search.results": 8,
+    "web.source.fetched": 7
+  },
+  "expected_rejection_console_messages": 1,
+  "status": "FAIL",
+  "problems": [
+    "NPC·생산 오브젝트 클릭의 실제 사건 상세"
+  ],
+  "finished_at": "2026-11-07T10:47:52.378585+00:00"
+}

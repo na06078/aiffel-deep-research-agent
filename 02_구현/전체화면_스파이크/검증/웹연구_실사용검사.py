@@ -547,9 +547,14 @@ class Check:
         self.step("검사 뒤: 실행 0·호출 집계 불변", clean_end, must=False)
 
     # ---- research -------------------------------------------------------------------
-    def phase_research(self, submit, verify_only):
+    def phase_research(self, submit, verify_only, budget_before_from=None):
         initial = self.api("/api/spike/snapshot")
         base_budget = initial["budget"]
+        if verify_only and budget_before_from is not None:
+            # 이미 끝난 실행의 장부 증감은 원 실행 증거의 시작 값을 기준으로 다시 검증한다.
+            base_budget = json.loads(budget_before_from.read_text(encoding="utf-8"))[
+                "budget_before"
+            ]
         self.proof["budget_before"] = base_budget
         if submit:
             assert not initial["runs"], "격리 서버에 이미 실행이 있어 추가로 전송하지 않습니다."
@@ -833,15 +838,36 @@ class Check:
         def clicks():
             page.set_viewport_size({"width": 1440, "height": 900})
             self.close_popup()
-            page.get_by_test_id("bubble-planner").click()
-            page.get_by_test_id("event-detail").wait_for()
-            assert "openai" in page.get_by_test_id("event-detail").inner_text()
-            self.capture("웹연구_02_사건상세.png")
-            self.close_popup()
-            page.get_by_test_id("bubble-workstation").click()
-            page.get_by_test_id("event-detail").wait_for()
-            self.close_popup()
-            return {}
+            # 실시간 스냅샷은 최근 사건 100건만 담는다. 웹 연구는 사건이 수백 건이라 기획 단계 사건이
+            # 창 밖으로 밀려 기획 말풍선이 없을 수 있다. 있는 말풍선만 클릭하고 부재는 증거로 남긴다.
+            names = [
+                b.get_attribute("data-testid")
+                for b in page.locator('[data-testid^="bubble-"]').all()
+            ]
+            snapshot = self.api("/api/spike/snapshot")
+            facts = {
+                "bubbles": names,
+                "planner_bubble_visible": "bubble-planner" in names,
+                "events_in_snapshot": len(snapshot["events"]),
+                "events_has_more": snapshot["events_has_more"],
+                "high_watermark_seq": snapshot["high_watermark_seq"],
+            }
+            targets = [n for n in names if n != "bubble-workstation"]
+            assert targets, facts
+            for name in targets[:2]:
+                page.get_by_test_id(name).click()
+                detail = page.get_by_test_id("event-detail")
+                detail.wait_for()
+                assert run["run_id"] in detail.inner_text(), (name, facts)
+                if name == "bubble-planner":
+                    assert "openai" in detail.inner_text()
+                self.capture(f"웹연구_02_사건상세_{name}.png")
+                self.close_popup()
+            if "bubble-workstation" in names:
+                page.get_by_test_id("bubble-workstation").click()
+                page.get_by_test_id("event-detail").wait_for()
+                self.close_popup()
+            return facts
 
         self.step("NPC·생산 오브젝트 클릭의 실제 사건 상세", clicks, must=False)
 
@@ -985,6 +1011,11 @@ def main():
     parser.add_argument("--ledger", type=Path)
     parser.add_argument("--submit", action="store_true")
     parser.add_argument("--verify-only", action="store_true")
+    parser.add_argument(
+        "--budget-before-from",
+        type=Path,
+        help="--verify-only에서 장부 증감의 시작 값을 읽을 원 실행의 확인.json",
+    )
     args = parser.parse_args()
     if args.phase == "research" and args.submit == args.verify_only:
         parser.error("research 단계는 --submit 또는 --verify-only 중 하나만 지정해야 합니다.")
@@ -997,7 +1028,7 @@ def main():
         elif args.phase == "zero":
             check.phase_zero()
         else:
-            check.phase_research(args.submit, args.verify_only)
+            check.phase_research(args.submit, args.verify_only, args.budget_before_from)
     except StepFailed:
         pass
     except Exception as error:  # noqa: BLE001 -- 예기치 못한 실패도 증거 파일에 남긴다.

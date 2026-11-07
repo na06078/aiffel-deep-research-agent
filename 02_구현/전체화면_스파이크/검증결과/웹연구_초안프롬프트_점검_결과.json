@@ -1,0 +1,124 @@
+{
+ "ledger_before": {
+  "attempt_count": 26,
+  "remaining_attempts": 74,
+  "spent_usd": 0.08350985
+ },
+ "ledger_after": {
+  "attempt_count": 30,
+  "remaining_attempts": 70,
+  "spent_usd": 0.091839
+ },
+ "calls": 4,
+ "spent_usd_this_probe": 0.008329,
+ "sections": [
+  {
+   "section_id": "section-1",
+   "notes": 3,
+   "prompt_sha256": "f99e286d1ad0dcc8de295e7a61cfcf8d6537d8ec12dffe75ae1ecdd91af36a57",
+   "usage": {
+    "input_tokens": 6199,
+    "output_tokens": 696,
+    "reasoning_tokens": 54
+   },
+   "estimated_cost_usd": 0.00238495,
+   "parsed": true,
+   "sufficient": true,
+   "body_characters": 1380,
+   "citation_count": 7,
+   "valid_citation_count": 7,
+   "unknown_citations": [],
+   "source_ids": [
+    "ba72a540cb31418ba8dd62a72e30af7f",
+    "c454ca2ddda54e20bbdcab57bf9881fd",
+    "e0362fcc910b4f60b9b6c4711b06c298"
+   ]
+  },
+  {
+   "section_id": "section-2",
+   "notes": 1,
+   "prompt_sha256": "d8b18f38f9bd349112320f9c7ab680a3daf7ded3fb39add4c9f9b432bc10829c",
+   "usage": {
+    "input_tokens": 1633,
+    "output_tokens": 736,
+    "reasoning_tokens": 74
+   },
+   "estimated_cost_usd": 0.00129145,
+   "parsed": true,
+   "sufficient": true,
+   "body_characters": 1423,
+   "citation_count": 8,
+   "valid_citation_count": 8,
+   "unknown_citations": [],
+   "source_ids": [
+    "cf259ed063294abf997178462e75cda7"
+   ]
+  },
+  {
+   "section_id": "section-3",
+   "notes": 2,
+   "prompt_sha256": "fdce94ee1c09c20d1c4652363d454dd05f15f4c8f2d517cd0c63c23b496bbec5",
+   "usage": {
+    "input_tokens": 4275,
+    "output_tokens": 916,
+    "reasoning_tokens": 119
+   },
+   "estimated_cost_usd": 0.00216795,
+   "parsed": true,
+   "sufficient": true,
+   "body_characters": 1570,
+   "citation_count": 10,
+   "valid_citation_count": 10,
+   "unknown_citations": [],
+   "source_ids": [
+    "9ddac9574872498192cf0190c3885b1f",
+    "e795f784876747678472ac85f1468a6e"
+   ]
+  },
+  {
+   "section_id": "section-4",
+   "notes": 2,
+   "prompt_sha256": "53ce0c07754af7a6b86e55bb21b082031556b92d62fe390e4790aa524998a5b9",
+   "usage": {
+    "input_tokens": 4664,
+    "output_tokens": 1099,
+    "reasoning_tokens": 45
+   },
+   "estimated_cost_usd": 0.0024848,
+   "parsed": true,
+   "sufficient": true,
+   "body_characters": 2007,
+   "citation_count": 15,
+   "valid_citation_count": 15,
+   "unknown_citations": [],
+   "source_ids": [
+    "ceb2a129dd2546378b4756c06fb8624f",
+    "f0425f7bd6124d97a74c1f20d9b9883c"
+   ]
+  }
+ ],
+ "probe_passed": true,
+ "criteria": "4개 절 모두 JSON 형식·절마다 유효 인용 1개 이상·자기 절 source_id 밖 인용 0",
+ "quality": {
+  "passed": true,
+  "reasons": [],
+  "unknown_citations": [],
+  "unread_citations": [],
+  "misattributed_citations": []
+ },
+ "metrics": {
+  "문장수": 42,
+  "근거붙은문장": 34,
+  "근거율": 81.0,
+  "허위인용": [],
+  "읽은문서": 8,
+  "읽고안쓴": [],
+  "인용편중": 20.0,
+  "중복률": 0.0,
+  "절수": 4,
+  "보고서자수": 6538,
+  "인용수": 40,
+  "LLM호출": 0,
+  "격리율": 0.0
+ }
+}
