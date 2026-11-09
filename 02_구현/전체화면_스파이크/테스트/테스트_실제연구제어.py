@@ -7,6 +7,7 @@ from pathlib import Path
 
 import pytest
 
+from 서버.보고서근거 import build_draft_request
 from 서버.실제연구제어 import RealResearchService
 
 os.environ["LANGSMITH_TRACING"] = "false"
@@ -33,7 +34,141 @@ def no_external_requests(monkeypatch):
 
 ROOT = Path(__file__).resolve().parents[3]
 CORPUS = ROOT / "01_참고자료/원본데이터/corpus.json"
-EVIDENCE = ROOT / ".cache/보고서품질_검증/생성/로컬"
+EVIDENCE = ROOT / ".cache/보고서품질_검증/번호참조/통합/로컬"
+
+
+async def test_complete_strict_schema_전달과_저널사본_다른노드미전달(data_dir):
+    class CapturingModel:
+        def __init__(self):
+            self.calls = []
+
+        async def complete(self, system, user, *, context, on_attempt, **kwargs):
+            self.calls.append(kwargs)
+            on_attempt("schema-attempt-" + str(len(self.calls)))
+            if "response_schema" in kwargs:
+                kwargs["response_schema"]["properties"]["answer"]["enum"].append("변조")
+            return {
+                "content": '{"answer":"원본"}',
+                "attempt_id": "schema-attempt-" + str(len(self.calls)),
+            }
+
+        async def aclose(self):
+            pass
+
+    model = CapturingModel()
+    service = RealResearchService(data_dir, model, CORPUS)
+    schema = {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {"answer": {"type": "string", "enum": ["원본"]}},
+        "required": ["answer"],
+    }
+    with service.repo.transaction() as (db, data):
+        run, _ = service.start(db, data, "자료", "schema")
+    state = {"run_id": run["run_id"], "revision": 1}
+    try:
+        await service.complete(
+            state, "researcher-1", "draft_section", ("JSON", "JSON"), response_schema=schema
+        )
+        await service.complete(state, "dispatcher", "plan", ("JSON", "JSON"))
+        assert "response_schema" in model.calls[0]
+        assert "response_schema" not in model.calls[1]
+        assert schema["properties"]["answer"]["enum"] == ["원본"]
+        with service.repo.read_connection() as db:
+            payloads = [
+                json.loads(row["input"])
+                for row in db.execute("SELECT input FROM calls ORDER BY rowid")
+            ]
+        assert payloads[0]["response_schema"] == schema
+        assert "response_schema" not in payloads[1]
+        started = [
+            e for e in service.repo.archive(run["run_id"])["events"] if e["type"] == "model.started"
+        ]
+        assert started[0]["input"]["response_schema"] == schema
+    finally:
+        await service.close()
+
+
+@pytest.mark.parametrize("kind", ["invalid", "oversize", "unsupported"])
+async def test_complete_schema차단은_모델저널예약전(data_dir, kind):
+    from 서버.실제모델 import ModelCallError
+
+    class NoSchemaModel:
+        calls = 0
+
+        async def complete(
+            self, system, user, *, context, max_output_tokens, json_mode, on_attempt
+        ):
+            self.calls += 1
+            raise AssertionError("provider_must_not_run")
+
+        async def aclose(self):
+            pass
+
+    class SchemaModel(NoSchemaModel):
+        async def complete(self, *args, response_schema=None, **kwargs):
+            return await super().complete(*args, **kwargs)
+
+    model = NoSchemaModel() if kind == "unsupported" else SchemaModel()
+    service = RealResearchService(data_dir, model, CORPUS)
+    with service.repo.transaction() as (db, data):
+        run, _ = service.start(db, data, "자료", "schema-fail")
+    state = {"run_id": run["run_id"], "revision": 1}
+    schema = (
+        []
+        if kind == "invalid"
+        else {
+            "type": "object",
+            "additionalProperties": False,
+            "properties": {"x": {"type": "string"}},
+            "required": ["x"],
+            "description": "가" * (90000 if kind == "oversize" else 1),
+        }
+    )
+    try:
+        with pytest.raises(ModelCallError) as caught:
+            await service.complete(
+                state, "researcher-1", "draft_section", ("JSON", "JSON"), response_schema=schema
+            )
+        assert caught.value.code == ("input_too_large" if kind == "oversize" else "invalid_request")
+        assert caught.value.attempt_id is None and model.calls == 0
+        with service.repo.read_connection() as db:
+            assert db.execute("SELECT COUNT(*) FROM calls").fetchone()[0] == 0
+        assert not [
+            e
+            for e in service.repo.archive(run["run_id"])["events"]
+            if e["type"].startswith("model.")
+        ]
+    finally:
+        await service.close()
+
+
+@pytest.mark.parametrize("mode", ["local", "web"])
+def test_정상초안호출은_request의_실제response_schema를_전달한다(mode):
+    import ast
+    import inspect
+    import textwrap
+
+    from 서버 import 웹연구
+
+    function = RealResearchService.research if mode == "local" else 웹연구.research
+    tree = ast.parse(textwrap.dedent(inspect.getsource(function)))
+    calls = [
+        n
+        for n in ast.walk(tree)
+        if isinstance(n, ast.Call)
+        and isinstance(n.func, ast.Attribute)
+        and n.func.attr == "complete"
+        and any(isinstance(a, ast.Constant) and a.value == "draft_section" for a in n.args)
+    ]
+    assert len(calls) == 1
+    supplied = {k.arg: k.value for k in calls[0].keywords}
+    assert "response_schema" in supplied
+    value = supplied["response_schema"]
+    assert isinstance(value, ast.Attribute) and value.attr == "response_schema"
+    assert isinstance(value.value, ast.Name) and value.value.id == (
+        "request" if mode == "local" else "draft_request"
+    )
 
 
 class ScriptedModel:
@@ -41,6 +176,7 @@ class ScriptedModel:
 
     def __init__(self):
         self.calls = []
+        self.schemas = []
         self.closed = False
         self.active = 0
         self.max_active = 0
@@ -50,10 +186,19 @@ class ScriptedModel:
         self.titles = list(self.docs)
 
     async def complete(
-        self, system, user, *, context, max_output_tokens=4096, json_mode=False, on_attempt=None
+        self,
+        system,
+        user,
+        *,
+        context,
+        max_output_tokens=4096,
+        json_mode=False,
+        response_schema=None,
+        on_attempt=None,
     ):
         actor, operation = context["actor"], context["operation"]
         self.calls.append((system, user, context))
+        self.schemas.append(response_schema)
         attempt_id = f"mock-attempt-{len(self.calls)}"
         on_attempt(attempt_id)
         self.active += 1
@@ -80,22 +225,29 @@ class ScriptedModel:
         elif operation == "draft_section":
             n = self.section_calls.get(actor, 0) + 1
             self.section_calls[actor] = n
-            title = self.titles[int(actor[-1]) - 1]
+            catalog = json.loads(user)
+            assert set(catalog) == {"assignment", "notes", "evidence_set_id", "evidence"}
+            offered = catalog["evidence"]
+            assert all(type(e["id"]) is int for e in offered)
+            assert response_schema is not None, "normal local draft must forward response_schema"
+            assert response_schema["properties"]["근거목록ID"]["enum"] == [
+                catalog["evidence_set_id"]
+            ]
+            assert response_schema["properties"]["문장"]["items"]["properties"]["근거구간"][
+                "items"
+            ]["enum"] == [e["id"] for e in offered]
+            assert offered and {e["source_id"] for e in offered} <= {
+                title for title, _ in catalog["notes"]
+            }
             body = (
-                "자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. " * 20
-            ) + f"«{title}»"
+                "자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 " * 20
+            ).strip()
             self.bodies[actor] = body
             value = {
-                "본문": body,
+                "근거목록ID": catalog["evidence_set_id"],
+                "문장": [{"내용": body, "근거구간": [offered[0]["id"]]}],
                 "충분": actor != "researcher-1" or n >= 2,
                 "부족": "추가 원인 자료 필요" if actor == "researcher-1" and n == 1 else "",
-                "근거": [
-                    {
-                        "주장": "자료에 근거한 연구 대역 문장",
-                        "출처": title,
-                        "인용문": self.docs[title][:80],
-                    }
-                ],
             }
         elif operation == "synthesize":
             value = {
@@ -164,6 +316,11 @@ async def test_실제6노드_Send병렬_부족절만2라운드_원고보존과_�
         await settle(service)
         snap = service.repo.snapshot()
         run = snap["runs"][0]
+        drafts = [c for c in model.calls if c[2]["operation"] == "draft_section"]
+        assert drafts  # plan/select/read_one 양성 대조 뒤 실제 호출 경계에 도달했다.
+        for _, user, _ in drafts:
+            assert user.startswith("{"), "draft_section must receive the source-span JSON catalog"
+            assert json.loads(user)["evidence"]
         assert run["status"] == "completed", run
         assert run["mock_requests"] == 0
         assert run["actual_model_requests"] == len(model.calls) > 0
@@ -254,7 +411,13 @@ async def test_라운드마다3건_최대2회_이전메모_유지와_정확한�
         assert [len(s["읽은문서"]) for s in one] == [3, 6]
         assert one[1]["메모"][:3] == one[0]["메모"]
         assert len(set(one[1]["읽은문서"])) == 6
-        assert one[1]["인용"] == [model.titles[0]]
+        second_draft = [
+            json.loads(c[1])
+            for c in model.calls
+            if c[2]["operation"] == "draft_section" and c[2]["actor"] == "researcher-1"
+        ][1]
+        assert one[1]["인용"] == [second_draft["evidence"][0]["source_id"]]
+        assert one[1]["인용"][0] in one[1]["읽은문서"]
         assert one[1]["허위인용"] == []
         for section in sections:
             assert len(section["읽은문서"]) <= 3 * section["round"]
@@ -294,7 +457,7 @@ class AlteredModel(ScriptedModel):
 async def test_신규실제경로는_누락근거를_충분으로_승격하지_않는다(data_dir):
     def missing(response):
         obj = json.loads(response["content"])
-        obj.pop("근거", None)
+        obj["문장"][0].pop("근거구간")
         return {**response, "content": json.dumps(obj, ensure_ascii=False)}
 
     model = AlteredModel("draft_section", missing)
@@ -311,7 +474,7 @@ async def test_신규실제경로는_누락근거를_충분으로_승격하지_�
             for e in service.repo.archive(run["run_id"])["events"]
             if e["error"]
         ]
-        assert any("evidence" in message for message in errors)
+        assert any(message == "span response: schema" for message in errors)
     finally:
         await service.close()
 
@@ -440,8 +603,11 @@ async def test_의미검토_불합격과_불명응답은_초안보존_큐차단_
 @pytest.mark.parametrize(
     "bad_content, reason",
     [
-        ("not JSON", "invalid JSON"),
-        ('{"본문":"본문", "충분":"false", "부족":""}', "exact bool"),
+        ("not JSON", "span response: schema"),
+        (
+            '{"문장":[{"내용":"본문", "근거구간":[]}], "충분":"false", "부족":""}',
+            "span response: schema",
+        ),
     ],
 )
 async def test_원고JSON과_bool실패는_최종파일없이_큐정지(data_dir, bad_content, reason):
@@ -489,17 +655,35 @@ async def test_실패한_실행은_사유를_run에_보존한다(data_dir):
         await service.close()
 
 
-@pytest.mark.parametrize(
-    "bad_citation, field", [("없는문서", "unknown_citations"), ("갑오개혁", "unread_citations")]
-)
-async def test_허위인용_초안보존_출판차단_자동재생성없음(data_dir, bad_citation, field):
-    def inject(response):
-        obj = json.loads(response["content"])
-        obj["본문"] += f" «{bad_citation}»"
-        return {**response, "content": json.dumps(obj, ensure_ascii=False)}
+@pytest.mark.parametrize("mutation", ["unknown", "unread", "stale"])
+async def test_허위구간ID_원응답보존_출판차단_자동재생성없음(data_dir, mutation):
+    class InvalidSpanModel(ScriptedModel):
+        async def complete(self, *args, **kwargs):
+            response = await super().complete(*args, **kwargs)
+            if kwargs["context"]["operation"] != "draft_section":
+                return response
+            catalog = json.loads(args[1])
+            source = catalog["evidence"][0]["source_id"]
+            if mutation == "unknown":
+                bad_id = max(e["id"] for e in catalog["evidence"]) + 1
+            else:
+                source = "갑오개혁" if mutation == "unread" else source
+                text = self.docs[source] + (" 다른 원문 버전" if mutation == "stale" else "")
+                other = build_draft_request(catalog["assignment"], [], {source: text})
+                bad_id = json.loads(other.prompts[1])["evidence"][0]["id"]
+            obj = json.loads(response["content"])
+            if mutation == "unknown":
+                assert bad_id not in {e["id"] for e in catalog["evidence"]}
+            else:
+                other_catalog = json.loads(other.prompts[1])
+                assert bad_id in {e["id"] for e in catalog["evidence"]}
+                assert other_catalog["evidence_set_id"] != catalog["evidence_set_id"]
+                obj["근거목록ID"] = other_catalog["evidence_set_id"]
+            obj["문장"][0]["근거구간"] = [bad_id]
+            return {**response, "content": json.dumps(obj, ensure_ascii=False)}
 
-    model = AlteredModel("draft_section", inject)
-    assert bad_citation not in model.titles[:4]
+    model = InvalidSpanModel()
+    assert "갑오개혁" not in model.titles[:4]
     service = RealResearchService(data_dir, model, CORPUS)
     try:
         service.admit("질문", "first")
@@ -507,13 +691,23 @@ async def test_허위인용_초안보존_출판차단_자동재생성없음(data
         await settle(service)
         snap = service.repo.snapshot()
         run = snap["runs"][0]
-        assert run["status"] == "blocked"
+        assert run["status"] == "failed"
         assert snap["queue_paused"] and len(snap["queue"]) == 1
-        assert run["draft"] and run["report_id"] is None
-        assert run["quality"][field] == [bad_citation]
-        assert "citation_integrity_error" in run["quality"]["reasons"]
+        assert run["draft"] is None and run["report_id"] is None
+        assert run["failure"]["message"] == (
+            "span response: unoffered ID"
+            if mutation == "unknown"
+            else "span response: evidence set"
+        )
         assert not list(data_dir.glob("*.md"))
-        assert sum(c[2]["operation"] == "synthesize" for c in model.calls) == 1
+        assert not any(c[2]["operation"] == "synthesize" for c in model.calls)
+        assert all(n == 1 for n in model.section_calls.values())
+        completed = [
+            e
+            for e in service.repo.archive(run["run_id"])["events"]
+            if e["type"] == "model.completed"
+        ]
+        assert any('"근거구간"' in e["output"]["content"] for e in completed)
         assert not [
             e
             for e in service.repo.archive(run["run_id"])["events"]
@@ -538,7 +732,40 @@ class DelayedModel(ScriptedModel):
         return response
 
 
-@pytest.mark.parametrize("operation", ["plan", "read_one", "synthesize", "semantic_review"])
+async def test_로컬구간요청후_원문버전변경은_원응답만_남기고_조립을_차단한다(data_dir):
+    model = DelayedModel("draft_section")
+    service = RealResearchService(data_dir, model, CORPUS)
+    try:
+        admitted = service.admit("자료", "first")
+        await asyncio.wait_for(model.arrived.wait(), 3)
+        request = next(c for c in model.calls if c[2]["operation"] == "draft_section")
+        assert json.loads(request[1])["evidence"]
+        # 실제 파일은 불변이며, 현재 호출자의 메모리 원문만 새 버전으로 바꾼다.
+        service.corpus.docs = {
+            title: text + " 원문 버전 변경" for title, text in service.corpus.docs.items()
+        }
+        count = len(model.calls)
+        model.release.set()
+        await settle(service)
+        run = service.repo.snapshot()["runs"][0]
+        assert run["status"] == "failed" and run["report_id"] is None
+        assert run["failure"]["message"] == "span response: source version"
+        assert len(model.calls) == count
+        events = service.repo.archive(admitted["run_id"])["events"]
+        assert not any(e["type"] == "research.completed" for e in events)
+        assert any(
+            e["type"] == "model.completed" and '"근거구간"' in e["output"]["content"]
+            for e in events
+        )
+        assert not list(data_dir.glob("*.md"))
+    finally:
+        model.release.set()
+        await service.close()
+
+
+@pytest.mark.parametrize(
+    "operation", ["plan", "read_one", "draft_section", "synthesize", "semantic_review"]
+)
 async def test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단(data_dir, operation):
     model = DelayedModel(operation)
     service = RealResearchService(data_dir, model, CORPUS)
@@ -865,5 +1092,28 @@ async def test_로컬4절2라운드_최대55모델호출_의미검토한번(data
         assert run["actual_model_requests"] == len(model.calls) == 55
         assert model.section_calls == {f"researcher-{i}": 2 for i in range(1, 5)}
         assert sum(c[2]["operation"] == "semantic_review" for c in model.calls) == 1
+        for actor in model.section_calls:
+            drafts = [
+                c
+                for c in model.calls
+                if c[2]["operation"] == "draft_section" and c[2]["actor"] == actor
+            ]
+            catalogs = [json.loads(c[1]) for c in drafts]
+            assert [len(c["notes"]) for c in catalogs] == [3, 6]
+            assert catalogs[1]["notes"][:3] == catalogs[0]["notes"]
+            for call, catalog in zip(drafts, catalogs):
+                assert {e["source_id"] for e in catalog["evidence"]} == {
+                    n[0] for n in catalog["notes"]
+                }
+                assert len(catalog["evidence"]) <= 128
+                schema = service.model.schemas[service.model.calls.index(call)]
+                assert schema is not None
+                assert (
+                    len(call[0].encode("utf-8"))
+                    + len(call[1].encode("utf-8"))
+                    + len(json.dumps(schema, ensure_ascii=False).encode("utf-8"))
+                    + 8192
+                    <= 272000
+                )
     finally:
         await service.close()

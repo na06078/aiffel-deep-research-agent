@@ -12,6 +12,7 @@ from 서버.실행삭제 import RunDeletion
 from 서버.실행제어 import ExecutionService
 from 서버.저장소 import Repository
 from 서버.활동기록 import Activity
+from 테스트.테스트_실제연구제어 import CORPUS, ScriptedModel, settle
 from 테스트.테스트_실행삭제 import seed_web, web_counts
 from 테스트.테스트_웹연구 import FakeWebClient, WebModel
 
@@ -29,7 +30,7 @@ class GatedModel:
             raise RuntimeError("지연 대역 실패")
         return "삭제 대상 비공개 초안"
 
-    async def complete(self, system, user, *, on_attempt, **kwargs):
+    async def complete(self, system, user, *, on_attempt, response_schema=None, **kwargs):
         on_attempt("gated-attempt")
         content = await self.synthesize({})
         return {"content": content, "attempt_id": "gated-attempt"}
@@ -74,6 +75,52 @@ def assert_absent(repo, run_id):
     assert counts == dict.fromkeys(counts, 0), counts
     assert repo.run(repo.snapshot(), run_id) is None
     assert not list(repo.root.glob("*.md"))
+
+
+@pytest.mark.parametrize("source_mode", ["local", "web"])
+async def test_구간초안대기중_삭제는_늦은원응답과_조립결과를_복원하지_않는다(tmp_path, source_mode):
+    base = ScriptedModel if source_mode == "local" else WebModel
+
+    class DelayedDraft(base):
+        def __init__(self):
+            super().__init__()
+            self.entered, self.release = asyncio.Event(), asyncio.Event()
+
+        async def complete(self, *args, **kwargs):
+            response = await super().complete(*args, **kwargs)
+            if kwargs["context"]["operation"] == "draft_section":
+                catalog = json.loads(args[1])
+                assert catalog["evidence"]  # 실제 읽기·구간 생성 양성 대조.
+                assert kwargs["response_schema"]["properties"]["근거목록ID"]["enum"] == [
+                    catalog["evidence_set_id"]
+                ]
+                assert json.loads(response["content"])["근거목록ID"] == catalog["evidence_set_id"]
+                self.entered.set()
+                await self.release.wait()
+            return response
+
+    model = DelayedDraft()
+    service = RealResearchService(tmp_path, model, CORPUS, web_client=FakeWebClient())
+    try:
+        admitted = service.admit("/웹 자료" if source_mode == "web" else "자료", "first")
+        run_id = admitted["run_id"]
+        await asyncio.wait_for(model.entered.wait(), 3)
+        count = len(model.calls)
+        service.cancel(run_id, 1, "cancel")
+        assert (
+            RunDeletion(service, ReportExports(service)).delete(run_id, run_id, "delete")["status"]
+            == "deleted"
+        )
+        assert_absent(service.repo, run_id)
+        model.release.set()
+        await settle(service)
+        assert_absent(service.repo, run_id)
+        assert len(model.calls) == count
+        assert service.web_store.sources(run_id, 1) == []
+        assert service.web_store.read_claims(run_id, 1) == []
+    finally:
+        model.release.set()
+        await service.close()
 
 
 async def test_실제_synthesize_취소삭제후_지연성공과_finally가_행을_복원하지_않는다(tmp_path):

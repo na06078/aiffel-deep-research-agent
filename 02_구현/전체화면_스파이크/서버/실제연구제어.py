@@ -1,6 +1,7 @@
 """실제 코퍼스 6노드 감독자. 외부 제공자 호출은 주입 모델만 담당한다."""
 
 import asyncio
+import copy
 import json
 import operator
 import re
@@ -19,10 +20,10 @@ from 서버.교안연구 import (
     plan_prompt,
     read_prompt,
     required_text,
-    section_prompt,
     selection_prompt,
     synthesis_prompt,
 )
+from 서버.보고서근거 import build_draft_request, materialize_section
 from 서버.보고서품질 import parse_semantic, parse_synthesis, semantic_prompt, validate_section
 from 서버.실행제어 import ExecutionService
 from 서버.저장소 import encode, now, uid
@@ -205,6 +206,7 @@ class RealResearchService(ExecutionService):
         *,
         inputs=None,
         json_mode=True,
+        response_schema=None,
         on_complete_receipt=None,
     ):
         self.check(state)
@@ -223,6 +225,39 @@ class RealResearchService(ExecutionService):
             "max_output_tokens": 4096,
             "json_mode": json_mode,
         }
+        schema_options = {}
+        if response_schema is not None:
+            import inspect
+
+            from 서버.실제모델 import ModelCallError, _response_schema
+
+            detached, schema_bytes = _response_schema(response_schema)
+            if (
+                len(system.encode("utf-8")) + len(user.encode("utf-8")) + schema_bytes + 8192
+                > 272000
+            ):
+                raise ModelCallError(
+                    "input_too_large", "긴 컨텍스트 요금 경계의 요청을 차단했습니다."
+                )
+            supported = True
+            try:
+                inspect.signature(self.model.complete).bind(
+                    system,
+                    user,
+                    context=context,
+                    max_output_tokens=4096,
+                    json_mode=json_mode,
+                    on_attempt=lambda _: None,
+                    response_schema=detached,
+                )
+            except (TypeError, ValueError):
+                supported = False
+            if not supported:
+                raise ModelCallError(
+                    "invalid_request", "모델 인터페이스가 응답 스키마를 지원하지 않습니다."
+                )
+            payload["response_schema"] = detached
+            schema_options["response_schema"] = copy.deepcopy(detached)
         call_id = uid()
         with self.repo.transaction() as (db, data):
             if not self.repo.fenced(data, state["run_id"], state["revision"]):
@@ -277,6 +312,7 @@ class RealResearchService(ExecutionService):
                     max_output_tokens=4096,
                     json_mode=json_mode,
                     on_attempt=on_attempt,
+                    **schema_options,
                 ),
             )
             if not sent:
@@ -510,16 +546,20 @@ class RealResearchService(ExecutionService):
             read.append(title)
             notes.append([title, note])
             title = None
+        self.check(state)
+        request = build_draft_request(assignment, notes, {d: self.corpus.docs[d] for d in read})
         raw = await self.complete(
             state,
             actor,
             "draft_section",
-            section_prompt(assignment, notes),
-            inputs={"assignment": assignment, "notes": notes},
+            request.prompts,
+            inputs=request.inputs,
+            response_schema=request.response_schema,
         )
+        self.check(state)
         section = {
             **assignment,
-            **validate_section(raw, {d: self.corpus.docs[d] for d in read}),
+            **materialize_section(raw, request, {d: self.corpus.docs[d] for d in read}),
             "읽은문서": read,
             "메모": notes,
         }

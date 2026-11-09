@@ -4,7 +4,6 @@
 """
 
 import json
-import re
 import socket
 import time
 
@@ -34,41 +33,19 @@ class IntegrationModel(WebModel):
             "unknown_count": 0,
         }
 
-    async def complete(self, system, user, *, context, on_attempt, **kwargs):
-        if context["operation"] != "draft_section":
-            return await super().complete(
-                system, user, context=context, on_attempt=on_attempt, **kwargs
-            )
-        # 기존 단위 대역의 source-* 가정 대신 실제 저장소가 발급한 opaque ID를 읽는다.
-        ids = re.findall(r"\[source_id: ([0-9a-f]{32})\]", user)
-        assert len(ids) == 3
-        # 실제 모델의 관측 동작: source_id 인용 지시가 없으면 메모 제목을 인용 키로 쓴다.
-        key = ids[0] if "source_id" in system else "메모 제목"
-        self.calls.append((system, user, context))
-        attempt = f"integration-{len(self.calls)}"
-        on_attempt(attempt)
-        body = (("실제 공개 웹이 아닌 명시적 통합 대역의 문장입니다. " * 4) + f"«{key}».\n") * 22
-        return {
-            "content": json.dumps(
-                {
-                    "본문": body,
-                    "충분": True,
-                    "부족": "",
-                    "근거": [
-                        {
-                            "주장": "실제 공개 웹이 아닌 명시적 통합 대역의 문장입니다.",
-                            "출처": ids[0],
-                            "인용문": self.excerpts[ids[0]],
-                        }
-                    ],
-                },
-                ensure_ascii=False,
-            ),
-            "attempt_id": attempt,
-            "request_id": "explicit-fake-provider",
-            "model": "explicit-integration-fake",
-            "usage": {},
-        }
+    async def complete(self, system, user, *, context, on_attempt, response_schema=None, **kwargs):
+        if context["operation"] == "draft_section":
+            # 실제 저장소의 opaque source_id도 실제 제시 목록에서만 선택한다.
+            catalog = json.loads(user)
+            assert len({e["source_id"] for e in catalog["evidence"]}) == 3
+        return await super().complete(
+            system,
+            user,
+            context=context,
+            on_attempt=on_attempt,
+            response_schema=response_schema,
+            **kwargs,
+        )
 
 
 @pytest.fixture(autouse=True)

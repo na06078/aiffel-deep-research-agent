@@ -9,6 +9,7 @@ from uuid import uuid4
 
 import pytest
 
+from 서버.보고서근거 import build_draft_request
 from 서버.실제연구제어 import RealResearchService
 from 서버.웹계약 import WebSourceError
 
@@ -205,6 +206,7 @@ class FakeWebClient:
 class WebModel:
     def __init__(self, *, long_note=False, bad_first_read=None):
         self.calls = []
+        self.schemas = []
         self.notes = {}
         self.excerpts = {}
         self.long_note = long_note
@@ -212,8 +214,9 @@ class WebModel:
         self.bad_first_read = bad_first_read
         self.reads = 0
 
-    async def complete(self, system, user, *, context, on_attempt, **kwargs):
+    async def complete(self, system, user, *, context, on_attempt, response_schema=None, **kwargs):
         self.calls.append((system, user, context))
+        self.schemas.append(response_schema)
         attempt = f"attempt-{len(self.calls)}"
         on_attempt(attempt)
         op = context["operation"]
@@ -248,24 +251,29 @@ class WebModel:
                 value = "메모" * 8
             self.notes[actor] = value
         elif op == "draft_section":
-            import re
-
-            # 실제 모델의 관측 동작(2026-11-07 실사용 초안 전 절): 시스템 프롬프트가 source_id 인용을
-            # 지시하면 자료 라벨의 id를 쓰고, 지시가 없으면 자료 메모의 제목을 인용 키로 쓴다.
-            ids = re.findall(r"\[source_id: ([^\]]+)\]", user)
-            key = ids[0] if "source_id" in system else "메모 제목"
+            catalog = json.loads(user)
+            assert set(catalog) == {"assignment", "notes", "evidence_set_id", "evidence"}
+            offered = catalog["evidence"]
+            assert all(type(e["id"]) is int for e in offered)
+            assert response_schema is not None, "normal web draft must forward response_schema"
+            assert response_schema["properties"]["근거목록ID"]["enum"] == [
+                catalog["evidence_set_id"]
+            ]
+            assert response_schema["properties"]["문장"]["items"]["properties"]["근거구간"][
+                "items"
+            ]["enum"] == [e["id"] for e in offered]
+            assert offered and all(e["end"] <= 20000 for e in offered)
+            assert {e["source_id"] for e in offered} <= self.excerpts.keys()
             value = {
-                "본문": (("자료에 적힌 범위를 벗어나지 않는 대역 문장입니다. " * 4) + f"«{key}».\n")
-                * 22,
-                "충분": True,
-                "부족": "",
-                "근거": [
+                "근거목록ID": catalog["evidence_set_id"],
+                "문장": [
                     {
-                        "주장": "자료에 적힌 범위를 벗어나지 않는 대역 문장입니다.",
-                        "출처": ids[0],
-                        "인용문": self.excerpts[ids[0]],
+                        "내용": "자료에 적힌 범위를 벗어나지 않는 대역 문장입니다. " * 88,
+                        "근거구간": [offered[0]["id"]],
                     }
                 ],
+                "충분": True,
+                "부족": "",
             }
         elif op == "synthesize":
             value = {
@@ -301,7 +309,7 @@ async def settle(service):
 
 def make(*, client=None, model=None, store=None):
     return RealResearchService(
-        ROOT / ".cache/보고서품질_검증/생성/웹" / uuid4().hex,
+        ROOT / ".cache/보고서품질_검증/번호참조/통합/웹" / uuid4().hex,
         model or WebModel(),
         CORPUS,
         web_client=client or FakeWebClient(),
@@ -366,25 +374,32 @@ async def test_웹6노드_진짜읽기receipt_출처정본_모델과HTTP분리(r
         await service.close()
 
 
-async def test_웹초안프롬프트는_source_id_인용을_지시하고_자료라벨이_인용키다():
-    """2026-11-07 실사용: 로컬용 프롬프트(«문서명»=제목)를 써서 모델이 메모 제목을 인용했다.
-
-    4개 절 모두 citation_integrity_error로 막힐 결함이었다. 지시와 자료 라벨이 같은 키(source_id)를
-    가리키는지 프롬프트 경계에서 고정하고, 지시를 따르는 모델이면 품질 검사를 통과하는지 확인한다.
-    """
+async def test_웹초안은_검증된_source_id의_제시구간만_코드로_인용한다():
+    """메모 제목을 인용하던 반례를 실제 제시 구간→코드 source_id 경계로 옮긴다."""
     service = make()
     try:
         a = service.admit("/웹 자료", "web")
         await settle(service)
         run = service.repo.snapshot()["runs"][0]
-        assert run["status"] == "completed", run
-        system, user, _ = next(
+        _system, user, _ = next(
             c for c in service.model.calls if c[2]["operation"] == "draft_section"
         )
+        assert user.startswith("{"), "web draft_section must receive the source-span JSON catalog"
+        catalog = json.loads(user)
+        assert run["status"] == "completed", run
         ids = [c["source_id"] for c in service.web_store.read_claims(a["run_id"], 1)]
-        assert "«source_id»" in system and "문서 제목" not in system
-        assert all(f"[source_id: {sid}]" in user for sid in ids)
-        assert any(f"예: «{sid}»" in system for sid in ids)  # 예시는 실제 읽은 자료의 id다.
+        assert {e["source_id"] for e in catalog["evidence"]} == set(ids)
+        for e in catalog["evidence"]:
+            source = service.web_store.get(a["run_id"], 1, e["source_id"])
+            assert e["text"] == source["text"][e["start"] : e["end"]]
+            assert e["end"] <= 20000
+        section = next(
+            e["output"]
+            for e in service.repo.archive(a["run_id"])["events"]
+            if e["type"] == "research.completed"
+        )
+        assert section["근거"][0]["출처"] in ids
+        assert "메모 제목" not in section["본문"]
         assert run["quality"]["passed"] and run["quality"]["unknown_citations"] == []
     finally:
         await service.close()
@@ -659,7 +674,7 @@ async def test_single_sidecar_url_change_cannot_publish_cited_source():
             return await super().complete(system, user, context=context, **kwargs)
 
     store = WebSourceStore(
-        ROOT / ".cache/보고서품질_검증/생성/웹" / uuid4().hex / "웹자료/자료.sqlite3"
+        ROOT / ".cache/보고서품질_검증/번호참조/통합/웹" / uuid4().hex / "웹자료/자료.sqlite3"
     )
     service = make(model=DelayedEditor(), store=store)
     try:
@@ -667,7 +682,13 @@ async def test_single_sidecar_url_change_cannot_publish_cited_source():
         await asyncio.wait_for(entered.wait(), 3)
         claims = service.web_store.read_claims(admitted["run_id"], 1)
         assert len(claims) == 3
-        sid = claims[0]["source_id"]  # 원고가 실제 인용한 첫 번째 읽기.
+        section = next(
+            e["output"]
+            for e in service.repo.archive(admitted["run_id"])["events"]
+            if e["type"] == "research.completed"
+        )
+        sid = section["근거"][0]["출처"]  # 읽기 순서 대신 원고가 실제 인용한 자료를 변조한다.
+        assert sid in {claim["source_id"] for claim in claims}
         before = service.web_store.get(admitted["run_id"], 1, sid)
         with sqlite3.connect(service.web_store.path) as db:
             db.execute(
@@ -830,6 +851,30 @@ async def test_웹4절2라운드_16검색24본문_63모델상한_실제그래프
         }
         assert len(service.web_store.read_claims(a["run_id"], 1)) == 24
         assert service.model.rounds == {f"researcher-{i}": 2 for i in range(1, 5)}
+        for actor in service.model.rounds:
+            drafts = [
+                c
+                for c in service.model.calls
+                if c[2]["operation"] == "draft_section" and c[2]["actor"] == actor
+            ]
+            catalogs = [json.loads(c[1]) for c in drafts]
+            assert [len(c["notes"]) for c in catalogs] == [3, 6]
+            assert catalogs[1]["notes"][:3] == catalogs[0]["notes"]
+            for call, catalog in zip(drafts, catalogs):
+                assert {e["source_id"] for e in catalog["evidence"]} == {
+                    n[0] for n in catalog["notes"]
+                }
+                assert all(e["end"] <= 20000 for e in catalog["evidence"])
+                assert len(catalog["evidence"]) <= 128
+                schema = service.model.schemas[service.model.calls.index(call)]
+                assert schema is not None
+                assert (
+                    len(call[0].encode("utf-8"))
+                    + len(call[1].encode("utf-8"))
+                    + len(json.dumps(schema, ensure_ascii=False).encode("utf-8"))
+                    + 8192
+                    <= 272000
+                )
         archive = service.repo.archive(a["run_id"])
         assert all(e["source_mode"] == "web" for e in archive["events"])
         assert run["research_stop_reason"] == "sufficient"
@@ -854,11 +899,33 @@ async def test_웹절근거는_receipt와_실제읽힌앞20000자에_귀속한�
             if kwargs["context"]["operation"] == "draft_section":
                 obj = json.loads(result["content"])
                 if mutation == "missing":
-                    obj.pop("근거")
-                elif mutation == "unread":
-                    obj["근거"][0]["출처"] = "source-4"
+                    obj["문장"][0].pop("근거구간")
                 else:
-                    obj["근거"][0]["인용문"] = quote
+                    catalog = json.loads(args[1])
+                    sid = catalog["evidence"][0]["source_id"]
+                    if mutation == "unread":
+                        extra = build_draft_request(catalog["assignment"], [], {"source-4": quote})
+                        bad_id = json.loads(extra.prompts[1])["evidence"][0]["id"]
+                    else:
+                        source = service.web_store.get(
+                            kwargs["context"]["run_id"], kwargs["context"]["revision"], sid
+                        )
+                        extra = build_draft_request(
+                            {**catalog["assignment"], "instruction": quote},
+                            [],
+                            {sid: source["text"]},
+                        )
+                        tail = next(
+                            e
+                            for e in json.loads(extra.prompts[1])["evidence"]
+                            if quote in e["text"]
+                        )
+                        assert tail["end"] > 20000
+                        bad_id = tail["id"]
+                    extra_catalog = json.loads(extra.prompts[1])
+                    assert extra_catalog["evidence_set_id"] != catalog["evidence_set_id"]
+                    obj["근거목록ID"] = extra_catalog["evidence_set_id"]
+                    obj["문장"][0]["근거구간"] = [bad_id]
                 result["content"] = json.dumps(obj, ensure_ascii=False)
             return result
 
@@ -879,6 +946,57 @@ async def test_웹절근거는_receipt와_실제읽힌앞20000자에_귀속한�
             for e in service.repo.archive(admission["run_id"])["events"]
             if e["error"]
         ]
-        assert any("evidence" in message for message in errors)
+        reason = "span response: schema" if mutation == "missing" else "span response: evidence set"
+        assert reason in errors
     finally:
+        await service.close()
+
+
+@pytest.mark.parametrize("tamper", ["note_receipt", "source_version", "fetch_receipt"])
+async def test_웹구간요청후_현재receipt와원문을_재검사하고_늦은조립을_차단한다(tamper):
+    entered, release = asyncio.Event(), asyncio.Event()
+
+    class DelayedDraft(WebModel):
+        async def complete(self, *args, **kwargs):
+            response = await super().complete(*args, **kwargs)
+            if kwargs["context"]["operation"] == "draft_section":
+                assert json.loads(args[1])["evidence"]
+                entered.set()
+                await release.wait()
+            return response
+
+    service = make(model=DelayedDraft())
+    try:
+        admitted = service.admit("/웹 자료", "first")
+        await asyncio.wait_for(entered.wait(), 3)
+        assert len(service.web_store.read_claims(admitted["run_id"], 1)) == 3
+        if tamper == "note_receipt":
+            for claim in service.web_store.claims.values():
+                claim["note_sha256"] = "0" * 64
+        elif tamper == "source_version":
+            for source in service.web_store.rows.values():
+                if source["status"] == "ready":
+                    source["text"] = "새 원문 버전. " + source["text"]
+                    source["text_sha256"] = sha(source["text"])
+        else:
+            with service.repo.transaction() as (db, _data):
+                db.execute(
+                    "DELETE FROM events WHERE json_extract(body,'$.type')='web.source.fetched'"
+                )
+        count = len(service.model.calls)
+        requests = list(service.web_client.calls)
+        release.set()
+        await settle(service)
+        run = service.repo.snapshot()["runs"][0]
+        assert run["status"] == "failed" and run["report_id"] is None
+        assert run["failure"]["message"] == "span response: source version"
+        assert len(service.model.calls) == count and service.web_client.calls == requests
+        events = service.repo.archive(admitted["run_id"])["events"]
+        assert not any(e["type"] == "research.completed" for e in events)
+        assert any(
+            e["type"] == "model.completed" and '"근거구간"' in e["output"]["content"]
+            for e in events
+        )
+    finally:
+        release.set()
         await service.close()

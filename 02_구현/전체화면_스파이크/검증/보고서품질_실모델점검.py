@@ -23,7 +23,7 @@ MAX_INPUT_PROXY = 272000
 MAX_COST_NANO_USD = MAX_CALLS * (MAX_INPUT_PROXY * 250 + MAX_OUTPUT * 1200)
 sys.path.insert(0, str(SPIKE))
 
-from 서버.교안연구 import Corpus, section_prompt
+from 서버.교안연구 import Corpus
 
 
 def digest(data):
@@ -71,6 +71,7 @@ def manifest():
         for name in (
             "교안연구.py",
             "보고서품질.py",
+            "보고서근거.py",
             "보고서도식.py",
             "보고서표현.py",
             "저장소.py",
@@ -84,10 +85,25 @@ def manifest():
 
 
 def prepare(*, work=WORK):
+    from 서버.보고서근거 import build_draft_request
+
     work = cache_path(work)
     corpus, data = inputs()
-    system, user = section_prompt(data["assignment"], data["notes"])
-    save(work, "입력준비.json", {**data, "system": system, "user": user})
+    request = build_draft_request(
+        data["assignment"], data["notes"], {"임오군란": corpus.docs["임오군란"]}
+    )
+    system, user = request.prompts
+    save(
+        work,
+        "입력준비.json",
+        {
+            **data,
+            "system": system,
+            "user": user,
+            "request_inputs": request.inputs,
+            "response_schema": request.response_schema,
+        },
+    )
     result = {
         "mode": "prepare",
         "model": MODEL,
@@ -215,11 +231,11 @@ def usage_snapshot(model):
 async def run_probe(*, model, work=WORK):
     """명시 주입 모델만 사용한다. None일 때 실제 제공자로 대체하지 않는다."""
     from 서버.교안연구 import ResearchContractError, assemble_report, synthesis_prompt
+    from 서버.보고서근거 import build_draft_request, materialize_section
     from 서버.보고서품질 import (
         parse_semantic,
         parse_synthesis,
         semantic_prompt,
-        validate_section,
         visible_markdown,
     )
 
@@ -232,17 +248,24 @@ async def run_probe(*, model, work=WORK):
         "observed_attempts": 0,
         "source_hashes": manifest(),
         "live_verified": False,
+        "draft_protocol": "short-number-json-schema-v1",
+        "draft_schema_received": False,
     }
     attempts, receipts = [], []
     stage = "setup"
 
-    async def call(operation, case, prompt):
+    async def call(operation, case, prompt, *, response_schema=None):
         nonlocal stage
         stage = case
         if len(attempts) >= MAX_CALLS:
             raise ProbeError("attempt_limit")
         system, user = prompt
-        if len(system.encode()) + len(user.encode()) + 8192 > MAX_INPUT_PROXY:
+        schema_bytes = (
+            len(json.dumps(response_schema, ensure_ascii=False, allow_nan=False).encode("utf-8"))
+            if response_schema is not None
+            else 0
+        )
+        if len(system.encode()) + len(user.encode()) + schema_bytes + 8192 > MAX_INPUT_PROXY:
             raise ProbeError("input_too_large")
         slot = []
         context = {
@@ -261,6 +284,7 @@ async def run_probe(*, model, work=WORK):
                 "context": context,
                 "max_output_tokens": MAX_OUTPUT,
                 "json_mode": True,
+                "response_schema": response_schema,
             },
         )
 
@@ -276,6 +300,7 @@ async def run_probe(*, model, work=WORK):
             ):
                 raise ProbeError("attempt_callback_contract")
 
+        schema_options = {"response_schema": response_schema} if response_schema is not None else {}
         response = await model.complete(
             system,
             user,
@@ -283,11 +308,17 @@ async def run_probe(*, model, work=WORK):
             max_output_tokens=MAX_OUTPUT,
             json_mode=True,
             on_attempt=on_attempt,
+            **schema_options,
         )
         if len(slot) != 1 or response.get("attempt_id") != slot[0]:
             raise ProbeError("attempt_binding_mismatch")
         if response.get("model") != MODEL:
             raise ProbeError("unexpected_model")
+        if case == "section" and response_schema is not None:
+            result["draft_schema_received"] = True
+            result["draft_schema_sha256"] = hashlib.sha256(
+                json.dumps(response_schema, ensure_ascii=False, allow_nan=False).encode("utf-8")
+            ).hexdigest()
         receipt = {
             k: response.get(k)
             for k in ("attempt_id", "request_id", "model", "usage", "estimated_cost_usd")
@@ -303,10 +334,22 @@ async def run_probe(*, model, work=WORK):
         corpus, data = inputs()
         save(work, "입력준비.json", data)
         sources = {"임오군란": corpus.docs["임오군란"]}
-        raw = await call(
-            "draft_section", "section", section_prompt(data["assignment"], data["notes"])
+        request = build_draft_request(data["assignment"], data["notes"], sources)
+        save(
+            work,
+            "입력준비.json",
+            {
+                **data,
+                "system": request.prompts[0],
+                "user": request.prompts[1],
+                "request_inputs": request.inputs,
+                "response_schema": request.response_schema,
+            },
         )
-        parsed = validate_section(raw, sources)
+        raw = await call(
+            "draft_section", "section", request.prompts, response_schema=request.response_schema
+        )
+        parsed = materialize_section(raw, request, sources)
         if not parsed["충분"]:
             raise ProbeError("section_insufficient")
         first_date = parsed["본문"].find("1882년")
@@ -317,6 +360,7 @@ async def run_probe(*, model, work=WORK):
         ):
             raise ProbeError("canonical_date_missing")
         section = {**data["assignment"], **parsed, "읽은문서": ["임오군란"]}
+        save(work, "절_조립.json", {"section": section, "request_inputs": request.inputs})
         sections = [section]
         title = "임오군란 발생 시기 사전점검"
         summary = parse_synthesis(
@@ -368,7 +412,9 @@ async def run_probe(*, model, work=WORK):
             raise ProbeError("negative_accepted")
         # 단순 fail-closed/다른 지적을 날짜 검출 성공으로 계산하지 않는다.
         if not any(
-            "1883년" in p["본문발췌"] and p["본문발췌"] in negative and "임오군란" in p["출처"]
+            "1883년" in p["본문발췌"]
+            and p["본문발췌"] in negative_visible
+            and "임오군란" in p["출처"]
             for p in verdict["문제"]
         ):
             raise ProbeError("negative_date_not_identified")

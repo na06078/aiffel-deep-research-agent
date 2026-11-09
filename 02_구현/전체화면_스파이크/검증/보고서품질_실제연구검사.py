@@ -26,6 +26,7 @@ def main(args):
     address = urlsplit(args.base_url)
     assert address.scheme == "http" and address.hostname == "127.0.0.1"
     assert address.port not in {8766, 8768} and address.port is not None
+    assert args.expected_unknown >= 0
     assert re.fullmatch(r"[A-Za-z0-9_-]+", args.label)
     data = args.data_dir.resolve()
     assert data.is_relative_to(ROOT / "03_실행데이터") and data.name.startswith("보고서품질_")
@@ -51,14 +52,48 @@ def main(args):
 
     initial = get(args.base_url, "/api/spike/snapshot")
     assert initial["provider"] == "openai" and initial["mode"] == "research"
-    assert initial["budget"]["max_attempts"] == 165 and initial["budget"]["max_usd"] == 2
-    assert initial["budget"]["unknown_count"] == 0
+    assert initial["budget"]["max_attempts"] == 185 and initial["budget"]["max_usd"] == 2
+    assert initial["budget"]["unknown_count"] == args.expected_unknown
     result["budget_before"] = initial["budget"]
     if args.submit:
         assert args.preflight is not None
         preflight = json.loads(args.preflight.read_text("utf-8"))
-        assert preflight["mode"] == "live" and preflight["passed"] and preflight["live_verified"]
-        assert preflight["observed_attempts"] == 4
+        assert preflight["mode"] == "live"
+        assert preflight["passed"] and preflight["live_verified"]
+        assert preflight["observed_attempts"] == preflight["completed_calls"] == 4
+        assert preflight["draft_protocol"] == "short-number-json-schema-v1"
+        assert preflight["draft_schema_received"] is True
+        assert args.preflight.resolve().is_relative_to(ROOT / ".cache/보고서품질_검증/실모델점검")
+        for filename, digest in preflight["source_hashes"].items():
+            target = Path(filename).resolve()
+            assert target.is_relative_to(ROOT)
+            assert hashlib.sha256(target.read_bytes()).hexdigest() == digest
+        section_input = json.loads((args.preflight.parent / "입력_section.json").read_text("utf-8"))
+        schema = section_input["response_schema"]
+        assert (
+            preflight["draft_schema_sha256"]
+            == hashlib.sha256(
+                json.dumps(schema, ensure_ascii=False, allow_nan=False).encode("utf-8")
+            ).hexdigest()
+        )
+        offered = json.loads(section_input["user"])
+        assert schema["properties"]["근거목록ID"]["enum"] == [offered["evidence_set_id"]]
+        assert schema["properties"]["문장"]["items"]["properties"]["근거구간"]["items"] == {
+            "type": "integer",
+            "enum": [span["id"] for span in offered["evidence"]],
+        }
+        receipts = json.loads((args.preflight.parent / "호출영수증.json").read_text("utf-8"))
+        assert [r["case"] for r in receipts] == ["section", "synthesis", "positive", "negative"]
+        assert all(r["model"] == "gpt-5.6-luna" and r["request_id"] for r in receipts)
+        assert (
+            preflight["usage_after"]["attempt_count"] - preflight["usage_before"]["attempt_count"]
+            == 4
+        )
+        assert (
+            preflight["usage_before"]["unknown_count"]
+            == preflight["usage_after"]["unknown_count"]
+            == args.expected_unknown
+        )
         assert not initial["runs"] and not initial["queue"], (
             "실행 기록이 있어 새 연구를 전송하지 않습니다."
         )
@@ -148,7 +183,7 @@ def main(args):
             assert run["quality"]["passed"] and run["quality"]["semantic_review"]["통과"]
             assert run["source_mode"] == "local" and run["mock_requests"] == 0
             assert 0 < run["actual_model_requests"] <= 55
-            assert snapshot["budget"]["unknown_count"] == 0
+            assert snapshot["budget"]["unknown_count"] == initial["budget"]["unknown_count"]
             if args.submit:
                 assert (
                     snapshot["budget"]["attempt_count"] - initial["budget"]["attempt_count"]
@@ -327,4 +362,10 @@ if __name__ == "__main__":
     parser.add_argument("--submit", action="store_true")
     parser.add_argument("--run-id")
     parser.add_argument("--preflight", type=Path)
+    parser.add_argument(
+        "--expected-unknown",
+        type=int,
+        default=0,
+        help="별도 확인/보존하는 과거 미정산 예약 수(새 실패를 허용하는 값 아님)",
+    )
     raise SystemExit(main(parser.parse_args()))

@@ -86,20 +86,22 @@ def test_HTTP1회_예약콜백_요청옵션_정산(tmp_path):
 @pytest.mark.parametrize(
     "kind,code,status",
     [
+        ("402", "provider_http", 402),
         ("429", "provider_http", 429),
         ("timeout", "timeout", None),
         ("secret", "provider_error", None),
     ],
 )
-def test_실패는_단한번_안전오류_예약유지(tmp_path, kind, code, status):
+@pytest.mark.parametrize("structured", [False, True])
+def test_실패는_단한번_안전오류_예약유지(tmp_path, kind, code, status, structured):
     secret = "FAKE_SECRET_NEVER_LOG_abc123"
     sent = []
 
     def handler(request):
         sent.append(request)
-        if kind == "429":
+        if kind in ("402", "429"):
             return httpx.Response(
-                429, json={"error": {"message": secret}}, headers={"retry-after": "0"}
+                int(kind), json={"error": {"message": secret}}, headers={"retry-after": "0"}
             )
         if kind == "timeout":
             raise httpx.ReadTimeout(secret, request=request)
@@ -110,7 +112,12 @@ def test_실패는_단한번_안전오류_예약유지(tmp_path, kind, code, sta
     async def run():
         try:
             with pytest.raises(ModelCallError) as caught:
-                await model.complete("dummy", "dummy", context=CTX)
+                await model.complete(
+                    "dummy",
+                    "dummy",
+                    context=CTX,
+                    response_schema=STRICT_SCHEMA if structured else None,
+                )
             err = caught.value
             assert err.code == code
             assert err.status == status
@@ -139,7 +146,10 @@ def test_실패는_단한번_안전오류_예약유지(tmp_path, kind, code, sta
         ("partial", "content_filter", False),
     ],
 )
-def test_비정상출력은_결과가아니며_확인usage만정산(tmp_path, content, finish, json_mode):
+@pytest.mark.parametrize("structured", [False, True])
+def test_비정상출력은_결과가아니며_확인usage만정산(
+    tmp_path, content, finish, json_mode, structured
+):
     sent = []
 
     def handler(request):
@@ -151,7 +161,13 @@ def test_비정상출력은_결과가아니며_확인usage만정산(tmp_path, co
     async def run():
         try:
             with pytest.raises(ModelCallError) as caught:
-                await model.complete("dummy JSON", "dummy JSON", context=CTX, json_mode=json_mode)
+                await model.complete(
+                    "dummy JSON",
+                    "dummy JSON",
+                    context=CTX,
+                    json_mode=json_mode,
+                    response_schema=STRICT_SCHEMA if structured else None,
+                )
             assert caught.value.code == "invalid_response"
             assert "FAKE_SECRET" not in str(caught.value)
         finally:
@@ -170,7 +186,8 @@ def test_비정상출력은_결과가아니며_확인usage만정산(tmp_path, co
         ("callback", "attempt_callback_failed", 1),
     ],
 )
-def test_전송전차단과_콜백오류(tmp_path, kind, code, attempts):
+@pytest.mark.parametrize("structured", [False, True])
+def test_전송전차단과_콜백오류(tmp_path, kind, code, attempts, structured):
     sent = []
     model = model_for(tmp_path, lambda req: sent.append(req))
 
@@ -186,6 +203,7 @@ def test_전송전차단과_콜백오류(tmp_path, kind, code, attempts):
                     context=CTX,
                     max_output_tokens=1000000 if kind == "money" else 4096,
                     on_attempt=broken if kind == "callback" else None,
+                    response_schema=STRICT_SCHEMA if structured else None,
                 )
             assert caught.value.code == code
             assert "FAKE_SECRET" not in str(caught.value)
@@ -388,3 +406,266 @@ def test_env설정오류는_ambient키로_우회하지않음(tmp_path, monkeypat
     assert caught.value.code == "configuration_error"
     assert caught.value.attempt_id is None
     assert "dummy" not in str(caught.value)
+
+
+STRICT_SCHEMA = {
+    "type": "object",
+    "additionalProperties": False,
+    "properties": {"근거구간": {"type": "array", "items": {"type": "integer", "enum": [1, 3]}}},
+    "required": ["근거구간"],
+}
+
+
+def test_strict_schema_실제SDK_payload와예약UTF8사본(tmp_path):
+    import copy
+
+    sent, reserved = [], []
+    schema = copy.deepcopy(STRICT_SCHEMA)
+    expected = copy.deepcopy(schema)
+    model = model_for(
+        tmp_path,
+        lambda req: sent.append(json.loads(req.content)) or httpx.Response(200, json=response()),
+    )
+    original = model.budget.reserve
+
+    def reserve(bound, output, context):
+        reserved.append(bound)
+        schema["properties"]["근거구간"]["items"]["enum"].append(99)
+        return original(bound, output, context)
+
+    model.budget.reserve = reserve
+
+    async def run():
+        try:
+            await model.complete(
+                "시스템", "사용자", context=CTX, json_mode=True, response_schema=schema
+            )
+        finally:
+            await model.aclose()
+
+    asyncio.run(run())
+    assert len(sent) == 1
+    assert sent[0]["response_format"] == {
+        "type": "json_schema",
+        "json_schema": {"name": "grounded_section", "strict": True, "schema": expected},
+    }
+    assert reserved == [
+        len("시스템".encode())
+        + len("사용자".encode())
+        + len(json.dumps(expected, ensure_ascii=False).encode())
+        + 8192
+    ]
+
+
+@pytest.mark.parametrize(
+    "schema,code",
+    [
+        ([], "invalid_request"),
+        ({"type": "array"}, "invalid_request"),
+        (
+            {
+                "type": "json_schema",
+                "json_schema": {"name": "bad", "strict": True, "schema": STRICT_SCHEMA},
+            },
+            "invalid_request",
+        ),
+        ({"type": "object", "items": []}, "invalid_request"),
+        ({"type": "object", "properties": {"x": {"enum": []}}}, "invalid_request"),
+        ({"type": "object", "properties": {1: {"type": "string"}}}, "invalid_request"),
+        ({"type": "object", "required": [True]}, "invalid_request"),
+        (
+            {"type": "object", "properties": {"x": {"type": "string", "maxLength": True}}},
+            "invalid_request",
+        ),
+        ({"type": "object", "properties": []}, "invalid_request"),
+        ({"type": "object", "properties": {"x": {"type": "nonsense"}}}, "invalid_request"),
+        ({"type": "object", "description": float("nan")}, "invalid_request"),
+        ({"type": "object", "description": (1, 2)}, "invalid_request"),
+        ({**STRICT_SCHEMA, "description": "가" * 90000}, "input_too_large"),
+    ],
+)
+def test_schema거절은_예약콜백SDK전(tmp_path, schema, code):
+    sent, reserved, callbacks = [], [], []
+    model = model_for(tmp_path, lambda req: sent.append(req))
+    model.budget.reserve = lambda *args: reserved.append(args)
+
+    async def run():
+        try:
+            with pytest.raises(ModelCallError) as caught:
+                await model.complete(
+                    "JSON",
+                    "JSON",
+                    context=CTX,
+                    json_mode=True,
+                    response_schema=schema,
+                    on_attempt=callbacks.append,
+                )
+            assert caught.value.code == code
+            assert caught.value.attempt_id is None
+        finally:
+            await model.aclose()
+
+    asyncio.run(run())
+    assert sent == reserved == callbacks == []
+    assert model.usage()["attempt_count"] == 0
+
+
+@pytest.mark.parametrize("location", ["root", "nested"])
+@pytest.mark.parametrize(
+    "defect", ["missing_required", "partial_required", "missing_closed", "open"]
+)
+def test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부(tmp_path, location, defect):
+    schema = {
+        "type": "object",
+        "additionalProperties": False,
+        "required": ["rows"],
+        "properties": {
+            "rows": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "additionalProperties": False,
+                    "required": ["x"],
+                    "properties": {"x": {"type": "string"}},
+                },
+            }
+        },
+    }
+    target = schema if location == "root" else schema["properties"]["rows"]["items"]
+    if defect == "missing_required":
+        target.pop("required")
+    elif defect == "partial_required":
+        target["required"] = []
+    elif defect == "missing_closed":
+        target.pop("additionalProperties")
+    else:
+        target["additionalProperties"] = True
+    sent, callbacks = [], []
+    model = model_for(
+        tmp_path, lambda request: sent.append(request) or httpx.Response(200, json=response())
+    )
+
+    async def run():
+        try:
+            with pytest.raises(ModelCallError) as caught:
+                await model.complete(
+                    "JSON", "JSON", context=CTX, response_schema=schema, on_attempt=callbacks.append
+                )
+            assert caught.value.code == "invalid_request" and caught.value.attempt_id is None
+        finally:
+            await model.aclose()
+
+    asyncio.run(run())
+    assert sent == callbacks == [] and model.usage()["attempt_count"] == 0
+
+
+def test_실제builder_schema의_정수enum이_SDK_HTTP까지_동일하다(tmp_path):
+    from 서버.보고서근거 import build_draft_request
+
+    request = build_draft_request(
+        {"title": "시기", "role": "시간순 담당", "instruction": "원문 확인"},
+        [["자료", "읽은 메모"]],
+        {"자료": "1894년에 사건이 일어났다. " * 25},
+    )
+    catalog = json.loads(request.prompts[1])
+    schema = request.response_schema
+    sent = []
+    content = json.dumps(
+        {
+            "근거목록ID": catalog["evidence_set_id"],
+            "문장": [
+                {
+                    "내용": "자료에 기록된 사건을 정리한다.",
+                    "근거구간": [catalog["evidence"][0]["id"]],
+                }
+            ],
+            "충분": True,
+            "부족": "",
+        },
+        ensure_ascii=False,
+    )
+    model = model_for(
+        tmp_path,
+        lambda req: (
+            sent.append(json.loads(req.content)) or httpx.Response(200, json=response(content))
+        ),
+    )
+
+    async def run():
+        try:
+            result = await model.complete(
+                *request.prompts, context=CTX, json_mode=True, response_schema=schema
+            )
+            assert result["content"] == content
+        finally:
+            await model.aclose()
+
+    asyncio.run(run())
+    assert len(sent) == 1
+    actual = sent[0]["response_format"]
+    assert actual == {
+        "type": "json_schema",
+        "json_schema": {"name": "grounded_section", "strict": True, "schema": schema},
+    }
+    assert actual["json_schema"]["schema"]["properties"]["문장"]["items"]["properties"]["근거구간"][
+        "items"
+    ]["enum"] == [e["id"] for e in catalog["evidence"]]
+    assert all(type(e["id"]) is int for e in catalog["evidence"])
+
+
+@pytest.mark.parametrize("kind", ["refusal", "tool_calls"])
+def test_strict_schema도_거부와도구호출은_출판응답아님(tmp_path, kind):
+    payload = response()
+    message = payload["choices"][0]["message"]
+    if kind == "refusal":
+        message["refusal"] = "dummy refusal"
+    else:
+        message["tool_calls"] = [
+            {"id": "dummy", "type": "function", "function": {"name": "dummy", "arguments": "{}"}}
+        ]
+    sent = []
+    model = model_for(tmp_path, lambda req: sent.append(req) or httpx.Response(200, json=payload))
+
+    async def run():
+        try:
+            with pytest.raises(ModelCallError) as caught:
+                await model.complete(
+                    "JSON", "JSON", context=CTX, json_mode=True, response_schema=STRICT_SCHEMA
+                )
+            assert caught.value.code == "invalid_response"
+        finally:
+            await model.aclose()
+
+    asyncio.run(run())
+    assert len(sent) == 1 and model.usage()["unknown_count"] == 0
+    assert model.usage()["spent_usd"] == pytest.approx(0.000061)
+
+
+def test_schema실패두건_재시작과정상정산도_과거예약불변(tmp_path):
+    model = model_for(
+        tmp_path, lambda req: httpx.Response(429, json={"error": {"message": "dummy"}})
+    )
+
+    async def fail_twice():
+        try:
+            for _ in range(2):
+                with pytest.raises(ModelCallError, match="모델 제공자"):
+                    await model.complete("JSON", "JSON", context=CTX, response_schema=STRICT_SCHEMA)
+        finally:
+            await model.aclose()
+
+    asyncio.run(fail_twice())
+    old = model.usage()
+    restart = model_for(tmp_path, lambda req: httpx.Response(200, json=response()))
+
+    async def success():
+        try:
+            await restart.complete("JSON", "JSON", context=CTX, response_schema=STRICT_SCHEMA)
+        finally:
+            await restart.aclose()
+
+    asyncio.run(success())
+    usage = restart.usage()
+    assert old["unknown_count"] == usage["unknown_count"] == 2
+    assert old["reserved_usd"] == usage["reserved_usd"] > 0
+    assert old["attempt_count"] == 2 and usage["attempt_count"] == 3

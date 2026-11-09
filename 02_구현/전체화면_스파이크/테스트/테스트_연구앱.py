@@ -1,6 +1,7 @@
 """실제 앱 조립은 주입 대역으로, 실제 HTTP 제공자는 별도 승인 실행으로 검증한다."""
 
 import asyncio
+import json
 
 import httpx
 
@@ -44,5 +45,32 @@ async def test_실제앱_주입모델과_분리저장_정본다운로드(tmp_pat
             assert downloaded.headers["x-content-sha256"] == report["sha256"]
             archive = (await client.get(f"/api/spike/runs/{run['run_id']}/archive")).json()
             assert archive["provider"] == "openai"
+            requests = [
+                e
+                for e in archive["events"]
+                if e["type"] == "model.started"
+                and e["input"]["context"]["operation"] == "draft_section"
+            ]
+            assert len(requests) == 5  # 기존 네 절 + 부족 절 한 번; 신규 모델 턴 없음.
+            for event in requests:
+                payload = event["input"]
+                catalog = json.loads(payload["user"])["evidence"]
+                assert catalog == payload["inputs"]["catalog"]
+                token = json.loads(payload["user"])["evidence_set_id"]
+                assert payload["response_schema"]["properties"]["근거목록ID"]["enum"] == [token]
+                assert payload["response_schema"]["properties"]["문장"]["items"]["properties"][
+                    "근거구간"
+                ]["items"]["enum"] == [e["id"] for e in catalog]
+                assert all(type(e["id"]) is int for e in catalog)
+                assert set(payload["inputs"]["source_hashes"]) == {e["source_id"] for e in catalog}
+            raw_drafts = [
+                json.loads(e["output"]["content"])
+                for e in archive["events"]
+                if e["type"] == "model.completed" and '"문장"' in e["output"]["content"]
+            ]
+            assert len(raw_drafts) == 5
+            assert all(set(raw) == {"근거목록ID", "문장", "충분", "부족"} for raw in raw_drafts)
+            sections = [e["output"] for e in archive["events"] if e["type"] == "research.completed"]
+            assert len(sections) == 5 and all(s["근거"] and "문장" not in s for s in sections)
             assert len(model.calls) == before
     assert model.closed

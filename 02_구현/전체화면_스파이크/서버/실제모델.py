@@ -1,5 +1,6 @@
 """명시적 실제 모델 인터페이스."""
 
+import json
 import re
 from pathlib import Path
 
@@ -53,6 +54,101 @@ def _project_key(path):
     return key
 
 
+def _response_schema(schema):
+    """허용된 plain JSON Schema를 검증하고 전송/크기 계산용 사본을 만든다."""
+
+    def plain(value):
+        if type(value) is dict:
+            if any(type(key) is not str for key in value):
+                raise ValueError("schema keys")
+            for child in value.values():
+                plain(child)
+        elif type(value) is list:
+            for child in value:
+                plain(child)
+        elif type(value) not in (str, int, float, bool, type(None)):
+            raise ValueError("plain JSON required")
+
+    def node(value):
+        if type(value) is not dict:
+            raise ValueError("schema object required")
+        kinds = {"object", "array", "string", "integer", "number", "boolean", "null"}
+        kind = value.get("type")
+        if kind is not None and not (
+            type(kind) is str
+            and kind in kinds
+            or type(kind) is list
+            and kind
+            and all(type(k) is str and k in kinds for k in kind)
+        ):
+            raise ValueError("schema type")
+        # strict 요청은 모든 object를 닫고 모든 속성을 필수로 지정해야 한다.
+        if kind == "object" or (type(kind) is list and "object" in kind) or "properties" in value:
+            properties, required = value.get("properties"), value.get("required")
+            if (
+                type(properties) is not dict
+                or value.get("additionalProperties") is not False
+                or type(required) is not list
+                or any(type(key) is not str for key in required)
+                or len(required) != len(properties)
+                or set(required) != set(properties)
+            ):
+                raise ValueError("strict object fields")
+        for key in ("properties", "$defs", "definitions"):
+            if key in value:
+                if type(value[key]) is not dict:
+                    raise ValueError("schema properties")
+                for child in value[key].values():
+                    node(child)
+        if "items" in value:
+            node(value["items"])
+        if "additionalProperties" in value and type(value["additionalProperties"]) is not bool:
+            node(value["additionalProperties"])
+        for key in ("anyOf", "allOf", "oneOf"):
+            if key in value:
+                if type(value[key]) is not list or not value[key]:
+                    raise ValueError("schema union")
+                for child in value[key]:
+                    node(child)
+        if "required" in value and (
+            type(value["required"]) is not list
+            or any(type(k) is not str for k in value["required"])
+            or len(set(value["required"])) != len(value["required"])
+            or not set(value["required"]) <= set(value.get("properties", {}))
+        ):
+            raise ValueError("schema required")
+        if "enum" in value and (type(value["enum"]) is not list or not value["enum"]):
+            raise ValueError("schema enum")
+        for key in ("description", "title", "$ref", "$schema", "pattern", "format"):
+            if key in value and type(value[key]) is not str:
+                raise ValueError("schema string")
+        for key in (
+            "minItems",
+            "maxItems",
+            "minLength",
+            "maxLength",
+            "minProperties",
+            "maxProperties",
+        ):
+            if key in value and (type(value[key]) is not int or value[key] < 0):
+                raise ValueError("schema limit")
+
+    invalid = False
+    try:
+        plain(schema)
+        if type(schema) is not dict or schema.get("type") != "object":
+            raise ValueError("root object required")
+        node(schema)
+        encoded = json.dumps(schema, ensure_ascii=False, allow_nan=False)
+        detached = json.loads(encoded)
+        size = len(encoded.encode("utf-8"))
+    except (TypeError, ValueError, RecursionError, OverflowError):
+        invalid = True
+    if invalid:
+        raise ModelCallError("invalid_request", "응답 스키마 형식이 올바르지 않습니다.")
+    return detached, size
+
+
 class OpenAIModel:
     def __init__(self, env_path: Path, ledger_path: Path, *, client=None):
         self.budget = CallBudget(ledger_path)
@@ -92,6 +188,7 @@ class OpenAIModel:
         context: dict,
         max_output_tokens=4096,
         json_mode=False,
+        response_schema=None,
         on_attempt=None,
     ) -> dict:
         if (
@@ -101,7 +198,10 @@ class OpenAIModel:
             or max_output_tokens <= 0
         ):
             raise ModelCallError("invalid_request", "모델 입력 형식이 올바르지 않습니다.")
-        input_bound = len(system.encode("utf-8")) + len(user.encode("utf-8")) + 8192
+        schema_bytes = 0
+        if response_schema is not None:
+            response_schema, schema_bytes = _response_schema(response_schema)
+        input_bound = len(system.encode("utf-8")) + len(user.encode("utf-8")) + schema_bytes + 8192
         if input_bound > 272000:
             raise ModelCallError("input_too_large", "긴 컨텍스트 요금 경계의 요청을 차단했습니다.")
         failure = None
@@ -130,7 +230,16 @@ class OpenAIModel:
             "reasoning_effort": "low",
             "max_completion_tokens": max_output_tokens,
         }
-        if json_mode:
+        if response_schema is not None:
+            options["response_format"] = {
+                "type": "json_schema",
+                "json_schema": {
+                    "name": "grounded_section",
+                    "strict": True,
+                    "schema": response_schema,
+                },
+            }
+        elif json_mode:
             options["response_format"] = {"type": "json_object"}
         import asyncio
 
@@ -187,8 +296,6 @@ class OpenAIModel:
             failure = ModelCallError("ledger_error", "모델 사용량 정산에 실패했습니다.", attempt_id)
         if failure:
             raise failure
-        import json
-
         invalid = False
         try:
             choice = result.choices[0]

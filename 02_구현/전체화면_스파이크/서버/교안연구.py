@@ -204,6 +204,7 @@ def read_prompt(title, brief, corpus):
 
 
 def section_prompt(assignment, notes):
+    """과거 응답 재현 전용. 정상 신규 초안은 보고서근거.build_draft_request를 쓴다."""
     from 서버.보고서품질 import EVIDENCE_INSTRUCTION
 
     material = "\n\n".join(f"[{d}]\n{n}" for d, n in notes) or "(읽은 자료 없음)"

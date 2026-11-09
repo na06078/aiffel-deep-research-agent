@@ -12,7 +12,8 @@ from 서버.교안연구 import (
     required_text,
     role_sentence,
 )
-from 서버.보고서품질 import EVIDENCE_INSTRUCTION, validate_section
+from 서버.보고서근거 import build_draft_request, materialize_section
+from 서버.보고서품질 import EVIDENCE_INSTRUCTION
 from 서버.웹계약 import (
     MAX_WEB_FETCH_ATTEMPTS,
     MAX_WEB_NOTE_CHARACTERS,
@@ -84,7 +85,9 @@ def parse_plan(raw):
 
 
 def web_section_prompt(assignment, notes):
-    """웹 모드 절 초안 프롬프트. 인용 키는 문서 제목이 아니라 자료 라벨의 source_id다.
+    """과거 응답 재현 전용. 정상 신규 초안은 검증한 원문의 구간 요청을 쓴다.
+
+    구형 웹 모드 절 초안의 인용 키는 문서 제목이 아니라 자료 라벨의 source_id다.
 
     로컬용 section_prompt는 «문서명»(제목)을 요구한다. 웹 자료의 키는 제목이 없는 source_id이고 메모는
     모델이 쓴 제목으로 시작한다. 지시가 없으면 모델이 그 메모 제목을 인용해 검증이 전부 실패한다
@@ -531,16 +534,21 @@ async def research(service, state):
             "근거": [],
         }
     else:
+        corpus, verified, _ = evidence(service, state, [{**a, "읽은문서": read}])
+        draft_request = build_draft_request(
+            a, notes, {sid: corpus.docs[sid][:20000] for sid in verified[0]["읽은문서"]}
+        )
         raw = await service.complete(
             state,
             actor,
             "draft_section",
-            web_section_prompt(a, notes),
-            inputs={"assignment": a, "notes": notes},
+            draft_request.prompts,
+            inputs=draft_request.inputs,
+            response_schema=draft_request.response_schema,
         )
         corpus, verified, _ = evidence(service, state, [{**a, "읽은문서": read}])
-        result = validate_section(
-            raw, {sid: corpus.docs[sid][:20000] for sid in verified[0]["읽은문서"]}
+        result = materialize_section(
+            raw, draft_request, {sid: corpus.docs[sid][:20000] for sid in verified[0]["읽은문서"]}
         )
     section = {**a, **result, "읽은문서": read, "메모": notes}
     section["인용"] = re.findall(r"«([^»]+)»", section["본문"])

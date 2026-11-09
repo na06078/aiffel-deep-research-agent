@@ -1,12 +1,16 @@
 """실제 제공자 없이 preflight 안전 경계와 기존 순수 파서를 검사한다."""
 
 import asyncio
+import hashlib
+import html
 import importlib.util
 import json
+import re
 import sys
 from pathlib import Path
 
 import pytest
+from markdown_it import MarkdownIt
 
 SPIKE = Path(__file__).resolve().parents[1]
 ROOT = SPIKE.parents[1]
@@ -103,11 +107,23 @@ class ModelDouble:
             "검토요약": "대역의 음성 응답",
         }
         self.responses = [self.section, self.synthesis, self.positive, self.negative]
+        self.extra_fields = {}
+        self.bad_reference = False
         self.overrides = overrides or {}
         self.calls, self.attempts, self.closed = [], [], False
         self.callbacks = callbacks
 
-    async def complete(self, system, user, *, context, max_output_tokens, json_mode, on_attempt):
+    async def complete(
+        self,
+        system,
+        user,
+        *,
+        context,
+        max_output_tokens,
+        json_mode,
+        on_attempt,
+        response_schema=None,
+    ):
         index = len(self.calls)
         self.calls.append(
             {
@@ -116,6 +132,7 @@ class ModelDouble:
                 "context": context,
                 "max_output_tokens": max_output_tokens,
                 "json_mode": json_mode,
+                "response_schema": response_schema,
             }
         )
         attempt = f"unbound-{index}"
@@ -124,6 +141,23 @@ class ModelDouble:
             self.attempts.append(attempt)
             on_attempt(attempt)
         reply = self.overrides.get(index, self.responses[index])
+        if index == 0 and index not in self.overrides:
+            payload = json.loads(user)
+            offered = payload["evidence"]
+            assert offered, "명시 대역도 실제 요청에 제시된 구간만 선택한다"
+            anchor = self.section["근거"][0]["인용문"]
+            chosen = next((span for span in offered if anchor in span["text"]), offered[0])
+            ref = chosen["id"]
+            if self.bad_reference:
+                ref = 999999
+                assert ref not in {span["id"] for span in offered}
+            text = self.section["본문"].replace("«임오군란»", "").rstrip()
+            reply = {
+                "근거목록ID": payload["evidence_set_id"],
+                "문장": [{"내용": text, "근거구간": [ref], **self.extra_fields}],
+                "충분": self.section["충분"],
+                "부족": self.section["부족"],
+            }
         if isinstance(reply, Exception):
             raise reply
         return {
@@ -145,6 +179,56 @@ class ModelDouble:
 
     async def aclose(self):
         self.closed = True
+
+
+def test_active_preflight_sends_id_catalog_and_never_asks_model_to_copy_quotes(tmp_path):
+    model = ModelDouble()
+    result = asyncio.run(probe.run_probe(model=model, work=tmp_path))
+    first = model.calls[0]
+    assert first["user"].lstrip().startswith("{"), (
+        "초안의 실제 전송 입력은 구간 목록 JSON이어야 한다"
+    )
+    payload = json.loads(first["user"])
+    assert {"assignment", "notes", "evidence_set_id", "evidence"} == set(payload)
+    assert payload["evidence"] and all(
+        {"id", "source_id", "start", "end", "text"} == set(span) for span in payload["evidence"]
+    )
+    assert result["passed"] is True and result["observed_attempts"] == 4
+    response = json.loads((tmp_path / "응답_section.json").read_text("utf-8"))["content"]
+    assert {"근거목록ID", "문장", "충분", "부족"} == set(json.loads(response))
+
+
+def test_actual_draft_call_forwards_provider_schema_not_only_prompt(tmp_path):
+    class SchemaRequiredDouble(ModelDouble):
+        async def complete(self, *args, response_schema=None, **kwargs):
+            if kwargs["context"]["operation"] == "draft_section":
+                assert isinstance(response_schema, dict), (
+                    "실제 모델 호출에 strict schema를 전달해야 한다"
+                )
+                assert response_schema["additionalProperties"] is False
+                payload = json.loads(args[1])
+                properties = response_schema["properties"]
+                assert properties["근거목록ID"]["enum"] == [payload["evidence_set_id"]]
+                assert properties["문장"]["items"]["properties"]["근거구간"]["items"] == {
+                    "type": "integer",
+                    "enum": [span["id"] for span in payload["evidence"]],
+                }
+            return await super().complete(*args, response_schema=response_schema, **kwargs)
+
+    model = SchemaRequiredDouble()
+    result = asyncio.run(probe.run_probe(model=model, work=tmp_path))
+    assert result["passed"] is True and result["observed_attempts"] == 4
+    assert result["draft_protocol"] == "short-number-json-schema-v1"
+    assert result["draft_schema_received"] is True
+    saved = json.loads((tmp_path / "입력_section.json").read_text("utf-8"))
+    assert (
+        result["draft_schema_sha256"]
+        == hashlib.sha256(
+            json.dumps(saved["response_schema"], ensure_ascii=False, allow_nan=False).encode(
+                "utf-8"
+            )
+        ).hexdigest()
+    )
 
 
 def test_four_steps_use_actual_parsers_and_assembly_with_bound_attempts(tmp_path, monkeypatch):
@@ -169,14 +253,18 @@ def test_four_steps_use_actual_parsers_and_assembly_with_bound_attempts(tmp_path
         "negative",
     ]
     assert all(c["max_output_tokens"] == 4096 and c["json_mode"] is True for c in model.calls)
-    assert model.section["본문"] in model.calls[1]["user"]
+    assembled = json.loads((tmp_path / "절_조립.json").read_text("utf-8"))["section"]["본문"]
+    rendered = MarkdownIt("commonmark", {"html": False}).render(assembled)
+    visible = html.unescape(re.sub(r"<[^>]+>", "", rendered))
+    assert " ".join(visible.split()) == " ".join(model.section["본문"].split())
+    assert assembled in model.calls[1]["user"]
     assert model.quote in model.calls[1]["user"]
     assert "표 1개와 SVG 도식 1개" in model.calls[1]["user"]
     candidates = json.loads((tmp_path / "후보.json").read_text(encoding="utf-8"))
     assert "| 사건 | 연도 | 출처 |" in candidates["positive"]
     assert "svg\n" in candidates["positive"]
     assert "<title>발생 시기</title>" in candidates["positive"]
-    assert model.section["본문"] in candidates["positive"]
+    assert assembled in candidates["positive"]
     assert candidates["positive"] != candidates["negative"]
     assert "1883년" in candidates["negative"]
     assert "1882년 7월 23일" in model.calls[3]["user"].split("[검증된 주장과 원문 인용구]", 1)[1]
@@ -262,13 +350,43 @@ def test_provider_failure_keeps_only_safe_code_status_and_bound_attempt(known, t
     assert "DO-NOT-LOG-provider-secret" not in (tmp_path / "실행메타데이터.json").read_text("utf-8")
 
 
-def test_negative_date_change_must_change_visible_body_not_only_link_destination(tmp_path):
+def test_negative_date_change_must_change_visible_body_not_only_link_destination(
+    tmp_path, monkeypatch
+):
+    from 서버 import 보고서근거
+
+    original = 보고서근거.materialize_section
+
+    def canonical_with_hidden_first_date(*args, **kwargs):
+        section = original(*args, **kwargs)
+        return {**section, "본문": "[참고](https://example.invalid/1882년) " + section["본문"]}
+
+    # 새 조립기는 hidden URL을 제거한다. oracle의 원래 반례는 조립된 문서 경계에 유지한다.
+    monkeypatch.setattr(보고서근거, "materialize_section", canonical_with_hidden_first_date)
     model = ModelDouble()
-    model.section["본문"] = "[참고](https://example.invalid/1882년) " + model.section["본문"]
     result = asyncio.run(probe.run_probe(model=model, work=tmp_path))
     assert result["passed"] is False
     assert result["error"] == "date_mutation_not_visible"
     assert result["observed_attempts"] == 2 and model.closed
+
+
+def test_real_observed_visible_excerpt_matches_even_when_canonical_period_is_escaped(tmp_path):
+    model = ModelDouble()
+    model.negative["문제"][0]["본문발췌"] = model.quote.replace("1882년", "1883년", 1)
+    result = asyncio.run(probe.run_probe(model=model, work=tmp_path))
+    assert result["passed"] is True and result["negative_detected"] is True
+    assert result["observed_attempts"] == 4 and model.closed
+
+
+def test_new_materializer_drops_hidden_date_before_real_visible_date_mutation(tmp_path):
+    model = ModelDouble()
+    model.section["본문"] = "[참고](https://example.invalid/1882년) " + model.section["본문"]
+    result = asyncio.run(probe.run_probe(model=model, work=tmp_path))
+    candidates = json.loads((tmp_path / "후보.json").read_text("utf-8"))
+    assert "https://example.invalid" not in candidates["positive"]
+    assert "참고" in candidates["positive"]
+    assert result["passed"] and result["negative_detected"]
+    assert result["observed_attempts"] == 4 and model.closed
 
 
 @pytest.mark.parametrize(
@@ -281,10 +399,40 @@ def test_negative_date_change_must_change_visible_body_not_only_link_destination
 )
 def test_actual_evidence_contract_rejects_tampering(field, value, tmp_path):
     model = ModelDouble()
-    model.section["근거"][0][field] = value
+    # 새 모델은 복사 필드를 쓰지 않는다. 유효 ID 옆의 임의 복사 필드도 수용하지 않는다.
+    model.extra_fields[field] = value
     result = asyncio.run(probe.run_probe(model=model, work=tmp_path))
     assert result["error"] == "invalid_schema"
     assert len(model.calls) == 1 and model.closed
+
+
+def test_unoffered_span_stops_before_synthesis_without_new_calls(tmp_path):
+    model = ModelDouble()
+    model.bad_reference = True
+    result = asyncio.run(probe.run_probe(model=model, work=tmp_path))
+    assert result["passed"] is False and result["error"] == "invalid_schema"
+    assert result["observed_attempts"] == 1 and len(model.calls) == 1 and model.closed
+
+
+def test_exact_catalog_snapshot_is_saved_before_first_model_attempt(tmp_path):
+    class SnapshotDouble(ModelDouble):
+        snapshot_seen = False
+
+        async def complete(self, *args, **kwargs):
+            if not self.calls:
+                saved = json.loads((tmp_path / "입력준비.json").read_text("utf-8"))
+                assert saved.get("request_inputs", {}).get("source_hashes"), (
+                    "전송 전에 원문 버전과 제시 목록을 보존해야 한다"
+                )
+                assert json.loads(saved["user"])["evidence"]
+                self.snapshot_seen = True
+            return await super().complete(*args, **kwargs)
+
+    model = SnapshotDouble()
+    model.bad_reference = True
+    result = asyncio.run(probe.run_probe(model=model, work=tmp_path))
+    assert result["error"] == "invalid_schema" and result["observed_attempts"] == 1
+    assert model.snapshot_seen and model.closed
 
 
 def test_actual_svg_validator_rejects_unsafe_code(tmp_path):
