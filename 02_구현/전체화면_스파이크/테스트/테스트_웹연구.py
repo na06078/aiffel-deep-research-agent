@@ -256,22 +256,29 @@ class WebModel:
             offered = catalog["evidence"]
             assert all(type(e["id"]) is int for e in offered)
             assert response_schema is not None, "normal web draft must forward response_schema"
+            assert response_schema["additionalProperties"] is False
+            assert (
+                set(response_schema["required"])
+                == set(response_schema["properties"])
+                == {"근거목록ID", "문장", "근거관계", "충분", "부족"}
+            )
+            assert response_schema["properties"]["문장"]["items"] == {"type": "string"}
+            relations = response_schema["properties"]["근거관계"]
+            assert relations["minItems"] == 0 and relations["maxItems"] == 16
+            assert relations["items"]["additionalProperties"] is False
+            assert set(relations["items"]["required"]) == {"문장번호", "근거구간"}
             assert response_schema["properties"]["근거목록ID"]["enum"] == [
                 catalog["evidence_set_id"]
             ]
-            assert response_schema["properties"]["문장"]["items"]["properties"]["근거구간"][
-                "items"
-            ]["enum"] == [e["id"] for e in offered]
+            assert response_schema["properties"]["근거관계"]["items"]["properties"]["근거구간"][
+                "enum"
+            ] == [e["id"] for e in offered]
             assert offered and all(e["end"] <= 20000 for e in offered)
             assert {e["source_id"] for e in offered} <= self.excerpts.keys()
             value = {
                 "근거목록ID": catalog["evidence_set_id"],
-                "문장": [
-                    {
-                        "내용": "자료에 적힌 범위를 벗어나지 않는 대역 문장입니다. " * 88,
-                        "근거구간": [offered[0]["id"]],
-                    }
-                ],
+                "문장": ["자료에 적힌 범위를 벗어나지 않는 대역 문장입니다. " * 88],
+                "근거관계": [{"문장번호": 1, "근거구간": offered[0]["id"]}],
                 "충분": True,
                 "부족": "",
             }
@@ -309,7 +316,7 @@ async def settle(service):
 
 def make(*, client=None, model=None, store=None):
     return RealResearchService(
-        ROOT / ".cache/보고서품질_검증/번호참조/통합/웹" / uuid4().hex,
+        ROOT / ".cache/보고서품질_검증/관계목록/대역/웹" / uuid4().hex,
         model or WebModel(),
         CORPUS,
         web_client=client or FakeWebClient(),
@@ -674,7 +681,7 @@ async def test_single_sidecar_url_change_cannot_publish_cited_source():
             return await super().complete(system, user, context=context, **kwargs)
 
     store = WebSourceStore(
-        ROOT / ".cache/보고서품질_검증/번호참조/통합/웹" / uuid4().hex / "웹자료/자료.sqlite3"
+        ROOT / ".cache/보고서품질_검증/관계목록/대역/웹" / uuid4().hex / "웹자료/자료.sqlite3"
     )
     service = make(model=DelayedEditor(), store=store)
     try:
@@ -899,7 +906,7 @@ async def test_웹절근거는_receipt와_실제읽힌앞20000자에_귀속한�
             if kwargs["context"]["operation"] == "draft_section":
                 obj = json.loads(result["content"])
                 if mutation == "missing":
-                    obj["문장"][0].pop("근거구간")
+                    obj.pop("근거관계")
                 else:
                     catalog = json.loads(args[1])
                     sid = catalog["evidence"][0]["source_id"]
@@ -925,7 +932,7 @@ async def test_웹절근거는_receipt와_실제읽힌앞20000자에_귀속한�
                     extra_catalog = json.loads(extra.prompts[1])
                     assert extra_catalog["evidence_set_id"] != catalog["evidence_set_id"]
                     obj["근거목록ID"] = extra_catalog["evidence_set_id"]
-                    obj["문장"][0]["근거구간"] = [bad_id]
+                    obj["근거관계"][0]["근거구간"] = bad_id
                 result["content"] = json.dumps(obj, ensure_ascii=False)
             return result
 

@@ -1,0 +1,9 @@
+{
+  "core_handoff": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\검증결과\\보고서품질\\관계목록_핵심\\인계.json",
+  "path_note": "Worker wrote evidence at project-root 검증결과, not I/검증결과; original preserved, parent references actual path.",
+  "core_source_hash_drift": 0,
+  "core_tests": 28,
+  "main_combined_junit_cases": 71,
+  "core_success_subtests": 55,
+  "additional_actual_model_requests": 0
+}

@@ -22,7 +22,9 @@ class SpanEvidenceTests(unittest.TestCase):
         self.assertEqual(set(schema), {"type", "properties", "required", "additionalProperties"})
         self.assertEqual(schema["type"], "object")
         self.assertIs(schema["additionalProperties"], False)
-        self.assertEqual(set(schema["required"]), {"근거목록ID", "문장", "충분", "부족"})
+        self.assertEqual(
+            set(schema["required"]), {"근거목록ID", "문장", "근거관계", "충분", "부족"}
+        )
         props = schema["properties"]
         self.assertEqual(
             props["근거목록ID"], {"type": "string", "enum": [request.inputs["evidence_set_id"]]}
@@ -31,14 +33,17 @@ class SpanEvidenceTests(unittest.TestCase):
         self.assertEqual(props["부족"], {"type": "string"})
         self.assertEqual(props["문장"]["minItems"], 1)
         self.assertEqual(props["문장"]["maxItems"], 12)
-        item = props["문장"]["items"]
+        self.assertEqual(props["문장"]["items"], {"type": "string"})
+        relations = props["근거관계"]
+        self.assertEqual((relations["minItems"], relations["maxItems"]), (0, 16))
+        item = relations["items"]
         self.assertIs(item["additionalProperties"], False)
-        self.assertEqual(set(item["required"]), {"내용", "근거구간"})
+        self.assertEqual(set(item["required"]), {"문장번호", "근거구간"})
         self.assertEqual(
             item["properties"],
             {
-                "내용": {"type": "string"},
-                "근거구간": {"type": "array", "items": {"type": "integer", "enum": [1, 2]}},
+                "문장번호": {"type": "integer", "enum": list(range(1, 13))},
+                "근거구간": {"type": "integer", "enum": [1, 2]},
             },
         )
         schema_bytes = len(json.dumps(schema, ensure_ascii=False).encode("utf-8"))
@@ -48,7 +53,7 @@ class SpanEvidenceTests(unittest.TestCase):
             sum(len(p.encode()) for p in request.prompts) + schema_bytes + 8192, 272000
         )
         props["근거목록ID"]["enum"][0] = "tampered"
-        item["properties"]["근거구간"]["items"]["enum"].append(99)
+        item["properties"]["근거구간"]["enum"].append(99)
         snapshot = request.inputs
         snapshot["alias_map"]["1"] = "tampered"
         snapshot["private_catalog"][0][0] = "tampered"
@@ -56,15 +61,22 @@ class SpanEvidenceTests(unittest.TestCase):
         self.assertNotEqual(request.response_schema, schema)
         self.assertEqual(request.inputs["alias_map"]["1"], request._catalog[0][0])
         self.assertEqual(request.inputs["response_schema"], request.response_schema)
+
+    def test_flat_single_claim_materialization(self):
+        sources = {"A": TEXT, "B": TEXT}
+        request = build_draft_request(ASSIGNMENT, [], sources)
         raw = {
             "근거목록ID": request.inputs["evidence_set_id"],
-            "문장": [{"내용": "기록이 있다.", "근거구간": [1]}],
+            "문장": ["기록이 있다."],
+            "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in [1]],
             "충분": True,
             "부족": "",
         }
-        self.assertEqual(
-            materialize_section(json.dumps(raw), request, sources)["근거"][0]["인용문"], TEXT
-        )
+        try:
+            result = materialize_section(json.dumps(raw), request, sources)
+        except ResearchContractError as exc:
+            self.fail(f"valid flat relation rejected: {exc}")
+        self.assertEqual(result["근거"][0]["인용문"], TEXT)
 
     def test_catalog_token_binds_numeric_materialization_to_request(self):
         sources = {"A": TEXT}
@@ -73,7 +85,8 @@ class SpanEvidenceTests(unittest.TestCase):
         self.assertIn("evidence_set_id", payload)
         raw = {
             "근거목록ID": payload["evidence_set_id"],
-            "문장": [{"내용": "기록이 있다.", "근거구간": [1]}],
+            "문장": ["기록이 있다."],
+            "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in [1]],
             "충분": True,
             "부족": "",
         }
@@ -91,10 +104,18 @@ class SpanEvidenceTests(unittest.TestCase):
             self.assertEqual(json.loads(other.prompts[1])["evidence"][0]["id"], 1)
             self.assert_rejected(json.dumps(raw), other, changed, "span response: evidence set")
         for ref in (True, False, "1", 1.0, request._catalog[0][0]):
-            bad = {**raw, "문장": [{"내용": "기록이 있다.", "근거구간": [ref]}]}
+            bad = {
+                **raw,
+                "문장": ["기록이 있다."],
+                "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in [ref]],
+            }
             self.assert_rejected(json.dumps(bad), request, sources, "span response: schema")
         for ref in (0, -1, 2):
-            bad = {**raw, "문장": [{"내용": "기록이 있다.", "근거구간": [ref]}]}
+            bad = {
+                **raw,
+                "문장": ["기록이 있다."],
+                "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in [ref]],
+            }
             self.assert_rejected(json.dumps(bad), request, sources, "span response: unoffered ID")
         self.assert_rejected(
             json.dumps({**raw, "근거목록ID": "wrong"}),
@@ -136,7 +157,8 @@ class SpanEvidenceTests(unittest.TestCase):
         raw = json.dumps(
             {
                 "근거목록ID": request.inputs["evidence_set_id"],
-                "문장": [{"내용": "기록이 있다.", "근거구간": [ref]}],
+                "문장": ["기록이 있다."],
+                "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in [ref]],
                 "충분": True,
                 "부족": "",
             }
@@ -175,7 +197,8 @@ class SpanEvidenceTests(unittest.TestCase):
             raw = json.dumps(
                 {
                     "근거목록ID": request.inputs["evidence_set_id"],
-                    "문장": [{"내용": "기록이 있다.", "근거구간": [ref]}],
+                    "문장": ["기록이 있다."],
+                    "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in [ref]],
                     "충분": True,
                     "부족": "",
                 }
@@ -217,7 +240,8 @@ class SpanEvidenceTests(unittest.TestCase):
                 json.dumps(
                     {
                         "근거목록ID": request.inputs["evidence_set_id"],
-                        "문장": [{"내용": "기록이 있다.", "근거구간": [ref]}],
+                        "문장": ["기록이 있다."],
+                        "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in [ref]],
                         "충분": True,
                         "부족": "",
                     }
@@ -232,7 +256,8 @@ class SpanEvidenceTests(unittest.TestCase):
         raw = json.dumps(
             {
                 "근거목록ID": foreign_request.inputs["evidence_set_id"],
-                "문장": [{"내용": "기록이 있다.", "근거구간": [foreign_ref]}],
+                "문장": ["기록이 있다."],
+                "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in [foreign_ref]],
                 "충분": True,
                 "부족": "",
             }
@@ -246,7 +271,8 @@ class SpanEvidenceTests(unittest.TestCase):
         self.assertNotEqual(spans[0]["id"], spans[1]["id"])
         raw = json.dumps(
             {
-                "문장": [{"내용": "기록이 있다.", "근거구간": [spans[0]["id"]]}],
+                "문장": ["기록이 있다."],
+                "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in [spans[0]["id"]]],
                 "근거목록ID": request.inputs["evidence_set_id"],
                 "충분": True,
                 "부족": "",
@@ -293,8 +319,9 @@ class SpanEvidenceTests(unittest.TestCase):
             request.prompts = ("changed", "changed")
         raw = json.dumps(
             {
-                "문장": [
-                    {"내용": "기록이 있다.", "근거구간": [request.inputs["catalog"][0]["id"]]}
+                "문장": ["기록이 있다."],
+                "근거관계": [
+                    {"문장번호": 1, "근거구간": ref} for ref in [request.inputs["catalog"][0]["id"]]
                 ],
                 "근거목록ID": request.inputs["evidence_set_id"],
                 "충분": True,
@@ -311,11 +338,9 @@ class SpanEvidenceTests(unittest.TestCase):
         obj = {
             "근거목록ID": request.inputs["evidence_set_id"],
             "문장": [
-                {
-                    "내용": "**기록**은 [여기](https://invalid.test/비가시)에 있다.\n\n```text\n숨은 내용\n```",
-                    "근거구간": [s["id"] for s in spans[:2]],
-                }
+                "**기록**은 [여기](https://invalid.test/비가시)에 있다.\n\n```text\n숨은 내용\n```"
             ],
+            "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in [s["id"] for s in spans[:2]]],
             "충분": True,
             "부족": "",
         }
@@ -340,7 +365,8 @@ class SpanEvidenceTests(unittest.TestCase):
         for count in (16, 17):
             obj = {
                 "근거목록ID": request.inputs["evidence_set_id"],
-                "문장": [{"내용": "여러 기록이 있다.", "근거구간": refs[:count]}],
+                "문장": ["여러 기록이 있다."],
+                "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in refs[:count]],
                 "충분": True,
                 "부족": "",
             }
@@ -355,8 +381,11 @@ class SpanEvidenceTests(unittest.TestCase):
         for count in (12, 13):
             obj = {
                 "근거목록ID": request.inputs["evidence_set_id"],
-                "문장": [
-                    {"내용": f"기록 {i}이 있다.", "근거구간": [refs[0]]} for i in range(count)
+                "문장": [f"기록 {i}이 있다." for i in range(count)],
+                "근거관계": [
+                    {"문장번호": n + 1, "근거구간": ref}
+                    for n, refs in enumerate([[refs[0]] for i in range(count)])
+                    for ref in refs
                 ],
                 "충분": True,
                 "부족": "",
@@ -379,7 +408,8 @@ class SpanEvidenceTests(unittest.TestCase):
         ):
             obj = {
                 "근거목록ID": request.inputs["evidence_set_id"],
-                "문장": [{"내용": content, "근거구간": refs}],
+                "문장": [content],
+                "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in refs],
                 "충분": True,
                 "부족": "",
             }
@@ -398,7 +428,8 @@ class SpanEvidenceTests(unittest.TestCase):
         ):
             obj = {
                 "근거목록ID": request.inputs["evidence_set_id"],
-                "문장": [{"내용": content, "근거구간": [ref]}],
+                "문장": [content],
+                "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in [ref]],
                 "충분": True,
                 "부족": "",
             }
@@ -411,7 +442,8 @@ class SpanEvidenceTests(unittest.TestCase):
         request = build_draft_request(ASSIGNMENT, [], sources)
         obj = {
             "근거목록ID": request.inputs["evidence_set_id"],
-            "문장": [{"내용": "추가 자료가 필요하다.", "근거구간": []}],
+            "문장": ["추가 자료가 필요하다."],
+            "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in []],
             "충분": False,
             "부족": "후속 기록 미확인",
         }
@@ -426,6 +458,201 @@ class SpanEvidenceTests(unittest.TestCase):
                 "span response: sufficiency",
             )
 
+    def test_protocol_token_and_scope_prompt(self):
+        import hashlib
+
+        import 서버.보고서근거 as core
+
+        request = build_draft_request(ASSIGNMENT, [], {"A": TEXT})
+        old_token = hashlib.sha256(
+            json.dumps(
+                [
+                    ASSIGNMENT,
+                    [],
+                    sorted(request.inputs["source_hashes"].items()),
+                    request.inputs["private_catalog"],
+                ],
+                ensure_ascii=False,
+                allow_nan=False,
+            ).encode()
+        ).hexdigest()
+        self.assertNotEqual(request.inputs["evidence_set_id"], old_token)
+        self.assertEqual(getattr(core, "DRAFT_PROTOCOL", None), "short-number-flat-evidence-v2")
+        self.assertEqual(request.inputs.get("draft_protocol"), "short-number-flat-evidence-v2")
+        raw = {
+            "근거목록ID": old_token,
+            "문장": ["기록이 있다."],
+            "근거관계": [{"문장번호": 1, "근거구간": 1}],
+            "충분": True,
+            "부족": "",
+        }
+        self.assert_rejected(json.dumps(raw), request, {"A": TEXT}, "span response: evidence set")
+        prompt = request.prompts[0]
+        for text in (
+            "질문",
+            "역할",
+            "핵심 주장",
+            "전체 연대기",
+            "인과",
+            "시점",
+            "충돌",
+            "600자",
+            "2,000자",
+            "1부터",
+            "16개",
+            "근거관계",
+        ):
+            self.assertIn(text, prompt)
+        self.assertNotIn("6~12", prompt)
+        self.assertNotIn("여섯 문장 이상", prompt)
+
+    def test_noncontiguous_relations_group_by_sentence_and_preserve_pair_order(self):
+        sources = {"A": "첫 자료에는 독립 기록이 있다.", "B": "두 번째 자료에도 별도 기록이 있다."}
+        request = build_draft_request(ASSIGNMENT, [], sources)
+        obj = {
+            "근거목록ID": request.inputs["evidence_set_id"],
+            "문장": ["**첫 주장**이다.", "둘째 주장이다.", "셋째 주장이다."],
+            "근거관계": [
+                {"문장번호": 3, "근거구간": 1},
+                {"문장번호": 1, "근거구간": 2},
+                {"문장번호": 2, "근거구간": 1},
+                {"문장번호": 1, "근거구간": 1},
+            ],
+            "충분": True,
+            "부족": "",
+        }
+        result = materialize_section(json.dumps(obj), request, sources)
+        self.assertEqual(
+            result["근거"],
+            [
+                {
+                    "주장": "첫 주장이다.",
+                    "출처": "B",
+                    "인용문": "두 번째 자료에도 별도 기록이 있다.",
+                },
+                {"주장": "첫 주장이다.", "출처": "A", "인용문": "첫 자료에는 독립 기록이 있다."},
+                {"주장": "둘째 주장이다.", "출처": "A", "인용문": "첫 자료에는 독립 기록이 있다."},
+                {"주장": "셋째 주장이다.", "출처": "A", "인용문": "첫 자료에는 독립 기록이 있다."},
+            ],
+        )
+        self.assertEqual(
+            visible_markdown(result["본문"]),
+            "첫 주장이다. «B» «A»\n둘째 주장이다. «A»\n셋째 주장이다. «A»",
+        )
+
+    def test_twelve_statements_sixteen_pairs_and_nine_nineteen_rejection(self):
+        sources = {"A": TEXT, "B": TEXT, "C": TEXT}
+        request = build_draft_request(ASSIGNMENT, [], sources)
+        obj = {
+            "근거목록ID": request.inputs["evidence_set_id"],
+            "문장": [f"주장 {i}." for i in range(1, 13)],
+            "근거관계": [{"문장번호": i, "근거구간": 1} for i in range(1, 13)]
+            + [{"문장번호": i, "근거구간": 2} for i in range(1, 5)],
+            "충분": True,
+            "부족": "",
+        }
+        result = materialize_section(json.dumps(obj), request, sources)
+        self.assertEqual(len(result["근거"]), 16)
+        self.assertEqual(
+            [e["주장"] for e in result["근거"]],
+            [
+                "주장 1.",
+                "주장 1.",
+                "주장 2.",
+                "주장 2.",
+                "주장 3.",
+                "주장 3.",
+                "주장 4.",
+                "주장 4.",
+                "주장 5.",
+                "주장 6.",
+                "주장 7.",
+                "주장 8.",
+                "주장 9.",
+                "주장 10.",
+                "주장 11.",
+                "주장 12.",
+            ],
+        )
+        obj["문장"] = obj["문장"][:9]
+        obj["근거관계"] = [
+            {"문장번호": i, "근거구간": ref} for i in range(1, 10) for ref in (1, 2)
+        ] + [{"문장번호": 1, "근거구간": 3}]
+        with patch("서버.보고서근거.validate_section") as canonical:
+            self.assert_rejected(
+                json.dumps(obj), request, sources, "span response: reference limit"
+            )
+            canonical.assert_not_called()
+
+    def test_relation_indices_exact_types_keys_and_actual_sentence_bounds(self):
+        sources = {"A": TEXT}
+        request = build_draft_request(ASSIGNMENT, [], sources)
+        good = {
+            "근거목록ID": request.inputs["evidence_set_id"],
+            "문장": ["기록이 있다."],
+            "근거관계": [{"문장번호": 1, "근거구간": 1}],
+            "충분": True,
+            "부족": "",
+        }
+        self.assertTrue(materialize_section(json.dumps(good), request, sources)["충분"])
+        for number in (0, -1, 2, 13):
+            with self.subTest(number=number):
+                bad = {**good, "근거관계": [{"문장번호": number, "근거구간": 1}]}
+                self.assert_rejected(
+                    json.dumps(bad), request, sources, "span response: statement index"
+                )
+        for relation in (
+            None,
+            [],
+            {},
+            {"문장번호": 1},
+            {"근거구간": 1},
+            {"문장번호": 1, "근거구간": 1, "주장": "다시 쓰기"},
+            *({"문장번호": number, "근거구간": 1} for number in (True, False, "1", 1.0)),
+            *({"문장번호": 1, "근거구간": ref} for ref in (True, False, "1", 1.0)),
+        ):
+            with self.subTest(relation=relation):
+                self.assert_rejected(
+                    json.dumps({**good, "근거관계": [relation]}),
+                    request,
+                    sources,
+                    "span response: schema",
+                )
+        for relations in (None, {}, "1"):
+            with self.subTest(relations=relations):
+                self.assert_rejected(
+                    json.dumps({**good, "근거관계": relations}),
+                    request,
+                    sources,
+                    "span response: schema",
+                )
+        old = {key: value for key, value in good.items() if key != "근거관계"}
+        old["문장"] = [{"내용": "기록이 있다.", "근거구간": [1]}]
+        self.assert_rejected(json.dumps(old), request, sources, "span response: schema")
+        self.assert_rejected(
+            json.dumps({**good, "문장": old["문장"]}), request, sources, "span response: schema"
+        )
+
+    def test_partial_unbound_sentences_require_false_with_reason(self):
+        sources = {"A": TEXT}
+        request = build_draft_request(ASSIGNMENT, [], sources)
+        obj = {
+            "근거목록ID": request.inputs["evidence_set_id"],
+            "문장": ["기록이 있다.", "후속 자료는 미확인이다."],
+            "근거관계": [{"문장번호": 1, "근거구간": 1}],
+            "충분": False,
+            "부족": "후속 자료 미확인",
+        }
+        result = materialize_section(json.dumps(obj), request, sources)
+        self.assertEqual(result["근거"], [{"주장": "기록이 있다.", "출처": "A", "인용문": TEXT}])
+        self.assertIn("후속 자료는 미확인이다.", visible_markdown(result["본문"]))
+        self.assert_rejected(
+            json.dumps({**obj, "충분": True, "부족": ""}),
+            request,
+            sources,
+            "span response: sufficiency",
+        )
+
     def assert_rejected(self, raw, request, sources, reason):
         with self.assertRaisesRegex(ResearchContractError, reason):
             materialize_section(raw, request, sources)
@@ -436,7 +663,8 @@ class SpanEvidenceTests(unittest.TestCase):
         ref = json.loads(request.prompts[1])["evidence"][0]["id"]
         good = {
             "근거목록ID": request.inputs["evidence_set_id"],
-            "문장": [{"내용": "기록이 존재한다.", "근거구간": [ref]}],
+            "문장": ["기록이 존재한다."],
+            "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in [ref]],
             "충분": True,
             "부족": "",
         }
@@ -478,7 +706,8 @@ class SpanEvidenceTests(unittest.TestCase):
             raw = json.dumps(
                 {
                     "근거목록ID": foreign.inputs["evidence_set_id"],
-                    "문장": [{"내용": "기록이 있다.", "근거구간": [1]}],
+                    "문장": ["기록이 있다."],
+                    "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in [1]],
                     "충분": True,
                     "부족": "",
                 }
@@ -493,7 +722,8 @@ class SpanEvidenceTests(unittest.TestCase):
             raw = json.dumps(
                 {
                     "근거목록ID": request.inputs["evidence_set_id"],
-                    "문장": [{"내용": "기록이 있다.", "근거구간": [ref]}],
+                    "문장": ["기록이 있다."],
+                    "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in [ref]],
                     "충분": True,
                     "부족": "",
                 }
@@ -515,7 +745,7 @@ class SpanEvidenceTests(unittest.TestCase):
         self.assertEqual(numbers, list(range(1, len(numbers) + 1)))
         props = request.response_schema["properties"]
         self.assertEqual(props["근거목록ID"]["enum"], [payload["evidence_set_id"]])
-        self.assertEqual(props["문장"]["items"]["properties"]["근거구간"]["items"]["enum"], numbers)
+        self.assertEqual(props["근거관계"]["items"]["properties"]["근거구간"]["enum"], numbers)
         self.assertEqual(request.inputs["evidence_set_id"], payload["evidence_set_id"])
         self.assertEqual(len(request.inputs["alias_map"]), len(numbers))
         self.assertEqual(len(request.inputs["private_catalog"]), len(numbers))
@@ -532,7 +762,8 @@ class SpanEvidenceTests(unittest.TestCase):
             self.assertEqual(request.inputs["alias_map"][str(number)], span[0])
             raw = {
                 "근거목록ID": payload["evidence_set_id"],
-                "문장": [{"내용": "기록이 있다.", "근거구간": [number]}],
+                "문장": ["기록이 있다."],
+                "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in [number]],
                 "충분": True,
                 "부족": "",
             }
@@ -607,7 +838,8 @@ class SpanEvidenceTests(unittest.TestCase):
         self.assertEqual(span["id"], 1)
         raw = json.dumps(
             {
-                "문장": [{"내용": "**사건**은 기록되었다.", "근거구간": [span["id"]]}],
+                "문장": ["**사건**은 기록되었다."],
+                "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in [span["id"]]],
                 "근거목록ID": request.inputs["evidence_set_id"],
                 "충분": True,
                 "부족": "",

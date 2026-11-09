@@ -65,7 +65,8 @@ def test_실제관측한_근거주장_재서술은_거절하고_새본문은_한
     raw = dump(
         {
             "근거목록ID": json.loads(request.prompts[1])["evidence_set_id"],
-            "문장": [{"내용": sentence, "근거구간": [offered[0]["id"]]}],
+            "문장": [sentence],
+            "근거관계": [{"문장번호": 1, "근거구간": offered[0]["id"]}],
             "충분": True,
             "부족": "",
         }
@@ -95,7 +96,11 @@ def test_떨어진_원문구간은_하나의인용문으로_합치지않고_근�
     raw = dump(
         {
             "근거목록ID": json.loads(request.prompts[1])["evidence_set_id"],
-            "문장": [{"내용": claim, "근거구간": [by_start[0]["id"], by_start[320]["id"]]}],
+            "문장": [claim],
+            "근거관계": [
+                {"문장번호": 1, "근거구간": by_start[0]["id"]},
+                {"문장번호": 1, "근거구간": by_start[320]["id"]},
+            ],
             "충분": True,
             "부족": "",
         }

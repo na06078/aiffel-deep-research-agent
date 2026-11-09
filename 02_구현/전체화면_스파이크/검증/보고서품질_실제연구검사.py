@@ -61,7 +61,7 @@ def main(args):
         assert preflight["mode"] == "live"
         assert preflight["passed"] and preflight["live_verified"]
         assert preflight["observed_attempts"] == preflight["completed_calls"] == 4
-        assert preflight["draft_protocol"] == "short-number-json-schema-v1"
+        assert preflight["draft_protocol"] == "short-number-flat-evidence-v2"
         assert preflight["draft_schema_received"] is True
         assert args.preflight.resolve().is_relative_to(ROOT / ".cache/보고서품질_검증/실모델점검")
         for filename, digest in preflight["source_hashes"].items():
@@ -78,7 +78,9 @@ def main(args):
         )
         offered = json.loads(section_input["user"])
         assert schema["properties"]["근거목록ID"]["enum"] == [offered["evidence_set_id"]]
-        assert schema["properties"]["문장"]["items"]["properties"]["근거구간"]["items"] == {
+        assert schema["properties"]["문장"]["items"] == {"type": "string"}
+        assert schema["properties"]["근거관계"]["maxItems"] == 16
+        assert schema["properties"]["근거관계"]["items"]["properties"]["근거구간"] == {
             "type": "integer",
             "enum": [span["id"] for span in offered["evidence"]],
         }

@@ -34,7 +34,7 @@ def no_external_requests(monkeypatch):
 
 ROOT = Path(__file__).resolve().parents[3]
 CORPUS = ROOT / "01_참고자료/원본데이터/corpus.json"
-EVIDENCE = ROOT / ".cache/보고서품질_검증/번호참조/통합/로컬"
+EVIDENCE = ROOT / ".cache/보고서품질_검증/관계목록/대역/로컬"
 
 
 async def test_complete_strict_schema_전달과_저널사본_다른노드미전달(data_dir):
@@ -230,12 +230,23 @@ class ScriptedModel:
             offered = catalog["evidence"]
             assert all(type(e["id"]) is int for e in offered)
             assert response_schema is not None, "normal local draft must forward response_schema"
+            assert response_schema["additionalProperties"] is False
+            assert (
+                set(response_schema["required"])
+                == set(response_schema["properties"])
+                == {"근거목록ID", "문장", "근거관계", "충분", "부족"}
+            )
+            assert response_schema["properties"]["문장"]["items"] == {"type": "string"}
+            relations = response_schema["properties"]["근거관계"]
+            assert relations["minItems"] == 0 and relations["maxItems"] == 16
+            assert relations["items"]["additionalProperties"] is False
+            assert set(relations["items"]["required"]) == {"문장번호", "근거구간"}
             assert response_schema["properties"]["근거목록ID"]["enum"] == [
                 catalog["evidence_set_id"]
             ]
-            assert response_schema["properties"]["문장"]["items"]["properties"]["근거구간"][
-                "items"
-            ]["enum"] == [e["id"] for e in offered]
+            assert response_schema["properties"]["근거관계"]["items"]["properties"]["근거구간"][
+                "enum"
+            ] == [e["id"] for e in offered]
             assert offered and {e["source_id"] for e in offered} <= {
                 title for title, _ in catalog["notes"]
             }
@@ -245,7 +256,8 @@ class ScriptedModel:
             self.bodies[actor] = body
             value = {
                 "근거목록ID": catalog["evidence_set_id"],
-                "문장": [{"내용": body, "근거구간": [offered[0]["id"]]}],
+                "문장": [body],
+                "근거관계": [{"문장번호": 1, "근거구간": offered[0]["id"]}],
                 "충분": actor != "researcher-1" or n >= 2,
                 "부족": "추가 원인 자료 필요" if actor == "researcher-1" and n == 1 else "",
             }
@@ -457,7 +469,7 @@ class AlteredModel(ScriptedModel):
 async def test_신규실제경로는_누락근거를_충분으로_승격하지_않는다(data_dir):
     def missing(response):
         obj = json.loads(response["content"])
-        obj["문장"][0].pop("근거구간")
+        obj.pop("근거관계")
         return {**response, "content": json.dumps(obj, ensure_ascii=False)}
 
     model = AlteredModel("draft_section", missing)
@@ -605,13 +617,20 @@ async def test_의미검토_불합격과_불명응답은_초안보존_큐차단_
     [
         ("not JSON", "span response: schema"),
         (
-            '{"문장":[{"내용":"본문", "근거구간":[]}], "충분":"false", "부족":""}',
+            "invalid_bool",
             "span response: schema",
         ),
     ],
 )
 async def test_원고JSON과_bool실패는_최종파일없이_큐정지(data_dir, bad_content, reason):
-    model = AlteredModel("draft_section", lambda r: {**r, "content": bad_content})
+    def mutate(response):
+        if bad_content == "invalid_bool":
+            obj = json.loads(response["content"])
+            obj["충분"] = "false"
+            return {**response, "content": json.dumps(obj, ensure_ascii=False)}
+        return {**response, "content": bad_content}
+
+    model = AlteredModel("draft_section", mutate)
     service = RealResearchService(data_dir, model, CORPUS)
     try:
         service.admit("질문", "first")
@@ -679,7 +698,7 @@ async def test_허위구간ID_원응답보존_출판차단_자동재생성없음
                 assert bad_id in {e["id"] for e in catalog["evidence"]}
                 assert other_catalog["evidence_set_id"] != catalog["evidence_set_id"]
                 obj["근거목록ID"] = other_catalog["evidence_set_id"]
-            obj["문장"][0]["근거구간"] = [bad_id]
+            obj["근거관계"][0]["근거구간"] = bad_id
             return {**response, "content": json.dumps(obj, ensure_ascii=False)}
 
     model = InvalidSpanModel()
@@ -713,6 +732,76 @@ async def test_허위구간ID_원응답보존_출판차단_자동재생성없음
             for e in service.repo.archive(run["run_id"])["events"]
             if e["type"] == "report.submitted"
         ]
+    finally:
+        await service.close()
+
+
+@pytest.mark.parametrize("mode", ["local", "web"])
+@pytest.mark.parametrize("count", [16, 17, 19])
+async def test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다(data_dir, mode, count):
+    from 테스트.테스트_웹연구 import FakeWebClient, FakeWebStore, WebModel
+
+    base = ScriptedModel if mode == "local" else WebModel
+
+    class BoundaryModel(base):
+        async def complete(self, *args, **kwargs):
+            response = await super().complete(*args, **kwargs)
+            if kwargs["context"]["operation"] != "draft_section":
+                return response
+            catalog = json.loads(args[1])
+            offered = catalog["evidence"]
+            assert len(offered) >= 2
+            # 제시된 두 원문을 그대로 연결한다. 의미 판정은 명시적 대역이며 실모델 증거가 아니다.
+            claim = offered[0]["text"] + " " + offered[1]["text"]
+            statements = [f"기록 {i + 1}: {claim}" for i in range((count + 1) // 2)]
+            relations = [
+                {"문장번호": i // 2 + 1, "근거구간": offered[i % 2]["id"]} for i in range(count)
+            ]
+            assert len({(r["문장번호"], r["근거구간"]) for r in relations}) == count
+            response["content"] = json.dumps(
+                {
+                    "근거목록ID": catalog["evidence_set_id"],
+                    "문장": statements,
+                    "근거관계": relations,
+                    "충분": True,
+                    "부족": "",
+                },
+                ensure_ascii=False,
+            )
+            return response
+
+    model = BoundaryModel()
+    service = RealResearchService(
+        data_dir, model, CORPUS, web_client=FakeWebClient(), web_store=FakeWebStore()
+    )
+    try:
+        admitted = service.admit("/웹 자료" if mode == "web" else "자료", "boundary")
+        await settle(service)
+        run = service.repo.snapshot()["runs"][0]
+        events = service.repo.archive(admitted["run_id"])["events"]
+        raw = [
+            json.loads(e["output"]["content"])
+            for e in events
+            if e["type"] == "model.completed" and '"근거관계"' in e["output"]["content"]
+        ]
+        assert raw and all(len(obj["근거관계"]) == count for obj in raw)
+        drafts = [c for c in model.calls if c[2]["operation"] == "draft_section"]
+        assert len(drafts) == (4 if mode == "local" else 1)
+        if count == 16:
+            assert run["status"] == "completed", run
+            assert run["quality"]["passed"] is True
+            sections = [e["output"] for e in events if e["type"] == "research.completed"]
+            assert sections and all(len(s["근거"]) == 16 for s in sections)
+            assert service.report_bytes(run["report_id"])[0]["markdown"]
+            assert sum(c[2]["operation"] == "semantic_review" for c in model.calls) == 1
+        else:
+            assert run["status"] == "failed" and run["report_id"] is None
+            assert run["failure"]["message"] == "span response: reference limit"
+            assert not any(
+                c[2]["operation"] in {"synthesize", "semantic_review"} for c in model.calls
+            )
+            assert not any(e["type"] in {"research.completed", "report.submitted"} for e in events)
+            assert not list(data_dir.glob("*.md"))
     finally:
         await service.close()
 

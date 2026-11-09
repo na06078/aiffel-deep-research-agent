@@ -38,6 +38,7 @@ class IntegrationModel(WebModel):
             # 실제 저장소의 opaque source_id도 실제 제시 목록에서만 선택한다.
             catalog = json.loads(user)
             assert len({e["source_id"] for e in catalog["evidence"]}) == 3
+            assert response_schema["properties"]["근거관계"]["maxItems"] == 16
         return await super().complete(
             system,
             user,

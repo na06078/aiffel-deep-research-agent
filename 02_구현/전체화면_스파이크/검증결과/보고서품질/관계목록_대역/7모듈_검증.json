@@ -1,0 +1,3590 @@
+{
+  "scope": [
+    "테스트/테스트_실제모델.py",
+    "테스트/테스트_실제연구제어.py",
+    "테스트/테스트_웹연구.py",
+    "테스트/테스트_웹통합.py",
+    "테스트/테스트_연구앱.py",
+    "테스트/테스트_삭제후기록차단.py",
+    "테스트/테스트_보고서품질.py"
+  ],
+  "argv": [
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "테스트/테스트_실제모델.py",
+    "테스트/테스트_실제연구제어.py",
+    "테스트/테스트_웹연구.py",
+    "테스트/테스트_웹통합.py",
+    "테스트/테스트_연구앱.py",
+    "테스트/테스트_삭제후기록차단.py",
+    "테스트/테스트_보고서품질.py",
+    "-q",
+    "--basetemp=C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\관계목록_대역\\matrix",
+    "--junitxml=C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\관계목록_대역\\7모듈_junit.xml"
+  ],
+  "exit_code": 0,
+  "collected": 217,
+  "module_counts": {
+    "테스트/테스트_실제모델.py": 70,
+    "테스트/테스트_실제연구제어.py": 46,
+    "테스트/테스트_웹연구.py": 35,
+    "테스트/테스트_웹통합.py": 1,
+    "테스트/테스트_연구앱.py": 1,
+    "테스트/테스트_삭제후기록차단.py": 29,
+    "테스트/테스트_보고서품질.py": 35
+  },
+  "nodeids": [
+    "테스트/테스트_실제모델.py::test_HTTP1회_예약콜백_요청옵션_정산",
+    "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[False-402-provider_http-402]",
+    "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[False-429-provider_http-429]",
+    "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[False-timeout-timeout-None]",
+    "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[False-secret-provider_error-None]",
+    "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[True-402-provider_http-402]",
+    "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[True-429-provider_http-429]",
+    "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[True-timeout-timeout-None]",
+    "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[True-secret-provider_error-None]",
+    "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False--stop-False]",
+    "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-{\"value\": NaN}-stop-True]",
+    "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-FAKE_SECRET_bad_json-stop-True]",
+    "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-[]-stop-True]",
+    "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-{\"ok\":true}-length-True]",
+    "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-partial-content_filter-False]",
+    "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True--stop-False]",
+    "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-{\"value\": NaN}-stop-True]",
+    "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-FAKE_SECRET_bad_json-stop-True]",
+    "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-[]-stop-True]",
+    "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-{\"ok\":true}-length-True]",
+    "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-partial-content_filter-False]",
+    "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[False-money-budget_exceeded-0]",
+    "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[False-long-input_too_large-0]",
+    "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[False-callback-attempt_callback_failed-1]",
+    "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[True-money-budget_exceeded-0]",
+    "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[True-long-input_too_large-0]",
+    "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[True-callback-attempt_callback_failed-1]",
+    "테스트/테스트_실제모델.py::test_프로젝트env만_명시설정_공식주소_실제SDK생성",
+    "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[missing]",
+    "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[negative]",
+    "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[overflow]",
+    "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[bad_reasoning]",
+    "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[bad_model]",
+    "테스트/테스트_실제모델.py::test_취소후재시작도_예약보존",
+    "테스트/테스트_실제모델.py::test_응답봉투도_정식스키마를_검증[object]",
+    "테스트/테스트_실제모델.py::test_응답봉투도_정식스키마를_검증[id]",
+    "테스트/테스트_실제모델.py::test_응답봉투도_정식스키마를_검증[role]",
+    "테스트/테스트_실제모델.py::test_40번째전송후_41번째는_콜백도HTTP도없음",
+    "테스트/테스트_실제모델.py::test_초기화한100회상한은_101번째콜백과전송을차단",
+    "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OTHER=dummy]",
+    "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OPENAI_API_KEY=\\n]",
+    "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OPENAI_API_KEY=${OTHER}]",
+    "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OPENAI_API_KEY='dummy\\n]",
+    "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OPENAI_API_KEY=dummy1\\nOPENAI_API_KEY=dummy2]",
+    "테스트/테스트_실제모델.py::test_strict_schema_실제SDK_payload와예약UTF8사본",
+    "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema0-invalid_request]",
+    "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema1-invalid_request]",
+    "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema2-invalid_request]",
+    "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema3-invalid_request]",
+    "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema4-invalid_request]",
+    "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema5-invalid_request]",
+    "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema6-invalid_request]",
+    "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema7-invalid_request]",
+    "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema8-invalid_request]",
+    "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema9-invalid_request]",
+    "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema10-invalid_request]",
+    "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema11-invalid_request]",
+    "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema12-input_too_large]",
+    "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[missing_required-root]",
+    "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[missing_required-nested]",
+    "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[partial_required-root]",
+    "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[partial_required-nested]",
+    "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[missing_closed-root]",
+    "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[missing_closed-nested]",
+    "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[open-root]",
+    "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[open-nested]",
+    "테스트/테스트_실제모델.py::test_실제builder_schema의_정수enum이_SDK_HTTP까지_동일하다",
+    "테스트/테스트_실제모델.py::test_strict_schema도_거부와도구호출은_출판응답아님[refusal]",
+    "테스트/테스트_실제모델.py::test_strict_schema도_거부와도구호출은_출판응답아님[tool_calls]",
+    "테스트/테스트_실제모델.py::test_schema실패두건_재시작과정상정산도_과거예약불변",
+    "테스트/테스트_실제연구제어.py::test_complete_strict_schema_전달과_저널사본_다른노드미전달",
+    "테스트/테스트_실제연구제어.py::test_complete_schema차단은_모델저널예약전[invalid]",
+    "테스트/테스트_실제연구제어.py::test_complete_schema차단은_모델저널예약전[oversize]",
+    "테스트/테스트_실제연구제어.py::test_complete_schema차단은_모델저널예약전[unsupported]",
+    "테스트/테스트_실제연구제어.py::test_정상초안호출은_request의_실제response_schema를_전달한다[local]",
+    "테스트/테스트_실제연구제어.py::test_정상초안호출은_request의_실제response_schema를_전달한다[web]",
+    "테스트/테스트_실제연구제어.py::test_실제6노드_Send병렬_부족절만2라운드_원고보존과_정본재열기",
+    "테스트/테스트_실제연구제어.py::test_라운드마다3건_최대2회_이전메모_유지와_정확한소진사유",
+    "테스트/테스트_실제연구제어.py::test_신규실제경로는_누락근거를_충분으로_승격하지_않는다",
+    "테스트/테스트_실제연구제어.py::test_종합한번으로_표와SVG를_조립하고_절본문을_보존한다",
+    "테스트/테스트_실제연구제어.py::test_신규종합은_누락스키마와_미독시각출처를_거부한다[missing]",
+    "테스트/테스트_실제연구제어.py::test_신규종합은_누락스키마와_미독시각출처를_거부한다[unknown_source]",
+    "테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음[negative]",
+    "테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음[contradiction]",
+    "테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음[missing]",
+    "테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음[non_json]",
+    "테스트/테스트_실제연구제어.py::test_원고JSON과_bool실패는_최종파일없이_큐정지[not JSON-span response: schema]",
+    "테스트/테스트_실제연구제어.py::test_원고JSON과_bool실패는_최종파일없이_큐정지[invalid_bool-span response: schema]",
+    "테스트/테스트_실제연구제어.py::test_실패한_실행은_사유를_run에_보존한다",
+    "테스트/테스트_실제연구제어.py::test_허위구간ID_원응답보존_출판차단_자동재생성없음[unknown]",
+    "테스트/테스트_실제연구제어.py::test_허위구간ID_원응답보존_출판차단_자동재생성없음[unread]",
+    "테스트/테스트_실제연구제어.py::test_허위구간ID_원응답보존_출판차단_자동재생성없음[stale]",
+    "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[16-local]",
+    "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[16-web]",
+    "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[17-local]",
+    "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[17-web]",
+    "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[19-local]",
+    "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[19-web]",
+    "테스트/테스트_실제연구제어.py::test_로컬구간요청후_원문버전변경은_원응답만_남기고_조립을_차단한다",
+    "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[plan]",
+    "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[read_one]",
+    "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[draft_section]",
+    "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[synthesize]",
+    "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[semantic_review]",
+    "테스트/테스트_실제연구제어.py::test_예산차단은_미전송_0회_큐정지_비밀오류_비보존",
+    "테스트/테스트_실제연구제어.py::test_취소후_늦은모델응답은_다음노드와_출판을_진행못한다",
+    "테스트/테스트_실제연구제어.py::test_실제후보외_문서선택은_코퍼스에_있어도_실패한다",
+    "테스트/테스트_실제연구제어.py::test_ASGI_조립은_동일보고서_열기다운로드_기록_무재호출",
+    "테스트/테스트_실제연구제어.py::test_시도ID_불일치는_결과적용_전에_안전실패",
+    "테스트/테스트_실제연구제어.py::test_의미검토대기중_취소삭제는_정본과_지운기록을_재생성하지_않는다[cancel]",
+    "테스트/테스트_실제연구제어.py::test_의미검토대기중_취소삭제는_정본과_지운기록을_재생성하지_않는다[delete]",
+    "테스트/테스트_실제연구제어.py::test_의미검토_제공자오류와_예산차단은_품질통과가_아니다[provider_http-401]",
+    "테스트/테스트_실제연구제어.py::test_의미검토_제공자오류와_예산차단은_품질통과가_아니다[provider_http-429]",
+    "테스트/테스트_실제연구제어.py::test_의미검토_제공자오류와_예산차단은_품질통과가_아니다[budget_exceeded-None]",
+    "테스트/테스트_실제연구제어.py::test_같은revision_동시평가는_의미검토를_한번만_예약한다",
+    "테스트/테스트_실제연구제어.py::test_로컬4절2라운드_최대55모델호출_의미검토한번",
+    "테스트/테스트_웹연구.py::test_웹6노드_진짜읽기receipt_출처정본_모델과HTTP분리[False]",
+    "테스트/테스트_웹연구.py::test_웹6노드_진짜읽기receipt_출처정본_모델과HTTP분리[True]",
+    "테스트/테스트_웹연구.py::test_웹초안은_검증된_source_id의_제시구간만_코드로_인용한다",
+    "테스트/테스트_웹연구.py::test_읽기없는웹은_코드기원부족_2라운드후_품질차단[client0]",
+    "테스트/테스트_웹연구.py::test_읽기없는웹은_코드기원부족_2라운드후_품질차단[client1]",
+    "테스트/테스트_웹연구.py::test_늦은검색은_출처쓰기_후속fetch_읽기_정본없음",
+    "테스트/테스트_웹연구.py::test_malformed_redirect_candidate_does_not_abort_other_sources",
+    "테스트/테스트_웹연구.py::test_길이계약을_어긴_메모는_읽기로_인정하지_않고_연구는_계속한다[long-read_note_too_long]",
+    "테스트/테스트_웹연구.py::test_길이계약을_어긴_메모는_읽기로_인정하지_않고_연구는_계속한다[empty-read_note_empty]",
+    "테스트/테스트_웹연구.py::test_모든_메모가_길면_읽기없이_2라운드후_품질차단되고_실패하지_않는다",
+    "테스트/테스트_웹연구.py::test_새버전은_웹논리상한_다시0_옛버전사용량불변",
+    "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[actual_user]",
+    "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[source_url]",
+    "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[read_url]",
+    "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[fetch_url]",
+    "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_section]",
+    "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_run]",
+    "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_revision]",
+    "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[failed_call]",
+    "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_read_hash]",
+    "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_note_hash]",
+    "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[failed_source]",
+    "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[no_fetch_receipt]",
+    "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[orphan_call]",
+    "테스트/테스트_웹연구.py::test_single_sidecar_url_change_cannot_publish_cited_source",
+    "테스트/테스트_웹연구.py::test_웹논리슬롯_동시예약은_상한이상_외부요청0",
+    "테스트/테스트_웹연구.py::test_취소후_늦은본문과읽기응답은_추가claim과후속모델0[fetch]",
+    "테스트/테스트_웹연구.py::test_취소후_늦은본문과읽기응답은_추가claim과후속모델0[read_one]",
+    "테스트/테스트_웹연구.py::test_웹4절2라운드_16검색24본문_63모델상한_실제그래프대역",
+    "테스트/테스트_웹연구.py::test_웹절근거는_receipt와_실제읽힌앞20000자에_귀속한다[missing]",
+    "테스트/테스트_웹연구.py::test_웹절근거는_receipt와_실제읽힌앞20000자에_귀속한다[unread]",
+    "테스트/테스트_웹연구.py::test_웹절근거는_receipt와_실제읽힌앞20000자에_귀속한다[outside_excerpt]",
+    "테스트/테스트_웹연구.py::test_웹구간요청후_현재receipt와원문을_재검사하고_늦은조립을_차단한다[note_receipt]",
+    "테스트/테스트_웹연구.py::test_웹구간요청후_현재receipt와원문을_재검사하고_늦은조립을_차단한다[source_version]",
+    "테스트/테스트_웹연구.py::test_웹구간요청후_현재receipt와원문을_재검사하고_늦은조립을_차단한다[fetch_receipt]",
+    "테스트/테스트_웹통합.py::test_정상조립과실제자료저장소_HTTP연구_재시작_무재전송",
+    "테스트/테스트_연구앱.py::test_실제앱_주입모델과_분리저장_정본다운로드",
+    "테스트/테스트_삭제후기록차단.py::test_구간초안대기중_삭제는_늦은원응답과_조립결과를_복원하지_않는다[local]",
+    "테스트/테스트_삭제후기록차단.py::test_구간초안대기중_삭제는_늦은원응답과_조립결과를_복원하지_않는다[web]",
+    "테스트/테스트_삭제후기록차단.py::test_실제_synthesize_취소삭제후_지연성공과_finally가_행을_복원하지_않는다",
+    "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-success-synthesize]",
+    "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-success-real-complete-plan]",
+    "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-error-synthesize]",
+    "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-error-real-complete-plan]",
+    "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-cancel-synthesize]",
+    "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-cancel-real-complete-plan]",
+    "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-success-synthesize]",
+    "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-success-real-complete-plan]",
+    "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-error-synthesize]",
+    "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-error-real-complete-plan]",
+    "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-cancel-synthesize]",
+    "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-cancel-real-complete-plan]",
+    "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-success-synthesize]",
+    "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-success-real-complete-plan]",
+    "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-error-synthesize]",
+    "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-error-real-complete-plan]",
+    "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-cancel-synthesize]",
+    "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-cancel-real-complete-plan]",
+    "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[False-False-search]",
+    "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[False-False-fetch]",
+    "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[False-True-search]",
+    "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[False-True-fetch]",
+    "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[True-False-search]",
+    "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[True-False-fetch]",
+    "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[True-True-search]",
+    "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[True-True-fetch]",
+    "테스트/테스트_보고서품질.py::test_실제관측한_근거주장_재서술은_거절하고_새본문은_한번만_작성한다",
+    "테스트/테스트_보고서품질.py::test_떨어진_원문구간은_하나의인용문으로_합치지않고_근거를_분리한다",
+    "테스트/테스트_보고서품질.py::test_공백만_정규화하고_날짜와단위는_고치지_않는다",
+    "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[other_source-source not read]",
+    "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[wrong_date-quote not in]",
+    "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[not_in_body-claim not in]",
+    "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[too_short-quote not in]",
+    "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[too_long-quote not in]",
+    "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[too_many-list required]",
+    "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[missing-list required]",
+    "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[empty-list required]",
+    "테스트/테스트_보고서품질.py::test_부족초안은_빈근거와_원고를_그대로_보존한다",
+    "테스트/테스트_보고서품질.py::test_링크_title에만_숨긴_주장은_가시본문의_근거로_통과하지_않는다",
+    "테스트/테스트_보고서품질.py::test_실제_표와_인라인코드와_강조는_보이는_문자로_추출한다",
+    "테스트/테스트_보고서품질.py::test_강조표시가_있는_가시주장은_원문과_연결할_수_있다",
+    "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[columns]",
+    "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[rows]",
+    "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[cells]",
+    "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[long_cell]",
+    "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[tables]",
+    "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[diagrams]",
+    "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[unknown]",
+    "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[omission]",
+    "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[malicious_svg]",
+    "테스트/테스트_보고서품질.py::test_시각자료없는_생략사유는_텍스트이며_원래조립호출도_가능하다",
+    "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value0]",
+    "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value1]",
+    "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value2]",
+    "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value3]",
+    "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value4]",
+    "테스트/테스트_보고서품질.py::test_미지원주장은_출처가_비어있어도_음성판정을_보존한다",
+    "테스트/테스트_보고서품질.py::test_표의_이스케이프된_출처도_원래식별자로_평가한다[\\uc790\\ub8cc(A).B]",
+    "테스트/테스트_보고서품질.py::test_표의_이스케이프된_출처도_원래식별자로_평가한다[\\uc790\\ub8cc&amp;]",
+    "테스트/테스트_보고서품질.py::test_표의_이스케이프된_출처도_원래식별자로_평가한다[\\uc790\\ub8cc\\\\!]",
+    "테스트/테스트_보고서품질.py::test_SVG텍스트의_백틱이_코드펜스를_탈출하지_못한다"
+  ],
+  "reports": [
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_HTTP1회_예약콜백_요청옵션_정산",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_HTTP1회_예약콜백_요청옵션_정산",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_HTTP1회_예약콜백_요청옵션_정산",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[False-402-provider_http-402]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[False-402-provider_http-402]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[False-402-provider_http-402]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[False-429-provider_http-429]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[False-429-provider_http-429]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[False-429-provider_http-429]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[False-timeout-timeout-None]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[False-timeout-timeout-None]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[False-timeout-timeout-None]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[False-secret-provider_error-None]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[False-secret-provider_error-None]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[False-secret-provider_error-None]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[True-402-provider_http-402]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[True-402-provider_http-402]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[True-402-provider_http-402]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[True-429-provider_http-429]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[True-429-provider_http-429]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[True-429-provider_http-429]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[True-timeout-timeout-None]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[True-timeout-timeout-None]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[True-timeout-timeout-None]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[True-secret-provider_error-None]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[True-secret-provider_error-None]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실패는_단한번_안전오류_예약유지[True-secret-provider_error-None]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False--stop-False]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False--stop-False]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False--stop-False]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-{\"value\": NaN}-stop-True]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-{\"value\": NaN}-stop-True]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-{\"value\": NaN}-stop-True]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-FAKE_SECRET_bad_json-stop-True]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-FAKE_SECRET_bad_json-stop-True]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-FAKE_SECRET_bad_json-stop-True]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-[]-stop-True]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-[]-stop-True]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-[]-stop-True]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-{\"ok\":true}-length-True]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-{\"ok\":true}-length-True]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-{\"ok\":true}-length-True]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-partial-content_filter-False]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-partial-content_filter-False]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[False-partial-content_filter-False]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True--stop-False]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True--stop-False]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True--stop-False]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-{\"value\": NaN}-stop-True]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-{\"value\": NaN}-stop-True]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-{\"value\": NaN}-stop-True]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-FAKE_SECRET_bad_json-stop-True]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-FAKE_SECRET_bad_json-stop-True]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-FAKE_SECRET_bad_json-stop-True]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-[]-stop-True]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-[]-stop-True]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-[]-stop-True]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-{\"ok\":true}-length-True]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-{\"ok\":true}-length-True]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-{\"ok\":true}-length-True]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-partial-content_filter-False]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-partial-content_filter-False]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_비정상출력은_결과가아니며_확인usage만정산[True-partial-content_filter-False]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[False-money-budget_exceeded-0]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[False-money-budget_exceeded-0]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[False-money-budget_exceeded-0]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[False-long-input_too_large-0]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[False-long-input_too_large-0]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[False-long-input_too_large-0]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[False-callback-attempt_callback_failed-1]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[False-callback-attempt_callback_failed-1]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[False-callback-attempt_callback_failed-1]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[True-money-budget_exceeded-0]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[True-money-budget_exceeded-0]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[True-money-budget_exceeded-0]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[True-long-input_too_large-0]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[True-long-input_too_large-0]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[True-long-input_too_large-0]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[True-callback-attempt_callback_failed-1]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[True-callback-attempt_callback_failed-1]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_전송전차단과_콜백오류[True-callback-attempt_callback_failed-1]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_프로젝트env만_명시설정_공식주소_실제SDK생성",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_프로젝트env만_명시설정_공식주소_실제SDK생성",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_프로젝트env만_명시설정_공식주소_실제SDK생성",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[missing]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[missing]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[missing]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[negative]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[negative]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[negative]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[overflow]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[overflow]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[overflow]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[bad_reasoning]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[bad_reasoning]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[bad_reasoning]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[bad_model]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[bad_model]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_불명또는잘못된usage는_예약을해제하지않음[bad_model]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_취소후재시작도_예약보존",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_취소후재시작도_예약보존",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_취소후재시작도_예약보존",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_응답봉투도_정식스키마를_검증[object]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_응답봉투도_정식스키마를_검증[object]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_응답봉투도_정식스키마를_검증[object]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_응답봉투도_정식스키마를_검증[id]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_응답봉투도_정식스키마를_검증[id]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_응답봉투도_정식스키마를_검증[id]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_응답봉투도_정식스키마를_검증[role]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_응답봉투도_정식스키마를_검증[role]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_응답봉투도_정식스키마를_검증[role]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_40번째전송후_41번째는_콜백도HTTP도없음",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_40번째전송후_41번째는_콜백도HTTP도없음",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_40번째전송후_41번째는_콜백도HTTP도없음",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_초기화한100회상한은_101번째콜백과전송을차단",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_초기화한100회상한은_101번째콜백과전송을차단",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_초기화한100회상한은_101번째콜백과전송을차단",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OTHER=dummy]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OTHER=dummy]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OTHER=dummy]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OPENAI_API_KEY=\\n]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OPENAI_API_KEY=\\n]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OPENAI_API_KEY=\\n]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OPENAI_API_KEY=${OTHER}]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OPENAI_API_KEY=${OTHER}]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OPENAI_API_KEY=${OTHER}]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OPENAI_API_KEY='dummy\\n]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OPENAI_API_KEY='dummy\\n]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OPENAI_API_KEY='dummy\\n]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OPENAI_API_KEY=dummy1\\nOPENAI_API_KEY=dummy2]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OPENAI_API_KEY=dummy1\\nOPENAI_API_KEY=dummy2]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_env설정오류는_ambient키로_우회하지않음[OPENAI_API_KEY=dummy1\\nOPENAI_API_KEY=dummy2]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_strict_schema_실제SDK_payload와예약UTF8사본",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_strict_schema_실제SDK_payload와예약UTF8사본",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_strict_schema_실제SDK_payload와예약UTF8사본",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema0-invalid_request]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema0-invalid_request]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema0-invalid_request]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema1-invalid_request]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema1-invalid_request]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema1-invalid_request]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema2-invalid_request]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema2-invalid_request]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema2-invalid_request]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema3-invalid_request]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema3-invalid_request]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema3-invalid_request]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema4-invalid_request]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema4-invalid_request]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema4-invalid_request]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema5-invalid_request]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema5-invalid_request]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema5-invalid_request]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema6-invalid_request]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema6-invalid_request]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema6-invalid_request]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema7-invalid_request]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema7-invalid_request]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema7-invalid_request]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema8-invalid_request]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema8-invalid_request]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema8-invalid_request]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema9-invalid_request]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema9-invalid_request]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema9-invalid_request]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema10-invalid_request]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema10-invalid_request]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema10-invalid_request]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema11-invalid_request]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema11-invalid_request]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema11-invalid_request]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema12-input_too_large]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema12-input_too_large]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema거절은_예약콜백SDK전[schema12-input_too_large]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[missing_required-root]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[missing_required-root]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[missing_required-root]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[missing_required-nested]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[missing_required-nested]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[missing_required-nested]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[partial_required-root]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[partial_required-root]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[partial_required-root]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[partial_required-nested]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[partial_required-nested]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[partial_required-nested]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[missing_closed-root]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[missing_closed-root]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[missing_closed-root]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[missing_closed-nested]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[missing_closed-nested]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[missing_closed-nested]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[open-root]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[open-root]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[open-root]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[open-nested]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[open-nested]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부[open-nested]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실제builder_schema의_정수enum이_SDK_HTTP까지_동일하다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실제builder_schema의_정수enum이_SDK_HTTP까지_동일하다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_실제builder_schema의_정수enum이_SDK_HTTP까지_동일하다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_strict_schema도_거부와도구호출은_출판응답아님[refusal]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_strict_schema도_거부와도구호출은_출판응답아님[refusal]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_strict_schema도_거부와도구호출은_출판응답아님[refusal]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_strict_schema도_거부와도구호출은_출판응답아님[tool_calls]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_strict_schema도_거부와도구호출은_출판응답아님[tool_calls]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_strict_schema도_거부와도구호출은_출판응답아님[tool_calls]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema실패두건_재시작과정상정산도_과거예약불변",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema실패두건_재시작과정상정산도_과거예약불변",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제모델.py::test_schema실패두건_재시작과정상정산도_과거예약불변",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_complete_strict_schema_전달과_저널사본_다른노드미전달",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_complete_strict_schema_전달과_저널사본_다른노드미전달",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_complete_strict_schema_전달과_저널사본_다른노드미전달",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_complete_schema차단은_모델저널예약전[invalid]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_complete_schema차단은_모델저널예약전[invalid]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_complete_schema차단은_모델저널예약전[invalid]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_complete_schema차단은_모델저널예약전[oversize]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_complete_schema차단은_모델저널예약전[oversize]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_complete_schema차단은_모델저널예약전[oversize]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_complete_schema차단은_모델저널예약전[unsupported]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_complete_schema차단은_모델저널예약전[unsupported]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_complete_schema차단은_모델저널예약전[unsupported]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_정상초안호출은_request의_실제response_schema를_전달한다[local]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_정상초안호출은_request의_실제response_schema를_전달한다[local]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_정상초안호출은_request의_실제response_schema를_전달한다[local]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_정상초안호출은_request의_실제response_schema를_전달한다[web]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_정상초안호출은_request의_실제response_schema를_전달한다[web]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_정상초안호출은_request의_실제response_schema를_전달한다[web]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_실제6노드_Send병렬_부족절만2라운드_원고보존과_정본재열기",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_실제6노드_Send병렬_부족절만2라운드_원고보존과_정본재열기",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_실제6노드_Send병렬_부족절만2라운드_원고보존과_정본재열기",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_라운드마다3건_최대2회_이전메모_유지와_정확한소진사유",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_라운드마다3건_최대2회_이전메모_유지와_정확한소진사유",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_라운드마다3건_최대2회_이전메모_유지와_정확한소진사유",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_신규실제경로는_누락근거를_충분으로_승격하지_않는다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_신규실제경로는_누락근거를_충분으로_승격하지_않는다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_신규실제경로는_누락근거를_충분으로_승격하지_않는다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_종합한번으로_표와SVG를_조립하고_절본문을_보존한다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_종합한번으로_표와SVG를_조립하고_절본문을_보존한다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_종합한번으로_표와SVG를_조립하고_절본문을_보존한다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_신규종합은_누락스키마와_미독시각출처를_거부한다[missing]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_신규종합은_누락스키마와_미독시각출처를_거부한다[missing]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_신규종합은_누락스키마와_미독시각출처를_거부한다[missing]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_신규종합은_누락스키마와_미독시각출처를_거부한다[unknown_source]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_신규종합은_누락스키마와_미독시각출처를_거부한다[unknown_source]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_신규종합은_누락스키마와_미독시각출처를_거부한다[unknown_source]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음[negative]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음[negative]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음[negative]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음[contradiction]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음[contradiction]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음[contradiction]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음[missing]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음[missing]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음[missing]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음[non_json]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음[non_json]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음[non_json]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_원고JSON과_bool실패는_최종파일없이_큐정지[not JSON-span response: schema]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_원고JSON과_bool실패는_최종파일없이_큐정지[not JSON-span response: schema]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_원고JSON과_bool실패는_최종파일없이_큐정지[not JSON-span response: schema]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_원고JSON과_bool실패는_최종파일없이_큐정지[invalid_bool-span response: schema]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_원고JSON과_bool실패는_최종파일없이_큐정지[invalid_bool-span response: schema]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_원고JSON과_bool실패는_최종파일없이_큐정지[invalid_bool-span response: schema]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_실패한_실행은_사유를_run에_보존한다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_실패한_실행은_사유를_run에_보존한다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_실패한_실행은_사유를_run에_보존한다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_허위구간ID_원응답보존_출판차단_자동재생성없음[unknown]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_허위구간ID_원응답보존_출판차단_자동재생성없음[unknown]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_허위구간ID_원응답보존_출판차단_자동재생성없음[unknown]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_허위구간ID_원응답보존_출판차단_자동재생성없음[unread]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_허위구간ID_원응답보존_출판차단_자동재생성없음[unread]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_허위구간ID_원응답보존_출판차단_자동재생성없음[unread]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_허위구간ID_원응답보존_출판차단_자동재생성없음[stale]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_허위구간ID_원응답보존_출판차단_자동재생성없음[stale]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_허위구간ID_원응답보존_출판차단_자동재생성없음[stale]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[16-local]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[16-local]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[16-local]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[16-web]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[16-web]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[16-web]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[17-local]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[17-local]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[17-local]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[17-web]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[17-web]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[17-web]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[19-local]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[19-local]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[19-local]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[19-web]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[19-web]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[19-web]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_로컬구간요청후_원문버전변경은_원응답만_남기고_조립을_차단한다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_로컬구간요청후_원문버전변경은_원응답만_남기고_조립을_차단한다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_로컬구간요청후_원문버전변경은_원응답만_남기고_조립을_차단한다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[plan]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[plan]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[plan]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[read_one]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[read_one]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[read_one]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[draft_section]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[draft_section]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[draft_section]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[synthesize]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[synthesize]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[synthesize]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[semantic_review]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[semantic_review]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[semantic_review]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_예산차단은_미전송_0회_큐정지_비밀오류_비보존",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_예산차단은_미전송_0회_큐정지_비밀오류_비보존",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_예산차단은_미전송_0회_큐정지_비밀오류_비보존",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_취소후_늦은모델응답은_다음노드와_출판을_진행못한다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_취소후_늦은모델응답은_다음노드와_출판을_진행못한다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_취소후_늦은모델응답은_다음노드와_출판을_진행못한다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_실제후보외_문서선택은_코퍼스에_있어도_실패한다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_실제후보외_문서선택은_코퍼스에_있어도_실패한다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_실제후보외_문서선택은_코퍼스에_있어도_실패한다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_ASGI_조립은_동일보고서_열기다운로드_기록_무재호출",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_ASGI_조립은_동일보고서_열기다운로드_기록_무재호출",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_ASGI_조립은_동일보고서_열기다운로드_기록_무재호출",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_시도ID_불일치는_결과적용_전에_안전실패",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_시도ID_불일치는_결과적용_전에_안전실패",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_시도ID_불일치는_결과적용_전에_안전실패",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토대기중_취소삭제는_정본과_지운기록을_재생성하지_않는다[cancel]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토대기중_취소삭제는_정본과_지운기록을_재생성하지_않는다[cancel]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토대기중_취소삭제는_정본과_지운기록을_재생성하지_않는다[cancel]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토대기중_취소삭제는_정본과_지운기록을_재생성하지_않는다[delete]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토대기중_취소삭제는_정본과_지운기록을_재생성하지_않는다[delete]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토대기중_취소삭제는_정본과_지운기록을_재생성하지_않는다[delete]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_제공자오류와_예산차단은_품질통과가_아니다[provider_http-401]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_제공자오류와_예산차단은_품질통과가_아니다[provider_http-401]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_제공자오류와_예산차단은_품질통과가_아니다[provider_http-401]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_제공자오류와_예산차단은_품질통과가_아니다[provider_http-429]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_제공자오류와_예산차단은_품질통과가_아니다[provider_http-429]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_제공자오류와_예산차단은_품질통과가_아니다[provider_http-429]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_제공자오류와_예산차단은_품질통과가_아니다[budget_exceeded-None]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_제공자오류와_예산차단은_품질통과가_아니다[budget_exceeded-None]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_의미검토_제공자오류와_예산차단은_품질통과가_아니다[budget_exceeded-None]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_같은revision_동시평가는_의미검토를_한번만_예약한다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_같은revision_동시평가는_의미검토를_한번만_예약한다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_같은revision_동시평가는_의미검토를_한번만_예약한다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_로컬4절2라운드_최대55모델호출_의미검토한번",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_로컬4절2라운드_최대55모델호출_의미검토한번",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_실제연구제어.py::test_로컬4절2라운드_최대55모델호출_의미검토한번",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹6노드_진짜읽기receipt_출처정본_모델과HTTP분리[False]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹6노드_진짜읽기receipt_출처정본_모델과HTTP분리[False]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹6노드_진짜읽기receipt_출처정본_모델과HTTP분리[False]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹6노드_진짜읽기receipt_출처정본_모델과HTTP분리[True]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹6노드_진짜읽기receipt_출처정본_모델과HTTP분리[True]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹6노드_진짜읽기receipt_출처정본_모델과HTTP분리[True]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹초안은_검증된_source_id의_제시구간만_코드로_인용한다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹초안은_검증된_source_id의_제시구간만_코드로_인용한다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹초안은_검증된_source_id의_제시구간만_코드로_인용한다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_읽기없는웹은_코드기원부족_2라운드후_품질차단[client0]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_읽기없는웹은_코드기원부족_2라운드후_품질차단[client0]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_읽기없는웹은_코드기원부족_2라운드후_품질차단[client0]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_읽기없는웹은_코드기원부족_2라운드후_품질차단[client1]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_읽기없는웹은_코드기원부족_2라운드후_품질차단[client1]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_읽기없는웹은_코드기원부족_2라운드후_품질차단[client1]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_늦은검색은_출처쓰기_후속fetch_읽기_정본없음",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_늦은검색은_출처쓰기_후속fetch_읽기_정본없음",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_늦은검색은_출처쓰기_후속fetch_읽기_정본없음",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_malformed_redirect_candidate_does_not_abort_other_sources",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_malformed_redirect_candidate_does_not_abort_other_sources",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_malformed_redirect_candidate_does_not_abort_other_sources",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_길이계약을_어긴_메모는_읽기로_인정하지_않고_연구는_계속한다[long-read_note_too_long]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_길이계약을_어긴_메모는_읽기로_인정하지_않고_연구는_계속한다[long-read_note_too_long]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_길이계약을_어긴_메모는_읽기로_인정하지_않고_연구는_계속한다[long-read_note_too_long]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_길이계약을_어긴_메모는_읽기로_인정하지_않고_연구는_계속한다[empty-read_note_empty]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_길이계약을_어긴_메모는_읽기로_인정하지_않고_연구는_계속한다[empty-read_note_empty]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_길이계약을_어긴_메모는_읽기로_인정하지_않고_연구는_계속한다[empty-read_note_empty]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_모든_메모가_길면_읽기없이_2라운드후_품질차단되고_실패하지_않는다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_모든_메모가_길면_읽기없이_2라운드후_품질차단되고_실패하지_않는다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_모든_메모가_길면_읽기없이_2라운드후_품질차단되고_실패하지_않는다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_새버전은_웹논리상한_다시0_옛버전사용량불변",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_새버전은_웹논리상한_다시0_옛버전사용량불변",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_새버전은_웹논리상한_다시0_옛버전사용량불변",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[actual_user]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[actual_user]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[actual_user]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[source_url]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[source_url]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[source_url]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[read_url]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[read_url]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[read_url]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[fetch_url]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[fetch_url]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[fetch_url]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_section]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_section]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_section]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_run]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_run]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_run]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_revision]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_revision]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_revision]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[failed_call]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[failed_call]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[failed_call]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_read_hash]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_read_hash]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_read_hash]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_note_hash]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_note_hash]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[wrong_note_hash]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[failed_source]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[failed_source]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[failed_source]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[no_fetch_receipt]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[no_fetch_receipt]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[no_fetch_receipt]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[orphan_call]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[orphan_call]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_부정확한읽기receipt는_출처claim만으로_제출불가[orphan_call]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_single_sidecar_url_change_cannot_publish_cited_source",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_single_sidecar_url_change_cannot_publish_cited_source",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_single_sidecar_url_change_cannot_publish_cited_source",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹논리슬롯_동시예약은_상한이상_외부요청0",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹논리슬롯_동시예약은_상한이상_외부요청0",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹논리슬롯_동시예약은_상한이상_외부요청0",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_취소후_늦은본문과읽기응답은_추가claim과후속모델0[fetch]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_취소후_늦은본문과읽기응답은_추가claim과후속모델0[fetch]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_취소후_늦은본문과읽기응답은_추가claim과후속모델0[fetch]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_취소후_늦은본문과읽기응답은_추가claim과후속모델0[read_one]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_취소후_늦은본문과읽기응답은_추가claim과후속모델0[read_one]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_취소후_늦은본문과읽기응답은_추가claim과후속모델0[read_one]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹4절2라운드_16검색24본문_63모델상한_실제그래프대역",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹4절2라운드_16검색24본문_63모델상한_실제그래프대역",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹4절2라운드_16검색24본문_63모델상한_실제그래프대역",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹절근거는_receipt와_실제읽힌앞20000자에_귀속한다[missing]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹절근거는_receipt와_실제읽힌앞20000자에_귀속한다[missing]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹절근거는_receipt와_실제읽힌앞20000자에_귀속한다[missing]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹절근거는_receipt와_실제읽힌앞20000자에_귀속한다[unread]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹절근거는_receipt와_실제읽힌앞20000자에_귀속한다[unread]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹절근거는_receipt와_실제읽힌앞20000자에_귀속한다[unread]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹절근거는_receipt와_실제읽힌앞20000자에_귀속한다[outside_excerpt]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹절근거는_receipt와_실제읽힌앞20000자에_귀속한다[outside_excerpt]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹절근거는_receipt와_실제읽힌앞20000자에_귀속한다[outside_excerpt]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹구간요청후_현재receipt와원문을_재검사하고_늦은조립을_차단한다[note_receipt]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹구간요청후_현재receipt와원문을_재검사하고_늦은조립을_차단한다[note_receipt]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹구간요청후_현재receipt와원문을_재검사하고_늦은조립을_차단한다[note_receipt]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹구간요청후_현재receipt와원문을_재검사하고_늦은조립을_차단한다[source_version]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹구간요청후_현재receipt와원문을_재검사하고_늦은조립을_차단한다[source_version]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹구간요청후_현재receipt와원문을_재검사하고_늦은조립을_차단한다[source_version]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹구간요청후_현재receipt와원문을_재검사하고_늦은조립을_차단한다[fetch_receipt]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹구간요청후_현재receipt와원문을_재검사하고_늦은조립을_차단한다[fetch_receipt]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹연구.py::test_웹구간요청후_현재receipt와원문을_재검사하고_늦은조립을_차단한다[fetch_receipt]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹통합.py::test_정상조립과실제자료저장소_HTTP연구_재시작_무재전송",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹통합.py::test_정상조립과실제자료저장소_HTTP연구_재시작_무재전송",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_웹통합.py::test_정상조립과실제자료저장소_HTTP연구_재시작_무재전송",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_연구앱.py::test_실제앱_주입모델과_분리저장_정본다운로드",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_연구앱.py::test_실제앱_주입모델과_분리저장_정본다운로드",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_연구앱.py::test_실제앱_주입모델과_분리저장_정본다운로드",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_구간초안대기중_삭제는_늦은원응답과_조립결과를_복원하지_않는다[local]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_구간초안대기중_삭제는_늦은원응답과_조립결과를_복원하지_않는다[local]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_구간초안대기중_삭제는_늦은원응답과_조립결과를_복원하지_않는다[local]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_구간초안대기중_삭제는_늦은원응답과_조립결과를_복원하지_않는다[web]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_구간초안대기중_삭제는_늦은원응답과_조립결과를_복원하지_않는다[web]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_구간초안대기중_삭제는_늦은원응답과_조립결과를_복원하지_않는다[web]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_실제_synthesize_취소삭제후_지연성공과_finally가_행을_복원하지_않는다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_실제_synthesize_취소삭제후_지연성공과_finally가_행을_복원하지_않는다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_실제_synthesize_취소삭제후_지연성공과_finally가_행을_복원하지_않는다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-success-synthesize]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-success-synthesize]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-success-synthesize]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-success-real-complete-plan]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-success-real-complete-plan]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-success-real-complete-plan]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-error-synthesize]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-error-synthesize]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-error-synthesize]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-error-real-complete-plan]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-error-real-complete-plan]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-error-real-complete-plan]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-cancel-synthesize]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-cancel-synthesize]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-cancel-synthesize]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-cancel-real-complete-plan]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-cancel-real-complete-plan]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[deleted-cancel-real-complete-plan]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-success-synthesize]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-success-synthesize]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-success-synthesize]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-success-real-complete-plan]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-success-real-complete-plan]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-success-real-complete-plan]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-error-synthesize]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-error-synthesize]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-error-synthesize]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-error-real-complete-plan]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-error-real-complete-plan]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-error-real-complete-plan]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-cancel-synthesize]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-cancel-synthesize]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-cancel-synthesize]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-cancel-real-complete-plan]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-cancel-real-complete-plan]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[cancelled-cancel-real-complete-plan]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-success-synthesize]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-success-synthesize]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-success-synthesize]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-success-real-complete-plan]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-success-real-complete-plan]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-success-real-complete-plan]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-error-synthesize]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-error-synthesize]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-error-synthesize]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-error-real-complete-plan]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-error-real-complete-plan]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-error-real-complete-plan]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-cancel-synthesize]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-cancel-synthesize]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-cancel-synthesize]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-cancel-real-complete-plan]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-cancel-real-complete-plan]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_늦은응답_실패_취소종료는_삭제만_차단하고_비삭제_기록을_보존한다[revised-cancel-real-complete-plan]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[False-False-search]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[False-False-search]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[False-False-search]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[False-False-fetch]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[False-False-fetch]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[False-False-fetch]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[False-True-search]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[False-True-search]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[False-True-search]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[False-True-fetch]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[False-True-fetch]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[False-True-fetch]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[True-False-search]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[True-False-search]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[True-False-search]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[True-False-fetch]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[True-False-fetch]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[True-False-fetch]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[True-True-search]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[True-True-search]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[True-True-search]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[True-True-fetch]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[True-True-fetch]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_삭제후기록차단.py::test_지연_웹검색과_수집_응답_실패_observer는_삭제후_자료를_복원하지_않는다[True-True-fetch]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_실제관측한_근거주장_재서술은_거절하고_새본문은_한번만_작성한다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_실제관측한_근거주장_재서술은_거절하고_새본문은_한번만_작성한다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_실제관측한_근거주장_재서술은_거절하고_새본문은_한번만_작성한다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_떨어진_원문구간은_하나의인용문으로_합치지않고_근거를_분리한다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_떨어진_원문구간은_하나의인용문으로_합치지않고_근거를_분리한다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_떨어진_원문구간은_하나의인용문으로_합치지않고_근거를_분리한다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_공백만_정규화하고_날짜와단위는_고치지_않는다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_공백만_정규화하고_날짜와단위는_고치지_않는다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_공백만_정규화하고_날짜와단위는_고치지_않는다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[other_source-source not read]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[other_source-source not read]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[other_source-source not read]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[wrong_date-quote not in]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[wrong_date-quote not in]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[wrong_date-quote not in]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[not_in_body-claim not in]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[not_in_body-claim not in]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[not_in_body-claim not in]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[too_short-quote not in]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[too_short-quote not in]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[too_short-quote not in]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[too_long-quote not in]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[too_long-quote not in]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[too_long-quote not in]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[too_many-list required]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[too_many-list required]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[too_many-list required]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[missing-list required]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[missing-list required]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[missing-list required]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[empty-list required]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[empty-list required]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_다른문서귀속과_없는인용과_없는주장을_거부한다[empty-list required]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_부족초안은_빈근거와_원고를_그대로_보존한다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_부족초안은_빈근거와_원고를_그대로_보존한다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_부족초안은_빈근거와_원고를_그대로_보존한다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_링크_title에만_숨긴_주장은_가시본문의_근거로_통과하지_않는다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_링크_title에만_숨긴_주장은_가시본문의_근거로_통과하지_않는다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_링크_title에만_숨긴_주장은_가시본문의_근거로_통과하지_않는다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_실제_표와_인라인코드와_강조는_보이는_문자로_추출한다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_실제_표와_인라인코드와_강조는_보이는_문자로_추출한다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_실제_표와_인라인코드와_강조는_보이는_문자로_추출한다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_강조표시가_있는_가시주장은_원문과_연결할_수_있다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_강조표시가_있는_가시주장은_원문과_연결할_수_있다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_강조표시가_있는_가시주장은_원문과_연결할_수_있다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[columns]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[columns]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[columns]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[rows]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[rows]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[rows]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[cells]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[cells]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[cells]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[long_cell]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[long_cell]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[long_cell]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[tables]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[tables]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[tables]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[diagrams]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[diagrams]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[diagrams]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[unknown]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[unknown]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[unknown]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[omission]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[omission]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[omission]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[malicious_svg]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[malicious_svg]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각요약의_상한과_출처와SVG를_검사한다[malicious_svg]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각자료없는_생략사유는_텍스트이며_원래조립호출도_가능하다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각자료없는_생략사유는_텍스트이며_원래조립호출도_가능하다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_시각자료없는_생략사유는_텍스트이며_원래조립호출도_가능하다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value0]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value0]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value0]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value1]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value1]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value1]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value2]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value2]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value2]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value3]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value3]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value3]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value4]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value4]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_의미검토는_타입과_모순과_귀속을_검사한다[value4]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_미지원주장은_출처가_비어있어도_음성판정을_보존한다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_미지원주장은_출처가_비어있어도_음성판정을_보존한다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_미지원주장은_출처가_비어있어도_음성판정을_보존한다",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_표의_이스케이프된_출처도_원래식별자로_평가한다[\\uc790\\ub8cc(A).B]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_표의_이스케이프된_출처도_원래식별자로_평가한다[\\uc790\\ub8cc(A).B]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_표의_이스케이프된_출처도_원래식별자로_평가한다[\\uc790\\ub8cc(A).B]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_표의_이스케이프된_출처도_원래식별자로_평가한다[\\uc790\\ub8cc&amp;]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_표의_이스케이프된_출처도_원래식별자로_평가한다[\\uc790\\ub8cc&amp;]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_표의_이스케이프된_출처도_원래식별자로_평가한다[\\uc790\\ub8cc&amp;]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_표의_이스케이프된_출처도_원래식별자로_평가한다[\\uc790\\ub8cc\\\\!]",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_표의_이스케이프된_출처도_원래식별자로_평가한다[\\uc790\\ub8cc\\\\!]",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_표의_이스케이프된_출처도_원래식별자로_평가한다[\\uc790\\ub8cc\\\\!]",
+      "when": "teardown",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_SVG텍스트의_백틱이_코드펜스를_탈출하지_못한다",
+      "when": "setup",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_SVG텍스트의_백틱이_코드펜스를_탈출하지_못한다",
+      "when": "call",
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "테스트/테스트_보고서품질.py::test_SVG텍스트의_백틱이_코드펜스를_탈출하지_못한다",
+      "when": "teardown",
+      "outcome": "passed"
+    }
+  ],
+  "source_hashes_before": {
+    "서버\\교안연구.py": "0bf66c70a4a593bcb034dbada00233631c434e6a90046a9e4d8c3610f1d14c0e",
+    "서버\\명령해석.py": "a8bb23168a535dc9a40dac63ad0299e932328cfccb6a3a2950e960cdb2ad9a0c",
+    "서버\\모델대역.py": "89672e64a3556ed448042859d87b5105b91f27938c9b17ecf064f2ec8a13824e",
+    "서버\\보고서근거.py": "f7b90809905cd10fcfeccf34be17a98b517249c2e422af806bf98c749082136e",
+    "서버\\보고서도식.py": "ddf5c42d46bc86dfe883714ffb5f8666c765a541142acf26febca4f1651ced48",
+    "서버\\보고서변환.py": "6dbd31927da7a23e2f6651605274e0df3127db5ae7ae460c65ab6e4331d729fc",
+    "서버\\보고서표현.py": "826063df92b15d394717fe962049426a71e64e6c96e4ee899f8ce3a24b94e2e8",
+    "서버\\보고서품질.py": "2a7780e82890b4d2c6753d2b6ddacdf9b92d2e3794bf5898db343f72dec033a7",
+    "서버\\시험문서.py": "9a7e03ed34e0eb19dfa93b6f2b14a79074af3a7f22f33c393cefd72e74009ca3",
+    "서버\\실제모델.py": "80ae3bfda7725342699acc38b0455f8bed8b72e5494a8f760501543ee53ff766",
+    "서버\\실제연구제어.py": "93fc05e1b2b0d53ed44c07a33722195a28274afab8e26ae863b017c161ed706e",
+    "서버\\실행삭제.py": "1c0d2fc411355595efe20f177c0e4ecabea440201c9732193664fe90c70b2b9b",
+    "서버\\실행제어.py": "6fe218510f555c41f7e362ed0e763d8b2106170affb6b0edefc611382f23ea7a",
+    "서버\\앱.py": "c0e2ac3d3e4d1ce220df4fa4a0233349c273e60c2c4f15a0072beeca2324bc74",
+    "서버\\야후결과파서.py": "64e602c20a5df7081fac1bc8828ba40e75715a71ad539c741530ab6a7f338ed7",
+    "서버\\연구그래프.py": "9ecff4240b5011da08c2c2b293e9d49f2ca660caacd48241e6ee895f58a150ad",
+    "서버\\연구앱.py": "c4d36470f42fc5a38c9952e05c204a5078f8f57d4e205e0cdc35aafae3fdb548",
+    "서버\\웹계약.py": "7a1dfba4d73a7755c7801a04e5c2794f619e2ecd03b4526a9e94c77d0e1afbcb",
+    "서버\\웹연구.py": "c76295547bd79b189876e59214098b3c84b67552b81d079e9b45def15ddc84e8",
+    "서버\\웹자료.py": "6ba0bbd0fc309e56f1dae056c80dbf119c5b75e91268f7ab3bc002e3043a9d42",
+    "서버\\웹자료저장소.py": "5a7d7fa231631a64ddb5da283a8f27231b440e106982a0e99f8795379c030d04",
+    "서버\\저장소.py": "bff9ea9d64fff72203c57ae1bf4f4045db2dc084e16241309855ecfb0a00db8c",
+    "서버\\접근경계.py": "69b71b4bf821c31cea1964af9b8058c4a5071fe263ba97fd3a460742dd5e6890",
+    "서버\\호출예산.py": "42216cb8f6fe9e36602214a7c01079b157ddcb7c8a56ca6434fc6b5d18366bfb",
+    "서버\\활동기록.py": "a9bbd77a72954d6e339fb8edd61038b3432d23ed76cbc3081e750c7078ea186a",
+    "pyproject.toml": "b64675b70e30f366ba7923cd43560dfcb910f23ab468158cb8c65df40719ee98",
+    "테스트\\테스트_실제모델.py": "e6fc689327be9c0cc62baaf50c563a31bf6718712bb8589ddcc740a5542a1a20",
+    "테스트\\테스트_실제연구제어.py": "c5ecb36df01b37ae43f3e6ddba8ce2314b7b2ba911bc84275e5ecbe8b5624b71",
+    "테스트\\테스트_웹연구.py": "fec881c1a4f7e2a3d6390610766344f0f1bebbbe251e03328f3cbc4f0b6f71f7",
+    "테스트\\테스트_웹통합.py": "085ddf5a3940c6061f59537dab2f54dc71efcefb50e44f0bdc58ff56e5bd1c28",
+    "테스트\\테스트_연구앱.py": "b2eac5c60d45cecb5f492a6a9323e1d9fc7279b7b4461b00b6d3b7383ce3a3d9",
+    "테스트\\테스트_삭제후기록차단.py": "9c59e588ca353ec01aca4b2c4a4f8d498fb28587b122ecbd45d03edfc09fa3a8",
+    "테스트\\테스트_보고서품질.py": "cffd3a3a27dd1bc74ab82feea1ad085227bbcc9677d50f36d947087ccff10dfc"
+  },
+  "source_hashes_after": {
+    "서버\\교안연구.py": "0bf66c70a4a593bcb034dbada00233631c434e6a90046a9e4d8c3610f1d14c0e",
+    "서버\\명령해석.py": "a8bb23168a535dc9a40dac63ad0299e932328cfccb6a3a2950e960cdb2ad9a0c",
+    "서버\\모델대역.py": "89672e64a3556ed448042859d87b5105b91f27938c9b17ecf064f2ec8a13824e",
+    "서버\\보고서근거.py": "f7b90809905cd10fcfeccf34be17a98b517249c2e422af806bf98c749082136e",
+    "서버\\보고서도식.py": "ddf5c42d46bc86dfe883714ffb5f8666c765a541142acf26febca4f1651ced48",
+    "서버\\보고서변환.py": "6dbd31927da7a23e2f6651605274e0df3127db5ae7ae460c65ab6e4331d729fc",
+    "서버\\보고서표현.py": "826063df92b15d394717fe962049426a71e64e6c96e4ee899f8ce3a24b94e2e8",
+    "서버\\보고서품질.py": "2a7780e82890b4d2c6753d2b6ddacdf9b92d2e3794bf5898db343f72dec033a7",
+    "서버\\시험문서.py": "9a7e03ed34e0eb19dfa93b6f2b14a79074af3a7f22f33c393cefd72e74009ca3",
+    "서버\\실제모델.py": "80ae3bfda7725342699acc38b0455f8bed8b72e5494a8f760501543ee53ff766",
+    "서버\\실제연구제어.py": "93fc05e1b2b0d53ed44c07a33722195a28274afab8e26ae863b017c161ed706e",
+    "서버\\실행삭제.py": "1c0d2fc411355595efe20f177c0e4ecabea440201c9732193664fe90c70b2b9b",
+    "서버\\실행제어.py": "6fe218510f555c41f7e362ed0e763d8b2106170affb6b0edefc611382f23ea7a",
+    "서버\\앱.py": "c0e2ac3d3e4d1ce220df4fa4a0233349c273e60c2c4f15a0072beeca2324bc74",
+    "서버\\야후결과파서.py": "64e602c20a5df7081fac1bc8828ba40e75715a71ad539c741530ab6a7f338ed7",
+    "서버\\연구그래프.py": "9ecff4240b5011da08c2c2b293e9d49f2ca660caacd48241e6ee895f58a150ad",
+    "서버\\연구앱.py": "c4d36470f42fc5a38c9952e05c204a5078f8f57d4e205e0cdc35aafae3fdb548",
+    "서버\\웹계약.py": "7a1dfba4d73a7755c7801a04e5c2794f619e2ecd03b4526a9e94c77d0e1afbcb",
+    "서버\\웹연구.py": "c76295547bd79b189876e59214098b3c84b67552b81d079e9b45def15ddc84e8",
+    "서버\\웹자료.py": "6ba0bbd0fc309e56f1dae056c80dbf119c5b75e91268f7ab3bc002e3043a9d42",
+    "서버\\웹자료저장소.py": "5a7d7fa231631a64ddb5da283a8f27231b440e106982a0e99f8795379c030d04",
+    "서버\\저장소.py": "bff9ea9d64fff72203c57ae1bf4f4045db2dc084e16241309855ecfb0a00db8c",
+    "서버\\접근경계.py": "69b71b4bf821c31cea1964af9b8058c4a5071fe263ba97fd3a460742dd5e6890",
+    "서버\\호출예산.py": "42216cb8f6fe9e36602214a7c01079b157ddcb7c8a56ca6434fc6b5d18366bfb",
+    "서버\\활동기록.py": "a9bbd77a72954d6e339fb8edd61038b3432d23ed76cbc3081e750c7078ea186a",
+    "pyproject.toml": "b64675b70e30f366ba7923cd43560dfcb910f23ab468158cb8c65df40719ee98",
+    "테스트\\테스트_실제모델.py": "e6fc689327be9c0cc62baaf50c563a31bf6718712bb8589ddcc740a5542a1a20",
+    "테스트\\테스트_실제연구제어.py": "c5ecb36df01b37ae43f3e6ddba8ce2314b7b2ba911bc84275e5ecbe8b5624b71",
+    "테스트\\테스트_웹연구.py": "fec881c1a4f7e2a3d6390610766344f0f1bebbbe251e03328f3cbc4f0b6f71f7",
+    "테스트\\테스트_웹통합.py": "085ddf5a3940c6061f59537dab2f54dc71efcefb50e44f0bdc58ff56e5bd1c28",
+    "테스트\\테스트_연구앱.py": "b2eac5c60d45cecb5f492a6a9323e1d9fc7279b7b4461b00b6d3b7383ce3a3d9",
+    "테스트\\테스트_삭제후기록차단.py": "9c59e588ca353ec01aca4b2c4a4f8d498fb28587b122ecbd45d03edfc09fa3a8",
+    "테스트\\테스트_보고서품질.py": "cffd3a3a27dd1bc74ab82feea1ad085227bbcc9677d50f36d947087ccff10dfc"
+  },
+  "source_hashes_unchanged": true,
+  "audit": {
+    "external_socket_attempts": 0,
+    "forbidden_file_attempts": 0,
+    "stdlib_asyncio_socketpair": 178
+  },
+  "evidence_level": "explicit model/HTTP doubles, real SDK/service/SQLite/compiler; no real provider/schema acceptance/semantic quality claim"
+}

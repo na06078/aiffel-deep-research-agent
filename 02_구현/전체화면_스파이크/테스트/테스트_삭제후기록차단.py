@@ -94,7 +94,13 @@ async def test_구간초안대기중_삭제는_늦은원응답과_조립결과�
                 assert kwargs["response_schema"]["properties"]["근거목록ID"]["enum"] == [
                     catalog["evidence_set_id"]
                 ]
-                assert json.loads(response["content"])["근거목록ID"] == catalog["evidence_set_id"]
+                raw = json.loads(response["content"])
+                assert raw["근거목록ID"] == catalog["evidence_set_id"]
+                assert all(type(s) is str for s in raw["문장"])
+                assert raw["근거관계"] == [
+                    {"문장번호": 1, "근거구간": catalog["evidence"][0]["id"]}
+                ]
+                assert kwargs["response_schema"]["properties"]["근거관계"]["maxItems"] == 16
                 self.entered.set()
                 await self.release.wait()
             return response

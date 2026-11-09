@@ -106,6 +106,7 @@ def prepare(*, work=WORK):
     )
     result = {
         "mode": "prepare",
+        "draft_protocol": request.inputs["draft_protocol"],
         "model": MODEL,
         "live_verified": False,
         "observed_attempts": 0,
@@ -248,7 +249,7 @@ async def run_probe(*, model, work=WORK):
         "observed_attempts": 0,
         "source_hashes": manifest(),
         "live_verified": False,
-        "draft_protocol": "short-number-json-schema-v1",
+        "draft_protocol": None,
         "draft_schema_received": False,
     }
     attempts, receipts = [], []
@@ -335,6 +336,7 @@ async def run_probe(*, model, work=WORK):
         save(work, "입력준비.json", data)
         sources = {"임오군란": corpus.docs["임오군란"]}
         request = build_draft_request(data["assignment"], data["notes"], sources)
+        result["draft_protocol"] = request.inputs["draft_protocol"]
         save(
             work,
             "입력준비.json",

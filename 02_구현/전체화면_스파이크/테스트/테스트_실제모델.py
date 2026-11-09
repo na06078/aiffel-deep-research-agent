@@ -569,16 +569,14 @@ def test_실제builder_schema의_정수enum이_SDK_HTTP까지_동일하다(tmp_p
     )
     catalog = json.loads(request.prompts[1])
     schema = request.response_schema
+    # §29.10: 전체 관계 수의 상한은 문장별 상한이 아니라 루트 배열에 둔다.
+    assert schema["properties"].get("근거관계", {}).get("maxItems") == 16
     sent = []
     content = json.dumps(
         {
             "근거목록ID": catalog["evidence_set_id"],
-            "문장": [
-                {
-                    "내용": "자료에 기록된 사건을 정리한다.",
-                    "근거구간": [catalog["evidence"][0]["id"]],
-                }
-            ],
+            "문장": ["자료에 기록된 사건을 정리한다."],
+            "근거관계": [{"문장번호": 1, "근거구간": catalog["evidence"][0]["id"]}],
             "충분": True,
             "부족": "",
         },
@@ -607,9 +605,30 @@ def test_실제builder_schema의_정수enum이_SDK_HTTP까지_동일하다(tmp_p
         "type": "json_schema",
         "json_schema": {"name": "grounded_section", "strict": True, "schema": schema},
     }
-    assert actual["json_schema"]["schema"]["properties"]["문장"]["items"]["properties"]["근거구간"][
-        "items"
+    assert actual["json_schema"]["schema"]["properties"]["근거관계"]["items"]["properties"][
+        "근거구간"
     ]["enum"] == [e["id"] for e in catalog["evidence"]]
+    carrier = actual["json_schema"]["schema"]
+    assert carrier["additionalProperties"] is False
+    assert (
+        set(carrier["required"])
+        == set(carrier["properties"])
+        == {"근거목록ID", "문장", "근거관계", "충분", "부족"}
+    )
+    assert carrier["properties"]["문장"] == {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 12,
+        "items": {"type": "string"},
+    }
+    relations = carrier["properties"]["근거관계"]
+    assert relations["minItems"] == 0 and relations["maxItems"] == 16
+    assert relations["items"]["additionalProperties"] is False
+    assert set(relations["items"]["required"]) == {"문장번호", "근거구간"}
+    assert relations["items"]["properties"]["문장번호"] == {
+        "type": "integer",
+        "enum": list(range(1, 13)),
+    }
     assert all(type(e["id"]) is int for e in catalog["evidence"])
 
 

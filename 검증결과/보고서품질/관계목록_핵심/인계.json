@@ -1,0 +1,50 @@
+{
+  "scope": "§29.10 순수 코어·명시 유닛 단일 파일; 실제 모델 품질 미검증",
+  "command": "PYTHONDONTWRITEBYTECODE=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\관계목록\\핵심\\핵심검증.py\"",
+  "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크",
+  "expected_tests": 28,
+  "tests_run": 28,
+  "successful_subtests": 55,
+  "failed_subtests": 0,
+  "failures": 0,
+  "errors": 0,
+  "passed": true,
+  "sha256": {
+    "02_구현\\전체화면_스파이크\\서버\\보고서근거.py": "f7b90809905cd10fcfeccf34be17a98b517249c2e422af806bf98c749082136e",
+    "02_구현\\전체화면_스파이크\\테스트\\테스트_보고서근거.py": "1c4aefaca69c30ed6829e44d83107b59c4733b0ea406b6ee6f274a009a28d417"
+  },
+  "observed_red": [
+    {
+      "test": "test_detached_strict_schema_and_schema_in_input_budget",
+      "assertion": "required root missing 근거관계",
+      "failures": 1
+    },
+    {
+      "test": "test_flat_single_claim_materialization",
+      "assertion": "valid flat relation rejected: span response: schema",
+      "failures": 1
+    },
+    {
+      "test": "test_protocol_token_and_scope_prompt",
+      "assertion": "new request token equals independently calculated old token",
+      "failures": 1
+    }
+  ],
+  "setup_incidents": [
+    "파일 overwrite guard 거절 후 전체 대상 patch 사용; 파일 미변경",
+    "정상 flat 입력 거절을 assertion으로 명시한 뒤 RED 재실행",
+    "토큰 부재 필드 assertion 대신 구형 토큰 동일성 행동 assertion을 선행하여 RED 재실행",
+    "가시 Markdown의 문단 개행 기대값을 단일 줄바꿈으로 수정; 제품 정규화 미변경"
+  ],
+  "forbidden_boundary_actions": 0,
+  "external_provider_calls": 0,
+  "auth_or_ledger_reads_or_writes": 0,
+  "git_commands": 0,
+  "excluded": [
+    "전체 테스트",
+    "frontend",
+    "SDK/통합 대역(다른 작업자 소유)",
+    "실제 모델·네트워크·auth·ledger",
+    "보호 원 응답/실행 데이터"
+  ]
+}

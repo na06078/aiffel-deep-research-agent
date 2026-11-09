@@ -1,0 +1,8 @@
+{
+  "source_files": 62,
+  "drift": [],
+  "junit_cases": 603,
+  "cli_summary": "603 passed, 55 subtests passed in 108.36s (0:01:48)",
+  "excluded_in_progress": "Only new end-to-end verifier source owned by third worker; all product/server/tests and main probe/driver/block scripts frozen and included.",
+  "actual_provider_calls": 0
+}

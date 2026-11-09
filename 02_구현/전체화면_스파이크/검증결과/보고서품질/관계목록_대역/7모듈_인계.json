@@ -1,0 +1,55 @@
+{
+  "결과": "일곱 직접 호출자/대역/SDK 테스트 모듈의 §29.10 평면 관계 전환 완료",
+  "수정_테스트": ["테스트_실제모델.py", "테스트_실제연구제어.py", "테스트_웹연구.py", "테스트_웹통합.py", "테스트_연구앱.py", "테스트_삭제후기록차단.py", "테스트_보고서품질.py"],
+  "제품수정": [],
+  "검증명령": "R/.venv/Scripts/python.exe 검증결과/보고서품질/관계목록_대역/7모듈_실행.py (cwd=I)",
+  "정확한_pytest_argv_및_노드ID_해시": "7모듈_검증.json",
+  "최종_검증": {
+    "collected": 217,
+    "executed_call": 217,
+    "passed_call": 217,
+    "junit_testcases": 217,
+    "failures": 0,
+    "errors": 0,
+    "모듈별": {"실제모델": 70, "실제연구제어": 46, "웹연구": 35, "웹통합": 1, "연구앱": 1, "삭제후기록차단": 29, "보고서품질": 35},
+    "선택모듈_제외_또는_skip": [],
+    "server_py_전체와_7모듈과_pyproject_실행전후_SHA256_동일": true,
+    "로그": "7모듈_실행.log",
+    "JUnit": "7모듈_junit.xml"
+  },
+  "RED": {
+    "대상": "테스트_실제모델.py::test_실제builder_schema의_정수enum이_SDK_HTTP까지_동일하다",
+    "방법": "대역 마이그레이션 전에 루트 근거관계.maxItems == 16 단언만 먼저 추가하고 단일 테스트 실행",
+    "실제결과": "1 failed in 0.64s; AssertionError: assert None == 16",
+    "실패위치": "기존 중첩 스키마에 루트 근거관계가 없어 실제 builder 생성 결과의 전역 상한 단언에서 실패",
+    "범위": "이 전역 스키마 단언의 RED→GREEN을 관측했다. 이후 추가한 16/17/19 전체경로 6개 사례는 별도의 사전 RED로 주장하지 않는다."
+  },
+  "GREEN": {
+    "초기_스모크": "SDK carrier + 실제 로컬 6노드 경로: 2 passed in 1.69s",
+    "경계_단독": "16/17/19 × local/web: 6 passed in 3.23s",
+    "최종": "217 passed in 66.58s; 경고 없음"
+  },
+  "계약_매핑": {
+    "SDK전달": "실제builder_schema의_정수enum이_SDK_HTTP까지_동일하다: native response_format carrier 전체 동일, root5 required/closed, 문자열 문장1..12, 관계0..16, 관계 object required/closed, 제공된 정수enum",
+    "기존SDK": "70개 전체: 402/429/timeout, reserve/callback/no fallback, None 경로, invalidSchema와 NUM_SCHEMA_01 root/nested 8개, mutation copies, 40/41 및 100/101, 불명 예약 재시작 유지",
+    "평면관계경계": "평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다: 16개는 실제 서비스/컴파일러/정본/모든 backend gate 통과, 17/19개는 원응답 관계 수 그대로 보존하며 reference limit 거부, 추가 synthesize/semantic_review/출판 없음",
+    "반복참조": "경계 사례에서 8개 이상 문장에 같은 두 제시 구간 반복 연결; 단일 주장 복수 구간은 보고서품질의 떨어진 원문구간 회귀 유지",
+    "원래한도": "로컬4절2라운드_최대55모델호출 및 웹4절2라운드_16검색24본문_63모델상한, 라운드마다3건_최대2회 원형 유지 통과",
+    "수명과삭제": "삭제후기록차단29개 전체, 개입/취소/새revision/원문버전변경/동시평가 및 늦은쓰기 차단 기존 단언 유지",
+    "읽기": "receipt 변조13개, 앞20000자와 미독/외부excerpt, fetch/note/source receipt, read3/2 및 메모 유지 통과",
+    "오류지점유지": "missing은 근거관계 root 삭제; unknown은 관계.근거구간 변경; unread/stale은 기존 token 변조 의미 유지; bool 오류는 정상 실제payload의 충분만 문자열로 변조하여 이전 중첩 스키마 조기거절이 오류를 가리지 않게 개선",
+    "정본품질": "canonical quote/date/hidden Markdown 음성 논리 변경 없음; 앱 정본/다운로드/저널 native schema 전달 및 재호출0 유지"
+  },
+  "안전": {
+    "실제제공자호출": 0,
+    "실제자격증명_장부사용": 0,
+    "범위": "명시적 모델/HTTP 대역과 격리된 fixture SQLite만 사용; 실제 env/03_data/실제 장부 조회 또는 수정 없음",
+    "최종_audit_external_socket_attempts": 0,
+    "최종_audit_forbidden_file_attempts": 0,
+    "최종_audit_stdlib_asyncio_socketpair": 178,
+    "Windows예외": "첫 audit 실행에서 Windows asyncio의 표준 socket._fallback_socketpair를 잘못 차단했다. 해당 실행은 제품 회귀가 아니라 runner scaffold 실패이다. 실제 traceback 확인 후 표준 코드 객체, BaseProactorEventLoop._make_self_pipe 호출자, csock identity, lsock 실제주소, 127.0.0.1 모두 일치하는 내부 자기깨우기 연결만 허용했다. 첫 실패 log/json/xml은 socketpair차단_ 접두사로 보존. 일반 loopback 연결은 허용하지 않는다.",
+    "Git_설치_전체suite_프론트_렌더러": "실행하지 않음"
+  },
+  "미확인": ["실제 모델 응답/사실성/의미판정 능력", "실제 제공자의 native JSON Schema 수락과 강제 준수", "부모 소유 driver/helper/문서 및 다른 테스트", "전체 테스트 suite"],
+  "주의": "native schema는 진실성을 증명하지 않는다. fake가 provider native constraint를 자동 재현하지 않으므로 17/19 응답은 실제 materializer에서 직접 거부되는지 검증했다."
+}

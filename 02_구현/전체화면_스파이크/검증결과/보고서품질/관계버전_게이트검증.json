@@ -1,0 +1,18 @@
+{
+  "old_native_v1_rejected_at_protocol_guard": true,
+  "requests_delta": 0,
+  "new_run_delta": 0,
+  "budget_preserved": {
+    "attempt_count": 149,
+    "max_attempts": 185,
+    "remaining_attempts": 36,
+    "spent_usd": 0.28995125,
+    "reserved_usd": 0.1042923,
+    "max_usd": 2.0,
+    "input_tokens": 660965,
+    "output_tokens": 103925,
+    "unknown_count": 4
+  },
+  "additional_live_approval": false,
+  "manifest_scope": "main verifier changes only; no Model request"
+}

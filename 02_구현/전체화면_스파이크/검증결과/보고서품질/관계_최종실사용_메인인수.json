@@ -1,0 +1,59 @@
+{
+  "passed": true,
+  "proof": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\관계목록_실사용\\fff3c88e595a49d1a2eab6f84d4a2a78\\확인.json",
+  "checks": 41,
+  "double_calls": 17,
+  "operations": {
+    "plan": 1,
+    "read_one": 4,
+    "select": 5,
+    "draft_section": 5,
+    "synthesize": 1,
+    "semantic_review": 1
+  },
+  "screenshots": [
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\관계목록_실사용\\fff3c88e595a49d1a2eab6f84d4a2a78\\완료_문서제출.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\관계목록_실사용\\fff3c88e595a49d1a2eab6f84d4a2a78\\HTML_파일_재열기.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\관계목록_실사용\\fff3c88e595a49d1a2eab6f84d4a2a78\\PDF_페이지_1.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\관계목록_실사용\\fff3c88e595a49d1a2eab6f84d4a2a78\\PDF_페이지_3.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\관계목록_실사용\\fff3c88e595a49d1a2eab6f84d4a2a78\\도식_1440x900.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\관계목록_실사용\\fff3c88e595a49d1a2eab6f84d4a2a78\\도식_390x844.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\관계목록_실사용\\fff3c88e595a49d1a2eab6f84d4a2a78\\도식_844x390.png"
+  ],
+  "downloads": {
+    "md": {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\관계목록_실사용\\fff3c88e595a49d1a2eab6f84d4a2a78\\🧾 명시적대역_보고서.md",
+      "sha256": "35b3aee611daeece3de0814e8300810ecccdd1e71fce5502218350a8b5737df8",
+      "bytes": 10335
+    },
+    "html": {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\관계목록_실사용\\fff3c88e595a49d1a2eab6f84d4a2a78\\명시적대역_보고서.html",
+      "sha256": "3ed779267989fa029afd84ffde991af522d992519a22f9dfa8ce69037a59819d",
+      "bytes": 13158
+    },
+    "pdf": {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\관계목록_실사용\\fff3c88e595a49d1a2eab6f84d4a2a78\\명시적대역_보고서.pdf",
+      "sha256": "c82c2266f5ad47c994c3f31e85e52ba784930ec3152f877557ffe8677e66c3bc",
+      "bytes": 69149
+    }
+  },
+  "pdf_pages": 3,
+  "source_hashes_verified": 37,
+  "block_ui": {
+    "passed": true,
+    "evidence": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\차단화면\\bf4497043f82453fbbfc5dd3807e6dde",
+    "counts": {
+      "checks": 48,
+      "passed": 48,
+      "cases": 2,
+      "screenshots": 8
+    },
+    "failure": null,
+    "listener_closed": true
+  },
+  "real_ledger_unchanged": true,
+  "actual_requests_added": 0,
+  "real_attempts": 149,
+  "real_cap": 185,
+  "real_unknown": 4
+}
