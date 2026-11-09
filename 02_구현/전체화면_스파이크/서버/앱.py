@@ -55,6 +55,12 @@ class DeleteRun(BaseModel):
     confirm_run_id: str
 
 
+class Correction(BaseModel):
+    model_config = {"extra": "forbid", "strict": True}
+    control_revision: int = Field(gt=0)
+    client_request_id: str = Field(min_length=1, max_length=200)
+
+
 class ExportRequest(BaseModel):
     format: Literal["html", "pdf"]
     source_report_hash: str = Field(pattern=r"^[0-9a-f]{64}$")
@@ -199,6 +205,13 @@ def create_app(
     @app.get("/api/spike/runs/{run_id}/archive")
     async def run_archive(run_id: str):
         return app.state.service.repo.archive(run_id)
+
+    @app.post("/api/spike/runs/{run_id}/correction", status_code=202)
+    async def correction(run_id: str, body: Correction):
+        service = app.state.service
+        if service.repo.provider != "openai" or not callable(getattr(service, "request_correction", None)):
+            raise ApiError(409, "correction_unavailable", "실제 로컬 연구에서만 보완할 수 있습니다.")
+        return service.request_correction(run_id, body.control_revision, body.client_request_id)
 
     @app.get("/api/spike/runs/{run_id}/delete-preview")
     async def run_delete_preview(run_id: str):

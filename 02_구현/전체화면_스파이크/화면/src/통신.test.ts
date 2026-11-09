@@ -1,6 +1,16 @@
 import { it, expect, vi, afterEach } from 'vitest';
 import { sendCommand, api } from './통신';
 afterEach(()=>vi.unstubAllGlobals());
+it('correction은 고정 revision과 요청 ID를 POST하고 접수·지원 없음 오류를 그대로 유지한다',async()=>{
+ const body={run_id:'A/B',control_revision:2,source_revision:1,status:'running',max_model_calls:2};
+ const fetcher=vi.fn().mockResolvedValueOnce(new Response(JSON.stringify(body),{status:202})).mockResolvedValueOnce(new Response(JSON.stringify({error:{code:'correction_unsupported',message:'지원하지 않는 서비스'}}),{status:409}));vi.stubGlobal('fetch',fetcher);
+ const call=api.correction;
+ const result=await call('A/B',1,'fixed-request');
+ expect(fetcher).toHaveBeenCalledExactlyOnceWith('/api/spike/runs/A%2FB/correction',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({control_revision:1,client_request_id:'fixed-request'})});
+ expect(result).toEqual(body);
+ await expect(call('A/B',1,'fixed-request')).rejects.toThrow('correction_unsupported: 지원하지 않는 서비스');
+ expect(fetcher).toHaveBeenCalledTimes(2);
+});
 it('presentation은 정본 해시와 렌더러 버전을 GET으로 보내며 오류 사유를 유지한다',async()=>{
  const body={report_id:'A/B',html:'<!doctype html>',warnings:[],links:[]};
  const fetcher=vi.fn().mockResolvedValueOnce(new Response(JSON.stringify(body))).mockResolvedValueOnce(new Response(JSON.stringify({error:{code:'report_hash_mismatch',message:'정본 불일치'}}),{status:409}));vi.stubGlobal('fetch',fetcher);

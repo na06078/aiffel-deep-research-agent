@@ -1,0 +1,275 @@
+{
+  "scope": "기술 명세29.11 수동 단1회 보완 화면/API/타입. 실제 서버·모델 호출 없음.",
+  "modified_sources": [
+    "02_구현\\전체화면_스파이크\\화면\\src\\앱.tsx",
+    "02_구현\\전체화면_스파이크\\화면\\src\\실행실패.tsx",
+    "02_구현\\전체화면_스파이크\\화면\\src\\실행실패.test.tsx",
+    "02_구현\\전체화면_스파이크\\화면\\src\\통신.ts",
+    "02_구현\\전체화면_스파이크\\화면\\src\\통신.test.ts",
+    "02_구현\\전체화면_스파이크\\화면\\src\\계약.ts"
+  ],
+  "source_sha256": {
+    "02_구현\\전체화면_스파이크\\화면\\src\\앱.tsx": "007eb13f3d7552e25843d11f462ce555dc4297f5b40ce5f5599c4dd1f1bbcdef",
+    "02_구현\\전체화면_스파이크\\화면\\src\\실행실패.tsx": "f6cf333bb21d8043beb58f58eac4ae15b52307a7816fc79d2396025774fc0ea5",
+    "02_구현\\전체화면_스파이크\\화면\\src\\실행실패.test.tsx": "9e2349f9ebb39a327fc5f53ce7a38d3da8425fa04dce4e81fbdcfdabbfabdb2b",
+    "02_구현\\전체화면_스파이크\\화면\\src\\통신.ts": "5c45dde463cb3fd8cca9b8cff16df6d579c21a05d258379bf1d3484870cb278c",
+    "02_구현\\전체화면_스파이크\\화면\\src\\통신.test.ts": "11e3e6c5f610cae9aacf86a0831274bb02d3610f8da828d69201e3938eef7926",
+    "02_구현\\전체화면_스파이크\\화면\\src\\계약.ts": "81b7652a36a912991c1b719a3224611a2869967729daf2a45967d422bf06b495"
+  },
+  "app_two_bindings_only_verified": true,
+  "tests": {
+    "executed_files": [
+      "src/실행실패.test.tsx",
+      "src/통신.test.ts"
+    ],
+    "total": 24,
+    "passed": 24,
+    "failed": 0,
+    "baseline_tests": 15,
+    "added_tests": 9,
+    "boundary": "no-DOM hook harness로 실제 RunFailureNotice 클릭→api.correction→mock fetch 검증 및 SSR 이스케이프/노출 검사. 앱 실제 호출부 2곳은 원문 검사.",
+    "red_green": [
+      {
+        "label": "01_RED_수동버튼",
+        "command": [
+          "C:/nvm4w/nodejs/node.exe",
+          "node_modules/vitest/vitest.mjs",
+          "run",
+          "src/실행실패.test.tsx"
+        ],
+        "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면",
+        "exit_code": 1
+      },
+      {
+        "label": "02_GREEN_수동버튼",
+        "command": [
+          "C:/nvm4w/nodejs/node.exe",
+          "node_modules/vitest/vitest.mjs",
+          "run",
+          "src/실행실패.test.tsx"
+        ],
+        "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면",
+        "exit_code": 0
+      },
+      {
+        "label": "03_RED_교정API",
+        "command": [
+          "C:/nvm4w/nodejs/node.exe",
+          "node_modules/vitest/vitest.mjs",
+          "run",
+          "src/통신.test.ts"
+        ],
+        "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면",
+        "exit_code": 1
+      },
+      {
+        "label": "04_GREEN_교정API",
+        "command": [
+          "C:/nvm4w/nodejs/node.exe",
+          "node_modules/vitest/vitest.mjs",
+          "run",
+          "src/통신.test.ts"
+        ],
+        "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면",
+        "exit_code": 0
+      },
+      {
+        "label": "05_RED_노출경계",
+        "command": [
+          "C:/nvm4w/nodejs/node.exe",
+          "node_modules/vitest/vitest.mjs",
+          "run",
+          "src/실행실패.test.tsx"
+        ],
+        "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면",
+        "exit_code": 1
+      },
+      {
+        "label": "06_GREEN_노출경계",
+        "command": [
+          "C:/nvm4w/nodejs/node.exe",
+          "node_modules/vitest/vitest.mjs",
+          "run",
+          "src/실행실패.test.tsx"
+        ],
+        "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면",
+        "exit_code": 0
+      },
+      {
+        "label": "07_RED_수동POST",
+        "command": [
+          "C:/nvm4w/nodejs/node.exe",
+          "node_modules/vitest/vitest.mjs",
+          "run",
+          "src/실행실패.test.tsx"
+        ],
+        "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면",
+        "exit_code": 1
+      },
+      {
+        "label": "08_GREEN_수동POST",
+        "command": [
+          "C:/nvm4w/nodejs/node.exe",
+          "node_modules/vitest/vitest.mjs",
+          "run",
+          "src/실행실패.test.tsx"
+        ],
+        "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면",
+        "exit_code": 0
+      },
+      {
+        "label": "09_RED_보완상태",
+        "command": [
+          "C:/nvm4w/nodejs/node.exe",
+          "node_modules/vitest/vitest.mjs",
+          "run",
+          "src/실행실패.test.tsx"
+        ],
+        "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면",
+        "exit_code": 1
+      },
+      {
+        "label": "10_GREEN_보완상태",
+        "command": [
+          "C:/nvm4w/nodejs/node.exe",
+          "node_modules/vitest/vitest.mjs",
+          "run",
+          "src/실행실패.test.tsx",
+          "src/통신.test.ts"
+        ],
+        "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면",
+        "exit_code": 0
+      },
+      {
+        "label": "11_전체타입검사",
+        "command": [
+          "C:/nvm4w/nodejs/node.exe",
+          "node_modules/typescript/bin/tsc",
+          "--noEmit"
+        ],
+        "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면",
+        "exit_code": 0
+      },
+      {
+        "label": "12_최종대상회귀",
+        "command": [
+          "C:/nvm4w/nodejs/node.exe",
+          "node_modules/vitest/vitest.mjs",
+          "run",
+          "src/실행실패.test.tsx",
+          "src/통신.test.ts",
+          "--reporter=default",
+          "--reporter=json",
+          "--outputFile=C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\교정_화면\\대상회귀.json"
+        ],
+        "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면",
+        "exit_code": 0
+      },
+      {
+        "label": "13_최종전체타입검사",
+        "command": [
+          "C:/nvm4w/nodejs/node.exe",
+          "node_modules/typescript/bin/tsc",
+          "--noEmit"
+        ],
+        "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면",
+        "exit_code": 0
+      }
+    ]
+  },
+  "candidate": {
+    "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\교정화면_후보",
+    "files_count": 25,
+    "file_sha256": {
+      "assets\\browserAll-D5l8sSu2.js": "43633700cc9fdd9a9a7556fa57a323d43eb93fe783d1052a13a556fe575434d2",
+      "assets\\Cache-CTROkX_m.js": "1362d81633b62e495b282f17617beb74083f16064864156e04949a07fa9ae0cf",
+      "assets\\CanvasPool-DzuCm1vb.js": "edde6aa9084e7f5958ad3f9a1437ea82c2406913957ef01be12296ca951373f1",
+      "assets\\canvasUtils-U4WZZEj-.js": "c0a01018402f30d7e9ad35ae43fafc8c490899236e6f28c8c4c8095fd066d448",
+      "assets\\Filter-vpEaIMwd.js": "e802a7ce1c4d21948131c5d247ee9db7f33376b17678d973d22ae0296f1935fc",
+      "assets\\GCManagedHash-DCvVepMX.js": "f9c36545f614350af3b653bd4e603e590afad27332ad79133fb661180406b312",
+      "assets\\getTexelRangeRects-Bdv1rQ51.js": "baa0c3c95a387acb0bf72e4b440a0ffc947f8bfcb34bfd462c32a10bbe53c665",
+      "assets\\getTextureBatchBindGroup-CEQHRttu.js": "f820ad942542bd39943bfcbc6073fa6d5237ee8fe574a36f8a4d22ae67c9558a",
+      "assets\\GraphicsContext-48tzdr3Q.js": "26553fe11bde03fcc13af77e92b26890e5b7f7ec1b791ad26634a133b670a7dc",
+      "assets\\index-B4pzZVZ8.js": "aa8ab9fd8ca7bbbac783443beddaed3b98d2c363b7152bc451ac6367322bdce3",
+      "assets\\index-CcRZevJm.css": "537ebc4f0880ee2c9ee9931feeabaaba2b581c6814c9f2ce0d25f14132e8de93",
+      "assets\\init-DoUXYMOj.js": "8aa920d822fab365c3d8f4dff6dd7daa2ef6d7d8979f4156b928684d79ac0af5",
+      "assets\\RenderTargetSystem-BK2ifv01.js": "76151e37944ac1989dd3632f63fdc2a7f8b897cd226583baa060db0c71ccd6b0",
+      "assets\\webworkerAll-CzAbfZND.js": "493c81f849d8ff03bc49808bf0cdce4e606282850722ea648428efab2fe5ea9c",
+      "index.html": "dd68659e8342851b0d3f141031d9cf308af0e5f171c3bace37a1bbfc920613b3",
+      "에셋\\마을_타일.png": "bea430eb9a11074b349587978f7eae8ea9b030a38a046bff240d662e5cb45b17",
+      "에셋\\에셋_목록.json": "51306343fb1939344783559b14e70bb4bf9ffbdf101fc51b40cacfcedad91aad",
+      "에셋\\인물_라이선스.txt": "97f92c9d60b7ba92e3d08d5061b614abcd01629c9bfcd26ca7b6c6c04e67ce58",
+      "에셋\\조사관_1.png": "441290e7e62dfed6359b6fa3d94b07431208a6c99fefdb54e351286f6e464c97",
+      "에셋\\조사관_2.png": "6f75115baf28df20b8a04bf9ef0d5608f4e91d306fa3bd198515174c2f05fe5e",
+      "에셋\\조사관_3.png": "8a509790890837c4c378209f9aa24aebb54c39a4dde290c6581174782b30c0ca",
+      "에셋\\조사관_4.png": "e120fdc8513fbd0c77b0dbc321c45d3e56d4a8b945fc23d7492211874c1a7b1c",
+      "에셋\\조정자.png": "66f739c3b5c8d3890d963d04c7998bd310f1a80c4777d36a70d1e1a1dfcfc6c0",
+      "에셋\\종합자.png": "13b9807ee13c5c1b860fcfdb988312784109b1316cf70570a8ec5e610eaf3f50",
+      "에셋\\타운_라이선스.txt": "587587de795599e3d4795247503c45e023980c5c66b26b90c807909af26b303d"
+    },
+    "index_js": [
+      "/assets/index-B4pzZVZ8.js",
+      "/assets/CanvasPool-DzuCm1vb.js",
+      "/assets/Filter-vpEaIMwd.js",
+      "/assets/canvasUtils-U4WZZEj-.js",
+      "/assets/Cache-CTROkX_m.js",
+      "/assets/GCManagedHash-DCvVepMX.js",
+      "/assets/RenderTargetSystem-BK2ifv01.js",
+      "/assets/getTextureBatchBindGroup-CEQHRttu.js",
+      "/assets/GraphicsContext-48tzdr3Q.js",
+      "/assets/getTexelRangeRects-Bdv1rQ51.js"
+    ],
+    "index_references": {
+      "/assets/index-B4pzZVZ8.js": true,
+      "/assets/CanvasPool-DzuCm1vb.js": true,
+      "/assets/Filter-vpEaIMwd.js": true,
+      "/assets/canvasUtils-U4WZZEj-.js": true,
+      "/assets/Cache-CTROkX_m.js": true,
+      "/assets/GCManagedHash-DCvVepMX.js": true,
+      "/assets/RenderTargetSystem-BK2ifv01.js": true,
+      "/assets/getTextureBatchBindGroup-CEQHRttu.js": true,
+      "/assets/GraphicsContext-48tzdr3Q.js": true,
+      "/assets/getTexelRangeRects-Bdv1rQ51.js": true,
+      "/assets/index-CcRZevJm.css": true
+    },
+    "compiled_correction_button_and_route_verified": true,
+    "build": {
+      "command": [
+        "C:/nvm4w/nodejs/node.exe",
+        "node_modules/vite/bin/vite.js",
+        "build",
+        "--outDir",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\교정화면_후보"
+      ],
+      "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면",
+      "process_id": "proc_f362d9356f61",
+      "exit_code": 0,
+      "transformed_modules": 758,
+      "duration_output": "500ms",
+      "warnings": [
+        "outDir가 project root 밖이므로 자동 비우지 않음. 빌드 전 대상 미존재 확인.",
+        "기존 주 entry 500kB 초과 경고(548.65kB). chunk 분리 범위 밖."
+      ]
+    }
+  },
+  "behavior": [
+    "readOnly 기본 true. 현재 실행에서만 readOnly={replaying}; 과거 상세는 readOnly.",
+    "local·blocked·semantic_review_failed(정상 false/문제1~2)·유효 ID/positive safe integer revision·미게시·미시도만 버튼 노출.",
+    "클릭 시에만 POST. ref pending으로 즉시 중복 클릭 방지. 서버 202는 완료/통과 아닌 접수로 표시.",
+    "같은 컴포넌트의 같은 run/revision HTTP 오류 재시도에 최초 UUID 유지. 자동 재요청 없음.",
+    "API error.code/message를 텍스트로 표시; 검토 지적/초안 미변경.",
+    "서버 correction_state 5개 상태는 읽기 전용 안내와 함께 버튼 미노출.",
+    "실제 고유 문장 매핑/자격/재시도 소비는 서버가 재검증."
+  ],
+  "limits": [
+    "실제 브라우저 DOM/마우스/UI 통합 검증은 메인 담당.",
+    "실제 HTTP 서버·모델·예산·장부·배포 검증 안 함.",
+    "재마운트/브라우저 재시작까지 UUID 영속 저장하지 않음. 서버 correction_state와 멱등성/단1회 소비가 최종 권위. 컴포넌트 내 렌더·오류 재시도는 UUID 고정.",
+    "다른 프런트 파일·백엔드·Git·설치·기존 dist 변경 없음.",
+    "전체 프런트 테스트는 실행하지 않음. 승인된 2파일 회귀와 전체 tsc만 실행."
+  ],
+  "pending_parent": [
+    "백엔드 구현과 통합 후 실제 호출/완료/원고·파일 검증",
+    "교정화면_후보를 사용하여 승인된 사용자 실행본 반영. 과거 hH 후보 대신 이 후보 사용."
+  ]
+}

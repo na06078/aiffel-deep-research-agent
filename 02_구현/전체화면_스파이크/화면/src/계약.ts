@@ -24,7 +24,15 @@ export interface QualitySummary {
   };
 }
 export interface RunFailure { code: string; message: string; actor: string }
+// 기술 명세29.11: 수동 보완은 접수일 뿐 완료/통과가 아니다.
+export interface CorrectionAdmission {
+  run_id:string; control_revision:number; source_revision:number; status:'running'; max_model_calls:2;
+}
+export interface CorrectionState {
+  status:'pending'|'applied'|'passed'|'failed'|'completed'; source_revision:number; max_model_calls:2;
+}
 export interface RunSnapshot {
+  correction_state?: CorrectionState;
   run_id: string;
   question: string;
   control_revision: number;

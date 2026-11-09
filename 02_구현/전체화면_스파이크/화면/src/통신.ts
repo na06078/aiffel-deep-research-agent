@@ -1,5 +1,5 @@
 import {REPORT_RENDERER_VERSION} from './계약';
-import type { ReportPresentation, Admission, Snapshot, EventDetail, Report, ReportExport, ReportExports, ExportFormat, ReleaseOutcome, SourceMode, RunDeletePreview, RunDeleteResult } from './계약';
+import type { CorrectionAdmission, ReportPresentation, Admission, Snapshot, EventDetail, Report, ReportExport, ReportExports, ExportFormat, ReleaseOutcome, SourceMode, RunDeletePreview, RunDeleteResult } from './계약';
 export async function request<T>(path:string,body?:unknown):Promise<T> {
  const response=await fetch(path, body===undefined?undefined:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
  if(!response.ok){const data=await response.json().catch(()=>null);throw new Error(data?.error?`${data.error.code}: ${data.error.message}`:`HTTP ${response.status}`);}
@@ -8,6 +8,7 @@ export async function request<T>(path:string,body?:unknown):Promise<T> {
 export async function sendCommand(text:string,id:string,source_mode?:SourceMode):Promise<Admission> { return request<Admission>('/api/spike/commands',{text,client_request_id:id,...(source_mode===undefined?{}:{source_mode})}); }
 import type {RunArchive} from './시간계약';
 export const api={
+ correction:(id:string,control_revision:number,client_request_id:string)=>request<CorrectionAdmission>(`/api/spike/runs/${encodeURIComponent(id)}/correction`,{control_revision,client_request_id}),
  presentation:(id:string,hash:string)=>request<ReportPresentation>(`/api/spike/reports/${encodeURIComponent(id)}/presentation?source_report_hash=${encodeURIComponent(hash)}&renderer_version=${encodeURIComponent(REPORT_RENDERER_VERSION)}`),
  exports:(id:string)=>request<ReportExports>(`/api/spike/reports/${encodeURIComponent(id)}/exports`),
  createExport:(id:string,format:ExportFormat,hash:string)=>request<ReportExport>(`/api/spike/reports/${encodeURIComponent(id)}/exports`,{format,source_report_hash:hash}),

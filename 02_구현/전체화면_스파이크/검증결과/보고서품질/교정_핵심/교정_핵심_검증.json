@@ -1,0 +1,93 @@
+{
+  "files": [
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서보완.py",
+      "sha256": "8ee5e833b267be4cc3efec4efc064ee6f35bb1539e34a51aaaee32fafcab5851"
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\테스트\\테스트_보고서보완.py",
+      "sha256": "0964533f7a66e41ce671f40d82725f0d2cf18085ebb779b752f852289c8bab71"
+    }
+  ],
+  "tests": [
+    {
+      "command": [
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "테스트/테스트_보고서보완.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "-W",
+        "ignore::pytest.PytestConfigWarning",
+        "--tb=short"
+      ],
+      "exit_code": 0,
+      "evidence": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\교정_핵심\\단위_GREEN.txt"
+    },
+    {
+      "command": [
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "서버/보고서보완.py",
+        "테스트/테스트_보고서보완.py"
+      ],
+      "exit_code": 0,
+      "evidence": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\교정_핵심\\Ruff_check.txt"
+    },
+    {
+      "command": [
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "format",
+        "--check",
+        "--no-cache",
+        "서버/보고서보완.py",
+        "테스트/테스트_보고서보완.py"
+      ],
+      "exit_code": 0,
+      "evidence": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\교정_핵심\\Ruff_format.txt"
+    }
+  ],
+  "observed_red": [
+    {
+      "stage": "positive scaffold behavioral assertion",
+      "result": "1 failed: assert None is not None"
+    },
+    {
+      "stage": "strict response and replacement",
+      "result": "19 failed, 1 passed"
+    },
+    {
+      "stage": "preflight",
+      "result": "9 failed, 28 passed"
+    },
+    {
+      "stage": "section shape and callback boundary",
+      "result": "5 failed, 48 passed"
+    },
+    {
+      "stage": "same-section cascading correction",
+      "result": "1 failed, 53 passed"
+    }
+  ],
+  "green": "54 passed",
+  "real_model_verified": false,
+  "provider_calls": 0,
+  "not_verified": [
+    "real model correction/semantic judgment",
+    "backend/API/UI integration",
+    "final report 2000-character and table/SVG publication checks (caller responsibility)"
+  ],
+  "changes_contract": {
+    "target_id": "int",
+    "section_id": "str",
+    "before": "str",
+    "after": "str"
+  }
+}

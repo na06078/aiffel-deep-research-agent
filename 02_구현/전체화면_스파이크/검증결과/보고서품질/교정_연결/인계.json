@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "test_count": 39,
+  "failures": 0,
+  "errors": 0,
+  "code_sha256": {
+    "서버/실제연구제어.py": "cb98b6b11f26023642090725e98d1bdc4caa0d176088597d50a8759e5c25dc38",
+    "서버/앱.py": "21c396305fc07ccea2ffdb856dc5fd7f0dbbe820a2c114f4aa771c15aa90c017",
+    "테스트/테스트_보고서보완연결.py": "5052e42abd0d677fe19e5234452e4e4ae18d07cdf97dc69c971547c9ec4c7416"
+  },
+  "red_logs": [
+    "RED_개입.log",
+    "RED_복원.log",
+    "RED_원본종료.log",
+    "RED_접수.log",
+    "RED_큐.log"
+  ],
+  "green_log": "GREEN.log",
+  "ruff": "All checks passed!",
+  "actual_provider_calls": 0,
+  "actual_data_reads": 0,
+  "full_suite_run": false,
+  "command": "env -u PYTHONPATH PYTHONNOUSERSITE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false <R>/.venv/Scripts/python.exe -m pytest -p pytest_asyncio.plugin 테스트/테스트_보고서보완연결.py -q --asyncio-mode=auto --basetemp=<R>/.cache/보고서품질_검증/실모델점검/교정_연결/pytest --junitxml=검증결과/보고서품질/교정_연결/GREEN.xml",
+  "unverified": [
+    "실제 모델의 교정/의미 판단",
+    "부모 UI 및 실사용 2회 호출",
+    "전체 회귀"
+  ],
+  "notes": [
+    "접수404, 개입pending/applied, 복원pending, 큐미시작, 누락원본/이전판정202, 시작전종료pending의 행동 RED 후 GREEN",
+    "가드/최대2/실패/삭제 회귀는 첫 실행부터 GREEN이며 모든 매개변수별 별도 RED를 주장하지 않음",
+    "PYTHONPATH에 Hermes Python3.14가 상속되어 최초 수집 실패; 명령 범위 env -u PYTHONPATH로 해결; 전역 설정 변경 없음"
+  ]
+}

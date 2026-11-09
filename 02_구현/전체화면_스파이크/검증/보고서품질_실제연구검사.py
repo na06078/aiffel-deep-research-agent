@@ -52,7 +52,7 @@ def main(args):
 
     initial = get(args.base_url, "/api/spike/snapshot")
     assert initial["provider"] == "openai" and initial["mode"] == "research"
-    assert initial["budget"]["max_attempts"] == 185 and initial["budget"]["max_usd"] == 2
+    assert initial["budget"]["max_attempts"] == 208 and initial["budget"]["max_usd"] == 2
     assert initial["budget"]["unknown_count"] == args.expected_unknown
     result["budget_before"] = initial["budget"]
     if args.submit:
