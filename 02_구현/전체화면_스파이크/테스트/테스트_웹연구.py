@@ -206,6 +206,7 @@ class WebModel:
     def __init__(self, *, long_note=False, bad_first_read=None):
         self.calls = []
         self.notes = {}
+        self.excerpts = {}
         self.long_note = long_note
         # "long" | "empty": 첫 읽기 응답만 메모 길이 계약을 어긴다(나머지는 정상).
         self.bad_first_read = bad_first_read
@@ -236,6 +237,8 @@ class WebModel:
             cards = json.loads(user)
             value = {"문서": cards["candidates"][0]["source_id"] if cards["candidates"] else None}
         elif op == "read_one":
+            sid = user.split("[source_id: ", 1)[1].split("]", 1)[0]
+            self.excerpts[sid] = user.split("]\n", 1)[1][:80]
             self.reads += 1
             if self.long_note or (self.bad_first_read == "long" and self.reads == 1):
                 value = "메모" * 3001
@@ -249,16 +252,31 @@ class WebModel:
 
             # 실제 모델의 관측 동작(2026-11-07 실사용 초안 전 절): 시스템 프롬프트가 source_id 인용을
             # 지시하면 자료 라벨의 id를 쓰고, 지시가 없으면 자료 메모의 제목을 인용 키로 쓴다.
-            ids = re.findall(r"\[(?:source_id: )?(source-[^\]]+)\]", user)
+            ids = re.findall(r"\[source_id: ([^\]]+)\]", user)
             key = ids[0] if "source_id" in system else "메모 제목"
             value = {
                 "본문": (("자료에 적힌 범위를 벗어나지 않는 대역 문장입니다. " * 4) + f"«{key}».\n")
                 * 22,
                 "충분": True,
                 "부족": "",
+                "근거": [
+                    {
+                        "주장": "자료에 적힌 범위를 벗어나지 않는 대역 문장입니다.",
+                        "출처": ids[0],
+                        "인용문": self.excerpts[ids[0]],
+                    }
+                ],
             }
         elif op == "synthesize":
-            value = {"머리말": "공개 자료를 정리합니다.", "맺음말": "자료 범위를 확인해야 합니다."}
+            value = {
+                "머리말": "공개 자료를 정리합니다.",
+                "맺음말": "자료 범위를 확인해야 합니다.",
+                "표": [],
+                "도식": [],
+                "시각화생략사유": "대역에서는 시각화를 생략한다.",
+            }
+        elif op == "semantic_review":
+            value = {"통과": True, "문제": [], "검토요약": "명시적 대역 판정; 실제 의미 검증 아님"}
         else:
             raise AssertionError(op)
         return {
@@ -283,7 +301,7 @@ async def settle(service):
 
 def make(*, client=None, model=None, store=None):
     return RealResearchService(
-        ROOT / ".cache/웹검토_보완/단위" / uuid4().hex,
+        ROOT / ".cache/보고서품질_검증/생성/웹" / uuid4().hex,
         model or WebModel(),
         CORPUS,
         web_client=client or FakeWebClient(),
@@ -337,7 +355,7 @@ async def test_웹6노드_진짜읽기receipt_출처정본_모델과HTTP분리(r
             "fetch_limit": 24,
             "observed_http_requests": 4,
         }
-        assert run["actual_model_requests"] == 9  # 기획1 + 선택3 + 읽기3 + 절1 + 종합1
+        assert run["actual_model_requests"] == 10  # 기획1 + 선택3 + 읽기3 + 절1 + 종합1 + 의미검토1
         events = service.repo.archive(a["run_id"])["events"]
         assert any(e["type"] == "web.request.started" for e in events)
         assert any(
@@ -476,7 +494,9 @@ async def test_길이계약을_어긴_메모는_읽기로_인정하지_않고_�
         report = service.report_bytes(run["report_id"])[0]
         assert len(report["sources"]) == 2
         assert all(row["source_id"] != rejected_source for row in report["sources"])
-        assert run["actual_model_requests"] == 9  # 거절된 읽기도 실제 모델 호출이라 센다.
+        assert (
+            run["actual_model_requests"] == 10
+        )  # 거절된 읽기도 실제 모델 호출이며 의미검토1 추가.
     finally:
         await service.close()
 
@@ -628,18 +648,19 @@ async def test_single_sidecar_url_change_cannot_publish_cited_source():
     import sqlite3
 
     from 서버.웹자료저장소 import WebSourceStore
-    from 테스트.테스트_웹통합 import IntegrationModel
 
     entered, release = asyncio.Event(), asyncio.Event()
 
-    class DelayedEditor(IntegrationModel):
+    class DelayedEditor(WebModel):
         async def complete(self, system, user, *, context, **kwargs):
             if context["operation"] == "synthesize":
                 entered.set()
                 await release.wait()
             return await super().complete(system, user, context=context, **kwargs)
 
-    store = WebSourceStore(ROOT / ".cache/웹검토_보완/단위" / uuid4().hex / "웹자료/자료.sqlite3")
+    store = WebSourceStore(
+        ROOT / ".cache/보고서품질_검증/생성/웹" / uuid4().hex / "웹자료/자료.sqlite3"
+    )
     service = make(model=DelayedEditor(), store=store)
     try:
         admitted = service.admit("/웹 공개 자료", "single-url")
@@ -749,7 +770,7 @@ async def test_취소후_늦은본문과읽기응답은_추가claim과후속모�
         await service.close()
 
 
-async def test_웹4절2라운드_16검색24본문_62모델상한_실제그래프대역():
+async def test_웹4절2라운드_16검색24본문_63모델상한_실제그래프대역():
     from urllib.parse import quote
 
     class DistinctSources(FakeWebClient):
@@ -799,7 +820,7 @@ async def test_웹4절2라운드_16검색24본문_62모델상한_실제그래프
         await settle(service)
         run = service.repo.snapshot()["runs"][0]
         assert run["status"] == "completed", run
-        assert run["actual_model_requests"] == len(service.model.calls) == 62
+        assert run["actual_model_requests"] == len(service.model.calls) == 63
         assert run["web_usage"] == {
             "search_attempts": 16,
             "search_limit": 16,
@@ -812,5 +833,52 @@ async def test_웹4절2라운드_16검색24본문_62모델상한_실제그래프
         archive = service.repo.archive(a["run_id"])
         assert all(e["source_mode"] == "web" for e in archive["events"])
         assert run["research_stop_reason"] == "sufficient"
+    finally:
+        await service.close()
+
+
+@pytest.mark.parametrize("mutation", ["missing", "unread", "outside_excerpt"])
+async def test_웹절근거는_receipt와_실제읽힌앞20000자에_귀속한다(mutation):
+    quote = "실제 읽은 앞부분 밖에만 존재하는 문장입니다."
+
+    class TailClient(FakeWebClient):
+        async def fetch(self, url, *, observer=None):
+            page = await super().fetch(url, observer=observer)
+            page["text"] = "읽힌 원문에 존재하는 자료입니다. " * 1500 + quote
+            page["text_sha256"] = sha(page["text"])
+            return page
+
+    class InvalidEvidenceModel(WebModel):
+        async def complete(self, *args, **kwargs):
+            result = await super().complete(*args, **kwargs)
+            if kwargs["context"]["operation"] == "draft_section":
+                obj = json.loads(result["content"])
+                if mutation == "missing":
+                    obj.pop("근거")
+                elif mutation == "unread":
+                    obj["근거"][0]["출처"] = "source-4"
+                else:
+                    obj["근거"][0]["인용문"] = quote
+                result["content"] = json.dumps(obj, ensure_ascii=False)
+            return result
+
+    service = make(client=TailClient(), model=InvalidEvidenceModel())
+    try:
+        admission = service.admit("/웹 자료", "first")
+        await settle(service)
+        run = service.repo.snapshot()["runs"][0]
+        assert run["status"] == "failed" and run["report_id"] is None
+        claims = service.web_store.read_claims(admission["run_id"], 1)
+        assert len(claims) == 3  # 읽기 receipt 자체는 변형하지 않는다.
+        assert not any(c[2]["operation"] == "synthesize" for c in service.model.calls)
+        for row in service.web_store.sources(admission["run_id"], 1):
+            if row["status"] == "ready":
+                assert quote not in row["text"][:20000] and quote in row["text"]
+        errors = [
+            e["error"]["message"]
+            for e in service.repo.archive(admission["run_id"])["events"]
+            if e["error"]
+        ]
+        assert any("evidence" in message for message in errors)
     finally:
         await service.close()

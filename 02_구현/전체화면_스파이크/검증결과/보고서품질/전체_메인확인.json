@@ -1,0 +1,43 @@
+{
+  "scope": "커밋 전 중간 전체 회귀. 새 실모델 점검기/이후 수정의 최종 회귀는 별도",
+  "backend": {
+    "tests": 461,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "baseline_tests": 338,
+    "added": 124,
+    "removed_or_renamed": [
+      [
+        "테스트.테스트_웹연구",
+        "test_웹4절2라운드_16검색24본문_62모델상한_실제그래프대역"
+      ]
+    ],
+    "junit": "전체_메인회귀.xml"
+  },
+  "frontend": {
+    "declared": 231,
+    "enumerated": 231,
+    "passed": 231,
+    "nonpassed": [],
+    "files": 26
+  },
+  "protection": {
+    "protected_data_sha256": {
+      "checked": 13,
+      "mismatches": []
+    },
+    "installed_dist_sha256": {
+      "checked": 25,
+      "mismatches": []
+    }
+  },
+  "live_model_requests": 0,
+  "budget_policy_changed": false,
+  "not_verified": [
+    "Luna의 의미 판별",
+    "실제 모델 전체 경로",
+    "이후 추가된 검사",
+    "운영 적용"
+  ]
+}

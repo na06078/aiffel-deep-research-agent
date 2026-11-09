@@ -1,0 +1,17 @@
+{
+  "actual_trial_cache": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\live-c2be615c53354e86b9cb5472588325ad",
+  "baseline_error": "section evidence: quote not in read source",
+  "actual_claims": 7,
+  "claims_verbatim_in_body": 7,
+  "non_contiguous_quote_indices": [
+    5,
+    6
+  ],
+  "counterfactual_evidence_items": 9,
+  "counterfactual_same_body": true,
+  "counterfactual_parser_passed": true,
+  "original_rejected_again": true,
+  "new_model_calls": 0,
+  "actual_model_trial_passed": false,
+  "boundary": "Counterfactual separates exact source spans only; it is not a new model output, correction of stored originals, or permission to publish."
+}

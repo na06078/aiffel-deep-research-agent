@@ -1,0 +1,12 @@
+{
+  "scope": "SVG·순수표현·실제 HTML/PDF·변환 API의 메인 대상 회귀",
+  "command": "../../.venv/Scripts/python.exe -B -m pytest 테스트/테스트_보고서도식.py 테스트/테스트_보고서표현.py 테스트/테스트_보고서변환.py 테스트/테스트_보고서변환_API.py -q -p no:cacheprovider --asyncio-mode=auto --basetemp=../../.cache/보고서품질_검증/표현_메인/tmp --junitxml=검증결과/보고서품질/표현_메인회귀.xml",
+  "process_id": "proc_c3bda16f48be",
+  "exit_code": 0,
+  "raw_summary": "105 passed in 16.37s",
+  "junit": {"testcases": 105, "failures": 0, "errors": 0, "skipped": 0},
+  "protected_data": {"checked": 13, "mismatches": []},
+  "installed_dist": {"checked": 25, "mismatches": []},
+  "separate_scope": ["새 API5개는 API_메인확인.json", "화면36개는 화면_메인인수.json"],
+  "not_claimed": ["새 생성기의 실제 Luna 품질 개선", "실제 앱 브라우저 통합", "전체 스위트", "운영 적용"]
+}

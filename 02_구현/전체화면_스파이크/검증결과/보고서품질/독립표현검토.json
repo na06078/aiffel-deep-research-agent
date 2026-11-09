@@ -1,0 +1,252 @@
+{
+  "review_type": "독립 Standards/Spec 정적 검토",
+  "verdict": "changes_requested",
+  "passed": false,
+  "summary": "정적 검토 범위에서 Standards 위반은 발견하지 않았습니다. Spec에는 본문 링크의 iframe 자체 탐색 경로(P2, 실제 클릭 재현 미실행)와 비차단 안내 누락(P3)이 있습니다. 생성기 및 전체 프로젝트 완료 판정은 하지 않습니다.",
+  "parent_owns_final_verdict": true,
+  "baseline": {
+    "branch": "main",
+    "head": "083c6cd",
+    "comparison": "baseline 대 현재 unstaged/untracked 작업 트리",
+    "staged_diff": "없음",
+    "git_writes": false
+  },
+  "scope": {
+    "owned_files": [
+      "서버/보고서도식.py",
+      "서버/보고서표현.py",
+      "서버/보고서변환.py",
+      "서버/앱.py",
+      "화면/src/계약.ts",
+      "화면/src/보고서표현.tsx",
+      "화면/src/보고서표현.css",
+      "화면/src/보고서표현.test.tsx",
+      "화면/src/상세보기.tsx",
+      "화면/src/상세보기.test.tsx",
+      "화면/src/실제연구표시.test.tsx",
+      "화면/src/통신.ts",
+      "화면/src/통신.test.ts",
+      "테스트/테스트_보고서표현_API.py",
+      "테스트/테스트_보고서도식.py",
+      "테스트/테스트_보고서표현.py",
+      "테스트/테스트_보고서변환.py",
+      "테스트/테스트_보고서변환_API.py"
+    ],
+    "owned_file_count": 18,
+    "consumers": [
+      "서버/실행제어.py",
+      "서버/저장소.py",
+      "서버/실행삭제.py",
+      "화면/src/앱.tsx",
+      "화면/src/기록재생연결.ts",
+      "화면/src/시간재생.ts",
+      "화면/src/보고서변환.tsx",
+      "화면/src/앱.test.tsx",
+      "화면/src/기록재생연결.test.ts",
+      "화면/src/실행삭제.test.tsx"
+    ],
+    "consumer_file_count": 10,
+    "consumer_inspection": "필요한 함수/선택/재생/삭제/변환 호출 범위를 발췌 확인. 소비자 전체 파일 전수 검토는 아님",
+    "excluded": [
+      "실행 중 변경되는 보고서품질/교안연구/웹연구/실제연구제어 생성기 및 관련 시험",
+      "다른 작업자 소유 신규 브라우저 검증 스크립트",
+      "환경/인증/DB 실제 내용/운영 정본/장부/설치된 dist",
+      "전체 프로젝트/실제 제공자 의미 품질"
+    ]
+  },
+  "standards": {
+    "status": "pass",
+    "qualification": "승인된 표현 코드와 소유/보존 경계에 관한 정적 범위만 통과. TDD 실행/전체회귀/운영자료 불변 실측을 새로 인증하는 판정 아님",
+    "sources": [
+      {
+        "file": "../../AGENTS.md",
+        "lines": "16-18,27-29",
+        "sentence": "새 파일명은 기본 한국어. / 추측을 단정하지 않는다. / 실행·검증·제출·리뷰 상태를 서로 구분해 기록한다."
+      },
+      {
+        "file": "📋 진행 현황.md",
+        "lines": "4-8",
+        "sentence": "기존 정본·실행DB·웹 자료·호출 장부·설치된 화면/dist는 보존하며 과거 보고서를 수정본으로 덮어쓰지 않는다."
+      },
+      {
+        "file": "📘 딥리서치 에이전트 기술 명세서.md",
+        "lines": "1009-1014",
+        "sentence": "패키지 설치 없이 기존 Python/React/markdown-it/Playwright를 재사용한다."
+      }
+    ],
+    "findings": [],
+    "evidence": [
+      "새 모듈/시험 파일명은 한국어이며 검사한 표현 경로에 새 패키지 설치/모델/검색 호출 없음",
+      "GET은 report_bytes SELECT/정본 읽기→binding→순수 렌더→JSON 반환만 수행(서버/앱.py:219-231; 서버/실행제어.py:614-634)",
+      "report_html의 공통 렌더러 교체 및 v2 키 분리 이외 기존 캐시/DB/정본 이관 경로 추가 없음(서버/보고서변환.py:16-21,156-162)"
+    ]
+  },
+  "spec": {
+    "status": "fail",
+    "sources": [
+      {
+        "file": "📘 딥리서치 에이전트 작업 명세서.md",
+        "lines": "205-220",
+        "sentence": "Q-07 같은 정본을 앱 뷰어·HTML·PDF에서 표와 도식으로 표시 / Q-08 오래된 보고서·해시·재생 시점·삭제 대상의 늦은 응답을 표시하지 않는다."
+      },
+      {
+        "file": "📘 딥리서치 에이전트 기술 명세서.md",
+        "lines": "1038-1060",
+        "sentence": "SVG를 파싱 후 새 허용 트리로 재직렬화 / 순수 표현 GET / sandbox=\"\" / 출처 링크는 sandbox 밖의 접힌 목록에서 연다."
+      }
+    ],
+    "findings": [
+      {
+        "id": "PRES-01",
+        "axis": "spec",
+        "priority": "P2",
+        "blocking": true,
+        "title": "본문 HTTP 링크가 sandbox iframe 자체를 외부 문서로 이동시킬 수 있습니다.",
+        "rule": {
+          "file": "📘 딥리서치 에이전트 기술 명세서.md",
+          "line": 1052,
+          "sentence": "출처 링크는 sandbox 밖의 접힌 목록에서 React가 이스케이프한 일반 링크(`target=_blank`, `rel=noopener noreferrer`)로 연다. 정상 링크 동작을 위해 iframe 권한을 넓히지 않는다."
+        },
+        "trigger": "정상 보고서의 [출처](https://example.org/reference) 같은 본문 링크를 iframe 안에서 직접 누르는 경우. 최초 로딩만으로 외부 요청이 발생한다는 지적이 아닙니다.",
+        "producer_evidence": [
+          "서버/보고서표현.py:65-66 — HTTP(S) 링크 허용",
+          "서버/보고서표현.py:93-103 — links 목록에 복사하지만 원 토큰의 href/target은 바꾸지 않고 기본 renderer로 본문에도 앵커 출력",
+          "테스트/테스트_보고서표현.py:87-101 — HTTP 앵커가 본문에 그대로 남는 독립 기대값"
+        ],
+        "consumer_evidence": [
+          "화면/src/보고서표현.tsx:19-21 — sandbox=\"\" srcDoc으로 표시하며 별도 안전 링크 목록도 출력",
+          "서버/보고서표현.py:108-110 — CSP default-src/img-src/base-uri/form-action은 링크의 동일 iframe 탐색 금지 정책이 아님"
+        ],
+        "consequence": "빈 sandbox는 스크립트·팝업·상위 탐색을 막지만 iframe 자신의 일반 앵커 탐색까지 막지 않습니다. 따라서 사용자가 본문 출처를 누르면 외부 GET 및 iframe 본문 대체 경로가 남습니다. 바깥 보고서 ID/해시는 그대로여서 정본 표현 대신 외부 페이지를 보게 될 수 있습니다. 스크립트 실행이나 상위 창 탈출이 확인됐다는 의미는 아닙니다.",
+        "evidence_status": "정적 도달 경로 확인; 브라우저 클릭/네트워크 재현은 이 작업에서 금지되어 미실행. parent의 실제 브라우저 검증에서 확정/반증 필요.",
+        "minimal_fix": "공통 렌더러의 HTTP(S) link_open에 target=\"_blank\"와 rel=\"noopener noreferrer\"를 명시해 빈 sandbox 안에서는 팝업으로 차단되게 하고, 실제 출처 열기는 기존 바깥 목록으로만 제공합니다. 또는 iframe 본문 링크만 비탐색 표현으로 만듭니다. sandbox 권한 추가는 하지 않습니다.",
+        "verification_needed": "실제 srcDoc iframe의 본문 출처 클릭 시 iframe URL/정본 본문 유지 및 외부 요청0을 검사하고, 바깥 출처 링크만 사용자 조작으로 새 탭에서 열리는지 확인합니다. HTML/PDF의 본문·표·SVG 동일성과 내려받은 HTML 링크도 회귀합니다."
+      },
+      {
+        "id": "PRES-02",
+        "axis": "spec",
+        "priority": "P3",
+        "blocking": false,
+        "title": "Markdown 다운로드의 SVG fence 호환성 안내가 아직 없습니다.",
+        "rule": {
+          "file": "📘 딥리서치 에이전트 작업 명세서.md",
+          "line": 217,
+          "sentence": "외부 Markdown 프로그램에서는 SVG fence가 코드로 보일 수 있음을 안내한다."
+        },
+        "trigger": "표/도식 보고서를 Markdown으로 내려받아 외부 Markdown 프로그램에서 열 때",
+        "producer_evidence": [
+          "서버/보고서표현.py:74-89 — 앱의 정확한 svg fence만 도식으로 전환"
+        ],
+        "consumer_evidence": [
+          "화면/src/상세보기.tsx:11-15 — 다운로드와 접힌 원문은 있지만 외부 SVG 호환성 안내 없음",
+          "📘 전체화면 스파이크 실행 안내.md:39-57 — 다운로드/변환 안내에도 해당 설명 없음"
+        ],
+        "consequence": "외부 프로그램에서 도식이 코드로 표시되는 정상 제한을 사용자가 변환 실패로 오해할 수 있습니다. 생성·무결성·보안 차단 결함으로 확대하지 않습니다.",
+        "evidence_status": "현재 UI 전체 파일과 실행 안내의 Markdown/SVG 관련 문장 정적 확인; 실행 재현 아님",
+        "minimal_fix": "Markdown 다운로드 또는 원문 펼침 옆에 외부 프로그램에서는 SVG 코드로 보일 수 있고 앱/HTML/PDF에서는 도식으로 보인다는 한 문장을 추가합니다.",
+        "verification_needed": "문구 렌더링 단위 검사. 별도 기능이나 의존성 추가 불필요."
+      }
+    ],
+    "not_assessed": [
+      "Q-01~06 생성/근거/의미 검토 경로는 다른 작업자 범위로 평가 제외",
+      "29.7 실제 격리 브라우저와 전체 회귀의 실행 수용 조건은 이 검토에서 미평가"
+    ]
+  },
+  "blocking_findings": [
+    "PRES-01"
+  ],
+  "nonblocking_findings": [
+    "PRES-02"
+  ],
+  "checked_paths": [
+    {
+      "topic": "SVG 보안/수치/path",
+      "evidence": "서버/보고서도식.py:32-137,140-205",
+      "result": "DTD/PI/비표준 namespace/금지 요소와 속성 거절, 유한 ASCII 숫자·좌표 범위, 속성별 길이/인자·arc 플래그 검사, 바이트/요소/깊이/path 합계 제한 및 새 트리 직렬화 확인. 추가 구체 보안 결함 미발견. 실브라우저 공격 재현 아님"
+    },
+    {
+      "topic": "HTML/이미지/공통 내용",
+      "evidence": "서버/보고서표현.py:62-120; 서버/보고서변환.py:20-65",
+      "result": "일반 HTML 비허용, 이미지 alt 변환, 정확한 svg fence 검증/실패시 escaped code·한국어 경고, CSP, HTML/PDF 같은 공통 함수 사용 확인. 링크 탐색은 PRES-01 별도"
+    },
+    {
+      "topic": "해시/순수 GET/삭제",
+      "evidence": "서버/앱.py:219-231; 서버/실행제어.py:614-634; 서버/보고서변환.py:174-190,303-384,386-423; 서버/실행삭제.py:59-92,154-164,204-234",
+      "result": "실제 정본 바이트/해시/저장 markdown 일치 후 binding, 순수 렌더, no-store/nosniff 및 기존 오류 봉투. v2 캐시 분리, 변환 저장 삭제 펜스와 모든 버전 캐시의 report_id 기반 정리 유지 확인"
+    },
+    {
+      "topic": "선택/요청 세대/재생",
+      "evidence": "화면/src/보고서표현.tsx:25-61; 상세보기.tsx:7-15; 앱.tsx:55-61,91-96,121; 기록재생연결.ts:22-35,51-58; 시간재생.ts:57-89",
+      "result": "ID+해시 수명, ID/해시/renderer 응답 결합, epoch/dispose, 재생 시점에 보고서가 사라지면 렌더 가드 및 창 종료 확인. 빠른 전환/삭제의 실브라우저 재현은 제외"
+    },
+    {
+      "topic": "시험의 실제 수준",
+      "evidence": "테스트_보고서도식.py/테스트_보고서표현.py/테스트_보고서표현_API.py/테스트_보고서변환.py/테스트_보고서변환_API.py; 화면/src/보고서표현.test.tsx 및 상세/실제연구표시/통신 시험",
+      "result": "시험 원문 확인. SVG·표·문자/PDF/크기/무변경/오류/세대 시험 존재. SSR·세션 단위 시험은 iframe 본문 링크 클릭이나 실제 App 선택→effect→iframe 조작을 실행하지 않으므로 PRES-01 반증으로 간주하지 않음"
+    }
+  ],
+  "runtime_evidence": {
+    "fresh_tests_executed": false,
+    "tests_build_server_provider_calls": "모두 금지에 따라 미실행",
+    "reported_by_parent_only": [
+      "FE36 + tsc 통과",
+      "API5 통과",
+      "renderer 작업자 저장105 통과"
+    ],
+    "interpretation": "부모 제공 수치는 이번 검토자의 재실행/로그 재집계가 아니며 실제 제공자·전체 UI 통과 증거로 확대하지 않음"
+  },
+  "unverified_boundaries": [
+    "PRES-01 실제 브라우저 탐색/요청 재현",
+    "전체 App 격리 브라우저의 새 보고서/다운로드/재열기/390·낮은 창/지연 조회/삭제 후 미표시",
+    "현재 변경 생성기와 전체 회귀",
+    "실제 Luna 의미 판별/웹검색/예산",
+    "운영 DB·기존 정본·설치된 dist의 실측 전후 불변(읽기 금지 영역)"
+  ],
+  "source_sha256": {
+    "base_path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크",
+    "owned_production_and_test_files": {
+      "서버/보고서도식.py": "53d0fa1469d797b68923d2bc190bf3a700cc9c55e11135f5806c22d4b156c223",
+      "서버/보고서표현.py": "2cc1b1dae4343d6ab1b0d071b9da69cb294ce72fe9e7fa48e04fed595d990139",
+      "서버/보고서변환.py": "6dbd31927da7a23e2f6651605274e0df3127db5ae7ae460c65ab6e4331d729fc",
+      "서버/앱.py": "ab57f37b2aeea206135c8e71a6ab12bd8926d57c29b83bfcbc18518e66842cd7",
+      "화면/src/계약.ts": "fbdbb04b0a22e009448e32d79fd8fdc663a5f21fbaa9ceeec96e0eab509740d4",
+      "화면/src/보고서표현.tsx": "d48762e3ebf76a5c93ebc67b42151b3de0af14e31201d1c69f9007e3f246b41b",
+      "화면/src/보고서표현.css": "3bc5c5513ff6310a743f2cdcd895108e6701a9f54437aaf1954f0ccd0f49830e",
+      "화면/src/보고서표현.test.tsx": "f211ef649389f704bee3f5ce61e6a1350131e5de3cdac673b60a792b581bf626",
+      "화면/src/상세보기.tsx": "8c59bc4910d0d0831be03a9675c87974c7319b64274cf30b90f54e97bb560668",
+      "화면/src/상세보기.test.tsx": "6c6dd077e03a721ebe500ffe206fc951ab7ed3d054492b0406aeb74beb456ced",
+      "화면/src/실제연구표시.test.tsx": "f8d0f1ddccffd4df3ee54c452768fd54fdf8d3b90033216f9a53b367a20647a6",
+      "화면/src/통신.ts": "e41844dddda2564522e3932af4e4516fb47da2037a0d29854d2178fe53fded96",
+      "화면/src/통신.test.ts": "481244e77880766e9c79a237356222dbb3a2a673d16b18c195b1623476ee8f35",
+      "테스트/테스트_보고서표현_API.py": "ba6595a091ffdc5e824dd2de91e4cec6edf3e960d6f0e903bf7cd587174de68d",
+      "테스트/테스트_보고서도식.py": "75abe3da3be1fb3e5ff0860dd3d1376d30f34c4f299a4314730866aba5145611",
+      "테스트/테스트_보고서표현.py": "2c23bbd9cfb0cdf4822778bb7b8aaf403542b5eacefa34b6e3ce4ed65a7b69b1",
+      "테스트/테스트_보고서변환.py": "f3c02a8094fbd9b935a1bf8428bb61dbc17064cf3524efcd1cd0ddefd0dc5204",
+      "테스트/테스트_보고서변환_API.py": "e730052607ccb581a03524d5abf6e5a058f870e476133292606c117ef6a8a7d5"
+    },
+    "additional_consumer_files_partial_read": {
+      "서버/실행제어.py": "6fe218510f555c41f7e362ed0e763d8b2106170affb6b0edefc611382f23ea7a",
+      "서버/저장소.py": "bff9ea9d64fff72203c57ae1bf4f4045db2dc084e16241309855ecfb0a00db8c",
+      "서버/실행삭제.py": "1c0d2fc411355595efe20f177c0e4ecabea440201c9732193664fe90c70b2b9b",
+      "화면/src/앱.tsx": "3cf58990f19bdb016ad038c631d204bbaf0a2c8deb2a67033700c7267f06d34c",
+      "화면/src/기록재생연결.ts": "0e466209d552391cc9d2fe19a48ee3aa7f850ee59e913d40c60406f592c51feb",
+      "화면/src/시간재생.ts": "a011e9fddc8c96db8a03848957917a09cad5226055d6c0e192e6c5982145cb77",
+      "화면/src/보고서변환.tsx": "bfa7e20c5caad407808be9dbf79bf8000ffec276615d4c8ff432e9cced3f9bf6",
+      "화면/src/앱.test.tsx": "1669775a34adcdd4153996c318b55293dc275ca34b1f8f92298da0ec1db9a36b",
+      "화면/src/기록재생연결.test.ts": "77c82969961fcbd9b2edfad8db0ca61828fc4050038dc83bb4a0825c232dffbb",
+      "화면/src/실행삭제.test.tsx": "94f57691afbc625609e7d2b44f534324d072c52e3e80d4a035ce714cd43e0244"
+    },
+    "owned_hashes_unchanged_during_review": true
+  },
+  "writes": {
+    "only_artifact": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/보고서품질/독립표현검토.json",
+    "source_spec_app_edits": false,
+    "tests_or_servers_started": false,
+    "git_mutated": false
+  },
+  "repair_order": [
+    "PRES-01은 부모의 실제 브라우저 검증에서 본문 링크 클릭을 먼저 확정/반증하고 최소 수정",
+    "PRES-02 문구 보완",
+    "기존 승인된 격리 실행/전체회귀 게이트는 부모가 별도로 완수"
+  ]
+}

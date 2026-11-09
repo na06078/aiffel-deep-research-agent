@@ -1,0 +1,11 @@
+{
+  "scope": "이번 작업자가 잘못된 상대 기준으로 저장한 인계 JSON 1건만 정본 증거 폴더로 정리",
+  "from": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/검증결과/보고서품질/화면_작업자인계.json",
+  "to": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/보고서품질/화면_작업자인계.json",
+  "source_absent": true,
+  "target": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\화면_작업자인계.json",
+  "sha256": "fca5f5b37e95bd390cb035c85fd041683c3806922d5c8a4f896acc9dfc46e77a",
+  "bytes": 30070,
+  "operating_data_moved": false,
+  "backup_created": false
+}

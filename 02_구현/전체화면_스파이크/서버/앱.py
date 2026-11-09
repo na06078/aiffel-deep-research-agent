@@ -216,6 +216,18 @@ def create_app(
     async def report(report_id: str):
         return app.state.service.report_bytes(report_id)[0]
 
+    @app.get("/api/spike/reports/{report_id}/presentation")
+    async def report_presentation(report_id: str, source_report_hash: str, renderer_version: str):
+        from 서버.보고서표현 import render_presentation
+
+        report, markdown, _ = app.state.service.report_bytes(report_id)
+        app.state.exports.binding(report, source_report_hash, renderer_version)
+        # 조회는 캐시 생성이나 연구 접수가 아니다. 정본을 검증한 뒤 메모리에서만 표현한다.
+        return JSONResponse(
+            content=render_presentation(markdown, report),
+            headers={"Cache-Control": "no-store", "X-Content-Type-Options": "nosniff"},
+        )
+
     @app.get("/api/spike/reports/{report_id}/exports")
     async def report_exports(report_id: str):
         return app.state.exports.list(report_id)

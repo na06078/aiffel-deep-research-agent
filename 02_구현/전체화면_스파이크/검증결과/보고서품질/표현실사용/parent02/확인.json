@@ -1,0 +1,1556 @@
+{
+  "label": "parent02",
+  "scope": "presentation integration only; NOT RealResearchService/Luna quality",
+  "provider": "test-double",
+  "external_model_requests": 0,
+  "checks": [
+    {
+      "name": "운영13파일·설치본25파일 해시 보호",
+      "passed": true,
+      "differences": [],
+      "protected_data_count": 13,
+      "dist_count": 25
+    },
+    {
+      "name": "UI지시·4gate UI해제·신규보고서3개·외부모델0",
+      "passed": true,
+      "metrics": {
+        "provider": "test-double",
+        "calls": {
+          "plan": 3,
+          "research": 12,
+          "synthesize": 3,
+          "external_model": 0,
+          "web": 0
+        },
+        "pid": 6628,
+        "pdf_browser_requests": [],
+        "real_renderer_invocations": []
+      }
+    },
+    {
+      "name": "실제6노드·SQLite 저장",
+      "passed": true,
+      "db": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\표현실사용\\parent02\\데이터\\실행기록.sqlite3",
+      "counts": {
+        "state": 1,
+        "events": 66,
+        "sqlite_sequence": 1,
+        "revisions": 3,
+        "calls": 18,
+        "requests": 3,
+        "reports": 3,
+        "activity_spans": 48
+      },
+      "node_labels": [
+        "dispatch",
+        "evaluate",
+        "plan",
+        "publish",
+        "research",
+        "review",
+        "synthesize"
+      ]
+    },
+    {
+      "name": "iframe 실제 표·SVG·escaped Markdown·접힌원문·외부출처 안전링크",
+      "passed": true,
+      "iframe_body_text": "합성 실행 제어 시험 보고서\n\n실제 LLM 미사용: 테스트 대역의 합성 결과입니다.\n\n현재 지시: 표현 통합 합성 시험 A\n\n1. 합성 검증 절\n\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 1절: 표현 통합 합성 시험 A\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n2. 합성 검증 절\n\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 2절: 표현 통합 합성 시험 A\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n3. 합성 검증 절\n\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 3절: 표현 통합 합성 시험 A\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n4. 합성 검증 절\n\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 4절: 표현 통합 합성 시험 A\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n표현 검사용 합성 표\n항목\t값\t출처\n한글 보존\t검증값 42\t«합성문서-1»\n파이프\t가|나\t«합성문서-2»\n합성 도식 · 실제 연구 결과 아님\n\n검증용 흐름 설명입니다. «합성문서-1»\n\n입력 → 합성 표 → 보고서\n합성 검증 도식 · 입력에서 보고서까지 · 시험 대역\n\n검증용 출처 한글\n\n<script>window.__presentationUnsafe=true</script>\n\n차단된 외부 이미지",
+      "source_link": "https://example.invalid/presentation-source"
+    },
+    {
+      "name": "본문출처 클릭은 sandbox 안 탐색/요청0·바깥목록 링크만 새창(메모리대역)",
+      "passed": true,
+      "inside_attempts": 0,
+      "outside_memory_navigations": [
+        "https://example.invalid/presentation-source"
+      ],
+      "actual_external_http": 0
+    },
+    {
+      "name": "MD정본 해시·HTML/PDF 실제 생성/다운로드/재열기·한글표도식 대조",
+      "passed": true,
+      "pages": 3,
+      "downloads": {
+        "md": {
+          "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\표현실사용\\parent02\\합성보고서.md",
+          "bytes": 8697,
+          "sha256": "4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3"
+        },
+        "html": {
+          "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\표현실사용\\parent02\\합성보고서.html",
+          "bytes": 11110,
+          "sha256": "22cd6aa17d12d531f4ecfce1b0016dd02cc28aedccccac4f042098ac2c6f61d7"
+        },
+        "pdf": {
+          "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\표현실사용\\parent02\\합성보고서.pdf",
+          "bytes": 53039,
+          "sha256": "7a63ae6cea04826f62feb52a2898d38bb5f1405eb2c2957de57defa059c8e74c"
+        }
+      },
+      "source_md_sha256": "4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3"
+    },
+    {
+      "name": "실제뷰포트 1440x900·표도식label·입력닫기끝조작·키보드focus",
+      "passed": true,
+      "overflow": {
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "ok": true
+      },
+      "canvas": {
+        "count": 1,
+        "same": true
+      },
+      "svg_labels": [
+        {
+          "text": "입력 → 합성 표 → 보고서",
+          "width": 306.03125,
+          "height": 35,
+          "inside": true
+        }
+      ],
+      "command-input": {
+        "x": 349,
+        "y": 799,
+        "w": 626.15625,
+        "h": 56,
+        "inView": true,
+        "hit": true,
+        "top": "TEXTAREA."
+      },
+      "popup-close": {
+        "x": 1095,
+        "y": 87,
+        "w": 44,
+        "h": 44,
+        "inView": true,
+        "hit": true,
+        "top": "path.[object SVGAnimatedString]"
+      },
+      "last_control": {
+        "x": 307,
+        "y": 660.53125,
+        "w": 826,
+        "h": 42,
+        "inView": true,
+        "hit": true,
+        "top": "SUMMARY."
+      }
+    },
+    {
+      "name": "실제뷰포트 390x844·표도식label·입력닫기끝조작·키보드focus",
+      "passed": true,
+      "overflow": {
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "ok": true
+      },
+      "canvas": {
+        "count": 1,
+        "same": true
+      },
+      "svg_labels": [
+        {
+          "text": "입력 → 합성 표 → 보고서",
+          "width": 142.59375,
+          "height": 16,
+          "inside": true
+        }
+      ],
+      "command-input": {
+        "x": 21,
+        "y": 743,
+        "w": 255.703125,
+        "h": 56,
+        "inView": true,
+        "hit": true,
+        "top": "TEXTAREA."
+      },
+      "popup-close": {
+        "x": 319,
+        "y": 81,
+        "w": 44,
+        "h": 44,
+        "inView": true,
+        "hit": true,
+        "top": "path.[object SVGAnimatedString]"
+      },
+      "last_control": {
+        "x": 29,
+        "y": 590.171875,
+        "w": 332,
+        "h": 42,
+        "inView": true,
+        "hit": true,
+        "top": "SUMMARY."
+      }
+    },
+    {
+      "name": "실제뷰포트 844x390·표도식label·입력닫기끝조작·키보드focus",
+      "passed": true,
+      "overflow": {
+        "scrollWidth": 844,
+        "innerWidth": 844,
+        "ok": true
+      },
+      "canvas": {
+        "count": 1,
+        "same": true
+      },
+      "svg_labels": [
+        {
+          "text": "입력 → 합성 표 → 보고서",
+          "width": 306.03125,
+          "height": 35,
+          "inside": true
+        }
+      ],
+      "command-input": {
+        "x": 48,
+        "y": 314,
+        "w": 632.15625,
+        "h": 36,
+        "inView": true,
+        "hit": true,
+        "top": "TEXTAREA."
+      },
+      "popup-close": {
+        "x": 739,
+        "y": 76,
+        "w": 44,
+        "h": 44,
+        "inView": true,
+        "hit": true,
+        "top": "path.[object SVGAnimatedString]"
+      },
+      "last_control": {
+        "x": 65,
+        "y": 193.53125,
+        "w": 714,
+        "h": 42,
+        "inView": true,
+        "hit": true,
+        "top": "SUMMARY."
+      }
+    },
+    {
+      "name": "자동GET 503 실패·원문다운로드 유지·명시적 재조회 성공",
+      "passed": true
+    },
+    {
+      "name": "지연GET close 후 성공 응답은 옛뷰어 복원금지",
+      "passed": true
+    },
+    {
+      "name": "지연GET close 후 실패 응답은 옛뷰어 복원금지",
+      "passed": true
+    },
+    {
+      "name": "지연GET replay-before-submitted 후 성공 응답은 옛뷰어 복원금지",
+      "passed": true
+    },
+    {
+      "name": "지연GET replay-before-submitted 후 실패 응답은 옛뷰어 복원금지",
+      "passed": true
+    },
+    {
+      "name": "지연GET other-report 후 성공 응답은 옛뷰어 복원금지",
+      "passed": true
+    },
+    {
+      "name": "지연GET other-report 후 실패 응답은 옛뷰어 복원금지",
+      "passed": true
+    },
+    {
+      "name": "재생/되감기/재생중새로고침/실시간새로고침 모델·웹 추가0",
+      "passed": true,
+      "before": {
+        "plan": 3,
+        "research": 12,
+        "synthesize": 3,
+        "external_model": 0,
+        "web": 0
+      },
+      "after": {
+        "plan": 3,
+        "research": 12,
+        "synthesize": 3,
+        "external_model": 0,
+        "web": 0
+      }
+    },
+    {
+      "name": "합성fixture 삭제·파생파일제거·지연성공 부활금지",
+      "passed": true,
+      "deleted_run": "e85276b1cb10419cb9fbda69670d2273",
+      "remaining_derivatives": [
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\표현실사용\\parent02\\데이터\\형식변환\\565f79aae3390e2657fddc4b3b9e9522447605029784074a64fe286e0b52a1a9.html",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\표현실사용\\parent02\\데이터\\형식변환\\565f79aae3390e2657fddc4b3b9e9522447605029784074a64fe286e0b52a1a9.json",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\표현실사용\\parent02\\데이터\\형식변환\\aa3d1a49c1ae44ab6e9f3a803aee3faf7d8465f8b8bb75573dd0d8028dc6eb99.json",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\표현실사용\\parent02\\데이터\\형식변환\\aa3d1a49c1ae44ab6e9f3a803aee3faf7d8465f8b8bb75573dd0d8028dc6eb99.pdf"
+      ]
+    },
+    {
+      "name": "합성fixture 삭제·파생파일제거·지연실패 부활금지",
+      "passed": true,
+      "deleted_run": "ec754d3b38464a88b91d94f17dc66f66",
+      "remaining_derivatives": [
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\표현실사용\\parent02\\데이터\\형식변환\\565f79aae3390e2657fddc4b3b9e9522447605029784074a64fe286e0b52a1a9.html",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\표현실사용\\parent02\\데이터\\형식변환\\565f79aae3390e2657fddc4b3b9e9522447605029784074a64fe286e0b52a1a9.json",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\표현실사용\\parent02\\데이터\\형식변환\\aa3d1a49c1ae44ab6e9f3a803aee3faf7d8465f8b8bb75573dd0d8028dc6eb99.json",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\표현실사용\\parent02\\데이터\\형식변환\\aa3d1a49c1ae44ab6e9f3a803aee3faf7d8465f8b8bb75573dd0d8028dc6eb99.pdf"
+      ]
+    },
+    {
+      "name": "합성fixture 삭제·파생파일제거·지연성공 부활금지",
+      "passed": true,
+      "deleted_run": "08aff38f4ac047838cdc69968f914d2b",
+      "remaining_derivatives": []
+    },
+    {
+      "name": "실제 HTML/PDF 렌더러 각1회·PDF Chromium 네트워크요청0",
+      "passed": true,
+      "requests": [],
+      "invocations": [
+        {
+          "format": "html",
+          "report_id": "e418bc57a47d4081a039bfb20566828c"
+        },
+        {
+          "format": "pdf",
+          "report_id": "e418bc57a47d4081a039bfb20566828c"
+        }
+      ]
+    },
+    {
+      "name": "조회·다운로드·변환·수명·삭제는 모델/웹 추가호출0",
+      "passed": true,
+      "before": {
+        "provider": "test-double",
+        "calls": {
+          "plan": 3,
+          "research": 12,
+          "synthesize": 3,
+          "external_model": 0,
+          "web": 0
+        },
+        "pid": 6628,
+        "pdf_browser_requests": [],
+        "real_renderer_invocations": []
+      },
+      "after": {
+        "provider": "test-double",
+        "calls": {
+          "plan": 3,
+          "research": 12,
+          "synthesize": 3,
+          "external_model": 0,
+          "web": 0
+        },
+        "pid": 6628,
+        "pdf_browser_requests": [],
+        "real_renderer_invocations": [
+          {
+            "format": "html",
+            "report_id": "e418bc57a47d4081a039bfb20566828c"
+          },
+          {
+            "format": "pdf",
+            "report_id": "e418bc57a47d4081a039bfb20566828c"
+          }
+        ]
+      }
+    },
+    {
+      "name": "외부네트워크·미승인변경·예상밖console/pageerror0",
+      "passed": true,
+      "blocked": [],
+      "console_errors": [],
+      "pageerrors": []
+    },
+    {
+      "name": "소유시험서버 정상종료",
+      "passed": true,
+      "pid": 36768,
+      "returncode": 0
+    },
+    {
+      "name": "운영13파일·설치본25파일 해시 보호",
+      "passed": true,
+      "differences": [],
+      "protected_data_count": 13,
+      "dist_count": 25
+    },
+    {
+      "name": "검사중 표현API/렌더러/화면소스·후보bundle drift0",
+      "passed": true
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/index-BoCJVO8M.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/CanvasPool-DzuCm1vb.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/Filter-vpEaIMwd.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/canvasUtils-U4WZZEj-.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/Cache-CTROkX_m.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/GCManagedHash-DCvVepMX.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/RenderTargetSystem-BK2ifv01.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/GraphicsContext-48tzdr3Q.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/getTexelRangeRects-Bdv1rQ51.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/index-CcRZevJm.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/browserAll-D6cpW_4c.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/init-DoUXYMOj.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/events?after=0"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:8794/api/spike/commands"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/runs/08aff38f4ac047838cdc69968f914d2b/archive"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:8794/api/spike/releases"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/runs/08aff38f4ac047838cdc69968f914d2b/archive"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:8794/api/spike/commands"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/runs/ec754d3b38464a88b91d94f17dc66f66/archive"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:8794/api/spike/releases"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/runs/ec754d3b38464a88b91d94f17dc66f66/archive"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/b1cb23c8d01f446f8279544ab35338be"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:8794/api/spike/commands"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/runs/e85276b1cb10419cb9fbda69670d2273/archive"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:8794/api/spike/releases"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/runs/e85276b1cb10419cb9fbda69670d2273/archive"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/bf1da3ec7c8c4a5da237ae3af4a6eef7"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/exports"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/presentation?source_report_hash=4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3&renderer_version=markdown-it4-playwright1248-svg-v2"
+    },
+    {
+      "method": "GET",
+      "url": "https://example.invalid/presentation-source"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/exports"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/exports"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/exports"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/exports"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/exports"
+    },
+    {
+      "method": "GET",
+      "url": "file:///C:/my%20vault/ME/1.%20Note/Hermes/Aiffel_Work/02_%EB%85%B8%EB%93%9C%EC%8B%A4%EC%8A%B5/%EB%94%A5%EB%A6%AC%EC%84%9C%EC%B9%98_%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8/.cache/%EB%B3%B4%EA%B3%A0%EC%84%9C%ED%92%88%EC%A7%88_%EA%B2%80%EC%A6%9D/%ED%91%9C%ED%98%84%EC%8B%A4%EC%82%AC%EC%9A%A9/parent02/%ED%95%A9%EC%84%B1%EB%B3%B4%EA%B3%A0%EC%84%9C.html"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/exports"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/presentation?source_report_hash=4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3&renderer_version=markdown-it4-playwright1248-svg-v2"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/presentation?source_report_hash=4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3&renderer_version=markdown-it4-playwright1248-svg-v2"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/exports"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/presentation?source_report_hash=4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3&renderer_version=markdown-it4-playwright1248-svg-v2"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/exports"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/presentation?source_report_hash=4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3&renderer_version=markdown-it4-playwright1248-svg-v2"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/exports"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/presentation?source_report_hash=4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3&renderer_version=markdown-it4-playwright1248-svg-v2"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/runs/08aff38f4ac047838cdc69968f914d2b/archive"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/runs/e85276b1cb10419cb9fbda69670d2273/archive"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/exports"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/presentation?source_report_hash=4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3&renderer_version=markdown-it4-playwright1248-svg-v2"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/runs/08aff38f4ac047838cdc69968f914d2b/archive"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/runs/e85276b1cb10419cb9fbda69670d2273/archive"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/exports"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/presentation?source_report_hash=4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3&renderer_version=markdown-it4-playwright1248-svg-v2"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/bf1da3ec7c8c4a5da237ae3af4a6eef7"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/bf1da3ec7c8c4a5da237ae3af4a6eef7/exports"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/bf1da3ec7c8c4a5da237ae3af4a6eef7/presentation?source_report_hash=78d88e4539bdc12b0583e556bc7977bc85f44c875aafb2bb4094e7d0191505d5&renderer_version=markdown-it4-playwright1248-svg-v2"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/exports"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/presentation?source_report_hash=4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3&renderer_version=markdown-it4-playwright1248-svg-v2"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/bf1da3ec7c8c4a5da237ae3af4a6eef7"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/bf1da3ec7c8c4a5da237ae3af4a6eef7/exports"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/bf1da3ec7c8c4a5da237ae3af4a6eef7/presentation?source_report_hash=78d88e4539bdc12b0583e556bc7977bc85f44c875aafb2bb4094e7d0191505d5&renderer_version=markdown-it4-playwright1248-svg-v2"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/runs/e85276b1cb10419cb9fbda69670d2273/archive"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/index-BoCJVO8M.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/CanvasPool-DzuCm1vb.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/Filter-vpEaIMwd.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/canvasUtils-U4WZZEj-.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/Cache-CTROkX_m.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/GCManagedHash-DCvVepMX.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/RenderTargetSystem-BK2ifv01.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/GraphicsContext-48tzdr3Q.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/getTexelRangeRects-Bdv1rQ51.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/index-CcRZevJm.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/runs/e85276b1cb10419cb9fbda69670d2273/archive"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/browserAll-D6cpW_4c.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/init-DoUXYMOj.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/events?after=66"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/bf1da3ec7c8c4a5da237ae3af4a6eef7"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/runs/e85276b1cb10419cb9fbda69670d2273/archive"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/index-BoCJVO8M.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/CanvasPool-DzuCm1vb.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/Filter-vpEaIMwd.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/canvasUtils-U4WZZEj-.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/Cache-CTROkX_m.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/GCManagedHash-DCvVepMX.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/RenderTargetSystem-BK2ifv01.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/GraphicsContext-48tzdr3Q.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/getTexelRangeRects-Bdv1rQ51.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/index-CcRZevJm.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/browserAll-D6cpW_4c.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/assets/init-DoUXYMOj.js"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/events?after=66"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/runs/e85276b1cb10419cb9fbda69670d2273/archive"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/bf1da3ec7c8c4a5da237ae3af4a6eef7"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/bf1da3ec7c8c4a5da237ae3af4a6eef7"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/bf1da3ec7c8c4a5da237ae3af4a6eef7/exports"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/bf1da3ec7c8c4a5da237ae3af4a6eef7/presentation?source_report_hash=78d88e4539bdc12b0583e556bc7977bc85f44c875aafb2bb4094e7d0191505d5&renderer_version=markdown-it4-playwright1248-svg-v2"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/runs/e85276b1cb10419cb9fbda69670d2273/delete-preview"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:8794/api/spike/runs/e85276b1cb10419cb9fbda69670d2273/delete"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/runs/ec754d3b38464a88b91d94f17dc66f66/archive"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/b1cb23c8d01f446f8279544ab35338be"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/b1cb23c8d01f446f8279544ab35338be"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/b1cb23c8d01f446f8279544ab35338be/exports"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/b1cb23c8d01f446f8279544ab35338be/presentation?source_report_hash=8c9bff3edefe2c5d64258ab5489766d18081fc3b9101e155d075c49d4d604a0f&renderer_version=markdown-it4-playwright1248-svg-v2"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/runs/ec754d3b38464a88b91d94f17dc66f66/delete-preview"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:8794/api/spike/runs/ec754d3b38464a88b91d94f17dc66f66/delete"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/runs/08aff38f4ac047838cdc69968f914d2b/archive"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/exports"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/presentation?source_report_hash=4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3&renderer_version=markdown-it4-playwright1248-svg-v2"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/runs/08aff38f4ac047838cdc69968f914d2b/delete-preview"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:8794/api/spike/runs/08aff38f4ac047838cdc69968f914d2b/delete"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:8794/api/spike/snapshot"
+    }
+  ],
+  "blocked": [],
+  "pageerrors": [],
+  "console_errors": [],
+  "expected_errors": [
+    {
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/presentation?source_report_hash=4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3&renderer_version=markdown-it4-playwright1248-svg-v2",
+      "status": 503,
+      "injected": true
+    },
+    {
+      "console": {
+        "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+        "location": {
+          "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/presentation?source_report_hash=4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3&renderer_version=markdown-it4-playwright1248-svg-v2",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/presentation?source_report_hash=4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3&renderer_version=markdown-it4-playwright1248-svg-v2",
+      "status": 503,
+      "injected": true,
+      "lifecycle": "close"
+    },
+    {
+      "console": {
+        "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+        "location": {
+          "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/presentation?source_report_hash=4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3&renderer_version=markdown-it4-playwright1248-svg-v2",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/presentation?source_report_hash=4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3&renderer_version=markdown-it4-playwright1248-svg-v2",
+      "status": 503,
+      "injected": true,
+      "lifecycle": "replay-before-submitted"
+    },
+    {
+      "console": {
+        "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+        "location": {
+          "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/presentation?source_report_hash=4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3&renderer_version=markdown-it4-playwright1248-svg-v2",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/presentation?source_report_hash=4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3&renderer_version=markdown-it4-playwright1248-svg-v2",
+      "status": 503,
+      "injected": true,
+      "lifecycle": "other-report"
+    },
+    {
+      "console": {
+        "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+        "location": {
+          "url": "http://127.0.0.1:8794/api/spike/reports/e418bc57a47d4081a039bfb20566828c/presentation?source_report_hash=4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3&renderer_version=markdown-it4-playwright1248-svg-v2",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8794/api/spike/reports/b1cb23c8d01f446f8279544ab35338be/presentation?source_report_hash=8c9bff3edefe2c5d64258ab5489766d18081fc3b9101e155d075c49d4d604a0f&renderer_version=markdown-it4-playwright1248-svg-v2",
+      "status": 503,
+      "injected": true,
+      "lifecycle": "delete"
+    },
+    {
+      "console": {
+        "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+        "location": {
+          "url": "http://127.0.0.1:8794/api/spike/reports/b1cb23c8d01f446f8279544ab35338be/presentation?source_report_hash=8c9bff3edefe2c5d64258ab5489766d18081fc3b9101e155d075c49d4d604a0f&renderer_version=markdown-it4-playwright1248-svg-v2",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      }
+    }
+  ],
+  "sandbox_security_diagnostics": [
+    {
+      "text": "Blocked script execution in 'about:srcdoc' because the document's frame is sandboxed and the 'allow-scripts' permission is not set.",
+      "location": {
+        "url": "about:srcdoc",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Blocked script execution in 'about:srcdoc' because the document's frame is sandboxed and the 'allow-scripts' permission is not set.",
+      "location": {
+        "url": "about:srcdoc",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Blocked script execution in 'about:srcdoc' because the document's frame is sandboxed and the 'allow-scripts' permission is not set.",
+      "location": {
+        "url": "about:srcdoc",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Blocked script execution in 'about:srcdoc' because the document's frame is sandboxed and the 'allow-scripts' permission is not set.",
+      "location": {
+        "url": "about:srcdoc",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Blocked script execution in 'about:srcdoc' because the document's frame is sandboxed and the 'allow-scripts' permission is not set.",
+      "location": {
+        "url": "about:srcdoc",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Blocked script execution in 'about:srcdoc' because the document's frame is sandboxed and the 'allow-scripts' permission is not set.",
+      "location": {
+        "url": "about:srcdoc",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Blocked opening 'https://example.invalid/presentation-source' in a new window because the request was made in a sandboxed frame whose 'allow-popups' permission is not set.",
+      "location": {
+        "url": "about:srcdoc",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Blocked script execution in 'about:srcdoc' because the document's frame is sandboxed and the 'allow-scripts' permission is not set.",
+      "location": {
+        "url": "about:srcdoc",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Blocked script execution in 'about:srcdoc' because the document's frame is sandboxed and the 'allow-scripts' permission is not set.",
+      "location": {
+        "url": "about:srcdoc",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Blocked script execution in 'about:srcdoc' because the document's frame is sandboxed and the 'allow-scripts' permission is not set.",
+      "location": {
+        "url": "about:srcdoc",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Blocked script execution in 'about:srcdoc' because the document's frame is sandboxed and the 'allow-scripts' permission is not set.",
+      "location": {
+        "url": "about:srcdoc",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Blocked script execution in 'about:srcdoc' because the document's frame is sandboxed and the 'allow-scripts' permission is not set.",
+      "location": {
+        "url": "about:srcdoc",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Blocked script execution in 'about:srcdoc' because the document's frame is sandboxed and the 'allow-scripts' permission is not set.",
+      "location": {
+        "url": "about:srcdoc",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Blocked script execution in 'about:srcdoc' because the document's frame is sandboxed and the 'allow-scripts' permission is not set.",
+      "location": {
+        "url": "about:srcdoc",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Blocked script execution in 'about:srcdoc' because the document's frame is sandboxed and the 'allow-scripts' permission is not set.",
+      "location": {
+        "url": "about:srcdoc",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Blocked script execution in 'about:srcdoc' because the document's frame is sandboxed and the 'allow-scripts' permission is not set.",
+      "location": {
+        "url": "about:srcdoc",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Blocked script execution in 'about:srcdoc' because the document's frame is sandboxed and the 'allow-scripts' permission is not set.",
+      "location": {
+        "url": "about:srcdoc",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Blocked script execution in 'about:srcdoc' because the document's frame is sandboxed and the 'allow-scripts' permission is not set.",
+      "location": {
+        "url": "about:srcdoc",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "captures": [
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\바깥출처링크_메모리응답.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\HTML_재열기_표도식.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\PDF_페이지_1.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\PDF_페이지_2.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\PDF_페이지_3.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\뷰어_1440x900.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\뷰어_390x844.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\뷰어_844x390.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\조회실패_명시재시도.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\지연_close_성공.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\지연_close_실패.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\지연_replay-before-submitted_성공.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\지연_replay-before-submitted_실패.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\지연_other-report_성공.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\지연_other-report_실패.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\삭제후_bf1da3ec7c8c4a5da237ae3af4a6eef7_지연성공.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\삭제후_b1cb23c8d01f446f8279544ab35338be_지연실패.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\삭제후_e418bc57a47d4081a039bfb20566828c_지연성공.png"
+  ],
+  "started_at": "2026-11-09T03:20:15.718561+00:00",
+  "reports": [
+    {
+      "report_id": "e418bc57a47d4081a039bfb20566828c",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "title": "합성 실행 제어 시험 보고서",
+      "markdown": "# 합성 실행 제어 시험 보고서\n\n실제 LLM 미사용: 테스트 대역의 합성 결과입니다.\n\n현재 지시: 표현 통합 합성 시험 A\n\n## 1. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 1절: 표현 통합 합성 시험 A\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n## 2. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 2절: 표현 통합 합성 시험 A\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n## 3. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 3절: 표현 통합 합성 시험 A\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n## 4. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 4절: 표현 통합 합성 시험 A\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n\n## 표현 검사용 합성 표\n\n| 항목 | 값 | 출처 |\n|---|---|---|\n| 한글 보존 | 검증값 42 | «합성문서-1» |\n| 파이프 | 가\\|나 | «합성문서-2» |\n\n## 합성 도식 · 실제 연구 결과 아님\n\n검증용 흐름 설명입니다. «합성문서-1»\n\n```svg\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 160\"><title>합성 검증 도식</title><desc>입력에서 보고서까지 · 시험 대역</desc><rect x=\"10\" y=\"15\" width=\"580\" height=\"130\" fill=\"#eef4ff\" stroke=\"#234567\"/><text x=\"35\" y=\"85\" font-size=\"24\" fill=\"#123456\">입력 → 합성 표 → 보고서</text></svg>\n```\n\n[검증용 출처 한글](https://example.invalid/presentation-source)\n\n<script>window.__presentationUnsafe=true</script>\n\n![차단된 외부 이미지](https://example.invalid/blocked.png)\n",
+      "sha256": "4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3",
+      "created_at": "2026-11-09T03:20:20.252803+00:00",
+      "download_url": "/api/spike/reports/e418bc57a47d4081a039bfb20566828c/download",
+      "source_mode": "local"
+    },
+    {
+      "report_id": "b1cb23c8d01f446f8279544ab35338be",
+      "run_id": "ec754d3b38464a88b91d94f17dc66f66",
+      "control_revision": 1,
+      "title": "합성 실행 제어 시험 보고서",
+      "markdown": "# 합성 실행 제어 시험 보고서\n\n실제 LLM 미사용: 테스트 대역의 합성 결과입니다.\n\n현재 지시: 표현 통합 합성 시험 B\n\n## 1. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 B / 합성 시험 1절: 표현 통합 합성 시험 B\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n## 2. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 B / 합성 시험 2절: 표현 통합 합성 시험 B\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n## 3. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 B / 합성 시험 3절: 표현 통합 합성 시험 B\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n## 4. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 B / 합성 시험 4절: 표현 통합 합성 시험 B\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n\n## 표현 검사용 합성 표\n\n| 항목 | 값 | 출처 |\n|---|---|---|\n| 한글 보존 | 검증값 42 | «합성문서-1» |\n| 파이프 | 가\\|나 | «합성문서-2» |\n\n## 합성 도식 · 실제 연구 결과 아님\n\n검증용 흐름 설명입니다. «합성문서-1»\n\n```svg\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 160\"><title>합성 검증 도식</title><desc>입력에서 보고서까지 · 시험 대역</desc><rect x=\"10\" y=\"15\" width=\"580\" height=\"130\" fill=\"#eef4ff\" stroke=\"#234567\"/><text x=\"35\" y=\"85\" font-size=\"24\" fill=\"#123456\">입력 → 합성 표 → 보고서</text></svg>\n```\n\n[검증용 출처 한글](https://example.invalid/presentation-source)\n\n<script>window.__presentationUnsafe=true</script>\n\n![차단된 외부 이미지](https://example.invalid/blocked.png)\n",
+      "sha256": "8c9bff3edefe2c5d64258ab5489766d18081fc3b9101e155d075c49d4d604a0f",
+      "created_at": "2026-11-09T03:20:20.781748+00:00",
+      "download_url": "/api/spike/reports/b1cb23c8d01f446f8279544ab35338be/download",
+      "source_mode": "local"
+    },
+    {
+      "report_id": "bf1da3ec7c8c4a5da237ae3af4a6eef7",
+      "run_id": "e85276b1cb10419cb9fbda69670d2273",
+      "control_revision": 1,
+      "title": "합성 실행 제어 시험 보고서",
+      "markdown": "# 합성 실행 제어 시험 보고서\n\n실제 LLM 미사용: 테스트 대역의 합성 결과입니다.\n\n현재 지시: 표현 통합 합성 시험 C\n\n## 1. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 C / 합성 시험 1절: 표현 통합 합성 시험 C\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n## 2. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 C / 합성 시험 2절: 표현 통합 합성 시험 C\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n## 3. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 C / 합성 시험 3절: 표현 통합 합성 시험 C\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n## 4. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 C / 합성 시험 4절: 표현 통합 합성 시험 C\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n\n## 표현 검사용 합성 표\n\n| 항목 | 값 | 출처 |\n|---|---|---|\n| 한글 보존 | 검증값 42 | «합성문서-1» |\n| 파이프 | 가\\|나 | «합성문서-2» |\n\n## 합성 도식 · 실제 연구 결과 아님\n\n검증용 흐름 설명입니다. «합성문서-1»\n\n```svg\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 160\"><title>합성 검증 도식</title><desc>입력에서 보고서까지 · 시험 대역</desc><rect x=\"10\" y=\"15\" width=\"580\" height=\"130\" fill=\"#eef4ff\" stroke=\"#234567\"/><text x=\"35\" y=\"85\" font-size=\"24\" fill=\"#123456\">입력 → 합성 표 → 보고서</text></svg>\n```\n\n[검증용 출처 한글](https://example.invalid/presentation-source)\n\n<script>window.__presentationUnsafe=true</script>\n\n![차단된 외부 이미지](https://example.invalid/blocked.png)\n",
+      "sha256": "78d88e4539bdc12b0583e556bc7977bc85f44c875aafb2bb4094e7d0191505d5",
+      "created_at": "2026-11-09T03:20:21.309633+00:00",
+      "download_url": "/api/spike/reports/bf1da3ec7c8c4a5da237ae3af4a6eef7/download",
+      "source_mode": "local"
+    }
+  ],
+  "input_hashes_at_start": {
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\앱.py": "c0e2ac3d3e4d1ce220df4fa4a0233349c273e60c2c4f15a0072beeca2324bc74",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서표현.py": "826063df92b15d394717fe962049426a71e64e6c96e4ee899f8ce3a24b94e2e8",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서변환.py": "6dbd31927da7a23e2f6651605274e0df3127db5ae7ae460c65ab6e4331d729fc",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서도식.py": "ddf5c42d46bc86dfe883714ffb5f8666c765a541142acf26febca4f1651ced48",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\상세보기.tsx": "bd8e7dc833982ff257c3d058216959d255268be2f842ba1b993f71a0fa12d099",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\보고서표현.tsx": "d48762e3ebf76a5c93ebc67b42151b3de0af14e31201d1c69f9007e3f246b41b",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\browserAll-D6cpW_4c.js": "c33180c762851f4147e9a55d5cdc0c1b9df888a11275e718dfe5d74720e6af09",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\Cache-CTROkX_m.js": "1362d81633b62e495b282f17617beb74083f16064864156e04949a07fa9ae0cf",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\CanvasPool-DzuCm1vb.js": "edde6aa9084e7f5958ad3f9a1437ea82c2406913957ef01be12296ca951373f1",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\canvasUtils-U4WZZEj-.js": "c0a01018402f30d7e9ad35ae43fafc8c490899236e6f28c8c4c8095fd066d448",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\Filter-vpEaIMwd.js": "e802a7ce1c4d21948131c5d247ee9db7f33376b17678d973d22ae0296f1935fc",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\GCManagedHash-DCvVepMX.js": "f9c36545f614350af3b653bd4e603e590afad27332ad79133fb661180406b312",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\getTexelRangeRects-Bdv1rQ51.js": "baa0c3c95a387acb0bf72e4b440a0ffc947f8bfcb34bfd462c32a10bbe53c665",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\getTextureBatchBindGroup-CEQHRttu.js": "f820ad942542bd39943bfcbc6073fa6d5237ee8fe574a36f8a4d22ae67c9558a",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\GraphicsContext-48tzdr3Q.js": "26553fe11bde03fcc13af77e92b26890e5b7f7ec1b791ad26634a133b670a7dc",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\index-BoCJVO8M.js": "331f9110b171d45d89161f222347a0b8788b43fccd26890f821a2b6012316faa",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\index-CcRZevJm.css": "537ebc4f0880ee2c9ee9931feeabaaba2b581c6814c9f2ce0d25f14132e8de93",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\init-DoUXYMOj.js": "8aa920d822fab365c3d8f4dff6dd7daa2ef6d7d8979f4156b928684d79ac0af5",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\RenderTargetSystem-BK2ifv01.js": "76151e37944ac1989dd3632f63fdc2a7f8b897cd226583baa060db0c71ccd6b0",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\webworkerAll-eYJ9-kw-.js": "afa2d188d7ec56d7f62ad8bd8ac4b5455abeca2c33ab5011dfc733619bf98c94",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\index.html": "5d9d1180541eec97ca71a0bcaafe03bae3594e41e97e714ef94bb2dd817cbb30",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\마을_타일.png": "bea430eb9a11074b349587978f7eae8ea9b030a38a046bff240d662e5cb45b17",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\에셋_목록.json": "51306343fb1939344783559b14e70bb4bf9ffbdf101fc51b40cacfcedad91aad",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\인물_라이선스.txt": "97f92c9d60b7ba92e3d08d5061b614abcd01629c9bfcd26ca7b6c6c04e67ce58",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\조사관_1.png": "441290e7e62dfed6359b6fa3d94b07431208a6c99fefdb54e351286f6e464c97",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\조사관_2.png": "6f75115baf28df20b8a04bf9ef0d5608f4e91d306fa3bd198515174c2f05fe5e",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\조사관_3.png": "8a509790890837c4c378209f9aa24aebb54c39a4dde290c6581174782b30c0ca",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\조사관_4.png": "e120fdc8513fbd0c77b0dbc321c45d3e56d4a8b945fc23d7492211874c1a7b1c",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\조정자.png": "66f739c3b5c8d3890d963d04c7998bd310f1a80c4777d36a70d1e1a1dfcfc6c0",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\종합자.png": "13b9807ee13c5c1b860fcfdb988312784109b1316cf70570a8ec5e610eaf3f50",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\타운_라이선스.txt": "587587de795599e3d4795247503c45e023980c5c66b26b90c807909af26b303d"
+  },
+  "server_command": [
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\보고서품질_표현시험서버.py",
+    "--data-dir",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\표현실사용\\parent02\\데이터",
+    "--stop-file",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\표현실사용\\parent02\\소유시험서버_종료표식",
+    "--port",
+    "8794"
+  ],
+  "command": [
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\보고서품질_표현실사용검사.py",
+    "--label",
+    "parent02",
+    "--port",
+    "8794"
+  ],
+  "server_health": {
+    "status": "ok",
+    "mode": "spike",
+    "provider": "test-double",
+    "actual_model_requests": 0
+  },
+  "memory_route_navigations": [
+    "https://example.invalid/presentation-source"
+  ],
+  "pdf_browser_requests": [],
+  "real_renderer_invocations": [
+    {
+      "format": "html",
+      "report_id": "e418bc57a47d4081a039bfb20566828c"
+    },
+    {
+      "format": "pdf",
+      "report_id": "e418bc57a47d4081a039bfb20566828c"
+    }
+  ],
+  "input_hashes_at_end": {
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\앱.py": "c0e2ac3d3e4d1ce220df4fa4a0233349c273e60c2c4f15a0072beeca2324bc74",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서표현.py": "826063df92b15d394717fe962049426a71e64e6c96e4ee899f8ce3a24b94e2e8",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서변환.py": "6dbd31927da7a23e2f6651605274e0df3127db5ae7ae460c65ab6e4331d729fc",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서도식.py": "ddf5c42d46bc86dfe883714ffb5f8666c765a541142acf26febca4f1651ced48",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\상세보기.tsx": "bd8e7dc833982ff257c3d058216959d255268be2f842ba1b993f71a0fa12d099",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\보고서표현.tsx": "d48762e3ebf76a5c93ebc67b42151b3de0af14e31201d1c69f9007e3f246b41b",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\browserAll-D6cpW_4c.js": "c33180c762851f4147e9a55d5cdc0c1b9df888a11275e718dfe5d74720e6af09",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\Cache-CTROkX_m.js": "1362d81633b62e495b282f17617beb74083f16064864156e04949a07fa9ae0cf",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\CanvasPool-DzuCm1vb.js": "edde6aa9084e7f5958ad3f9a1437ea82c2406913957ef01be12296ca951373f1",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\canvasUtils-U4WZZEj-.js": "c0a01018402f30d7e9ad35ae43fafc8c490899236e6f28c8c4c8095fd066d448",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\Filter-vpEaIMwd.js": "e802a7ce1c4d21948131c5d247ee9db7f33376b17678d973d22ae0296f1935fc",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\GCManagedHash-DCvVepMX.js": "f9c36545f614350af3b653bd4e603e590afad27332ad79133fb661180406b312",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\getTexelRangeRects-Bdv1rQ51.js": "baa0c3c95a387acb0bf72e4b440a0ffc947f8bfcb34bfd462c32a10bbe53c665",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\getTextureBatchBindGroup-CEQHRttu.js": "f820ad942542bd39943bfcbc6073fa6d5237ee8fe574a36f8a4d22ae67c9558a",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\GraphicsContext-48tzdr3Q.js": "26553fe11bde03fcc13af77e92b26890e5b7f7ec1b791ad26634a133b670a7dc",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\index-BoCJVO8M.js": "331f9110b171d45d89161f222347a0b8788b43fccd26890f821a2b6012316faa",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\index-CcRZevJm.css": "537ebc4f0880ee2c9ee9931feeabaaba2b581c6814c9f2ce0d25f14132e8de93",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\init-DoUXYMOj.js": "8aa920d822fab365c3d8f4dff6dd7daa2ef6d7d8979f4156b928684d79ac0af5",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\RenderTargetSystem-BK2ifv01.js": "76151e37944ac1989dd3632f63fdc2a7f8b897cd226583baa060db0c71ccd6b0",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\assets\\webworkerAll-eYJ9-kw-.js": "afa2d188d7ec56d7f62ad8bd8ac4b5455abeca2c33ab5011dfc733619bf98c94",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\index.html": "5d9d1180541eec97ca71a0bcaafe03bae3594e41e97e714ef94bb2dd817cbb30",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\마을_타일.png": "bea430eb9a11074b349587978f7eae8ea9b030a38a046bff240d662e5cb45b17",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\에셋_목록.json": "51306343fb1939344783559b14e70bb4bf9ffbdf101fc51b40cacfcedad91aad",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\인물_라이선스.txt": "97f92c9d60b7ba92e3d08d5061b614abcd01629c9bfcd26ca7b6c6c04e67ce58",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\조사관_1.png": "441290e7e62dfed6359b6fa3d94b07431208a6c99fefdb54e351286f6e464c97",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\조사관_2.png": "6f75115baf28df20b8a04bf9ef0d5608f4e91d306fa3bd198515174c2f05fe5e",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\조사관_3.png": "8a509790890837c4c378209f9aa24aebb54c39a4dde290c6581174782b30c0ca",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\조사관_4.png": "e120fdc8513fbd0c77b0dbc321c45d3e56d4a8b945fc23d7492211874c1a7b1c",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\조정자.png": "66f739c3b5c8d3890d963d04c7998bd310f1a80c4777d36a70d1e1a1dfcfc6c0",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\종합자.png": "13b9807ee13c5c1b860fcfdb988312784109b1316cf70570a8ec5e610eaf3f50",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_화면\\에셋\\타운_라이선스.txt": "587587de795599e3d4795247503c45e023980c5c66b26b90c807909af26b303d"
+  },
+  "source_hashes": {
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\보고서품질_표현시험서버.py": "1ad5a5e717cf4093b3a633cf0f59c2b408cbbe1054358d99aefd680dbd7f9b7f",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\보고서품질_표현실사용검사.py": "fbabed72137b09f46cd33d9df58e97927fd38f2c00c7eca578d0fb0f5056ed95"
+  },
+  "summary": {
+    "total": 26,
+    "passed": 26,
+    "failed": [],
+    "browser_requests": 178,
+    "post_requests": 11,
+    "external_model_requests": 0,
+    "actual_external_http": 0,
+    "outside_memory_route_navigations": 1,
+    "sandbox_security_diagnostics": 18,
+    "expected_injected_http_503": 5
+  }
+}

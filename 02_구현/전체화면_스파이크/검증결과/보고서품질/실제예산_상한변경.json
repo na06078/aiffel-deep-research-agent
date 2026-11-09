@@ -1,0 +1,22 @@
+{
+  "before_policy": [
+    100,
+    2000000000,
+    27
+  ],
+  "after_policy": [
+    159,
+    2000000000,
+    27
+  ],
+  "preserved_rows": 127,
+  "current_attempts": 100,
+  "remaining_attempts": 59,
+  "unknown_count": 0,
+  "prefix_sha256": "3d6e17c92aefc23d2a6d0e7cf02e36f2e3b56e7d2e9940c5349e97bc8f3d7e73",
+  "spent_usd": 0.19670855,
+  "protected_originals_before": 13,
+  "installed_files_unchanged": 25,
+  "actual_new_model_attempts": 0,
+  "scope": "Only max_attempts changed. No reset; history, amounts and reset_after_rowid preserved."
+}

@@ -15,9 +15,7 @@ from 서버.교안연구 import (
     ResearchContractError,
     assemble_report,
     evaluate_report,
-    json_object,
     parse_plan,
-    parse_section,
     plan_prompt,
     read_prompt,
     required_text,
@@ -25,6 +23,7 @@ from 서버.교안연구 import (
     selection_prompt,
     synthesis_prompt,
 )
+from 서버.보고서품질 import parse_semantic, parse_synthesis, semantic_prompt, validate_section
 from 서버.실행제어 import ExecutionService
 from 서버.저장소 import encode, now, uid
 from 서버.활동기록 import measured_call, measured_node, start_call
@@ -518,7 +517,12 @@ class RealResearchService(ExecutionService):
             section_prompt(assignment, notes),
             inputs={"assignment": assignment, "notes": notes},
         )
-        section = {**assignment, **parse_section(raw), "읽은문서": read, "메모": notes}
+        section = {
+            **assignment,
+            **validate_section(raw, {d: self.corpus.docs[d] for d in read}),
+            "읽은문서": read,
+            "메모": notes,
+        }
         section["인용"] = re.findall(r"«([^»]+)»", section["본문"])
         section["허위인용"] = sorted(set(section["인용"]) - set(read))
         self.check(state)
@@ -617,6 +621,7 @@ class RealResearchService(ExecutionService):
     async def synthesize(self, state):
         self.check(state)
         sections = latest_sections(state["results"])
+        read_sources = {d for s in sections for d in s["읽은문서"]}
         raw = await self.complete(
             state,
             "editor",
@@ -624,22 +629,26 @@ class RealResearchService(ExecutionService):
             synthesis_prompt(state["question"], state["title"], sections),
             inputs={
                 "title": state["title"],
-                "outline": [{"title": s["title"], "opening": s["본문"][:90]} for s in sections],
+                "sections": sections,
             },
         )
-        obj = json_object(raw, "synthesize")
+        obj = parse_synthesis(raw, read_sources)
         introduction = required_text(obj, "머리말", "synthesize")
         conclusion = required_text(obj, "맺음말", "synthesize")
         if state.get("source_mode", "local") == "web":
             _, sections, sources = 웹연구.evidence(self, state, sections)
-            draft = 웹연구.assemble(state["title"], introduction, conclusion, sections, sources)
+            draft = 웹연구.assemble(
+                state["title"], introduction, conclusion, sections, sources, obj
+            )
         else:
-            draft = assemble_report(state["title"], introduction, conclusion, sections, self.corpus)
+            draft = assemble_report(
+                state["title"], introduction, conclusion, sections, self.corpus, obj
+            )
         with self.repo.transaction() as (db, data):
             run = self.repo.fenced(data, state["run_id"], state["revision"])
             if not run:
                 raise SupersededResearch()
-            run.update(draft=draft, phase="evaluating")
+            run.update(draft=draft, phase="evaluating", visual_summary=obj)
             self.repo.save_revision(db, run)
             self.repo.event(
                 db,
@@ -706,6 +715,81 @@ class RealResearchService(ExecutionService):
             ):
                 quality["reasons"].append("web_sources_insufficient")
                 quality["passed"] = False
+            for section in sections:
+                try:
+                    validate_section(
+                        encode(section),
+                        {
+                            d: corpus.docs[d][:20000]
+                            if state.get("source_mode", "local") == "web"
+                            else corpus.docs[d]
+                            for d in section["읽은문서"]
+                        },
+                    )
+                except ResearchContractError:
+                    if "evidence_integrity_error" not in quality["reasons"]:
+                        quality["reasons"].append("evidence_integrity_error")
+                    quality["passed"] = False
+            read_sources = {d for s in sections for d in s["읽은문서"]}
+            try:
+                parse_synthesis(encode(run["visual_summary"]), read_sources)
+            except ResearchContractError:
+                quality["reasons"].append("visual_integrity_error")
+                quality["passed"] = False
+            semantic = run.get("semantic_review_state", {})
+            invoke = quality["passed"] and semantic.get("revision") != state["revision"]
+            if invoke:
+                run["semantic_review_state"] = {"revision": state["revision"], "status": "pending"}
+                self.repo.save_revision(db, run)
+            elif quality["passed"] and semantic.get("status") == "pending":
+                # 같은 revision의 동시 evaluate는 이미 예약한 호출의 완료만 기다린다.
+                return {}
+        # complete()의 시도/저널 콜백도 DB를 쓰므로 write transaction 밖에서만 await한다.
+        if quality["passed"]:
+            raw = (
+                await self.complete(
+                    state,
+                    "evaluator",
+                    "semantic_review",
+                    semantic_prompt(state["draft"], sections),
+                    inputs={"draft": state["draft"], "evidence": [s["근거"] for s in sections]},
+                )
+                if invoke
+                else semantic["raw"]
+            )
+            self.check(state)
+            quality["semantic_review_raw"] = raw
+            try:
+                decision = parse_semantic(raw, read_sources)
+                quality["semantic_review"] = decision
+                if not decision["통과"]:
+                    quality["reasons"].append("semantic_review_failed")
+                    quality["passed"] = False
+            except ResearchContractError:
+                quality["reasons"].append("semantic_review_invalid")
+                quality["passed"] = False
+        with self.repo.transaction() as (db, data):
+            run = self.repo.fenced(data, state["run_id"], state["revision"])
+            if not run:
+                raise SupersededResearch()
+            if "semantic_review_raw" in quality:
+                run["semantic_review_state"] = {
+                    "revision": state["revision"],
+                    "status": "completed",
+                    "raw": quality["semantic_review_raw"],
+                }
+                self.repo.event(
+                    db,
+                    state["run_id"],
+                    state["revision"],
+                    "semantic_review.evaluated",
+                    "evaluator",
+                    output={
+                        "raw": quality["semantic_review_raw"],
+                        "decision": quality.get("semantic_review"),
+                    },
+                )
+            quality["metrics"]["LLM호출"] = run["actual_model_requests"]
             run["quality"] = quality
             if state.get("source_mode", "local") == "web":
                 run["source_provenance"] = provenance

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="0.327" timestamp="2026-11-09T12:47:17.180893+09:00" hostname="z13flow"><testcase classname="테스트.테스트_보고서품질_실모델점검" name="test_provider_failure_keeps_only_safe_code_status_and_bound_attempt[True]" time="0.033"><failure message="KeyError: 'provider_error'">known = True
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/안전오류_RED/test_provider_failure_keeps_on0')
+
+    @pytest.mark.parametrize("known", [True, False])
+    def test_provider_failure_keeps_only_safe_code_status_and_bound_attempt(known, tmp_path):
+        error = RuntimeError("DO-NOT-LOG-provider-secret")
+        error.code = "provider_http" if known else "DO-NOT-LOG-provider-secret"
+        error.status = 429 if known else "DO-NOT-LOG-provider-secret"
+        error.attempt_id = "fake-0-0" if known else "DO-NOT-LOG-provider-secret"
+        model = ModelDouble({0: error})
+        result = asyncio.run(probe.run_probe(model=model, work=tmp_path))
+        expected = (
+            {"code": "provider_http", "status": 429, "attempt_id": "fake-0-0"}
+            if known else {"code": "unclassified"}
+        )
+&gt;       assert result["provider_error"] == expected
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'provider_error'
+
+02_구현\전체화면_스파이크\테스트\테스트_보고서품질_실모델점검.py:167: KeyError</failure></testcase><testcase classname="테스트.테스트_보고서품질_실모델점검" name="test_provider_failure_keeps_only_safe_code_status_and_bound_attempt[False]" time="0.031"><failure message="KeyError: 'provider_error'">known = False
+tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/안전오류_RED/test_provider_failure_keeps_on1')
+
+    @pytest.mark.parametrize("known", [True, False])
+    def test_provider_failure_keeps_only_safe_code_status_and_bound_attempt(known, tmp_path):
+        error = RuntimeError("DO-NOT-LOG-provider-secret")
+        error.code = "provider_http" if known else "DO-NOT-LOG-provider-secret"
+        error.status = 429 if known else "DO-NOT-LOG-provider-secret"
+        error.attempt_id = "fake-0-0" if known else "DO-NOT-LOG-provider-secret"
+        model = ModelDouble({0: error})
+        result = asyncio.run(probe.run_probe(model=model, work=tmp_path))
+        expected = (
+            {"code": "provider_http", "status": 429, "attempt_id": "fake-0-0"}
+            if known else {"code": "unclassified"}
+        )
+&gt;       assert result["provider_error"] == expected
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'provider_error'
+
+02_구현\전체화면_스파이크\테스트\테스트_보고서품질_실모델점검.py:167: KeyError</failure></testcase></testsuite></testsuites>

@@ -155,3 +155,121 @@ async def test_실제_격리_Chromium_PDF는_한글인용출처와_여러페이�
         assert "한글 변환 보고서" in full
         assert "«검증문서»" in full and "CC-BY" in full
         assert "절 39" in full
+
+
+def test_실제_HTML_PDF의_표_한글_SVG는_반응형과_인쇄영역을_보존한다(tmp_path):
+    """제품 앱 E2E가 아니라 프로젝트 전용 headless 렌더러/레이아웃 검사."""
+    import asyncio
+    import hashlib
+    import json
+    from pathlib import Path
+
+    import pypdfium2 as pdfium
+    from playwright.sync_api import sync_playwright
+
+    from 서버.보고서표현 import render_presentation
+    from 테스트.테스트_보고서표현 import MARKDOWN
+
+    markdown = (
+        MARKDOWN
+        + (
+            "\n\n| 긴 셀 | 값 |\n| --- | --- |\n| "
+            + "긴문자열" * 65
+            + " | 끝셀표식 |\n\n"
+            + "\n\n".join(
+                "## 인쇄 절 " + str(i) + "\n\n한글 본문 «출처문서» CC-BY. " * 8 for i in range(12)
+            )
+        ).encode()
+    )
+    presentation = render_presentation(markdown, {"title": "표 도식 검사"})
+    html = presentation["html"].encode()
+    executable = (
+        Path(__file__).resolve().parents[3]
+        / ".cache/playwright/chromium-1248/chrome-win64/chrome.exe"
+    )
+    requests = []
+    layouts = []
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(
+            executable_path=str(executable),
+            headless=True,
+            args=["--disable-background-networking", "--disable-component-update"],
+        )
+        try:
+            context = browser.new_context(
+                java_script_enabled=False, service_workers="block", offline=True
+            )
+            context.route("**/*", lambda route: route.abort())
+            page = context.new_page()
+            page.on("request", lambda request: requests.append(request.url))
+            for width in [1440, 390]:
+                page.set_viewport_size({"width": width, "height": 800})
+                page.set_content(html.decode(), wait_until="load")
+                layout = page.evaluate("""() => ({width: innerWidth, scroll: document.documentElement.scrollWidth,
+                    labels: [...document.querySelectorAll('svg text')].map(e => {const r=e.getBoundingClientRect(); return {text:e.textContent,left:r.left,right:r.right,height:r.height}}),
+                    cells: [...document.querySelectorAll('th,td')].map(e=>({client:e.clientWidth,scroll:e.scrollWidth}))})""")
+                assert layout["scroll"] <= width, layout
+                assert all(cell["scroll"] <= cell["client"] + 1 for cell in layout["cells"]), layout
+                assert all(
+                    label["left"] >= 0 and label["right"] <= width and label["height"] >= 14
+                    for label in layout["labels"]
+                ), layout
+                layouts.append(layout)
+            page.emulate_media(media="print")
+            assert page.locator("svg").count() == 1 and page.locator("table").count() == 2
+        finally:
+            browser.close()
+    assert requests == [], requests
+    # 실제 제품 PDF 진입점(소유 스레드/Proactor)도 통과시킨다.
+    pdf = asyncio.run(render_report(markdown, "pdf", {"title": "표 도식 검사"}))
+    (tmp_path / "표도식_정본.md").write_bytes(markdown)
+    (tmp_path / "표도식_표현.html").write_bytes(html)
+    (tmp_path / "표도식_출력.pdf").write_bytes(pdf)
+    texts = []
+    boxes = 0
+    with pdfium.PdfDocument(pdf) as document:
+        pages = len(document)
+        assert pages >= 2
+        for page in document:
+            try:
+                textpage = page.get_textpage()
+                try:
+                    texts.append(textpage.get_text_range())
+                    width, height = page.get_size()
+                    for index in range(textpage.count_chars()):
+                        left, bottom, right, top = textpage.get_charbox(index)
+                        if right > left and top > bottom:
+                            assert 0 <= left <= right <= width and 0 <= bottom <= top <= height
+                            boxes += 1
+                finally:
+                    textpage.close()
+            finally:
+                page.close()
+    full = "\n".join(texts)
+    for expected in [
+        "한글 보고서",
+        "한글 자료 흐름",
+        "수집에서 검토로 진행",
+        "수집",
+        "검토",
+        "끝셀표식",
+        "인쇄 절 11",
+        "CC-BY",
+    ]:
+        assert expected in full, expected
+    (tmp_path / "표도식_검증.json").write_text(
+        json.dumps(
+            {
+                "html_sha256": hashlib.sha256(html).hexdigest(),
+                "pdf_sha256": hashlib.sha256(pdf).hexdigest(),
+                "pages": pages,
+                "checked_character_boxes": boxes,
+                "external_requests": requests,
+                "layouts": layouts,
+                "pdf_text": full,
+            },
+            ensure_ascii=False,
+            indent=2,
+        ),
+        encoding="utf-8",
+    )

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="6" skipped="0" tests="6" time="0.303" timestamp="2026-11-09T11:55:11.014679+09:00" hostname="z13flow"><testcase classname="테스트.테스트_교안연구" name="test_링크의_숨은_부분은_본문분량과_인용으로_인정하지_않는다[title]" time="0.003"><failure message="AssertionError: assert 'body_under_2000' in []">hidden_in = 'title'
+
+    @pytest.mark.parametrize("hidden_in", ["title", "destination", "reference"])
+    def test_링크의_숨은_부분은_본문분량과_인용으로_인정하지_않는다(hidden_in):
+        hidden = "숨은 내용" * 600 + " «A»"
+        if hidden_in == "title":
+            markdown = f'[자료](https://example.invalid/source "{hidden}")'
+        elif hidden_in == "destination":
+            markdown = "[자료](https://example.invalid/" + "x" * 3000 + "«A»)"
+        else:
+            markdown = f'[자료][ref]\n\n[ref]: https://example.invalid/source "{hidden}"'
+        corpus = Corpus.from_data({"docs": {"A": "확인한 자료"}, "links": {}})
+        section = {"section_id": "section-1", "본문": markdown, "읽은문서": ["A"]}
+        quality = evaluate_report("# 제목\n\n" + markdown, [section], corpus)
+&gt;       assert "body_under_2000" in quality["reasons"]
+E       AssertionError: assert 'body_under_2000' in []
+
+테스트\테스트_교안연구.py:132: AssertionError</failure></testcase><testcase classname="테스트.테스트_교안연구" name="test_링크의_숨은_부분은_본문분량과_인용으로_인정하지_않는다[destination]" time="0.004"><failure message="AssertionError: assert 'body_under_2000' in []">hidden_in = 'destination'
+
+    @pytest.mark.parametrize("hidden_in", ["title", "destination", "reference"])
+    def test_링크의_숨은_부분은_본문분량과_인용으로_인정하지_않는다(hidden_in):
+        hidden = "숨은 내용" * 600 + " «A»"
+        if hidden_in == "title":
+            markdown = f'[자료](https://example.invalid/source "{hidden}")'
+        elif hidden_in == "destination":
+            markdown = "[자료](https://example.invalid/" + "x" * 3000 + "«A»)"
+        else:
+            markdown = f'[자료][ref]\n\n[ref]: https://example.invalid/source "{hidden}"'
+        corpus = Corpus.from_data({"docs": {"A": "확인한 자료"}, "links": {}})
+        section = {"section_id": "section-1", "본문": markdown, "읽은문서": ["A"]}
+        quality = evaluate_report("# 제목\n\n" + markdown, [section], corpus)
+&gt;       assert "body_under_2000" in quality["reasons"]
+E       AssertionError: assert 'body_under_2000' in []
+
+테스트\테스트_교안연구.py:132: AssertionError</failure></testcase><testcase classname="테스트.테스트_교안연구" name="test_링크의_숨은_부분은_본문분량과_인용으로_인정하지_않는다[reference]" time="0.002"><failure message="AssertionError: assert 'body_under_2000' in []">hidden_in = 'reference'
+
+    @pytest.mark.parametrize("hidden_in", ["title", "destination", "reference"])
+    def test_링크의_숨은_부분은_본문분량과_인용으로_인정하지_않는다(hidden_in):
+        hidden = "숨은 내용" * 600 + " «A»"
+        if hidden_in == "title":
+            markdown = f'[자료](https://example.invalid/source "{hidden}")'
+        elif hidden_in == "destination":
+            markdown = "[자료](https://example.invalid/" + "x" * 3000 + "«A»)"
+        else:
+            markdown = f'[자료][ref]\n\n[ref]: https://example.invalid/source "{hidden}"'
+        corpus = Corpus.from_data({"docs": {"A": "확인한 자료"}, "links": {}})
+        section = {"section_id": "section-1", "본문": markdown, "읽은문서": ["A"]}
+        quality = evaluate_report("# 제목\n\n" + markdown, [section], corpus)
+&gt;       assert "body_under_2000" in quality["reasons"]
+E       AssertionError: assert 'body_under_2000' in []
+
+테스트\테스트_교안연구.py:132: AssertionError</failure></testcase><testcase classname="테스트.테스트_보고서품질" name="test_링크_title에만_숨긴_주장은_가시본문의_근거로_통과하지_않는다" time="0.001"><failure message="Failed: DID NOT RAISE ResearchContractError">def test_링크_title에만_숨긴_주장은_가시본문의_근거로_통과하지_않는다():
+        value = section()
+        value["본문"] = '[자료](https://example.invalid/source "1894년 7월 23일 사건이 있었다.") «자료A»'
+&gt;       with pytest.raises(ResearchContractError, match="claim not in visible body"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ResearchContractError
+
+테스트\테스트_보고서품질.py:65: Failed</failure></testcase><testcase classname="테스트.테스트_보고서품질" name="test_실제_표와_인라인코드와_강조는_보이는_문자로_추출한다" time="0.001"><failure message="AssertionError: assert '| 항목 | 값 |\n...\(A\\)\\.B» |' == '항목\n값\n날짜\n1894년 «자료(A).B»'&#10;  &#10;  + | 항목 | 값 |&#10;  + |---|---|&#10;  + | **날짜** | `1894년` «자료\(A\)\.B» |&#10;  - 항목&#10;  - 값&#10;  - 날짜&#10;  - 1894년 «자료(A).B»">def test_실제_표와_인라인코드와_강조는_보이는_문자로_추출한다():
+        markdown = '| 항목 | 값 |\n|---|---|\n| **날짜** | `1894년` «자료\\(A\\)\\.B» |'
+&gt;       assert visible_markdown(markdown) == '항목\n값\n날짜\n1894년 «자료(A).B»'
+E       AssertionError: assert '| 항목 | 값 |\n...\(A\\)\\.B» |' == '항목\n값\n날짜\n1894년 «자료(A).B»'
+E         
+E         + | 항목 | 값 |
+E         + |---|---|
+E         + | **날짜** | `1894년` «자료\(A\)\.B» |
+E         - 항목
+E         - 값
+E         - 날짜
+E         - 1894년 «자료(A).B»
+
+테스트\테스트_보고서품질.py:71: AssertionError</failure></testcase><testcase classname="테스트.테스트_보고서품질" name="test_강조표시가_있는_가시주장은_원문과_연결할_수_있다" time="0.001"><failure message="서버.교안연구.ResearchContractError: section evidence: claim not in visible body">def test_강조표시가_있는_가시주장은_원문과_연결할_수_있다():
+        value = section()
+        value["본문"] = '**1894년** 7월 23일 사건이 있었다. «자료A»'
+&gt;       actual = validate_section(dump(value), {"자료A": "1894년 7월 23일 사건이 있었다."})
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+테스트\테스트_보고서품질.py:77: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+raw = '{"본문": "**1894년** 7월 23일 사건이 있었다. «자료A»", "충분": true, "부족": "", "근거": [{"주장": "1894년 7월 23일 사건이 있었다.", "출처": "자료A", "인용문": "1894년 7월 23일 사건이 있었다."}]}'
+sources = {'자료A': '1894년 7월 23일 사건이 있었다.'}
+
+    def validate_section(raw, sources):
+        """sources는 호출자가 같은 버전/절의 실제 읽기로 한정한 원문이다."""
+        section = parse_section(raw)
+        obj = json_object(raw, "section evidence")
+        items = obj.get("근거")
+        if not isinstance(items, list) or len(items) &gt; 16 or (section["충분"] and not items):
+            raise ResearchContractError("section evidence: list required, 1..16 when sufficient")
+        body = normalized(visible_markdown(section["본문"]))
+        for item in items:
+            if not isinstance(item, dict):
+                raise ResearchContractError("section evidence: object required")
+            claim = required_text(item, "주장", "section evidence")
+            source = required_text(item, "출처", "section evidence")
+            quote = required_text(item, "인용문", "section evidence")
+            if source not in sources:
+                raise ResearchContractError("section evidence: source not read by this section")
+            if not 10 &lt;= len(quote) &lt;= 400 or normalized(quote) not in normalized(sources[source]):
+                raise ResearchContractError("section evidence: quote not in read source")
+            if normalized(claim) not in body:
+&gt;               raise ResearchContractError("section evidence: claim not in visible body")
+E               서버.교안연구.ResearchContractError: section evidence: claim not in visible body
+
+서버\보고서품질.py:47: ResearchContractError</failure></testcase></testsuite></testsuites>

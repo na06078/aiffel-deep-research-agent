@@ -1,0 +1,20 @@
+{
+  "original_review": "독립표현검토.json",
+  "original_verdict_preserved": "changes_requested",
+  "PRES-01": {
+    "status": "main_reproduced_and_fixed",
+    "root_cause": "빈 sandbox와 CSP는 iframe 자체의 일반 앵커 탐색을 막지 않는다. HTTP링크 기본 target이 자기 프레임이었다.",
+    "behavioral_red": {"file": "링크_RED.xml", "failed": 2, "real_browser_observation": "내부 링크 클릭으로 example.invalid/source 탐색 요청1이 memory route에 관측됨"},
+    "fix": "공통 HTTP link_open 토큰에 target=_blank와 rel=noopener noreferrer 명시; iframe sandbox 권한은 비워 유지",
+    "green": {"file": "링크_GREEN.xml", "passed": 14, "exit_code": 0, "checks": ["내부 클릭 후 정본 유지·탐색 요청0", "바깥 링크 클릭은 별도 탭", "바깥 링크 요청은 Playwright memory route로만 응답", "표현/정본/삭제 API 관련 회귀"]},
+    "external_site_transmissions": 0
+  },
+  "PRES-02": {
+    "status": "main_red_green_verified",
+    "green": {"owned_frontend_tests_passed": 37, "typescript_exit_code": 0},
+    "behavioral_red": "Vitest 상세보기.test.tsx의 호환성 안내 assertion1개 FAIL (기존4개는 선택 제외)",
+    "fix": "Markdown 다운로드 옆에 외부 Markdown은 SVG 코드로 보일 수 있고 앱/HTML/PDF는 도식으로 표시한다는 안내"
+  },
+  "not_claimed": ["수정 뒤 독립 재검토 통과", "실제 생성기 의미 품질", "운영 적용"],
+  "next": "수정 UI 대상 회귀/후보 재빌드 및 실제 앱 브라우저 경로 최종 확인"
+}

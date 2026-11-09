@@ -1,0 +1,122 @@
+{
+  "trials": [
+    {
+      "cache": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\live-3bec7c44c4724d66993422dc050079a2",
+      "start": 100,
+      "end": 101,
+      "attempts": 1,
+      "passed": false,
+      "stage": "section",
+      "replayed_error": "section evidence: claim not in visible body",
+      "receipt_ids": [
+        "03d1dadfb1a844cdb3fc2a63e88f2db7"
+      ],
+      "request_ids": [
+        "req_1bd368f18e094df6a75f1c435b675e52"
+      ],
+      "all_models_luna": true,
+      "claims": 8,
+      "bad_claim_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "bad_quote_indices": [],
+      "estimated_cost_usd": "0.0018006"
+    },
+    {
+      "cache": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\live-c2be615c53354e86b9cb5472588325ad",
+      "start": 101,
+      "end": 102,
+      "attempts": 1,
+      "passed": false,
+      "stage": "section",
+      "replayed_error": "section evidence: quote not in read source",
+      "receipt_ids": [
+        "305dc19b886b4ed585a2d80e875b6611"
+      ],
+      "request_ids": [
+        "req_dfa0405af1cc4eeca16e882d04e7a5bc"
+      ],
+      "all_models_luna": true,
+      "claims": 7,
+      "bad_claim_indices": [],
+      "bad_quote_indices": [
+        5,
+        6
+      ],
+      "estimated_cost_usd": "0.0026068"
+    },
+    {
+      "cache": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\live-c95bad864c7e405bbb567b416e653f86",
+      "start": 102,
+      "end": 103,
+      "attempts": 1,
+      "passed": false,
+      "stage": "section",
+      "replayed_error": "section evidence: quote not in read source",
+      "receipt_ids": [
+        "d4f2f2bdaa5b44abadafc8b12dbfa855"
+      ],
+      "request_ids": [
+        "req_65c17c173a0347f289c31b6ad8a6e82b"
+      ],
+      "all_models_luna": true,
+      "claims": 8,
+      "bad_claim_indices": [],
+      "bad_quote_indices": [
+        1
+      ],
+      "estimated_cost_usd": "0.0021986"
+    },
+    {
+      "cache": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\live-ada9f9e22e5f49f29d857d671d3b5984",
+      "start": 103,
+      "end": 104,
+      "attempts": 1,
+      "passed": false,
+      "stage": "section",
+      "replayed_error": "section evidence: quote not in read source",
+      "receipt_ids": [
+        "7e8198db2fc7468a9ac3cdb72ca3f54d"
+      ],
+      "request_ids": [
+        "req_cc82bfbabd554491af17f3af6be23ba7"
+      ],
+      "all_models_luna": true,
+      "claims": 7,
+      "bad_claim_indices": [],
+      "bad_quote_indices": [
+        1,
+        5
+      ],
+      "estimated_cost_usd": "0.0021362"
+    }
+  ],
+  "actual_new_attempts": 4,
+  "all_preflights_passed": false,
+  "generation_stage_only": true,
+  "model_synthesis_calls": 0,
+  "semantic_review_model_calls": 0,
+  "full_research_runs": 0,
+  "policy": [
+    165,
+    2000000000,
+    27
+  ],
+  "current_attempts": 104,
+  "remaining_attempts": 61,
+  "unknown_count": 0,
+  "total_app_estimated_usd": "0.20545075",
+  "new_app_estimated_usd": "0.0087422",
+  "original127_hash": "3d6e17c92aefc23d2a6d0e7cf02e36f2e3b56e7d2e9940c5349e97bc8f3d7e73",
+  "other_operating_files_unchanged": 12,
+  "installed_dist_files_unchanged": 25,
+  "new_live_data_created": false,
+  "gate": "No further model calls; both newly approved groups used. Full research prerequisite not met."
+}

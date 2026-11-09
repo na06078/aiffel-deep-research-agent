@@ -1,0 +1,1155 @@
+{
+  "protocol_version": 1,
+  "provider": "test-double",
+  "run": {
+    "run_id": "08aff38f4ac047838cdc69968f914d2b",
+    "question": "표현 통합 합성 시험 A",
+    "control_revision": 1,
+    "status": "completed",
+    "phase": "submitted",
+    "plan": [
+      {
+        "section_id": "section-1",
+        "title": "합성 시험 1절: 표현 통합 합성 시험 A",
+        "assignee": "researcher-1"
+      },
+      {
+        "section_id": "section-2",
+        "title": "합성 시험 2절: 표현 통합 합성 시험 A",
+        "assignee": "researcher-2"
+      },
+      {
+        "section_id": "section-3",
+        "title": "합성 시험 3절: 표현 통합 합성 시험 A",
+        "assignee": "researcher-3"
+      },
+      {
+        "section_id": "section-4",
+        "title": "합성 시험 4절: 표현 통합 합성 시험 A",
+        "assignee": "researcher-4"
+      }
+    ],
+    "report_id": "e418bc57a47d4081a039bfb20566828c",
+    "draft": "# 합성 실행 제어 시험 보고서\n\n실제 LLM 미사용: 테스트 대역의 합성 결과입니다.\n\n현재 지시: 표현 통합 합성 시험 A\n\n## 1. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 1절: 표현 통합 합성 시험 A\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n## 2. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 2절: 표현 통합 합성 시험 A\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n## 3. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 3절: 표현 통합 합성 시험 A\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n## 4. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 4절: 표현 통합 합성 시험 A\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n\n## 표현 검사용 합성 표\n\n| 항목 | 값 | 출처 |\n|---|---|---|\n| 한글 보존 | 검증값 42 | «합성문서-1» |\n| 파이프 | 가\\|나 | «합성문서-2» |\n\n## 합성 도식 · 실제 연구 결과 아님\n\n검증용 흐름 설명입니다. «합성문서-1»\n\n```svg\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 160\"><title>합성 검증 도식</title><desc>입력에서 보고서까지 · 시험 대역</desc><rect x=\"10\" y=\"15\" width=\"580\" height=\"130\" fill=\"#eef4ff\" stroke=\"#234567\"/><text x=\"35\" y=\"85\" font-size=\"24\" fill=\"#123456\">입력 → 합성 표 → 보고서</text></svg>\n```\n\n[검증용 출처 한글](https://example.invalid/presentation-source)\n\n<script>window.__presentationUnsafe=true</script>\n\n![차단된 외부 이미지](https://example.invalid/blocked.png)\n",
+    "quality": {
+      "passed": true,
+      "reasons": []
+    },
+    "parent_report_id": null,
+    "created_at": "2026-11-09T03:20:19.850749+00:00",
+    "updated_at": "2026-11-09T03:20:20.254388+00:00",
+    "mock_requests": 6,
+    "actual_model_requests": 0,
+    "source_mode": "local"
+  },
+  "revisions": [
+    {
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "question": "표현 통합 합성 시험 A",
+      "control_revision": 1,
+      "status": "completed",
+      "phase": "submitted",
+      "plan": [
+        {
+          "section_id": "section-1",
+          "title": "합성 시험 1절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-1"
+        },
+        {
+          "section_id": "section-2",
+          "title": "합성 시험 2절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-2"
+        },
+        {
+          "section_id": "section-3",
+          "title": "합성 시험 3절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-3"
+        },
+        {
+          "section_id": "section-4",
+          "title": "합성 시험 4절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-4"
+        }
+      ],
+      "report_id": "e418bc57a47d4081a039bfb20566828c",
+      "draft": "# 합성 실행 제어 시험 보고서\n\n실제 LLM 미사용: 테스트 대역의 합성 결과입니다.\n\n현재 지시: 표현 통합 합성 시험 A\n\n## 1. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 1절: 표현 통합 합성 시험 A\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n## 2. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 2절: 표현 통합 합성 시험 A\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n## 3. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 3절: 표현 통합 합성 시험 A\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n## 4. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 4절: 표현 통합 합성 시험 A\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n\n## 표현 검사용 합성 표\n\n| 항목 | 값 | 출처 |\n|---|---|---|\n| 한글 보존 | 검증값 42 | «합성문서-1» |\n| 파이프 | 가\\|나 | «합성문서-2» |\n\n## 합성 도식 · 실제 연구 결과 아님\n\n검증용 흐름 설명입니다. «합성문서-1»\n\n```svg\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 160\"><title>합성 검증 도식</title><desc>입력에서 보고서까지 · 시험 대역</desc><rect x=\"10\" y=\"15\" width=\"580\" height=\"130\" fill=\"#eef4ff\" stroke=\"#234567\"/><text x=\"35\" y=\"85\" font-size=\"24\" fill=\"#123456\">입력 → 합성 표 → 보고서</text></svg>\n```\n\n[검증용 출처 한글](https://example.invalid/presentation-source)\n\n<script>window.__presentationUnsafe=true</script>\n\n![차단된 외부 이미지](https://example.invalid/blocked.png)\n",
+      "quality": {
+        "passed": true,
+        "reasons": []
+      },
+      "parent_report_id": null,
+      "created_at": "2026-11-09T03:20:19.850749+00:00",
+      "updated_at": "2026-11-09T03:20:20.254388+00:00",
+      "mock_requests": 6,
+      "actual_model_requests": 0,
+      "source_mode": "local"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "de002f376e804613b5252990924a163e",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 1,
+      "occurred_at": "2026-11-09T03:20:19.850749+00:00",
+      "type": "instruction.received",
+      "actor": "planner",
+      "recipient": null,
+      "status": "received",
+      "summary": "instruction.received",
+      "input": {
+        "text": "표현 통합 합성 시험 A",
+        "source_mode": "local"
+      },
+      "output": {
+        "kind": "research",
+        "source_mode": "local",
+        "instruction_id": "2ef860229b9b49e2ae5a9c7371133e6d",
+        "run_id": "08aff38f4ac047838cdc69968f914d2b",
+        "mode": "immediate",
+        "status": "received",
+        "control_revision": 1,
+        "state_seq": 1
+      },
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "e0d7086b94f6401481dcb771076cf20a",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 2,
+      "occurred_at": "2026-11-09T03:20:19.870648+00:00",
+      "type": "model.started",
+      "actor": "planner",
+      "recipient": null,
+      "status": "running",
+      "summary": "model.started",
+      "input": {
+        "instruction": "표현 통합 합성 시험 A",
+        "synthetic": true,
+        "prior_report_context": null,
+        "prior_report_is_primary_evidence": false
+      },
+      "output": {
+        "call_id": "abaa1b82438c4ad79920d37c0b32afdd"
+      },
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "9af301be479c483abf13f149a028b9e4",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 3,
+      "occurred_at": "2026-11-09T03:20:19.881838+00:00",
+      "type": "model.completed",
+      "actor": "planner",
+      "recipient": null,
+      "status": "completed",
+      "summary": "model.completed",
+      "input": {
+        "instruction": "표현 통합 합성 시험 A",
+        "synthetic": true,
+        "prior_report_context": null,
+        "prior_report_is_primary_evidence": false
+      },
+      "output": [
+        {
+          "section_id": "section-1",
+          "title": "합성 시험 1절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-1"
+        },
+        {
+          "section_id": "section-2",
+          "title": "합성 시험 2절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-2"
+        },
+        {
+          "section_id": "section-3",
+          "title": "합성 시험 3절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-3"
+        },
+        {
+          "section_id": "section-4",
+          "title": "합성 시험 4절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-4"
+        }
+      ],
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "57148dd1dd13415d8a1d1fa142458ea4",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 4,
+      "occurred_at": "2026-11-09T03:20:19.882650+00:00",
+      "type": "plan.created",
+      "actor": "planner",
+      "recipient": "dispatcher",
+      "status": "completed",
+      "summary": "plan.created",
+      "input": {
+        "instruction": "표현 통합 합성 시험 A",
+        "synthetic": true,
+        "prior_report_context": null,
+        "prior_report_is_primary_evidence": false
+      },
+      "output": [
+        {
+          "section_id": "section-1",
+          "title": "합성 시험 1절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-1"
+        },
+        {
+          "section_id": "section-2",
+          "title": "합성 시험 2절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-2"
+        },
+        {
+          "section_id": "section-3",
+          "title": "합성 시험 3절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-3"
+        },
+        {
+          "section_id": "section-4",
+          "title": "합성 시험 4절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-4"
+        }
+      ],
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "bed168feafd04d67aa1d3b59a53b5dcb",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 5,
+      "occurred_at": "2026-11-09T03:20:19.898541+00:00",
+      "type": "assignment.created",
+      "actor": "dispatcher",
+      "recipient": "researcher-1",
+      "status": "completed",
+      "summary": "assignment.created",
+      "input": {
+        "section_id": "section-1",
+        "title": "합성 시험 1절: 표현 통합 합성 시험 A",
+        "assignee": "researcher-1"
+      },
+      "output": {
+        "section_id": "section-1",
+        "title": "합성 시험 1절: 표현 통합 합성 시험 A",
+        "assignee": "researcher-1"
+      },
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "53b25517f04b489b82d7f48b2294004b",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 6,
+      "occurred_at": "2026-11-09T03:20:19.899557+00:00",
+      "type": "assignment.created",
+      "actor": "dispatcher",
+      "recipient": "researcher-2",
+      "status": "completed",
+      "summary": "assignment.created",
+      "input": {
+        "section_id": "section-2",
+        "title": "합성 시험 2절: 표현 통합 합성 시험 A",
+        "assignee": "researcher-2"
+      },
+      "output": {
+        "section_id": "section-2",
+        "title": "합성 시험 2절: 표현 통합 합성 시험 A",
+        "assignee": "researcher-2"
+      },
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "5c30c1c2221646aaaf4b5e47487b0b52",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 7,
+      "occurred_at": "2026-11-09T03:20:19.899557+00:00",
+      "type": "assignment.created",
+      "actor": "dispatcher",
+      "recipient": "researcher-3",
+      "status": "completed",
+      "summary": "assignment.created",
+      "input": {
+        "section_id": "section-3",
+        "title": "합성 시험 3절: 표현 통합 합성 시험 A",
+        "assignee": "researcher-3"
+      },
+      "output": {
+        "section_id": "section-3",
+        "title": "합성 시험 3절: 표현 통합 합성 시험 A",
+        "assignee": "researcher-3"
+      },
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "d2255d122fb1463ca0e1f134cd4d4e62",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 8,
+      "occurred_at": "2026-11-09T03:20:19.899557+00:00",
+      "type": "assignment.created",
+      "actor": "dispatcher",
+      "recipient": "researcher-4",
+      "status": "completed",
+      "summary": "assignment.created",
+      "input": {
+        "section_id": "section-4",
+        "title": "합성 시험 4절: 표현 통합 합성 시험 A",
+        "assignee": "researcher-4"
+      },
+      "output": {
+        "section_id": "section-4",
+        "title": "합성 시험 4절: 표현 통합 합성 시험 A",
+        "assignee": "researcher-4"
+      },
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "14f120989d6b4a3e97e2e3bc18ced0cd",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 9,
+      "occurred_at": "2026-11-09T03:20:19.899557+00:00",
+      "type": "instruction.applied",
+      "actor": "dispatcher",
+      "recipient": null,
+      "status": "applied",
+      "summary": "instruction.applied",
+      "input": {
+        "instruction": "표현 통합 합성 시험 A"
+      },
+      "output": [
+        {
+          "section_id": "section-1",
+          "title": "합성 시험 1절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-1"
+        },
+        {
+          "section_id": "section-2",
+          "title": "합성 시험 2절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-2"
+        },
+        {
+          "section_id": "section-3",
+          "title": "합성 시험 3절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-3"
+        },
+        {
+          "section_id": "section-4",
+          "title": "합성 시험 4절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-4"
+        }
+      ],
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "2e0d6fcc3bbd4f4db0512a7584508e9e",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 10,
+      "occurred_at": "2026-11-09T03:20:19.915498+00:00",
+      "type": "model.started",
+      "actor": "researcher-1",
+      "recipient": null,
+      "status": "waiting",
+      "summary": "model.started",
+      "input": {
+        "instruction": "표현 통합 합성 시험 A",
+        "assignment": {
+          "section_id": "section-1",
+          "title": "합성 시험 1절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-1"
+        },
+        "synthetic": true,
+        "document_id": "합성문서-1",
+        "source": "이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+      },
+      "output": {
+        "call_id": "4e68723455b94075b2cbb4712e67d529",
+        "gate_id": "a9ed72901fd14c2181020a326968e7dc"
+      },
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "c5f5aedd0ae54ed29cfc221f8057a28a",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 11,
+      "occurred_at": "2026-11-09T03:20:19.926564+00:00",
+      "type": "model.started",
+      "actor": "researcher-2",
+      "recipient": null,
+      "status": "waiting",
+      "summary": "model.started",
+      "input": {
+        "instruction": "표현 통합 합성 시험 A",
+        "assignment": {
+          "section_id": "section-2",
+          "title": "합성 시험 2절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-2"
+        },
+        "synthetic": true,
+        "document_id": "합성문서-2",
+        "source": "이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+      },
+      "output": {
+        "call_id": "0776ba22e7aa4f029d7427f8a419f3a9",
+        "gate_id": "1cfea5307654457ca4b50ca845130edc"
+      },
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "bbf43d4c67f6429bb188ebbf7aa8ba72",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 12,
+      "occurred_at": "2026-11-09T03:20:19.936881+00:00",
+      "type": "model.started",
+      "actor": "researcher-3",
+      "recipient": null,
+      "status": "waiting",
+      "summary": "model.started",
+      "input": {
+        "instruction": "표현 통합 합성 시험 A",
+        "assignment": {
+          "section_id": "section-3",
+          "title": "합성 시험 3절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-3"
+        },
+        "synthetic": true,
+        "document_id": "합성문서-3",
+        "source": "이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+      },
+      "output": {
+        "call_id": "b798a895101d4037863f2054e4651da9",
+        "gate_id": "d52910c6f0f84bedb63c3d4510c8cf2a"
+      },
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "e59b238a44e34d0bb9b00a2920f76537",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 13,
+      "occurred_at": "2026-11-09T03:20:19.946057+00:00",
+      "type": "model.started",
+      "actor": "researcher-4",
+      "recipient": null,
+      "status": "waiting",
+      "summary": "model.started",
+      "input": {
+        "instruction": "표현 통합 합성 시험 A",
+        "assignment": {
+          "section_id": "section-4",
+          "title": "합성 시험 4절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-4"
+        },
+        "synthetic": true,
+        "document_id": "합성문서-4",
+        "source": "이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+      },
+      "output": {
+        "call_id": "4ef578cd256841b7b64f01d918227ca9",
+        "gate_id": "c190ae508e3e483b8e11860d12147c26"
+      },
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "f47c72eabd59434fa267e359b59e78ee",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 14,
+      "occurred_at": "2026-11-09T03:20:20.157066+00:00",
+      "type": "model.completed",
+      "actor": "researcher-1",
+      "recipient": null,
+      "status": "completed",
+      "summary": "model.completed",
+      "input": {
+        "instruction": "표현 통합 합성 시험 A",
+        "assignment": {
+          "section_id": "section-1",
+          "title": "합성 시험 1절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-1"
+        },
+        "synthetic": true,
+        "document_id": "합성문서-1",
+        "source": "이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+      },
+      "output": {
+        "synthetic": true,
+        "instruction": "표현 통합 합성 시험 A",
+        "section_id": "section-1",
+        "outcome": "success",
+        "text": "실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 1절: 표현 통합 합성 시험 A",
+        "document": "합성문서-1",
+        "source": "이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+      },
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "240ac02ce5584d1cbd972662bb487266",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 15,
+      "occurred_at": "2026-11-09T03:20:20.171710+00:00",
+      "type": "model.completed",
+      "actor": "researcher-2",
+      "recipient": null,
+      "status": "completed",
+      "summary": "model.completed",
+      "input": {
+        "instruction": "표현 통합 합성 시험 A",
+        "assignment": {
+          "section_id": "section-2",
+          "title": "합성 시험 2절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-2"
+        },
+        "synthetic": true,
+        "document_id": "합성문서-2",
+        "source": "이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+      },
+      "output": {
+        "synthetic": true,
+        "instruction": "표현 통합 합성 시험 A",
+        "section_id": "section-2",
+        "outcome": "success",
+        "text": "실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 2절: 표현 통합 합성 시험 A",
+        "document": "합성문서-2",
+        "source": "이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+      },
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "216f2e68d30e4c1ea4be46ff4210a693",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 16,
+      "occurred_at": "2026-11-09T03:20:20.184224+00:00",
+      "type": "model.completed",
+      "actor": "researcher-3",
+      "recipient": null,
+      "status": "completed",
+      "summary": "model.completed",
+      "input": {
+        "instruction": "표현 통합 합성 시험 A",
+        "assignment": {
+          "section_id": "section-3",
+          "title": "합성 시험 3절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-3"
+        },
+        "synthetic": true,
+        "document_id": "합성문서-3",
+        "source": "이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+      },
+      "output": {
+        "synthetic": true,
+        "instruction": "표현 통합 합성 시험 A",
+        "section_id": "section-3",
+        "outcome": "success",
+        "text": "실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 3절: 표현 통합 합성 시험 A",
+        "document": "합성문서-3",
+        "source": "이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+      },
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "81b6b3da15c94db8b7350cc2ff6dd21b",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 17,
+      "occurred_at": "2026-11-09T03:20:20.197373+00:00",
+      "type": "model.completed",
+      "actor": "researcher-4",
+      "recipient": null,
+      "status": "completed",
+      "summary": "model.completed",
+      "input": {
+        "instruction": "표현 통합 합성 시험 A",
+        "assignment": {
+          "section_id": "section-4",
+          "title": "합성 시험 4절: 표현 통합 합성 시험 A",
+          "assignee": "researcher-4"
+        },
+        "synthetic": true,
+        "document_id": "합성문서-4",
+        "source": "이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+      },
+      "output": {
+        "synthetic": true,
+        "instruction": "표현 통합 합성 시험 A",
+        "section_id": "section-4",
+        "outcome": "success",
+        "text": "실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 4절: 표현 통합 합성 시험 A",
+        "document": "합성문서-4",
+        "source": "이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+      },
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "7cdc71e62af548bab1bf0d94cc6cd526",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 18,
+      "occurred_at": "2026-11-09T03:20:20.215053+00:00",
+      "type": "review.completed",
+      "actor": "reviewer",
+      "recipient": "editor",
+      "status": "completed",
+      "summary": "review.completed",
+      "input": [
+        {
+          "synthetic": true,
+          "instruction": "표현 통합 합성 시험 A",
+          "section_id": "section-1",
+          "outcome": "success",
+          "text": "실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 1절: 표현 통합 합성 시험 A",
+          "document": "합성문서-1",
+          "source": "이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+        },
+        {
+          "synthetic": true,
+          "instruction": "표현 통합 합성 시험 A",
+          "section_id": "section-2",
+          "outcome": "success",
+          "text": "실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 2절: 표현 통합 합성 시험 A",
+          "document": "합성문서-2",
+          "source": "이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+        },
+        {
+          "synthetic": true,
+          "instruction": "표현 통합 합성 시험 A",
+          "section_id": "section-3",
+          "outcome": "success",
+          "text": "실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 3절: 표현 통합 합성 시험 A",
+          "document": "합성문서-3",
+          "source": "이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+        },
+        {
+          "synthetic": true,
+          "instruction": "표현 통합 합성 시험 A",
+          "section_id": "section-4",
+          "outcome": "success",
+          "text": "실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 4절: 표현 통합 합성 시험 A",
+          "document": "합성문서-4",
+          "source": "이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+        }
+      ],
+      "output": {
+        "accepted_sections": 4
+      },
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "5e96ec5c5d1e4fec8cff2525cf18fe45",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 19,
+      "occurred_at": "2026-11-09T03:20:20.228486+00:00",
+      "type": "model.started",
+      "actor": "editor",
+      "recipient": null,
+      "status": "running",
+      "summary": "model.started",
+      "input": {
+        "instruction": "표현 통합 합성 시험 A",
+        "results": [
+          {
+            "synthetic": true,
+            "instruction": "표현 통합 합성 시험 A",
+            "section_id": "section-1",
+            "outcome": "success",
+            "text": "실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 1절: 표현 통합 합성 시험 A",
+            "document": "합성문서-1",
+            "source": "이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+          },
+          {
+            "synthetic": true,
+            "instruction": "표현 통합 합성 시험 A",
+            "section_id": "section-2",
+            "outcome": "success",
+            "text": "실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 2절: 표현 통합 합성 시험 A",
+            "document": "합성문서-2",
+            "source": "이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+          },
+          {
+            "synthetic": true,
+            "instruction": "표현 통합 합성 시험 A",
+            "section_id": "section-3",
+            "outcome": "success",
+            "text": "실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 3절: 표현 통합 합성 시험 A",
+            "document": "합성문서-3",
+            "source": "이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+          },
+          {
+            "synthetic": true,
+            "instruction": "표현 통합 합성 시험 A",
+            "section_id": "section-4",
+            "outcome": "success",
+            "text": "실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 4절: 표현 통합 합성 시험 A",
+            "document": "합성문서-4",
+            "source": "이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+          }
+        ]
+      },
+      "output": {
+        "call_id": "a159650f53ee4afaadf2cedc4ef6b884"
+      },
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "1f6ac144710047779d20f7b58993367f",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 20,
+      "occurred_at": "2026-11-09T03:20:20.236228+00:00",
+      "type": "draft.created",
+      "actor": "editor",
+      "recipient": null,
+      "status": "completed",
+      "summary": "draft.created",
+      "input": {
+        "instruction": "표현 통합 합성 시험 A",
+        "results": [
+          {
+            "synthetic": true,
+            "instruction": "표현 통합 합성 시험 A",
+            "section_id": "section-1",
+            "outcome": "success",
+            "text": "실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 1절: 표현 통합 합성 시험 A",
+            "document": "합성문서-1",
+            "source": "이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+          },
+          {
+            "synthetic": true,
+            "instruction": "표현 통합 합성 시험 A",
+            "section_id": "section-2",
+            "outcome": "success",
+            "text": "실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 2절: 표현 통합 합성 시험 A",
+            "document": "합성문서-2",
+            "source": "이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+          },
+          {
+            "synthetic": true,
+            "instruction": "표현 통합 합성 시험 A",
+            "section_id": "section-3",
+            "outcome": "success",
+            "text": "실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 3절: 표현 통합 합성 시험 A",
+            "document": "합성문서-3",
+            "source": "이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+          },
+          {
+            "synthetic": true,
+            "instruction": "표현 통합 합성 시험 A",
+            "section_id": "section-4",
+            "outcome": "success",
+            "text": "실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 4절: 표현 통합 합성 시험 A",
+            "document": "합성문서-4",
+            "source": "이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다."
+          }
+        ]
+      },
+      "output": "# 합성 실행 제어 시험 보고서\n\n실제 LLM 미사용: 테스트 대역의 합성 결과입니다.\n\n현재 지시: 표현 통합 합성 시험 A\n\n## 1. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 1절: 표현 통합 합성 시험 A\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n## 2. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 2절: 표현 통합 합성 시험 A\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n## 3. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 3절: 표현 통합 합성 시험 A\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n## 4. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 4절: 표현 통합 합성 시험 A\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n\n## 표현 검사용 합성 표\n\n| 항목 | 값 | 출처 |\n|---|---|---|\n| 한글 보존 | 검증값 42 | «합성문서-1» |\n| 파이프 | 가\\|나 | «합성문서-2» |\n\n## 합성 도식 · 실제 연구 결과 아님\n\n검증용 흐름 설명입니다. «합성문서-1»\n\n```svg\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 160\"><title>합성 검증 도식</title><desc>입력에서 보고서까지 · 시험 대역</desc><rect x=\"10\" y=\"15\" width=\"580\" height=\"130\" fill=\"#eef4ff\" stroke=\"#234567\"/><text x=\"35\" y=\"85\" font-size=\"24\" fill=\"#123456\">입력 → 합성 표 → 보고서</text></svg>\n```\n\n[검증용 출처 한글](https://example.invalid/presentation-source)\n\n<script>window.__presentationUnsafe=true</script>\n\n![차단된 외부 이미지](https://example.invalid/blocked.png)\n",
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "44a1d23e86b7417981ad4f634404d82b",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 21,
+      "occurred_at": "2026-11-09T03:20:20.250384+00:00",
+      "type": "quality.evaluated",
+      "actor": "evaluator",
+      "recipient": null,
+      "status": "completed",
+      "summary": "quality.evaluated",
+      "input": {
+        "draft": "# 합성 실행 제어 시험 보고서\n\n실제 LLM 미사용: 테스트 대역의 합성 결과입니다.\n\n현재 지시: 표현 통합 합성 시험 A\n\n## 1. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 1절: 표현 통합 합성 시험 A\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n## 2. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 2절: 표현 통합 합성 시험 A\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n## 3. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 3절: 표현 통합 합성 시험 A\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n## 4. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 4절: 표현 통합 합성 시험 A\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n\n## 표현 검사용 합성 표\n\n| 항목 | 값 | 출처 |\n|---|---|---|\n| 한글 보존 | 검증값 42 | «합성문서-1» |\n| 파이프 | 가\\|나 | «합성문서-2» |\n\n## 합성 도식 · 실제 연구 결과 아님\n\n검증용 흐름 설명입니다. «합성문서-1»\n\n```svg\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 160\"><title>합성 검증 도식</title><desc>입력에서 보고서까지 · 시험 대역</desc><rect x=\"10\" y=\"15\" width=\"580\" height=\"130\" fill=\"#eef4ff\" stroke=\"#234567\"/><text x=\"35\" y=\"85\" font-size=\"24\" fill=\"#123456\">입력 → 합성 표 → 보고서</text></svg>\n```\n\n[검증용 출처 한글](https://example.invalid/presentation-source)\n\n<script>window.__presentationUnsafe=true</script>\n\n![차단된 외부 이미지](https://example.invalid/blocked.png)\n"
+      },
+      "output": {
+        "passed": true,
+        "reasons": []
+      },
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    },
+    {
+      "event_id": "1316380ac535429aa1e91ca07209e99f",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "seq": 22,
+      "occurred_at": "2026-11-09T03:20:20.253883+00:00",
+      "type": "report.submitted",
+      "actor": "publisher",
+      "recipient": null,
+      "status": "completed",
+      "summary": "report.submitted",
+      "input": {
+        "draft": "# 합성 실행 제어 시험 보고서\n\n실제 LLM 미사용: 테스트 대역의 합성 결과입니다.\n\n현재 지시: 표현 통합 합성 시험 A\n\n## 1. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 1절: 표현 통합 합성 시험 A\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n## 2. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 2절: 표현 통합 합성 시험 A\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n## 3. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 3절: 표현 통합 합성 시험 A\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n## 4. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 4절: 표현 통합 합성 시험 A\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n\n## 표현 검사용 합성 표\n\n| 항목 | 값 | 출처 |\n|---|---|---|\n| 한글 보존 | 검증값 42 | «합성문서-1» |\n| 파이프 | 가\\|나 | «합성문서-2» |\n\n## 합성 도식 · 실제 연구 결과 아님\n\n검증용 흐름 설명입니다. «합성문서-1»\n\n```svg\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 160\"><title>합성 검증 도식</title><desc>입력에서 보고서까지 · 시험 대역</desc><rect x=\"10\" y=\"15\" width=\"580\" height=\"130\" fill=\"#eef4ff\" stroke=\"#234567\"/><text x=\"35\" y=\"85\" font-size=\"24\" fill=\"#123456\">입력 → 합성 표 → 보고서</text></svg>\n```\n\n[검증용 출처 한글](https://example.invalid/presentation-source)\n\n<script>window.__presentationUnsafe=true</script>\n\n![차단된 외부 이미지](https://example.invalid/blocked.png)\n",
+        "quality": {
+          "passed": true,
+          "reasons": []
+        }
+      },
+      "output": {
+        "report_id": "e418bc57a47d4081a039bfb20566828c",
+        "run_id": "08aff38f4ac047838cdc69968f914d2b",
+        "control_revision": 1,
+        "title": "합성 실행 제어 시험 보고서",
+        "markdown": "# 합성 실행 제어 시험 보고서\n\n실제 LLM 미사용: 테스트 대역의 합성 결과입니다.\n\n현재 지시: 표현 통합 합성 시험 A\n\n## 1. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 1절: 표현 통합 합성 시험 A\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n이것은 합성문서-1의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-1»\n\n## 2. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 2절: 표현 통합 합성 시험 A\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n이것은 합성문서-2의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-2»\n\n## 3. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 3절: 표현 통합 합성 시험 A\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n이것은 합성문서-3의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-3»\n\n## 4. 합성 검증 절\n실제 LLM 아님. 합성 조사: 표현 통합 합성 시험 A / 합성 시험 4절: 표현 통합 합성 시험 A\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n이것은 합성문서-4의 시험용 원문이다. 실제 인물·역사·사건을 설명하지 않는다. 이 자료는 로컬 병렬 작업과 지시 변경, 파일 바이트 검증을 위한 고정 입력이다. 지시의 의미를 이해하거나 실제 리서치 정확성을 입증하는 근거가 아니다. 문서에 적힌 시험 표식만 인용하며 이전 AI 보고서는 일차 자료로 사용하지 않는다. «합성문서-4»\n\n\n## 표현 검사용 합성 표\n\n| 항목 | 값 | 출처 |\n|---|---|---|\n| 한글 보존 | 검증값 42 | «합성문서-1» |\n| 파이프 | 가\\|나 | «합성문서-2» |\n\n## 합성 도식 · 실제 연구 결과 아님\n\n검증용 흐름 설명입니다. «합성문서-1»\n\n```svg\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 600 160\"><title>합성 검증 도식</title><desc>입력에서 보고서까지 · 시험 대역</desc><rect x=\"10\" y=\"15\" width=\"580\" height=\"130\" fill=\"#eef4ff\" stroke=\"#234567\"/><text x=\"35\" y=\"85\" font-size=\"24\" fill=\"#123456\">입력 → 합성 표 → 보고서</text></svg>\n```\n\n[검증용 출처 한글](https://example.invalid/presentation-source)\n\n<script>window.__presentationUnsafe=true</script>\n\n![차단된 외부 이미지](https://example.invalid/blocked.png)\n",
+        "sha256": "4109ef617e481102c9b17c4198308f677a25c5619fa744b252533fa08d2a26f3",
+        "created_at": "2026-11-09T03:20:20.252803+00:00",
+        "download_url": "/api/spike/reports/e418bc57a47d4081a039bfb20566828c/download",
+        "source_mode": "local"
+      },
+      "error": null,
+      "provider": "test-double",
+      "source_mode": "local"
+    }
+  ],
+  "spans": [
+    {
+      "span_id": "0688d68ba0c648fea48912724e16a001",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "actor": "planner",
+      "track_id": "planner",
+      "label": "plan",
+      "kind": "node",
+      "started_at": "2026-11-09T03:20:19.864639+00:00",
+      "ended_at": "2026-11-09T03:20:19.886118+00:00",
+      "duration_ms": 21.472599997650832,
+      "status": "completed",
+      "timing_source": "monotonic",
+      "event_ids": [
+        "e0d7086b94f6401481dcb771076cf20a",
+        "9af301be479c483abf13f149a028b9e4",
+        "57148dd1dd13415d8a1d1fa142458ea4"
+      ]
+    },
+    {
+      "span_id": "2c0d555332284b3199cf15c98af23de0",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "actor": "planner",
+      "track_id": "planner",
+      "label": "model",
+      "kind": "model_wait",
+      "started_at": "2026-11-09T03:20:19.870648+00:00",
+      "ended_at": "2026-11-09T03:20:19.876319+00:00",
+      "duration_ms": 6.013799997163005,
+      "status": "completed",
+      "timing_source": "monotonic",
+      "event_ids": [
+        "e0d7086b94f6401481dcb771076cf20a",
+        "9af301be479c483abf13f149a028b9e4"
+      ]
+    },
+    {
+      "span_id": "9291de531e51420380923167888fefdd",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "actor": "dispatcher",
+      "track_id": "code",
+      "label": "dispatch",
+      "kind": "node",
+      "started_at": "2026-11-09T03:20:19.893885+00:00",
+      "ended_at": "2026-11-09T03:20:19.904075+00:00",
+      "duration_ms": 9.523500004434027,
+      "status": "completed",
+      "timing_source": "monotonic",
+      "event_ids": [
+        "bed168feafd04d67aa1d3b59a53b5dcb",
+        "53b25517f04b489b82d7f48b2294004b",
+        "5c30c1c2221646aaaf4b5e47487b0b52",
+        "d2255d122fb1463ca0e1f134cd4d4e62",
+        "14f120989d6b4a3e97e2e3bc18ced0cd"
+      ]
+    },
+    {
+      "span_id": "dba9e28f3b26468bbdb5a2f36d4bae8b",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "actor": "researcher-1",
+      "track_id": "researcher-1",
+      "label": "research",
+      "kind": "node",
+      "started_at": "2026-11-09T03:20:19.909470+00:00",
+      "ended_at": "2026-11-09T03:20:20.162091+00:00",
+      "duration_ms": 252.0512999908533,
+      "status": "completed",
+      "timing_source": "monotonic",
+      "event_ids": [
+        "2e0d6fcc3bbd4f4db0512a7584508e9e",
+        "f47c72eabd59434fa267e359b59e78ee"
+      ]
+    },
+    {
+      "span_id": "e6adcb5fde0847ba8a1e2701cb5ecc5a",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "actor": "researcher-1",
+      "track_id": "researcher-1",
+      "label": "model",
+      "kind": "model_wait",
+      "started_at": "2026-11-09T03:20:19.915498+00:00",
+      "ended_at": "2026-11-09T03:20:20.152528+00:00",
+      "duration_ms": 236.76010000053793,
+      "status": "completed",
+      "timing_source": "monotonic",
+      "event_ids": [
+        "2e0d6fcc3bbd4f4db0512a7584508e9e",
+        "f47c72eabd59434fa267e359b59e78ee"
+      ]
+    },
+    {
+      "span_id": "ab7d9cf91bc64fddac55e6d00c422732",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "actor": "researcher-2",
+      "track_id": "researcher-2",
+      "label": "research",
+      "kind": "node",
+      "started_at": "2026-11-09T03:20:19.921005+00:00",
+      "ended_at": "2026-11-09T03:20:20.175345+00:00",
+      "duration_ms": 254.81139999465086,
+      "status": "completed",
+      "timing_source": "monotonic",
+      "event_ids": [
+        "c5f5aedd0ae54ed29cfc221f8057a28a",
+        "240ac02ce5584d1cbd972662bb487266"
+      ]
+    },
+    {
+      "span_id": "836c88625d2843afb0f1f98d84a9fd02",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "actor": "researcher-2",
+      "track_id": "researcher-2",
+      "label": "model",
+      "kind": "model_wait",
+      "started_at": "2026-11-09T03:20:19.926564+00:00",
+      "ended_at": "2026-11-09T03:20:20.166738+00:00",
+      "duration_ms": 240.2176000032341,
+      "status": "completed",
+      "timing_source": "monotonic",
+      "event_ids": [
+        "c5f5aedd0ae54ed29cfc221f8057a28a",
+        "240ac02ce5584d1cbd972662bb487266"
+      ]
+    },
+    {
+      "span_id": "b6eb4bd674724d57b40498a295c169cf",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "actor": "researcher-3",
+      "track_id": "researcher-3",
+      "label": "research",
+      "kind": "node",
+      "started_at": "2026-11-09T03:20:19.931152+00:00",
+      "ended_at": "2026-11-09T03:20:20.188844+00:00",
+      "duration_ms": 257.5639999995474,
+      "status": "completed",
+      "timing_source": "monotonic",
+      "event_ids": [
+        "bbf43d4c67f6429bb188ebbf7aa8ba72",
+        "216f2e68d30e4c1ea4be46ff4210a693"
+      ]
+    },
+    {
+      "span_id": "c3c93207dc7c4a80810fbfd3a4ec272e",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "actor": "researcher-3",
+      "track_id": "researcher-3",
+      "label": "model",
+      "kind": "model_wait",
+      "started_at": "2026-11-09T03:20:19.936881+00:00",
+      "ended_at": "2026-11-09T03:20:20.178697+00:00",
+      "duration_ms": 242.23540000093635,
+      "status": "completed",
+      "timing_source": "monotonic",
+      "event_ids": [
+        "bbf43d4c67f6429bb188ebbf7aa8ba72",
+        "216f2e68d30e4c1ea4be46ff4210a693"
+      ]
+    },
+    {
+      "span_id": "c4421a931abc497396f4f3f100e71f99",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "actor": "researcher-4",
+      "track_id": "researcher-4",
+      "label": "research",
+      "kind": "node",
+      "started_at": "2026-11-09T03:20:19.940388+00:00",
+      "ended_at": "2026-11-09T03:20:20.201458+00:00",
+      "duration_ms": 260.3721999912523,
+      "status": "completed",
+      "timing_source": "monotonic",
+      "event_ids": [
+        "e59b238a44e34d0bb9b00a2920f76537",
+        "81b6b3da15c94db8b7350cc2ff6dd21b"
+      ]
+    },
+    {
+      "span_id": "3ed5b9d88d464522a0308907fe9d728e",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "actor": "researcher-4",
+      "track_id": "researcher-4",
+      "label": "model",
+      "kind": "model_wait",
+      "started_at": "2026-11-09T03:20:19.946057+00:00",
+      "ended_at": "2026-11-09T03:20:20.191388+00:00",
+      "duration_ms": 245.97930000163615,
+      "status": "completed",
+      "timing_source": "monotonic",
+      "event_ids": [
+        "e59b238a44e34d0bb9b00a2920f76537",
+        "81b6b3da15c94db8b7350cc2ff6dd21b"
+      ]
+    },
+    {
+      "span_id": "cdf62b63ab374e45a8ae888fab9bafef",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "actor": "reviewer",
+      "track_id": "code",
+      "label": "review",
+      "kind": "node",
+      "started_at": "2026-11-09T03:20:20.210481+00:00",
+      "ended_at": "2026-11-09T03:20:20.218567+00:00",
+      "duration_ms": 7.912500004749745,
+      "status": "completed",
+      "timing_source": "monotonic",
+      "event_ids": [
+        "7cdc71e62af548bab1bf0d94cc6cd526"
+      ]
+    },
+    {
+      "span_id": "037395e8dd4f4e89a67027f54481726a",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "actor": "editor",
+      "track_id": "editor",
+      "label": "synthesize",
+      "kind": "node",
+      "started_at": "2026-11-09T03:20:20.222746+00:00",
+      "ended_at": "2026-11-09T03:20:20.241576+00:00",
+      "duration_ms": 18.702499990467913,
+      "status": "completed",
+      "timing_source": "monotonic",
+      "event_ids": [
+        "5e96ec5c5d1e4fec8cff2525cf18fe45",
+        "1f6ac144710047779d20f7b58993367f"
+      ]
+    },
+    {
+      "span_id": "322503b25dc849bd9182ce65fbe1420d",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "actor": "editor",
+      "track_id": "editor",
+      "label": "model",
+      "kind": "model_wait",
+      "started_at": "2026-11-09T03:20:20.228486+00:00",
+      "ended_at": "2026-11-09T03:20:20.232465+00:00",
+      "duration_ms": 4.132800007937476,
+      "status": "completed",
+      "timing_source": "monotonic",
+      "event_ids": [
+        "5e96ec5c5d1e4fec8cff2525cf18fe45",
+        "1f6ac144710047779d20f7b58993367f"
+      ]
+    },
+    {
+      "span_id": "8f5899a0863a4f02911065ff22f31988",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "actor": "evaluator",
+      "track_id": "code",
+      "label": "evaluate",
+      "kind": "node",
+      "started_at": "2026-11-09T03:20:20.247216+00:00",
+      "ended_at": "2026-11-09T03:20:20.259414+00:00",
+      "duration_ms": 12.863600000855513,
+      "status": "completed",
+      "timing_source": "monotonic",
+      "event_ids": [
+        "44a1d23e86b7417981ad4f634404d82b",
+        "1316380ac535429aa1e91ca07209e99f"
+      ]
+    },
+    {
+      "span_id": "1ddb7aca93d54dac8375113abe7b8260",
+      "run_id": "08aff38f4ac047838cdc69968f914d2b",
+      "control_revision": 1,
+      "actor": "publisher",
+      "track_id": "document",
+      "label": "publish",
+      "kind": "node",
+      "started_at": "2026-11-09T03:20:20.251413+00:00",
+      "ended_at": "2026-11-09T03:20:20.254388+00:00",
+      "duration_ms": 2.8469999961089343,
+      "status": "completed",
+      "timing_source": "monotonic",
+      "event_ids": [
+        "1316380ac535429aa1e91ca07209e99f"
+      ]
+    }
+  ],
+  "high_watermark_seq": 22,
+  "started_at": "2026-11-09T03:20:19.850749+00:00",
+  "ended_at": "2026-11-09T03:20:20.254388+00:00",
+  "recorded_at": "2026-11-09T03:20:21.429297+00:00",
+  "duration_ms": 408.665,
+  "has_measured_spans": true,
+  "truncated": false
+}

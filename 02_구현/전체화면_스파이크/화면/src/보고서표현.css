@@ -1,0 +1,17 @@
+/* Read 표면만 확장합니다. 팝업/세계/입력의 배치에는 관여하지 않습니다. */
+.report-presentation{min-width:0;margin-top:20px;color:#253c2c}
+.report-presentation h3{margin:0 0 8px}
+.report-presentation h4{margin:0 0 8px}
+.report-reading-help{max-width:72ch;margin:0 0 12px;line-height:1.7}
+/* opaque-origin sandbox: 내부 DOM 높이를 읽거나 스크립트로 자동 확장하지 않습니다. */
+.report-presentation-frame{display:block;box-sizing:border-box;width:100%;height:clamp(280px,55dvh,640px);min-width:0;border:1px solid #7f946e;border-radius:6px;background:#fffdf4;color-scheme:light}
+.report-source-links,.report-markdown-source{margin-top:16px;min-width:0}
+.report-source-links summary,.report-markdown-source summary{cursor:pointer;min-height:42px;box-sizing:border-box;padding:9px 4px;color:#285a3c;font-weight:600;line-height:1.7}
+.report-source-links a{color:#285a3c;overflow-wrap:anywhere;text-underline-offset:3px}
+.report-source-links li+li{margin-top:8px}
+.report-source-links a:hover{color:#214d32}
+.report-presentation button{min-height:42px}
+.report-presentation :is(a,button,summary,iframe):focus-visible,.report-markdown-source summary:focus-visible{outline:3px solid #285a3c;outline-offset:3px}
+.report-markdown-source .markdown{white-space:pre-wrap;overflow-wrap:anywhere}
+@media(max-width:540px){.report-presentation-frame{height:clamp(260px,52dvh,480px)}}
+@media(max-height:500px){.report-presentation-frame{height:240px}}

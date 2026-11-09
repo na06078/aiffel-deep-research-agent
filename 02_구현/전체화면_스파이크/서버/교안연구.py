@@ -78,6 +78,8 @@ def parse_section(raw):
         raise ResearchContractError("section: exact bool and reason string required")
     if not obj["충분"] and not obj["부족"].strip():
         raise ResearchContractError("section: insufficient reason required")
+    if obj["충분"] and obj["부족"].strip():
+        raise ResearchContractError("section: contradictory sufficiency and deficit")
     return {"본문": body, "충분": obj["충분"], "부족": obj["부족"]}
 
 
@@ -86,20 +88,26 @@ def evaluate_report(report, sections, corpus, *, model_calls=0, coord_chars=0, s
     import re
     from collections import Counter
 
+    from 서버.보고서품질 import citation_keys, visible_markdown
+
+    raw_report = report
+    report = visible_markdown(raw_report)
     latest = {s["section_id"]: s for s in sections}
     pairs = {(sid, d) for sid, s in latest.items() for d in s["읽은문서"]}
     read = {d for _, d in pairs}
-    citations = re.findall(r"«([^»]+)»", report)
+    citations = citation_keys(report)
     used = Counter(c for c in citations if c in corpus.docs)
     unknown = sorted(set(citations) - set(corpus.docs))
     unread = sorted((set(citations) & set(corpus.docs)) - read)
     misattributed = []
     for sid, section in latest.items():
-        bad = sorted(set(re.findall(r"«([^»]+)»", section["본문"])) - set(section["읽은문서"]))
+        bad = sorted(
+            set(citation_keys(visible_markdown(section["본문"]))) - set(section["읽은문서"])
+        )
         if bad:
             misattributed.append({"section_id": sid, "documents": bad})
     sentences = [x.strip() for x in re.split(r"(?<=[.!?])\s+|\n", report) if len(x.strip()) > 15]
-    grounded = sum(any(c in corpus.docs for c in re.findall(r"«([^»]+)»", s)) for s in sentences)
+    grounded = sum(any(c in corpus.docs for c in citation_keys(s)) for s in sentences)
     metrics = {
         "문장수": len(sentences),
         "근거붙은문장": grounded,
@@ -116,8 +124,13 @@ def evaluate_report(report, sections, corpus, *, model_calls=0, coord_chars=0, s
         "격리율": round(100 * coord_chars / max(coord_chars + sub_chars, 1), 1),
     }
     reasons = []
-    body = report.split("\n", 1)[1].split("\n\n## 출처 및 이용허락", 1)[0] if "\n" in report else ""
-    if not re.match(r"^# [^\n]+\n", report) or not body.strip():
+    body_markdown = (
+        raw_report.split("\n", 1)[1].split("\n\n## 출처 및 이용허락", 1)[0]
+        if "\n" in raw_report
+        else ""
+    )
+    body = visible_markdown(body_markdown)
+    if not re.match(r"^# [^\n]+\n", raw_report) or not body.strip():
         reasons.append("title_or_body_missing")
     if len(body.strip()) < 2000:
         reasons.append("body_under_2000")
@@ -184,42 +197,63 @@ def selection_prompt(assignment, read, candidates):
 def read_prompt(title, brief, corpus):
     return (
         "너는 자료 조사 담당이다. 아래 문서를 읽고 지시에 관련된 내용만 여섯 문장 이내로 "
-        "간추려라. 관련 없으면 '관련 없음'이라고만 답하라.\n" + f"[지시] {brief}",
+        "간추려라. 날짜/달력·수치/단위·출처 간 충돌과 짧은 직접 인용을 원문 그대로 보존하라. "
+        "관련 없으면 '관련 없음'이라고만 답하라.\n" + f"[지시] {brief}",
         f"[문서: {title}]\n{corpus.docs[title]}",
     )
 
 
 def section_prompt(assignment, notes):
+    from 서버.보고서품질 import EVIDENCE_INSTRUCTION
+
     material = "\n\n".join(f"[{d}]\n{n}" for d, n in notes) or "(읽은 자료 없음)"
     return (
         role_sentence(assignment) + " 아래 자료만 근거로 보고서의 한 절을 써라. "
         "여섯 문장 이상 열두 문장 이하, 600자 이상. 문장마다 근거가 된 문서 제목을 «문서명» "
         "으로 붙여라. 자료에 없는 내용은 쓰지 마라. 지시를 자료로 다 채우지 못했으면 "
         "충분을 false 로 하고 무엇이 비었는지 적어라.\n"
-        'JSON으로만: {"본문":"...","충분":true,"부족":""}',
+        'JSON으로만: {"본문":"...","충분":true,"부족":"","근거":[]}' + EVIDENCE_INSTRUCTION,
         f"[맡은 절] {assignment['title']}\n[지시] {assignment['instruction']}\n[모은 자료]\n{material}",
     )
 
 
 def synthesis_prompt(question, title, sections):
-    outline = "\n".join(f"{i + 1}. {s['title']}: {s['본문'][:90]}…" for i, s in enumerate(sections))
+    from 서버.보고서도식 import ELEMENTS
+
+    outline = "\n\n".join(
+        f"{i + 1}. {s['title']}\n{s['본문']}\n[검증된 근거]\n{json.dumps(s['근거'], ensure_ascii=False)}"
+        for i, s in enumerate(sections)
+    )
     return (
         (
-            "너는 보고서를 마무리하는 편집자다. 아래는 리서처 에이전트들이 각자 쓴 절의 제목과 첫머리다. "
-            "본문은 고치지 말고, 전체를 여는 머리말과 닫는 맺음말만 써라. 각각 세 문장 이내.\n"
-            'JSON으로만: {"머리말":"...","맺음말":"..."}'
+            "너는 보고서를 마무리하는 편집자다. 아래는 리서처 에이전트들이 각자 쓴 완성된 절과 검증된 근거다. "
+            "본문은 고치지 말고 머리말·맺음말을 각각 세 문장 이내로 써라. 검증된 근거 안에서만 선택적으로 "
+            "최대2개 표(2~6열,1~10행,셀300자 이하)와 최대2개 SVG 도식을 작성하라. "
+            "HTML·이미지 URL은 금지다. SVG는 viewBox와 기본 도형/text/title/desc만, "
+            "script/style/image/use/href/이벤트/외부참조/DTD는 금지. UTF-8 32KiB·요소300·깊이12·path12000자 이하, 좌표절댓값100000 이하. "
+            f"\n허용 SVG 요소: {', '.join(sorted(ELEMENTS))}.\n"
+            "defs/marker/foreignObject/filter/id/class/role/aria 속성과 url(...) 참조도 금지다. "
+            "속성의 숫자에는 px/% 단위를 붙이지 말고 색은 #RGB 또는 #RRGGBB로 써라. "
+            "font-family를 쓰면 sans-serif 또는 Malgun Gothic 하나만 지정하라. "
+            "화살표는 line/path와 polygon으로 그리고, 가로 viewBox 600·font-size 24 이상을 권장한다. "
+            "출처는 실제 읽은 자료 키만 쓰며 인과를 시간 순서로부터 만들지 마라. 근거가 없으면 표/도식을 생략하고 이유를 적어라.\n"
+            'JSON으로만: {"머리말":"...","맺음말":"...","표":[{"제목":"...","열":["항목","값"],"행":[{"셀":["...","..."],"출처":["자료 키"]}]}],'
+            '"도식":[{"제목":"...","설명":"...","코드":"<svg viewBox=...>...</svg>","출처":["자료 키"]}],"시각화생략사유":"..."}'
         ),
         f"[질문] {question}\n[보고서 제목] {title}\n[절 목록]\n{outline}",
     )
 
 
-def assemble_report(title, introduction, conclusion, sections, corpus):
+def assemble_report(title, introduction, conclusion, sections, corpus, visual_summary=None):
     from urllib.parse import quote
+
+    from 서버.보고서품질 import visual_markdown
 
     parts = [f"# {title}", introduction]
     for i, section in enumerate(sections):
         parts.append(f"## {i + 1}. {section['title']}  _({section['role']})_\n\n{section['본문']}")
     parts.append(f"## 맺음말\n\n{conclusion}")
+    parts.extend(visual_markdown(visual_summary))
     # 출처 목록에는 실제로 읽은 문서만. 인용 괄호는 본문의 지표만 세도록 사용하지 않는다.
     read = sorted({d for section in sections for d in section["읽은문서"]})
     provenance = [

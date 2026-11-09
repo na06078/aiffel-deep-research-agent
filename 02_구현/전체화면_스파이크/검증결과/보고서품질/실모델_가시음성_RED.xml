@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.464" timestamp="2026-11-09T12:56:14.662630+09:00" hostname="z13flow"><testcase classname="테스트.테스트_보고서품질_실모델점검" name="test_negative_date_change_must_change_visible_body_not_only_link_destination" time="0.162"><failure message="assert True is False">tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/가시음성_RED/test_negative_date_change_must0')
+
+    def test_negative_date_change_must_change_visible_body_not_only_link_destination(tmp_path):
+        model = ModelDouble()
+        model.section["본문"] = "[참고](https://example.invalid/1882년) " + model.section["본문"]
+        result = asyncio.run(probe.run_probe(model=model, work=tmp_path))
+&gt;       assert result["passed"] is False
+E       assert True is False
+
+02_구현\전체화면_스파이크\테스트\테스트_보고서품질_실모델점검.py:269: AssertionError</failure></testcase></testsuite></testsuites>

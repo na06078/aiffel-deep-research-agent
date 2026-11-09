@@ -1,0 +1,121 @@
+{
+  "status": "local_presentation_verified_real_provider_pending",
+  "browser_evidence": "표현실사용/parent02/확인.json",
+  "browser": {
+    "total": 26,
+    "passed": 26,
+    "failed": [],
+    "browser_requests": 178,
+    "post_requests": 11,
+    "external_model_requests": 0,
+    "actual_external_http": 0,
+    "outside_memory_route_navigations": 1,
+    "sandbox_security_diagnostics": 18,
+    "expected_injected_http_503": 5
+  },
+  "source_and_candidate_hashes_checked": 33,
+  "hash_mismatches": [],
+  "generated_core_regression": {
+    "tests": 129,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "evidence": "생성보완_메인.xml"
+  },
+  "ruff": {
+    "checked_files": 19,
+    "check_exit": 0,
+    "format_exit": 0
+  },
+  "protection": {
+    "protected_data_sha256": {
+      "count": 13,
+      "changed": []
+    },
+    "installed_dist_sha256": {
+      "count": 25,
+      "changed": []
+    }
+  },
+  "live_model_calls": 0,
+  "live_budget_policy_changed": false,
+  "captures": [
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\바깥출처링크_메모리응답.png",
+      "bytes": 7951
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\HTML_재열기_표도식.png",
+      "bytes": 66618
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\PDF_페이지_1.png",
+      "bytes": 246594
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\PDF_페이지_2.png",
+      "bytes": 269480
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\PDF_페이지_3.png",
+      "bytes": 156377
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\뷰어_1440x900.png",
+      "bytes": 89724
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\뷰어_390x844.png",
+      "bytes": 52875
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\뷰어_844x390.png",
+      "bytes": 58773
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\조회실패_명시재시도.png",
+      "bytes": 97481
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\지연_close_성공.png",
+      "bytes": 119074
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\지연_close_실패.png",
+      "bytes": 119074
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\지연_replay-before-submitted_성공.png",
+      "bytes": 91785
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\지연_replay-before-submitted_실패.png",
+      "bytes": 91785
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\지연_other-report_성공.png",
+      "bytes": 107017
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\지연_other-report_실패.png",
+      "bytes": 106781
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\삭제후_bf1da3ec7c8c4a5da237ae3af4a6eef7_지연성공.png",
+      "bytes": 120595
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\삭제후_b1cb23c8d01f446f8279544ab35338be_지연실패.png",
+      "bytes": 112048
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\표현실사용\\parent02\\삭제후_e418bc57a47d4081a039bfb20566828c_지연성공.png",
+      "bytes": 85282
+    }
+  ],
+  "not_claimed": [
+    "실제 Luna의 의미 판별",
+    "실제 모델 전체 연구",
+    "운영 적용"
+  ]
+}

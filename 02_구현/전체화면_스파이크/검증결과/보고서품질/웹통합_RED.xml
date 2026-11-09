@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="3.916" timestamp="2026-11-09T11:32:39.173377+09:00" hostname="z13flow"><testcase classname="테스트.테스트_웹통합" name="test_정상조립과실제자료저장소_HTTP연구_재시작_무재전송" time="1.202"><failure message="AssertionError: {'run_id': '983a8161f76144fda88b4a5818b0baec', 'question': '공개 자료 범위', 'control_revision': 1, 'status': 'failed', ...}&#10;assert 'failed' == 'completed'&#10;  &#10;  - completed&#10;  + failed">tmp_path = WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/웹통합_RED/test_정상조립과실제자료저장소_HTTP연구_재시작_무0')
+
+    def test_정상조립과실제자료저장소_HTTP연구_재시작_무재전송(tmp_path):
+        source, searches, wire = source_boundary()
+        model = IntegrationModel()
+        app = create_research_app(data_dir=tmp_path, model=model, web_client=source)
+        with TestClient(app, base_url="http://127.0.0.1") as client:
+            first = client.get("/api/spike/snapshot").json()
+            assert first["selected_source_mode"] == "local"
+            assert first["source_modes"] == ["local", "web"]
+            chosen = client.post(
+                "/api/spike/commands", json={"text": "/웹", "client_request_id": "mode"}
+            )
+            assert chosen.status_code == 202 and chosen.json()["kind"] == "mode_change"
+            assert model.calls == searches == wire.connects == []
+            assert client.get("/api/spike/snapshot").json()["runs"] == []
+            admitted = client.post(
+                "/api/spike/commands", json={"text": "공개 자료 범위", "client_request_id": "research"}
+            )
+            assert admitted.status_code == 202
+            run_id = admitted.json()["run_id"]
+            deadline = time.monotonic() + 8
+            while time.monotonic() &lt; deadline:
+                state = client.get("/api/spike/snapshot").json()
+                run = next(r for r in state["runs"] if r["run_id"] == run_id)
+                if run["status"] != "running":
+                    break
+                time.sleep(0.01)
+&gt;           assert run["status"] == "completed", run
+E           AssertionError: {'run_id': '983a8161f76144fda88b4a5818b0baec', 'question': '공개 자료 범위', 'control_revision': 1, 'status': 'failed', ...}
+E           assert 'failed' == 'completed'
+E             
+E             - completed
+E             + failed
+
+테스트\테스트_웹통합.py:125: AssertionError</failure></testcase></testsuite></testsuites>

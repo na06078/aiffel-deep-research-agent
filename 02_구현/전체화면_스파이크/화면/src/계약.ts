@@ -17,6 +17,11 @@ export interface Assignment { section_id: string; title: string; assignee: strin
 export interface QualitySummary {
   passed: boolean | null; reasons: string[]; warnings?: string[];
   metrics?: Record<string, unknown>;
+  semantic_review?: {
+    통과: boolean;
+    문제: { 유형: string; 설명: string; 본문발췌: string; 출처: string[] }[];
+    검토요약: string;
+  };
 }
 export interface RunFailure { code: string; message: string; actor: string }
 export interface RunSnapshot {
@@ -111,6 +116,17 @@ export interface Report {
   source_mode?: SourceMode;
 }
 export interface ErrorEnvelope { error: { code: string; message: string } }
+
+// 기술 명세29절: 조회만으로 만드는 안전한 보고서 표현. 정본/실행/변환 작업을 만들지 않는다.
+export const REPORT_RENDERER_VERSION = 'markdown-it4-playwright1248-svg-v2';
+export interface ReportPresentation {
+  report_id: string;
+  source_report_hash: string;
+  renderer_version: string;
+  html: string;
+  warnings: string[];
+  links: { text: string; url: string }[];
+}
 
 // 기술 명세23절: 변환은 연구/큐와 독립이며 동일 정본에 결합한다.
 export type ExportFormat = 'html' | 'pdf';

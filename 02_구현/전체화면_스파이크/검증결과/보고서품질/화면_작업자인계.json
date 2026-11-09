@@ -1,0 +1,234 @@
+{
+  "상태": "화면 소유 범위 구현·대역 단위/SSR 검사 PASS; 실제 브라우저 통합은 메인 검사 대상",
+  "기준": "기술 명세29절",
+  "project_root": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트",
+  "implementation": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크",
+  "변경파일": [
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/보고서표현.tsx",
+      "sha256": "d48762e3ebf76a5c93ebc67b42151b3de0af14e31201d1c69f9007e3f246b41b"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/보고서표현.css",
+      "sha256": "3bc5c5513ff6310a743f2cdcd895108e6701a9f54437aaf1954f0ccd0f49830e"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/보고서표현.test.tsx",
+      "sha256": "f211ef649389f704bee3f5ce61e6a1350131e5de3cdac673b60a792b581bf626"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/상세보기.tsx",
+      "sha256": "8c59bc4910d0d0831be03a9675c87974c7319b64274cf30b90f54e97bb560668"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/상세보기.test.tsx",
+      "sha256": "6c6dd077e03a721ebe500ffe206fc951ab7ed3d054492b0406aeb74beb456ced"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/실제연구표시.test.tsx",
+      "sha256": "f8d0f1ddccffd4df3ee54c452768fd54fdf8d3b90033216f9a53b367a20647a6"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/통신.ts",
+      "sha256": "e41844dddda2564522e3932af4e4516fb47da2037a0d29854d2178fe53fded96"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/통신.test.ts",
+      "sha256": "481244e77880766e9c79a237356222dbb3a2a673d16b18c195b1623476ee8f35"
+    }
+  ],
+  "기능": [
+    "ID+sha256 세션과 응답 report_id/source_report_hash/renderer_version 검증",
+    "useMemo/useSyncExternalStore/useEffect cleanup으로 선택 수명과 GET 요청 세대 분리",
+    "중복 조회 합침·중단 후 성공/실패 폐기·StrictMode 재시작 세대 폐기",
+    "전체 서버 HTML을 sandbox=\"\" iframe srcDoc으로만 표시; 부모 DOM HTML 삽입 없음",
+    "출처는 외부 접힌 목록의 http/https 절대 URL만 허용; 사용자정보 포함 URL/다른 scheme/상대경로/비문자 URL 차단",
+    "Markdown 원문은 접어서 보존; 다운로드/HTML·PDF 조작/메타데이터/품질 경고 유지",
+    "반응형 iframe 높이와 내부 스크롤 사용; 세계·composer·팝업 전역 CSS 수정 없음"
+  ],
+  "검증": {
+    "numTotalTests": 36,
+    "numPassedTests": 36,
+    "numFailedTests": 0,
+    "success": true
+  },
+  "파일별집계": [
+    {
+      "file": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/보고서표현.test.tsx",
+      "count": 10,
+      "status": "passed"
+    },
+    {
+      "file": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/상세보기.test.tsx",
+      "count": 4,
+      "status": "passed"
+    },
+    {
+      "file": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/실제연구표시.test.tsx",
+      "count": 13,
+      "status": "passed"
+    },
+    {
+      "file": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/통신.test.ts",
+      "count": 9,
+      "status": "passed"
+    }
+  ],
+  "신규시험": {
+    "보고서표현.test.tsx": 10,
+    "통신.test.ts": 1
+  },
+  "명령실행기록": [
+    {
+      "label": "api-red",
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/통신.test.ts --no-file-parallelism",
+      "output": "RUN  v5.1.0 C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면\n\n ❯ src/통신.test.ts (9 tests | 1 failed) 25ms\n   × presentation은 정본 해시와 렌더러 버전을 GET으로 보내며 오류 사유를 유지한다 17ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/통신.test.ts > presentation은 정본 해시와 렌더러 버전을 GET으로 보내며 오류 사유를 유지한다\nAssertionError: expected \"vi.fn()\" to be called once with arguments: [ …(2) ]\n\nNumber of calls: 0\n\n ❯ src/통신.test.ts:9:18\n      7|  const presentation=(api as unknown as {presentation?:(id:string,hash:…\n      8|  const result=await presentation?.('A/B','hash +&');\n      9|  expect(fetcher).toHaveBeenCalledExactlyOnceWith('/api/spike/reports/A…\n       |                  ^\n     10|  expect(result).toEqual(body);\n     11|  await expect(presentation!('A/B','old')).rejects.toThrow('report_hash…\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed (1)\n      Tests  1 failed | 8 passed (9)\n   Start at  11:00:37\n   Duration  363ms (transform 31%, tests 30%, import 20%, worker 19%)",
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "label": "api-green",
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/통신.test.ts --no-file-parallelism",
+      "output": "RUN  v5.1.0 C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  11:01:10\n   Duration  178ms (transform 45%, tests 31%, import 19%, worker 5%)",
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "label": "presentation-positive-red",
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/보고서표현.test.tsx --no-file-parallelism",
+      "output": "RUN  v5.1.0 C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면\n\n ❯ src/보고서표현.test.tsx (1 test | 1 failed) 4ms\n   × 선택 ID와 해시의 표현만 조회하고 표와 SVG가 있는 전체 HTML을 보존한다 3ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/보고서표현.test.tsx > 선택 ID와 해시의 표현만 조회하고 표와 SVG가 있는 전체 HTML을 보존한다\nAssertionError: expected \"vi.fn()\" to be called once with arguments: [ 'A', 'hash-A' ]\n\nNumber of calls: 0\n\n ❯ src/보고서표현.test.tsx:14:27\n     12|  const api=client(),s=createPresentationSession('A','hash-A',api);\n     13|  expect(api.presentation).not.toHaveBeenCalled();s.start();await flush…\n     14|  expect(api.presentation).toHaveBeenCalledExactlyOnceWith('A','hash-A'…\n       |                           ^\n     15|  expect(s.getState()).toEqual({loading:false,error:'',presentation:val…\n     16| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed (1)\n      Tests  1 failed (1)\n   Start at  11:01:17\n   Duration  166ms (transform 60%, import 25%, tests 8%, worker 7%)",
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "label": "presentation-positive-green",
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/보고서표현.test.tsx --no-file-parallelism",
+      "output": "RUN  v5.1.0 C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면\n\n\n Test Files  1 passed (1)\n      Tests  1 passed (1)\n   Start at  11:01:38\n   Duration  158ms (transform 60%, import 25%, worker 8%, tests 6%)",
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "label": "binding-red",
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/보고서표현.test.tsx --no-file-parallelism",
+      "output": "RUN  v5.1.0 C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면\n\n ❯ src/보고서표현.test.tsx (4 tests | 3 failed) 6ms\n   × report_id 불일치는 HTML을 표시하지 않는다 4ms\n   × source_report_hash 불일치는 HTML을 표시하지 않는다 0ms\n   × renderer_version 불일치는 HTML을 표시하지 않는다 0ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/보고서표현.test.tsx > report_id 불일치는 HTML을 표시하지 않는다\nAssertionError: expected '' to contain 'report_id_mismatch'\n\n- Expected\n+ Received\n\n- report_id_mismatch\n\n ❯ src/보고서표현.test.tsx:18:29\n     16|  const api=client();api.presentation.mockResolvedValue(value({[field]:…\n     17|  const s=createPresentationSession('A','hash-A',api);s.start();await f…\n     18|  expect(s.getState().error).toContain(code);expect(s.getState().presen…\n       |                             ^\n     19| });\n     20| it('선택 ID와 해시의 표현만 조회하고 표와 SVG가 있는 전체 HTML을 보존한다',async()=>{\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯\n\n FAIL  src/보고서표현.test.tsx > source_report_hash 불일치는 HTML을 표시하지 않는다\nAssertionError: expected '' to contain 'report_hash_mismatch'\n\n- Expected\n+ Received\n\n- report_hash_mismatch\n\n ❯ src/보고서표현.test.tsx:18:29\n     16|  const api=client();api.presentation.mockResolvedValue(value({[field]:…\n     17|  const s=createPresentationSession('A','hash-A',api);s.start();await f…\n     18|  expect(s.getState().error).toContain(code);expect(s.getState().presen…\n       |                             ^\n     19| });\n     20| it('선택 ID와 해시의 표현만 조회하고 표와 SVG가 있는 전체 HTML을 보존한다',async()=>{\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯\n\n FAIL  src/보고서표현.test.tsx > renderer_version 불일치는 HTML을 표시하지 않는다\nAssertionError: expected '' to contain 'renderer_version_mismatch'\n\n- Expected\n+ Received\n\n- renderer_version_mismatch\n\n ❯ src/보고서표현.test.tsx:18:29\n     16|  const api=client();api.presentation.mockResolvedValue(value({[field]:…\n     17|  const s=createPresentationSession('A','hash-A',api);s.start();await f…\n     18|  expect(s.getState().error).toContain(code);expect(s.getState().presen…\n       |                             ^\n     19| });\n     20| it('선택 ID와 해시의 표현만 조회하고 표와 SVG가 있는 전체 HTML을 보존한다',async()=>{\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯\n\n\n Test Files  1 failed (1)\n      Tests  3 failed | 1 passed (4)\n   Start at  11:01:45\n   Duration  170ms (transform 57%, import 26%, tests 11%, worker 6%)",
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "label": "binding-green",
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/보고서표현.test.tsx --no-file-parallelism",
+      "output": "RUN  v5.1.0 C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면\n\n\n Test Files  1 passed (1)\n      Tests  4 passed (4)\n   Start at  11:02:16\n   Duration  157ms (transform 59%, import 27%, worker 7%, tests 6%)",
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "label": "lifecycle-red",
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/보고서표현.test.tsx --no-file-parallelism",
+      "output": "RUN  v5.1.0 C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면\n\n ❯ src/보고서표현.test.tsx (7 tests | 3 failed) 10ms\n   × 닫기·삭제·전환 후 늦은 성공과 실패는 상태나 구독을 되살리지 않는다 5ms\n   × 재시작은 이전 요청 세대를 버리며 중복 start와 조회를 합친다 1ms\n   × 실패는 자동 재시도 없이 사유를 보존하고 명시 재조회로만 복구한다 1ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/보고서표현.test.tsx > 닫기·삭제·전환 후 늦은 성공과 실패는 상태나 구독을 되살리지 않는다\nAssertionError: expected { loading: false, error: '', …(1) } to be { loading: true, error: '', …(1) } // Object.is equality\n\n- Expected\n+ Received\n\n  {\n    \"error\": \"\",\n-   \"loading\": true,\n-   \"presentation\": null,\n+   \"loading\": false,\n+   \"presentation\": {\n+     \"html\": \"<!doctype html><html><head><meta http-equiv=\\\"Content-Security-Policy\\\" content=\\\"default-src 'none'\\\"></head><body><table><tr><th>날짜</th></tr><tr><td>2026년</td></tr></table><svg viewBox=\\\"0 0 100 40\\\"><title>흐름</title><text x=\\\"0\\\" y=\\\"20\\\">근거</text></svg></body></html>\",\n+     \"links\": [],\n+     \"renderer_version\": \"markdown-it4-playwright1248-svg-v2\",\n+     \"report_id\": \"A\",\n+     \"source_report_hash\": \"hash-A\",\n+     \"warnings\": [],\n+   },\n  }\n\n ❯ src/보고서표현.test.tsx:26:24\n     24|   const bApi=client();bApi.presentation.mockResolvedValue(value({repor…\n     25|   if(rejected)late.reject(new Error('report_not_found: 삭제됨'));else lat…\n     26|   expect(a.getState()).toBe(stopped);expect(listener).not.toHaveBeenCa…\n       |                        ^\n     27|  }\n     28| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯\n\n FAIL  src/보고서표현.test.tsx > 재시작은 이전 요청 세대를 버리며 중복 start와 조회를 합친다\nAssertionError: expected \"vi.fn()\" to be called 1 times, but got 3 times\n ❯ src/보고서표현.test.tsx:31:116\n     29| it('재시작은 이전 요청 세대를 버리며 중복 start와 조회를 합친다',async()=>{\n     30|  const api=client(),old=deferred<ReportPresentation>();api.presentatio…\n     31|  const s=createPresentationSession('A','hash-A',api);s.start();s.start…\n       |                                                                                                                    ^\n     32|  s.stop();s.start();await flush();old.resolve(value({html:'이전 세대'}));a…\n     33| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯\n\n FAIL  src/보고서표현.test.tsx > 실패는 자동 재시도 없이 사유를 보존하고 명시 재조회로만 복구한다\nAssertionError: expected \"vi.fn()\" to not be called at all, but actually been called 1 times\n\nReceived:\n\n  1st vi.fn() call:\n\n    Array [\n      \"A\",\n      \"hash-A\",\n    ]\n\n\nNumber of calls: 1\n\n ❯ src/보고서표현.test.tsx:36:101\n     34| it('실패는 자동 재시도 없이 사유를 보존하고 명시 재조회로만 복구한다',async()=>{\n     35|  const api=client();api.presentation.mockRejectedValueOnce(new Error('…\n     36|  const s=createPresentationSession('A','hash-A',api);await s.refresh()…\n       |                                                                                                     ^\n     37|  s.start();await flush();expect(s.getState()).toEqual({loading:false,e…\n     38|  await s.refresh();expect(s.getState().error).toBe('');expect(s.getSta…\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯\n\n\n Test Files  1 failed (1)\n      Tests  3 failed | 4 passed (7)\n   Start at  11:02:22\n   Duration  185ms (transform 54%, import 23%, tests 17%, worker 7%)",
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "label": "lifecycle-green",
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/보고서표현.test.tsx --no-file-parallelism",
+      "output": "RUN  v5.1.0 C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면\n\n\n Test Files  1 passed (1)\n      Tests  7 passed (7)\n   Start at  11:03:02\n   Duration  170ms (transform 59%, import 26%, tests 8%, worker 7%)",
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "label": "ui-red",
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/보고서표현.test.tsx --no-file-parallelism",
+      "output": "RUN  v5.1.0 C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면\n\n ❯ src/보고서표현.test.tsx (9 tests | 2 failed) 12ms\n   × 전체 문서를 빈 sandbox srcDoc으로 격리하고 출처와 표현 경고를 밖에서 읽는다 7ms\n   × 조회 로딩과 실패 원인·명시 재조회는 원문 안내와 함께 읽을 수 있다 1ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/보고서표현.test.tsx > 전체 문서를 빈 sandbox srcDoc으로 격리하고 출처와 표현 경고를 밖에서 읽는다\nAssertionError: expected '<section></section>' to contain '<iframe'\n\nExpected: \"<iframe\"\nReceived: \"<section></section>\"\n\n ❯ src/보고서표현.test.tsx:43:15\n\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  src/보고서표현.test.tsx > 조회 로딩과 실패 원인·명시 재조회는 원문 안내와 함께 읽을 수 있다\nAssertionError: expected '<section></section>' to contain 'role=\"status\"'\n\nExpected: \"role=\"status\"\"\nReceived: \"<section></section>\"\n\n ❯ src/보고서표현.test.tsx:49:26\n\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n\n Test Files  1 failed (1)\n      Tests  2 failed | 7 passed (9)\n   Start at  11:03:20\n   Duration  386ms (import 73%, transform 22%, tests 4%, worker 1%)",
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "label": "ui-green",
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/보고서표현.test.tsx --no-file-parallelism",
+      "output": "RUN  v5.1.0 C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  11:03:47\n   Duration  218ms (transform 46%, import 37%, tests 12%, worker 4%)",
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "label": "url-red",
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/보고서표현.test.tsx --no-file-parallelism",
+      "output": "RUN  v5.1.0 C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면\n\n ❯ src/보고서표현.test.tsx (10 tests | 1 failed) 17ms\n   × 서버 응답도 http(s) 절대 URL만 외부 링크로 제공한다 6ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/보고서표현.test.tsx > 서버 응답도 http(s) 절대 URL만 외부 링크로 제공한다\nAssertionError: expected '<section class=\"report-presentation\" …' not to contain '거절-'\n\nExpected: \"거절-\"\nReceived: \"<section class=\"report-presentation\" aria-label=\"보고서 본문\" data-testid=\"report-presentation\"><h3>보고서 본문</h3><p class=\"report-reading-help\">본문 안에서 스크롤하여 표와 도식을 읽을 수 있습니다. 출처는 아래 출처 링크에서 열어 주세요.</p><iframe class=\"report-presentation-frame\" title=\"보고서 본문 · 표와 도식\" sandbox=\"\" srcDoc=\"&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;&quot;&gt;&lt;/head&gt;&lt;body&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;날짜&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;2026년&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;svg viewBox=&quot;0 0 100 40&quot;&gt;&lt;title&gt;흐름&lt;/title&gt;&lt;text x=&quot;0&quot; y=&quot;20&quot;&gt;근거&lt;/text&gt;&lt;/svg&gt;&lt;/body&gt;&lt;/html&gt;\" referrerPolicy=\"no-referrer\"></iframe><details class=\"report-source-links\"><summary>출처 링크 (12)</summary><ul><li><a href=\"https://example.org\" target=\"_blank\" rel=\"noopener noreferrer\">안전 https</a></li><li><a href=\"http://example.org\" target=\"_blank\" rel=\"noopener noreferrer\">안전 http</a></li><li><a href=\"javascript:throw new Error(&#x27;React has blocked a javascript: URL as a security precaution.&#x27;)\" target=\"_blank\" rel=\"noopener noreferrer\">거절-0</a></li><li><a href=\"data:text/html,bad\" target=\"_blank\" rel=\"noopener noreferrer\">거절-1</a></li><li><a href=\"file:///C:/secret\" target=\"_blank\" rel=\"noopener noreferrer\">거절-2</a></li><li><a href=\"//evil.example\" target=\"_blank\" rel=\"noopener noreferrer\">거절-3</a></li><li><a href=\"/relative\" target=\"_blank\" rel=\"noopener noreferrer\">거절-4</a></li><li><a href=\"https://\" target=\"_blank\" rel=\"noopener noreferrer\">거절-5</a></li><li><a href=\"https://user:pass@example.org\" target=\"_blank\" rel=\"noopener noreferrer\">거절-6</a></li><li><a href=\"42\" target=\"_blank\" rel=\"noopener noreferrer\">거절-7</a></li><li><a target=\"_blank\" rel=\"noopener noreferrer\">거절-8</a></li><li><a href=\"[object Object]\" target=\"_blank\" rel=\"noopener noreferrer\">거절-9</a></li></ul></details></section>\"\n\n ❯ src/보고서표현.test.tsx:55:88\n\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed (1)\n      Tests  1 failed | 9 passed (10)\n   Start at  11:03:54\n   Duration  217ms (transform 43%, import 35%, tests 18%, worker 4%)",
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "label": "url-green",
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/보고서표현.test.tsx --no-file-parallelism",
+      "output": "RUN  v5.1.0 C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  11:04:24\n   Duration  195ms (transform 47%, import 36%, tests 13%, worker 4%)",
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "label": "viewer-red",
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/상세보기.test.tsx --no-file-parallelism",
+      "output": "RUN  v5.1.0 C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면\n\n ❯ src/상세보기.test.tsx (4 tests | 1 failed) 14ms\n   × 보고서는 정확한 보고서 ID와 전체 Markdown 및 실제 다운로드 URL을 제공한다 6ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/상세보기.test.tsx > 보고서는 정확한 보고서 ID와 전체 Markdown 및 실제 다운로드 URL을 제공한다\nAssertionError: expected '<article data-testid=\"report-viewer\">…' to contain '<details class=\"report-markdown-sourc…'\n\n- Expected\n+ Received\n\n- <details class=\"report-markdown-source\"><summary>Markdown 원문</summary>\n+ <article data-testid=\"report-viewer\"><dl><dt>보고서 ID</dt><dd>report-A</dd><dt>작성 시각</dt><dd>10:02:03 KST · 2026-11-06T01:02:03Z</dd><dt>실행 / 버전</dt><dd>run-A / 1</dd></dl><a class=\"download\" href=\"/api/spike/reports/report-A/download\" download=\"\">Markdown 다운로드</a><section class=\"report-exports\" data-testid=\"report-exports\" aria-label=\"보고서 형식 변환\"><h3>HTML · PDF</h3><p>같은 Markdown 정본을 변환합니다. 연구를 다시 실행하지 않습니다.</p><p role=\"status\">변환 상태를 조회하는 중입니다.</p><div class=\"report-export-row\"><div class=\"report-export-info\"><strong>HTML</strong></div><button type=\"button\" data-testid=\"export-html-create\" disabled=\"\">HTML 생성</button></div><div class=\"report-export-row\"><div class=\"report-export-info\"><strong>PDF</strong></div><button type=\"button\" data-testid=\"export-pdf-create\" disabled=\"\">PDF 생성</button></div></section><pre class=\"markdown\"># 원문\n+ &lt;script&gt;예시&lt;/script&gt;\n+ 마지막 문장</pre></article>\n\n ❯ src/상세보기.test.tsx:22:193\n\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed (1)\n      Tests  1 failed | 3 passed (4)\n   Start at  11:04:31\n   Duration  233ms (import 42%, transform 41%, tests 13%, worker 3%)",
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "label": "viewer-green",
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/상세보기.test.tsx src/보고서표현.test.tsx src/통신.test.ts src/실제연구표시.test.tsx --no-file-parallelism",
+      "output": "RUN  v5.1.0 C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면\n\n\n Test Files  4 passed (4)\n      Tests  36 passed (36)\n   Start at  11:05:13\n   Duration  734ms (import 41%, transform 33%, tests 22%, worker 4%)\n\n    Isolate  4 workers spawned · ~93ms startup each (spawn + environment, per file)\n             at least ~280ms faster with isolate: false — reuses workers across files instead of one per file",
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "label": "tsc",
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/typescript/bin/tsc --noEmit",
+      "output": "",
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "label": "final-owned-green",
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/vitest/vitest.mjs run src/보고서표현.test.tsx src/상세보기.test.tsx src/실제연구표시.test.tsx src/통신.test.ts --no-file-parallelism --reporter=json --outputFile=\"C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/화면/Vitest_최종.json\"",
+      "output": "JSON report written to C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/화면/Vitest_최종.json",
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "label": "final-tsc",
+      "command": "\"C:/nvm4w/nodejs/node.exe\" node_modules/typescript/bin/tsc --noEmit",
+      "output": "",
+      "exit_code": 0,
+      "error": null
+    }
+  ],
+  "TDD_RED": [
+    "api-red: fetch 호출 0 assertion 실패",
+    "presentation-positive-red: 선택 ID/hash 조회 assertion 실패",
+    "binding-red: ID/hash/version 오류 코드 assertion 3개 실패",
+    "lifecycle-red: 중단 뒤 상태 복원·중복 요청·비활성 조회 assertion 3개 실패",
+    "ui-red: iframe/상태 안내 누락 assertion 2개 실패",
+    "url-red: 위험 URL이 링크 목록에 남음 assertion 실패",
+    "viewer-red: 접힌 원문이 없음 assertion 실패"
+  ],
+  "TDD_GREEN": "각 RED 뒤 GREEN 통과; 최종 4파일 36/36; tsc --noEmit exit 0",
+  "테스트근거": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/화면/Vitest_최종.json",
+  "UX한계": [
+    "iframe은 opaque origin이므로 내부 높이 자동 측정/스크립트 사용 없음; 본문 내부와 팝업의 이중 스크롤이 의도된 동작",
+    "iframe 안 외부 링크를 열기 위해 권한을 넓히지 않음; 아래 출처 목록에서 열기",
+    "CSS 높이: 데스크톱 clamp(280px,55dvh,640px), 모바일 clamp(260px,52dvh,480px), 500px 이하 낮은 창 240px; 실제 viewport 조작/가림은 메인 격리 브라우저에서 최종 확인 필요"
+  ],
+  "메인통합요청": [
+    "앱.tsx와 공통 계약 변경 불필요: 기존 selectedReportAllowed·open/close setReport(null)·selectionToken·삭제 콜백 수명 유지 확인",
+    "다른 파일의 api 전체 대역에 presentation 메서드가 필요하면 메인 소유로 보강(소유 밖 파일 미수정)",
+    "후보 번들만 별도 .cache에 빌드 후 실제 HTML 서버 결과 표/SVG/경고/출처·원문을 확인",
+    "1440/390/낮은 창의 같은 canvas·입력·닫기·마지막 조작 접근, 느린 GET 후 close/switch/hash/replay rewind/delete 및 MD/HTML/PDF 다운로드·새로고침·외부요청0을 실제 격리 경로로 확인"
+  ],
+  "제외": [
+    "실제 모델/검색/이미지 API 미호출",
+    "설치/패키지·lock/.env/장부/운영자료/설치 dist/Git 변경 없음",
+    "전체 테스트 및 전체 브라우저/PDF/신규 그래프 통합은 메인 담당; 여기 36개 결과로 대체하지 않음"
+  ],
+  "도구문제": [
+    "최초 PRODUCT/DESIGN 읽기 위치를 implementation으로 잡아 없음; 프로젝트 루트에서 실제 문서 재조회 완료",
+    "Vitest JSON 단일 긴 줄 read_file 추출 한도로 파싱 실패하여 terminal Python json.loads로 실제 파일 집계 확인",
+    "기존 TDD_실행로그.json 재기록은 read guard 거절됨; 최초 RED/GREEN 로그는 보존하고 모든 최종 실행은 이 인계 JSON에 포함"
+  ]
+}

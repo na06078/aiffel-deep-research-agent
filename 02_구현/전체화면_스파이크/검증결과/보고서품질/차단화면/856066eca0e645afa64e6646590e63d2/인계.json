@@ -1,0 +1,643 @@
+{
+  "explicit_model_double": true,
+  "actual_provider_requests": 0,
+  "unverified": [
+    "실제 모델 판별 능력",
+    "실제 제공자/인증/공유 예산",
+    "실제 웹 수집"
+  ],
+  "checks": [
+    {
+      "name": "port unused before",
+      "passed": true
+    },
+    {
+      "name": "false: server ready",
+      "passed": true
+    },
+    {
+      "name": "false: UI admission",
+      "passed": true
+    },
+    {
+      "name": "false: upstream reached semantic guard",
+      "passed": true,
+      "operations": [
+        "plan",
+        "read_one",
+        "read_one",
+        "read_one",
+        "read_one",
+        "select",
+        "select",
+        "select",
+        "select",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "select",
+        "draft_section",
+        "synthesize",
+        "semantic_review"
+      ]
+    },
+    {
+      "name": "false: exact API block",
+      "passed": true,
+      "quality": {
+        "passed": false,
+        "reasons": [
+          "semantic_review_failed"
+        ],
+        "warnings": [
+          "자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다."
+        ],
+        "metrics": {
+          "문장수": 89,
+          "근거붙은문장": 0,
+          "근거율": 0.0,
+          "허위인용": [],
+          "읽은문서": 4,
+          "읽고안쓴": [],
+          "인용편중": 25.0,
+          "중복률": 0.0,
+          "절수": 4,
+          "보고서자수": 3595,
+          "인용수": 4,
+          "LLM호출": 17,
+          "격리율": 38.1
+        },
+        "unknown_citations": [],
+        "unread_citations": [],
+        "misattributed_citations": [],
+        "semantic_review_raw": "{\"통과\": false, \"문제\": [{\"유형\": \"근거 불일치 대역\", \"설명\": \"명시적 대역 판정 <img src=x onerror=\\\"window.__semanticInjected=1\\\">\", \"본문발췌\": \"자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다.\", \"출처\": [\"운요호 사건\"]}], \"검토요약\": \"의미 판별 성능을 입증하지 않는 차단 표시 검사\"}",
+        "semantic_review": {
+          "통과": false,
+          "문제": [
+            {
+              "유형": "근거 불일치 대역",
+              "설명": "명시적 대역 판정 <img src=x onerror=\"window.__semanticInjected=1\">",
+              "본문발췌": "자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다.",
+              "출처": [
+                "운요호 사건"
+              ]
+            }
+          ],
+          "검토요약": "의미 판별 성능을 입증하지 않는 차단 표시 검사"
+        }
+      }
+    },
+    {
+      "name": "false: draft preserved / no final / queue paused",
+      "passed": true
+    },
+    {
+      "name": "false: SQLite durable draft and no report",
+      "passed": true
+    },
+    {
+      "name": "false/1440: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "false/1440: literal excerpt/source/markup",
+      "passed": true
+    },
+    {
+      "name": "false/1440: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "false/1440: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "false/1440: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "false/390: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "false/390: literal excerpt/source/markup",
+      "passed": true
+    },
+    {
+      "name": "false/390: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "false/390: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "false/390: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "false/844: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "false/844: literal excerpt/source/markup",
+      "passed": true
+    },
+    {
+      "name": "false/844: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "false/844: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "false/844: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "false: history explains cause and keeps draft",
+      "passed": true
+    },
+    {
+      "name": "false: no automatic retry",
+      "passed": true
+    },
+    {
+      "name": "false: service/model cleanup",
+      "passed": true
+    },
+    {
+      "name": "invalid: server ready",
+      "passed": true
+    },
+    {
+      "name": "invalid: UI admission",
+      "passed": true
+    },
+    {
+      "name": "invalid: upstream reached semantic guard",
+      "passed": true,
+      "operations": [
+        "plan",
+        "read_one",
+        "read_one",
+        "read_one",
+        "read_one",
+        "select",
+        "select",
+        "select",
+        "select",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "select",
+        "draft_section",
+        "synthesize",
+        "semantic_review"
+      ]
+    },
+    {
+      "name": "invalid: exact API block",
+      "passed": true,
+      "quality": {
+        "passed": false,
+        "reasons": [
+          "semantic_review_invalid"
+        ],
+        "warnings": [
+          "자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다."
+        ],
+        "metrics": {
+          "문장수": 89,
+          "근거붙은문장": 0,
+          "근거율": 0.0,
+          "허위인용": [],
+          "읽은문서": 4,
+          "읽고안쓴": [],
+          "인용편중": 25.0,
+          "중복률": 0.0,
+          "절수": 4,
+          "보고서자수": 3595,
+          "인용수": 4,
+          "LLM호출": 17,
+          "격리율": 38.1
+        },
+        "unknown_citations": [],
+        "unread_citations": [],
+        "misattributed_citations": [],
+        "semantic_review_raw": "THIS IS NOT JSON <script>window.__semanticInjected=1</script>"
+      }
+    },
+    {
+      "name": "invalid: draft preserved / no final / queue paused",
+      "passed": true
+    },
+    {
+      "name": "invalid: SQLite durable draft and no report",
+      "passed": true
+    },
+    {
+      "name": "invalid/1440: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "invalid/1440: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "invalid/1440: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "invalid/1440: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "invalid/390: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "invalid/390: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "invalid/390: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "invalid/390: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "invalid/844: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "invalid/844: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "invalid/844: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "invalid/844: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "invalid: history explains cause and keeps draft",
+      "passed": true
+    },
+    {
+      "name": "invalid: no automatic retry",
+      "passed": true
+    },
+    {
+      "name": "invalid: service/model cleanup",
+      "passed": true
+    },
+    {
+      "name": "no external request attempts",
+      "passed": true
+    },
+    {
+      "name": "no browser errors",
+      "passed": true
+    }
+  ],
+  "cases": [
+    {
+      "case": "false",
+      "data_dir": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\차단화면\\856066eca0e645afa64e6646590e63d2\\false",
+      "run": {
+        "run_id": "3b7017c4d26c4ad9b838d2e322830647",
+        "question": "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?",
+        "control_revision": 1,
+        "status": "blocked",
+        "phase": "quality_failed",
+        "plan": [
+          {
+            "section_id": "section-1",
+            "title": "사건 0",
+            "assignee": "researcher-1",
+            "role": "원인 담당",
+            "seed": "운요호 사건",
+            "instruction": "사건과 원인을 자료대로 밝히라 (재위임: 지난번에 «운요호 사건» 를 읽었지만 추가 원인 자료 필요. 그 빈 칸을 채우도록 아직 안 본 문서를 찾아라)",
+            "budget": 3,
+            "round": 2,
+            "order": 0
+          },
+          {
+            "section_id": "section-2",
+            "title": "사건 1",
+            "assignee": "researcher-2",
+            "role": "원인 담당",
+            "seed": "강화도 조약",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 1
+          },
+          {
+            "section_id": "section-3",
+            "title": "사건 2",
+            "assignee": "researcher-3",
+            "role": "원인 담당",
+            "seed": "조미 수호 통상 조약",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 2
+          },
+          {
+            "section_id": "section-4",
+            "title": "사건 3",
+            "assignee": "researcher-4",
+            "role": "원인 담당",
+            "seed": "거문도 사건",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 3
+          }
+        ],
+        "report_id": null,
+        "draft": "# 1894년 사건과 원인\n\n질문에 관한 연구를 정리한다.\n\n## 1. 사건 0  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. «운요호 사건»\n\n## 2. 사건 1  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. «강화도 조약»\n\n## 3. 사건 2  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. «조미 수호 통상 조약»\n\n## 4. 사건 3  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. «거문도 사건»\n\n## 맺음말\n\n각 사건의 원인은 자료의 범위 안에서 해석해야 한다.\n\n시각화 생략 사유: 이 대역은 시각 요약을 만들지 않는다\\.\n\n## 출처 및 이용허락\n고정 코퍼스: 한국어 위키백과 (CC BY-SA 4.0), MediaWiki API로 수집; 수집일 2026-09-21.\n한국어 위키백과 원문을 조사 메모로 요약하고 절 원고로 재구성했습니다. 원문 기여자·변경 이력은 각 문서의 역사 탭에서 확인할 수 있습니다. 원자료 이용허락: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). 이 보고서는 같은 이용허락으로 제공합니다.\n- [강화도 조약](https://ko.wikipedia.org/wiki/%EA%B0%95%ED%99%94%EB%8F%84_%EC%A1%B0%EC%95%BD) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EA%B0%95%ED%99%94%EB%8F%84%20%EC%A1%B0%EC%95%BD&action=history))\n- [거문도 사건](https://ko.wikipedia.org/wiki/%EA%B1%B0%EB%AC%B8%EB%8F%84_%EC%82%AC%EA%B1%B4) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EA%B1%B0%EB%AC%B8%EB%8F%84%20%EC%82%AC%EA%B1%B4&action=history))\n- [운요호 사건](https://ko.wikipedia.org/wiki/%EC%9A%B4%EC%9A%94%ED%98%B8_%EC%82%AC%EA%B1%B4) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EC%9A%B4%EC%9A%94%ED%98%B8%20%EC%82%AC%EA%B1%B4&action=history))\n- [조미 수호 통상 조약](https://ko.wikipedia.org/wiki/%EC%A1%B0%EB%AF%B8_%EC%88%98%ED%98%B8_%ED%86%B5%EC%83%81_%EC%A1%B0%EC%95%BD) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EC%A1%B0%EB%AF%B8%20%EC%88%98%ED%98%B8%20%ED%86%B5%EC%83%81%20%EC%A1%B0%EC%95%BD&action=history))",
+        "quality": {
+          "passed": false,
+          "reasons": [
+            "semantic_review_failed"
+          ],
+          "warnings": [
+            "자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다."
+          ],
+          "metrics": {
+            "문장수": 89,
+            "근거붙은문장": 0,
+            "근거율": 0.0,
+            "허위인용": [],
+            "읽은문서": 4,
+            "읽고안쓴": [],
+            "인용편중": 25.0,
+            "중복률": 0.0,
+            "절수": 4,
+            "보고서자수": 3595,
+            "인용수": 4,
+            "LLM호출": 17,
+            "격리율": 38.1
+          },
+          "unknown_citations": [],
+          "unread_citations": [],
+          "misattributed_citations": [],
+          "semantic_review_raw": "{\"통과\": false, \"문제\": [{\"유형\": \"근거 불일치 대역\", \"설명\": \"명시적 대역 판정 <img src=x onerror=\\\"window.__semanticInjected=1\\\">\", \"본문발췌\": \"자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다.\", \"출처\": [\"운요호 사건\"]}], \"검토요약\": \"의미 판별 성능을 입증하지 않는 차단 표시 검사\"}",
+          "semantic_review": {
+            "통과": false,
+            "문제": [
+              {
+                "유형": "근거 불일치 대역",
+                "설명": "명시적 대역 판정 <img src=x onerror=\"window.__semanticInjected=1\">",
+                "본문발췌": "자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다.",
+                "출처": [
+                  "운요호 사건"
+                ]
+              }
+            ],
+            "검토요약": "의미 판별 성능을 입증하지 않는 차단 표시 검사"
+          }
+        },
+        "parent_report_id": null,
+        "created_at": "2026-11-09T04:37:09.543675+00:00",
+        "updated_at": "2026-11-09T04:37:10.192963+00:00",
+        "mock_requests": 0,
+        "actual_model_requests": 17,
+        "source_mode": "local",
+        "instruction_history": [
+          "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?"
+        ],
+        "report_title": "1894년 사건과 원인",
+        "research_stop_reason": "sufficient",
+        "visual_summary": {
+          "머리말": "질문에 관한 연구를 정리한다.",
+          "맺음말": "각 사건의 원인은 자료의 범위 안에서 해석해야 한다.",
+          "표": [],
+          "도식": [],
+          "시각화생략사유": "이 대역은 시각 요약을 만들지 않는다."
+        },
+        "semantic_review_state": {
+          "revision": 1,
+          "status": "completed",
+          "raw": "{\"통과\": false, \"문제\": [{\"유형\": \"근거 불일치 대역\", \"설명\": \"명시적 대역 판정 <img src=x onerror=\\\"window.__semanticInjected=1\\\">\", \"본문발췌\": \"자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다.\", \"출처\": [\"운요호 사건\"]}], \"검토요약\": \"의미 판별 성능을 입증하지 않는 차단 표시 검사\"}"
+        }
+      },
+      "snapshot_queue_paused": true,
+      "double_operations": [
+        "plan",
+        "read_one",
+        "read_one",
+        "read_one",
+        "read_one",
+        "select",
+        "select",
+        "select",
+        "select",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "select",
+        "draft_section",
+        "synthesize",
+        "semantic_review"
+      ],
+      "sqlite": {
+        "integrity_check": "ok",
+        "reports": 0,
+        "revision_matches_api": true
+      },
+      "result": "PASS",
+      "model_closed": true,
+      "elapsed_seconds": 4.094
+    },
+    {
+      "case": "invalid",
+      "data_dir": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\차단화면\\856066eca0e645afa64e6646590e63d2\\invalid",
+      "run": {
+        "run_id": "6837003340de4bb6a5e748724613614f",
+        "question": "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?",
+        "control_revision": 1,
+        "status": "blocked",
+        "phase": "quality_failed",
+        "plan": [
+          {
+            "section_id": "section-1",
+            "title": "사건 0",
+            "assignee": "researcher-1",
+            "role": "원인 담당",
+            "seed": "운요호 사건",
+            "instruction": "사건과 원인을 자료대로 밝히라 (재위임: 지난번에 «운요호 사건» 를 읽었지만 추가 원인 자료 필요. 그 빈 칸을 채우도록 아직 안 본 문서를 찾아라)",
+            "budget": 3,
+            "round": 2,
+            "order": 0
+          },
+          {
+            "section_id": "section-2",
+            "title": "사건 1",
+            "assignee": "researcher-2",
+            "role": "원인 담당",
+            "seed": "강화도 조약",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 1
+          },
+          {
+            "section_id": "section-3",
+            "title": "사건 2",
+            "assignee": "researcher-3",
+            "role": "원인 담당",
+            "seed": "조미 수호 통상 조약",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 2
+          },
+          {
+            "section_id": "section-4",
+            "title": "사건 3",
+            "assignee": "researcher-4",
+            "role": "원인 담당",
+            "seed": "거문도 사건",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 3
+          }
+        ],
+        "report_id": null,
+        "draft": "# 1894년 사건과 원인\n\n질문에 관한 연구를 정리한다.\n\n## 1. 사건 0  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. «운요호 사건»\n\n## 2. 사건 1  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. «강화도 조약»\n\n## 3. 사건 2  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. «조미 수호 통상 조약»\n\n## 4. 사건 3  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다. «거문도 사건»\n\n## 맺음말\n\n각 사건의 원인은 자료의 범위 안에서 해석해야 한다.\n\n시각화 생략 사유: 이 대역은 시각 요약을 만들지 않는다\\.\n\n## 출처 및 이용허락\n고정 코퍼스: 한국어 위키백과 (CC BY-SA 4.0), MediaWiki API로 수집; 수집일 2026-09-21.\n한국어 위키백과 원문을 조사 메모로 요약하고 절 원고로 재구성했습니다. 원문 기여자·변경 이력은 각 문서의 역사 탭에서 확인할 수 있습니다. 원자료 이용허락: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). 이 보고서는 같은 이용허락으로 제공합니다.\n- [강화도 조약](https://ko.wikipedia.org/wiki/%EA%B0%95%ED%99%94%EB%8F%84_%EC%A1%B0%EC%95%BD) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EA%B0%95%ED%99%94%EB%8F%84%20%EC%A1%B0%EC%95%BD&action=history))\n- [거문도 사건](https://ko.wikipedia.org/wiki/%EA%B1%B0%EB%AC%B8%EB%8F%84_%EC%82%AC%EA%B1%B4) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EA%B1%B0%EB%AC%B8%EB%8F%84%20%EC%82%AC%EA%B1%B4&action=history))\n- [운요호 사건](https://ko.wikipedia.org/wiki/%EC%9A%B4%EC%9A%94%ED%98%B8_%EC%82%AC%EA%B1%B4) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EC%9A%B4%EC%9A%94%ED%98%B8%20%EC%82%AC%EA%B1%B4&action=history))\n- [조미 수호 통상 조약](https://ko.wikipedia.org/wiki/%EC%A1%B0%EB%AF%B8_%EC%88%98%ED%98%B8_%ED%86%B5%EC%83%81_%EC%A1%B0%EC%95%BD) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EC%A1%B0%EB%AF%B8%20%EC%88%98%ED%98%B8%20%ED%86%B5%EC%83%81%20%EC%A1%B0%EC%95%BD&action=history))",
+        "quality": {
+          "passed": false,
+          "reasons": [
+            "semantic_review_invalid"
+          ],
+          "warnings": [
+            "자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다."
+          ],
+          "metrics": {
+            "문장수": 89,
+            "근거붙은문장": 0,
+            "근거율": 0.0,
+            "허위인용": [],
+            "읽은문서": 4,
+            "읽고안쓴": [],
+            "인용편중": 25.0,
+            "중복률": 0.0,
+            "절수": 4,
+            "보고서자수": 3595,
+            "인용수": 4,
+            "LLM호출": 17,
+            "격리율": 38.1
+          },
+          "unknown_citations": [],
+          "unread_citations": [],
+          "misattributed_citations": [],
+          "semantic_review_raw": "THIS IS NOT JSON <script>window.__semanticInjected=1</script>"
+        },
+        "parent_report_id": null,
+        "created_at": "2026-11-09T04:37:13.491013+00:00",
+        "updated_at": "2026-11-09T04:37:14.301764+00:00",
+        "mock_requests": 0,
+        "actual_model_requests": 17,
+        "source_mode": "local",
+        "instruction_history": [
+          "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?"
+        ],
+        "report_title": "1894년 사건과 원인",
+        "research_stop_reason": "sufficient",
+        "visual_summary": {
+          "머리말": "질문에 관한 연구를 정리한다.",
+          "맺음말": "각 사건의 원인은 자료의 범위 안에서 해석해야 한다.",
+          "표": [],
+          "도식": [],
+          "시각화생략사유": "이 대역은 시각 요약을 만들지 않는다."
+        },
+        "semantic_review_state": {
+          "revision": 1,
+          "status": "completed",
+          "raw": "THIS IS NOT JSON <script>window.__semanticInjected=1</script>"
+        }
+      },
+      "snapshot_queue_paused": true,
+      "double_operations": [
+        "plan",
+        "read_one",
+        "read_one",
+        "read_one",
+        "read_one",
+        "select",
+        "select",
+        "select",
+        "select",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "select",
+        "draft_section",
+        "synthesize",
+        "semantic_review"
+      ],
+      "sqlite": {
+        "integrity_check": "ok",
+        "reports": 0,
+        "revision_matches_api": true
+      },
+      "result": "PASS",
+      "model_closed": true,
+      "elapsed_seconds": 4.078
+    }
+  ],
+  "network_denials": [],
+  "browser_errors": [],
+  "console_errors": [],
+  "external_browser_requests": [],
+  "screenshots": [
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\차단화면\\856066eca0e645afa64e6646590e63d2\\false_1440x900_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\차단화면\\856066eca0e645afa64e6646590e63d2\\false_390x844_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\차단화면\\856066eca0e645afa64e6646590e63d2\\false_844x390_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\차단화면\\856066eca0e645afa64e6646590e63d2\\false_과거상세.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\차단화면\\856066eca0e645afa64e6646590e63d2\\invalid_1440x900_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\차단화면\\856066eca0e645afa64e6646590e63d2\\invalid_390x844_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\차단화면\\856066eca0e645afa64e6646590e63d2\\invalid_844x390_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\보고서품질\\차단화면\\856066eca0e645afa64e6646590e63d2\\invalid_과거상세.png"
+  ],
+  "script": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\보고서품질_차단실사용검사.py",
+  "script_sha256": "10f0329e0194113d3a7ad6d38b48d13619ddf3d667bcbf52db1523c43e9dcf4b",
+  "candidate_assets": {
+    "browserAll-BhzFzjqc.js": "59e0ac05bf666a4fb79e49e30e12b00406fbcb7da2eee92e7b93b976004b0d30",
+    "Cache-CTROkX_m.js": "1362d81633b62e495b282f17617beb74083f16064864156e04949a07fa9ae0cf",
+    "CanvasPool-DzuCm1vb.js": "edde6aa9084e7f5958ad3f9a1437ea82c2406913957ef01be12296ca951373f1",
+    "canvasUtils-U4WZZEj-.js": "c0a01018402f30d7e9ad35ae43fafc8c490899236e6f28c8c4c8095fd066d448",
+    "Filter-vpEaIMwd.js": "e802a7ce1c4d21948131c5d247ee9db7f33376b17678d973d22ae0296f1935fc",
+    "GCManagedHash-DCvVepMX.js": "f9c36545f614350af3b653bd4e603e590afad27332ad79133fb661180406b312",
+    "getTexelRangeRects-Bdv1rQ51.js": "baa0c3c95a387acb0bf72e4b440a0ffc947f8bfcb34bfd462c32a10bbe53c665",
+    "getTextureBatchBindGroup-CEQHRttu.js": "f820ad942542bd39943bfcbc6073fa6d5237ee8fe574a36f8a4d22ae67c9558a",
+    "GraphicsContext-48tzdr3Q.js": "26553fe11bde03fcc13af77e92b26890e5b7f7ec1b791ad26634a133b670a7dc",
+    "index-h_HvDJ5a.js": "dca529d2384e56f5c251718d2040fbdab8b65a87d601673709dce604a3621dc8",
+    "init-DoUXYMOj.js": "8aa920d822fab365c3d8f4dff6dd7daa2ef6d7d8979f4156b928684d79ac0af5",
+    "RenderTargetSystem-BK2ifv01.js": "76151e37944ac1989dd3632f63fdc2a7f8b897cd226583baa060db0c71ccd6b0",
+    "webworkerAll-BdtYZv_i.js": "06cd92bf88a32ae22af5d24f463bbba35f3a8acbeab75d5e6624226b0b3d9feb"
+  },
+  "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\보고서품질_차단실사용검사.py\"",
+  "listener_closed": true,
+  "counts": {
+    "checks": 48,
+    "passed": 48,
+    "cases": 2,
+    "screenshots": 8
+  },
+  "passed": true
+}

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="2.182" timestamp="2026-11-09T11:26:47.415619+09:00" hostname="z13flow"><testcase classname="테스트.테스트_보고서표현" name="test_본문_외부앵커는_빈_sandbox의_자체탐색을_허용하지않는다" time="0.003"><failure message="AssertionError: assert None == '_blank'&#10; +  where None = &lt;built-in method get of dict object at 0x0000017FE0A17E00&gt;('target')&#10; +    where &lt;built-in method get of dict object at 0x0000017FE0A17E00&gt; = {'href': 'https://example.invalid/source'}.get">def test_본문_외부앵커는_빈_sandbox의_자체탐색을_허용하지않는다():
+        result = render_presentation(
+            b'[source](https://example.invalid/source) [section](#section)', {}
+        )
+        anchors = [attrs for tag, attrs in Document(result['html']).tags if tag == 'a']
+&gt;       assert anchors[0].get('target') == '_blank'
+E       AssertionError: assert None == '_blank'
+E        +  where None = &lt;built-in method get of dict object at 0x0000017FE0A17E00&gt;('target')
+E        +    where &lt;built-in method get of dict object at 0x0000017FE0A17E00&gt; = {'href': 'https://example.invalid/source'}.get
+
+테스트\테스트_보고서표현.py:131: AssertionError</failure></testcase><testcase classname="테스트.테스트_보고서표현" name="test_실제_빈_sandbox는_본문탐색을_막고_바깥출처만_별도탭으로_연다" time="1.812"><failure message="AssertionError: 본문 앵커가 iframe 자체를 탐색했습니다.&#10;assert ['https://exa...valid/source'] == []&#10;  &#10;  Left contains one more item: 'https://example.invalid/source'&#10;  Use -v to get more diff">def test_실제_빈_sandbox는_본문탐색을_막고_바깥출처만_별도탭으로_연다():
+        """외부 호스트에는 전송하지 않고 Playwright route가 응답하는 탐색 경계 검사."""
+        import html
+        from pathlib import Path
+    
+        from playwright.sync_api import sync_playwright
+    
+        url = 'https://example.invalid/source'
+        document = render_presentation(b'# canonical report\n\n[body source](https://example.invalid/source)', {})['html']
+        requests = []
+        denied = []
+        with sync_playwright() as playwright:
+            browser = playwright.chromium.launch(
+                executable_path=str(Path(__file__).resolve().parents[3] / '.cache/playwright/chromium-1248/chrome-win64/chrome.exe'),
+                headless=True,
+            )
+            try:
+                context = browser.new_context()
+    
+                def route_request(route):
+                    if route.request.url == url:
+                        requests.append(route.request.url)
+                        route.fulfill(status=200, content_type='text/html', body='&lt;h1&gt;memory-routed source&lt;/h1&gt;')
+                    else:
+                        denied.append(route.request.url)
+                        route.abort()
+    
+                context.route('**/*', route_request)
+                page = context.new_page()
+                page.set_content(
+                    '&lt;iframe title="report" sandbox="" srcdoc="'
+                    + html.escape(document, quote=True)
+                    + '"&gt;&lt;/iframe&gt;&lt;a target="_blank" rel="noopener noreferrer" href="'
+                    + url
+                    + '"&gt;outside source&lt;/a&gt;'
+                )
+                frame = page.frame_locator('iframe')
+                frame.get_by_role('heading', name='canonical report', exact=True).wait_for()
+                frame.get_by_role('link', name='body source', exact=True).click()
+                page.wait_for_timeout(200)
+&gt;               assert requests == [], '본문 앵커가 iframe 자체를 탐색했습니다.'
+E               AssertionError: 본문 앵커가 iframe 자체를 탐색했습니다.
+E               assert ['https://exa...valid/source'] == []
+E                 
+E                 Left contains one more item: 'https://example.invalid/source'
+E                 Use -v to get more diff
+
+테스트\테스트_보고서표현.py:176: AssertionError</failure></testcase></testsuite></testsuites>

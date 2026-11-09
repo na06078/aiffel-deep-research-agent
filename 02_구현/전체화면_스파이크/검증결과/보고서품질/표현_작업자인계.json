@@ -1,0 +1,252 @@
+{
+  "source_hashes": {
+    "서버/보고서도식.py": "53d0fa1469d797b68923d2bc190bf3a700cc9c55e11135f5806c22d4b156c223",
+    "서버/보고서표현.py": "2cc1b1dae4343d6ab1b0d071b9da69cb294ce72fe9e7fa48e04fed595d990139",
+    "서버/보고서변환.py": "6dbd31927da7a23e2f6651605274e0df3127db5ae7ae460c65ab6e4331d729fc",
+    "테스트/테스트_보고서도식.py": "75abe3da3be1fb3e5ff0860dd3d1376d30f34c4f299a4314730866aba5145611",
+    "테스트/테스트_보고서표현.py": "2c23bbd9cfb0cdf4822778bb7b8aaf403542b5eacefa34b6e3ce4ed65a7b69b1",
+    "테스트/테스트_보고서변환.py": "f3c02a8094fbd9b935a1bf8428bb61dbc17064cf3524efcd1cd0ddefd0dc5204"
+  },
+  "test_counts": {
+    "테스트.테스트_보고서도식": 59,
+    "테스트.테스트_보고서표현": 7,
+    "테스트.테스트_보고서변환": 7,
+    "테스트.테스트_보고서변환_API": 32
+  },
+  "tests_total": 105,
+  "protected": {
+    "protected_data_sha256": {
+      "base_path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트",
+      "expected_count": 13,
+      "checked_count": 13,
+      "mismatches": []
+    },
+    "installed_dist_sha256": {
+      "base_path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트",
+      "expected_count": 25,
+      "checked_count": 25,
+      "mismatches": []
+    }
+  },
+  "artifacts": [
+    {
+      "path": ".cache/보고서품질_검증/표현/tmp/test_실제_HTML_PDF의_표_한글_SVG는_반응0/표도식_검증.json",
+      "bytes": 7164,
+      "sha256": "abf16994f3fa33ab57e623c85d317847ecb049d6bd2b11fa87e3f3e228907e8b"
+    },
+    {
+      "path": ".cache/보고서품질_검증/표현/tmp/test_실제_HTML_PDF의_표_한글_SVG는_반응0/표도식_정본.md",
+      "bytes": 5271,
+      "sha256": "81ed097f3b036cdf5ba072f278468b686618598122e040896f957b831e921836"
+    },
+    {
+      "path": ".cache/보고서품질_검증/표현/tmp/test_실제_HTML_PDF의_표_한글_SVG는_반응0/표도식_출력.pdf",
+      "bytes": 32213,
+      "sha256": "77b2ae50571dadaab46a3660e51e51a2fff2990bc6a2c8ccf28e9bea36c7cdb6"
+    },
+    {
+      "path": ".cache/보고서품질_검증/표현/tmp/test_실제_HTML_PDF의_표_한글_SVG는_반응0/표도식_표현.html",
+      "bytes": 8068,
+      "sha256": "b2ba255543a2ef38cfbe26449d368d0e968e1e4e7bfa892e7a033c3d5a69dbda"
+    },
+    {
+      "path": ".cache/보고서품질_검증/표현/tmp/test_실제_격리_Chromium_PDF는_한글인용출0/긴문서.html",
+      "bytes": 12062,
+      "sha256": "731c16263da3b9e4cc9b92b3db6378f6c933de17bf380dc0258de55ceb6caa3e"
+    },
+    {
+      "path": ".cache/보고서품질_검증/표현/tmp/test_실제_격리_Chromium_PDF는_한글인용출0/긴문서.pdf",
+      "bytes": 30308,
+      "sha256": "e008bf63cb3470560263e8e338d6ef614d43dcee16e93cefb65c0c2e0665d7f0"
+    }
+  ],
+  "real_layout": {
+    "pages": 6,
+    "checked_character_boxes": 1926,
+    "external_requests": [],
+    "layouts": [
+      {
+        "width": 1440,
+        "scroll": 1440,
+        "labels": [
+          {
+            "text": "수집 → 검토",
+            "left": 428.3125,
+            "right": 634.4375,
+            "height": 49
+          }
+        ],
+        "cells": [
+          {
+            "client": 327,
+            "scroll": 327
+          },
+          {
+            "client": 327,
+            "scroll": 327
+          },
+          {
+            "client": 327,
+            "scroll": 327
+          },
+          {
+            "client": 327,
+            "scroll": 327
+          },
+          {
+            "client": 327,
+            "scroll": 327
+          },
+          {
+            "client": 327,
+            "scroll": 327
+          },
+          {
+            "client": 327,
+            "scroll": 327
+          },
+          {
+            "client": 327,
+            "scroll": 327
+          }
+        ]
+      },
+      {
+        "width": 390,
+        "scroll": 390,
+        "labels": [
+          {
+            "text": "수집 → 검토",
+            "left": 32.333335876464844,
+            "right": 147.27084350585938,
+            "height": 27
+          }
+        ],
+        "cells": [
+          {
+            "client": 182,
+            "scroll": 182
+          },
+          {
+            "client": 182,
+            "scroll": 182
+          },
+          {
+            "client": 182,
+            "scroll": 182
+          },
+          {
+            "client": 182,
+            "scroll": 182
+          },
+          {
+            "client": 182,
+            "scroll": 182
+          },
+          {
+            "client": 182,
+            "scroll": 182
+          },
+          {
+            "client": 182,
+            "scroll": 182
+          },
+          {
+            "client": 182,
+            "scroll": 182
+          }
+        ]
+      }
+    ]
+  },
+  "junit": ".cache/보고서품질_검증/표현/시험결과.xml",
+  "root": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크",
+  "modified_paths": [
+    "서버/보고서도식.py",
+    "서버/보고서표현.py",
+    "서버/보고서변환.py",
+    "테스트/테스트_보고서도식.py",
+    "테스트/테스트_보고서표현.py",
+    "테스트/테스트_보고서변환.py"
+  ],
+  "unchanged_owned_test": "테스트/테스트_보고서변환_API.py (회귀만 실행; 수정하지 않음)",
+  "renderer_version": "markdown-it4-playwright1248-svg-v2",
+  "commands": [
+    "../../.venv/Scripts/python.exe -m pytest 테스트/테스트_보고서도식.py 테스트/테스트_보고서표현.py 테스트/테스트_보고서변환.py 테스트/테스트_보고서변환_API.py -q -o cache_dir=.cache/보고서품질_검증/표현/pytest --basetemp=.cache/보고서품질_검증/표현/tmp --junitxml=.cache/보고서품질_검증/표현/시험결과.xml",
+    "../../.venv/Scripts/python.exe -m ruff check 서버/보고서도식.py 서버/보고서표현.py 서버/보고서변환.py 테스트/테스트_보고서도식.py 테스트/테스트_보고서표현.py 테스트/테스트_보고서변환.py --cache-dir .cache/보고서품질_검증/표현/ruff"
+  ],
+  "final_results": {
+    "pytest": "105 passed in 28.63s",
+    "ruff": "All checks passed!",
+    "full_suite_run": false
+  },
+  "tdd_cycles": [
+    {
+      "boundary": "첫 양성 SVG 재직렬화",
+      "red": "1 failed: SvgValidationError(미구현)",
+      "green": "1 passed"
+    },
+    {
+      "boundary": "정적 도형/문법/한도",
+      "red": "4 failed, 48 passed (지원 도형 누락, 음수 width 및 중첩 svg 미차단)",
+      "green": "52 passed"
+    },
+    {
+      "boundary": "순수 완전한 문서 표현",
+      "red": "1 failed: html 빈 문자열",
+      "intermediate": "1 failed: 링크 강조 토큰 때문에 평문 출처 공백 중복",
+      "green": "1 passed"
+    },
+    {
+      "boundary": "1MiB 및 공통 HTML 진입점",
+      "red": "2 failed, 5 passed: 초과 허용 및 HTML 바이트 불일치",
+      "green": "97 passed (관련 4모듈 중간 회귀)"
+    },
+    {
+      "boundary": "ASCII 수/콤마/빈 namespace/정확한 한도",
+      "red": "7 failed, 52 passed (하나는 잘못된 콤마의 오류 사유 불일치)",
+      "green": "59 passed"
+    },
+    {
+      "boundary": "실제 HTML/PDF 표/한글/SVG/레이아웃 검증 강화",
+      "first_run": "1 passed in 1.90s (이미 구현된 행동의 수용 검사; 별도 신규 생산 코드 없음)"
+    }
+  ],
+  "actual_renderer_checks": {
+    "pdf_success_test_count": 4,
+    "pdf_success_tests": [
+      "Selector 루프 실제 PDF",
+      "한글 다중페이지 PDF",
+      "표 도식 실제 PDF",
+      "ASGI PDF 다운로드"
+    ],
+    "pdf_cancellation_test_count": 2,
+    "persisted_real_pdf_document_count": 2,
+    "persisted_real_html_document_count": 2,
+    "isolated_layout_context_count": 1,
+    "viewport_widths": [
+      1440,
+      390
+    ],
+    "fake_transport_pdf_files_excluded": true,
+    "all_render_function_invocations_instrumented": false,
+    "note": "실제 성공 시험 4건 중 Selector는 메모리 검사, ASGI는 시험 전용 변환 저장소. 대표 문서2건은 직접 HTML/PDF 아티팩트로 기록. 파일명/동시성 대역은 실제 PDF 수에서 제외."
+  },
+  "integration_notes": [
+    "validate_svg(code)->str 및 SvgValidationError 제공. DTD 콜백이 entity 확장 전 차단하고 제한 XML 트리를 새로 재직렬화.",
+    "render_presentation은 supplied report_id/sha256를 그대로 반환. 실제 원문 해시 검증은 API/service 책임.",
+    "renderer version 및 MAX_SOURCE_BYTES 소유자는 서버/보고서표현.py; 보고서변환.py에서 다시 import하므로 기존 import 호환 및 순환 의존 없음.",
+    "report_html은 render_presentation html UTF-8 바이트를 그대로 사용. PDF 격리/취소, ReportExports 캐시/write-if-current 로직 미수정.",
+    "거절 SVG는 escaped code/한국어 경고; 일반 HTML 비허용, 이미지 alt만, img-src none 유지.",
+    "프로파일은 정적 요소 외 nested svg, style, href, on*, namespace, 외부참조를 거부. 제목/설명은 SVG aria-label 및 인쇄되는 figcaption에 사용."
+  ],
+  "contract_issues": [],
+  "unverified": [
+    "실제 모델/웹검색/이미지 호출 및 제공자 의미검토",
+    "앱 iframe/srcDoc/전환/되감기/삭제 브라우저 E2E (부모 담당)",
+    "운영 데이터/설치 dist 적용",
+    "모든 가능한 SVG 입력의 시각적 가독성 및 사용자 디자인 수용",
+    "Ruff format 게이트 (ruff check만 실행)"
+  ],
+  "prohibited_actions_performed": []
+}

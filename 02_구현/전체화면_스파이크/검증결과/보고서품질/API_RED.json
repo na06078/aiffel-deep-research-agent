@@ -1,0 +1,12 @@
+{
+  "kind": "expected_behavioral_red",
+  "scope": "순수 표현 API의 정상 생성/정본 조회 후 표현 요청 경계",
+  "command": "../../.venv/Scripts/python.exe -B -m pytest 테스트/테스트_보고서표현_API.py::test_표현_GET은_같은_정본의_표와_SVG를_저장이나_추가호출없이_돌려준다 -q -p no:cacheprovider --asyncio-mode=auto --basetemp=../../.cache/보고서품질_검증/API_RED",
+  "exit_code": 1,
+  "failed": 1,
+  "expected_failure": "presentation route returned 404, expected 200",
+  "positive_control": "Synthetic model through actual LangGraph/ASGI/store completed; original report GET returned 200 before assertion",
+  "model_boundary": "explicit fake, no actual provider/network",
+  "implementation_after_red": "앱.py에 순수 표현 GET 추가; 공통 렌더러 인수 후 GREEN 실행 예정",
+  "green_verified": false
+}

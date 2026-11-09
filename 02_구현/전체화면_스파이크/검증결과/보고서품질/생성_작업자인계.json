@@ -1,0 +1,212 @@
+{
+  "scope": "기술 명세서 §29 생성/근거/의미검토 독점 허용목록",
+  "status": "구현 및 무외부망 표적 회귀 통과; 실제 Luna 의미 판별/새 생성 실호출은 미검증",
+  "implementation_root": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크",
+  "modified_paths": [
+    "서버/보고서품질.py",
+    "서버/교안연구.py",
+    "서버/웹연구.py",
+    "서버/실제연구제어.py",
+    "테스트/테스트_보고서품질.py",
+    "테스트/테스트_교안연구.py",
+    "테스트/테스트_실제연구제어.py",
+    "테스트/테스트_웹연구.py"
+  ],
+  "unchanged_regression_target": "테스트/테스트_검토보완.py",
+  "source_sha256": {
+    "서버/보고서품질.py": "9a62c4ac95c8526907933882957295ff6eae62cb884b4b07c5ecaaecee491507",
+    "서버/교안연구.py": "97c351753b70ea1fe9b4891ca7ea2e829794bb3737be0f30b4b180aa38cd17b8",
+    "서버/웹연구.py": "567470a016012b0014ccd6541983abb73f0d6377fb83c882d975f648d2f999ae",
+    "서버/실제연구제어.py": "9a331f9b1ff188f8387ef9f83a7678b417ccc9a0c5d87c2bdc2a86da5d6224e9",
+    "테스트/테스트_보고서품질.py": "7687152e5d4a4fc780824880cc978332f5db5a4224154cbd177300167b55acf8",
+    "테스트/테스트_교안연구.py": "6a4353ed0e49225ce1d93b9c7b5f4c09a65edd58429671a6c19b91ea516ac561",
+    "테스트/테스트_실제연구제어.py": "42f824a6b945b2dc8ac8a11d3cb37c39c1265b85960a7b26c74d6508acf0cf17",
+    "테스트/테스트_웹연구.py": "339fa7eef6377deb975e6885981775bffdafeb14df2e91e63c439d847ccac966"
+  },
+  "dependency_sha256": {
+    "서버/보고서도식.py": "53d0fa1469d797b68923d2bc190bf3a700cc9c55e11135f5806c22d4b156c223"
+  },
+  "protected": {
+    "protected_data_sha256": {
+      "count": 13,
+      "unchanged": true,
+      "differences": []
+    },
+    "installed_dist_sha256": {
+      "count": 25,
+      "unchanged": true,
+      "differences": []
+    }
+  },
+  "tdd_cycles": [
+    {
+      "behavior": "충분/부족 모순과 fenced-code 지표 배제",
+      "red_command": "LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false ../../.venv/Scripts/python.exe -m pytest 테스트/테스트_교안연구.py -k '충분참 or SVG와' -q -o 'cache_dir=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/pytest' --basetemp='C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/tmp'",
+      "red": {
+        "failed": 2,
+        "deselected": 5
+      },
+      "green_command": "LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false ../../.venv/Scripts/python.exe -m pytest 테스트/테스트_교안연구.py -q -o 'cache_dir=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/pytest' --basetemp='C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/tmp'",
+      "green": {
+        "passed": 7
+      }
+    },
+    {
+      "behavior": "실제 로컬 신규 절의 누락 근거 거부",
+      "red_command": "LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false ../../.venv/Scripts/python.exe -m pytest 테스트/테스트_실제연구제어.py -k 누락근거 -q -o 'cache_dir=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/pytest' --basetemp='C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/tmp'",
+      "red": {
+        "failed": 1,
+        "deselected": 15
+      },
+      "green_command": "LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false ../../.venv/Scripts/python.exe -m pytest 테스트/테스트_실제연구제어.py -k 누락근거 -q -o 'cache_dir=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/pytest' --basetemp='C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/tmp'",
+      "green": {
+        "passed": 1,
+        "deselected": 15
+      }
+    },
+    {
+      "behavior": "종합 입력에 완성된 절 전체 전달",
+      "red_command": "LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false ../../.venv/Scripts/python.exe -m pytest 테스트/테스트_실제연구제어.py -k 실제6노드 -q -o 'cache_dir=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/pytest' --basetemp='C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/tmp'",
+      "red": {
+        "failed": 1,
+        "deselected": 15
+      },
+      "green_command": "LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false ../../.venv/Scripts/python.exe -m pytest 테스트/테스트_실제연구제어.py -k 실제6노드 -q -o 'cache_dir=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/pytest' --basetemp='C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/tmp'",
+      "green": {
+        "passed": 1,
+        "deselected": 15
+      }
+    },
+    {
+      "behavior": "표/SVG 조립과 신규 종합 스키마/출처 검증",
+      "red_command": "LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false ../../.venv/Scripts/python.exe -m pytest 테스트/테스트_실제연구제어.py -k '종합한번 or 신규종합' -q -o 'cache_dir=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/pytest' --basetemp='C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/tmp'",
+      "red": {
+        "failed": 3,
+        "deselected": 16
+      },
+      "green_command": "LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false ../../.venv/Scripts/python.exe -m pytest 테스트/테스트_실제연구제어.py -k '종합한번 or 신규종합' -q -o 'cache_dir=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/pytest' --basetemp='C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/tmp'",
+      "green": {
+        "passed": 3,
+        "deselected": 16
+      }
+    },
+    {
+      "behavior": "ordinary 의미검토 1회 및 음성/모순/누락/비JSON fail-closed",
+      "red_command": "LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false ../../.venv/Scripts/python.exe -m pytest 테스트/테스트_실제연구제어.py -k '실제6노드 or 의미검토_불합격' -q -o 'cache_dir=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/pytest' --basetemp='C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/tmp'",
+      "red": {
+        "failed": 5,
+        "deselected": 18
+      },
+      "green_command": "LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false ../../.venv/Scripts/python.exe -m pytest 테스트/테스트_실제연구제어.py -k '실제6노드 or 의미검토_불합격' -q -o 'cache_dir=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/pytest' --basetemp='C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/tmp'",
+      "green": {
+        "passed": 5,
+        "deselected": 18
+      }
+    },
+    {
+      "behavior": "미지원 주장에 대한 빈 출처 배열 음성 판정 보존",
+      "red_command": "LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false ../../.venv/Scripts/python.exe -m pytest 테스트/테스트_보고서품질.py -k 미지원주장 -q -o 'cache_dir=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/pytest' --basetemp='C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/품질tmp'",
+      "red": {
+        "failed": 1,
+        "deselected": 25
+      },
+      "green_command": "LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false ../../.venv/Scripts/python.exe -m pytest 테스트/테스트_보고서품질.py -k '미지원주장 or 이스케이프된 or 백틱이' -q -o 'cache_dir=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/pytest' --basetemp='C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/품질tmp'",
+      "green": {
+        "passed": 3,
+        "deselected": 25
+      }
+    },
+    {
+      "behavior": "Markdown 이스케이프된 시각요약 인용키의 실제 식별자 대조",
+      "red_command": "LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false ../../.venv/Scripts/python.exe -m pytest 테스트/테스트_보고서품질.py -k '이스케이프된 or 미지원주장' -q -o 'cache_dir=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/pytest' --basetemp='C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/품질tmp'",
+      "red": {
+        "failed": 1,
+        "passed": 1,
+        "deselected": 25
+      },
+      "green_command": "LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false ../../.venv/Scripts/python.exe -m pytest 테스트/테스트_보고서품질.py -k '미지원주장 or 이스케이프된 or 백틱이' -q -o 'cache_dir=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/pytest' --basetemp='C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/품질tmp'",
+      "green": {
+        "passed": 3,
+        "deselected": 25
+      }
+    },
+    {
+      "behavior": "SVG 텍스트의 백틱에 의한 Markdown fence 탈출 차단",
+      "red_command": "LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false ../../.venv/Scripts/python.exe -m pytest 테스트/테스트_보고서품질.py -k 백틱이 -q -o 'cache_dir=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/pytest' --basetemp='C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/품질tmp'",
+      "red": {
+        "failed": 1,
+        "deselected": 27
+      },
+      "green_command": "LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false ../../.venv/Scripts/python.exe -m pytest 테스트/테스트_보고서품질.py -k '미지원주장 or 이스케이프된 or 백틱이' -q -o 'cache_dir=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/pytest' --basetemp='C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/품질tmp'",
+      "green": {
+        "passed": 3,
+        "deselected": 25
+      }
+    }
+  ],
+  "setup_failures_not_behavioral_red": [
+    {
+      "issue": "구현 폴더의 .venv/Scripts/python.exe 없음",
+      "exit_code": 127,
+      "recovery": "실제 프로젝트 ../../.venv/Scripts/python.exe 사용"
+    },
+    {
+      "issue": "pytest 상대 cache_dir의 상위 경로가 cache escape 오류",
+      "exit_code": 3,
+      "recovery": "승인된 프로젝트 .cache/보고서품질_검증/생성 절대 경로 사용"
+    }
+  ],
+  "final_regression": {
+    "command": "LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false ../../.venv/Scripts/python.exe -m pytest 테스트/테스트_보고서품질.py 테스트/테스트_교안연구.py 테스트/테스트_실제연구제어.py 테스트/테스트_웹연구.py 테스트/테스트_검토보완.py -q -o 'cache_dir=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/pytest' --basetemp='C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/생성/tmp'",
+    "exit_code": 0,
+    "passed": 106,
+    "failed": 0,
+    "seconds": 39.73,
+    "output": "106 passed in 39.73s",
+    "network": "명시 모델/전송 경계 대역, 외부 추적 false; 실제 provider/search 요청 없음"
+  },
+  "lint": {
+    "command": "../../.venv/Scripts/python.exe -m ruff check --no-cache 서버/보고서품질.py 서버/교안연구.py 서버/웹연구.py 서버/실제연구제어.py 테스트/테스트_보고서품질.py 테스트/테스트_교안연구.py 테스트/테스트_실제연구제어.py 테스트/테스트_웹연구.py 테스트/테스트_검토보완.py",
+    "exit_code": 0,
+    "output": "All checks passed!"
+  },
+  "semantic_call": {
+    "node": "evaluate",
+    "actor": "evaluator",
+    "operation": "semantic_review",
+    "method": "기존 RealResearchService.complete() → model.complete()",
+    "extra_calls_per_revision_max": 1,
+    "extra_http_attempts_per_revision_max": 1,
+    "max_output_tokens": 4096,
+    "local_total_calls_per_revision_max": 55,
+    "web_total_calls_per_revision_max": 63,
+    "static_failure_extra_calls": 0,
+    "automatic_retry_or_repair": false,
+    "image_api_calls": 0,
+    "transaction_boundary": "예약/정적검사 write transaction 종료 → complete() await → check() → 새 fenced write transaction에서 판정/quality/event/기존 publish",
+    "timing": "기존 start_call/on_attempt/measured_call 및 model_wait/call_id와 model.started/completed 이벤트 사용. 새 NPC 없음.",
+    "scope_limit": "원문 존재 검증은 의미적 지지의 증명이 아님. 전체 코퍼스/외부 진위 보증 아님.",
+    "input_token_cost": "완성된 절/근거의 종합 입력과 최종 검토 입력으로 기존 대비 입력 토큰 증가. 입력 길이/실계정 무료 적용을 대역으로 추정하지 않음."
+  },
+  "remaining_fixture_updates_for_parent": [
+    {
+      "path": "테스트/테스트_웹통합.py",
+      "locations": [
+        "IntegrationModel.complete(), draft_section override (현재37~57행)",
+        "test_정상조립과실제자료저장소_HTTP연구_재시작_무재전송(), 현재126행"
+      ],
+      "required": "draft_section 응답에 근거=[{주장:\"실제 공개 웹이 아닌 명시적 통합 대역의 문장입니다.\",출처:ids[0],인용문:self.excerpts[ids[0]]}]를 넣고 실제 통합 출력 본문에 해당 주장을 유지. 상속 WebModel은 이미 synth 새 필드/semantic_review/opaque source_id 읽기 지원. 모델 호출 기대9를10으로 갱신.",
+      "edited": false,
+      "run_by_this_worker": false
+    }
+  ],
+  "exclusions": [
+    "전체 suite/브라우저/PDF/사용자 운영 적용은 메인 소유",
+    "실제 Luna 양성/날짜·귀속 음성 판별과 새 생성 경로의 실요청은 별도 승인 필요",
+    "Git 명령/커밋 없음",
+    ".env 읽기/설치/한도 초기화 없음",
+    "운영 데이터와 설치 dist 쓰기 없음"
+  ],
+  "preserved": "기존 저장 보고서/메모 문자열/웹 receipt·hash·6노드·4절·3읽기·2라운드·큐/개입/취소/삭제 펜스",
+  "metadata_path": "검증결과/보고서품질/생성_작업자인계.json"
+}

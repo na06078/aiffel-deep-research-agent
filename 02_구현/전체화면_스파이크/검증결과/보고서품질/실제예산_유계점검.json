@@ -1,0 +1,24 @@
+{
+  "before": [
+    160,
+    2000000000,
+    27
+  ],
+  "after": [
+    165,
+    2000000000,
+    27
+  ],
+  "preserved_rows": 129,
+  "original127_sha256": "3d6e17c92aefc23d2a6d0e7cf02e36f2e3b56e7d2e9940c5349e97bc8f3d7e73",
+  "current_attempts": 102,
+  "remaining_attempts": 63,
+  "spent_usd": 0.20111595,
+  "unknown_count": 0,
+  "bounded_preflight_groups": 2,
+  "new_preflight_max": 8,
+  "conditional_full_max": 55,
+  "prior_failed": 2,
+  "grand_additional_max": 65,
+  "scope": "Explicit choice: at most two new preflight groups, no automatic retries; full research only after one group passes all4. Existing data/prefix/cost/baseline retained."
+}

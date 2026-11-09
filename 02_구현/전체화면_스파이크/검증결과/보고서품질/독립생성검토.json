@@ -1,0 +1,223 @@
+{
+  "verdict": "changes_requested",
+  "passed": false,
+  "review_kind": "독립 생성 경로 두 축 정적 검토",
+  "baseline": {
+    "branch": "main",
+    "head": "083c6cd",
+    "scope": "현재 staged/unstaged/untracked 작업 트리. staged diff 없음. 다른 작업자 파일은 소비 경계 확인 외 수정하지 않음."
+  },
+  "standards": {
+    "status": "pass",
+    "qualification": "검토한 소스 및 이번 검토의 승인/보존/명명/보고 범위에 한정한 정적 판정. 전체 작업 TDD·전체회귀 완료 판정 아님.",
+    "sources": [
+      {
+        "source": "AGENTS.md:15-29",
+        "sentence": "사실은 실제 로그·공식 문서·현재 환경으로 검증한다. 추측을 단정하지 않는다. 실행·검증·제출·리뷰 상태를 서로 구분해 기록한다."
+      },
+      {
+        "source": "📋 진행 현황.md:8",
+        "sentence": "기존 정본·실행DB·웹 자료·호출 장부·설치된 화면/dist는 보존하며 실제 모델 호출은 별도 승인."
+      },
+      {
+        "source": "📘 딥리서치 에이전트 기술 명세서.md:1009-1014",
+        "sentence": "생성/품질 소유 파일 범위와 기존 모델·장부·6노드·revision/삭제 펜스 유지."
+      }
+    ],
+    "findings": []
+  },
+  "spec": {
+    "status": "fail",
+    "sources": [
+      "📘 딥리서치 에이전트 작업 명세서.md:205-218 (Q-01~08)",
+      "📘 딥리서치 에이전트 기술 명세서.md:1016-1036 (29.2~29.4)"
+    ],
+    "findings": [
+      {
+        "id": "GEN-01",
+        "axis": "spec",
+        "priority": "P2",
+        "title": "가시 본문 추출이 링크의 숨은 title/목적지를 그대로 세어 분량·근거 지표를 부풀림",
+        "requirement": {
+          "source": "📘 딥리서치 에이전트 기술 명세서.md:1035",
+          "sentence": "본문 분량/근거 지표는 fenced code·SVG 코드를 제외한 가시 Markdown 텍스트를 기준으로 세고, 기존 지표와 의미 검토를 구별해 표시한다."
+        },
+        "evidence": [
+          "서버/보고서품질.py:51-58 — fence/code_block 행만 제거하고 나머지 원문 행을 그대로 반환",
+          "서버/교안연구.py:93-107,117-128 — 위 원문에서 인용·문장·보고서자수 및 body_under_2000 판정",
+          "서버/보고서품질.py:35-47 — 주장 존재도 같은 추출 결과를 사용",
+          "서버/실제연구제어.py:696-703,709-735 — 정상 생성의 정적 게이트와 의미 검토 입력까지 연결",
+          "서버/보고서표현.py:65-69,92-107 — 실제 Markdown 렌더러는 링크 title/href를 본문 텍스트로 표시하지 않음"
+        ],
+        "trigger": "모델의 절 본문에 [자료](https://example.test \"숨은 긴 문자열 및 «읽은자료키»\") 같은 유효 Markdown 링크가 있고 가시 본문은 짧은 경우. 숨은 title만 2,000자 이상이면 원문 길이 검사에는 포함됨. 근거 주장 문자열을 title에만 둔 경우도 validate_section의 substring 조건에는 포함됨.",
+        "impact": "가시 본문 길이/인용 지표 및 주장 가시성 검사가 실제 렌더링과 불일치한다. 정적 품질 통과 후보가 될 수 있다. 실제 최종 출판은 별도 의미 검토의 판정에 달려 있으며 실모델 우회 성공으로 주장하지 않는다.",
+        "evidence_level": "static_reachable_not_executed",
+        "minimum_fix": "표 확장을 포함한 실제 표현 파서와 같은 토큰 의미로 가시 텍스트를 추출한다. link href/title·참조 정의는 제외하고 text/inline code/표 셀 텍스트 및 줄 구분은 보존한다. SVG/fenced/indented code 제외는 유지한다.",
+        "required_verification": "링크 title/목적지·참조 정의에만 있는 긴 글/인용/주장은 분량과 근거로 인정되지 않는 RED/GREEN 및 정상 표·이스케이프 인용·일반 본문 회귀. 이번 검토에서는 실행하지 않음."
+      }
+    ]
+  },
+  "security_concerns": [],
+  "logic_errors": [
+    "GEN-01"
+  ],
+  "verified_static_paths": [
+    {
+      "topic": "정상 신규 절 근거",
+      "evidence": "실제연구제어.py:513-520,709-715 / 웹연구.py:249-318,533-541 / 보고서품질.py:28-48",
+      "result": "로컬·웹 정상 생성 모두 새 근거 검증 사용. 웹은 성공 read_one 저널·실제 앞20,000자·원문/메모 해시·fetch receipt·동일 run/revision/actor/source를 교차 검사. legacy parse_section 우회 없음. 의미적 지지는 substring 검사와 별개."
+    },
+    {
+      "topic": "부족 초안·스키마",
+      "evidence": "교안연구.py:74-83 / 보고서품질.py:33 / 실제연구제어.py:557-613 / 웹연구.py:523-541",
+      "result": "충분=false의 짧은 비어 있지 않은 본문과 빈 근거는 허용되어 재위임 가능. 충분=true/부족 모순은 거부. 근거 누락/불일치는 failed로 끝나며 자동 legacy 통과 없음. 모든 핵심 주장의 결정론적 coverage 완전성 보증은 없고 의미 검토에 의존."
+    },
+    {
+      "topic": "종합·표·SVG",
+      "evidence": "교안연구.py:211-258 / 보고서품질.py:67-132 / 실제연구제어.py:615-654",
+      "result": "기존 synthesize 한 번에 완성 절/근거 전체를 전달. 절 본문 원형 조립. 표 크기·출처·생략 사유 검사, Markdown 셀 이스케이프, 공통 SVG 검사 호출 및 코드 최대 백틱 길이보다 긴 fence 사용. SVG 검증기 자체 전수 안전성 검토는 본 범위 아님."
+    },
+    {
+      "topic": "의미 검토·동시성·실패",
+      "evidence": "실제연구제어.py:683-776 / 보고서품질.py:135-161 / 실행제어.py:45-82",
+      "result": "결정론 검사 뒤 revision당 pending 예약, write transaction 밖 complete await, 대기 중 동시 evaluate는 추가 요청 없이 반환. 정확한 bool/문제 목록 모순 검사. 음성/불명 스키마는 blocked/quality_failed·초안/큐 보존. provider401/429/예산 오류는 기존 complete/fail 경로로 failed 및 구체 사유 유지."
+    },
+    {
+      "topic": "실제 소비 진입·예산·삭제",
+      "evidence": "연구앱.py:39-73 / 실제모델.py:87-145,158-225 / 실제연구제어.py:199-364,736-776 / 저장소.py:126-155 / 활동기록.py:36-42 / 실행제어.py:576-612",
+      "result": "정상 create_research_app→RealResearchService→OpenAIModel.complete에 연결. UTF-8 input bound+8192 <=272000, 출력4096, max_retries=0 및 기존 장부 reserve/settle. 호출 전후·의미 응답 후·publish의 running/current/revision 펜스와 삭제 event/span 무재생성 보호를 확인."
+    },
+    {
+      "topic": "기존 저장물·시험 대역 호환",
+      "evidence": "실행제어.py:614-634 / 테스트_웹통합.py:23-71,139-168 / 테스트_실제연구제어.py:344-372,655-765 / 테스트_웹연구.py:825-865",
+      "result": "저장 보고서 조회에서 새 필드 검사/새 검토를 실행하지 않음. 부모가 갱신한 IntegrationModel은 opaque source ID+실제 발췌 대응이며 신규 guard 완화 아님. 테스트 소스의 의미 음성/불명/취소삭제/동시평가/최대 호출 assertion 확인; 실행 PASS를 새로 확인한 것은 아님."
+    }
+  ],
+  "metrics_review": {
+    "actual_calls": "semantic_review도 기존 on_attempt에서 actual_model_requests 증가; 최종 quality.metrics.LLM호출은 호출 후 현재값으로 갱신(실제연구제어.py:254-256,754).",
+    "isolation_ratio": "격리율은 기존 planner/editor 입력 user 문자만 coord, 나머지를 sub로 두는 방식. 683-703에서 의미 검토 전 계산하므로 새 semantic_review 입력은 그 지표에 포함되지 않음. 이 지표가 전체 비용/컨텍스트 격리를 증명하지 않으며 신규 검토 입력 포함 의무는 명세에 명시되어 있지 않아 blocker로 판정하지 않음.",
+    "call_ceiling": "로컬55/웹63은 시험 소스의 기대값(실제연구제어 시험742-763, 웹연구 시험758-820). 본 검토가 실행/실제 비용/실모델 달성을 검증하지 않음."
+  },
+  "suggestions": [
+    {
+      "id": "GEN-S01",
+      "priority": "P3",
+      "topic": "격리율의 집계 시점·범위 표기",
+      "evidence": "서버/실제연구제어.py:687-703,754",
+      "minimum_fix": "신규 의미 검토를 제외한 기존 coordinator/researcher 입력 문자 비율임을 설명하거나 별도 semantic 입력 지표를 추가. 검토자가 임의로 필수 제품 범위로 확대하지 않음."
+    }
+  ],
+  "unverified_boundaries": [
+    "새 테스트/빌드/서버/브라우저 실행 금지에 따라 실행하지 않음. 작업자106 PASS와 부모 결과를 독립 실행 근거로 재사용하지 않음.",
+    "실제 Luna 의미 판별 정확도, 날짜/달력/수치/인과/귀속 오류 검출력, 새 생성 응답의 4096토큰 적합성과 truncation 빈도 미검증. 런타임 승인 게이트이며 그 자체가 정적 알고리즘 오류 증거는 아님.",
+    "실제 모델/검색/키/예산 장부/운영 DB·기존 보고서·dist를 열거나 변경하지 않음. 보호 파일 해시 불변은 부모의 별도 검증 대상.",
+    "검토한 파일은 전체 또는 관련 발췌 범위를 읽었음. 저장소/실행제어/활동기록/삭제/표현 모듈 전체 보안 감사, 전체 test fake inventory 전수 검토, 전체 앱/표현/UI 최종판정은 아님.",
+    "해시는 검토 말미 파일 스냅샷. 병렬 작업 중인 문서/표현/통합시험은 이후 변할 수 있음. 부모가 인수 시 재대조 필요."
+  ],
+  "executions": {
+    "tests": 0,
+    "builds": 0,
+    "servers": 0,
+    "provider_requests": 0,
+    "git_writes": 0,
+    "source_edits": 0,
+    "allowed_writes": [
+      "검증결과/보고서품질/독립생성검토.json"
+    ]
+  },
+  "inspected_file_sha256": [
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/AGENTS.md",
+      "sha256": "18ec6a15781a131482aabb3a0fa306f16d08610abd52349adc842d2f305442d6"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/📋 진행 현황.md",
+      "sha256": "10c6c0b0e5c369552848d288ec987b4ea1b94341feb120b7782e72627328c631"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/📘 딥리서치 에이전트 작업 명세서.md",
+      "sha256": "3bbbb44e75e2ad5aeeb2fd19efceaeee3641b3c47a648dcc74ce18cfe1d2057a"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/📘 딥리서치 에이전트 기술 명세서.md",
+      "sha256": "cfbcfda9a7c12e8c92f33f3381c7a4631b853379f4d5963184a68eb8419a8055"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/보고서품질.py",
+      "sha256": "9a62c4ac95c8526907933882957295ff6eae62cb884b4b07c5ecaaecee491507"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/교안연구.py",
+      "sha256": "97c351753b70ea1fe9b4891ca7ea2e829794bb3737be0f30b4b180aa38cd17b8"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/웹연구.py",
+      "sha256": "567470a016012b0014ccd6541983abb73f0d6377fb83c882d975f648d2f999ae"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/실제연구제어.py",
+      "sha256": "9a331f9b1ff188f8387ef9f83a7678b417ccc9a0c5d87c2bdc2a86da5d6224e9"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/연구앱.py",
+      "sha256": "c4d36470f42fc5a38c9952e05c204a5078f8f57d4e205e0cdc35aafae3fdb548"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/실제모델.py",
+      "sha256": "4b2230183e18a93306856f6d8303f14a5dc42feb6d33d8ed138ec53c784f4a1b"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/호출예산.py",
+      "sha256": "42216cb8f6fe9e36602214a7c01079b157ddcb7c8a56ca6434fc6b5d18366bfb"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/실행제어.py",
+      "sha256": "6fe218510f555c41f7e362ed0e763d8b2106170affb6b0edefc611382f23ea7a"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/저장소.py",
+      "sha256": "bff9ea9d64fff72203c57ae1bf4f4045db2dc084e16241309855ecfb0a00db8c"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/활동기록.py",
+      "sha256": "a9bbd77a72954d6e339fb8edd61038b3432d23ed76cbc3081e750c7078ea186a"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/실행삭제.py",
+      "sha256": "1c0d2fc411355595efe20f177c0e4ecabea440201c9732193664fe90c70b2b9b"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/웹자료저장소.py",
+      "sha256": "5a7d7fa231631a64ddb5da283a8f27231b440e106982a0e99f8795379c030d04"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/보고서표현.py",
+      "sha256": "a8fc1cd335293aac72a062408bcafdf0d1bb4a99817b3314deee43c13d0fc6c2"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_보고서품질.py",
+      "sha256": "7687152e5d4a4fc780824880cc978332f5db5a4224154cbd177300167b55acf8"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_교안연구.py",
+      "sha256": "6a4353ed0e49225ce1d93b9c7b5f4c09a65edd58429671a6c19b91ea516ac561"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_실제연구제어.py",
+      "sha256": "42f824a6b945b2dc8ac8a11d3cb37c39c1265b85960a7b26c74d6508acf0cf17"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_웹연구.py",
+      "sha256": "339fa7eef6377deb975e6885981775bffdafeb14df2e91e63c439d847ccac966"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_검토보완.py",
+      "sha256": "cca8a802ae435fa2f6f8068bdba2bf6ecad4bd27316bafb441084fc7d0879370"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_웹통합.py",
+      "sha256": "1913d660e0429ecd6a9461a250a0b4b9e65e31b4ba12d24bf83720e13ddb0f1f"
+    }
+  ],
+  "summary": "Standards 정적 범위 위반 없음. Spec은 가시 본문 추출의 조건부 P2 결함 GEN-01로 보완 요청. 실제 모델 품질·전체 완료 판정은 하지 않음."
+}

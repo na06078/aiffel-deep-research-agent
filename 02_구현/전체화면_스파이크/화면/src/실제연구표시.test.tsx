@@ -39,7 +39,7 @@ it('실제 사건 상세는 요청0이라고 단정하지 않고 원문·오류�
  expect(renderToStaticMarkup(<EventViewer event={{...e,provider:'test-double'}}/>)).toContain('테스트 대역');
  expect(renderToStaticMarkup(<EventViewer event={{...e,provider:'art-demo'}}/>)).toContain('합성 사건');
  const report={report_id:'R',run_id:'A',control_revision:1,title:'연구 보고서',markdown:'# 실제 fixture 본문',sha256:'nonsecret-fixture',created_at:run.created_at,download_url:'/api/spike/reports/R/download'};
- const rh=renderToStaticMarkup(<ReportViewer report={report}/>);expect(rh).toContain('Markdown 다운로드');expect(rh).toContain(report.markdown);expect(rh).toContain(report.download_url);expect(network).not.toHaveBeenCalled();
+ const rh=renderToStaticMarkup(<ReportViewer report={report}/>);expect(rh).toContain('Markdown 다운로드');expect(rh).toContain(report.markdown);expect(rh).toContain('<details class="report-markdown-source"><summary>Markdown 원문</summary>');expect(rh).toContain('data-testid="report-presentation"');expect(rh).toContain(report.download_url);expect(network).not.toHaveBeenCalled();
 });
 const actual:Snapshot={protocol_version:1,provider:'openai',mode:'research',runs:[],events:[],waiting:[],queue:[],current_run_id:null,queue_paused:false,queue_pause_reason:null,high_watermark_seq:0,events_has_more:false,mock_requests:0,actual_model_requests:7};
 afterEach(()=>{vi.unstubAllGlobals();state.drawer=true;state.popup=null;state.snapshot=null;state.replay=null;});

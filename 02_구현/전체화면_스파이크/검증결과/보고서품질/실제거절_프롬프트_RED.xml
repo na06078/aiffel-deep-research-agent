@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.356" timestamp="2026-11-09T13:57:36.279420+09:00" hostname="z13flow"><testcase classname="테스트.테스트_보고서품질" name="test_실제관측한_근거주장_재서술은_본문복사_절차를_요구한다" time="0.115"><failure message="서버.교안연구.ResearchContractError: section evidence: claim not in visible body">def test_실제관측한_근거주장_재서술은_본문복사_절차를_요구한다():
+        # 실제 Luna 1차는 같은 사실을 재서술해 근거.주장이 본문과 달라졌다.
+        # 이 대역은 명시한 복사 절차가 전달된 경우에만 형식을 지킨다. 판단 능력 시험은 아니다.
+        source = "임오군란은 1882년 7월 23일부터 8월 30일까지 이어진 조선 한성부에서 발발한 구식 군인의 폭동이다."
+        sentence = "임오군란은 1882년 7월 23일 조선 한성부에서 발발했으며, 구식 군인의 폭동으로 시작되었다."
+        reply = {"본문": sentence + " «임오군란» 이 폭동은 1882년 7월 23일부터 8월 30일까지 이어졌다. «임오군란»",
+                 "충분": True, "부족": "", "근거": [{"주장": "임오군란은 1882년 7월 23일부터 8월 30일까지 이어졌고, 구식 군인의 폭동으로 시작되었다.",
+                                                  "출처": "임오군란", "인용문": source}]}
+        system, _ = section_prompt({"title": "발생 시기", "instruction": "원문에 근거하라", "role": "시간순 담당"}, [["임오군란", source]])
+        if "본문을 먼저 완성" in system and "다시 요약하지" in system:
+            reply["근거"][0]["주장"] = sentence
+&gt;       actual = validate_section(dump(reply), {"임오군란": source})
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+02_구현\전체화면_스파이크\테스트\테스트_보고서품질.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+raw = '{"본문": "임오군란은 1882년 7월 23일 조선 한성부에서 발발했으며, 구식 군인의 폭동으로 시작되었다. «임오군란» 이 폭동은 1882년 7월 23일부터 8월 30일까지 이어졌다. «임오군란»", "충분...30일까지 이어졌고, 구식 군인의 폭동으로 시작되었다.", "출처": "임오군란", "인용문": "임오군란은 1882년 7월 23일부터 8월 30일까지 이어진 조선 한성부에서 발발한 구식 군인의 폭동이다."}]}'
+sources = {'임오군란': '임오군란은 1882년 7월 23일부터 8월 30일까지 이어진 조선 한성부에서 발발한 구식 군인의 폭동이다.'}
+
+    def validate_section(raw, sources):
+        """sources는 호출자가 같은 버전/절의 실제 읽기로 한정한 원문이다."""
+        section = parse_section(raw)
+        obj = json_object(raw, "section evidence")
+        items = obj.get("근거")
+        if not isinstance(items, list) or len(items) &gt; 16 or (section["충분"] and not items):
+            raise ResearchContractError("section evidence: list required, 1..16 when sufficient")
+        body = normalized(visible_markdown(section["본문"]))
+        for item in items:
+            if not isinstance(item, dict):
+                raise ResearchContractError("section evidence: object required")
+            claim = required_text(item, "주장", "section evidence")
+            source = required_text(item, "출처", "section evidence")
+            quote = required_text(item, "인용문", "section evidence")
+            if source not in sources:
+                raise ResearchContractError("section evidence: source not read by this section")
+            if not 10 &lt;= len(quote) &lt;= 400 or normalized(quote) not in normalized(sources[source]):
+                raise ResearchContractError("section evidence: quote not in read source")
+            if normalized(claim) not in body:
+&gt;               raise ResearchContractError("section evidence: claim not in visible body")
+E               서버.교안연구.ResearchContractError: section evidence: claim not in visible body
+
+02_구현\전체화면_스파이크\서버\보고서품질.py:46: ResearchContractError</failure></testcase></testsuite></testsuites>

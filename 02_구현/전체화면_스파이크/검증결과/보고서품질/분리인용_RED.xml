@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.286" timestamp="2026-11-09T14:17:09.758658+09:00" hostname="z13flow"><testcase classname="테스트.테스트_보고서품질" name="test_떨어진_원문구간은_하나의인용문으로_합치지않고_근거를_분리한다" time="0.063"><failure message="서버.교안연구.ResearchContractError: section evidence: quote not in read source">def test_떨어진_원문구간은_하나의인용문으로_합치지않고_근거를_분리한다():
+        first = "1882년 8월 30일 청나라군은 민란을 진압하고 한성부 곳곳에 주둔했다."
+        last = "일본 제국과 조선은 1882년 8월 30일 제물포 조약을 체결했다."
+        source = first + " 임오군란 이후 일본 제국과 청나라는 조선 정부와 불평등 조약을 체결했다. " + last
+        claim = first + " " + last
+        item = {"주장": claim, "출처": "임오군란", "인용문": claim}
+        reply = {"본문": claim + " «임오군란»", "충분": True, "부족": "", "근거": [item]}
+        system, _ = section_prompt({"title": "경과", "instruction": "원문에 근거하라", "role": "시간순 담당"}, [["임오군란", source]])
+        # 실제2차의 비연속 인용을 기본 행동으로 삼는 명시 대역이다.
+        if "떨어진 원문" in system and "여러 근거 항목" in system:
+            reply["근거"] = [{**item, "인용문": quote} for quote in (first, last)]
+&gt;       actual = validate_section(dump(reply), {"임오군란": source})
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+02_구현\전체화면_스파이크\테스트\테스트_보고서품질.py:77: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+raw = '{"본문": "1882년 8월 30일 청나라군은 민란을 진압하고 한성부 곳곳에 주둔했다. 일본 제국과 조선은 1882년 8월 30일 제물포 조약을 체결했다. «임오군란»", "충분": true, "부족": ""... 조약을 체결했다.", "출처": "임오군란", "인용문": "1882년 8월 30일 청나라군은 민란을 진압하고 한성부 곳곳에 주둔했다. 일본 제국과 조선은 1882년 8월 30일 제물포 조약을 체결했다."}]}'
+sources = {'임오군란': '1882년 8월 30일 청나라군은 민란을 진압하고 한성부 곳곳에 주둔했다. 임오군란 이후 일본 제국과 청나라는 조선 정부와 불평등 조약을 체결했다. 일본 제국과 조선은 1882년 8월 30일 제물포 조약을 체결했다.'}
+
+    def validate_section(raw, sources):
+        """sources는 호출자가 같은 버전/절의 실제 읽기로 한정한 원문이다."""
+        section = parse_section(raw)
+        obj = json_object(raw, "section evidence")
+        items = obj.get("근거")
+        if not isinstance(items, list) or len(items) &gt; 16 or (section["충분"] and not items):
+            raise ResearchContractError("section evidence: list required, 1..16 when sufficient")
+        body = normalized(visible_markdown(section["본문"]))
+        for item in items:
+            if not isinstance(item, dict):
+                raise ResearchContractError("section evidence: object required")
+            claim = required_text(item, "주장", "section evidence")
+            source = required_text(item, "출처", "section evidence")
+            quote = required_text(item, "인용문", "section evidence")
+            if source not in sources:
+                raise ResearchContractError("section evidence: source not read by this section")
+            if not 10 &lt;= len(quote) &lt;= 400 or normalized(quote) not in normalized(sources[source]):
+&gt;               raise ResearchContractError("section evidence: quote not in read source")
+E               서버.교안연구.ResearchContractError: section evidence: quote not in read source
+
+02_구현\전체화면_스파이크\서버\보고서품질.py:49: ResearchContractError</failure></testcase></testsuite></testsuites>

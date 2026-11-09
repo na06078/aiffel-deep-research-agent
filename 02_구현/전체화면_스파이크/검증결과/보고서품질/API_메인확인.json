@@ -1,0 +1,10 @@
+{
+  "scope": "실제 ASGI/SQLite/정본 검증 뒤 순수 표현 API의 정상/거절/삭제/손상 경계",
+  "behavioral_red": "API_RED.json: 정상 정본 GET200 뒤 presentation404≠200, 1 failed",
+  "green_command": "../../.venv/Scripts/python.exe -B -m pytest 테스트/테스트_보고서표현_API.py -q -p no:cacheprovider --asyncio-mode=auto --basetemp=../../.cache/보고서품질_검증/API_GREEN --junitxml=검증결과/보고서품질/API_GREEN.xml",
+  "main_result": {"passed": 5, "exit_code": 0},
+  "checked": ["실제 합성 그래프 생성/필수 검사/정본 조회 양성 제어", "표와 SVG 및 링크/메타데이터 반환", "정본 해시/렌더러 버전 불일치의 정확한409", "삭제 대상404와 무재생성", "변조 정본409", "GET 전후 파일해시/저장스냅샷 불변", "변환 작업/새 모델 호출 없음"],
+  "boundaries": {"model": "explicit test-double", "real_provider_requests": 0, "browser": "not exercised by this API test"},
+  "renderer_handoff_verification": {"sources_checked": 6, "mismatches": [], "saved_testcases_enumerated": 105, "saved_failures": 0, "saved_errors": 0},
+  "not_claimed": ["앱 브라우저 전체 경로", "신규 생성기의 사실 판별", "실제 Luna 품질 개선", "운영 적용"]
+}

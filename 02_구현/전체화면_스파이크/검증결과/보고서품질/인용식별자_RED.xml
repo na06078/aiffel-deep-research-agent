@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="3" time="0.292" timestamp="2026-11-09T11:59:01.350004+09:00" hostname="z13flow"><testcase classname="테스트.테스트_보고서품질" name="test_표의_이스케이프된_출처도_원래식별자로_평가한다[\uc790\ub8cc(A).B]" time="0.048" /><testcase classname="테스트.테스트_보고서품질" name="test_표의_이스케이프된_출처도_원래식별자로_평가한다[\uc790\ub8cc&amp;amp;]" time="0.003"><failure message="AssertionError: {'passed': False, 'reasons': ['citation_integrity_error'], 'warnings': ['자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다.', '읽었지만 본문 인용에 쓰이지 않은 문서가 있습니다.'], 'metrics': {'문장수': 5, '근거붙은문장': 0, '근거율': 0.0, '허위인용': ['자료&amp;'], ...}, ...}&#10;assert False">source = '자료&amp;amp;'
+
+    @pytest.mark.parametrize("source", ["자료(A).B", "자료&amp;amp;", "자료\\!"])
+    def test_표의_이스케이프된_출처도_원래식별자로_평가한다(source):
+        from 서버.교안연구 import Corpus, assemble_report, evaluate_report
+    
+        value = synthesis()
+        value["표"] = [{"제목": "표", "열": ["항목", "값"], "행": [{"셀": ["사실", "값"], "출처": [source]}]}]
+        corpus = Corpus.from_data({"docs": {source: "원문"}, "links": {}})
+        sections = [{"section_id": "section-1", "title": "절", "role": "큰그림 담당", "본문": "가시 본문입니다. " * 200, "읽은문서": [source]}]
+        markdown = assemble_report("제목", "머리말", "맺음말", sections, corpus, value)
+        quality = evaluate_report(markdown, sections, corpus)
+&gt;       assert quality["passed"], quality
+E       AssertionError: {'passed': False, 'reasons': ['citation_integrity_error'], 'warnings': ['자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다.', '읽었지만 본문 인용에 쓰이지 않은 문서가 있습니다.'], 'metrics': {'문장수': 5, '근거붙은문장': 0, '근거율': 0.0, '허위인용': ['자료&amp;'], ...}, ...}
+E       assert False
+
+테스트\테스트_보고서품질.py:146: AssertionError</failure></testcase><testcase classname="테스트.테스트_보고서품질" name="test_표의_이스케이프된_출처도_원래식별자로_평가한다[\uc790\ub8cc\\!]" time="0.003"><failure message="AssertionError: {'passed': False, 'reasons': ['citation_integrity_error'], 'warnings': ['자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다.', '읽었지만 본문 인용에 쓰이지 않은 문서가 있습니다.'], 'metrics': {'문장수': 5, '근거붙은문장': 0, '근거율': 0.0, '허위인용': ['자료!'], ...}, ...}&#10;assert False">source = '자료\\!'
+
+    @pytest.mark.parametrize("source", ["자료(A).B", "자료&amp;amp;", "자료\\!"])
+    def test_표의_이스케이프된_출처도_원래식별자로_평가한다(source):
+        from 서버.교안연구 import Corpus, assemble_report, evaluate_report
+    
+        value = synthesis()
+        value["표"] = [{"제목": "표", "열": ["항목", "값"], "행": [{"셀": ["사실", "값"], "출처": [source]}]}]
+        corpus = Corpus.from_data({"docs": {source: "원문"}, "links": {}})
+        sections = [{"section_id": "section-1", "title": "절", "role": "큰그림 담당", "본문": "가시 본문입니다. " * 200, "읽은문서": [source]}]
+        markdown = assemble_report("제목", "머리말", "맺음말", sections, corpus, value)
+        quality = evaluate_report(markdown, sections, corpus)
+&gt;       assert quality["passed"], quality
+E       AssertionError: {'passed': False, 'reasons': ['citation_integrity_error'], 'warnings': ['자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다.', '읽었지만 본문 인용에 쓰이지 않은 문서가 있습니다.'], 'metrics': {'문장수': 5, '근거붙은문장': 0, '근거율': 0.0, '허위인용': ['자료!'], ...}, ...}
+E       assert False
+
+테스트\테스트_보고서품질.py:146: AssertionError</failure></testcase></testsuite></testsuites>

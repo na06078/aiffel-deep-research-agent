@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.233" timestamp="2026-11-09T12:39:17.630212+09:00" hostname="z13flow"><testcase classname="테스트.테스트_교안연구" name="test_종합자는_실제_SVG_허용문법과_금지문법을_입력받는다" time="0.002"><failure message="assert '허용 SVG 요소:' in '너는 보고서를 마무리하는 편집자다. 아래는 리서처 에이전트들이 각자 쓴 완성된 절과 검증된 근거다. 본문은 고치지 말고 머리말·맺음말을 각각 세 문장 이내로 써라. 검증된 근거 안에서만 선택적으로 최대2개 표(.....&quot;],&quot;출처&quot;:[&quot;자료 키&quot;]}]}],&quot;도식&quot;:[{&quot;제목&quot;:&quot;...&quot;,&quot;설명&quot;:&quot;...&quot;,&quot;코드&quot;:&quot;&lt;svg viewBox=...&gt;...&lt;/svg&gt;&quot;,&quot;출처&quot;:[&quot;자료 키&quot;]}],&quot;시각화생략사유&quot;:&quot;...&quot;}'">def test_종합자는_실제_SVG_허용문법과_금지문법을_입력받는다():
+        from 서버.교안연구 import synthesis_prompt
+    
+        system, _ = synthesis_prompt(
+            "질문", "제목", [{"title": "절", "본문": "확인된 본문", "근거": []}]
+        )
+&gt;       assert "허용 SVG 요소:" in system
+E       assert '허용 SVG 요소:' in '너는 보고서를 마무리하는 편집자다. 아래는 리서처 에이전트들이 각자 쓴 완성된 절과 검증된 근거다. 본문은 고치지 말고 머리말·맺음말을 각각 세 문장 이내로 써라. 검증된 근거 안에서만 선택적으로 최대2개 표(....."],"출처":["자료 키"]}]}],"도식":[{"제목":"...","설명":"...","코드":"&lt;svg viewBox=...&gt;...&lt;/svg&gt;","출처":["자료 키"]}],"시각화생략사유":"..."}'
+
+테스트\테스트_교안연구.py:18: AssertionError</failure></testcase></testsuite></testsuites>

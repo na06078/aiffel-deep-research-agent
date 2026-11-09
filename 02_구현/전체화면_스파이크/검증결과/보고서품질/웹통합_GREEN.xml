@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="2.799" timestamp="2026-11-09T11:35:11.483328+09:00" hostname="z13flow"><testcase classname="테스트.테스트_웹통합" name="test_정상조립과실제자료저장소_HTTP연구_재시작_무재전송" time="0.914" /></testsuite></testsuites>

@@ -3,57 +3,22 @@
 import asyncio
 import copy
 import hashlib
-import html
 import json
 import re
 import sys
 import threading
 from pathlib import Path
-from urllib.parse import quote, urlencode, urlsplit
+from urllib.parse import quote, urlencode
 from uuid import uuid4
 
-from markdown_it import MarkdownIt
 from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 
+from 서버.보고서표현 import MAX_SOURCE_BYTES, RENDERER_VERSION, render_presentation
 from 서버.저장소 import ApiError, now
-
-PRINT_CSS = """
-@page { size: A4; margin: 20mm 16mm; }
-body { font: 11pt/1.65 'Malgun Gothic', '맑은 고딕', sans-serif; color: #19212b;
-       max-width: 180mm; margin: 24px auto; overflow-wrap: anywhere; }
-h1,h2,h3 { break-after: avoid; line-height: 1.3; }
-p,li { orphans: 3; widows: 3; }
-table { border-collapse: collapse; width: 100%; margin: 1em 0; }
-thead { display: table-header-group; }
-tr,pre,blockquote { break-inside: avoid; }
-th,td { border: 1px solid #aab2bc; padding: 6px; text-align: left; }
-pre { white-space: pre-wrap; background: #f3f5f7; padding: 12px; }
-code { font-family: Consolas, 'Malgun Gothic', monospace; }
-a { color: #154f85; text-decoration: underline; }
-@media print { body { max-width: none; margin: 0; } }
-"""
 
 
 def report_html(markdown, report):
-    parser = MarkdownIt("js-default", {"html": False}).enable("table")
-    parser.validateLink = lambda value: (
-        value.startswith("#") or urlsplit(value).scheme.lower() in {"http", "https"}
-    )
-
-    # 이미지 토큰은 alt 텍스트로만 남긴다. data/file/원격 자원을 만들지 않는다.
-    def image(tokens, index, options, env):
-        return html.escape(tokens[index].content)
-
-    parser.renderer.rules["image"] = image
-    body = parser.render(markdown.decode("utf-8"))
-    title = html.escape(str(report.get("title", "보고서")))
-    return (
-        '<!doctype html><html lang="ko"><head><meta charset="utf-8">'
-        '<meta http-equiv="Content-Security-Policy" content="default-src &apos;none&apos;; '
-        "style-src &apos;unsafe-inline&apos;; img-src &apos;none&apos;; base-uri &apos;none&apos;; "
-        'form-action &apos;none&apos;">'
-        f"<title>{title}</title><style>{PRINT_CSS}</style></head><body>{body}</body></html>"
-    ).encode()
+    return render_presentation(markdown, report)["html"].encode("utf-8")
 
 
 async def render_report(markdown: bytes, format: str, report: dict) -> bytes:
@@ -167,9 +132,7 @@ async def render_pdf(content):
     return state["result"]
 
 
-RENDERER_VERSION = "markdown-it4-playwright1248-v1"
 CONVERSION_TIMEOUT = 20
-MAX_SOURCE_BYTES = 1024 * 1024
 SAFE_ERRORS = {
     "export_failed": "형식 변환에 실패했습니다. 다시 시도해 주세요.",
     "export_timeout": "변환 제한시간을 초과했습니다. 다시 시도해 주세요.",

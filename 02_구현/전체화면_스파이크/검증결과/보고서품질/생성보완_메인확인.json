@@ -1,0 +1,12 @@
+{
+  "status": "main_targeted_green",
+  "independent_review": "독립생성검토.json 원 판정은 보존",
+  "root_fix": "숨은 Markdown 링크/참조를 제외한 가시 텍스트 및 출처 식별자 원형 보존",
+  "tests": 129,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "evidence": "생성보완_메인.xml",
+  "live_model_calls": 0,
+  "note": "이후 새 실모델 점검기의 추가 시험은 최종 전체 회귀에서 별도 집계한다."
+}

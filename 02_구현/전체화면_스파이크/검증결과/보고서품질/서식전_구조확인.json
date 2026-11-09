@@ -1,0 +1,73 @@
+{
+  "note": "Ruff 서식 정리 전 AST 지문. 복구용 원본 사본이 아닙니다.",
+  "paths": {
+    "서버/교안연구.py": {
+      "sha256": "97c351753b70ea1fe9b4891ca7ea2e829794bb3737be0f30b4b180aa38cd17b8",
+      "ast_sha256": "2da592640773edfb053c52cee5a1d331b9948dcfd840d88c5deb1bff07883036"
+    },
+    "서버/보고서변환.py": {
+      "sha256": "6dbd31927da7a23e2f6651605274e0df3127db5ae7ae460c65ab6e4331d729fc",
+      "ast_sha256": "4bfc5341eb944a3119aa697d959d0a3d22030f2b05c2fcf6d0c8c42ee9988d19"
+    },
+    "서버/보고서도식.py": {
+      "sha256": "53d0fa1469d797b68923d2bc190bf3a700cc9c55e11135f5806c22d4b156c223",
+      "ast_sha256": "7654972d5a48c9a476abd68524877a2a33711377717be74e4b6e1fd1932c474d"
+    },
+    "서버/보고서표현.py": {
+      "sha256": "a8fc1cd335293aac72a062408bcafdf0d1bb4a99817b3314deee43c13d0fc6c2",
+      "ast_sha256": "9d0e8ccdf7a522576d270b5e0b05c8fecf4b5ed0b1625122176fac54cb53ff20"
+    },
+    "서버/보고서품질.py": {
+      "sha256": "9a62c4ac95c8526907933882957295ff6eae62cb884b4b07c5ecaaecee491507",
+      "ast_sha256": "479254ef030a85fc1f4ab092317fa9f96b800d42b02d56726515895e038a6584"
+    },
+    "서버/실제연구제어.py": {
+      "sha256": "9a331f9b1ff188f8387ef9f83a7678b417ccc9a0c5d87c2bdc2a86da5d6224e9",
+      "ast_sha256": "b6000df12e60a002331726684a58564c5615093e0a13bc9279c57eded668d1bc"
+    },
+    "서버/앱.py": {
+      "sha256": "ab57f37b2aeea206135c8e71a6ab12bd8926d57c29b83bfcbc18518e66842cd7",
+      "ast_sha256": "62cecbe70f61b1193441bec00fb4f6edfe6eec81c99b6a50537743604a9899e0"
+    },
+    "서버/웹연구.py": {
+      "sha256": "567470a016012b0014ccd6541983abb73f0d6377fb83c882d975f648d2f999ae",
+      "ast_sha256": "a148882bc64020b70defd4e38b841306286249714d9790cb59d37ecf6f646024"
+    },
+    "테스트/테스트_교안연구.py": {
+      "sha256": "6a4353ed0e49225ce1d93b9c7b5f4c09a65edd58429671a6c19b91ea516ac561",
+      "ast_sha256": "4157bf9cc08d21eed94207edac881b4dd6956590b524806ef3c15de0a113f497"
+    },
+    "테스트/테스트_보고서변환.py": {
+      "sha256": "f3c02a8094fbd9b935a1bf8428bb61dbc17064cf3524efcd1cd0ddefd0dc5204",
+      "ast_sha256": "63b4a4bc7c198819dead22539018094cef69b9cdaad92194f432dad1d78021e7"
+    },
+    "테스트/테스트_보고서도식.py": {
+      "sha256": "75abe3da3be1fb3e5ff0860dd3d1376d30f34c4f299a4314730866aba5145611",
+      "ast_sha256": "e9307f45bbca5b4d59c2fd9f5ef84f0cc346c705c2c833938116afa4a8420a19"
+    },
+    "테스트/테스트_보고서표현.py": {
+      "sha256": "33b6fef6118e18cd2ce623ec02b7720564f7116cdbb17de7212e367fe798ef25",
+      "ast_sha256": "a934225414485a4d4d22b141720f1b5954d11274d1e17bbcd5bcc193f1a6b524"
+    },
+    "테스트/테스트_보고서표현_API.py": {
+      "sha256": "ba6595a091ffdc5e824dd2de91e4cec6edf3e960d6f0e903bf7cd587174de68d",
+      "ast_sha256": "9f68d3e24867e672ba7c446155f50c9bca0cb07777a479b607a0b6979acf7fd2"
+    },
+    "테스트/테스트_보고서품질.py": {
+      "sha256": "7687152e5d4a4fc780824880cc978332f5db5a4224154cbd177300167b55acf8",
+      "ast_sha256": "2ab0fa59be1b6fc328c59493e7122fce92805b011dd97a9d14b7381d6f47609b"
+    },
+    "테스트/테스트_실제연구제어.py": {
+      "sha256": "42f824a6b945b2dc8ac8a11d3cb37c39c1265b85960a7b26c74d6508acf0cf17",
+      "ast_sha256": "5b8e68e762c720bd0aa65c5ce847f6b06f43f9c919cca0910558eeed5231020a"
+    },
+    "테스트/테스트_웹연구.py": {
+      "sha256": "339fa7eef6377deb975e6885981775bffdafeb14df2e91e63c439d847ccac966",
+      "ast_sha256": "58b64720f98c36b6947bdda56d6e8fc815ccc43136e41086302e911ae3bb4c79"
+    },
+    "테스트/테스트_웹통합.py": {
+      "sha256": "1913d660e0429ecd6a9461a250a0b4b9e65e31b4ba12d24bf83720e13ddb0f1f",
+      "ast_sha256": "dd675cc466ad07ac9dd6d4d24b1d26d3169ca0ca71d3304e3b0a014f69052227"
+    }
+  }
+}

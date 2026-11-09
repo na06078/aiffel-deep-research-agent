@@ -1,0 +1,112 @@
+{
+  "status": "PREPARED_AND_MODEL_DOUBLE_TESTED_ONLY",
+  "cwd": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트",
+  "created_files": [
+    "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증/보고서품질_실모델점검.py",
+    "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_보고서품질_실모델점검.py",
+    "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/보고서품질/실모델점검_준비.json"
+  ],
+  "executions": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe -m pytest '02_구현/전체화면_스파이크/테스트/테스트_보고서품질_실모델점검.py' -q -p no:cacheprovider --basetemp='.cache/보고서품질_검증/실모델점검/pytest-final' --junitxml='.cache/보고서품질_검증/실모델점검/단위검증.xml'",
+      "exit_code": 0,
+      "tests": 33,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe '02_구현/전체화면_스파이크/검증/보고서품질_실모델점검.py' --prepare",
+      "exit_code": 0,
+      "observed_attempts": 0
+    }
+  ],
+  "verification": {
+    "prepare": {
+      "mode": "prepare",
+      "model": "gpt-5.6-luna",
+      "live_verified": false,
+      "observed_attempts": 0,
+      "max_calls": 4,
+      "max_output_tokens": 4096,
+      "max_input_proxy_per_call": 272000,
+      "max_retries": 0,
+      "max_cost_nano_usd": 291660800,
+      "max_cost_usd": 0.2916608,
+      "source_key": "임오군란",
+      "source_text_sha256": "b7e87b73e31bfb04db641d56f698779057ba463fec123a126cfdfd37222245cc",
+      "source_hashes": {
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\01_참고자료\\원본데이터\\corpus.json": "583dbf10ee811796c80302e005bef71812476059dc79c3b5dd2fd3ea251e4ec7",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\📘 딥리서치 에이전트 기술 명세서.md": "cfbcfda9a7c12e8c92f33f3381c7a4631b853379f4d5963184a68eb8419a8055",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\보고서품질_실모델점검.py": "d8d4a7371d6218e4ac72ecb5a206163ad34cec333b7e3f0dd09539fd8e58ad9e",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\테스트\\테스트_보고서품질_실모델점검.py": "21631f7c83f1f3d79777842a7992a8c0361bf8fa406cd3da039c915849663059",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\웹연구_초안프롬프트_실모델점검.py": "f1f5b037470444b4f22195b98805b404aa2505d29f48787e5e8caaeff0e567c2",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\교안연구.py": "9be2ae369f595939a7b1f7d5542324de15c8025b29a1ab94a9f0bd957c22cf4a",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서품질.py": "0da7a4a29349eb191d8b391588ca449f8b9edbeffbfc73e878c99e170a5e2f1d",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서도식.py": "53d0fa1469d797b68923d2bc190bf3a700cc9c55e11135f5806c22d4b156c223",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서표현.py": "4eb92ae69c796cbe100c4ba5f3c1b650398242b68f74f8210cac2d80e4830858",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\저장소.py": "bff9ea9d64fff72203c57ae1bf4f4045db2dc084e16241309855ecfb0a00db8c",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\실제모델.py": "4b2230183e18a93306856f6d8303f14a5dc42feb6d33d8ed138ec53c784f4a1b",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\호출예산.py": "42216cb8f6fe9e36602214a7c01079b157ddcb7c8a56ca6434fc6b5d18366bfb",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\실제연구제어.py": "9a331f9b1ff188f8387ef9f83a7678b417ccc9a0c5d87c2bdc2a86da5d6224e9",
+        "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\연구앱.py": "c4d36470f42fc5a38c9952e05c204a5078f8f57d4e205e0cdc35aafae3fdb548"
+      },
+      "cache": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\prepare",
+      "boundary": "실제 Luna 미검증; 대역은 전달/스키마/조립만 검증. 6노드·2000자 앱 수용 검사 아님."
+    },
+    "tests": {
+      "tests": 33,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "fake_metadata_count": 24,
+    "fake_run_hashes_equal_prepare": true,
+    "current_hashes_equal_prepare": true,
+    "junit_path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\단위검증.xml",
+    "junit_sha256": "8ce231915c5da94f33ab005cbde749a13f1ec111ccac267a71421d3d26e49507"
+  },
+  "tdd_observed": [
+    {
+      "slice": "prepare 안전 메타데이터",
+      "red": "KeyError: mode, 1 failed",
+      "green": "1 passed"
+    },
+    {
+      "slice": "명시적 대역 4단계 전달·스키마·조립",
+      "red": "assert False is True, 1 failed/1 passed",
+      "green": "2 passed"
+    },
+    {
+      "slice": "기본 CLI prepare 출력",
+      "red": "준비 메타데이터 출력 assertion, 1 failed",
+      "green": "22 passed"
+    },
+    {
+      "slice": "코드 fence 안 날짜만 있을 때 음성 대조 불인정",
+      "red": "error 누락(KeyError), 1 failed; 잘못 PASS 재현",
+      "green": "33 passed 최종"
+    },
+    {
+      "slice": "preflight용 표/SVG 생성 요청의 현재 synthesis_prompt 전달",
+      "red": "표 1개와 SVG 도식 1개 입력 assertion, 1 failed",
+      "green": "최종 33 passed"
+    }
+  ],
+  "scaffolding_issue": "최초 pytest basetemp 상위 폴더 부재로 1 setup error; 승인 cache 경로 생성 후 행동 RED 재실행. 제품 회귀로 세지 않음.",
+  "live_calls": 0,
+  "provider_constructed": false,
+  "credentials_read": false,
+  "authentic_ledger_accessed": false,
+  "budgets_mutated": false,
+  "scope": "신규 유틸리티/대역 단위시험/이 메타데이터만; 기존 앱·도식·품질 소스/문서/설치본/Git 수정 없음. 전체 suite 실행 안 함.",
+  "unverified": [
+    "ordinary gpt-5.6-luna 실제 응답과 의미 판별 정확도",
+    "기존 실제 장부 잔액/한도(이 작업에서는 읽지 않음)",
+    "6노드·2000자 전체 앱 수용 기준"
+  ],
+  "future_live_gate": "부모만 실행: --allow-live와 기존 공유 장부의 명시적 절대 --ledger가 모두 필요. 새 장부 생성/예산 초기화/정책 변경 경로 없음.",
+  "cost_bound_formula": "4 * (272000 * 250 + 4096 * 1200) nano-USD = 291660800 nano-USD = $0.2916608. 기존 앱 보수 추정 상한이며 실제 청구 보증 아님.",
+  "raw_outputs": "ROOT/.cache/보고서품질_검증/실모델점검/에만 입력 snapshot, 후보, 원시 응답, 시도·영수증·usage 및 JUnit 보존. 이 메타데이터에 원시 응답/키/오류 원문 없음.",
+  "core_fix_recheck": "부모 GEN-01 가시 텍스트/경계 및 citation_keys 수정 후 명시적 대역 33개를 재실행했다. 대역 실행24건의 전체 소스 해시와 prepare 및 현재 디스크 해시가 전부 일치한다. 추가 shared parser 의존 보고서표현.py/저장소.py도 manifest에 포함했다."
+}

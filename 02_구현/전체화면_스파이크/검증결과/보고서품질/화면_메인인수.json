@@ -1,0 +1,19 @@
+{
+  "scope": "화면 부분 인수 검증만, 실제 브라우저/서버 통합 전",
+  "source_handoff_path": "02_구현/전체화면_스파이크/검증결과/보고서품질/화면_작업자인계.json",
+  "source_handoff_location_note": "프로젝트 루트 기준의 잘못된 위치에서 계약의 증거 폴더로 정리했다. 원문30070바이트와 SHA-256 보존은 인계경로_정리.json에서 확인한다.",
+  "source_hashes_checked": 8,
+  "source_hash_mismatches": [],
+  "saved_vitest_declared": 36,
+  "saved_vitest_enumerated": 36,
+  "saved_vitest_nonpassed": [],
+  "main_rerun": {
+    "command": "node.exe node_modules/vitest/vitest.mjs run src/보고서표현.test.tsx src/상세보기.test.tsx src/실제연구표시.test.tsx src/통신.test.ts",
+    "passed": 36,
+    "test_files": 4,
+    "exit_code": 0,
+    "start_time_kst": "2026-11-09 11:09:22"
+  },
+  "main_typescript": {"command": "node.exe node_modules/typescript/bin/tsc --noEmit", "exit_code": 0},
+  "not_verified": ["실제 브라우저", "실제 서버/API 결합", "PDF/HTML 다운로드", "Luna 의미 판별", "운영 적용"]
+}

@@ -49,7 +49,21 @@ class IntegrationModel(WebModel):
         on_attempt(attempt)
         body = (("실제 공개 웹이 아닌 명시적 통합 대역의 문장입니다. " * 4) + f"«{key}».\n") * 22
         return {
-            "content": json.dumps({"본문": body, "충분": True, "부족": ""}, ensure_ascii=False),
+            "content": json.dumps(
+                {
+                    "본문": body,
+                    "충분": True,
+                    "부족": "",
+                    "근거": [
+                        {
+                            "주장": "실제 공개 웹이 아닌 명시적 통합 대역의 문장입니다.",
+                            "출처": ids[0],
+                            "인용문": self.excerpts[ids[0]],
+                        }
+                    ],
+                },
+                ensure_ascii=False,
+            ),
             "attempt_id": attempt,
             "request_id": "explicit-fake-provider",
             "model": "explicit-integration-fake",
@@ -123,7 +137,7 @@ def test_정상조립과실제자료저장소_HTTP연구_재시작_무재전송(
                 break
             time.sleep(0.01)
         assert run["status"] == "completed", run
-        assert len(model.calls) == 9 and len(searches) == 1 and len(wire.connects) == 3
+        assert len(model.calls) == 10 and len(searches) == 1 and len(wire.connects) == 3
         service = app.state.service
         assert isinstance(service.web_store, WebSourceStore)
         claims = service.web_store.read_claims(run_id, 1)

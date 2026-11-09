@@ -1,0 +1,17 @@
+{
+  "original_review": "독립생성검토.json",
+  "original_verdict_preserved": "changes_requested",
+  "GEN-01": {
+    "status": "main_reproduced_and_fixed_pending_full_rerun",
+    "root_cause": "코드 블록만 뺀 Markdown 원문을 가시 본문으로 세어 링크 href/title/참조 정의와 숨은 주장이 포함됐다.",
+    "behavioral_red": {"evidence": "가시본문_RED.xml", "failed": 6},
+    "fix": "표현과 같은 Markdown 파서의 inline 텍스트/표 셀/인라인 코드를 추출한다. 원래 Markdown은 제목/출처 경계 판정용으로 보존한다.",
+    "related_green": {"evidence": "가시본문_GREEN.xml", "passed": 55, "exit_code": 0},
+    "identifier_followup": {"evidence": "인용식별자_RED.xml", "failed": 2, "passed_positive_control": 1, "fix": "이미 파싱된 가시 텍스트의 인용 키를 다시 unescape하지 않아 특수문자 원형 보존", "green": "생성보완_메인.xml 실행 중"}
+  },
+  "GEN-S01": {
+    "status": "document_scope_clarification_pending",
+    "decision": "기존 격리율의 계산을 새 비교 실험으로 바꾸지 않는다. 의미 검토 이전 planner/editor와 연구자 입력 문자 비율임을 기술/실행 안내에 명시한다. 비용·의미 정확성 지표로 승격하지 않는다."
+  },
+  "not_claimed": ["수정 뒤 독립 재검토 통과", "실제 Luna의 의미 판별", "운영 적용"]
+}

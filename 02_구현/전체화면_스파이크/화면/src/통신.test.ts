@@ -1,6 +1,15 @@
 import { it, expect, vi, afterEach } from 'vitest';
 import { sendCommand, api } from './통신';
 afterEach(()=>vi.unstubAllGlobals());
+it('presentation은 정본 해시와 렌더러 버전을 GET으로 보내며 오류 사유를 유지한다',async()=>{
+ const body={report_id:'A/B',html:'<!doctype html>',warnings:[],links:[]};
+ const fetcher=vi.fn().mockResolvedValueOnce(new Response(JSON.stringify(body))).mockResolvedValueOnce(new Response(JSON.stringify({error:{code:'report_hash_mismatch',message:'정본 불일치'}}),{status:409}));vi.stubGlobal('fetch',fetcher);
+ const presentation=api.presentation;
+ const result=await presentation('A/B','hash +&');
+ expect(fetcher).toHaveBeenCalledExactlyOnceWith('/api/spike/reports/A%2FB/presentation?source_report_hash=hash%20%2B%26&renderer_version=markdown-it4-playwright1248-svg-v2',undefined);
+ expect(result).toEqual(body);
+ await expect(presentation('A/B','old')).rejects.toThrow('report_hash_mismatch: 정본 불일치');
+});
 it('자료를 캡처한 명령은 원문과 선택을 함께 전송하고 미확인 자료는 생략한다',async()=>{
  const fetcher=vi.fn().mockImplementation(async()=>new Response('{}'));vi.stubGlobal('fetch',fetcher);
  await sendCommand('  /큐 /웹 질문  ','frozen-web','web');

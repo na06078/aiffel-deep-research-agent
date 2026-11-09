@@ -1,0 +1,19 @@
+{
+  "before": [
+    159,
+    2000000000,
+    27
+  ],
+  "after": [
+    160,
+    2000000000,
+    27
+  ],
+  "preserved_rows": 128,
+  "original127_sha256": "3d6e17c92aefc23d2a6d0e7cf02e36f2e3b56e7d2e9940c5349e97bc8f3d7e73",
+  "current_attempts": 101,
+  "remaining_attempts": 59,
+  "unknown_count": 0,
+  "spent_usd": 0.19850915,
+  "scope": "Explicit user choice: failed1 + new preflight4 + conditional full55; total additional maximum60, cumulative estimate USD2 unchanged."
+}
