@@ -22,6 +22,162 @@ SPIKE = Path(__file__).resolve().parents[1]
 ROOT = SPIKE.parents[1]
 
 
+def validate_preflight(path, expected_unknown):
+    """submit 전에 로컬 증거만 읽는다. 제공자·장부·HTTP·브라우저 I/O는 없다."""
+    from 보고서품질_실모델점검 import CONTROL_PROTOCOL, control_cases, inputs, manifest
+    from 보고서품질_실모델점검 import ROOT as PROBE_ROOT
+
+    from 서버.검토문맥 import build_review_request, parse_review
+    from 서버.교안연구 import assemble_report
+    from 서버.보고서근거 import build_draft_request, materialize_section
+    from 서버.보고서품질 import parse_synthesis, visible_markdown
+
+    try:
+        assert path is not None
+        path = path.resolve()
+        cache_root = (PROBE_ROOT / ".cache/보고서품질_검증/실모델점검").resolve()
+        assert path.is_relative_to(cache_root)
+
+        def read(name):
+            target = (path.parent / name).resolve()
+            assert target.is_relative_to(cache_root)
+            return json.loads(target.read_text("utf-8"))
+
+        value = read(path.name)
+        provenance, _, _ = control_cases(inputs()[0])
+        assert value.get("control_protocol") == CONTROL_PROTOCOL
+        assert value.get("control_source") == provenance
+        assert value.get("generated_candidate_semantic_verified") is False
+        assert value["mode"] == "live"
+        assert value["passed"] and value["live_verified"]
+        assert value["observed_attempts"] == value["completed_calls"] == 4
+        assert value["draft_protocol"] == "sentence-paragraph-evidence-v3"
+        assert value["review_protocol"] == "source-context-review-v1"
+        assert value["review_schema_cases"] == ["positive", "negative"]
+        assert value["draft_schema_received"] is True
+        assert value["source_hashes"] == manifest()
+        section_input = read("입력_section.json")
+        schema = section_input["response_schema"]
+        assert (
+            value["draft_schema_sha256"]
+            == hashlib.sha256(
+                json.dumps(schema, ensure_ascii=False, allow_nan=False).encode("utf-8")
+            ).hexdigest()
+        )
+        offered = json.loads(section_input["user"])
+        assert schema["properties"]["근거목록ID"]["enum"] == [offered["evidence_set_id"]]
+        assert schema["properties"]["문장"]["items"] == {"type": "string"}
+        assert schema["properties"]["근거관계"]["maxItems"] == 16
+        assert schema["properties"]["근거관계"]["items"]["properties"]["근거구간"] == {
+            "type": "integer",
+            "enum": [span["id"] for span in offered["evidence"]],
+        }
+        receipts = read("호출영수증.json")
+        assert [r["case"] for r in receipts] == ["section", "synthesis", "positive", "negative"]
+        assert all(r["model"] == "gpt-5.6-luna" and r["request_id"] for r in receipts)
+        assert value["usage_after"]["attempt_count"] - value["usage_before"]["attempt_count"] == 4
+        assert (
+            value["usage_before"]["unknown_count"]
+            == value["usage_after"]["unknown_count"]
+            == expected_unknown
+        )
+        assert value["negative_detected"] is True
+        assert value["passed"] is True and value["live_verified"] is True
+        corpus, data = inputs()
+        sources = {"임오군란": corpus.docs["임오군란"]}
+        draft_request = build_draft_request(data["assignment"], data["notes"], sources)
+        assert section_input["response_schema"] == draft_request.response_schema
+        assert (section_input["system"], section_input["user"]) == draft_request.prompts
+        generated = materialize_section(
+            read("응답_section.json")["content"], draft_request, sources
+        )
+        assert generated["충분"] and "1882년" in visible_markdown(generated["본문"])
+        section = {**data["assignment"], **generated, "읽은문서": ["임오군란"]}
+        assert read("절_조립.json") == {"section": section, "request_inputs": draft_request.inputs}
+        summary = parse_synthesis(read("응답_synthesis.json")["content"], sources)
+        assert summary["표"] and summary["도식"]
+        candidate = assemble_report(
+            "임오군란 발생 시기 사전점검",
+            summary["머리말"],
+            summary["맺음말"],
+            [section],
+            corpus,
+            summary,
+        )
+        candidates = read("후보.json")
+        assert candidates["positive"] == candidate
+        assert candidates["negative"] == candidate.replace(
+            section["본문"], section["본문"].replace("1882년", "1883년", 1), 1
+        )
+        assert candidates["evidence"] == [
+            {"section_id": section["section_id"], "근거": section["근거"]}
+        ]
+        provenance, cases, qualified_sources = control_cases(corpus)
+        controls = read("대조.json")
+        assert controls == {
+            "control_protocol": CONTROL_PROTOCOL,
+            "control_source": provenance,
+            "generated_candidate_semantic_verified": False,
+            "positive": cases["positive"]["draft"],
+            "negative": cases["negative"]["draft"],
+            "sections": cases["positive"]["sections"],
+            "negative_sections": cases["negative"]["sections"],
+        }
+        for case in ("positive", "negative"):
+            control = cases[case]
+            request = build_review_request(control["draft"], control["sections"], qualified_sources)
+            saved = read(f"입력_{case}.json")
+            assert saved["request_inputs"] == request.inputs
+            assert saved["response_schema"] == request.response_schema
+            assert (saved["system"], saved["user"]) == request.prompts
+            verdict = parse_review(read(f"응답_{case}.json")["content"], request, qualified_sources)
+            assert verdict["통과"] is (case == "positive")
+            if case == "negative":
+                assert any(
+                    p["유형"] == "contradiction"
+                    and "1883년" in p["본문발췌"]
+                    and p["본문발췌"] in request.inputs["visible_text"]
+                    and "임오군란" in p["출처"]
+                    for p in verdict["문제"]
+                )
+        attempts = read("시도.json")
+        assert attempts == [{"case": r["case"], "attempt_id": r["attempt_id"]} for r in receipts]
+        assert (
+            len({r["attempt_id"] for r in receipts})
+            == len({r["request_id"] for r in receipts})
+            == 4
+        )
+        assert all(
+            re.fullmatch(r"[a-f0-9]{32}", r["attempt_id"])
+            and re.fullmatch(r"req_[A-Za-z0-9_-]+", r["request_id"])
+            and isinstance(r["usage"], dict)
+            and all(
+                type(r["usage"][k]) is int and r["usage"][k] >= 0
+                for k in ("input_tokens", "output_tokens")
+            )
+            for r in receipts
+        )
+        operations = {
+            "section": "draft_section",
+            "synthesis": "synthesize",
+            "positive": "semantic_review",
+            "negative": "semantic_review",
+        }
+        for case, operation in operations.items():
+            saved = read(f"입력_{case}.json")
+            assert saved["context"] == {
+                "run_id": path.parent.name,
+                "revision": 1,
+                "actor": "quality-preflight",
+                "operation": operation,
+                "case": case,
+            }
+            assert saved["max_output_tokens"] == 4096 and saved["json_mode"] is True
+        return value
+    except (AssertionError, KeyError, TypeError, ValueError, OSError) as error:
+        raise AssertionError("preflight_control_invalid") from error
+
+
 def main(args):
     address = urlsplit(args.base_url)
     assert address.scheme == "http" and address.hostname == "127.0.0.1"
@@ -30,6 +186,7 @@ def main(args):
     assert re.fullmatch(r"[A-Za-z0-9_-]+", args.label)
     data = args.data_dir.resolve()
     assert data.is_relative_to(ROOT / "03_실행데이터") and data.name.startswith("보고서품질_")
+    preflight = validate_preflight(args.preflight, args.expected_unknown) if args.submit else None
     out = ROOT / ".cache/보고서품질_검증/실제연구" / args.label
     assert not out.exists(), "기존 증거는 덮어쓰지 않습니다. 새 label을 사용하세요."
     out.mkdir(parents=True)
@@ -52,52 +209,13 @@ def main(args):
 
     initial = get(args.base_url, "/api/spike/snapshot")
     assert initial["provider"] == "openai" and initial["mode"] == "research"
-    assert initial["budget"]["max_attempts"] == 208 and initial["budget"]["max_usd"] == 2
+    assert (
+        initial["budget"]["max_attempts"] == args.expected_max_attempts
+        and initial["budget"]["max_usd"] == args.expected_max_usd
+    ), "공유 장부의 호출/금액 한도가 승인값과 다릅니다."
     assert initial["budget"]["unknown_count"] == args.expected_unknown
     result["budget_before"] = initial["budget"]
     if args.submit:
-        assert args.preflight is not None
-        preflight = json.loads(args.preflight.read_text("utf-8"))
-        assert preflight["mode"] == "live"
-        assert preflight["passed"] and preflight["live_verified"]
-        assert preflight["observed_attempts"] == preflight["completed_calls"] == 4
-        assert preflight["draft_protocol"] == "sentence-paragraph-evidence-v3"
-        assert preflight["review_protocol"] == "source-context-review-v1"
-        assert preflight["review_schema_cases"] == ["positive", "negative"]
-        assert preflight["draft_schema_received"] is True
-        assert args.preflight.resolve().is_relative_to(ROOT / ".cache/보고서품질_검증/실모델점검")
-        for filename, digest in preflight["source_hashes"].items():
-            target = Path(filename).resolve()
-            assert target.is_relative_to(ROOT)
-            assert hashlib.sha256(target.read_bytes()).hexdigest() == digest
-        section_input = json.loads((args.preflight.parent / "입력_section.json").read_text("utf-8"))
-        schema = section_input["response_schema"]
-        assert (
-            preflight["draft_schema_sha256"]
-            == hashlib.sha256(
-                json.dumps(schema, ensure_ascii=False, allow_nan=False).encode("utf-8")
-            ).hexdigest()
-        )
-        offered = json.loads(section_input["user"])
-        assert schema["properties"]["근거목록ID"]["enum"] == [offered["evidence_set_id"]]
-        assert schema["properties"]["문장"]["items"] == {"type": "string"}
-        assert schema["properties"]["근거관계"]["maxItems"] == 16
-        assert schema["properties"]["근거관계"]["items"]["properties"]["근거구간"] == {
-            "type": "integer",
-            "enum": [span["id"] for span in offered["evidence"]],
-        }
-        receipts = json.loads((args.preflight.parent / "호출영수증.json").read_text("utf-8"))
-        assert [r["case"] for r in receipts] == ["section", "synthesis", "positive", "negative"]
-        assert all(r["model"] == "gpt-5.6-luna" and r["request_id"] for r in receipts)
-        assert (
-            preflight["usage_after"]["attempt_count"] - preflight["usage_before"]["attempt_count"]
-            == 4
-        )
-        assert (
-            preflight["usage_before"]["unknown_count"]
-            == preflight["usage_after"]["unknown_count"]
-            == args.expected_unknown
-        )
         assert not initial["runs"] and not initial["queue"], (
             "실행 기록이 있어 새 연구를 전송하지 않습니다."
         )
@@ -366,6 +484,18 @@ if __name__ == "__main__":
     parser.add_argument("--submit", action="store_true")
     parser.add_argument("--run-id")
     parser.add_argument("--preflight", type=Path)
+    parser.add_argument(
+        "--expected-max-attempts",
+        type=int,
+        default=208,
+        help="승인된 기존 공유 장부의 누적 호출 상한",
+    )
+    parser.add_argument(
+        "--expected-max-usd",
+        type=int,
+        default=2,
+        help="승인된 기존 공유 장부의 누적 추정 달러 상한",
+    )
     parser.add_argument(
         "--expected-unknown",
         type=int,

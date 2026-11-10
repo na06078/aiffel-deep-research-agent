@@ -63,3 +63,8 @@
 "/02_구현/전체화면_스파이크/검증/근거문맥_저장실패재생.py" -text
 "/02_구현/전체화면_스파이크/검증/테스트_문맥사전점검.py" -text
 "/02_구현/전체화면_스파이크/검증결과/근거문맥/**" -text
+"/02_구현/전체화면_스파이크/검증결과/근거문맥실제/**" -text
+# RED 원시 traceback의 공백도 해시 근거이므로 이 세 증거만 그대로 보존한다.
+"/02_구현/전체화면_스파이크/검증결과/근거문맥실제/SVG예시_RED.xml" whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
+"/02_구현/전체화면_스파이크/검증결과/근거문맥실제/사전경로_RED.xml" whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
+"/02_구현/전체화면_스파이크/검증결과/근거문맥실제/한도_RED.xml" whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol

@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "cases": 744,
+  "subtests": {
+    "passed": 1362
+  },
+  "modules": 40,
+  "source_hashes": 118,
+  "source_current_matches": true,
+  "guard_denials": 0,
+  "missing_nodeids": 0,
+  "xml_failures_errors_skips": [
+    0,
+    0,
+    0
+  ],
+  "model_quality_verified": false,
+  "scope": "offline guards/real local rendering, not OS sandbox or real provider quality",
+  "evidence": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\전체회귀\\근거문맥실제_전체_01"
+}

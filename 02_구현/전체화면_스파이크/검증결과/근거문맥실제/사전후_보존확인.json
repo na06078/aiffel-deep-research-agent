@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "protected_files": 55,
+  "unchanged_physical_files": 54,
+  "approved_changed_ledger": [
+    "03_실행데이터/실제연구/호출예산.sqlite3"
+  ],
+  "old_data26_unchanged": true,
+  "historical209_unchanged": true,
+  "new_model_rows": 5,
+  "policy": [
+    [
+      1,
+      245,
+      2000000000,
+      27
+    ]
+  ],
+  "unknown_ids_unchanged": true,
+  "new_unknown": 0,
+  "note": "첫 전체55파일 물리불변 assert는 승인된 장부 변경을 제외하지 않았다. 승인된 정책/새5행과 기존209행/미정산ID 불변을 분리해 재확인했다."
+}

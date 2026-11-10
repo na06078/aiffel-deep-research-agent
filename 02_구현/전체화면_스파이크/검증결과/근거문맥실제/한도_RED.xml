@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.477" timestamp="2026-11-10T18:12:46.883487+09:00" hostname="z13flow"><testcase classname="검증.테스트_문맥사전점검" name="test_실제연구검사기는_승인한245회장부에서_조회검사경계까지_진입한다" time="0.190"><failure message="AssertionError: Regex pattern did not match.&#10;  Expected regex: '조회만 검사하려면 --run-id가 필요합니다'&#10;  Actual message: ''">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000027D14BBFB00&gt;
+tmp_path = WindowsPath('C:/Users/YH/AppData/Local/Temp/pytest-of-YH/pytest-2/test_실제연구검사기는_승인한245회장부에서_조회검사0')
+
+    def test_실제연구검사기는_승인한245회장부에서_조회검사경계까지_진입한다(monkeypatch, tmp_path):
+        import importlib
+        from types import SimpleNamespace
+    
+        monkeypatch.syspath_prepend(str(I / "검증"))
+        driver = importlib.import_module("보고서품질_실제연구검사")
+        monkeypatch.setattr(driver, "ROOT", tmp_path)
+        snapshot = {
+            "provider": "openai",
+            "mode": "research",
+            "budget": {"max_attempts": 245, "max_usd": 2, "unknown_count": 4},
+        }
+        monkeypatch.setattr(driver, "get", lambda *_args: snapshot)
+        args = SimpleNamespace(
+            base_url="http://127.0.0.1:8797",
+            data_dir=tmp_path / "03_실행데이터/보고서품질_근거문맥실제연구",
+            expected_unknown=4,
+            expected_max_attempts=245,
+            label="approved245",
+            submit=False,
+            run_id=None,
+        )
+        # 실제 제공자/브라우저를 시작하기 전의 다음 독립 guard까지 가야 한다.
+&gt;       with pytest.raises(AssertionError, match="조회만 검사하려면 --run-id가 필요합니다"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: '조회만 검사하려면 --run-id가 필요합니다'
+E         Actual message: ''
+
+검증\테스트_문맥사전점검.py:165: AssertionError</failure></testcase></testsuite></testsuites>

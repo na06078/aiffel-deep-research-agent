@@ -1,0 +1,54 @@
+{
+  "original_sha256": "efc2d02ceb92f032a6a43f4892bada1e29457c9f01e38a693b9bc78893c08c6e",
+  "model_requests_added": 0,
+  "original_unchanged": true,
+  "counterfactual_not_applied": true,
+  "records": [
+    {
+      "case": "original",
+      "passed": false,
+      "error_chain": [
+        {
+          "type": "ResearchContractError",
+          "message": "synthesize: invalid SVG profile"
+        },
+        {
+          "type": "SvgValidationError",
+          "message": "SVG 숫자 형식이 올바르지 않습니다."
+        }
+      ]
+    },
+    {
+      "case": "in_memory_quote_only",
+      "passed": false,
+      "error_chain": [
+        {
+          "type": "ResearchContractError",
+          "message": "synthesize: invalid SVG profile"
+        },
+        {
+          "type": "SvgValidationError",
+          "message": "SVG 숫자 형식이 올바르지 않습니다."
+        }
+      ]
+    },
+    {
+      "case": "in_memory_quote_and_numeric_only",
+      "passed": true
+    },
+    {
+      "case": "original_again",
+      "passed": false,
+      "error_chain": [
+        {
+          "type": "ResearchContractError",
+          "message": "synthesize: invalid SVG profile"
+        },
+        {
+          "type": "SvgValidationError",
+          "message": "SVG 숫자 형식이 올바르지 않습니다."
+        }
+      ]
+    }
+  ]
+}

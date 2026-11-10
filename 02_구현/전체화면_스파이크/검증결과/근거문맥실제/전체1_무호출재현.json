@@ -1,0 +1,51 @@
+{
+  "run_id": "8223bf5375374a978976442cf2380c5f",
+  "actual_model_requests": 20,
+  "raw_sha256": "e128380cd87ed10c8427134cbc12ceeb63f10f37ee2db94fb577002a77f74b13",
+  "read_source_ids": [
+    "갑신정변",
+    "갑오개혁",
+    "동학",
+    "동학 농민 혁명",
+    "임오군란",
+    "전봉준",
+    "청일 전쟁",
+    "흥선대원군"
+  ],
+  "columns": [
+    "주요 사건",
+    "전개·시기",
+    "확인된 원인",
+    "출처"
+  ],
+  "row_cell_counts": [
+    5,
+    4,
+    4
+  ],
+  "declared_sources": [
+    null,
+    null,
+    null
+  ],
+  "schema_was_sent": false,
+  "records": [
+    {
+      "case": "original",
+      "passed": false,
+      "message": "synthesize: invalid table cells"
+    },
+    {
+      "case": "in_memory_source_cells_join_only",
+      "passed": false,
+      "message": "synthesize: read source list required"
+    },
+    {
+      "case": "original_again",
+      "passed": false,
+      "message": "synthesize: invalid table cells"
+    }
+  ],
+  "counterfactual_applied": false,
+  "model_requests_added_by_replay": 0
+}

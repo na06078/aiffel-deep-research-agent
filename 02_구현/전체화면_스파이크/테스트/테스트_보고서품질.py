@@ -246,6 +246,23 @@ def test_시각자료없는_생략사유는_텍스트이며_원래조립호출�
     assert visual_markdown(value) == ["시각화 생략 사유: 근거 부족"]
 
 
+def test_종합프롬프트의_완성예시는_그대로_파싱되는_유효한SVG다():
+    import json
+    import xml.etree.ElementTree as ET
+
+    from 서버.교안연구 import synthesis_prompt
+
+    system, _ = synthesis_prompt("질문", "제목", [])
+    example = json.loads(system.split("JSON으로만: ", 1)[1])
+    assert len(example["표"]) == len(example["도식"]) == 1
+    code = example["도식"][0]["코드"]
+    # 원격 응답이 아닌 소스의 작은 고정 예시만 표준 XML 파서로 독립 대조한다.
+    svg = ET.fromstring(code)
+    assert [float(value) for value in svg.attrib["viewBox"].split()] == [0, 0, 600, 180]
+    assert "\\" not in code
+    assert parse_synthesis(json.dumps(example, ensure_ascii=False), {"자료 키"})["도식"]
+
+
 @pytest.mark.parametrize(
     "value",
     [

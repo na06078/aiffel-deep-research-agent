@@ -1,0 +1,19 @@
+{
+  "base_url": "http://127.0.0.1:8797",
+  "provider": "openai",
+  "mode": "research",
+  "budget": {
+    "attempt_count": 184,
+    "max_attempts": 245,
+    "remaining_attempts": 61,
+    "spent_usd": 0.3896735,
+    "reserved_usd": 0.1042923,
+    "max_usd": 2.0,
+    "input_tokens": 982886,
+    "output_tokens": 119960,
+    "unknown_count": 4
+  },
+  "runs": 0,
+  "queue": 0,
+  "source_mode": "local"
+}

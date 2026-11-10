@@ -221,6 +221,31 @@ def section_prompt(assignment, notes):
 def synthesis_prompt(question, title, sections):
     from 서버.보고서도식 import ELEMENTS
 
+    # 완성된 예시를 쓴다. viewBox=... 같은 축약은 유효한 SVG 문법이 아니다.
+    example = {
+        "머리말": "확인된 내용의 요약",
+        "맺음말": "확인된 범위와 한계",
+        "표": [
+            {
+                "제목": "비교",
+                "열": ["항목", "값"],
+                "행": [{"셀": ["항목", "확인된 값"], "출처": ["자료 키"]}],
+            }
+        ],
+        "도식": [
+            {
+                "제목": "확인된 관계",
+                "설명": "제공된 근거 안의 관계만 표시한다.",
+                "코드": (
+                    "<svg viewBox='0 0 600 180' font-family='Malgun Gothic'>"
+                    "<line x1='80' y1='90' x2='520' y2='90' stroke='#333333'/>"
+                    "<text x='80' y='60' font-size='24'>항목</text></svg>"
+                ),
+                "출처": ["자료 키"],
+            }
+        ],
+        "시각화생략사유": "",
+    }
     outline = "\n\n".join(
         f"{i + 1}. {s['title']}\n{s['본문']}\n[검증된 근거]\n{json.dumps(s['근거'], ensure_ascii=False)}"
         for i, s in enumerate(sections)
@@ -236,10 +261,11 @@ def synthesis_prompt(question, title, sections):
             "defs/marker/foreignObject/filter/id/class/role/aria 속성과 url(...) 참조도 금지다. "
             "속성의 숫자에는 px/% 단위를 붙이지 말고 색은 #RGB 또는 #RRGGBB로 써라. "
             "font-family를 쓰면 sans-serif 또는 Malgun Gothic 하나만 지정하라. "
+            "SVG 속성은 예시처럼 작은따옴표로 감싸고 좌표/크기에는 실제 정수·소수만 써라. "
+            "숫자 속성에 단어·설명·말줄임표를 쓰지 마라. 아래는 형식 예시이며 실제 값과 출처로 바꿔라. "
             "화살표는 line/path와 polygon으로 그리고, 가로 viewBox 600·font-size 24 이상을 권장한다. "
             "출처는 실제 읽은 자료 키만 쓰며 인과를 시간 순서로부터 만들지 마라. 근거가 없으면 표/도식을 생략하고 이유를 적어라.\n"
-            'JSON으로만: {"머리말":"...","맺음말":"...","표":[{"제목":"...","열":["항목","값"],"행":[{"셀":["...","..."],"출처":["자료 키"]}]}],'
-            '"도식":[{"제목":"...","설명":"...","코드":"<svg viewBox=...>...</svg>","출처":["자료 키"]}],"시각화생략사유":"..."}'
+            "JSON으로만: " + json.dumps(example, ensure_ascii=False)
         ),
         f"[질문] {question}\n[보고서 제목] {title}\n[절 목록]\n{outline}",
     )

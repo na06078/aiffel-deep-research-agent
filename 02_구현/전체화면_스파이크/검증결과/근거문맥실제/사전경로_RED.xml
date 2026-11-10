@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.895" timestamp="2026-11-10T19:44:35.920958+09:00" hostname="z13flow"><testcase classname="검증.테스트_문맥사전점검" name="test_허용캐시밖_사전파일은_읽기전에_거절한다" time="0.314"><failure message="AssertionError: 범위 밖의 JSON/인증 파일을 먼저 열고 나중에 거절하면 안 된다.&#10;assert [WindowsPath(...utside.json')] == []&#10;  &#10;  Left contains one more item: WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥실제/path_red/test_허용캐시밖_사전파일은_읽기전에_거절한다0/outside.json')&#10;  Use -v to get more diff">검증\테스트_문맥사전점검.py:205: in test_허용캐시밖_사전파일은_읽기전에_거절한다
+    assert reads == [], "범위 밖의 JSON/인증 파일을 먼저 열고 나중에 거절하면 안 된다."
+E   AssertionError: 범위 밖의 JSON/인증 파일을 먼저 열고 나중에 거절하면 안 된다.
+E   assert [WindowsPath(...utside.json')] == []
+E     
+E     Left contains one more item: WindowsPath('C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥실제/path_red/test_허용캐시밖_사전파일은_읽기전에_거절한다0/outside.json')
+E     Use -v to get more diff</failure></testcase></testsuite></testsuites>

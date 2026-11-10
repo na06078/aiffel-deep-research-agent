@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "before": [
+    [
+      1,
+      245,
+      2000000000,
+      27
+    ]
+  ],
+  "after": [
+    [
+      1,
+      10000,
+      20000000000,
+      27
+    ]
+  ],
+  "historical_rows_preserved": 214,
+  "all_history_sha256": "5c5e179f6d31fc8ced5b7c52e584ee8bf20d8e581e204dcc8c59255095ea32d8",
+  "unknown_ids_unchanged": true,
+  "unknown_count": 4,
+  "attempt_count": 187,
+  "remaining_attempts": 9813,
+  "new_requests_during_change": 0,
+  "scope": "project ledger attempt and estimated-cost ceilings only; not organization billing settings"
+}

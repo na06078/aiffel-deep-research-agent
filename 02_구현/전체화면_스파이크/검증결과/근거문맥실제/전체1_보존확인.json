@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "protected54_changed": [],
+  "old_data26_changed": [],
+  "original209_preserved": true,
+  "added_model_rows": 29,
+  "attempt_count": 211,
+  "policy": [
+    [
+      1,
+      10000,
+      20000000000,
+      27
+    ]
+  ],
+  "unknown_ids_unchanged": true,
+  "new_unknown": 0,
+  "full_run": "8223bf5375374a978976442cf2380c5f",
+  "full_run_status": "failed",
+  "full_requests": 20
+}

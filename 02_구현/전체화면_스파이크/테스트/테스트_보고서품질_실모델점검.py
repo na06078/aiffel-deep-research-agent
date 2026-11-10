@@ -208,6 +208,49 @@ class ModelDouble:
         self.closed = True
 
 
+def test_generated_inference_does_not_contaminate_source_fixed_controls(tmp_path):
+    expected = "임오군란은 1882년 7월 23일부터 8월 30일까지 이어진 조선 한성부에서 발발한 구식 군인의 폭동이다."
+    inference = "이후의 모든 갈등도 완전히 끝났다는 추가 해석이다."
+    model = ModelDouble()
+    model.section["본문"] = expected + " " + inference + " «임오군란»"
+    model.synthesis["맺음말"] += " " + inference
+    result = asyncio.run(probe.run_probe(model=model, work=tmp_path))
+    assert result["passed"], result
+    positive, negative = [json.loads(c["user"]) for c in model.calls[2:]]
+    assert inference not in positive["draft"], "generated inference contaminated known-positive"
+    assert inference not in negative["draft"]
+    assert positive["evidence"] == [
+        {
+            "section_id": "control-1",
+            "근거": [{"주장": expected, "출처": "임오군란", "인용문": expected}],
+        }
+    ]
+    assert negative["evidence"][0]["근거"] == [
+        {"주장": expected.replace("1882년", "1883년", 1), "출처": "임오군란", "인용문": expected}
+    ]
+    corpus, _ = probe.inputs()
+    provenance = {
+        "source_id": "임오군란",
+        "source_sha256": hashlib.sha256(corpus.docs["임오군란"].encode("utf-8")).hexdigest(),
+        "start": 0,
+        "end": 59,
+        "quote": expected,
+        "positive_claim": expected,
+        "negative_claim": expected.replace("1882년", "1883년", 1),
+    }
+    assert result["control_protocol"] == "canonical-source-date-v1"
+    assert result["control_source"] == provenance
+    assert result["generated_candidate_semantic_verified"] is False
+    controls = json.loads((tmp_path / "대조.json").read_text("utf-8"))
+    assert controls["control_source"] == provenance
+    assert controls["positive"] == positive["draft"]
+    assert controls["negative"] == negative["draft"]
+    assert positive["source_hashes"] == negative["source_hashes"]
+    generated = json.loads((tmp_path / "후보.json").read_text("utf-8"))
+    assert inference in generated["positive"] and "svg\n" in generated["positive"]
+    assert result["observed_attempts"] == result["completed_calls"] == 4 and model.closed
+
+
 def test_probe_metadata_rejects_reuse_of_nested_reference_protocol(tmp_path):
     result = asyncio.run(probe.run_probe(model=ModelDouble(), work=tmp_path))
     assert result["passed"] is True
@@ -378,6 +421,16 @@ def test_stops_without_retry_or_false_detection(index, reply, error, expected_ca
         encoding="utf-8"
     )
     assert len(model.calls) <= 4
+
+
+def test_negative_date_mention_without_date_contradiction_is_not_detection(tmp_path):
+    model = ModelDouble()
+    model.negative["문제"][0]["유형"] = "unsupported"
+    result = asyncio.run(probe.run_probe(model=model, work=tmp_path))
+    assert result["passed"] is False
+    assert result["error"] == "negative_date_not_identified"
+    assert result["negative_detected"] is False
+    assert result["observed_attempts"] == 4 and model.closed
 
 
 def test_positive_rejection_stops_before_negative(tmp_path):

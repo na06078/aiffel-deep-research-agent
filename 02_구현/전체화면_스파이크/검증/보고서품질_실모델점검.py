@@ -59,11 +59,49 @@ def inputs():
     return corpus, {"assignment": assignment, "notes": notes, "quote": quote}
 
 
+CONTROL_PROTOCOL = "canonical-source-date-v1"
+
+
+def control_cases(corpus):
+    """생성 결과와 무관하게 현재 실제 원문의 첫 문장으로만 대조를 만든다."""
+    source = corpus.docs["임오군란"]
+    quote = source.split(". ", 1)[0] + "."
+    if (
+        not source.startswith(quote)
+        or "1882년 7월 23일" not in quote
+        or not 10 <= len(quote) <= 400
+    ):
+        raise ValueError("canonical_date_source_changed")
+    negative_claim = quote.replace("1882년", "1883년", 1)
+    provenance = {
+        "source_id": "임오군란",
+        "source_sha256": digest(source.encode("utf-8")),
+        "start": 0,
+        "end": len(quote),
+        "quote": quote,
+        "positive_claim": quote,
+        "negative_claim": negative_claim,
+    }
+    cases = {}
+    for name, claim in (("positive", quote), ("negative", negative_claim)):
+        section = {
+            "section_id": "control-1",
+            "본문": claim + " «임오군란»",
+            "충분": True,
+            "부족": "",
+            "읽은문서": ["임오군란"],
+            "근거": [{"주장": claim, "출처": "임오군란", "인용문": quote}],
+        }
+        cases[name] = {"draft": "# 임오군란 날짜 대조\n\n" + section["본문"], "sections": [section]}
+    return provenance, cases, {"control-1": {"임오군란": source}}
+
+
 def manifest():
     paths = [
         CORPUS_PATH,
         ROOT / "📘 딥리서치 에이전트 기술 명세서.md",
         Path(__file__),
+        SPIKE / "검증/보고서품질_실제연구검사.py",
         SPIKE / "테스트/테스트_보고서품질_실모델점검.py",
         SPIKE / "검증/웹연구_초안프롬프트_실모델점검.py",
     ] + [
@@ -254,6 +292,8 @@ async def run_probe(*, model, work=WORK):
         "draft_schema_received": False,
         "review_protocol": "source-context-review-v1",
         "review_schema_cases": [],
+        "control_protocol": CONTROL_PROTOCOL,
+        "generated_candidate_semantic_verified": False,
     }
     attempts, receipts = [], []
     stage = "setup"
@@ -408,7 +448,25 @@ async def run_probe(*, model, work=WORK):
                 "evidence": [{"section_id": section["section_id"], "근거": section["근거"]}],
             },
         )
-        qualified_sources = {section["section_id"]: sources}
+        provenance, cases, qualified_sources = control_cases(corpus)
+        result["control_source"] = provenance
+        positive, negative = (cases[name]["draft"] for name in ("positive", "negative"))
+        sections = cases["positive"]["sections"]
+        negative_sections = cases["negative"]["sections"]
+        negative_visible = visible_markdown(negative)
+        save(
+            work,
+            "대조.json",
+            {
+                "control_protocol": CONTROL_PROTOCOL,
+                "control_source": provenance,
+                "generated_candidate_semantic_verified": False,
+                "positive": positive,
+                "negative": negative,
+                "sections": sections,
+                "negative_sections": negative_sections,
+            },
+        )
         positive_request = build_review_request(positive, sections, qualified_sources)
         verdict = parse_review(
             await call(
@@ -423,24 +481,7 @@ async def run_probe(*, model, work=WORK):
         )
         if verdict["통과"] is not True:
             raise ProbeError("positive_rejected")
-        # 반례의 본문과 주장 메타데이터를 함께 바꾸되 실제 원문/인용구는1882년으로 유지한다.
-        # 정적 구조 오류가 아니라 의미 검토자가 가시 연도 불일치를 판별하는 경계를 시험한다.
-        negative_sections = json.loads(json.dumps(sections, ensure_ascii=False))
-        negative_sections[0]["본문"] = negative_body
-        visible_section = visible_markdown(section["본문"])
-        date_position = visible_section.find("1882년")
-        changed_claims = 0
-        for item in negative_sections[0]["근거"]:
-            claim = item["주장"]
-            claim_position = visible_section.find(claim)
-            if claim_position >= 0 and claim_position <= date_position < claim_position + len(
-                claim
-            ):
-                at = date_position - claim_position
-                item["주장"] = claim[:at] + "1883년" + claim[at + len("1882년") :]
-                changed_claims += 1
-        if not changed_claims:
-            raise ProbeError("date_claim_mutation_failed")
+        # 음성의 본문/주장만 1883년이며 원문과 선택 인용은 양성과 동일하다.
         negative_request = build_review_request(negative, negative_sections, qualified_sources)
         verdict = parse_review(
             await call(
@@ -457,7 +498,8 @@ async def run_probe(*, model, work=WORK):
             raise ProbeError("negative_accepted")
         # 단순 fail-closed/다른 지적을 날짜 검출 성공으로 계산하지 않는다.
         if not any(
-            "1883년" in p["본문발췌"]
+            p["유형"] == "contradiction"
+            and "1883년" in p["본문발췌"]
             and p["본문발췌"] in negative_visible
             and "임오군란" in p["출처"]
             for p in verdict["문제"]

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.101" timestamp="2026-11-10T18:25:08.728256+09:00" hostname="z13flow"><testcase classname="테스트.테스트_보고서품질" name="test_종합프롬프트의_완성예시는_그대로_파싱되는_유효한SVG다" time="0.001"><failure message="xml.etree.ElementTree.ParseError: not well-formed (invalid token): line 1, column 13">def test_종합프롬프트의_완성예시는_그대로_파싱되는_유효한SVG다():
+        import json
+        import xml.etree.ElementTree as ET
+    
+        from 서버.교안연구 import synthesis_prompt
+    
+        system, _ = synthesis_prompt("질문", "제목", [])
+        example = json.loads(system.split("JSON으로만: ", 1)[1])
+        assert len(example["표"]) == len(example["도식"]) == 1
+        code = example["도식"][0]["코드"]
+        # 문법 유효성과 실제 숫자 좌표는 XML 표준 파서로도 독립 대조한다.
+&gt;       svg = ET.fromstring(code)
+              ^^^^^^^^^^^^^^^^^^^
+
+테스트\테스트_보고서품질.py:260: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+text = '&lt;svg viewBox=...&gt;...&lt;/svg&gt;'
+parser = &lt;xml.etree.ElementTree.XMLParser object at 0x000002FA92ED5300&gt;
+
+    def XML(text, parser=None):
+        """Parse XML document from string constant.
+    
+        This function can be used to embed "XML Literals" in Python code.
+    
+        *text* is a string containing XML data, *parser* is an
+        optional parser instance, defaulting to the standard XMLParser.
+    
+        Returns an Element instance.
+    
+        """
+        if not parser:
+            parser = XMLParser(target=TreeBuilder())
+&gt;       parser.feed(text)
+E       xml.etree.ElementTree.ParseError: not well-formed (invalid token): line 1, column 13
+
+C:\Users\YH\AppData\Local\Programs\Python\Python312\Lib\xml\etree\ElementTree.py:1335: ParseError</failure></testcase></testsuite></testsuites>
