@@ -1,0 +1,136 @@
+{
+  "passed": true,
+  "standards": {
+    "status": "pass",
+    "sources": [
+      {"path": "Aiffel_Work/AGENTS.md", "rule": "승인된 경로와 부작용 범위를 지키고 실행·검증·리뷰 상태를 구분한다.", "qualification": "위임 문맥에 제공된 지침"},
+      {"path": "PRODUCT.md:23,30-35,43-46", "rule": "기술 명세·진행 현황이 정본이며 필수 품질 불합격은 보존·일시정지한다. 대역과 실제 제공자의 증거를 구별한다."},
+      {"path": "02_구현/전체화면_스파이크/pyproject.toml:1-11", "rule": "한국어 테스트 파일 규칙, line-length100/py312. 이번에는 실행 린트 판정하지 않는다."},
+      {"path": "📋 진행 현황.md:7-19", "rule": "실제 모델·검색·장부·운영 적용 제외, 입력 상한 보완 뒤 별도 검토. 이전 검증을 마지막 소스 검증으로 확대하지 않는다."}
+    ],
+    "findings": [],
+    "assessment": "승인된 입력 상한 보완 및 직접 소비 경로에서 저장소 규칙 위반을 발견하지 못했다. 변경 책임이 검토 요청 조립과 회귀에 한정되며 추가 모델·검색·자동 반복은 도입하지 않았다. 보고서만 생성했고 소스·기존 최종 검토·문서는 수정하지 않았다."
+  },
+  "spec": {
+    "status": "pass",
+    "sources": [
+      {"path": "📘 딥리서치 에이전트 기술 명세서.md:1171-1175", "sentence": "기존 인용/원고는 조용히 자르지 않고 추가 문맥만 제한한다. 최종 system/user/schema+8192가272000 이하여야 한다. 원래 입력 초과는 거절하고 선택적 문맥 때문에만 넘으면 들어가는 최대 우선순위 접두부를 이분 탐색한다."},
+      {"path": "📘 딥리서치 에이전트 기술 명세서.md:1179-1184", "sentence": "strict schema를 실제 complete/SDK 요청과 저장 저널로 전달한다. 선택 누락도 자동 게시하지 않는다. revision당 pending/완료 응답 재사용·동시 호출 방지와 조회 무호출을 유지한다."}
+    ],
+    "findings": [],
+    "checks": [
+      {
+        "contract": "기술 명세:1173-1174 — 최대 우선순위 접두부와 최종 바이트 상한",
+        "producer": "서버/검토문맥.py:156-161,230-254",
+        "consumer": "서버/실제연구제어.py:1043-1074; 서버/실제모델.py:201-209",
+        "assessment": "전체 chosen이 맞는 경우 먼저 반환한다. 전체가 안 맞는 경우 탐색 대상 길이0..len(chosen)-1이므로 마지막 가능한 길이를 빠뜨리지 않는다. fits일 때 middle+1, 초과일 때 middle-1로 이동하고 best를 보존한다. 빈 chosen은 complete가 original_only와 같아 앞에서 반환/거절된다. 최대 접두부는 기존192개/96000바이트 선별 정책으로 정해진 chosen 내부의 최대이며 전체 후보를 다시 최적화한다는 뜻이 아니다."
+      },
+      {
+        "contract": "기술 명세:1173-1174 — 재조립 뒤 바이트/문자/제외 수·id·토큰 일치",
+        "producer": "서버/검토문맥.py:176-228",
+        "consumer": "서버/검토문맥.py:274-288,304-323,340-348; 서버/실제모델.py:136-149,201-205,227-240",
+        "assessment": "추가 항목마다 JSON 항목·id enum의 양의 바이트가 늘고 기존 id는 접두부 길이와 무관하게 고정된다. 토큰은 고정64자리, scope selected/additional_bytes/provided_characters는 비감소이며 omitted 숫자 자릿수 감소보다 추가 항목이 충분히 크므로 경계 함수가 단조 증가한다. _json과 SDK 직전 json.dumps는 둘 다 ensure_ascii=False/allow_nan=False와 기본 구분자를 사용한다. sort_keys 유무는 키 순서만 바꾸므로 길이가 같다. 8192는 실제 공통 예약 proxy 가산량이며 완성 HTTP wire 전체 바이트나 실제 tokenizer의 증명이 아니다."
+      },
+      {
+        "contract": "기술 명세:1171,1174 — 분리 사본/불변 결합과 필수 원문 보존",
+        "producer": "서버/검토문맥.py:77-103,105-137,162-163,176-179,228-241",
+        "consumer": "서버/실제연구제어.py:1069-1079; 테스트/테스트_검토문맥.py:38-55,226-231",
+        "assessment": "sections는 JSON 사본, sources는 절별 dict 사본과 불변 문자열이다. trial은 내부 context dict에 id를 쓰지만 동일 접두부의 번호가 언제나 같고 ReviewRequest는 이미 직렬화된 문자열만 보유하므로 뒤 trial이 best나 기존 반환 요청을 변조하지 않는다. 정확 인용의 중복 위치를 모두 필수로 보존하고 필수-only가 초과하면 추가 문맥 축소로 숨기지 않는다."
+      },
+      {
+        "contract": "기술 명세:1171-1172,1175 — 같은 절의 실제 읽기·원문 버전과 웹 prefix 자격",
+        "producer": "서버/보고서근거.py:220-227,260-324; 서버/웹연구.py:252-321,537-552; 서버/실제연구제어.py:954-965",
+        "consumer": "서버/실제연구제어.py:1020-1034,1045-1047,1076-1086; 서버/검토문맥.py:77-87,114-137,274-283",
+        "assessment": "축소 대상도 원문 slice에서만 생산된다. 웹은 같은 run/revision/section·완료 read_one actor·URL·읽힌 본문/메모 해시·fetch receipt를 재검증하고 text[:20000]만 공급한다. 응답 뒤 동일 자격을 다시 조회하고 파서가 해시/slice를 검사한다. 로컬은 실제 호출자가 제공하는 읽은문서 목록과 corpus 스냅샷에 의존하며 임의 공개 함수 입력만으로 독립 읽기 영수증이 생기는 것은 아니다. 이 신뢰 경계는 보완 전과 같다."
+      },
+      {
+        "contract": "기술 명세:1179,1183-1184 — strict schema, 정상1호출, 같은 revision 재사용 및 모든 미통과 차단",
+        "producer": "서버/실제연구제어.py:434-494,530-595,1041-1096; 서버/검토문맥.py:165-173,284-348",
+        "consumer": "서버/실제모델.py:201-209,227-254; 서버/실제연구제어.py:192-206,240-253,1108-1133; 서버/보고서보완.py:96-107,158-198",
+        "assessment": "assemble/fits는 순수 연산이며 모델을 호출하지 않는다. evaluate가 트랜잭션 안에 pending을 먼저 저장하고 동시 같은 revision은 반환한다. 완료 raw는 결정론적으로 다시 만든 동일 요청 토큰으로만 파싱하며 실패 시 재호출 없이 차단한다. schema는 공통 complete의 예약 전 검사→저널→실제 complete→SDK strict:true로 이어진다. unsupported/citation_gap/undetermined가 통과로 바뀌지 않고 새 계약 보완은 contradiction만 허용한다. 축소 patch에 조회 진입점이나 자동 재검토 경로는 없다. 이번에 GET/UI 경로를 새로 실행하거나 전체 조회 구현을 재감사한 것은 아니다."
+      },
+      {
+        "contract": "기술 명세:1179,1191 — 사전 검사와 실제 연구 진입의 schema/영수증 검증",
+        "producer": "검증/보고서품질_실모델점검.py:261-337,411-423,444-449",
+        "consumer": "검증/보고서품질_실제연구검사.py:58-100; 검증/테스트_문맥사전점검.py:64-78,105-139; 테스트/테스트_검토문맥연결.py:143-218",
+        "assessment": "사전 경계도 같은 prompt+직렬화schema+8192를 검사하고 schema/inputs를 기록한다. 실제 연구 진입은 v3/문맥 protocol 및 두 schema case, 소스 해시, 영수증4건을 요구한다. 읽은 테스트는 연결 의도의 보조 근거일 뿐 새 실행 성공이나 실제 모델 판별력 증거로 집계하지 않았다."
+      }
+    ]
+  },
+  "security_concerns": [],
+  "logic_errors": [],
+  "suggestions": [
+    {
+      "id": "S-RESIZE-01",
+      "priority": "P3",
+      "classification": "비차단 회귀 정밀화; 확정 오류 아님",
+      "spec_sentence": "기술 명세:1174 — 들어가는 최대 우선순위 접두부를 이분 탐색하고 요청 토큰·id enum·제공량을 다시 결합한다.",
+      "producer": "서버/검토문맥.py:176-254",
+      "consumer": "검증/테스트_문맥사전점검.py:105-139; 서버/실제모델.py:201-209",
+      "condition": "이후 schema/metadata/id 정책이나 탐색 분기가 바뀌는 경우",
+      "impact": "현재 추가 회귀는 들어가는 요청과 필수 보존은 확인하지만 바로 다음 접두부가 초과하는지, 0/1개 길이·전체 적합·정확272000/272001·중복 인용 포함 재축소에서 최대성까지 직접 고정하지 않는다. 이번 독립 합성 probe에서는 확인했지만 저장된 정식 테스트에 모두 들어간 것은 아니다.",
+      "minimal_fix": "추후 테스트 승인 시 SDK 직전과 같은 크기 계산으로 선택 길이와 다음 길이를 비교하고 토큰/enum/scope 및 입력 사본 불변을 함께 assertion한다. 새 모델 호출이나 운영 변경은 필요 없다."
+    }
+  ],
+  "synthetic_probe": {
+    "execution": "기존 프로젝트 .venv/Scripts/python.exe -I -B -c, stdlib만 사용, 종료코드0",
+    "method": "실제 파일의 AST에서 원문구간 함수와 검토문맥 순수 정의만 메모리에 컴파일했다. 프로젝트 import/실제 런타임 생성자를 실행하지 않았고 _visible만 합성 평문 identity로 대체했다. assemble/선별 결과를 관측용으로 노출해 모든 접두부를 열거하여 반환값과 비교했다.",
+    "results": [
+      {"width": 0, "selected": 104, "preselected": 104, "bytes": 108860, "essential_bytes": 13754, "next_bytes": null},
+      {"width": 14500, "selected": 92, "preselected": 104, "bytes": 271861, "essential_bytes": 187754, "next_bytes": 272776},
+      {"width": 16000, "selected": 72, "preselected": 104, "bytes": 271561, "essential_bytes": 205754, "next_bytes": 272476},
+      {"width": 17000, "selected": 59, "preselected": 104, "bytes": 271666, "essential_bytes": 217754, "next_bytes": 272581},
+      {"width": 50000, "result": "review request: input_too_large", "input_preserved": true},
+      {"width": 16000, "duplicate_quote_locations": true, "original_quote_items": 8, "selected": 71, "preselected": 104, "bytes": 271830, "essential_bytes": 206898, "next_bytes": 272745}
+    ],
+    "assertions": "적합5조건 각각 모든 접두부의 크기 엄격 증가·최대 접두부·원고/원인용/입력 보존·동일 입력 재요청 일치·token 재해시·id enum·scope 문자/바이트 일치를 확인했다. 별도 필수-only272000 수용/272001 거절을 확인했다.",
+    "harness_issue": "최초 경계 fixture가 draft와 visible_text의 이중 직렬화를 놓쳐 input_too_large로 종료1이었다. 생산 오류로 집계하지 않고 padding을 이중 크기에 맞춰 수정한 뒤 동일 순수 probe 전체가 종료0으로 완료됐다. 외부 실행이나 파일 수정은 없었다."
+  },
+  "covered_paths": [
+    {"path": "서버/검토문맥.py", "coverage": "1-352 전체 정적; AST 합성 probe는 _visible 제외"},
+    {"path": "서버/실제모델.py", "coverage": "1-341 전체 정적; 생성자/SDK 실행 안 함"},
+    {"path": "서버/실제연구제어.py", "coverage": "170-269,434-639,950-1133 직접 생산/소비 경로 정적"},
+    {"path": "서버/보고서근거.py", "coverage": "1-324 전체 정적"},
+    {"path": "서버/원문구간.py", "coverage": "1-34 전체 정적 및 순수 AST 합성 실행"},
+    {"path": "서버/보고서품질.py", "coverage": "1-206 전체 정적"},
+    {"path": "서버/웹연구.py", "coverage": "245-364,520-576 자격·prefix·원문 조립 경로 정적"},
+    {"path": "서버/보고서보완.py", "coverage": "90-249 준비·대상 범위 정적"},
+    {"path": "검증/보고서품질_실모델점검.py", "coverage": "1-70,250-449 예산·schema·실제 소비 경로 정적"},
+    {"path": "검증/보고서품질_실제연구검사.py", "coverage": "1-149 preflight 수용·실호출 분리 경로 정적"},
+    {"path": "검증/테스트_문맥사전점검.py", "coverage": "1-139 전체 정적; pytest 실행 안 함"},
+    {"path": "테스트/테스트_검토문맥.py", "coverage": "1-278 전체 정적; 코퍼스 열람/pytest 실행 안 함"},
+    {"path": "테스트/테스트_검토문맥연결.py", "coverage": "1-218 전체 정적; SDK 대역 실행 안 함"},
+    {"path": "pyproject.toml", "coverage": "1-11 전체 정적"},
+    {"path": "../../📘 딥리서치 에이전트 기술 명세서.md", "coverage": "1150-1192 관련 계약"},
+    {"path": "../../PRODUCT.md", "coverage": "1-46 전체"},
+    {"path": "../../📋 진행 현황.md", "coverage": "1-30 승인·보완 기준"},
+    {"path": "검증결과/근거문맥/독립최종검토.json", "coverage": "1-372 기준과 기존 한계 비교; 통과 자체를 증거로 재사용하지 않음"}
+  ],
+  "source_hashes": {
+    "서버/검토문맥.py": "05739d1d7d0d01d10475fdc179d344a5e1fabe20b1358ae7363afe03b79424ec",
+    "서버/실제모델.py": "80ae3bfda7725342699acc38b0455f8bed8b72e5494a8f760501543ee53ff766",
+    "서버/실제연구제어.py": "338a3887e1662990e6705fcb711423fe643ad74554dc8f56d8e2fba757303213",
+    "서버/보고서근거.py": "6147b7efcb875e7d1ddd1cdf4f03be1a4eb4ae20d8da64c8ef416bc7e9b795ed",
+    "서버/원문구간.py": "b88839050ede1b3f598496773ea0a7caa711916ed9f28da57bc3158275323ae8",
+    "서버/보고서품질.py": "3887496cbce8332eaf38624c45f4f1825faae38d040083e7aa5df29236885790",
+    "서버/웹연구.py": "c76295547bd79b189876e59214098b3c84b67552b81d079e9b45def15ddc84e8",
+    "서버/보고서보완.py": "8ee5e833b267be4cc3efec4efc064ee6f35bb1539e34a51aaaee32fafcab5851",
+    "검증/보고서품질_실모델점검.py": "6435b0428e417ab45b46d0500f0de9dabbc48d03082dec597adbc95d7bdbe150",
+    "검증/보고서품질_실제연구검사.py": "5472aef2e0738130d8313989d3905df7bbbcc12c7ae1ec21b38ddb40a6136947",
+    "검증/테스트_문맥사전점검.py": "f744eb83e01c49f723a9d87920437aaca46c927d66c594f8b1708dadf824103d",
+    "테스트/테스트_검토문맥.py": "d0024842a0da8ed4db51afb6b1cb600dd1cb902f5e8fd4dff3ee624c93804d64",
+    "테스트/테스트_검토문맥연결.py": "445622334c11806dbc9ee1c6f83d3c92a60ad527f712a3c768a39f9315f682cb",
+    "pyproject.toml": "b64675b70e30f366ba7923cd43560dfcb910f23ab468158cb8c65df40719ee98",
+    "../../📘 딥리서치 에이전트 기술 명세서.md": "3b02e08328d15aa0bc787c56cc1632a38e65c830bee2ad70738f103ad6c5598e"
+  },
+  "limits": [
+    "검토 범위는 post-review 입력 상한 patch와 명시된 직접 호출/SDK/reuse 계약이다. 전체 앱 재검토·전체 회귀·실제 SDK 전송 검증을 뜻하지 않는다. 기존 pass와27개 통과를 독립 판정 근거로 집계하지 않았다.",
+    "프로젝트 소스/문서 읽기와 기존 프로젝트 Python의 메모리 AST/JSON/해시 계산만 수행했다. 프로젝트 모듈 import, 테스트·빌드·앱·서버·네트워크·실제 모델·검색·설치·Git 명령 및 쓰기, .env/인증값/장부 열람은 하지 않았다. 생성 파일은 이 보고서 하나다.",
+    "소스 해시는 읽은 시점의 전체 파일 지문이며 covered_paths의 부분 정적 검토를 전체 파일 검토로 확대하지 않는다. Git 상태나 부모의 동결 선언을 독립 Git 조회로 확인하지 않았다.",
+    "합성 probe는 평문 가시 투영 대역을 사용하므로 실제 Markdown/SVG 투영의 바이트를 실행한 결과가 아니다. 투영은 기존 함수 그대로이며 이번 변경은 계산을 trial 밖으로 이동해 재사용한다. 실제 모델의 지지 판단·제공되지 않은 원문·복합 주장 의미 정확성은 미평가다.",
+    "동일 인용이 극단적으로 반복되면 필수 위치만으로도 초과해 거절하는 정책은 보존된 명시 한계이지 새 결함이 아니다. 추가 문맥 축소로 탐지 범위가 작아질 수 있음도 scope/incomplete와 안내로 드러내는 승인된 한계다. 문맥 확대 자체를 unsupported/citation_gap 해제 근거로 삼지 않는다.",
+    "raw 재사용은 같은 revision뿐 아니라 같은 입력/원문/결정론적 선택 토큰이 재현될 때만 유효하다. 배포 중 알고리즘이나 원문이 바뀌어 토큰이 달라지면 기존 raw를 차단하며 자동 재호출하지 않는다. 프로토콜 마이그레이션이나 다중 서버·수동 DB 변조의 완전 보장을 주장하지 않는다.",
+    "원본 데이터·이전 보고서·운영dist·장부를 직접 읽어 보존 여부를 재검증하지 않았다. 그 보존 검증과 최종 수용·수정·커밋은 부모 소유다."
+  ],
+  "summary": "Standards/Spec 모두 한정 범위 통과. 최대 접두부·단조 바이트 계산·trial 불변 결합·필수 인용 보존과 실제 caller/SDK/reuse 연결에서 새 확정 오류를 찾지 못했다. 순수 독립 probe로 최대성/정확 경계를 반증 시도했으며 정식 경계 회귀 보강1건은 비차단 제안이다. 실제 모델 판단·전체 앱 수용·운영 적용은 판정하지 않았다."
+}

@@ -1,0 +1,21 @@
+{
+  "scope": "기술29.12/Q-09/A-30 근거 문맥 개선의 승인된 구현·격리 검증 단위",
+  "implementation_verification_passed": true,
+  "whole_product_complete": false,
+  "real_model_full_run_success": false,
+  "actual_provider_requests_added": 0,
+  "operating_applied": false,
+  "verification": {
+    "python": {"testcases":738,"successful_subtests":1362,"modules":40,"failures":0,"errors":0,"skipped":0,"source_hashes":118,"source_drift":0,"proof":"메인_전체최종인수.json"},
+    "frontend": {"tests":250,"files":26,"typecheck_exit_code":0,"proof":"화면_전체_최종.json"},
+    "actual_local_app": {"normal_checks":42,"blocked_checks":149,"blocked_types":5,"provider":"explicit external model double only","source_hashes_checked":[39,29],"drift":0,"md_html_pdf_reopened":true,"final_screens_visually_checked":true,"proof":"메인_앱최종인수.json"},
+    "stored_failure_replay": {"checks":20,"proof":"저장실패_재생/341d892883bd43ec8da3d17e44450fef/확인.json","model_judgment_tested":false},
+    "input_budget": {"targeted_green_tests":27,"essential_quotes_and_draft_preserved":true,"proof":"입력상한_보완.json"},
+    "independent_reviews": {"base":"독립최종검토.json","supplement":"입력상한_독립보완검토.json","standards":"pass","spec":"pass","required_security_or_logic_findings":0}
+  },
+  "preservation": {"protected_files":55,"ledger_rows":209,"count_since_reset":182,"max_attempts":208,"remaining_attempts":26,"unsettled":4,"unsettled_ids_unchanged":true,"installed_dist_unchanged":true,"operating_8768_not_started":true,"owned_8796_8799_closed":true,"proof":"보존_최종.json"},
+  "principles": ["원고·원래 인용은 자르거나 자동 수정하지 않음","제공되지 않은 원문의 부재를 사실 부재로 단정하지 않음","선택 누락·모순·출처 충돌/문맥 부족을 구별하고 모든 미합격은 차단","최종 의미 검토1호출 유지·새로고침/리플레이 무재호출","후속 인용 재연결이나 새 실제 연구를 자동 접수하지 않음"],
+  "known_limits": ["구두점 기반 분할/단어 관련성은 휴리스틱","SVG 가시 투영은 전체 픽셀/가림 계산이 아님","극단적으로 반복되는 필수 인용 위치만으로 초과하면 전송 전 차단","현재 실제 Luna 작성·판별력과 새 전체 연구 합격은 미검증","기존 서버/앱.py의 원래 서식 경고는 HEAD와 같아 범위 밖 수정하지 않음"],
+  "deferred": ["실제 모델 검증의 범위·호출 한도 선택","운영 서버 기동/설치 화면 적용","단일/멀티·폭/깊이·소거 비교 실험","기존 큐 복구의 나머지 조작","비차단 관측성·정밀 경계 회귀 제안"],
+  "local_record": {"decision":"기존 승인된 main 로컬 커밋 사용","exact_result_reference":".cache/근거문맥_커밋확인.json 및 실제 Git 조회","remote_push_tag":false}
+}

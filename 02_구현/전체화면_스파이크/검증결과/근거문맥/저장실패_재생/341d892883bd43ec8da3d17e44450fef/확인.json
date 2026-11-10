@@ -1,0 +1,113 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "original r1/r2 remain blocked without final report",
+      "passed": true
+    },
+    {
+      "name": "r1: real qualified input keeps exact context slices",
+      "passed": true
+    },
+    {
+      "name": "r1: actual serialized request is bounded",
+      "passed": true
+    },
+    {
+      "name": "r1: historical verdict still readable by legacy parser",
+      "passed": true
+    },
+    {
+      "name": "r1: old boolean-only response rejected at new boundary",
+      "passed": true
+    },
+    {
+      "name": "r2: real qualified input keeps exact context slices",
+      "passed": true
+    },
+    {
+      "name": "r2: actual serialized request is bounded",
+      "passed": true
+    },
+    {
+      "name": "r2: historical verdict still readable by legacy parser",
+      "passed": true
+    },
+    {
+      "name": "r2: old boolean-only response rejected at new boundary",
+      "passed": true
+    },
+    {
+      "name": "만석보: omitted support is actually offered as original context",
+      "passed": true,
+      "offered_contexts": 150,
+      "matching_ids": [
+        56
+      ]
+    },
+    {
+      "name": "만석보: citation gap remains blocked with bound support",
+      "passed": true
+    },
+    {
+      "name": "만석보: reject forged request",
+      "passed": true,
+      "error": "review: request mismatch"
+    },
+    {
+      "name": "만석보: reject forged source",
+      "passed": true,
+      "error": "review: source version changed"
+    },
+    {
+      "name": "만석보: reject forged excerpt",
+      "passed": true,
+      "error": "review: excerpt not visible"
+    },
+    {
+      "name": "강화조건: omitted support is actually offered as original context",
+      "passed": true,
+      "offered_contexts": 149,
+      "matching_ids": [
+        57
+      ]
+    },
+    {
+      "name": "강화조건: citation gap remains blocked with bound support",
+      "passed": true
+    },
+    {
+      "name": "강화조건: reject forged request",
+      "passed": true,
+      "error": "review: request mismatch"
+    },
+    {
+      "name": "강화조건: reject forged source",
+      "passed": true,
+      "error": "review: source version changed"
+    },
+    {
+      "name": "강화조건: reject forged excerpt",
+      "passed": true,
+      "error": "review: excerpt not visible"
+    },
+    {
+      "name": "chronology and mixed-event original objections are preserved",
+      "passed": true
+    }
+  ],
+  "actual_provider_requests": 0,
+  "injected_decisions_not_model_judgment": true,
+  "scope": "stored original input through current pure request/parser only; no database writes or publication",
+  "unverified": [
+    "Luna 의미 판별력",
+    "원문 밖 역사적 진실",
+    "새 전체 실제 연구 성공"
+  ],
+  "original_hashes_unchanged": true,
+  "original_sha256": {
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\03_실행데이터\\보고서품질_평면실제연구\\실행기록.sqlite3": "d42b89db59a32b8f6d9120dba656ca84b0a8ae317958b3a5977eb04dd8a6168e",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\01_참고자료\\원본데이터\\corpus.json": "583dbf10ee811796c80302e005bef71812476059dc79c3b5dd2fd3ea251e4ec7"
+  },
+  "checked": 20
+}

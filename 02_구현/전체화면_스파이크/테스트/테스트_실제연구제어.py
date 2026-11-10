@@ -270,8 +270,12 @@ class ScriptedModel:
                 "시각화생략사유": "이 대역은 시각 요약을 만들지 않는다.",
             }
         elif operation == "semantic_review":
+            catalog = json.loads(user)
+            assert response_schema["properties"]["검토목록ID"]["enum"] == [catalog["review_set_id"]]
+            assert catalog["contexts"] and catalog["source_hashes"]
             value = {
-                "통과": True,
+                "검토목록ID": catalog["review_set_id"],
+                "판정": "supported",
                 "문제": [],
                 "검토요약": "명시적 대역 판정이며 실제 의미 판별 검증 아님",
             }
@@ -367,7 +371,7 @@ async def test_실제6노드_Send병렬_부족절만2라운드_원고보존과_�
         assert all(body in synth[1] for body in model.bodies.values())
         reviews = [c for c in model.calls if c[2]["operation"] == "semantic_review"]
         assert len(reviews) == 1
-        assert report["markdown"] in reviews[0][1]
+        assert report["markdown"] == json.loads(reviews[0][1])["draft"]
         assert run["quality"]["semantic_review"]["통과"] is True
         semantic_started = [
             e
@@ -569,19 +573,20 @@ async def test_신규종합은_누락스키마와_미독시각출처를_거부�
 async def test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음(data_dir, decision):
     def reject(response):
         obj = {
-            "통과": False,
+            "검토목록ID": json.loads(response["content"])["검토목록ID"],
+            "판정": "needs_revision",
             "문제": [
                 {
-                    "유형": "날짜/귀속",
+                    "유형": "unsupported",
                     "설명": "시험용 오류",
                     "본문발췌": "자료에 근거한 연구 대역 문장",
-                    "출처": [model.titles[0]],
+                    "근거번호": [],
                 }
             ],
             "검토요약": "명시적 음성 대역",
         }
         if decision == "contradiction":
-            obj["통과"] = True
+            obj["판정"] = "supported"
         elif decision == "missing":
             obj.pop("문제")
         return {

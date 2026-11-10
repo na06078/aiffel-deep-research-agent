@@ -114,3 +114,74 @@ it('사유 문구의 마크업은 이스케이프된다',()=>{
  const html=renderToStaticMarkup(<RunFailureNotice run={{status:'failed',failure:{...failure,message:'<script>x</script>'}}}/>);
  expect(html).not.toContain('<script>');expect(html).toContain('&lt;script&gt;');
 });
+
+it('새 문맥 검토의 근거 선택 누락에는 주장만 고치는 보완 버튼을 제공하지 않는다',()=>{
+ const run={...eligible,quality:{...eligible.quality,semantic_review:{
+  ...eligible.quality.semantic_review,검토계약:'source-context-review-v1',검토목록ID:'request-A',판정:'needs_revision' as const,
+  문제:[{유형:'citation_gap',설명:'같은 읽은 원문 다른 문단에 근거가 있습니다.',본문발췌:'기존 주장',출처:['원문']}],
+ }}};
+ const html=renderToStaticMarkup(<RunFailureNotice run={run} readOnly={false}/>);
+ expect(html).not.toContain('data-testid="run-correction"');
+});
+
+it('근거 선택 누락은 사실 오류가 아니라 인용 재연결이 필요한 상태로 설명한다',()=>{
+ const run={...eligible,quality:{...eligible.quality,semantic_review:{
+  ...eligible.quality.semantic_review,검토계약:'source-context-review-v1',판정:'needs_revision' as const,
+  문제:[{유형:'citation_gap',설명:'다른 문단에 지지 내용이 있습니다.',본문발췌:'기존 주장',출처:['원문']}],
+ }}};
+ const html=renderToStaticMarkup(<RunFailureNotice run={run} readOnly={false}/>);
+ expect(html).toContain('근거 선택 누락');
+ expect(html).toContain('인용 재연결');
+ expect(html).not.toContain('사실 오류가 확정');
+});
+
+it.each(['source_conflict','insufficient_context'])('새 문맥 판정 %s는 판정 불가와 내용 오류 미확정을 명시한다',type=>{
+ const fetcher=vi.fn();vi.stubGlobal('fetch',fetcher);
+ const run={...eligible,quality:{...eligible.quality,semantic_review:{
+  ...eligible.quality.semantic_review,검토계약:'source-context-review-v1',판정:'undetermined' as const,
+  문제:[{유형:type,설명:'현재 제공된 자료로 확정할 수 없습니다.',본문발췌:'기존 주장',출처:['원문']}],
+ }}};
+ const html=markup(draw(run));
+ expect(html).toContain('판정 불가');
+ expect(html).toContain('내용 오류가 확정된 것은 아닙니다');
+ expect(html).not.toContain('data-testid="run-correction"');
+ expect(fetcher).not.toHaveBeenCalled();
+});
+
+it('대조한 원문 문맥은 위치·출처와 함께 접어서 보존하고 열람으로 POST하지 않는다',()=>{
+ const fetcher=vi.fn();vi.stubGlobal('fetch',fetcher);
+ const run={...eligible,quality:{...eligible.quality,semantic_review:{
+  ...eligible.quality.semantic_review,검토계약:'source-context-review-v1',판정:'needs_revision' as const,
+  문제:[{유형:'citation_gap',설명:'선택 인용 밖에 지지 기록이 있습니다.',본문발췌:'기존 주장',출처:['원문'],근거문맥:[
+   {id:2,section_id:'section-1',source_id:'원문',source_hash:'a'.repeat(64),start:10,end:29,text:'원문 <script>내용</script>\n다음 줄',kind:'related' as const},
+  ]}],
+ }}};
+ const before=JSON.stringify(run),html=markup(draw(run));
+ expect(html).toContain('<details');expect(html).not.toContain('<details open');
+ expect(html).toContain('대조한 원문 문맥');expect(html).toContain('문자 10–29');
+ expect(html).toContain('a'.repeat(64));expect(html).toContain('원문 &lt;script&gt;내용&lt;/script&gt;');
+ expect(html).not.toContain('<script>');expect(fetcher).not.toHaveBeenCalled();expect(JSON.stringify(run)).toBe(before);
+});
+
+it.each([['contradiction','사실 오류 지적 (모델 판정)'],['unsupported','제공 근거로 지지되지 않는 주장']])('새 판정의 %s를 내부 코드 대신 한글로 설명한다',(type,label)=>{
+ const run={...eligible,quality:{...eligible.quality,semantic_review:{
+  ...eligible.quality.semantic_review,검토계약:'source-context-review-v1',판정:'needs_revision' as const,
+  문제:[{유형:type,설명:'지적 원문',본문발췌:'기존 주장',출처:['원문']}],
+ }}};
+ const html=renderToStaticMarkup(<RunFailureNotice run={run} readOnly={false}/>);
+ expect(html).toContain(label);
+ expect(html.includes('data-testid="run-correction"')).toBe(type==='contradiction');
+});
+
+it('새 판정의 자격이 바뀌면 이전 보완 콜백과 미지원 계약도 POST하지 않는다',()=>{
+ const fetcher=vi.fn();vi.stubGlobal('fetch',fetcher);
+ const click=find(draw(),'run-correction').props.onClick;
+ for(const contract of ['source-context-review-v1','unknown-review-version']){
+  const run={...eligible,quality:{...eligible.quality,semantic_review:{
+   ...eligible.quality.semantic_review,검토계약:contract,판정:'needs_revision' as const,
+   문제:[{유형:'citation_gap',설명:'근거 재연결 필요',본문발췌:'기존 주장',출처:['원문']}],
+  }}};
+  expect(find(draw(run),'run-correction')).toBeUndefined();click();
+ }
+ expect(fetcher).not.toHaveBeenCalled();
+});

@@ -1,4 +1,4 @@
-"""평탄 관계의 로컬 UI 종단 검사. 실제 제공자/인증/장부는 사용하지 않는다.
+"""문장·문단 구간/문맥 검토의 로컬 UI 종단 검사. 실제 제공자/인증/장부는 사용하지 않는다.
 
 ScriptedModel의 정상 plan/select/read/draft/semantic 응답을 그대로 사용하며
 종합 응답 내용만 합성 표/SVG로 바꾼다. 역사적 사실·실모델 의미 판별 증거 아님.
@@ -8,6 +8,7 @@ import asyncio
 import hashlib
 import json
 import os
+import re
 import socket
 import sqlite3
 import sys
@@ -28,9 +29,9 @@ os.environ["LANGCHAIN_TRACING_V2"] = "false"
 os.environ["PLAYWRIGHT_BROWSERS_PATH"] = str(R / ".cache/playwright")
 BASE = "http://127.0.0.1:8799"
 LABEL = uuid.uuid4().hex
-OUT = I / "검증결과/보고서품질/관계목록_실사용" / LABEL
-DATA = R / ".cache/보고서품질_검증/관계목록/완료UI" / LABEL
-STATIC = R / ".cache/보고서품질_화면"
+OUT = I / "검증결과/근거문맥/완료_실사용" / LABEL
+DATA = R / ".cache/보고서품질_검증/실모델점검/근거문맥/완료UI" / LABEL
+STATIC = R / ".cache/근거문맥_화면"
 PROOF = {
     "label": LABEL,
     "passed": False,
@@ -47,7 +48,7 @@ PROOF = {
     "screenshots": [],
     "downloads": {},
     "scope": "actual candidate React UI/API/RealResearchService/LangGraph/SQLite/renderer; external model double ONLY",
-    "counter_warning": "API provider=openai and actual_model_requests are injected callback bookkeeping, NOT actual provider traffic. Fake max40 is NOT real 149/185 budget.",
+    "counter_warning": "API provider=openai and actual_model_requests are injected callback bookkeeping, NOT actual provider traffic. Real shared ledger is never opened.",
     "unverified": [
         "실제 계정·인증·장부",
         "Luna/실제 제공자 수락",
@@ -222,6 +223,8 @@ async def execute():
             I / p
             for p in (
                 "서버/보고서근거.py",
+                "서버/원문구간.py",
+                "서버/검토문맥.py",
                 "서버/실제연구제어.py",
                 "서버/앱.py",
                 "서버/보고서품질.py",
@@ -237,8 +240,19 @@ async def execute():
     )
     PROOF["source_hashes_start"] = {str(p): sha(p.read_bytes()) for p in paths}
     PROOF["draft_protocol"] = DRAFT_PROTOCOL
-    check("native flat protocol ready", DRAFT_PROTOCOL == "short-number-flat-evidence-v2")
-    check("candidate bundle exists", any(p.name == "index-h_HvDJ5a.js" for p in paths))
+    check(
+        "sentence/paragraph native protocol ready",
+        DRAFT_PROTOCOL == "sentence-paragraph-evidence-v3",
+    )
+    scripts = re.findall(r'<script[^>]+src="([^"]+)"', (STATIC / "index.html").read_text("utf-8"))
+    check(
+        "candidate index binds actual module assets",
+        bool(scripts)
+        and all(
+            name.startswith("/assets/") and (STATIC / name.lstrip("/")).is_file()
+            for name in scripts
+        ),
+    )
     with socket.socket() as probe:
         probe.bind(("127.0.0.1", 8799))
     check("8799 unused before start", True)
@@ -468,17 +482,38 @@ async def execute():
                     ),
                 )
             observed = [s for s in model.schemas if s is not None]
+            structured = [
+                r
+                for r in journal
+                if r["input"]["context"]["operation"] in {"draft_section", "semantic_review"}
+            ]
             check(
-                "every normal draft wrapper receives exact schema; no other schema fallback",
-                len(drafts) == len(observed) == operations.count("draft_section")
+                "normal draft and review wrappers receive exact schemas without fallback",
+                len(structured)
+                == len(observed)
+                == operations.count("draft_section") + operations.count("semantic_review")
                 and all(
                     row["input"]["response_schema"] == schema
-                    for row, schema in zip(drafts, observed)
+                    for row, schema in zip(structured, observed)
                 )
                 and all(
-                    (schema is not None) == (call[2]["operation"] == "draft_section")
+                    (schema is not None)
+                    == (call[2]["operation"] in {"draft_section", "semantic_review"})
                     for call, schema in zip(model.calls, model.schemas)
                 ),
+            )
+            reviews = [
+                r for r in structured if r["input"]["context"]["operation"] == "semantic_review"
+            ]
+            decision = json.loads(reviews[0]["output"]["content"]) if len(reviews) == 1 else {}
+            check(
+                "single contextual semantic call is request-bound and saved",
+                len(reviews) == 1
+                and decision.get("검토목록ID")
+                == reviews[0]["input"]["response_schema"]["properties"]["검토목록ID"]["enum"][0]
+                and decision.get("판정") == "supported"
+                and decision.get("문제") == []
+                and run["quality"]["semantic_review"].get("검토계약") == "source-context-review-v1",
             )
             PROOF["schemas_sha256"] = [
                 sha(json.dumps(s, ensure_ascii=False, allow_nan=False).encode("utf-8"))

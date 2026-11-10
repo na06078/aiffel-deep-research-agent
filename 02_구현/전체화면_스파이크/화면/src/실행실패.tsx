@@ -11,9 +11,16 @@ export function RunFailureNotice({run,readOnly=true}:{run:NoticeRun;readOnly?:bo
   const attempt=attempts.current.get(key);
   const reasons=run.quality?.reasons??[];
   const count=run.quality?.semantic_review?.문제.length??0;
+  const semantic=run.quality?.semantic_review;
+  // 새 판정의 선택 누락은 인용 재연결이 필요하므로 주장만 바꾸는 보완에 보내지 않는다.
+  const correctable=semantic?.검토계약===undefined||(
+    semantic.검토계약==='source-context-review-v1'&&semantic.판정==='needs_revision'&&
+    semantic.문제.every(problem=>problem.유형==='contradiction')
+  );
   const eligible=!readOnly&&run.status==='blocked'&&run.source_mode==='local'&&
     reasons.includes('semantic_review_failed')&&!reasons.includes('semantic_review_invalid')&&
     run.quality?.semantic_review?.통과===false&&count>=1&&count<=2&&
+    correctable&&
     typeof run.run_id==='string'&&run.run_id.trim().length>0&&
     Number.isSafeInteger(run.control_revision)&&(run.control_revision??0)>0&&
     !run.correction_state&&!run.report_id;
@@ -38,13 +45,29 @@ export function RunFailureNotice({run,readOnly=true}:{run:NoticeRun;readOnly?:bo
   if(run.status==='blocked'&&(reasons.includes('semantic_review_failed')||reasons.includes('semantic_review_invalid'))){
     const invalid=reasons.includes('semantic_review_invalid');
     const problems=run.quality?.semantic_review?.문제??[];
+    const hasGap=semantic?.검토계약==='source-context-review-v1'&&problems.some(problem=>problem.유형==='citation_gap');
+    const uncertain=semantic?.검토계약==='source-context-review-v1'&&semantic.판정==='undetermined';
+    const labels:Record<string,string>={
+      contradiction:'사실 오류 지적 (모델 판정)',citation_gap:'근거 선택 누락',
+      unsupported:'제공 근거로 지지되지 않는 주장',source_conflict:'출처 간 충돌',
+      insufficient_context:'제공 문맥 부족',
+    };
     return <section className="notice" role="alert" data-testid="run-quality-blocked" style={{overflowWrap:'anywhere'}}>
-      <p>{invalid?'검토 응답을 확인할 수 없어 최종 제출을 차단했습니다. 내용 오류가 확정된 것은 아닙니다.':'모델의 근거 검토에서 보완이 필요하다고 판정해 최종 제출을 차단했습니다.'}</p>
+      <p>{invalid?'검토 응답을 확인할 수 없어 최종 제출을 차단했습니다. 내용 오류가 확정된 것은 아닙니다.':uncertain?'판정 불가: 읽은 자료의 충돌 또는 제공 문맥 부족으로 최종 제출을 보류했습니다. 내용 오류가 확정된 것은 아닙니다.':'모델의 근거 검토에서 보완이 필요하다고 판정해 최종 제출을 차단했습니다.'}</p>
       {!!problems.length&&<ul>{problems.map((problem,index)=><li key={index}>
-        <strong>{problem.유형}</strong>: {problem.설명}
+        <strong>{labels[problem.유형]??problem.유형}</strong>: {problem.설명}
         <blockquote>{problem.본문발췌}</blockquote>
         <small>대조 출처: {problem.출처.join(', ')||'읽은 자료에서 확인되지 않음'}</small>
+        {!!problem.근거문맥?.length&&<details data-testid="review-contexts">
+          <summary>대조한 원문 문맥 ({problem.근거문맥.length})</summary>
+          {problem.근거문맥.map(context=><div key={context.id}>
+            <p>{context.source_id} · 문자 {context.start}–{context.end} · {context.kind==='quote'?'선택 인용':context.kind==='surrounding'?'주변 문맥':'관련 문맥'}</p>
+            <small>원문 해시: <code>{context.source_hash}</code></small>
+            <blockquote style={{whiteSpace:'pre-wrap'}}>{context.text}</blockquote>
+          </div>)}
+        </details>}
       </li>)}</ul>}
+      {hasGap&&<p>인용 재연결이 필요합니다. 원문 문맥에서 찾은 근거를 현재 인용이 뒷받침한다고 자동 처리하지 않습니다. 주장만 바꾸는 보완은 제공하지 않습니다.</p>}
       {eligible&&!accepted&&<><p>전체 연구를 다시 시작하지 않으며, 원래 초안은 보존합니다. 모델 호출 최대 2회입니다.</p><button type="button" data-testid="run-correction" disabled={attempt?.pending??false} onClick={()=>void correct()}>검토 지적 문장만1회 보완</button></>}
       {correctionNotice}
       {attempt?.pending&&<p role="status">보완 요청을 접수하는 중입니다. 중복 요청하지 않습니다.</p>}

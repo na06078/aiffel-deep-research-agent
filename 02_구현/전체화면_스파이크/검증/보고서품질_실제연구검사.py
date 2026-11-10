@@ -61,7 +61,9 @@ def main(args):
         assert preflight["mode"] == "live"
         assert preflight["passed"] and preflight["live_verified"]
         assert preflight["observed_attempts"] == preflight["completed_calls"] == 4
-        assert preflight["draft_protocol"] == "short-number-flat-evidence-v2"
+        assert preflight["draft_protocol"] == "sentence-paragraph-evidence-v3"
+        assert preflight["review_protocol"] == "source-context-review-v1"
+        assert preflight["review_schema_cases"] == ["positive", "negative"]
         assert preflight["draft_schema_received"] is True
         assert args.preflight.resolve().is_relative_to(ROOT / ".cache/보고서품질_검증/실모델점검")
         for filename, digest in preflight["source_hashes"].items():

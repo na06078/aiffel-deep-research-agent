@@ -1,0 +1,595 @@
+{
+  "status": "completed_change_scoped_python_verification",
+  "contract": "29.12 / source-context-review-v1 / sentence-paragraph-evidence-v3",
+  "live_calls": 0,
+  "changed_files": [
+    "서버/검토문맥.py",
+    "서버/실제연구제어.py",
+    "서버/보고서품질.py",
+    "테스트/테스트_검토문맥.py",
+    "테스트/테스트_검토문맥연결.py",
+    "테스트/테스트_실제연구제어.py",
+    "테스트/테스트_웹연구.py",
+    "테스트/테스트_보고서보완연결.py",
+    "테스트/테스트_보고서품질.py",
+    "테스트/테스트_보고서품질_실모델점검.py"
+  ],
+  "not_changed_by_this_worker": [
+    "서버/원문구간.py",
+    "서버/보고서근거.py",
+    "검증/*",
+    "화면/*",
+    "공통 TS",
+    "docs",
+    "packages",
+    "원본 코퍼스",
+    "원본 DB/보고서",
+    "운영8768",
+    "설치 dist",
+    "장부",
+    ".env"
+  ],
+  "result": {
+    "tests": 261,
+    "passed": 261,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "junit": "검토/조립최종.xml",
+    "source_snapshot_drift": {},
+    "test_modules": [
+      "테스트/테스트_검토문맥.py",
+      "테스트/테스트_검토문맥연결.py",
+      "테스트/테스트_실제연구제어.py",
+      "테스트/테스트_웹연구.py",
+      "테스트/테스트_보고서보완연결.py",
+      "테스트/테스트_웹통합.py",
+      "테스트/테스트_보고서품질.py",
+      "테스트/테스트_삭제후기록차단.py",
+      "테스트/테스트_보고서품질_실모델점검.py"
+    ]
+  },
+  "implementation": [
+    "순수 immutable ReviewRequest; prompts tuple, detached inputs/schema; exact section-qualified source hashes, original evidence/draft/context token binding.",
+    "원래 직접 인용의 모든 정확 중복 위치 명시; source_ranges 기반 주변/관련 slice; 추가 96000 UTF8 bytes/192개, 각 구간 <=400자로1600상한 충족; 원고·원래 인용 무절단; 최종272000 inclschema+8192 전송전 차단.",
+    "3-way 엄격 파싱; 중복 JSON키·old bool-only·추가필드·모순판정·bool/unknown refs 거절. 발췌는 Markdown 가시문자/표/SVG text projection에만 결합; 숨은 URL/escape/투명 SVG 제외.",
+    "canonical 통과/문제/검토요약 + 검토계약/검토목록ID/판정/제공범위; 문제 출처/근거문맥은 제시 id에서 코드가 조립.",
+    "정상 local/web evaluate 기존 semantic_review1회에 strict schema+inputs; 전후 같은 절 원문·web receipt/text[:20000] 재검증; pending/concurrency/reuse/cancel/delete fences 유지.",
+    "typed correction은 기존1~2문제 조건 + all contradiction만. 과거 저장 bool판정 재검증/보완 경로는 그대로 보존.",
+    "main 변경 checker consumer 테스트43개를 새 공개 API/schema/저널 입력에 맞춤; 실제 모델 대신 명시4응답 대역, positive/negative 가시 날짜 oracle 보존.",
+    "실제 OpenAI SDK payload는 MockTransport+메모리 예산 객체로 검증; 실제 장부 생성자를 건너뛰고 Path.open 금지로 비밀/장부 I/O 차단."
+  ],
+  "tdd_evidence": [
+    {
+      "behavior": "정확 중복 위치와 분리 사본",
+      "red": "검토/RED1.xml: quote list empty assertion",
+      "green": "검토/GREEN1.xml: 1 passed"
+    },
+    {
+      "behavior": "canonical 판정/strict rejection",
+      "red": "검토/RED2.xml: 10 behavioral failures",
+      "green": "검토/GREEN2.xml: 11 passed"
+    },
+    {
+      "behavior": "normal semantic request/schema integration",
+      "red": "검토/RED3.xml: old normal path fails typed JSON/schema fake",
+      "intermediate": "검토/GREEN3.xml is NOT GREEN: canonical JSON transport replaced raw substring assertion; its recorded1 failure retained",
+      "green": "검토/직접2.xml then 조립최종.xml"
+    },
+    {
+      "behavior": "typed correction eligibility",
+      "red": "검토/RED4.xml: five exact admission/error-code failures",
+      "green": "검토/GREEN4.xml: 5 passed"
+    },
+    {
+      "behavior": "contract errors retain specific failure reasons",
+      "red": "검토/순수3.xml: ValueError subclass catch erased2 exact reasons",
+      "green": "검토/조립최종.xml"
+    },
+    {
+      "behavior": "transparent inherited SVG text not visible",
+      "red": "검토/RED5.xml: hidden text included",
+      "green": "검토/순수연결최종.xml and 조립최종.xml"
+    },
+    {
+      "behavior": "actual provided-byte accounting",
+      "red": "검토/RED6.xml: reserved proxy != actual provided byte assertion",
+      "green": "검토/조립최종.xml"
+    },
+    {
+      "behavior": "scope incomplete quality warning",
+      "red": "검토/RED7.xml: warning absent after completed positive-control run",
+      "green": "검토/순수연결최종.xml and 조립최종.xml"
+    },
+    {
+      "behavior": "main checker schema consumer",
+      "red": "검토/소비자RED.xml: new fake fails old checker; unrelated remapped quote test passed",
+      "green": "검토/소비자GREEN.xml, 소비자최종.xml:43passed; 조립최종.xml"
+    }
+  ],
+  "fixture_remappings": [
+    "FakeWebClient.fetch repeated \"공개 자료 사실 및 범위. \"*3000 created thousands of literal quote locations and correctly exceeded272000; normal-path fixture now200 individually numbered paragraphs, still >20000 chars. Exact duplicate-position positive and repeated-original-overflow negative retained in 테스트_검토문맥.py.",
+    "테스트_보고서품질 separated-source test now has explicit paragraph boundary at320 instead of implicit fixed cut; disconnected fake joined quote still rejected and2 original fragments still preserved.",
+    "normal reviewer raw transport assertions changed to JSON draft equality; complete canonical draft remains unchanged.",
+    "preflight semantic doubles now request-token+typed verdict+offered quote ids only; no production fallback. Positive-rejection fake uses visible1882 excerpt rather than nonexistent1883 on positive text."
+  ],
+  "verification_exclusions_and_risks": [
+    "No actual Luna/provider/search/website request; explicit reviewer replies do not prove semantic accuracy, including Baeksan/Kumgu/Samrye grouping or Kim causal chronology.",
+    "Full-suite gate not run; main owns UI/real app/export/PDF/full gate and document/Git validation.",
+    "SVG reviewer projection checks safe-profile text/tspan, inherited opacity/paint/font visibility, not full browser geometry/occlusion/raster visibility. No renderer is invoked in the pure core.",
+    "Extremely repetitive original quotations can exhaust input capacity because all exact duplicate positions remain explicit; fail-closed instead of guessing a location/truncating original evidence.",
+    "No original actual-run SQLite was opened/written; corpus source checks are read-only. Test journals/receipts are isolated fixtures.",
+    "Some boundary regression cases added after the primary RED→GREEN tracer bullets pass existing implementation immediately; they are coverage evidence, not falsely claimed new RED cycles."
+  ],
+  "source_hashes": {
+    "files": {
+      "서버/검토문맥.py": "330ecde908b2a0be5ccdfe32828d8150d501032be653f3a8ff8a46f1072463f6",
+      "서버/실제연구제어.py": "590d4690e7ab577692617193be331db1dfe6da149e3b4127fb2dac69bccbb8c2",
+      "서버/보고서품질.py": "3887496cbce8332eaf38624c45f4f1825faae38d040083e7aa5df29236885790",
+      "서버/원문구간.py": "479ffc67f44f0228f507f27da853fcd28e0d30f2005e03e1fe9630c7eb232f19",
+      "서버/보고서근거.py": "05754dda0581ddb3a94a4f09c21b79af73cfcb935d68d113447ac6208d11181d",
+      "검증/보고서품질_실모델점검.py": "24da070400746e76c3bd0a6bd7052cbf23a9ba4fdfb134dffc66a08801f65309",
+      "테스트/테스트_검토문맥.py": "f5e4ba439c5e48db0b2d28743ef37cba5e95d21b16c120d07594defc4c26504e",
+      "테스트/테스트_검토문맥연결.py": "1eafa84d39f66a2e69526b3f2e8815863fe06f4eb800e1c4cb57a6b0cc5e0c0c",
+      "테스트/테스트_실제연구제어.py": "2baeecfd2bbed68075aa9d0275ab34a3f80ca929739aebb18b5e92a108e8a04d",
+      "테스트/테스트_웹연구.py": "65ed18b36d3ed181bd50ff06551183c9324e823edef1b36a20ecd23098a7cee7",
+      "테스트/테스트_보고서보완연결.py": "6c8ba77af62c598b4ed752498553b227f2d0440f71e41d27ffa262e2177634e6",
+      "테스트/테스트_웹통합.py": "085ddf5a3940c6061f59537dab2f54dc71efcefb50e44f0bdc58ff56e5bd1c28",
+      "테스트/테스트_보고서품질.py": "e03d6dd5f9b440bf25aa8f2dc6ad51ca7dcf2464d287d1c48cd4dd5ea27dc9c1",
+      "테스트/테스트_삭제후기록차단.py": "9c59e588ca353ec01aca4b2c4a4f8d498fb28587b122ecbd45d03edfc09fa3a8",
+      "테스트/테스트_보고서품질_실모델점검.py": "eb2ef2b3567555e3d731d653da020118f0866cebdcc79572cb776d28ebb5349e"
+    },
+    "corpus_file": "583dbf10ee811796c80302e005bef71812476059dc79c3b5dd2fd3ea251e4ec7",
+    "corpus_sources": {
+      "동학 농민 혁명": "d7a8b4a7aa624c00b729f7ae15887012187f04d42d1eceebf4ea948125b565f3",
+      "김옥균": "116e1b41336d8fae13a09fb5386804954c762de3d99273326f731affc17e54a5",
+      "임오군란": "b7e87b73e31bfb04db641d56f698779057ba463fec123a126cfdfd37222245cc"
+    }
+  },
+  "commands_and_junit_results": [
+    {
+      "file": "GREEN1.xml",
+      "sha256": "3befbe4b12451a8d5571ad0e63d2964fff847d9312a1d4c4a2987399e9977035",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "1",
+          "time": "0.080",
+          "timestamp": "2026-11-10T14:04:37.307962+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 1,
+      "failures": [],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_검토문맥.py' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-green1' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/GREEN1.xml'"
+    },
+    {
+      "file": "GREEN2.xml",
+      "sha256": "5c5fb2a28ac23a9b6afcfb9bd7ce5584f2be2ca3d10c48ee00473b3e0d50e4e2",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "11",
+          "time": "0.075",
+          "timestamp": "2026-11-10T14:05:48.863191+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 11,
+      "failures": [],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_검토문맥.py' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-green2' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/GREEN2.xml'"
+    },
+    {
+      "file": "GREEN3.xml",
+      "sha256": "2b23cfa8fcb95e6e5196bdbb72e67ed89799c7f510e9008d06ea2c12430ab6e0",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "1",
+          "skipped": "0",
+          "tests": "1",
+          "time": "2.280",
+          "timestamp": "2026-11-10T14:07:29.509734+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 1,
+      "failures": [
+        "test_실제6노드_Send병렬_부족절만2라운드_원고보존과_정본재열기"
+      ],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_실제연구제어.py::test_실제6노드_Send병렬_부족절만2라운드_원고보존과_정본재열기' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-green3' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/GREEN3.xml'"
+    },
+    {
+      "file": "GREEN4.xml",
+      "sha256": "48cfca8bb1ff57cf7fe871037ec8de4496a9c3dde987fa59511f5fb053e9d478",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "5",
+          "time": "1.919",
+          "timestamp": "2026-11-10T14:10:04.363382+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 5,
+      "failures": [],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_검토문맥연결.py' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-green4' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/GREEN4.xml'"
+    },
+    {
+      "file": "RED1.xml",
+      "sha256": "e9b5381d9326dee33abcaa81fb2743a7b0bcb7c152153b1868bae471057c8983",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "1",
+          "skipped": "0",
+          "tests": "1",
+          "time": "0.081",
+          "timestamp": "2026-11-10T14:02:39.429958+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 1,
+      "failures": [
+        "test_원문중복위치_명시와_문맥_분리사본"
+      ],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_검토문맥.py' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-red1' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/RED1.xml'"
+    },
+    {
+      "file": "RED2.xml",
+      "sha256": "3b6f33c1ca0307a9e6133520ee9ac7900f479bd0d951d50553e6340e71f69646",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "10",
+          "skipped": "0",
+          "tests": "11",
+          "time": "0.164",
+          "timestamp": "2026-11-10T14:05:09.174099+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 11,
+      "failures": [
+        "test_판정과_근거결합_새계약",
+        "test_엄격한_거절[legacy]",
+        "test_엄격한_거절[duplicate]",
+        "test_엄격한_거절[unknown]",
+        "test_엄격한_거절[bool]",
+        "test_엄격한_거절[verdict]",
+        "test_엄격한_거절[hidden]",
+        "test_엄격한_거절[gap_quote]",
+        "test_엄격한_거절[conflict_one]",
+        "test_엄격한_거절[stale]"
+      ],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_검토문맥.py' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-red2' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/RED2.xml'"
+    },
+    {
+      "file": "RED3.xml",
+      "sha256": "8d5618cdf1f0470f8dc5f675b70c2cedd0da3dc1bdcc8f2c87f24c4a539a9cb6",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "1",
+          "skipped": "0",
+          "tests": "1",
+          "time": "3.495",
+          "timestamp": "2026-11-10T14:06:19.479396+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 1,
+      "failures": [
+        "test_실제6노드_Send병렬_부족절만2라운드_원고보존과_정본재열기"
+      ],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_실제연구제어.py::test_실제6노드_Send병렬_부족절만2라운드_원고보존과_정본재열기' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-red3' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/RED3.xml'"
+    },
+    {
+      "file": "RED4.xml",
+      "sha256": "790adf2f357f7e2ac93b9f1f0203cc8e74262c3fed6ba8b057f1500b8e7c0ced",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "5",
+          "skipped": "0",
+          "tests": "5",
+          "time": "1.964",
+          "timestamp": "2026-11-10T14:09:25.585467+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 5,
+      "failures": [
+        "test_새계약은_모순만_주장보완_허용[contradiction]",
+        "test_새계약은_모순만_주장보완_허용[citation_gap]",
+        "test_새계약은_모순만_주장보완_허용[unsupported]",
+        "test_새계약은_모순만_주장보완_허용[source_conflict]",
+        "test_새계약은_모순만_주장보완_허용[insufficient_context]"
+      ],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_검토문맥연결.py' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-red4' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/RED4.xml'"
+    },
+    {
+      "file": "RED5.xml",
+      "sha256": "b6d9d9de523610369f03dcd20c6bd93f9d078da5b74030b51f19edda6278f026",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "1",
+          "skipped": "0",
+          "tests": "20",
+          "time": "0.234",
+          "timestamp": "2026-11-10T14:13:32.655776+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 20,
+      "failures": [
+        "test_가시SVG는_투명글자와_상속된숨김을_포함하지않는다"
+      ],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_검토문맥.py' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-red5' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/RED5.xml'"
+    },
+    {
+      "file": "RED6.xml",
+      "sha256": "c687d53bf6d19ef3aaeaa2106d49535e641759722e7c528f9b0c79738e507fe7",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "1",
+          "skipped": "0",
+          "tests": "20",
+          "time": "0.248",
+          "timestamp": "2026-11-10T14:14:20.564395+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 20,
+      "failures": [
+        "test_추가문맥_예산과_전체원문_미제공_표시"
+      ],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_검토문맥.py' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-red6' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/RED6.xml'"
+    },
+    {
+      "file": "RED7.xml",
+      "sha256": "e7c4d0a7575b5663f56fa2efb019e2b301718083bcf6aeceafb353099b94d81d",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "1",
+          "skipped": "0",
+          "tests": "1",
+          "time": "2.040",
+          "timestamp": "2026-11-10T14:15:19.774345+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 1,
+      "failures": [
+        "test_문맥미제공_범위를_최종품질경고에_보존"
+      ],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_검토문맥연결.py::test_문맥미제공_범위를_최종품질경고에_보존' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-red7' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/RED7.xml'"
+    },
+    {
+      "file": "소비자GREEN.xml",
+      "sha256": "eca13505bfa070c6cd46a4e0e0cb61f41745329e3c63dd8b46bb704eea309173",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "43",
+          "time": "1.500",
+          "timestamp": "2026-11-10T14:23:00.563280+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 43,
+      "failures": [],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_보고서품질_실모델점검.py' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-preflight-green' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/소비자GREEN.xml'"
+    },
+    {
+      "file": "소비자RED.xml",
+      "sha256": "ae4616b86867114a3edd223ce78ff51d105ebf674a6f7e080296d83176ef6d44",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "1",
+          "skipped": "0",
+          "tests": "2",
+          "time": "0.243",
+          "timestamp": "2026-11-10T14:20:56.354670+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 2,
+      "failures": [
+        "test_four_steps_use_actual_parsers_and_assembly_with_bound_attempts"
+      ],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_보고서품질.py::test_떨어진_원문구간은_하나의인용문으로_합치지않고_근거를_분리한다' '테스트/테스트_보고서품질_실모델점검.py::test_four_steps_use_actual_parsers_and_assembly_with_bound_attempts' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-preflight-red' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/소비자RED.xml'"
+    },
+    {
+      "file": "소비자최종.xml",
+      "sha256": "d7afa2083b0f186e41a8273c56ce0a690272e23931a36677995a60897ff366f4",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "43",
+          "time": "1.354",
+          "timestamp": "2026-11-10T14:23:38.311370+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 43,
+      "failures": [],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_보고서품질_실모델점검.py' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-preflight-final' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/소비자최종.xml'"
+    },
+    {
+      "file": "순수3.xml",
+      "sha256": "9228ac3c8f3ebbc74da488ca61227008814ca01bd0eb0f2b2d6b7b44aacbf050",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "2",
+          "skipped": "0",
+          "tests": "18",
+          "time": "0.172",
+          "timestamp": "2026-11-10T14:10:51.235864+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 18,
+      "failures": [
+        "test_숨은URL_이스케이프와_가시SVG표_발췌_경계",
+        "test_미읽은절_원문과_큰원고_조용히자르지않음"
+      ],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_검토문맥.py' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-core3' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/순수3.xml'"
+    },
+    {
+      "file": "순수연결최종.xml",
+      "sha256": "6853dd3137e701745cae39daf3de54eea12c1c5db0eb455260ba1df09c87cc51",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "33",
+          "time": "3.852",
+          "timestamp": "2026-11-10T14:22:42.175747+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 33,
+      "failures": [],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_검토문맥.py' '테스트/테스트_검토문맥연결.py' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-core-final' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/순수연결최종.xml'"
+    },
+    {
+      "file": "조립최종.xml",
+      "sha256": "fe20575e685851a877e8e63d822f662be6d7c73ca710397aed0a448c7bf22acb",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "261",
+          "time": "81.323",
+          "timestamp": "2026-11-10T14:23:56.264186+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 261,
+      "failures": [],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_검토문맥.py' '테스트/테스트_검토문맥연결.py' '테스트/테스트_실제연구제어.py' '테스트/테스트_웹연구.py' '테스트/테스트_보고서보완연결.py' '테스트/테스트_웹통합.py' '테스트/테스트_보고서품질.py' '테스트/테스트_삭제후기록차단.py' '테스트/테스트_보고서품질_실모델점검.py' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-assembled' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/조립최종.xml'"
+    },
+    {
+      "file": "직접1.xml",
+      "sha256": "1a979eb6e4002115ed6041b49154f65a8150ec2bd01b5130dd4dac279f4d0a39",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "7",
+          "skipped": "0",
+          "tests": "131",
+          "time": "85.889",
+          "timestamp": "2026-11-10T14:08:48.766864+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 131,
+      "failures": [
+        "test_평면관계_16개는_전체경로통과_17개이상은_자르지않고_차단한다[16-web]",
+        "test_웹6노드_진짜읽기receipt_출처정본_모델과HTTP분리[False]",
+        "test_웹6노드_진짜읽기receipt_출처정본_모델과HTTP분리[True]",
+        "test_웹초안은_검증된_source_id의_제시구간만_코드로_인용한다",
+        "test_길이계약을_어긴_메모는_읽기로_인정하지_않고_연구는_계속한다[long-read_note_too_long]",
+        "test_길이계약을_어긴_메모는_읽기로_인정하지_않고_연구는_계속한다[empty-read_note_empty]",
+        "test_웹4절2라운드_16검색24본문_63모델상한_실제그래프대역"
+      ],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_검토문맥.py' '테스트/테스트_실제연구제어.py' '테스트/테스트_웹연구.py' '테스트/테스트_보고서보완연결.py' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-direct1' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/직접1.xml'"
+    },
+    {
+      "file": "직접2.xml",
+      "sha256": "62e08e5433c2b01369790c57d7122822d8b92000c73c233747fd308c2a7dc5b2",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "146",
+          "time": "66.224",
+          "timestamp": "2026-11-10T14:12:55.946495+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 146,
+      "failures": [],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_검토문맥.py' '테스트/테스트_검토문맥연결.py' '테스트/테스트_실제연구제어.py' '테스트/테스트_웹연구.py' '테스트/테스트_보고서보완연결.py' '테스트/테스트_웹통합.py' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-direct2' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/직접2.xml'"
+    },
+    {
+      "file": "최종직접.xml",
+      "sha256": "f9de5ef4c851aebac83fe56668642a56a4c0f7d101a4d3fb2a55ba3b035dd075",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "1",
+          "skipped": "0",
+          "tests": "217",
+          "time": "71.912",
+          "timestamp": "2026-11-10T14:17:24.539929+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 217,
+      "failures": [
+        "test_떨어진_원문구간은_하나의인용문으로_합치지않고_근거를_분리한다"
+      ],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_검토문맥.py' '테스트/테스트_검토문맥연결.py' '테스트/테스트_실제연구제어.py' '테스트/테스트_웹연구.py' '테스트/테스트_보고서보완연결.py' '테스트/테스트_웹통합.py' '테스트/테스트_보고서품질.py' '테스트/테스트_삭제후기록차단.py' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-final' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/최종직접.xml'"
+    },
+    {
+      "file": "최종직접2.xml",
+      "sha256": "094524824acce5fe0ea3d8e166046e706d98f61167ae4b49b4c90599e9d1ae0c",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "217",
+          "time": "76.873",
+          "timestamp": "2026-11-10T14:21:09.142621+09:00",
+          "hostname": "z13flow"
+        }
+      ],
+      "testcase_count": 217,
+      "failures": [],
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 LANGSMITH_TRACING=false LANGCHAIN_TRACING_V2=false 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider '테스트/테스트_검토문맥.py' '테스트/테스트_검토문맥연결.py' '테스트/테스트_실제연구제어.py' '테스트/테스트_웹연구.py' '테스트/테스트_보고서보완연결.py' '테스트/테스트_웹통합.py' '테스트/테스트_보고서품질.py' '테스트/테스트_삭제후기록차단.py' -q '--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/검토/pytest-final2' '--junitxml=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/검토/최종직접2.xml'"
+    }
+  ],
+  "parent_followup": "Ready for main integrated app/validator/UI gate. No commits, skill writes, installs or operational-data writes performed."
+}

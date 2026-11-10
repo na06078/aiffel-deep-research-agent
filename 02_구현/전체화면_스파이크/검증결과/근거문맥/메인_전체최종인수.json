@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "exit_code": 0,
+  "testcases": 738,
+  "subtests": 1362,
+  "failures": 0,
+  "errors": 0,
+  "skips": 0,
+  "expected_modules": 40,
+  "completed_modules": 40,
+  "module_match": true,
+  "node_match": true,
+  "source_hash_count": 118,
+  "source_drift": false,
+  "source_changed_now": [],
+  "guard_denials": 0,
+  "cli_outcomes": {
+    "passed": 738
+  },
+  "junit": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\전체회귀\\최종전체_메인_20261110_153001\\전체.xml",
+  "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\전체회귀\\최종전체_메인_20261110_153001\\전체.log",
+  "result": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\전체회귀\\최종전체_메인_20261110_153001\\결과.json",
+  "source_after": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\전체회귀\\최종전체_메인_20261110_153001\\소스해시_후.json",
+  "coverage": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\전체회귀\\최종전체_메인_20261110_153001\\완료범위.json",
+  "runner_snapshot": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\전체회귀\\최종전체_메인_20261110_153001\\전체회귀_실행_보존.py",
+  "runner_sha256": "a62d122e40dad3f6f29ab79ce8d774b0bf18bd349ad6cbf4ce167636f6cdc1cc",
+  "actual_provider_requests": 0,
+  "real_local_chromium_launches": 7,
+  "scope": "Last source including optional-context resizing; offline full gate, actual local PDF/rendering retained, no OS-sandbox or model-quality claim."
+}

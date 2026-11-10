@@ -1,0 +1,13 @@
+{
+  "run_id": "최종전체_메인_20261110_153001",
+  "runner": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/최종전체/최종전체_메인_20261110_153001/전체회귀_메인실행.py",
+  "evidence": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/근거문맥/전체회귀/최종전체_메인_20261110_153001",
+  "process_id": "proc_453aeb7006a7",
+  "pid": 35016,
+  "original_runner_sha256": "ab6fc21816555fa0886f44aaa1eefb3057b42a4e1766be9bb996965672fc34da",
+  "copied_runner_sha256": "a62d122e40dad3f6f29ab79ce8d774b0bf18bd349ad6cbf4ce167636f6cdc1cc",
+  "guard_functions_ast_equal": true,
+  "only_change": "RUN 경로 상수, 원본 가드/명령/검사 로직은 보존",
+  "write_tool_partial_completion": "RPC 응답 해석 오류 후 파일 존재·정확 SHA를 별도 직접 조회로 확인. 파일을 다시 쓰지 않고 실행만 진행함.",
+  "scope": "마지막 소스 전체 회귀. 실제 모델/원본 저장소 접근 제외, 기존 로컬 Chromium 렌더 검사 유지"
+}

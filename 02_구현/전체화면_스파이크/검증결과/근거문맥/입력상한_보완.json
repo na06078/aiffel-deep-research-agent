@@ -1,0 +1,36 @@
+{
+  "cases": [
+    {
+      "padding_per_section": 16000,
+      "input_proxy": 271518,
+      "selected_additional": 73,
+      "omitted_additional": 463,
+      "original_quotes": 4,
+      "draft_preserved": true,
+      "within_limit": true
+    },
+    {
+      "padding_per_section": 18000,
+      "input_proxy": 271407,
+      "selected_additional": 46,
+      "omitted_additional": 490,
+      "original_quotes": 4,
+      "draft_preserved": true,
+      "within_limit": true
+    },
+    {
+      "padding_per_section": 20000,
+      "input_proxy": 271336,
+      "selected_additional": 19,
+      "omitted_additional": 517,
+      "original_quotes": 4,
+      "draft_preserved": true,
+      "within_limit": true
+    }
+  ],
+  "actual_provider_requests": 0,
+  "source_sha256": "05739d1d7d0d01d10475fdc179d344a5e1fabe20b1358ae7363afe03b79424ec",
+  "red": "검증결과/근거문맥/문맥상한_RED.xml",
+  "green": "검증결과/근거문맥/문맥상한_GREEN.xml",
+  "green_cases": 27
+}

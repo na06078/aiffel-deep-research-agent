@@ -1,0 +1,45 @@
+{
+  "positive": {
+    "proof": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\완료_실사용\\ae79ddc1485c427a81495785b3ed3b2d\\확인.json",
+    "passed": true,
+    "checks": 42,
+    "actual_provider_requests": 0,
+    "double_calls": 17,
+    "source_hashes_checked": 39,
+    "changed_after_run": []
+  },
+  "blocked": {
+    "proof": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\인계.json",
+    "passed": true,
+    "counts": {
+      "checks": 149,
+      "passed": 149,
+      "cases": 5,
+      "screenshots": 29
+    },
+    "actual_provider_requests": 0,
+    "source_hashes_checked": 29,
+    "changed_after_run": []
+  },
+  "downloads": {
+    "md": {
+      "bytes": 10335,
+      "hash_matches": true
+    },
+    "html": {
+      "bytes": 13158,
+      "hash_matches": true
+    },
+    "pdf": {
+      "bytes": 69149,
+      "hash_matches": true
+    }
+  },
+  "visual_pixels_same_png_bytes": {
+    "HTML_파일_재열기.png": true,
+    "PDF_페이지_1.png": true,
+    "PDF_페이지_3.png": true,
+    "도식_390x844.png": true
+  },
+  "passed": true
+}

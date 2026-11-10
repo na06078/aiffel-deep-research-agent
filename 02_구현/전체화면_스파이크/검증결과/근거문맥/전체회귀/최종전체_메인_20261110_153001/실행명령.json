@@ -1,0 +1,38 @@
+{
+  "executable": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe",
+  "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "launcher_argv": [
+    "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/최종전체/최종전체_메인_20261110_153001/전체회귀_메인실행.py"
+  ],
+  "pytest_args": [
+    "-p",
+    "pytest_asyncio.plugin",
+    "-p",
+    "no:cacheprovider",
+    "테스트",
+    "검증/테스트_문맥사전점검.py",
+    "-q",
+    "--basetemp=C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\근거문맥\\최종전체\\최종전체_메인_20261110_153001\\pytest",
+    "--junitxml=C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\전체회귀\\최종전체_메인_20261110_153001\\전체.xml",
+    "--log-file=C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\전체회귀\\최종전체_메인_20261110_153001\\pytest_logging.log"
+  ],
+  "equivalent_command": [
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-X",
+    "utf8",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\근거문맥\\최종전체\\최종전체_메인_20261110_153001\\전체회귀_메인실행.py"
+  ],
+  "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크",
+  "environment": {
+    "TMP": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\근거문맥\\최종전체\\최종전체_메인_20261110_153001\\temp",
+    "TEMP": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\근거문맥\\최종전체\\최종전체_메인_20261110_153001\\temp",
+    "TMPDIR": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\근거문맥\\최종전체\\최종전체_메인_20261110_153001\\temp",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "LANGSMITH_TRACING": "false",
+    "LANGCHAIN_TRACING_V2": "false",
+    "SPIKE_DATA_DIR": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\근거문맥\\최종전체\\최종전체_메인_20261110_153001\\app-default"
+  },
+  "guard_scope": "in-process audit + exact Playwright subprocess/launch allowlist; not OS sandbox"
+}

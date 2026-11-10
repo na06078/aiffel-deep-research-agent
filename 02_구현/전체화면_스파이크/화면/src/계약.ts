@@ -14,14 +14,22 @@ export interface BudgetSummary {
   input_tokens: number; output_tokens: number; unknown_count: number;
 }
 export interface Assignment { section_id: string; title: string; assignee: string }
+// 기술 명세29.12: 모델 판정과 코드가 결합한 원문 위치를 구별한다. 과거 판정에는 새 필드가 없다.
+export interface ReviewContext {
+  id:number; section_id:string; source_id:string; source_hash:string;
+  start:number; end:number; text:string; kind:'quote'|'surrounding'|'related';
+}
+export interface SemanticReview {
+  통과:boolean;
+  검토계약?:string; 검토목록ID?:string;
+  판정?:'supported'|'needs_revision'|'undetermined';
+  문제:{유형:string; 설명:string; 본문발췌:string; 출처:string[]; 근거문맥?:ReviewContext[]}[];
+  검토요약:string;
+}
 export interface QualitySummary {
   passed: boolean | null; reasons: string[]; warnings?: string[];
   metrics?: Record<string, unknown>;
-  semantic_review?: {
-    통과: boolean;
-    문제: { 유형: string; 설명: string; 본문발췌: string; 출처: string[] }[];
-    검토요약: string;
-  };
+  semantic_review?: SemanticReview;
 }
 export interface RunFailure { code: string; message: string; actor: string }
 // 기술 명세29.11: 수동 보완은 접수일 뿐 완료/통과가 아니다.

@@ -10,6 +10,7 @@ import sys
 import time
 import traceback
 import uuid
+from contextlib import closing
 from pathlib import Path
 
 I = Path(__file__).resolve().parents[1]
@@ -26,11 +27,11 @@ from 서버.앱 import create_app
 from 테스트.테스트_실제연구제어 import CORPUS, ScriptedModel
 
 BASE = "http://127.0.0.1:8796"
-OUT = I / "검증결과/보고서품질/차단화면" / uuid.uuid4().hex
-DATA = R / ".cache/보고서품질_검증/차단화면" / OUT.name
-STATIC = R / ".cache/보고서품질_화면"
+OUT = I / "검증결과/근거문맥/차단_실사용" / uuid.uuid4().hex
+DATA = R / ".cache/보고서품질_검증/실모델점검/근거문맥/차단화면" / OUT.name
+STATIC = R / ".cache/근거문맥_화면"
 MARKUP = '<img src=x onerror="window.__semanticInjected=1">'
-EXCERPT = "자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다."
+EXCERPT = "자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다"
 PROOF = {
     "explicit_model_double": True,
     "actual_provider_requests": 0,
@@ -42,10 +43,22 @@ PROOF = {
     "console_errors": [],
     "external_browser_requests": [],
     "screenshots": [],
+    "protected_path_denials": [],
+    "provider_denials": [],
+    "browser_requests": [],
 }
 
 
 def audit(event, args):
+    if (
+        event in {"open", "sqlite3.connect"}
+        and args
+        and isinstance(args[0], (str, bytes, os.PathLike))
+    ):
+        path = os.fsdecode(args[0]).replace("\\", "/").lower().split("/")
+        if "03_실행데이터" in path or any(p == ".env" or p.startswith(".env.") for p in path):
+            PROOF["protected_path_denials"].append(str(args[0]))
+            raise AssertionError("protected_original_or_credentials_forbidden")
     if event == "socket.connect":
         address = args[1]
         if isinstance(address, tuple) and address[0] not in ("127.0.0.1", "::1"):
@@ -70,24 +83,42 @@ class BlockingModel(ScriptedModel):
     async def complete(self, *args, **kwargs):
         response = await super().complete(*args, **kwargs)
         if kwargs["context"]["operation"] == "semantic_review":
-            response["content"] = (
-                json.dumps(
-                    {
-                        "통과": False,
-                        "문제": [
-                            {
-                                "유형": "근거 불일치 대역",
-                                "설명": "명시적 대역 판정 " + MARKUP,
-                                "본문발췌": EXCERPT,
-                                "출처": [self.titles[0]],
-                            }
-                        ],
-                        "검토요약": "의미 판별 성능을 입증하지 않는 차단 표시 검사",
-                    },
-                    ensure_ascii=False,
+            if self.verdict == "invalid":
+                response["content"] = (
+                    "THIS IS NOT JSON <script>window.__semanticInjected=1</script>"
                 )
-                if self.verdict == "false"
-                else "THIS IS NOT JSON <script>window.__semanticInjected=1</script>"
+                return response
+            payload = json.loads(args[1] if len(args) >= 2 else kwargs["user"])
+            contexts = payload["contexts"]
+            schema = kwargs["response_schema"]
+            assert EXCERPT in payload["visible_text"], (
+                "explicit fake must reach a real visible statement"
+            )
+            refs = []
+            if self.verdict == "citation_gap":
+                refs = [next(c["id"] for c in contexts if c["kind"] != "quote")]
+            elif self.verdict == "contradiction":
+                refs = [contexts[0]["id"]]
+            elif self.verdict == "source_conflict":
+                refs = [c["id"] for c in contexts[:2]]
+            self.support_sources = sorted({c["source_id"] for c in contexts if c["id"] in refs})
+            response["content"] = json.dumps(
+                {
+                    "검토목록ID": schema["properties"]["검토목록ID"]["enum"][0],
+                    "판정": "undetermined"
+                    if self.verdict in {"source_conflict", "insufficient_context"}
+                    else "needs_revision",
+                    "문제": [
+                        {
+                            "유형": self.verdict,
+                            "설명": "명시적 대역 판정 " + MARKUP,
+                            "본문발췌": EXCERPT,
+                            "근거번호": refs,
+                        }
+                    ],
+                    "검토요약": "의미 판별 성능을 입증하지 않는 차단 표시 검사",
+                },
+                ensure_ascii=False,
             )
         return response
 
@@ -158,6 +189,14 @@ async def case(driver, verdict):
                 PROOF["external_browser_requests"].append(url)
                 await route.abort()
             else:
+                method = route.request.method
+                PROOF["browser_requests"].append({"case": verdict, "method": method, "url": url})
+                if method != "GET" and not (
+                    method == "POST" and url == BASE + "/api/spike/commands"
+                ):
+                    PROOF["external_browser_requests"].append("unapproved mutation: " + url)
+                    await route.abort()
+                    return
                 await route.continue_()
 
         await context.route("**/*", route_gate)
@@ -189,7 +228,7 @@ async def case(driver, verdict):
         run = snap["runs"][0]
         record["run"] = run
         record["snapshot_queue_paused"] = snap["queue_paused"]
-        reason = "semantic_review_failed" if verdict == "false" else "semantic_review_invalid"
+        reason = "semantic_review_invalid" if verdict == "invalid" else "semantic_review_failed"
         operations = [c[2]["operation"] for c in model.calls]
         record["double_operations"] = operations
         check(
@@ -219,7 +258,7 @@ async def case(driver, verdict):
             json.dumps({"snapshot": snap, "archive": archive}, ensure_ascii=False, indent=2),
             "utf-8",
         )
-        with sqlite3.connect(data / "실행기록.sqlite3") as db:
+        with closing(sqlite3.connect(data / "실행기록.sqlite3")) as db:
             stored = json.loads(
                 db.execute(
                     "SELECT body FROM revisions WHERE run_id=? ORDER BY revision DESC LIMIT 1",
@@ -239,13 +278,17 @@ async def case(driver, verdict):
             and reports == 0
             and record["sqlite"]["integrity_check"] == "ok",
         )
-        expected = (
-            "모델의 근거 검토에서 보완이 필요"
-            if verdict == "false"
-            else "검토 응답을 확인할 수 없어"
-        )
+        expected = {
+            "contradiction": "사실 오류 지적 (모델 판정)",
+            "citation_gap": "근거 선택 누락",
+            "source_conflict": "판정 불가",
+            "insufficient_context": "판정 불가",
+            "invalid": "검토 응답을 확인할 수 없어",
+        }[verdict]
         for width, height in [(1440, 900), (390, 844), (844, 390)]:
             await page.set_viewport_size({"width": width, "height": height})
+            await page.wait_for_function("""() => {const w=document.querySelector('[data-testid=world]');
+                return Math.abs(Number(w?.dataset.layoutWidth)-innerWidth)<4 && Math.abs(Number(w?.dataset.layoutHeight)-innerHeight)<4;}""")
             await panel(page, "실행/큐")
             notice = page.get_by_test_id("run-quality-blocked")
             await notice.wait_for()
@@ -264,15 +307,36 @@ async def case(driver, verdict):
                     ]
                 ),
             )
-            if verdict == "false":
+            if verdict != "invalid":
                 check(
-                    f"false/{width}: literal excerpt/source/markup",
+                    f"{verdict}/{width}: literal excerpt/source/markup",
                     EXCERPT in text
-                    and model.titles[0] in text
+                    and all(source in text for source in model.support_sources)
                     and MARKUP in text
                     and await notice.locator("img,script").count() == 0
                     and await page.evaluate("window.__semanticInjected === undefined"),
                 )
+                check(
+                    f"{verdict}/{width}: correction follows reason not problem count",
+                    bool(await notice.get_by_test_id("run-correction").count())
+                    == (verdict == "contradiction"),
+                )
+                if verdict == "citation_gap":
+                    check(
+                        f"gap/{width}: citation repair is not claim-only correction",
+                        "인용 재연결" in text,
+                    )
+                if await notice.locator("details").count():
+                    detail = notice.locator("details").first
+                    await detail.locator("summary").click()
+                    expanded = await detail.inner_text()
+                    check(
+                        f"{verdict}/{width}: original context visible and escaped",
+                        "원문 해시" in expanded
+                        and "문자 " in expanded
+                        and await detail.locator("img,script").count() == 0,
+                    )
+                    await capture(page, f"{verdict}_{width}x{height}_원문문맥")
             check(
                 f"{verdict}/{width}: one canvas and no root overflow",
                 await page.locator("canvas").count() == 1
@@ -310,8 +374,28 @@ async def case(driver, verdict):
         await notice.scroll_into_view_if_needed()
         await capture(page, verdict + "_과거상세")
         before = len(model.calls)
-        await page.wait_for_timeout(300)
-        check(verdict + ": no automatic retry", len(model.calls) == before)
+        await page.reload()
+        await page.locator('[data-testid="world"][data-render-ready="true"]').wait_for(
+            timeout=12000
+        )
+        await panel(page, "실행/큐")
+        await page.get_by_test_id("run-quality-blocked").wait_for()
+        reloaded = await (await context.request.get(BASE + "/api/spike/snapshot")).json()
+        check(
+            verdict + ": reload restores verdict without automatic retry",
+            len(model.calls) == before
+            and reloaded["runs"][0]["quality"] == run["quality"]
+            and reloaded["runs"][0]["report_id"] is None,
+        )
+        changes = [
+            request
+            for request in PROOF["browser_requests"]
+            if request["case"] == verdict and request["method"] != "GET"
+        ]
+        check(
+            verdict + ": only explicit admission mutated isolated service",
+            len(changes) == 1 and changes[0]["url"] == BASE + "/api/spike/commands",
+        )
         record["result"] = "PASS"
     finally:
         if browser:
@@ -332,16 +416,44 @@ async def main():
         p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in (STATIC / "assets").glob("*.js")
     }
     PROOF["command"] = f'"{R / ".venv/Scripts/python.exe"}" "{Path(__file__)}"'
+    from 서버 import 실제모델, 호출예산
+
+    def forbidden_provider(*args, **kwargs):
+        PROOF["provider_denials"].append("real_provider_key_or_budget_constructor")
+        raise AssertionError("real_provider_key_or_budget_forbidden")
+
+    실제모델.OpenAIModel.__init__ = forbidden_provider
+    실제모델.AsyncOpenAI.__init__ = forbidden_provider
+    실제모델._project_key = forbidden_provider
+    호출예산.CallBudget.__init__ = forbidden_provider
+    observed_sources = [Path(__file__)] + sorted((I / "서버").glob("*.py"))
+    PROOF["source_hashes_start"] = {
+        str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in observed_sources
+    }
     with socket.socket() as probe:
         check("port unused before", probe.connect_ex(("127.0.0.1", 8796)) != 0)
     sys.addaudithook(audit)
     try:
         async with async_playwright() as driver:
-            for verdict in ["false", "invalid"]:
+            for verdict in [
+                "contradiction",
+                "citation_gap",
+                "source_conflict",
+                "insufficient_context",
+                "invalid",
+            ]:
                 await asyncio.wait_for(case(driver, verdict), timeout=45)
         check(
             "no external request attempts",
-            not PROOF["network_denials"] and not PROOF["external_browser_requests"],
+            not any(
+                PROOF[key]
+                for key in [
+                    "network_denials",
+                    "external_browser_requests",
+                    "protected_path_denials",
+                    "provider_denials",
+                ]
+            ),
         )
         check("no browser errors", not PROOF["browser_errors"] and not PROOF["console_errors"])
     except Exception:  # noqa: BLE001 - persist evidence for any validation failure
@@ -349,13 +461,19 @@ async def main():
     finally:
         with socket.socket() as probe:
             PROOF["listener_closed"] = probe.connect_ex(("127.0.0.1", 8796)) != 0
+        PROOF["source_hashes_end"] = {
+            str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in observed_sources
+        }
+        PROOF["source_drift"] = PROOF["source_hashes_start"] != PROOF["source_hashes_end"]
         PROOF["counts"] = {
             "checks": len(PROOF["checks"]),
             "passed": sum(c["passed"] for c in PROOF["checks"]),
             "cases": len(PROOF["cases"]),
             "screenshots": len(PROOF["screenshots"]),
         }
-        PROOF["passed"] = "failure" not in PROOF and PROOF["listener_closed"]
+        PROOF["passed"] = (
+            "failure" not in PROOF and PROOF["listener_closed"] and not PROOF["source_drift"]
+        )
         (OUT / "인계.json").write_text(json.dumps(PROOF, ensure_ascii=False, indent=2), "utf-8")
         print(
             json.dumps(

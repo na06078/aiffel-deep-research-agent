@@ -1,0 +1,3484 @@
+{
+  "explicit_model_double": true,
+  "actual_provider_requests": 0,
+  "unverified": [
+    "실제 모델 판별 능력",
+    "실제 제공자/인증/공유 예산",
+    "실제 웹 수집"
+  ],
+  "checks": [
+    {
+      "name": "port unused before",
+      "passed": true
+    },
+    {
+      "name": "contradiction: server ready",
+      "passed": true
+    },
+    {
+      "name": "contradiction: UI admission",
+      "passed": true
+    },
+    {
+      "name": "contradiction: upstream reached semantic guard",
+      "passed": true,
+      "operations": [
+        "plan",
+        "read_one",
+        "read_one",
+        "read_one",
+        "read_one",
+        "select",
+        "select",
+        "select",
+        "select",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "select",
+        "draft_section",
+        "synthesize",
+        "semantic_review"
+      ]
+    },
+    {
+      "name": "contradiction: exact API block",
+      "passed": true,
+      "quality": {
+        "passed": false,
+        "reasons": [
+          "semantic_review_failed"
+        ],
+        "warnings": [
+          "자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다."
+        ],
+        "metrics": {
+          "문장수": 13,
+          "근거붙은문장": 4,
+          "근거율": 30.8,
+          "허위인용": [],
+          "읽은문서": 4,
+          "읽고안쓴": [],
+          "인용편중": 25.0,
+          "중복률": 0.0,
+          "절수": 4,
+          "보고서자수": 3515,
+          "인용수": 4,
+          "LLM호출": 17,
+          "격리율": 24.6
+        },
+        "unknown_citations": [],
+        "unread_citations": [],
+        "misattributed_citations": [],
+        "semantic_review_raw": "{\"검토목록ID\": \"cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9\", \"판정\": \"needs_revision\", \"문제\": [{\"유형\": \"contradiction\", \"설명\": \"명시적 대역 판정 <img src=x onerror=\\\"window.__semanticInjected=1\\\">\", \"본문발췌\": \"자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다\", \"근거번호\": [1]}], \"검토요약\": \"의미 판별 성능을 입증하지 않는 차단 표시 검사\"}",
+        "semantic_review": {
+          "통과": false,
+          "문제": [
+            {
+              "유형": "contradiction",
+              "설명": "명시적 대역 판정 <img src=x onerror=\"window.__semanticInjected=1\">",
+              "본문발췌": "자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다",
+              "근거번호": [
+                1
+              ],
+              "출처": [
+                "운요호 사건"
+              ],
+              "근거문맥": [
+                {
+                  "end": 277,
+                  "id": 1,
+                  "kind": "quote",
+                  "section_id": "section-1",
+                  "source_hash": "e17d3aeda22d512cde0f6efdadac3a9140801b65ea5a0aad4b45d53f69baee75",
+                  "source_id": "운요호 사건",
+                  "start": 0,
+                  "text": "운요호 사건(雲揚號事件, 영어: Un'yō incident, 1875년 9월 20일(고종 12년, 음력 8월 21일)) 또는 강화도 사건(江華島事件, 영어: Ganghwa Island incident)은 통상조약 체결을 위해 일본 군함 운요호가 불법으로 강화도에 들어와 측량을 구실로 조선 정부의 동태를 살피다, 조선 수비대와 전투를 벌인 사건이다.\n\n\n== 배경 ==\n\n일본은 1868년 메이지 유신을 통해 안으로 중앙집권화와 근대화를 단행하고, 밖으로는 침략전쟁을 벌여 부국강병을 모색했다. "
+                }
+              ]
+            }
+          ],
+          "검토요약": "의미 판별 성능을 입증하지 않는 차단 표시 검사",
+          "검토계약": "source-context-review-v1",
+          "검토목록ID": "cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9",
+          "판정": "needs_revision",
+          "제공범위": {
+            "additional_bytes": 58057,
+            "incomplete": false,
+            "omitted": 0,
+            "original_characters": 19474,
+            "original_items": 4,
+            "provided_characters": 19474,
+            "selected": 66
+          }
+        }
+      }
+    },
+    {
+      "name": "contradiction: draft preserved / no final / queue paused",
+      "passed": true
+    },
+    {
+      "name": "contradiction: SQLite durable draft and no report",
+      "passed": true
+    },
+    {
+      "name": "contradiction/1440: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "contradiction/1440: literal excerpt/source/markup",
+      "passed": true
+    },
+    {
+      "name": "contradiction/1440: correction follows reason not problem count",
+      "passed": true
+    },
+    {
+      "name": "contradiction/1440: original context visible and escaped",
+      "passed": true
+    },
+    {
+      "name": "contradiction/1440: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "contradiction/1440: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "contradiction/1440: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "contradiction/390: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "contradiction/390: literal excerpt/source/markup",
+      "passed": true
+    },
+    {
+      "name": "contradiction/390: correction follows reason not problem count",
+      "passed": true
+    },
+    {
+      "name": "contradiction/390: original context visible and escaped",
+      "passed": true
+    },
+    {
+      "name": "contradiction/390: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "contradiction/390: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "contradiction/390: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "contradiction/844: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "contradiction/844: literal excerpt/source/markup",
+      "passed": true
+    },
+    {
+      "name": "contradiction/844: correction follows reason not problem count",
+      "passed": true
+    },
+    {
+      "name": "contradiction/844: original context visible and escaped",
+      "passed": true
+    },
+    {
+      "name": "contradiction/844: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "contradiction/844: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "contradiction/844: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "contradiction: history explains cause and keeps draft",
+      "passed": true
+    },
+    {
+      "name": "contradiction: reload restores verdict without automatic retry",
+      "passed": true
+    },
+    {
+      "name": "contradiction: only explicit admission mutated isolated service",
+      "passed": true
+    },
+    {
+      "name": "contradiction: service/model cleanup",
+      "passed": true
+    },
+    {
+      "name": "citation_gap: server ready",
+      "passed": true
+    },
+    {
+      "name": "citation_gap: UI admission",
+      "passed": true
+    },
+    {
+      "name": "citation_gap: upstream reached semantic guard",
+      "passed": true,
+      "operations": [
+        "plan",
+        "read_one",
+        "read_one",
+        "read_one",
+        "read_one",
+        "select",
+        "select",
+        "select",
+        "select",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "select",
+        "draft_section",
+        "synthesize",
+        "semantic_review"
+      ]
+    },
+    {
+      "name": "citation_gap: exact API block",
+      "passed": true,
+      "quality": {
+        "passed": false,
+        "reasons": [
+          "semantic_review_failed"
+        ],
+        "warnings": [
+          "자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다."
+        ],
+        "metrics": {
+          "문장수": 13,
+          "근거붙은문장": 4,
+          "근거율": 30.8,
+          "허위인용": [],
+          "읽은문서": 4,
+          "읽고안쓴": [],
+          "인용편중": 25.0,
+          "중복률": 0.0,
+          "절수": 4,
+          "보고서자수": 3515,
+          "인용수": 4,
+          "LLM호출": 17,
+          "격리율": 24.6
+        },
+        "unknown_citations": [],
+        "unread_citations": [],
+        "misattributed_citations": [],
+        "semantic_review_raw": "{\"검토목록ID\": \"cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9\", \"판정\": \"needs_revision\", \"문제\": [{\"유형\": \"citation_gap\", \"설명\": \"명시적 대역 판정 <img src=x onerror=\\\"window.__semanticInjected=1\\\">\", \"본문발췌\": \"자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다\", \"근거번호\": [5]}], \"검토요약\": \"의미 판별 성능을 입증하지 않는 차단 표시 검사\"}",
+        "semantic_review": {
+          "통과": false,
+          "문제": [
+            {
+              "유형": "citation_gap",
+              "설명": "명시적 대역 판정 <img src=x onerror=\"window.__semanticInjected=1\">",
+              "본문발췌": "자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다",
+              "근거번호": [
+                5
+              ],
+              "출처": [
+                "조미 수호 통상 조약"
+              ],
+              "근거문맥": [
+                {
+                  "end": 848,
+                  "id": 5,
+                  "kind": "surrounding",
+                  "section_id": "section-3",
+                  "source_hash": "b70c51a95233c5927cdec6f9ce90e612a4ae40f32b92dbb1fbf1ee8135df8c46",
+                  "source_id": "조미 수호 통상 조약",
+                  "start": 565,
+                  "text": "이때에 청나라의 북양대신(北洋大臣) 이홍장은 일본의 조선 진출을 막고, 조선의 종주국 노릇을 하기 위하여 구미 여러 나라와의 수호 통상을 권고하고 있었다. 이때 슈펠트는 이홍장에게 조선과의 수호 통상을 알선해 주기를 청했다. 그동안 수차의 회합과 사신 파견 등을 거쳐 1882년(고종 19) 음력 3월 슈펠트 제독은 청나라 사신 마건충(馬建忠)·정여창(丁汝昌) 등과 인천에 도착하여 그들의 알선으로 정부의 전권대관 신헌, 부관 김홍집 등과 음력 4월 6일(양력 5월 22일) 수호 통상 조약을 체결하였다.\n"
+                }
+              ]
+            }
+          ],
+          "검토요약": "의미 판별 성능을 입증하지 않는 차단 표시 검사",
+          "검토계약": "source-context-review-v1",
+          "검토목록ID": "cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9",
+          "판정": "needs_revision",
+          "제공범위": {
+            "additional_bytes": 58057,
+            "incomplete": false,
+            "omitted": 0,
+            "original_characters": 19474,
+            "original_items": 4,
+            "provided_characters": 19474,
+            "selected": 66
+          }
+        }
+      }
+    },
+    {
+      "name": "citation_gap: draft preserved / no final / queue paused",
+      "passed": true
+    },
+    {
+      "name": "citation_gap: SQLite durable draft and no report",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/1440: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/1440: literal excerpt/source/markup",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/1440: correction follows reason not problem count",
+      "passed": true
+    },
+    {
+      "name": "gap/1440: citation repair is not claim-only correction",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/1440: original context visible and escaped",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/1440: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/1440: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/1440: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/390: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/390: literal excerpt/source/markup",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/390: correction follows reason not problem count",
+      "passed": true
+    },
+    {
+      "name": "gap/390: citation repair is not claim-only correction",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/390: original context visible and escaped",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/390: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/390: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/390: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/844: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/844: literal excerpt/source/markup",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/844: correction follows reason not problem count",
+      "passed": true
+    },
+    {
+      "name": "gap/844: citation repair is not claim-only correction",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/844: original context visible and escaped",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/844: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/844: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "citation_gap/844: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "citation_gap: history explains cause and keeps draft",
+      "passed": true
+    },
+    {
+      "name": "citation_gap: reload restores verdict without automatic retry",
+      "passed": true
+    },
+    {
+      "name": "citation_gap: only explicit admission mutated isolated service",
+      "passed": true
+    },
+    {
+      "name": "citation_gap: service/model cleanup",
+      "passed": true
+    },
+    {
+      "name": "source_conflict: server ready",
+      "passed": true
+    },
+    {
+      "name": "source_conflict: UI admission",
+      "passed": true
+    },
+    {
+      "name": "source_conflict: upstream reached semantic guard",
+      "passed": true,
+      "operations": [
+        "plan",
+        "read_one",
+        "read_one",
+        "read_one",
+        "read_one",
+        "select",
+        "select",
+        "select",
+        "select",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "select",
+        "draft_section",
+        "synthesize",
+        "semantic_review"
+      ]
+    },
+    {
+      "name": "source_conflict: exact API block",
+      "passed": true,
+      "quality": {
+        "passed": false,
+        "reasons": [
+          "semantic_review_failed"
+        ],
+        "warnings": [
+          "자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다."
+        ],
+        "metrics": {
+          "문장수": 13,
+          "근거붙은문장": 4,
+          "근거율": 30.8,
+          "허위인용": [],
+          "읽은문서": 4,
+          "읽고안쓴": [],
+          "인용편중": 25.0,
+          "중복률": 0.0,
+          "절수": 4,
+          "보고서자수": 3515,
+          "인용수": 4,
+          "LLM호출": 17,
+          "격리율": 24.6
+        },
+        "unknown_citations": [],
+        "unread_citations": [],
+        "misattributed_citations": [],
+        "semantic_review_raw": "{\"검토목록ID\": \"cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9\", \"판정\": \"undetermined\", \"문제\": [{\"유형\": \"source_conflict\", \"설명\": \"명시적 대역 판정 <img src=x onerror=\\\"window.__semanticInjected=1\\\">\", \"본문발췌\": \"자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다\", \"근거번호\": [1, 2]}], \"검토요약\": \"의미 판별 성능을 입증하지 않는 차단 표시 검사\"}",
+        "semantic_review": {
+          "통과": false,
+          "문제": [
+            {
+              "유형": "source_conflict",
+              "설명": "명시적 대역 판정 <img src=x onerror=\"window.__semanticInjected=1\">",
+              "본문발췌": "자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다",
+              "근거번호": [
+                1,
+                2
+              ],
+              "출처": [
+                "운요호 사건",
+                "강화도 조약"
+              ],
+              "근거문맥": [
+                {
+                  "end": 277,
+                  "id": 1,
+                  "kind": "quote",
+                  "section_id": "section-1",
+                  "source_hash": "e17d3aeda22d512cde0f6efdadac3a9140801b65ea5a0aad4b45d53f69baee75",
+                  "source_id": "운요호 사건",
+                  "start": 0,
+                  "text": "운요호 사건(雲揚號事件, 영어: Un'yō incident, 1875년 9월 20일(고종 12년, 음력 8월 21일)) 또는 강화도 사건(江華島事件, 영어: Ganghwa Island incident)은 통상조약 체결을 위해 일본 군함 운요호가 불법으로 강화도에 들어와 측량을 구실로 조선 정부의 동태를 살피다, 조선 수비대와 전투를 벌인 사건이다.\n\n\n== 배경 ==\n\n일본은 1868년 메이지 유신을 통해 안으로 중앙집권화와 근대화를 단행하고, 밖으로는 침략전쟁을 벌여 부국강병을 모색했다. "
+                },
+                {
+                  "end": 234,
+                  "id": 2,
+                  "kind": "quote",
+                  "section_id": "section-2",
+                  "source_hash": "48e4891654eac6179c6cbc74645192151dd7b84453e9c82992789c52616e00dc",
+                  "source_id": "강화도 조약",
+                  "start": 0,
+                  "text": "조일수호조규(朝日修好條規, 영어: Japan-Korea Treaty of 1876) 또는 강화도 조약(江華島條約)은 1876년 2월 27일(고종 13년 음력 2월 3일) 조선과 일본 제국 사이에 체결된 조약이다.\n조선이 근대 국제법의 토대 위에서 맺은 최초의 조약이며, 한일 관계에서 중요한 의의가 있다. 흔히 일본의 강압적 위협으로 맺어진 불평등 조약으로 얘기되지만, 일본의 요구가 일방적으로 관철된 조약은 아니다. "
+                }
+              ]
+            }
+          ],
+          "검토요약": "의미 판별 성능을 입증하지 않는 차단 표시 검사",
+          "검토계약": "source-context-review-v1",
+          "검토목록ID": "cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9",
+          "판정": "undetermined",
+          "제공범위": {
+            "additional_bytes": 58057,
+            "incomplete": false,
+            "omitted": 0,
+            "original_characters": 19474,
+            "original_items": 4,
+            "provided_characters": 19474,
+            "selected": 66
+          }
+        }
+      }
+    },
+    {
+      "name": "source_conflict: draft preserved / no final / queue paused",
+      "passed": true
+    },
+    {
+      "name": "source_conflict: SQLite durable draft and no report",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/1440: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/1440: literal excerpt/source/markup",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/1440: correction follows reason not problem count",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/1440: original context visible and escaped",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/1440: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/1440: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/1440: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/390: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/390: literal excerpt/source/markup",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/390: correction follows reason not problem count",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/390: original context visible and escaped",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/390: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/390: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/390: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/844: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/844: literal excerpt/source/markup",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/844: correction follows reason not problem count",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/844: original context visible and escaped",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/844: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/844: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "source_conflict/844: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "source_conflict: history explains cause and keeps draft",
+      "passed": true
+    },
+    {
+      "name": "source_conflict: reload restores verdict without automatic retry",
+      "passed": true
+    },
+    {
+      "name": "source_conflict: only explicit admission mutated isolated service",
+      "passed": true
+    },
+    {
+      "name": "source_conflict: service/model cleanup",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context: server ready",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context: UI admission",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context: upstream reached semantic guard",
+      "passed": true,
+      "operations": [
+        "plan",
+        "read_one",
+        "read_one",
+        "read_one",
+        "read_one",
+        "select",
+        "select",
+        "select",
+        "select",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "select",
+        "draft_section",
+        "synthesize",
+        "semantic_review"
+      ]
+    },
+    {
+      "name": "insufficient_context: exact API block",
+      "passed": true,
+      "quality": {
+        "passed": false,
+        "reasons": [
+          "semantic_review_failed"
+        ],
+        "warnings": [
+          "자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다."
+        ],
+        "metrics": {
+          "문장수": 13,
+          "근거붙은문장": 4,
+          "근거율": 30.8,
+          "허위인용": [],
+          "읽은문서": 4,
+          "읽고안쓴": [],
+          "인용편중": 25.0,
+          "중복률": 0.0,
+          "절수": 4,
+          "보고서자수": 3515,
+          "인용수": 4,
+          "LLM호출": 17,
+          "격리율": 24.6
+        },
+        "unknown_citations": [],
+        "unread_citations": [],
+        "misattributed_citations": [],
+        "semantic_review_raw": "{\"검토목록ID\": \"cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9\", \"판정\": \"undetermined\", \"문제\": [{\"유형\": \"insufficient_context\", \"설명\": \"명시적 대역 판정 <img src=x onerror=\\\"window.__semanticInjected=1\\\">\", \"본문발췌\": \"자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다\", \"근거번호\": []}], \"검토요약\": \"의미 판별 성능을 입증하지 않는 차단 표시 검사\"}",
+        "semantic_review": {
+          "통과": false,
+          "문제": [
+            {
+              "유형": "insufficient_context",
+              "설명": "명시적 대역 판정 <img src=x onerror=\"window.__semanticInjected=1\">",
+              "본문발췌": "자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다",
+              "근거번호": [],
+              "출처": [],
+              "근거문맥": []
+            }
+          ],
+          "검토요약": "의미 판별 성능을 입증하지 않는 차단 표시 검사",
+          "검토계약": "source-context-review-v1",
+          "검토목록ID": "cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9",
+          "판정": "undetermined",
+          "제공범위": {
+            "additional_bytes": 58057,
+            "incomplete": false,
+            "omitted": 0,
+            "original_characters": 19474,
+            "original_items": 4,
+            "provided_characters": 19474,
+            "selected": 66
+          }
+        }
+      }
+    },
+    {
+      "name": "insufficient_context: draft preserved / no final / queue paused",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context: SQLite durable draft and no report",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context/1440: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context/1440: literal excerpt/source/markup",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context/1440: correction follows reason not problem count",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context/1440: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context/1440: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context/1440: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context/390: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context/390: literal excerpt/source/markup",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context/390: correction follows reason not problem count",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context/390: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context/390: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context/390: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context/844: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context/844: literal excerpt/source/markup",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context/844: correction follows reason not problem count",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context/844: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context/844: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context/844: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context: history explains cause and keeps draft",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context: reload restores verdict without automatic retry",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context: only explicit admission mutated isolated service",
+      "passed": true
+    },
+    {
+      "name": "insufficient_context: service/model cleanup",
+      "passed": true
+    },
+    {
+      "name": "invalid: server ready",
+      "passed": true
+    },
+    {
+      "name": "invalid: UI admission",
+      "passed": true
+    },
+    {
+      "name": "invalid: upstream reached semantic guard",
+      "passed": true,
+      "operations": [
+        "plan",
+        "read_one",
+        "read_one",
+        "read_one",
+        "read_one",
+        "select",
+        "select",
+        "select",
+        "select",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "select",
+        "draft_section",
+        "synthesize",
+        "semantic_review"
+      ]
+    },
+    {
+      "name": "invalid: exact API block",
+      "passed": true,
+      "quality": {
+        "passed": false,
+        "reasons": [
+          "semantic_review_invalid"
+        ],
+        "warnings": [
+          "자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다."
+        ],
+        "metrics": {
+          "문장수": 13,
+          "근거붙은문장": 4,
+          "근거율": 30.8,
+          "허위인용": [],
+          "읽은문서": 4,
+          "읽고안쓴": [],
+          "인용편중": 25.0,
+          "중복률": 0.0,
+          "절수": 4,
+          "보고서자수": 3515,
+          "인용수": 4,
+          "LLM호출": 17,
+          "격리율": 24.6
+        },
+        "unknown_citations": [],
+        "unread_citations": [],
+        "misattributed_citations": [],
+        "semantic_review_raw": "THIS IS NOT JSON <script>window.__semanticInjected=1</script>"
+      }
+    },
+    {
+      "name": "invalid: draft preserved / no final / queue paused",
+      "passed": true
+    },
+    {
+      "name": "invalid: SQLite durable draft and no report",
+      "passed": true
+    },
+    {
+      "name": "invalid/1440: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "invalid/1440: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "invalid/1440: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "invalid/1440: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "invalid/390: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "invalid/390: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "invalid/390: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "invalid/390: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "invalid/844: cause and next action",
+      "passed": true
+    },
+    {
+      "name": "invalid/844: one canvas and no root overflow",
+      "passed": true
+    },
+    {
+      "name": "invalid/844: close/input hit test",
+      "passed": true
+    },
+    {
+      "name": "invalid/844: input keyboard access",
+      "passed": true
+    },
+    {
+      "name": "invalid: history explains cause and keeps draft",
+      "passed": true
+    },
+    {
+      "name": "invalid: reload restores verdict without automatic retry",
+      "passed": true
+    },
+    {
+      "name": "invalid: only explicit admission mutated isolated service",
+      "passed": true
+    },
+    {
+      "name": "invalid: service/model cleanup",
+      "passed": true
+    },
+    {
+      "name": "no external request attempts",
+      "passed": true
+    },
+    {
+      "name": "no browser errors",
+      "passed": true
+    }
+  ],
+  "cases": [
+    {
+      "case": "contradiction",
+      "data_dir": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\근거문맥\\차단화면\\fdb65f28dc4a42da90c4afc36f51a8f6\\contradiction",
+      "run": {
+        "run_id": "ac8eaa55fa934be28e2670cd28511dd0",
+        "question": "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?",
+        "control_revision": 1,
+        "status": "blocked",
+        "phase": "quality_failed",
+        "plan": [
+          {
+            "section_id": "section-1",
+            "title": "사건 0",
+            "assignee": "researcher-1",
+            "role": "원인 담당",
+            "seed": "운요호 사건",
+            "instruction": "사건과 원인을 자료대로 밝히라 (재위임: 지난번에 «운요호 사건» 를 읽었지만 추가 원인 자료 필요. 그 빈 칸을 채우도록 아직 안 본 문서를 찾아라)",
+            "budget": 3,
+            "round": 2,
+            "order": 0
+          },
+          {
+            "section_id": "section-2",
+            "title": "사건 1",
+            "assignee": "researcher-2",
+            "role": "원인 담당",
+            "seed": "강화도 조약",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 1
+          },
+          {
+            "section_id": "section-3",
+            "title": "사건 2",
+            "assignee": "researcher-3",
+            "role": "원인 담당",
+            "seed": "조미 수호 통상 조약",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 2
+          },
+          {
+            "section_id": "section-4",
+            "title": "사건 3",
+            "assignee": "researcher-4",
+            "role": "원인 담당",
+            "seed": "거문도 사건",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 3
+          }
+        ],
+        "report_id": null,
+        "draft": "# 1894년 사건과 원인\n\n질문에 관한 연구를 정리한다.\n\n## 1. 사건 0  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «운요호 사건»\n\n## 2. 사건 1  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «강화도 조약»\n\n## 3. 사건 2  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «조미 수호 통상 조약»\n\n## 4. 사건 3  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «거문도 사건»\n\n## 맺음말\n\n각 사건의 원인은 자료의 범위 안에서 해석해야 한다.\n\n시각화 생략 사유: 이 대역은 시각 요약을 만들지 않는다\\.\n\n## 출처 및 이용허락\n고정 코퍼스: 한국어 위키백과 (CC BY-SA 4.0), MediaWiki API로 수집; 수집일 2026-09-21.\n한국어 위키백과 원문을 조사 메모로 요약하고 절 원고로 재구성했습니다. 원문 기여자·변경 이력은 각 문서의 역사 탭에서 확인할 수 있습니다. 원자료 이용허락: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). 이 보고서는 같은 이용허락으로 제공합니다.\n- [강화도 조약](https://ko.wikipedia.org/wiki/%EA%B0%95%ED%99%94%EB%8F%84_%EC%A1%B0%EC%95%BD) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EA%B0%95%ED%99%94%EB%8F%84%20%EC%A1%B0%EC%95%BD&action=history))\n- [거문도 사건](https://ko.wikipedia.org/wiki/%EA%B1%B0%EB%AC%B8%EB%8F%84_%EC%82%AC%EA%B1%B4) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EA%B1%B0%EB%AC%B8%EB%8F%84%20%EC%82%AC%EA%B1%B4&action=history))\n- [운요호 사건](https://ko.wikipedia.org/wiki/%EC%9A%B4%EC%9A%94%ED%98%B8_%EC%82%AC%EA%B1%B4) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EC%9A%B4%EC%9A%94%ED%98%B8%20%EC%82%AC%EA%B1%B4&action=history))\n- [조미 수호 통상 조약](https://ko.wikipedia.org/wiki/%EC%A1%B0%EB%AF%B8_%EC%88%98%ED%98%B8_%ED%86%B5%EC%83%81_%EC%A1%B0%EC%95%BD) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EC%A1%B0%EB%AF%B8%20%EC%88%98%ED%98%B8%20%ED%86%B5%EC%83%81%20%EC%A1%B0%EC%95%BD&action=history))",
+        "quality": {
+          "passed": false,
+          "reasons": [
+            "semantic_review_failed"
+          ],
+          "warnings": [
+            "자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다."
+          ],
+          "metrics": {
+            "문장수": 13,
+            "근거붙은문장": 4,
+            "근거율": 30.8,
+            "허위인용": [],
+            "읽은문서": 4,
+            "읽고안쓴": [],
+            "인용편중": 25.0,
+            "중복률": 0.0,
+            "절수": 4,
+            "보고서자수": 3515,
+            "인용수": 4,
+            "LLM호출": 17,
+            "격리율": 24.6
+          },
+          "unknown_citations": [],
+          "unread_citations": [],
+          "misattributed_citations": [],
+          "semantic_review_raw": "{\"검토목록ID\": \"cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9\", \"판정\": \"needs_revision\", \"문제\": [{\"유형\": \"contradiction\", \"설명\": \"명시적 대역 판정 <img src=x onerror=\\\"window.__semanticInjected=1\\\">\", \"본문발췌\": \"자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다\", \"근거번호\": [1]}], \"검토요약\": \"의미 판별 성능을 입증하지 않는 차단 표시 검사\"}",
+          "semantic_review": {
+            "통과": false,
+            "문제": [
+              {
+                "유형": "contradiction",
+                "설명": "명시적 대역 판정 <img src=x onerror=\"window.__semanticInjected=1\">",
+                "본문발췌": "자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다",
+                "근거번호": [
+                  1
+                ],
+                "출처": [
+                  "운요호 사건"
+                ],
+                "근거문맥": [
+                  {
+                    "end": 277,
+                    "id": 1,
+                    "kind": "quote",
+                    "section_id": "section-1",
+                    "source_hash": "e17d3aeda22d512cde0f6efdadac3a9140801b65ea5a0aad4b45d53f69baee75",
+                    "source_id": "운요호 사건",
+                    "start": 0,
+                    "text": "운요호 사건(雲揚號事件, 영어: Un'yō incident, 1875년 9월 20일(고종 12년, 음력 8월 21일)) 또는 강화도 사건(江華島事件, 영어: Ganghwa Island incident)은 통상조약 체결을 위해 일본 군함 운요호가 불법으로 강화도에 들어와 측량을 구실로 조선 정부의 동태를 살피다, 조선 수비대와 전투를 벌인 사건이다.\n\n\n== 배경 ==\n\n일본은 1868년 메이지 유신을 통해 안으로 중앙집권화와 근대화를 단행하고, 밖으로는 침략전쟁을 벌여 부국강병을 모색했다. "
+                  }
+                ]
+              }
+            ],
+            "검토요약": "의미 판별 성능을 입증하지 않는 차단 표시 검사",
+            "검토계약": "source-context-review-v1",
+            "검토목록ID": "cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9",
+            "판정": "needs_revision",
+            "제공범위": {
+              "additional_bytes": 58057,
+              "incomplete": false,
+              "omitted": 0,
+              "original_characters": 19474,
+              "original_items": 4,
+              "provided_characters": 19474,
+              "selected": 66
+            }
+          }
+        },
+        "parent_report_id": null,
+        "created_at": "2026-11-10T06:13:30.629066+00:00",
+        "updated_at": "2026-11-10T06:13:31.261089+00:00",
+        "mock_requests": 0,
+        "actual_model_requests": 17,
+        "source_mode": "local",
+        "instruction_history": [
+          "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?"
+        ],
+        "report_title": "1894년 사건과 원인",
+        "research_stop_reason": "sufficient",
+        "visual_summary": {
+          "머리말": "질문에 관한 연구를 정리한다.",
+          "맺음말": "각 사건의 원인은 자료의 범위 안에서 해석해야 한다.",
+          "표": [],
+          "도식": [],
+          "시각화생략사유": "이 대역은 시각 요약을 만들지 않는다."
+        },
+        "semantic_review_state": {
+          "revision": 1,
+          "status": "completed",
+          "raw": "{\"검토목록ID\": \"cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9\", \"판정\": \"needs_revision\", \"문제\": [{\"유형\": \"contradiction\", \"설명\": \"명시적 대역 판정 <img src=x onerror=\\\"window.__semanticInjected=1\\\">\", \"본문발췌\": \"자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다\", \"근거번호\": [1]}], \"검토요약\": \"의미 판별 성능을 입증하지 않는 차단 표시 검사\"}"
+        }
+      },
+      "snapshot_queue_paused": true,
+      "double_operations": [
+        "plan",
+        "read_one",
+        "read_one",
+        "read_one",
+        "read_one",
+        "select",
+        "select",
+        "select",
+        "select",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "select",
+        "draft_section",
+        "synthesize",
+        "semantic_review"
+      ],
+      "sqlite": {
+        "integrity_check": "ok",
+        "reports": 0,
+        "revision_matches_api": true
+      },
+      "result": "PASS",
+      "model_closed": true,
+      "elapsed_seconds": 4.219
+    },
+    {
+      "case": "citation_gap",
+      "data_dir": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\근거문맥\\차단화면\\fdb65f28dc4a42da90c4afc36f51a8f6\\citation_gap",
+      "run": {
+        "run_id": "80e417d158c54904be9b5d80137f9d30",
+        "question": "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?",
+        "control_revision": 1,
+        "status": "blocked",
+        "phase": "quality_failed",
+        "plan": [
+          {
+            "section_id": "section-1",
+            "title": "사건 0",
+            "assignee": "researcher-1",
+            "role": "원인 담당",
+            "seed": "운요호 사건",
+            "instruction": "사건과 원인을 자료대로 밝히라 (재위임: 지난번에 «운요호 사건» 를 읽었지만 추가 원인 자료 필요. 그 빈 칸을 채우도록 아직 안 본 문서를 찾아라)",
+            "budget": 3,
+            "round": 2,
+            "order": 0
+          },
+          {
+            "section_id": "section-2",
+            "title": "사건 1",
+            "assignee": "researcher-2",
+            "role": "원인 담당",
+            "seed": "강화도 조약",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 1
+          },
+          {
+            "section_id": "section-3",
+            "title": "사건 2",
+            "assignee": "researcher-3",
+            "role": "원인 담당",
+            "seed": "조미 수호 통상 조약",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 2
+          },
+          {
+            "section_id": "section-4",
+            "title": "사건 3",
+            "assignee": "researcher-4",
+            "role": "원인 담당",
+            "seed": "거문도 사건",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 3
+          }
+        ],
+        "report_id": null,
+        "draft": "# 1894년 사건과 원인\n\n질문에 관한 연구를 정리한다.\n\n## 1. 사건 0  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «운요호 사건»\n\n## 2. 사건 1  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «강화도 조약»\n\n## 3. 사건 2  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «조미 수호 통상 조약»\n\n## 4. 사건 3  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «거문도 사건»\n\n## 맺음말\n\n각 사건의 원인은 자료의 범위 안에서 해석해야 한다.\n\n시각화 생략 사유: 이 대역은 시각 요약을 만들지 않는다\\.\n\n## 출처 및 이용허락\n고정 코퍼스: 한국어 위키백과 (CC BY-SA 4.0), MediaWiki API로 수집; 수집일 2026-09-21.\n한국어 위키백과 원문을 조사 메모로 요약하고 절 원고로 재구성했습니다. 원문 기여자·변경 이력은 각 문서의 역사 탭에서 확인할 수 있습니다. 원자료 이용허락: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). 이 보고서는 같은 이용허락으로 제공합니다.\n- [강화도 조약](https://ko.wikipedia.org/wiki/%EA%B0%95%ED%99%94%EB%8F%84_%EC%A1%B0%EC%95%BD) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EA%B0%95%ED%99%94%EB%8F%84%20%EC%A1%B0%EC%95%BD&action=history))\n- [거문도 사건](https://ko.wikipedia.org/wiki/%EA%B1%B0%EB%AC%B8%EB%8F%84_%EC%82%AC%EA%B1%B4) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EA%B1%B0%EB%AC%B8%EB%8F%84%20%EC%82%AC%EA%B1%B4&action=history))\n- [운요호 사건](https://ko.wikipedia.org/wiki/%EC%9A%B4%EC%9A%94%ED%98%B8_%EC%82%AC%EA%B1%B4) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EC%9A%B4%EC%9A%94%ED%98%B8%20%EC%82%AC%EA%B1%B4&action=history))\n- [조미 수호 통상 조약](https://ko.wikipedia.org/wiki/%EC%A1%B0%EB%AF%B8_%EC%88%98%ED%98%B8_%ED%86%B5%EC%83%81_%EC%A1%B0%EC%95%BD) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EC%A1%B0%EB%AF%B8%20%EC%88%98%ED%98%B8%20%ED%86%B5%EC%83%81%20%EC%A1%B0%EC%95%BD&action=history))",
+        "quality": {
+          "passed": false,
+          "reasons": [
+            "semantic_review_failed"
+          ],
+          "warnings": [
+            "자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다."
+          ],
+          "metrics": {
+            "문장수": 13,
+            "근거붙은문장": 4,
+            "근거율": 30.8,
+            "허위인용": [],
+            "읽은문서": 4,
+            "읽고안쓴": [],
+            "인용편중": 25.0,
+            "중복률": 0.0,
+            "절수": 4,
+            "보고서자수": 3515,
+            "인용수": 4,
+            "LLM호출": 17,
+            "격리율": 24.6
+          },
+          "unknown_citations": [],
+          "unread_citations": [],
+          "misattributed_citations": [],
+          "semantic_review_raw": "{\"검토목록ID\": \"cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9\", \"판정\": \"needs_revision\", \"문제\": [{\"유형\": \"citation_gap\", \"설명\": \"명시적 대역 판정 <img src=x onerror=\\\"window.__semanticInjected=1\\\">\", \"본문발췌\": \"자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다\", \"근거번호\": [5]}], \"검토요약\": \"의미 판별 성능을 입증하지 않는 차단 표시 검사\"}",
+          "semantic_review": {
+            "통과": false,
+            "문제": [
+              {
+                "유형": "citation_gap",
+                "설명": "명시적 대역 판정 <img src=x onerror=\"window.__semanticInjected=1\">",
+                "본문발췌": "자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다",
+                "근거번호": [
+                  5
+                ],
+                "출처": [
+                  "조미 수호 통상 조약"
+                ],
+                "근거문맥": [
+                  {
+                    "end": 848,
+                    "id": 5,
+                    "kind": "surrounding",
+                    "section_id": "section-3",
+                    "source_hash": "b70c51a95233c5927cdec6f9ce90e612a4ae40f32b92dbb1fbf1ee8135df8c46",
+                    "source_id": "조미 수호 통상 조약",
+                    "start": 565,
+                    "text": "이때에 청나라의 북양대신(北洋大臣) 이홍장은 일본의 조선 진출을 막고, 조선의 종주국 노릇을 하기 위하여 구미 여러 나라와의 수호 통상을 권고하고 있었다. 이때 슈펠트는 이홍장에게 조선과의 수호 통상을 알선해 주기를 청했다. 그동안 수차의 회합과 사신 파견 등을 거쳐 1882년(고종 19) 음력 3월 슈펠트 제독은 청나라 사신 마건충(馬建忠)·정여창(丁汝昌) 등과 인천에 도착하여 그들의 알선으로 정부의 전권대관 신헌, 부관 김홍집 등과 음력 4월 6일(양력 5월 22일) 수호 통상 조약을 체결하였다.\n"
+                  }
+                ]
+              }
+            ],
+            "검토요약": "의미 판별 성능을 입증하지 않는 차단 표시 검사",
+            "검토계약": "source-context-review-v1",
+            "검토목록ID": "cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9",
+            "판정": "needs_revision",
+            "제공범위": {
+              "additional_bytes": 58057,
+              "incomplete": false,
+              "omitted": 0,
+              "original_characters": 19474,
+              "original_items": 4,
+              "provided_characters": 19474,
+              "selected": 66
+            }
+          }
+        },
+        "parent_report_id": null,
+        "created_at": "2026-11-10T06:13:34.703208+00:00",
+        "updated_at": "2026-11-10T06:13:35.299121+00:00",
+        "mock_requests": 0,
+        "actual_model_requests": 17,
+        "source_mode": "local",
+        "instruction_history": [
+          "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?"
+        ],
+        "report_title": "1894년 사건과 원인",
+        "research_stop_reason": "sufficient",
+        "visual_summary": {
+          "머리말": "질문에 관한 연구를 정리한다.",
+          "맺음말": "각 사건의 원인은 자료의 범위 안에서 해석해야 한다.",
+          "표": [],
+          "도식": [],
+          "시각화생략사유": "이 대역은 시각 요약을 만들지 않는다."
+        },
+        "semantic_review_state": {
+          "revision": 1,
+          "status": "completed",
+          "raw": "{\"검토목록ID\": \"cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9\", \"판정\": \"needs_revision\", \"문제\": [{\"유형\": \"citation_gap\", \"설명\": \"명시적 대역 판정 <img src=x onerror=\\\"window.__semanticInjected=1\\\">\", \"본문발췌\": \"자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다\", \"근거번호\": [5]}], \"검토요약\": \"의미 판별 성능을 입증하지 않는 차단 표시 검사\"}"
+        }
+      },
+      "snapshot_queue_paused": true,
+      "double_operations": [
+        "plan",
+        "read_one",
+        "read_one",
+        "read_one",
+        "read_one",
+        "select",
+        "select",
+        "select",
+        "select",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "select",
+        "draft_section",
+        "synthesize",
+        "semantic_review"
+      ],
+      "sqlite": {
+        "integrity_check": "ok",
+        "reports": 0,
+        "revision_matches_api": true
+      },
+      "result": "PASS",
+      "model_closed": true,
+      "elapsed_seconds": 3.687
+    },
+    {
+      "case": "source_conflict",
+      "data_dir": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\근거문맥\\차단화면\\fdb65f28dc4a42da90c4afc36f51a8f6\\source_conflict",
+      "run": {
+        "run_id": "fc14c55de30a4e90a50a404c004a2b44",
+        "question": "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?",
+        "control_revision": 1,
+        "status": "blocked",
+        "phase": "quality_failed",
+        "plan": [
+          {
+            "section_id": "section-1",
+            "title": "사건 0",
+            "assignee": "researcher-1",
+            "role": "원인 담당",
+            "seed": "운요호 사건",
+            "instruction": "사건과 원인을 자료대로 밝히라 (재위임: 지난번에 «운요호 사건» 를 읽었지만 추가 원인 자료 필요. 그 빈 칸을 채우도록 아직 안 본 문서를 찾아라)",
+            "budget": 3,
+            "round": 2,
+            "order": 0
+          },
+          {
+            "section_id": "section-2",
+            "title": "사건 1",
+            "assignee": "researcher-2",
+            "role": "원인 담당",
+            "seed": "강화도 조약",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 1
+          },
+          {
+            "section_id": "section-3",
+            "title": "사건 2",
+            "assignee": "researcher-3",
+            "role": "원인 담당",
+            "seed": "조미 수호 통상 조약",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 2
+          },
+          {
+            "section_id": "section-4",
+            "title": "사건 3",
+            "assignee": "researcher-4",
+            "role": "원인 담당",
+            "seed": "거문도 사건",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 3
+          }
+        ],
+        "report_id": null,
+        "draft": "# 1894년 사건과 원인\n\n질문에 관한 연구를 정리한다.\n\n## 1. 사건 0  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «운요호 사건»\n\n## 2. 사건 1  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «강화도 조약»\n\n## 3. 사건 2  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «조미 수호 통상 조약»\n\n## 4. 사건 3  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «거문도 사건»\n\n## 맺음말\n\n각 사건의 원인은 자료의 범위 안에서 해석해야 한다.\n\n시각화 생략 사유: 이 대역은 시각 요약을 만들지 않는다\\.\n\n## 출처 및 이용허락\n고정 코퍼스: 한국어 위키백과 (CC BY-SA 4.0), MediaWiki API로 수집; 수집일 2026-09-21.\n한국어 위키백과 원문을 조사 메모로 요약하고 절 원고로 재구성했습니다. 원문 기여자·변경 이력은 각 문서의 역사 탭에서 확인할 수 있습니다. 원자료 이용허락: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). 이 보고서는 같은 이용허락으로 제공합니다.\n- [강화도 조약](https://ko.wikipedia.org/wiki/%EA%B0%95%ED%99%94%EB%8F%84_%EC%A1%B0%EC%95%BD) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EA%B0%95%ED%99%94%EB%8F%84%20%EC%A1%B0%EC%95%BD&action=history))\n- [거문도 사건](https://ko.wikipedia.org/wiki/%EA%B1%B0%EB%AC%B8%EB%8F%84_%EC%82%AC%EA%B1%B4) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EA%B1%B0%EB%AC%B8%EB%8F%84%20%EC%82%AC%EA%B1%B4&action=history))\n- [운요호 사건](https://ko.wikipedia.org/wiki/%EC%9A%B4%EC%9A%94%ED%98%B8_%EC%82%AC%EA%B1%B4) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EC%9A%B4%EC%9A%94%ED%98%B8%20%EC%82%AC%EA%B1%B4&action=history))\n- [조미 수호 통상 조약](https://ko.wikipedia.org/wiki/%EC%A1%B0%EB%AF%B8_%EC%88%98%ED%98%B8_%ED%86%B5%EC%83%81_%EC%A1%B0%EC%95%BD) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EC%A1%B0%EB%AF%B8%20%EC%88%98%ED%98%B8%20%ED%86%B5%EC%83%81%20%EC%A1%B0%EC%95%BD&action=history))",
+        "quality": {
+          "passed": false,
+          "reasons": [
+            "semantic_review_failed"
+          ],
+          "warnings": [
+            "자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다."
+          ],
+          "metrics": {
+            "문장수": 13,
+            "근거붙은문장": 4,
+            "근거율": 30.8,
+            "허위인용": [],
+            "읽은문서": 4,
+            "읽고안쓴": [],
+            "인용편중": 25.0,
+            "중복률": 0.0,
+            "절수": 4,
+            "보고서자수": 3515,
+            "인용수": 4,
+            "LLM호출": 17,
+            "격리율": 24.6
+          },
+          "unknown_citations": [],
+          "unread_citations": [],
+          "misattributed_citations": [],
+          "semantic_review_raw": "{\"검토목록ID\": \"cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9\", \"판정\": \"undetermined\", \"문제\": [{\"유형\": \"source_conflict\", \"설명\": \"명시적 대역 판정 <img src=x onerror=\\\"window.__semanticInjected=1\\\">\", \"본문발췌\": \"자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다\", \"근거번호\": [1, 2]}], \"검토요약\": \"의미 판별 성능을 입증하지 않는 차단 표시 검사\"}",
+          "semantic_review": {
+            "통과": false,
+            "문제": [
+              {
+                "유형": "source_conflict",
+                "설명": "명시적 대역 판정 <img src=x onerror=\"window.__semanticInjected=1\">",
+                "본문발췌": "자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다",
+                "근거번호": [
+                  1,
+                  2
+                ],
+                "출처": [
+                  "운요호 사건",
+                  "강화도 조약"
+                ],
+                "근거문맥": [
+                  {
+                    "end": 277,
+                    "id": 1,
+                    "kind": "quote",
+                    "section_id": "section-1",
+                    "source_hash": "e17d3aeda22d512cde0f6efdadac3a9140801b65ea5a0aad4b45d53f69baee75",
+                    "source_id": "운요호 사건",
+                    "start": 0,
+                    "text": "운요호 사건(雲揚號事件, 영어: Un'yō incident, 1875년 9월 20일(고종 12년, 음력 8월 21일)) 또는 강화도 사건(江華島事件, 영어: Ganghwa Island incident)은 통상조약 체결을 위해 일본 군함 운요호가 불법으로 강화도에 들어와 측량을 구실로 조선 정부의 동태를 살피다, 조선 수비대와 전투를 벌인 사건이다.\n\n\n== 배경 ==\n\n일본은 1868년 메이지 유신을 통해 안으로 중앙집권화와 근대화를 단행하고, 밖으로는 침략전쟁을 벌여 부국강병을 모색했다. "
+                  },
+                  {
+                    "end": 234,
+                    "id": 2,
+                    "kind": "quote",
+                    "section_id": "section-2",
+                    "source_hash": "48e4891654eac6179c6cbc74645192151dd7b84453e9c82992789c52616e00dc",
+                    "source_id": "강화도 조약",
+                    "start": 0,
+                    "text": "조일수호조규(朝日修好條規, 영어: Japan-Korea Treaty of 1876) 또는 강화도 조약(江華島條約)은 1876년 2월 27일(고종 13년 음력 2월 3일) 조선과 일본 제국 사이에 체결된 조약이다.\n조선이 근대 국제법의 토대 위에서 맺은 최초의 조약이며, 한일 관계에서 중요한 의의가 있다. 흔히 일본의 강압적 위협으로 맺어진 불평등 조약으로 얘기되지만, 일본의 요구가 일방적으로 관철된 조약은 아니다. "
+                  }
+                ]
+              }
+            ],
+            "검토요약": "의미 판별 성능을 입증하지 않는 차단 표시 검사",
+            "검토계약": "source-context-review-v1",
+            "검토목록ID": "cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9",
+            "판정": "undetermined",
+            "제공범위": {
+              "additional_bytes": 58057,
+              "incomplete": false,
+              "omitted": 0,
+              "original_characters": 19474,
+              "original_items": 4,
+              "provided_characters": 19474,
+              "selected": 66
+            }
+          }
+        },
+        "parent_report_id": null,
+        "created_at": "2026-11-10T06:13:38.345064+00:00",
+        "updated_at": "2026-11-10T06:13:38.931674+00:00",
+        "mock_requests": 0,
+        "actual_model_requests": 17,
+        "source_mode": "local",
+        "instruction_history": [
+          "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?"
+        ],
+        "report_title": "1894년 사건과 원인",
+        "research_stop_reason": "sufficient",
+        "visual_summary": {
+          "머리말": "질문에 관한 연구를 정리한다.",
+          "맺음말": "각 사건의 원인은 자료의 범위 안에서 해석해야 한다.",
+          "표": [],
+          "도식": [],
+          "시각화생략사유": "이 대역은 시각 요약을 만들지 않는다."
+        },
+        "semantic_review_state": {
+          "revision": 1,
+          "status": "completed",
+          "raw": "{\"검토목록ID\": \"cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9\", \"판정\": \"undetermined\", \"문제\": [{\"유형\": \"source_conflict\", \"설명\": \"명시적 대역 판정 <img src=x onerror=\\\"window.__semanticInjected=1\\\">\", \"본문발췌\": \"자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다\", \"근거번호\": [1, 2]}], \"검토요약\": \"의미 판별 성능을 입증하지 않는 차단 표시 검사\"}"
+        }
+      },
+      "snapshot_queue_paused": true,
+      "double_operations": [
+        "plan",
+        "read_one",
+        "read_one",
+        "read_one",
+        "read_one",
+        "select",
+        "select",
+        "select",
+        "select",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "select",
+        "draft_section",
+        "synthesize",
+        "semantic_review"
+      ],
+      "sqlite": {
+        "integrity_check": "ok",
+        "reports": 0,
+        "revision_matches_api": true
+      },
+      "result": "PASS",
+      "model_closed": true,
+      "elapsed_seconds": 3.766
+    },
+    {
+      "case": "insufficient_context",
+      "data_dir": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\근거문맥\\차단화면\\fdb65f28dc4a42da90c4afc36f51a8f6\\insufficient_context",
+      "run": {
+        "run_id": "5936031d5d3c4d2cb92c8c0577dcb5aa",
+        "question": "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?",
+        "control_revision": 1,
+        "status": "blocked",
+        "phase": "quality_failed",
+        "plan": [
+          {
+            "section_id": "section-1",
+            "title": "사건 0",
+            "assignee": "researcher-1",
+            "role": "원인 담당",
+            "seed": "운요호 사건",
+            "instruction": "사건과 원인을 자료대로 밝히라 (재위임: 지난번에 «운요호 사건» 를 읽었지만 추가 원인 자료 필요. 그 빈 칸을 채우도록 아직 안 본 문서를 찾아라)",
+            "budget": 3,
+            "round": 2,
+            "order": 0
+          },
+          {
+            "section_id": "section-2",
+            "title": "사건 1",
+            "assignee": "researcher-2",
+            "role": "원인 담당",
+            "seed": "강화도 조약",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 1
+          },
+          {
+            "section_id": "section-3",
+            "title": "사건 2",
+            "assignee": "researcher-3",
+            "role": "원인 담당",
+            "seed": "조미 수호 통상 조약",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 2
+          },
+          {
+            "section_id": "section-4",
+            "title": "사건 3",
+            "assignee": "researcher-4",
+            "role": "원인 담당",
+            "seed": "거문도 사건",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 3
+          }
+        ],
+        "report_id": null,
+        "draft": "# 1894년 사건과 원인\n\n질문에 관한 연구를 정리한다.\n\n## 1. 사건 0  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «운요호 사건»\n\n## 2. 사건 1  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «강화도 조약»\n\n## 3. 사건 2  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «조미 수호 통상 조약»\n\n## 4. 사건 3  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «거문도 사건»\n\n## 맺음말\n\n각 사건의 원인은 자료의 범위 안에서 해석해야 한다.\n\n시각화 생략 사유: 이 대역은 시각 요약을 만들지 않는다\\.\n\n## 출처 및 이용허락\n고정 코퍼스: 한국어 위키백과 (CC BY-SA 4.0), MediaWiki API로 수집; 수집일 2026-09-21.\n한국어 위키백과 원문을 조사 메모로 요약하고 절 원고로 재구성했습니다. 원문 기여자·변경 이력은 각 문서의 역사 탭에서 확인할 수 있습니다. 원자료 이용허락: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). 이 보고서는 같은 이용허락으로 제공합니다.\n- [강화도 조약](https://ko.wikipedia.org/wiki/%EA%B0%95%ED%99%94%EB%8F%84_%EC%A1%B0%EC%95%BD) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EA%B0%95%ED%99%94%EB%8F%84%20%EC%A1%B0%EC%95%BD&action=history))\n- [거문도 사건](https://ko.wikipedia.org/wiki/%EA%B1%B0%EB%AC%B8%EB%8F%84_%EC%82%AC%EA%B1%B4) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EA%B1%B0%EB%AC%B8%EB%8F%84%20%EC%82%AC%EA%B1%B4&action=history))\n- [운요호 사건](https://ko.wikipedia.org/wiki/%EC%9A%B4%EC%9A%94%ED%98%B8_%EC%82%AC%EA%B1%B4) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EC%9A%B4%EC%9A%94%ED%98%B8%20%EC%82%AC%EA%B1%B4&action=history))\n- [조미 수호 통상 조약](https://ko.wikipedia.org/wiki/%EC%A1%B0%EB%AF%B8_%EC%88%98%ED%98%B8_%ED%86%B5%EC%83%81_%EC%A1%B0%EC%95%BD) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EC%A1%B0%EB%AF%B8%20%EC%88%98%ED%98%B8%20%ED%86%B5%EC%83%81%20%EC%A1%B0%EC%95%BD&action=history))",
+        "quality": {
+          "passed": false,
+          "reasons": [
+            "semantic_review_failed"
+          ],
+          "warnings": [
+            "자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다."
+          ],
+          "metrics": {
+            "문장수": 13,
+            "근거붙은문장": 4,
+            "근거율": 30.8,
+            "허위인용": [],
+            "읽은문서": 4,
+            "읽고안쓴": [],
+            "인용편중": 25.0,
+            "중복률": 0.0,
+            "절수": 4,
+            "보고서자수": 3515,
+            "인용수": 4,
+            "LLM호출": 17,
+            "격리율": 24.6
+          },
+          "unknown_citations": [],
+          "unread_citations": [],
+          "misattributed_citations": [],
+          "semantic_review_raw": "{\"검토목록ID\": \"cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9\", \"판정\": \"undetermined\", \"문제\": [{\"유형\": \"insufficient_context\", \"설명\": \"명시적 대역 판정 <img src=x onerror=\\\"window.__semanticInjected=1\\\">\", \"본문발췌\": \"자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다\", \"근거번호\": []}], \"검토요약\": \"의미 판별 성능을 입증하지 않는 차단 표시 검사\"}",
+          "semantic_review": {
+            "통과": false,
+            "문제": [
+              {
+                "유형": "insufficient_context",
+                "설명": "명시적 대역 판정 <img src=x onerror=\"window.__semanticInjected=1\">",
+                "본문발췌": "자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다",
+                "근거번호": [],
+                "출처": [],
+                "근거문맥": []
+              }
+            ],
+            "검토요약": "의미 판별 성능을 입증하지 않는 차단 표시 검사",
+            "검토계약": "source-context-review-v1",
+            "검토목록ID": "cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9",
+            "판정": "undetermined",
+            "제공범위": {
+              "additional_bytes": 58057,
+              "incomplete": false,
+              "omitted": 0,
+              "original_characters": 19474,
+              "original_items": 4,
+              "provided_characters": 19474,
+              "selected": 66
+            }
+          }
+        },
+        "parent_report_id": null,
+        "created_at": "2026-11-10T06:13:42.079513+00:00",
+        "updated_at": "2026-11-10T06:13:42.797207+00:00",
+        "mock_requests": 0,
+        "actual_model_requests": 17,
+        "source_mode": "local",
+        "instruction_history": [
+          "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?"
+        ],
+        "report_title": "1894년 사건과 원인",
+        "research_stop_reason": "sufficient",
+        "visual_summary": {
+          "머리말": "질문에 관한 연구를 정리한다.",
+          "맺음말": "각 사건의 원인은 자료의 범위 안에서 해석해야 한다.",
+          "표": [],
+          "도식": [],
+          "시각화생략사유": "이 대역은 시각 요약을 만들지 않는다."
+        },
+        "semantic_review_state": {
+          "revision": 1,
+          "status": "completed",
+          "raw": "{\"검토목록ID\": \"cf2ee0c89e98489012162cd859e22efe9f0740785191047d311af2a6dc1985c9\", \"판정\": \"undetermined\", \"문제\": [{\"유형\": \"insufficient_context\", \"설명\": \"명시적 대역 판정 <img src=x onerror=\\\"window.__semanticInjected=1\\\">\", \"본문발췌\": \"자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다\", \"근거번호\": []}], \"검토요약\": \"의미 판별 성능을 입증하지 않는 차단 표시 검사\"}"
+        }
+      },
+      "snapshot_queue_paused": true,
+      "double_operations": [
+        "plan",
+        "read_one",
+        "read_one",
+        "read_one",
+        "read_one",
+        "select",
+        "select",
+        "select",
+        "select",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "select",
+        "draft_section",
+        "synthesize",
+        "semantic_review"
+      ],
+      "sqlite": {
+        "integrity_check": "ok",
+        "reports": 0,
+        "revision_matches_api": true
+      },
+      "result": "PASS",
+      "model_closed": true,
+      "elapsed_seconds": 3.594
+    },
+    {
+      "case": "invalid",
+      "data_dir": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\근거문맥\\차단화면\\fdb65f28dc4a42da90c4afc36f51a8f6\\invalid",
+      "run": {
+        "run_id": "d75ab547fb474bcbb864d83af42e843e",
+        "question": "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?",
+        "control_revision": 1,
+        "status": "blocked",
+        "phase": "quality_failed",
+        "plan": [
+          {
+            "section_id": "section-1",
+            "title": "사건 0",
+            "assignee": "researcher-1",
+            "role": "원인 담당",
+            "seed": "운요호 사건",
+            "instruction": "사건과 원인을 자료대로 밝히라 (재위임: 지난번에 «운요호 사건» 를 읽었지만 추가 원인 자료 필요. 그 빈 칸을 채우도록 아직 안 본 문서를 찾아라)",
+            "budget": 3,
+            "round": 2,
+            "order": 0
+          },
+          {
+            "section_id": "section-2",
+            "title": "사건 1",
+            "assignee": "researcher-2",
+            "role": "원인 담당",
+            "seed": "강화도 조약",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 1
+          },
+          {
+            "section_id": "section-3",
+            "title": "사건 2",
+            "assignee": "researcher-3",
+            "role": "원인 담당",
+            "seed": "조미 수호 통상 조약",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 2
+          },
+          {
+            "section_id": "section-4",
+            "title": "사건 3",
+            "assignee": "researcher-4",
+            "role": "원인 담당",
+            "seed": "거문도 사건",
+            "instruction": "사건과 원인을 자료대로 밝히라",
+            "budget": 3,
+            "round": 1,
+            "order": 3
+          }
+        ],
+        "report_id": null,
+        "draft": "# 1894년 사건과 원인\n\n질문에 관한 연구를 정리한다.\n\n## 1. 사건 0  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «운요호 사건»\n\n## 2. 사건 1  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «강화도 조약»\n\n## 3. 사건 2  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «조미 수호 통상 조약»\n\n## 4. 사건 3  _(원인 담당)_\n\n자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 자료에 근거한 연구 대역 문장으로 사실 검증 완료를 의미하지 않는다 «거문도 사건»\n\n## 맺음말\n\n각 사건의 원인은 자료의 범위 안에서 해석해야 한다.\n\n시각화 생략 사유: 이 대역은 시각 요약을 만들지 않는다\\.\n\n## 출처 및 이용허락\n고정 코퍼스: 한국어 위키백과 (CC BY-SA 4.0), MediaWiki API로 수집; 수집일 2026-09-21.\n한국어 위키백과 원문을 조사 메모로 요약하고 절 원고로 재구성했습니다. 원문 기여자·변경 이력은 각 문서의 역사 탭에서 확인할 수 있습니다. 원자료 이용허락: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). 이 보고서는 같은 이용허락으로 제공합니다.\n- [강화도 조약](https://ko.wikipedia.org/wiki/%EA%B0%95%ED%99%94%EB%8F%84_%EC%A1%B0%EC%95%BD) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EA%B0%95%ED%99%94%EB%8F%84%20%EC%A1%B0%EC%95%BD&action=history))\n- [거문도 사건](https://ko.wikipedia.org/wiki/%EA%B1%B0%EB%AC%B8%EB%8F%84_%EC%82%AC%EA%B1%B4) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EA%B1%B0%EB%AC%B8%EB%8F%84%20%EC%82%AC%EA%B1%B4&action=history))\n- [운요호 사건](https://ko.wikipedia.org/wiki/%EC%9A%B4%EC%9A%94%ED%98%B8_%EC%82%AC%EA%B1%B4) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EC%9A%B4%EC%9A%94%ED%98%B8%20%EC%82%AC%EA%B1%B4&action=history))\n- [조미 수호 통상 조약](https://ko.wikipedia.org/wiki/%EC%A1%B0%EB%AF%B8_%EC%88%98%ED%98%B8_%ED%86%B5%EC%83%81_%EC%A1%B0%EC%95%BD) ([기여 이력](https://ko.wikipedia.org/w/index.php?title=%EC%A1%B0%EB%AF%B8%20%EC%88%98%ED%98%B8%20%ED%86%B5%EC%83%81%20%EC%A1%B0%EC%95%BD&action=history))",
+        "quality": {
+          "passed": false,
+          "reasons": [
+            "semantic_review_invalid"
+          ],
+          "warnings": [
+            "자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다."
+          ],
+          "metrics": {
+            "문장수": 13,
+            "근거붙은문장": 4,
+            "근거율": 30.8,
+            "허위인용": [],
+            "읽은문서": 4,
+            "읽고안쓴": [],
+            "인용편중": 25.0,
+            "중복률": 0.0,
+            "절수": 4,
+            "보고서자수": 3515,
+            "인용수": 4,
+            "LLM호출": 17,
+            "격리율": 24.6
+          },
+          "unknown_citations": [],
+          "unread_citations": [],
+          "misattributed_citations": [],
+          "semantic_review_raw": "THIS IS NOT JSON <script>window.__semanticInjected=1</script>"
+        },
+        "parent_report_id": null,
+        "created_at": "2026-11-10T06:13:45.740096+00:00",
+        "updated_at": "2026-11-10T06:13:46.584842+00:00",
+        "mock_requests": 0,
+        "actual_model_requests": 17,
+        "source_mode": "local",
+        "instruction_history": [
+          "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?"
+        ],
+        "report_title": "1894년 사건과 원인",
+        "research_stop_reason": "sufficient",
+        "visual_summary": {
+          "머리말": "질문에 관한 연구를 정리한다.",
+          "맺음말": "각 사건의 원인은 자료의 범위 안에서 해석해야 한다.",
+          "표": [],
+          "도식": [],
+          "시각화생략사유": "이 대역은 시각 요약을 만들지 않는다."
+        },
+        "semantic_review_state": {
+          "revision": 1,
+          "status": "completed",
+          "raw": "THIS IS NOT JSON <script>window.__semanticInjected=1</script>"
+        }
+      },
+      "snapshot_queue_paused": true,
+      "double_operations": [
+        "plan",
+        "read_one",
+        "read_one",
+        "read_one",
+        "read_one",
+        "select",
+        "select",
+        "select",
+        "select",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "draft_section",
+        "select",
+        "draft_section",
+        "synthesize",
+        "semantic_review"
+      ],
+      "sqlite": {
+        "integrity_check": "ok",
+        "reports": 0,
+        "revision_matches_api": true
+      },
+      "result": "PASS",
+      "model_closed": true,
+      "elapsed_seconds": 3.703
+    }
+  ],
+  "network_denials": [],
+  "browser_errors": [],
+  "console_errors": [],
+  "external_browser_requests": [],
+  "screenshots": [
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\contradiction_1440x900_원문문맥.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\contradiction_1440x900_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\contradiction_390x844_원문문맥.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\contradiction_390x844_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\contradiction_844x390_원문문맥.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\contradiction_844x390_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\contradiction_과거상세.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\citation_gap_1440x900_원문문맥.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\citation_gap_1440x900_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\citation_gap_390x844_원문문맥.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\citation_gap_390x844_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\citation_gap_844x390_원문문맥.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\citation_gap_844x390_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\citation_gap_과거상세.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\source_conflict_1440x900_원문문맥.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\source_conflict_1440x900_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\source_conflict_390x844_원문문맥.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\source_conflict_390x844_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\source_conflict_844x390_원문문맥.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\source_conflict_844x390_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\source_conflict_과거상세.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\insufficient_context_1440x900_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\insufficient_context_390x844_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\insufficient_context_844x390_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\insufficient_context_과거상세.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\invalid_1440x900_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\invalid_390x844_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\invalid_844x390_실행큐.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥\\차단_실사용\\fdb65f28dc4a42da90c4afc36f51a8f6\\invalid_과거상세.png"
+  ],
+  "protected_path_denials": [],
+  "provider_denials": [],
+  "browser_requests": [
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-DJVjknfo.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/CanvasPool-DzuCm1vb.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Filter-vpEaIMwd.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/canvasUtils-U4WZZEj-.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Cache-CTROkX_m.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GCManagedHash-DCvVepMX.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/RenderTargetSystem-BK2ifv01.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GraphicsContext-48tzdr3Q.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTexelRangeRects-Bdv1rQ51.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-CcRZevJm.css"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/browserAll-C0ttJ_gA.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/init-DoUXYMOj.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/events?after=0"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png"
+    },
+    {
+      "case": "contradiction",
+      "method": "POST",
+      "url": "http://127.0.0.1:8796/api/spike/commands"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/ac8eaa55fa934be28e2670cd28511dd0/archive"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/ac8eaa55fa934be28e2670cd28511dd0/archive"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/ac8eaa55fa934be28e2670cd28511dd0/archive"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/ac8eaa55fa934be28e2670cd28511dd0/archive"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/ac8eaa55fa934be28e2670cd28511dd0/archive"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-DJVjknfo.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/CanvasPool-DzuCm1vb.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Filter-vpEaIMwd.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/canvasUtils-U4WZZEj-.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Cache-CTROkX_m.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GCManagedHash-DCvVepMX.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/RenderTargetSystem-BK2ifv01.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GraphicsContext-48tzdr3Q.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTexelRangeRects-Bdv1rQ51.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-CcRZevJm.css"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/browserAll-C0ttJ_gA.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/init-DoUXYMOj.js"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/events?after=61"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/ac8eaa55fa934be28e2670cd28511dd0/archive"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png"
+    },
+    {
+      "case": "contradiction",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-DJVjknfo.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/CanvasPool-DzuCm1vb.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Filter-vpEaIMwd.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/canvasUtils-U4WZZEj-.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Cache-CTROkX_m.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GCManagedHash-DCvVepMX.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/RenderTargetSystem-BK2ifv01.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GraphicsContext-48tzdr3Q.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTexelRangeRects-Bdv1rQ51.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-CcRZevJm.css"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/browserAll-C0ttJ_gA.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/init-DoUXYMOj.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/events?after=0"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png"
+    },
+    {
+      "case": "citation_gap",
+      "method": "POST",
+      "url": "http://127.0.0.1:8796/api/spike/commands"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/80e417d158c54904be9b5d80137f9d30/archive"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/80e417d158c54904be9b5d80137f9d30/archive"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/80e417d158c54904be9b5d80137f9d30/archive"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/80e417d158c54904be9b5d80137f9d30/archive"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/80e417d158c54904be9b5d80137f9d30/archive"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-DJVjknfo.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/CanvasPool-DzuCm1vb.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Filter-vpEaIMwd.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/canvasUtils-U4WZZEj-.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Cache-CTROkX_m.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GCManagedHash-DCvVepMX.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/RenderTargetSystem-BK2ifv01.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GraphicsContext-48tzdr3Q.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTexelRangeRects-Bdv1rQ51.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-CcRZevJm.css"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/browserAll-C0ttJ_gA.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/init-DoUXYMOj.js"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/events?after=61"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/80e417d158c54904be9b5d80137f9d30/archive"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png"
+    },
+    {
+      "case": "citation_gap",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-DJVjknfo.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/CanvasPool-DzuCm1vb.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Filter-vpEaIMwd.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/canvasUtils-U4WZZEj-.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Cache-CTROkX_m.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GCManagedHash-DCvVepMX.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/RenderTargetSystem-BK2ifv01.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GraphicsContext-48tzdr3Q.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTexelRangeRects-Bdv1rQ51.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-CcRZevJm.css"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/browserAll-C0ttJ_gA.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/init-DoUXYMOj.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/events?after=0"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png"
+    },
+    {
+      "case": "source_conflict",
+      "method": "POST",
+      "url": "http://127.0.0.1:8796/api/spike/commands"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/fc14c55de30a4e90a50a404c004a2b44/archive"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/fc14c55de30a4e90a50a404c004a2b44/archive"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/fc14c55de30a4e90a50a404c004a2b44/archive"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/fc14c55de30a4e90a50a404c004a2b44/archive"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/fc14c55de30a4e90a50a404c004a2b44/archive"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-DJVjknfo.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/CanvasPool-DzuCm1vb.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Filter-vpEaIMwd.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/canvasUtils-U4WZZEj-.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Cache-CTROkX_m.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GCManagedHash-DCvVepMX.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/RenderTargetSystem-BK2ifv01.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GraphicsContext-48tzdr3Q.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTexelRangeRects-Bdv1rQ51.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-CcRZevJm.css"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/browserAll-C0ttJ_gA.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/init-DoUXYMOj.js"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/events?after=61"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/fc14c55de30a4e90a50a404c004a2b44/archive"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png"
+    },
+    {
+      "case": "source_conflict",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-DJVjknfo.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/CanvasPool-DzuCm1vb.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Filter-vpEaIMwd.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/canvasUtils-U4WZZEj-.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Cache-CTROkX_m.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GCManagedHash-DCvVepMX.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/RenderTargetSystem-BK2ifv01.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GraphicsContext-48tzdr3Q.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTexelRangeRects-Bdv1rQ51.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-CcRZevJm.css"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/browserAll-C0ttJ_gA.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/init-DoUXYMOj.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/events?after=0"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "POST",
+      "url": "http://127.0.0.1:8796/api/spike/commands"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/5936031d5d3c4d2cb92c8c0577dcb5aa/archive"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/5936031d5d3c4d2cb92c8c0577dcb5aa/archive"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/5936031d5d3c4d2cb92c8c0577dcb5aa/archive"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/5936031d5d3c4d2cb92c8c0577dcb5aa/archive"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-DJVjknfo.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/CanvasPool-DzuCm1vb.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Filter-vpEaIMwd.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/canvasUtils-U4WZZEj-.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Cache-CTROkX_m.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GCManagedHash-DCvVepMX.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/RenderTargetSystem-BK2ifv01.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GraphicsContext-48tzdr3Q.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTexelRangeRects-Bdv1rQ51.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-CcRZevJm.css"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/browserAll-C0ttJ_gA.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/init-DoUXYMOj.js"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/events?after=61"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/5936031d5d3c4d2cb92c8c0577dcb5aa/archive"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png"
+    },
+    {
+      "case": "insufficient_context",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-DJVjknfo.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/CanvasPool-DzuCm1vb.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Filter-vpEaIMwd.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/canvasUtils-U4WZZEj-.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Cache-CTROkX_m.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GCManagedHash-DCvVepMX.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/RenderTargetSystem-BK2ifv01.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GraphicsContext-48tzdr3Q.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTexelRangeRects-Bdv1rQ51.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-CcRZevJm.css"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/browserAll-C0ttJ_gA.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/init-DoUXYMOj.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/events?after=0"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png"
+    },
+    {
+      "case": "invalid",
+      "method": "POST",
+      "url": "http://127.0.0.1:8796/api/spike/commands"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/d75ab547fb474bcbb864d83af42e843e/archive"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/d75ab547fb474bcbb864d83af42e843e/archive"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/d75ab547fb474bcbb864d83af42e843e/archive"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/d75ab547fb474bcbb864d83af42e843e/archive"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/d75ab547fb474bcbb864d83af42e843e/archive"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/d75ab547fb474bcbb864d83af42e843e/archive"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-DJVjknfo.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/CanvasPool-DzuCm1vb.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Filter-vpEaIMwd.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/canvasUtils-U4WZZEj-.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/Cache-CTROkX_m.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GCManagedHash-DCvVepMX.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/RenderTargetSystem-BK2ifv01.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTextureBatchBindGroup-CEQHRttu.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/GraphicsContext-48tzdr3Q.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/getTexelRangeRects-Bdv1rQ51.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/index-CcRZevJm.css"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/snapshot"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/browserAll-C0ttJ_gA.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/assets/init-DoUXYMOj.js"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/events?after=61"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/api/spike/runs/d75ab547fb474bcbb864d83af42e843e/archive"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png"
+    },
+    {
+      "case": "invalid",
+      "method": "GET",
+      "url": "http://127.0.0.1:8796/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png"
+    }
+  ],
+  "script": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\보고서품질_차단실사용검사.py",
+  "script_sha256": "d303db72a3cbd2ff85e3a1f95942258ecfcba14a3f46bfbea33558eec6c4a4b3",
+  "candidate_assets": {
+    "browserAll-C0ttJ_gA.js": "45779e60aff000ff6f719b19dc2bb29f92381ed6a1a6408962bacb82806f9c7d",
+    "Cache-CTROkX_m.js": "1362d81633b62e495b282f17617beb74083f16064864156e04949a07fa9ae0cf",
+    "CanvasPool-DzuCm1vb.js": "edde6aa9084e7f5958ad3f9a1437ea82c2406913957ef01be12296ca951373f1",
+    "canvasUtils-U4WZZEj-.js": "c0a01018402f30d7e9ad35ae43fafc8c490899236e6f28c8c4c8095fd066d448",
+    "Filter-vpEaIMwd.js": "e802a7ce1c4d21948131c5d247ee9db7f33376b17678d973d22ae0296f1935fc",
+    "GCManagedHash-DCvVepMX.js": "f9c36545f614350af3b653bd4e603e590afad27332ad79133fb661180406b312",
+    "getTexelRangeRects-Bdv1rQ51.js": "baa0c3c95a387acb0bf72e4b440a0ffc947f8bfcb34bfd462c32a10bbe53c665",
+    "getTextureBatchBindGroup-CEQHRttu.js": "f820ad942542bd39943bfcbc6073fa6d5237ee8fe574a36f8a4d22ae67c9558a",
+    "GraphicsContext-48tzdr3Q.js": "26553fe11bde03fcc13af77e92b26890e5b7f7ec1b791ad26634a133b670a7dc",
+    "index-DJVjknfo.js": "e30caed1fef5a94fd8a801e185e31fc444490667577c1d45822db67abbcda43c",
+    "init-DoUXYMOj.js": "8aa920d822fab365c3d8f4dff6dd7daa2ef6d7d8979f4156b928684d79ac0af5",
+    "RenderTargetSystem-BK2ifv01.js": "76151e37944ac1989dd3632f63fdc2a7f8b897cd226583baa060db0c71ccd6b0",
+    "webworkerAll-DE98ukn0.js": "0cdcb97dc6db127e0db96bbd370ae8573ee0f19b54a6d0d9f011ebbeb8830c7e"
+  },
+  "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\보고서품질_차단실사용검사.py\"",
+  "source_hashes_start": {
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\보고서품질_차단실사용검사.py": "d303db72a3cbd2ff85e3a1f95942258ecfcba14a3f46bfbea33558eec6c4a4b3",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\검토문맥.py": "05739d1d7d0d01d10475fdc179d344a5e1fabe20b1358ae7363afe03b79424ec",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\교안연구.py": "0bf66c70a4a593bcb034dbada00233631c434e6a90046a9e4d8c3610f1d14c0e",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\명령해석.py": "a8bb23168a535dc9a40dac63ad0299e932328cfccb6a3a2950e960cdb2ad9a0c",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\모델대역.py": "89672e64a3556ed448042859d87b5105b91f27938c9b17ecf064f2ec8a13824e",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서근거.py": "6147b7efcb875e7d1ddd1cdf4f03be1a4eb4ae20d8da64c8ef416bc7e9b795ed",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서도식.py": "ddf5c42d46bc86dfe883714ffb5f8666c765a541142acf26febca4f1651ced48",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서변환.py": "6dbd31927da7a23e2f6651605274e0df3127db5ae7ae460c65ab6e4331d729fc",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서보완.py": "8ee5e833b267be4cc3efec4efc064ee6f35bb1539e34a51aaaee32fafcab5851",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서표현.py": "826063df92b15d394717fe962049426a71e64e6c96e4ee899f8ce3a24b94e2e8",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서품질.py": "3887496cbce8332eaf38624c45f4f1825faae38d040083e7aa5df29236885790",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\시험문서.py": "9a7e03ed34e0eb19dfa93b6f2b14a79074af3a7f22f33c393cefd72e74009ca3",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\실제모델.py": "80ae3bfda7725342699acc38b0455f8bed8b72e5494a8f760501543ee53ff766",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\실제연구제어.py": "338a3887e1662990e6705fcb711423fe643ad74554dc8f56d8e2fba757303213",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\실행삭제.py": "1c0d2fc411355595efe20f177c0e4ecabea440201c9732193664fe90c70b2b9b",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\실행제어.py": "6fe218510f555c41f7e362ed0e763d8b2106170affb6b0edefc611382f23ea7a",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\앱.py": "21c396305fc07ccea2ffdb856dc5fd7f0dbbe820a2c114f4aa771c15aa90c017",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\야후결과파서.py": "64e602c20a5df7081fac1bc8828ba40e75715a71ad539c741530ab6a7f338ed7",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\연구그래프.py": "9ecff4240b5011da08c2c2b293e9d49f2ca660caacd48241e6ee895f58a150ad",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\연구앱.py": "c4d36470f42fc5a38c9952e05c204a5078f8f57d4e205e0cdc35aafae3fdb548",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\원문구간.py": "b88839050ede1b3f598496773ea0a7caa711916ed9f28da57bc3158275323ae8",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\웹계약.py": "7a1dfba4d73a7755c7801a04e5c2794f619e2ecd03b4526a9e94c77d0e1afbcb",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\웹연구.py": "c76295547bd79b189876e59214098b3c84b67552b81d079e9b45def15ddc84e8",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\웹자료.py": "6ba0bbd0fc309e56f1dae056c80dbf119c5b75e91268f7ab3bc002e3043a9d42",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\웹자료저장소.py": "5a7d7fa231631a64ddb5da283a8f27231b440e106982a0e99f8795379c030d04",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\저장소.py": "bff9ea9d64fff72203c57ae1bf4f4045db2dc084e16241309855ecfb0a00db8c",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\접근경계.py": "69b71b4bf821c31cea1964af9b8058c4a5071fe263ba97fd3a460742dd5e6890",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\호출예산.py": "42216cb8f6fe9e36602214a7c01079b157ddcb7c8a56ca6434fc6b5d18366bfb",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\활동기록.py": "a9bbd77a72954d6e339fb8edd61038b3432d23ed76cbc3081e750c7078ea186a"
+  },
+  "listener_closed": true,
+  "source_hashes_end": {
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\보고서품질_차단실사용검사.py": "d303db72a3cbd2ff85e3a1f95942258ecfcba14a3f46bfbea33558eec6c4a4b3",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\검토문맥.py": "05739d1d7d0d01d10475fdc179d344a5e1fabe20b1358ae7363afe03b79424ec",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\교안연구.py": "0bf66c70a4a593bcb034dbada00233631c434e6a90046a9e4d8c3610f1d14c0e",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\명령해석.py": "a8bb23168a535dc9a40dac63ad0299e932328cfccb6a3a2950e960cdb2ad9a0c",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\모델대역.py": "89672e64a3556ed448042859d87b5105b91f27938c9b17ecf064f2ec8a13824e",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서근거.py": "6147b7efcb875e7d1ddd1cdf4f03be1a4eb4ae20d8da64c8ef416bc7e9b795ed",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서도식.py": "ddf5c42d46bc86dfe883714ffb5f8666c765a541142acf26febca4f1651ced48",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서변환.py": "6dbd31927da7a23e2f6651605274e0df3127db5ae7ae460c65ab6e4331d729fc",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서보완.py": "8ee5e833b267be4cc3efec4efc064ee6f35bb1539e34a51aaaee32fafcab5851",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서표현.py": "826063df92b15d394717fe962049426a71e64e6c96e4ee899f8ce3a24b94e2e8",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서품질.py": "3887496cbce8332eaf38624c45f4f1825faae38d040083e7aa5df29236885790",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\시험문서.py": "9a7e03ed34e0eb19dfa93b6f2b14a79074af3a7f22f33c393cefd72e74009ca3",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\실제모델.py": "80ae3bfda7725342699acc38b0455f8bed8b72e5494a8f760501543ee53ff766",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\실제연구제어.py": "338a3887e1662990e6705fcb711423fe643ad74554dc8f56d8e2fba757303213",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\실행삭제.py": "1c0d2fc411355595efe20f177c0e4ecabea440201c9732193664fe90c70b2b9b",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\실행제어.py": "6fe218510f555c41f7e362ed0e763d8b2106170affb6b0edefc611382f23ea7a",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\앱.py": "21c396305fc07ccea2ffdb856dc5fd7f0dbbe820a2c114f4aa771c15aa90c017",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\야후결과파서.py": "64e602c20a5df7081fac1bc8828ba40e75715a71ad539c741530ab6a7f338ed7",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\연구그래프.py": "9ecff4240b5011da08c2c2b293e9d49f2ca660caacd48241e6ee895f58a150ad",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\연구앱.py": "c4d36470f42fc5a38c9952e05c204a5078f8f57d4e205e0cdc35aafae3fdb548",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\원문구간.py": "b88839050ede1b3f598496773ea0a7caa711916ed9f28da57bc3158275323ae8",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\웹계약.py": "7a1dfba4d73a7755c7801a04e5c2794f619e2ecd03b4526a9e94c77d0e1afbcb",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\웹연구.py": "c76295547bd79b189876e59214098b3c84b67552b81d079e9b45def15ddc84e8",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\웹자료.py": "6ba0bbd0fc309e56f1dae056c80dbf119c5b75e91268f7ab3bc002e3043a9d42",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\웹자료저장소.py": "5a7d7fa231631a64ddb5da283a8f27231b440e106982a0e99f8795379c030d04",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\저장소.py": "bff9ea9d64fff72203c57ae1bf4f4045db2dc084e16241309855ecfb0a00db8c",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\접근경계.py": "69b71b4bf821c31cea1964af9b8058c4a5071fe263ba97fd3a460742dd5e6890",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\호출예산.py": "42216cb8f6fe9e36602214a7c01079b157ddcb7c8a56ca6434fc6b5d18366bfb",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\활동기록.py": "a9bbd77a72954d6e339fb8edd61038b3432d23ed76cbc3081e750c7078ea186a"
+  },
+  "source_drift": false,
+  "counts": {
+    "checks": 149,
+    "passed": 149,
+    "cases": 5,
+    "screenshots": 29
+  },
+  "passed": true
+}

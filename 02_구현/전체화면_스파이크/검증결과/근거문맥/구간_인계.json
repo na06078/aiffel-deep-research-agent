@@ -1,0 +1,159 @@
+{
+  "task": "Q09/A30 기술 계약29.12 원문 연속 구간 및 초안 작성기 통합",
+  "status": "owned scope verified; wider integration belongs to main",
+  "public_import": "from 서버.원문구간 import source_ranges",
+  "protocol": "sentence-paragraph-evidence-v3",
+  "implementation": "문장 종결 부호/닫는 따옴표/뒤 공백 또는 줄 경계를 목표320 내에서 우선 선택. 없으면400 이내 다음 경계, 없으면 연속320 분할. 10미만 꼬리는400내 병합 또는 앞 구간에서 재분배. Python 문자 위치와 원문 전체 공백/개행 보존. 원문10미만 후보 없음.",
+  "tdd": {
+    "behavioral_red": "기존 builder가 문장 끝300 대신 고정320에서 절단하여 assertEqual 실패. import/setup 오류 아님.",
+    "green": "같은 공개 builder 테스트가300/400 정확 위치로 통과.",
+    "scope": "한 수직 행동의 관찰 RED→GREEN 후 직접 회귀 보강. 모든 개별 추가 회귀를 별도 RED로 관찰했다고 주장하지 않음."
+  },
+  "runs": [
+    {
+      "name": "red",
+      "cwd": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크",
+      "environment": {
+        "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+        "LANGSMITH_TRACING": "false",
+        "LANGCHAIN_TRACING_V2": "false"
+      },
+      "argv": [
+        "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "-p",
+        "pytest_asyncio.plugin",
+        "-p",
+        "no:cacheprovider",
+        "테스트/테스트_보고서근거.py::SpanEvidenceTests::test_sentence_boundary_is_preserved_in_builder_catalog",
+        "-q",
+        "--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/구간/pytest-red",
+        "--junitxml=검증결과/근거문맥/구간/red.xml"
+      ],
+      "stdout_stderr": "검증결과/근거문맥/구간/red.log",
+      "pytest_exit_code": 1,
+      "actual_summary": "1 failed in 0.17s"
+    },
+    {
+      "name": "green",
+      "cwd": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크",
+      "environment": {
+        "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+        "LANGSMITH_TRACING": "false",
+        "LANGCHAIN_TRACING_V2": "false"
+      },
+      "argv": [
+        "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "-p",
+        "pytest_asyncio.plugin",
+        "-p",
+        "no:cacheprovider",
+        "테스트/테스트_보고서근거.py::SpanEvidenceTests::test_sentence_boundary_is_preserved_in_builder_catalog",
+        "-q",
+        "--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/구간/pytest-green",
+        "--junitxml=검증결과/근거문맥/구간/green.xml"
+      ],
+      "stdout_stderr": "검증결과/근거문맥/구간/green.log",
+      "pytest_exit_code": 0,
+      "actual_summary": "1 passed in 0.09s"
+    },
+    {
+      "name": "regression",
+      "cwd": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크",
+      "environment": {
+        "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+        "LANGSMITH_TRACING": "false",
+        "LANGCHAIN_TRACING_V2": "false"
+      },
+      "argv": [
+        "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "-p",
+        "pytest_asyncio.plugin",
+        "-p",
+        "no:cacheprovider",
+        "테스트/테스트_원문구간.py",
+        "테스트/테스트_보고서근거.py",
+        "-q",
+        "--basetemp=C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.cache/보고서품질_검증/실모델점검/근거문맥/구간/pytest-regression",
+        "--junitxml=검증결과/근거문맥/구간/regression.xml"
+      ],
+      "stdout_stderr": "검증결과/근거문맥/구간/regression.log",
+      "pytest_exit_code": 0,
+      "actual_summary": "34 passed, 1362 subtests passed in 1.59s"
+    }
+  ],
+  "final_counts": {
+    "test_cases": 34,
+    "successful_subtests": 1362,
+    "junit_tests_attribute": 1396,
+    "junit_testcase_entries": 34,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "reconciliation": "pytest unittest subtests가 JUnit tests 합계에 포함됨. 34개 testcase와1362개 성공 subtest를 구별한다. RED/GREEN 반복을 고유 최종 테스트 수에 더하지 않음."
+  },
+  "hash_algorithm": "SHA-256 of exact on-disk bytes",
+  "file_hashes": {
+    "서버/원문구간.py": "479ffc67f44f0228f507f27da853fcd28e0d30f2005e03e1fe9630c7eb232f19",
+    "서버/보고서근거.py": "05754dda0581ddb3a94a4f09c21b79af73cfcb935d68d113447ac6208d11181d",
+    "테스트/테스트_원문구간.py": "6b8cdaa174ca9a08eb1ba64183a2f6d6f165829e62c62d5d89845d5a503768f2",
+    "테스트/테스트_보고서근거.py": "b726b18f2a3d43a9a2197d2dc3c1419cb94891a8ccc95f0ea98413cc6ca86b3d"
+  },
+  "preserved_protections": [
+    "canonical materialize keys/validator",
+    "16/17 relation cap",
+    "strict enum/schema detached copies",
+    "source/version/slice/hash binding",
+    "272000 including schema and8192 exact-byte boundary",
+    "catalog/source allocation and relevance ranking",
+    "pure no-I/O fake guards"
+  ],
+  "test_remappings": [
+    "두 고정320 상한 기대값을 계약의 하드400으로 이관; 전체복원/버전/ID/순위 보호 유지",
+    "v2 토큰의 실제 프로토콜 문자열을 포함한 독립 구형 토큰을 구성하여v3에서 거절 확인"
+  ],
+  "ownership_notice": {
+    "file": "테스트/테스트_보고서품질.py",
+    "case": "test_떨어진_원문구간은_하나의인용문으로_합치지않고_근거를_분리한다",
+    "implication": "first_block320와 by_start[320] 가정은 새 경계에서 성립하지 않을 수 있음. 소유 검토 작업자가 연속 원문 위치/분리 근거 의미를 유지하여 재설계해야 함. 이 파일 수정/실행하지 않음."
+  },
+  "sources_read": [
+    "제공된 root AGENTS.md 및 승인/배타 소유 범위",
+    "📘 딥리서치 에이전트 기술 명세서.md §29.12 (1165–1191)",
+    "서버/보고서근거.py 전체",
+    "테스트/테스트_보고서근거.py 전체",
+    "테스트/테스트_보고서품질.py 고정320 직접 소비자 검색 결과",
+    "test-driven-development skill (read-only)"
+  ],
+  "limitations": [
+    "의미/사실 정확성·모델 품질은 검증하지 않음",
+    "실제 provider/model/search/network 요청0; credential/.env/장부/운영8768/dist/Git 변경 없음",
+    "전체 회귀/실제 앱 격리 통합은 메인 소유",
+    "문장 구분은 결정론적 구두점/줄 경계 휴리스틱이며 언어학적 완전한 문장 인식기가 아님"
+  ],
+  "artifacts": [
+    "검증결과/근거문맥/구간/red.log",
+    "검증결과/근거문맥/구간/red.xml",
+    "검증결과/근거문맥/구간/green.log",
+    "검증결과/근거문맥/구간/green.xml",
+    "검증결과/근거문맥/구간/regression.log",
+    "검증결과/근거문맥/구간/regression.xml"
+  ]
+}

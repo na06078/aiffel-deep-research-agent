@@ -1,0 +1,47 @@
+{
+  "scope": "2026-11-10 근거 문맥 개선 전 읽기 전용 독립 설계 반론 검토",
+  "delegation_id": "deleg_32fafedb",
+  "verdict": "direction_valid_with_required_boundaries",
+  "implementation_or_live_verification": false,
+  "findings": [
+    {
+      "id": "CTX-D01",
+      "finding": "만석보 파괴와 정부의 강화 조건 불이행은 선택 인용에는 빠졌으나 같은 읽은 원문 다른 위치에 존재한다. 원문 부재로 단정하면 안 된다.",
+      "source": "01_참고자료/원본데이터/corpus.json docs['동학 농민 혁명']",
+      "python_character_ranges": [[10144,10450],[21462,21689]],
+      "parent_direct_readback": "same passages independently found in read-only corpus/SQLite inspection"
+    },
+    {
+      "id": "CTX-D02",
+      "finding": "백산/금구/삼례의 구호나 다른 시점의 구절을 합쳐 하나의 사건/시점 주장으로 통과시키면 안 된다. 만석보의 서로 다른 자료 날짜와 김옥균 피살/청일전쟁의 시간순서도 그대로 검토해야 한다.",
+      "source": "corpus.json docs['동학 농민 혁명'], docs['전봉준'], docs['김옥균'], docs['청일 전쟁']",
+      "status": "independent finding; do not turn lexical hits into semantic proof"
+    },
+    {
+      "id": "CTX-D03",
+      "finding": "현재 최종 검토는 선택 인용만 받고, 구형 parser는 본문발췌의 실제 존재/지지 원문 위치/요청 결합을 검사하지 않는다.",
+      "source": "02_구현/전체화면_스파이크/서버/보고서품질.py semantic_prompt/parse_semantic",
+      "parent_direct_readback": true
+    },
+    {
+      "id": "CTX-D04",
+      "finding": "원문 문맥을 보강하되 canonical 인용을 자동 재결합/수정/게시하지 않는다. 선택 누락은 기존 주장만 수정하는 보완 버튼/API의 대상에서 제외한다.",
+      "source": "서버/보고서보완.py, 서버/실제연구제어.py request_correction, 화면/src/실행실패.tsx",
+      "decision": "adopted in technical specification29.12"
+    },
+    {
+      "id": "CTX-D05",
+      "finding": "현재 읽기 범위와 원문 해시/위치/요청에 문맥·판정을 묶고, 웹은 검증 receipt의 text[:20000]만 제공한다. 문맥/입력 상한과 선택 누락 표시를 둔다.",
+      "decision": "adopted in technical specification29.12"
+    }
+  ],
+  "mandatory_counterexamples": [
+    "선택 인용만으로 만석보/강화 조건 사실을 지지한다고 하면 실패",
+    "관련 단어를 찾았다는 이유만으로 백산/금구/삼례의 복합 주장을 지지하면 실패",
+    "다른 source/offset/hash/요청 또는 웹 읽기 범위 밖 근거를 거부",
+    "문맥 예산에서 제외된 내용을 원문 전체에도 없다고 단정하지 않음",
+    "source_conflict/insufficient_context와 사실 오류·선택 누락의 표시/보완 자격을 분리",
+    "동시 evaluate/재조회/늦은 응답에서 추가 호출·잘못된 게시 없음"
+  ],
+  "limits": ["독립 읽기 전용 후보 검토이며 구현/실제 모델 통과가 아님", "원문 자체의 불완전·충돌과 모델의 의미 판단 오류는 별도 한계"]
+}

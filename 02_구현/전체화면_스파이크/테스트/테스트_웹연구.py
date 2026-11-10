@@ -183,7 +183,11 @@ class FakeWebClient:
         await self.emit(observer, "fetch", url)
         if self.fail:
             raise WebSourceError("fetch_blocked")
-        text = "공개 자료 사실 및 범위. " * 3000
+        # §29.12 정상 경로는 고유 문단을 쓴다. 중복 위치/초과 원문은 검토문맥 직접 반례에서 보존한다.
+        text = "\n\n".join(
+            f"공개 자료 {i}번 문단의 사실 및 범위. " + "자료의 주장과 읽기 범위를 확인한다. " * 8
+            for i in range(200)
+        )
         return {
             "requested_url": url,
             "final_url": url,
@@ -291,7 +295,15 @@ class WebModel:
                 "시각화생략사유": "대역에서는 시각화를 생략한다.",
             }
         elif op == "semantic_review":
-            value = {"통과": True, "문제": [], "검토요약": "명시적 대역 판정; 실제 의미 검증 아님"}
+            catalog = json.loads(user)
+            assert response_schema["properties"]["검토목록ID"]["enum"] == [catalog["review_set_id"]]
+            assert all(len(c["text"]) <= 1600 for c in catalog["contexts"])
+            value = {
+                "검토목록ID": catalog["review_set_id"],
+                "판정": "supported",
+                "문제": [],
+                "검토요약": "명시적 대역 판정; 실제 의미 검증 아님",
+            }
         else:
             raise AssertionError(op)
         return {

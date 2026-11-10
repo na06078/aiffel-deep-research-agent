@@ -11,6 +11,7 @@ from langgraph.graph import END, START, StateGraph
 from langgraph.types import Send
 
 from 서버 import 웹연구
+from 서버.검토문맥 import REVIEW_PROTOCOL, build_review_request, parse_review
 from 서버.교안연구 import (
     Corpus,
     ResearchContractError,
@@ -24,7 +25,7 @@ from 서버.교안연구 import (
     synthesis_prompt,
 )
 from 서버.보고서근거 import build_draft_request, materialize_section
-from 서버.보고서품질 import parse_semantic, parse_synthesis, semantic_prompt, validate_section
+from 서버.보고서품질 import parse_semantic, parse_synthesis, validate_section
 from 서버.실행제어 import ExecutionService
 from 서버.저장소 import ApiError, encode, now, run_deleted, uid
 from 서버.활동기록 import measured_call, measured_node, start_call
@@ -124,7 +125,10 @@ class RealResearchService(ExecutionService):
         with self.repo.transaction() as (db, data):
             for run in data["runs"]:
                 correction = run.get("correction_state", {})
-                if correction.get("status") in {"pending", "applied"} and run["status"] != "running":
+                if (
+                    correction.get("status") in {"pending", "applied"}
+                    and run["status"] != "running"
+                ):
                     correction.update(status="failed", passed=False, reason="interrupted")
                     self.repo.save_revision(db, run)
 
@@ -196,47 +200,105 @@ class RealResearchService(ExecutionService):
                 or decision.get("통과") is not False
                 or not isinstance(problems, list)
                 or not 1 <= len(problems) <= 2
+                or (
+                    decision.get("검토계약") == REVIEW_PROTOCOL
+                    and any(p.get("유형") != "contradiction" for p in problems)
+                )
                 or any(r["status"] == "running" for r in data["runs"])
             ):
-                raise ApiError(409, "correction_ineligible", "의미 검토에서 차단된 로컬 원고만 보완할 수 있습니다.")
+                raise ApiError(
+                    409,
+                    "correction_ineligible",
+                    "의미 검토에서 차단된 로컬 원고만 보완할 수 있습니다.",
+                )
             try:
-                source_row = db.execute("SELECT body FROM revisions WHERE run_id=? AND revision=?",
-                                        (run_id, revision)).fetchone()
+                source_row = db.execute(
+                    "SELECT body FROM revisions WHERE run_id=? AND revision=?", (run_id, revision)
+                ).fetchone()
                 semantic_state = run.get("semantic_review_state", {})
-                if (source_row is None or json.loads(source_row[0]) != run
-                        or semantic_state.get("revision") != revision or semantic_state.get("status") != "completed"):
+                if (
+                    source_row is None
+                    or json.loads(source_row[0]) != run
+                    or semantic_state.get("revision") != revision
+                    or semantic_state.get("status") != "completed"
+                ):
                     raise ResearchContractError("correction: missing original revision or verdict")
-                events = [json.loads(row[0]) for row in db.execute(
-                    "SELECT body FROM events WHERE json_extract(body,'$.run_id')=? "
-                    "AND json_extract(body,'$.control_revision')=? "
-                    "AND json_extract(body,'$.type')='research.completed' ORDER BY seq", (run_id, revision)
-                )]
+                events = [
+                    json.loads(row[0])
+                    for row in db.execute(
+                        "SELECT body FROM events WHERE json_extract(body,'$.run_id')=? "
+                        "AND json_extract(body,'$.control_revision')=? "
+                        "AND json_extract(body,'$.type')='research.completed' ORDER BY seq",
+                        (run_id, revision),
+                    )
+                ]
                 sections = latest_sections([event["output"] for event in events])
                 if not sections:
                     raise ResearchContractError("correction: missing sections")
                 read = {key for section in sections for key in section["읽은문서"]}
                 sources = {key: self.corpus.docs[key] for key in read}
-                parsed = parse_semantic(run["semantic_review_state"]["raw"], read)
+                if decision.get("검토계약") == REVIEW_PROTOCOL:
+                    qualified = {
+                        s["section_id"]: {key: self.corpus.docs[key] for key in s["읽은문서"]}
+                        for s in sections
+                    }
+                    review_request = build_review_request(run["draft"], sections, qualified)
+                    parsed = parse_review(
+                        run["semantic_review_state"]["raw"], review_request, qualified
+                    )
+                else:
+                    # 이미 저장된 과거 판정은 그 당시 계약으로만 재검증한다.
+                    parsed = parse_semantic(run["semantic_review_state"]["raw"], read)
                 if parsed != decision:
                     raise ResearchContractError("correction: decision mismatch")
-                request = prepare_correction(draft=run["draft"], sections=sections, problems=problems, sources=sources)
+                request = prepare_correction(
+                    draft=run["draft"], sections=sections, problems=problems, sources=sources
+                )
             except (ResearchContractError, KeyError, TypeError, ValueError):
-                raise ApiError(409, "invalid_target", "지적 문장과 기존 원고·근거를 고유하게 연결할 수 없습니다.") from None
+                raise ApiError(
+                    409,
+                    "invalid_target",
+                    "지적 문장과 기존 원고·근거를 고유하게 연결할 수 없습니다.",
+                ) from None
             original = copy.deepcopy(run)
             self.repo.save_revision(db, run)
             new_revision = revision + 1
-            run.update(control_revision=new_revision, status="running", phase="correcting", updated_at=now())
+            run.update(
+                control_revision=new_revision,
+                status="running",
+                phase="correcting",
+                updated_at=now(),
+            )
             run["correction_state"] = {
-                "source_revision": revision, "revision": new_revision, "status": "pending",
-                "max_model_calls": 2, "client_request_id": request_id, "passed": None,
+                "source_revision": revision,
+                "revision": new_revision,
+                "status": "pending",
+                "max_model_calls": 2,
+                "client_request_id": request_id,
+                "passed": None,
             }
-            admission = {"run_id": run_id, "control_revision": new_revision, "source_revision": revision,
-                         "status": "running", "max_model_calls": 2}
+            admission = {
+                "run_id": run_id,
+                "control_revision": new_revision,
+                "source_revision": revision,
+                "status": "running",
+                "max_model_calls": 2,
+            }
             self.repo.save_revision(db, run)
-            self.repo.event(db, run_id, new_revision, "report.correction.requested", "editor",
-                            input=body, output=admission, status="running")
+            self.repo.event(
+                db,
+                run_id,
+                new_revision,
+                "report.correction.requested",
+                "editor",
+                input=body,
+                output=admission,
+                status="running",
+            )
             self.repo.remember(db, request_id, body, admission)
-        task = asyncio.create_task(self._supervise_correction(run_id, new_revision, original, sections, request))
+        task = asyncio.create_task(
+            self._supervise_correction(run_id, new_revision, original, sections, request)
+        )
         self.tasks.add(task)
         task.add_done_callback(self.tasks.discard)
         return admission
@@ -246,8 +308,14 @@ class RealResearchService(ExecutionService):
 
         state = {"run_id": run_id, "revision": revision}
         try:
-            raw = await self.complete(state, "editor", "semantic_correction", request.prompts,
-                                      response_schema=request.response_schema, inputs=request.inputs)
+            raw = await self.complete(
+                state,
+                "editor",
+                "semantic_correction",
+                request.prompts,
+                response_schema=request.response_schema,
+                inputs=request.inputs,
+            )
             self.check(state)
             read = {key for section in sections for key in section["읽은문서"]}
             sources = {key: self.corpus.docs[key] for key in read}
@@ -259,10 +327,24 @@ class RealResearchService(ExecutionService):
                 run.update(draft=result["draft"], phase="evaluating", updated_at=now())
                 run["correction_state"]["status"] = "applied"
                 self.repo.save_revision(db, run)
-                self.repo.event(db, run_id, revision, "report.correction.applied", "editor",
-                                output={**result, "source_revision": original["control_revision"]})
-            await self.evaluate({**state, "title": original["report_title"], "question": original["question"],
-                                 "results": result["sections"], "source_mode": "local", "draft": result["draft"]})
+                self.repo.event(
+                    db,
+                    run_id,
+                    revision,
+                    "report.correction.applied",
+                    "editor",
+                    output={**result, "source_revision": original["control_revision"]},
+                )
+            await self.evaluate(
+                {
+                    **state,
+                    "title": original["report_title"],
+                    "question": original["question"],
+                    "results": result["sections"],
+                    "source_mode": "local",
+                    "draft": result["draft"],
+                }
+            )
         except SupersededResearch:
             return
         except asyncio.CancelledError:
@@ -272,8 +354,19 @@ class RealResearchService(ExecutionService):
             with self.repo.transaction() as (db, data):
                 run = self.repo.fenced(data, run_id, revision)
                 if run and not run_deleted(db, run_id):
-                    self.fail(db, data, run_id, revision, "editor", "원고 보완을 안전하게 중단했습니다.",
-                              "report.correction.failed", safe_error={"code": "correction_failed", "message": "원고 보완을 안전하게 중단했습니다."})
+                    self.fail(
+                        db,
+                        data,
+                        run_id,
+                        revision,
+                        "editor",
+                        "원고 보완을 안전하게 중단했습니다.",
+                        "report.correction.failed",
+                        safe_error={
+                            "code": "correction_failed",
+                            "message": "원고 보완을 안전하게 중단했습니다.",
+                        },
+                    )
         finally:
             self._finish_correction(run_id, revision)
 
@@ -406,11 +499,18 @@ class RealResearchService(ExecutionService):
             run = self.repo.run(data, state["run_id"])
             correction = run.get("correction_state", {})
             if correction.get("revision") == state["revision"]:
-                prior_calls = db.execute("SELECT input FROM calls WHERE run_id=? AND revision=? ORDER BY rowid",
-                                         (state["run_id"], state["revision"])).fetchall()
+                prior_calls = db.execute(
+                    "SELECT input FROM calls WHERE run_id=? AND revision=? ORDER BY rowid",
+                    (state["run_id"], state["revision"]),
+                ).fetchall()
                 operations = [json.loads(row[0])["context"]["operation"] for row in prior_calls]
-                if operations + [operation] not in (["semantic_correction"], ["semantic_correction", "semantic_review"]):
-                    raise ResearchContractError("correction: model call budget or operation exceeded")
+                if operations + [operation] not in (
+                    ["semantic_correction"],
+                    ["semantic_correction", "semantic_review"],
+                ):
+                    raise ResearchContractError(
+                        "correction: model call budget or operation exceeded"
+                    )
             db.execute(
                 "INSERT INTO calls VALUES(?,?,?,?,?,?,?,?)",
                 (
@@ -851,6 +951,19 @@ class RealResearchService(ExecutionService):
             )
         return {"draft": draft}
 
+    def review_sources(self, state, sections):
+        """같은 절의 실제 읽기만 재확인한다. 웹은 receipt 검증 후 읽힌 prefix만."""
+        self.check(state)
+        if state.get("source_mode", "local") == "web":
+            _, verified, sources = 웹연구.evidence(self, state, sections)
+            return {
+                s["section_id"]: {key: sources[key]["text"][:20000] for key in s["읽은문서"]}
+                for s in verified
+            }
+        return {
+            s["section_id"]: {key: self.corpus.docs[key] for key in s["읽은문서"]} for s in sections
+        }
+
     @measured_node("evaluate", "evaluator", "code")
     async def evaluate(self, state):
         self.check(state)
@@ -926,6 +1039,19 @@ class RealResearchService(ExecutionService):
                 quality["reasons"].append("visual_integrity_error")
                 quality["passed"] = False
             semantic = run.get("semantic_review_state", {})
+            request = None
+            if quality["passed"]:
+                try:
+                    request = build_review_request(
+                        state["draft"], sections, self.review_sources(state, sections)
+                    )
+                    if request.inputs["scope"]["incomplete"]:
+                        quality["warnings"].append(
+                            "검토 입력 상한으로 전체 원문 문맥을 제공하지 않았습니다. 미제공 구간에 대한 의미 판정은 보장하지 않습니다."
+                        )
+                except ResearchContractError:
+                    quality["reasons"].append("semantic_review_invalid")
+                    quality["passed"] = False
             invoke = quality["passed"] and semantic.get("revision") != state["revision"]
             if invoke:
                 run["semantic_review_state"] = {"revision": state["revision"], "status": "pending"}
@@ -940,8 +1066,9 @@ class RealResearchService(ExecutionService):
                     state,
                     "evaluator",
                     "semantic_review",
-                    semantic_prompt(state["draft"], sections),
-                    inputs={"draft": state["draft"], "evidence": [s["근거"] for s in sections]},
+                    request.prompts,
+                    inputs=request.inputs,
+                    response_schema=request.response_schema,
                 )
                 if invoke
                 else semantic["raw"]
@@ -949,7 +1076,7 @@ class RealResearchService(ExecutionService):
             self.check(state)
             quality["semantic_review_raw"] = raw
             try:
-                decision = parse_semantic(raw, read_sources)
+                decision = parse_review(raw, request, self.review_sources(state, sections))
                 quality["semantic_review"] = decision
                 if not decision["통과"]:
                     quality["reasons"].append("semantic_review_failed")

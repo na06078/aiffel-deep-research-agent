@@ -72,6 +72,8 @@ def manifest():
             "교안연구.py",
             "보고서품질.py",
             "보고서근거.py",
+            "원문구간.py",
+            "검토문맥.py",
             "보고서도식.py",
             "보고서표현.py",
             "저장소.py",
@@ -231,12 +233,11 @@ def usage_snapshot(model):
 
 async def run_probe(*, model, work=WORK):
     """명시 주입 모델만 사용한다. None일 때 실제 제공자로 대체하지 않는다."""
+    from 서버.검토문맥 import build_review_request, parse_review
     from 서버.교안연구 import ResearchContractError, assemble_report, synthesis_prompt
     from 서버.보고서근거 import build_draft_request, materialize_section
     from 서버.보고서품질 import (
-        parse_semantic,
         parse_synthesis,
-        semantic_prompt,
         visible_markdown,
     )
 
@@ -251,11 +252,13 @@ async def run_probe(*, model, work=WORK):
         "live_verified": False,
         "draft_protocol": None,
         "draft_schema_received": False,
+        "review_protocol": "source-context-review-v1",
+        "review_schema_cases": [],
     }
     attempts, receipts = [], []
     stage = "setup"
 
-    async def call(operation, case, prompt, *, response_schema=None):
+    async def call(operation, case, prompt, *, response_schema=None, request_inputs=None):
         nonlocal stage
         stage = case
         if len(attempts) >= MAX_CALLS:
@@ -286,6 +289,7 @@ async def run_probe(*, model, work=WORK):
                 "max_output_tokens": MAX_OUTPUT,
                 "json_mode": True,
                 "response_schema": response_schema,
+                "request_inputs": request_inputs,
             },
         )
 
@@ -320,6 +324,8 @@ async def run_probe(*, model, work=WORK):
             result["draft_schema_sha256"] = hashlib.sha256(
                 json.dumps(response_schema, ensure_ascii=False, allow_nan=False).encode("utf-8")
             ).hexdigest()
+        if operation == "semantic_review" and response_schema is not None:
+            result["review_schema_cases"].append(case)
         receipt = {
             k: response.get(k)
             for k in ("attempt_id", "request_id", "model", "usage", "estimated_cost_usd")
@@ -402,13 +408,50 @@ async def run_probe(*, model, work=WORK):
                 "evidence": [{"section_id": section["section_id"], "근거": section["근거"]}],
             },
         )
-        verdict = parse_semantic(
-            await call("semantic_review", "positive", semantic_prompt(positive, sections)), sources
+        qualified_sources = {section["section_id"]: sources}
+        positive_request = build_review_request(positive, sections, qualified_sources)
+        verdict = parse_review(
+            await call(
+                "semantic_review",
+                "positive",
+                positive_request.prompts,
+                response_schema=positive_request.response_schema,
+                request_inputs=positive_request.inputs,
+            ),
+            positive_request,
+            qualified_sources,
         )
         if verdict["통과"] is not True:
             raise ProbeError("positive_rejected")
-        verdict = parse_semantic(
-            await call("semantic_review", "negative", semantic_prompt(negative, sections)), sources
+        # 반례의 본문과 주장 메타데이터를 함께 바꾸되 실제 원문/인용구는1882년으로 유지한다.
+        # 정적 구조 오류가 아니라 의미 검토자가 가시 연도 불일치를 판별하는 경계를 시험한다.
+        negative_sections = json.loads(json.dumps(sections, ensure_ascii=False))
+        negative_sections[0]["본문"] = negative_body
+        visible_section = visible_markdown(section["본문"])
+        date_position = visible_section.find("1882년")
+        changed_claims = 0
+        for item in negative_sections[0]["근거"]:
+            claim = item["주장"]
+            claim_position = visible_section.find(claim)
+            if claim_position >= 0 and claim_position <= date_position < claim_position + len(
+                claim
+            ):
+                at = date_position - claim_position
+                item["주장"] = claim[:at] + "1883년" + claim[at + len("1882년") :]
+                changed_claims += 1
+        if not changed_claims:
+            raise ProbeError("date_claim_mutation_failed")
+        negative_request = build_review_request(negative, negative_sections, qualified_sources)
+        verdict = parse_review(
+            await call(
+                "semantic_review",
+                "negative",
+                negative_request.prompts,
+                response_schema=negative_request.response_schema,
+                request_inputs=negative_request.inputs,
+            ),
+            negative_request,
+            qualified_sources,
         )
         if verdict["통과"] is not False:
             raise ProbeError("negative_accepted")

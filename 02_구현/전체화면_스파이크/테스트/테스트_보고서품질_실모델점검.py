@@ -23,7 +23,10 @@ SPEC.loader.exec_module(probe)
 
 
 @pytest.fixture(autouse=True)
-def no_credentials_ledger_or_provider(monkeypatch):
+def no_credentials_ledger_or_provider(monkeypatch, tmp_path):
+    # 기본 CLI prepare도 이 테스트의 격리 경로로 제한한다.
+    monkeypatch.setitem(probe.prepare.__kwdefaults__, "work", tmp_path)
+    monkeypatch.setitem(probe.run_probe.__kwdefaults__, "work", tmp_path)
     original = Path.open
 
     def guarded(path, *args, **kwargs):
@@ -93,15 +96,21 @@ class ModelDouble:
             ],
             "시각화생략사유": "",
         }
-        self.positive = {"통과": True, "문제": [], "검토요약": "대역의 양성 응답"}
+        self.positive = {
+            "검토목록ID": "__REQUEST__",
+            "판정": "supported",
+            "문제": [],
+            "검토요약": "대역의 양성 응답",
+        }
         self.negative = {
-            "통과": False,
+            "검토목록ID": "__REQUEST__",
+            "판정": "needs_revision",
             "문제": [
                 {
-                    "유형": "날짜",
+                    "유형": "contradiction",
                     "설명": "1883년은 원문의 1882년과 다르다.",
                     "본문발췌": "1883년",
-                    "출처": ["임오군란"],
+                    "근거번호": ["__QUOTE__"],
                 }
             ],
             "검토요약": "대역의 음성 응답",
@@ -159,6 +168,23 @@ class ModelDouble:
                 "충분": self.section["충분"],
                 "부족": self.section["부족"],
             }
+        if context["operation"] == "semantic_review":
+            payload = json.loads(user)
+            assert response_schema["properties"]["검토목록ID"]["enum"] == [payload["review_set_id"]]
+            assert payload["contexts"] and payload["source_hashes"]
+            # 실제 요청에 결합하는 명시 대역이다. bool-only reply를 변환하는 fallback은 없다.
+            if isinstance(reply, dict) and reply.get("검토목록ID") == "__REQUEST__":
+                reply = json.loads(json.dumps(reply, ensure_ascii=False))
+                reply["검토목록ID"] = payload["review_set_id"]
+                for problem in reply["문제"]:
+                    if problem["근거번호"] == ["__QUOTE__"]:
+                        problem["근거번호"] = [
+                            next(
+                                c["id"]
+                                for c in payload["contexts"]
+                                if c["kind"] == "quote" and "1882년" in c["text"]
+                            )
+                        ]
         if isinstance(reply, Exception):
             raise reply
         return {
@@ -185,7 +211,7 @@ class ModelDouble:
 def test_probe_metadata_rejects_reuse_of_nested_reference_protocol(tmp_path):
     result = asyncio.run(probe.run_probe(model=ModelDouble(), work=tmp_path))
     assert result["passed"] is True
-    assert result["draft_protocol"] == "short-number-flat-evidence-v2"
+    assert result["draft_protocol"] == "sentence-paragraph-evidence-v3"
 
 
 def test_active_preflight_sends_id_catalog_and_never_asks_model_to_copy_quotes(tmp_path):
@@ -227,8 +253,18 @@ def test_actual_draft_call_forwards_provider_schema_not_only_prompt(tmp_path):
     model = SchemaRequiredDouble()
     result = asyncio.run(probe.run_probe(model=model, work=tmp_path))
     assert result["passed"] is True and result["observed_attempts"] == 4
-    assert result["draft_protocol"] == "short-number-flat-evidence-v2"
+    assert result["draft_protocol"] == "sentence-paragraph-evidence-v3"
     assert result["draft_schema_received"] is True
+    assert result["review_protocol"] == "source-context-review-v1"
+    assert result["review_schema_cases"] == ["positive", "negative"]
+    for index, case in [(2, "positive"), (3, "negative")]:
+        saved_review = json.loads((tmp_path / f"입력_{case}.json").read_text("utf-8"))
+        catalog = json.loads(model.calls[index]["user"])
+        assert saved_review["request_inputs"] == catalog
+        assert saved_review["response_schema"] == model.calls[index]["response_schema"]
+        assert saved_review["response_schema"]["properties"]["검토목록ID"]["enum"] == [
+            catalog["review_set_id"]
+        ]
     saved = json.loads((tmp_path / "입력_section.json").read_text("utf-8"))
     assert (
         result["draft_schema_sha256"]
@@ -276,8 +312,10 @@ def test_four_steps_use_actual_parsers_and_assembly_with_bound_attempts(tmp_path
     assert assembled in candidates["positive"]
     assert candidates["positive"] != candidates["negative"]
     assert "1883년" in candidates["negative"]
-    assert "1882년 7월 23일" in model.calls[3]["user"].split("[검증된 주장과 원문 인용구]", 1)[1]
-    assert "1883년" not in model.calls[2]["user"]
+    negative_review = json.loads(model.calls[3]["user"])
+    assert any("1882년 7월 23일" in c["text"] for c in negative_review["contexts"])
+    assert "1883년" in negative_review["visible_text"]
+    assert "1883년" not in json.loads(model.calls[2]["user"])["visible_text"]
     assert result["negative_detected"] is True
     receipts = json.loads((tmp_path / "호출영수증.json").read_text(encoding="utf-8"))
     assert [c["attempt_id"] for c in receipts] == [f"fake-{n}-0" for n in range(4)]
@@ -294,18 +332,29 @@ def test_four_steps_use_actual_parsers_and_assembly_with_bound_attempts(tmp_path
         (0, RuntimeError("DO-NOT-LOG-provider-secret"), "provider_or_runtime_error", 1),
         (1, RuntimeError("DO-NOT-LOG-provider-secret"), "provider_or_runtime_error", 2),
         (2, RuntimeError("DO-NOT-LOG-provider-secret"), "provider_or_runtime_error", 3),
-        (3, {"통과": True, "문제": [], "검토요약": "잘못 통과"}, "negative_accepted", 4),
-        (3, {"통과": False, "문제": [], "검토요약": "모순"}, "invalid_schema", 4),
+        (
+            3,
+            {"검토목록ID": "__REQUEST__", "판정": "supported", "문제": [], "검토요약": "잘못 통과"},
+            "negative_accepted",
+            4,
+        ),
+        (
+            3,
+            {"검토목록ID": "__REQUEST__", "판정": "needs_revision", "문제": [], "검토요약": "모순"},
+            "invalid_schema",
+            4,
+        ),
         (
             3,
             {
-                "통과": False,
+                "검토목록ID": "__REQUEST__",
+                "판정": "needs_revision",
                 "문제": [
                     {
-                        "유형": "기타",
+                        "유형": "unsupported",
                         "설명": "다른 지적",
                         "본문발췌": "임오군란",
-                        "출처": ["임오군란"],
+                        "근거번호": [],
                     }
                 ],
                 "검토요약": "날짜 미검출",
@@ -333,7 +382,8 @@ def test_stops_without_retry_or_false_detection(index, reply, error, expected_ca
 
 def test_positive_rejection_stops_before_negative(tmp_path):
     model = ModelDouble()
-    model.overrides[2] = model.negative
+    model.overrides[2] = json.loads(json.dumps(model.negative, ensure_ascii=False))
+    model.overrides[2]["문제"][0]["본문발췌"] = "1882년"
     result = asyncio.run(probe.run_probe(model=model, work=tmp_path))
     assert result["error"] == "positive_rejected"
     assert result["passed"] is False and result["negative_detected"] is False

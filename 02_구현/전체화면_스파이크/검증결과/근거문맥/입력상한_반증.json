@@ -1,0 +1,17 @@
+{
+  "scope": "최종 검토 입력 상한에 대한 메인의 무호출 순수 경계 반증",
+  "actual_provider_requests": 0,
+  "actual_original_run_failure": false,
+  "setup": "동일한 정확 원문 인용/원고/절별 읽기 원문을 가진 합성4절. 본문/주장에 ASCII x 반복을 추가한 길이 경계. 새 모델 응답이나 사실 판별 결과가 아님.",
+  "counterfactual": "일반 build_review_request와 source_ranges가 추가 문맥 후보를 내지 않는 인메모리 대조를 비교. 원래 인용/원고/원문은 동일하며 저장 자료를 수정하지 않음.",
+  "observed": [
+    {"padding_per_section":12000,"normal":"accepted","normal_input_proxy":253355,"original_only":"accepted","original_only_input_proxy":158317},
+    {"padding_per_section":16000,"normal":"review request: input_too_large","original_only":"accepted","original_only_input_proxy":206317},
+    {"padding_per_section":18000,"normal":"review request: input_too_large","original_only":"accepted","original_only_input_proxy":230317},
+    {"padding_per_section":20000,"normal":"review request: input_too_large","original_only":"accepted","original_only_input_proxy":254317}
+  ],
+  "interpretation": "선택적 추가 문맥 때문에만 입력이 넘치는 경우가 존재한다. 원고/원래 인용을 유지한 채 낮은 우선순위 추가 문맥만 줄이면 검토 요청을 보낼 수 있다. 원래 입력 자체가 초과하면 기존처럼 전송 전 차단해야 한다.",
+  "contract_reference": "기술 명세29.12 추가 문맥만 제한·원고/원래 인용 무절단·최종272000",
+  "status": "verified conditional discriminator; not yet patched; independent review/full regression results pending",
+  "limits": ["기존 실제 실패가 이 조건 때문에 발생했다는 증거가 아님", "정적/입력 경계 검증이며 실제 모델 생성·판별력과 별개"]
+}

@@ -14,6 +14,16 @@ TEXT = "😀한글 사건은 1882년에 발생하였으며 기록에 남아 있�
 
 
 class SpanEvidenceTests(unittest.TestCase):
+    def test_sentence_boundary_is_preserved_in_builder_catalog(self):
+        first = "가" * 298 + ". "
+        second = "나" * 99 + "."
+        request = build_draft_request(ASSIGNMENT, [], {"A": first + second})
+        spans = sorted(request.inputs["catalog"], key=lambda s: s["start"])
+        self.assertEqual(
+            [(s["start"], s["end"], s["text"]) for s in spans],
+            [(0, 300, first), (300, 400, second)],
+        )
+
     def test_detached_strict_schema_and_schema_in_input_budget(self):
         sources = {"A": TEXT, "B": TEXT}
         request = build_draft_request(ASSIGNMENT, [], sources)
@@ -215,7 +225,7 @@ class SpanEvidenceTests(unittest.TestCase):
             self.assertEqual(
                 "".join(s["text"] for s in sorted(spans, key=lambda s: s["start"])), sources["A"]
             )
-            self.assertTrue(all(10 <= len(s["text"]) <= 320 for s in spans))
+            self.assertTrue(all(10 <= len(s["text"]) <= 400 for s in spans))
             self.assertEqual(len({s["id"] for s in spans}), len(spans))
             changed = build_draft_request(ASSIGNMENT, [], {"A": sources["A"] + "나"})
             self.assertTrue(
@@ -467,6 +477,7 @@ class SpanEvidenceTests(unittest.TestCase):
         old_token = hashlib.sha256(
             json.dumps(
                 [
+                    "short-number-flat-evidence-v2",
                     ASSIGNMENT,
                     [],
                     sorted(request.inputs["source_hashes"].items()),
@@ -477,8 +488,8 @@ class SpanEvidenceTests(unittest.TestCase):
             ).encode()
         ).hexdigest()
         self.assertNotEqual(request.inputs["evidence_set_id"], old_token)
-        self.assertEqual(getattr(core, "DRAFT_PROTOCOL", None), "short-number-flat-evidence-v2")
-        self.assertEqual(request.inputs.get("draft_protocol"), "short-number-flat-evidence-v2")
+        self.assertEqual(getattr(core, "DRAFT_PROTOCOL", None), "sentence-paragraph-evidence-v3")
+        self.assertEqual(request.inputs.get("draft_protocol"), "sentence-paragraph-evidence-v3")
         raw = {
             "근거목록ID": old_token,
             "문장": ["기록이 있다."],
@@ -808,7 +819,7 @@ class SpanEvidenceTests(unittest.TestCase):
         self.assertGreater(catalog[0]["start"], 20000)
         self.assertEqual(len({s["id"] for s in catalog}), len(catalog))
         for span in catalog:
-            self.assertTrue(10 <= len(span["text"]) <= 320)
+            self.assertTrue(10 <= len(span["text"]) <= 400)
             self.assertEqual(span["text"], sources[span["source_id"]][span["start"] : span["end"]])
         self.assertEqual(
             json.loads(

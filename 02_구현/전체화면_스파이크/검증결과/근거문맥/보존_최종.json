@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "protected_files": 55,
+  "changed_or_missing": [],
+  "ledger_rows": 209,
+  "attempts": 182,
+  "cap": 208,
+  "remaining": 26,
+  "policy_unchanged": true,
+  "readback_note": "SQLite tuple과 JSON list를 정규화해 실제 정책 값을 대조했다. 원본 장부/정책 변경 없음.",
+  "ledger_logical_unchanged": true,
+  "unsettled": 4,
+  "unsettled_ids_unchanged": true,
+  "live_or_test_listeners": [],
+  "actual_model_requests_added": 0,
+  "original_run_data_preserved": true,
+  "installed_dist_preserved": true,
+  "operating_applied": false
+}

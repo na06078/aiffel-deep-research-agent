@@ -172,6 +172,7 @@ def visual_markdown(summary):
 
 
 def semantic_prompt(draft, sections):
+    """과거 명시 호출자 전용. 정상 신규 연구는 검토문맥.build_review_request를 쓴다."""
     evidence = [{"section_id": s["section_id"], "근거": s["근거"]} for s in sections]
     return (
         (

@@ -1,4 +1,4 @@
-"""§29.10 요청별 정수 별칭과 비공개 원문 구간 결합의 순수 경계."""
+"""§29.12 문장·문단 구간과 요청별 정수 별칭 결합의 순수 경계."""
 
 import hashlib
 import html
@@ -8,8 +8,9 @@ from dataclasses import dataclass
 
 from 서버.교안연구 import ResearchContractError
 from 서버.보고서품질 import plain_markdown, validate_section, visible_markdown
+from 서버.원문구간 import source_ranges
 
-DRAFT_PROTOCOL = "short-number-flat-evidence-v2"
+DRAFT_PROTOCOL = "sentence-paragraph-evidence-v3"
 
 
 @dataclass(frozen=True)
@@ -115,11 +116,7 @@ def build_draft_request(assignment: dict, notes: list, sources: dict[str, str]) 
         digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
         hashes[source] = digest
         per_source = []
-        start = 0
-        while start < len(text):
-            end = min(start + 320, len(text))
-            if 0 < len(text) - end < 10:
-                end = len(text) - 10
+        for start, end in source_ranges(text):
             fragment = text[start:end]
             if len(fragment) >= 10 and fragment.strip():
                 identity = _json([source, digest, start, end])
@@ -129,7 +126,7 @@ def build_draft_request(assignment: dict, notes: list, sources: dict[str, str]) 
                 seen_ids.add(span_id)
                 score = len(terms.intersection(re.findall(r"[^\W_]+", fragment.lower())))
                 per_source.append((-score, source, start, (span_id, source, start, end, fragment)))
-            start = end
+
         per_source.sort()
         ranked.extend((i != 0, *entry) for i, entry in enumerate(per_source))
     ranked.sort()
