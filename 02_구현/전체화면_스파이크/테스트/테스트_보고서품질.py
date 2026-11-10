@@ -182,6 +182,153 @@ def test_강조표시가_있는_가시주장은_원문과_연결할_수_있다()
     assert actual["근거"] == value["근거"]
 
 
+def test_종합계약은_4열5셀_반례를_거절하며_2열6열을_허용한다():
+    from 서버.종합계약 import build_synthesis_schema
+
+    schema = build_synthesis_schema(["자료A"])
+    assert schema.get("type") == "object", "종합 root schema가 없다"
+    branches = schema["properties"]["표"]["items"]["anyOf"]
+
+    def accepts(columns, cells):
+        return any(
+            b["properties"]["열"]["minItems"] <= len(columns) <= b["properties"]["열"]["maxItems"]
+            and b["properties"]["행"]["items"]["properties"]["셀"]["minItems"]
+            <= len(cells)
+            <= b["properties"]["행"]["items"]["properties"]["셀"]["maxItems"]
+            for b in branches
+        )
+
+    assert len(branches) == 5
+    assert not accepts(["사건", "연도", "원인", "결과"], ["가", "나", "다", "라", "출처"])
+    assert accepts(["사건", "연도"], ["가", "나"])
+    assert accepts(["가", "나", "다", "라", "마", "바"], ["1", "2", "3", "4", "5", "6"])
+    for branch in branches:
+        row = branch["properties"]["행"]["items"]
+        assert set(row["required"]) == {"셀", "출처"}
+        assert row["properties"]["출처"] == {
+            "type": "array",
+            "minItems": 1,
+            "items": {"type": "string", "enum": ["자료A"]},
+        }
+
+
+@pytest.mark.parametrize("bad", ["자료A", b"A", [""], ["  "], [3], [None]])
+def test_종합계약은_출처키를_추정하거나_정규화하지않는다(bad):
+    from 서버.종합계약 import build_synthesis_schema
+
+    with pytest.raises(ValueError, match="invalid_source_ids"):
+        build_synthesis_schema(bad)
+
+
+def test_종합계약의_빈출처와_분리사본과_키원형과_닫힌객체():
+    from 서버.종합계약 import SYNTHESIS_PROTOCOL, build_synthesis_schema
+
+    assert SYNTHESIS_PROTOCOL == "source-bound-synthesis-v1"
+    source_ids = ["자료B", " 자료A ", "자료B"]
+    original = list(source_ids)
+    schema = build_synthesis_schema(iter(source_ids))
+    diagram = schema["properties"]["도식"]
+    assert diagram["maxItems"] == 2
+    assert diagram["items"]["properties"]["출처"]["items"]["enum"] == [" 자료A ", "자료B"]
+    assert source_ids == original
+    detached = build_synthesis_schema({"자료B": "ignored", " 자료A ": "ignored"})
+    assert detached == schema
+    diagram["items"]["properties"]["출처"]["items"]["enum"].append("변조")
+    assert detached["properties"]["도식"]["items"]["properties"]["출처"]["items"]["enum"] == [
+        " 자료A ",
+        "자료B",
+    ]
+    assert detached["properties"]["표"]["items"]["anyOf"][0]["properties"]["행"]["items"][
+        "properties"
+    ]["출처"]["items"]["enum"] == [" 자료A ", "자료B"]
+    empty = build_synthesis_schema([])
+    assert empty["properties"]["표"]["maxItems"] == empty["properties"]["도식"]["maxItems"] == 0
+    assert "minItems" not in detached["properties"]["도식"]
+    assert set(empty["required"]) == {"머리말", "맺음말", "표", "도식", "시각화생략사유"}
+
+    allowed = {
+        "type",
+        "properties",
+        "required",
+        "additionalProperties",
+        "enum",
+        "anyOf",
+        "minItems",
+        "maxItems",
+        "items",
+    }
+
+    def walk(node):
+        assert type(node) is dict and set(node) <= allowed
+        if node.get("type") == "object":
+            assert node["additionalProperties"] is False
+            assert set(node["required"]) == set(node["properties"])
+        for child in node.get("properties", {}).values():
+            walk(child)
+        if "items" in node:
+            walk(node["items"])
+        for child in node.get("anyOf", []):
+            walk(child)
+
+    walk(detached)
+    walk(empty)
+    assert json.loads(json.dumps(detached, ensure_ascii=False)) == detached
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    ["missing_source", "empty_source", "unknown_source", "four_five", "valid_two", "valid_six"],
+)
+def test_종합계약의_관측반례는_응답수선없이_제공자제약으로_배제한다(mutation):
+    from 서버.종합계약 import build_synthesis_schema
+
+    # 구체적 응답 예시를 schema 구조와 독립적으로 명시한다.
+    table = {
+        "제목": "비교",
+        "열": ["사건", "연도"],
+        "행": [{"셀": ["사건A", "1882년"], "출처": ["자료A"]}],
+    }
+    row = table["행"][0]
+    if mutation == "missing_source":
+        row.pop("출처")
+    elif mutation == "empty_source":
+        row["출처"] = []
+    elif mutation == "unknown_source":
+        row["출처"] = ["미독자료"]
+    elif mutation == "four_five":
+        table["열"] = ["사건", "연도", "원인", "결과"]
+        row["셀"] = ["사건A", "1882년", "원인A", "결과A", "자료A"]
+    elif mutation == "valid_six":
+        table["열"] = ["가", "나", "다", "라", "마", "바"]
+        row["셀"] = ["1", "2", "3", "4", "5", "6"]
+    before = dump(table)
+
+    def accepts(node, value):
+        # 테스트 전용 JSON Schema 부분집합 해석기. builder의 분기 생성과 공유하지 않는다.
+        if "anyOf" in node:
+            return any(accepts(child, value) for child in node["anyOf"])
+        kind = node["type"]
+        if kind == "object":
+            return (
+                type(value) is dict
+                and set(node["required"]) <= set(value)
+                and set(value) <= set(node["properties"])
+                and all(accepts(node["properties"][key], val) for key, val in value.items())
+            )
+        if kind == "array":
+            return (
+                type(value) is list
+                and node.get("minItems", 0) <= len(value) <= node.get("maxItems", float("inf"))
+                and all(accepts(node["items"], val) for val in value)
+            )
+        assert kind == "string"
+        return type(value) is str and ("enum" not in node or value in node["enum"])
+
+    node = build_synthesis_schema(["자료A"])["properties"]["표"]["items"]
+    assert accepts(node, table) is (mutation in {"valid_two", "valid_six"})
+    assert dump(table) == before
+
+
 def synthesis():
     return {
         "머리말": "머리말",
@@ -254,6 +401,10 @@ def test_종합프롬프트의_완성예시는_그대로_파싱되는_유효한S
 
     system, _ = synthesis_prompt("질문", "제목", [])
     example = json.loads(system.split("JSON으로만: ", 1)[1])
+    assert "연표나 병렬 카드" in system
+    assert "인과를 뜻하지 않는 SVG" in system
+    assert "출처 열은 렌더러가 추가" in system
+    assert "열/셀에 출처를 추가하지 마라" in system
     assert len(example["표"]) == len(example["도식"]) == 1
     code = example["도식"][0]["코드"]
     # 원격 응답이 아닌 소스의 작은 고정 예시만 표준 XML 파서로 독립 대조한다.

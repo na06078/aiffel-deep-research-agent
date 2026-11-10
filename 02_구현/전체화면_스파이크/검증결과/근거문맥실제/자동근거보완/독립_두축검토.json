@@ -1,0 +1,756 @@
+{
+  "schema_version": 1,
+  "review_type": "independent_two_axis_static_source_review",
+  "language": "ko",
+  "passed": false,
+  "overall_status": "changes_requested_static_only",
+  "final_acceptance": false,
+  "summary": "Standards는 확인한 적용 규칙 범위에서 pass, Spec은 조건부 수정범위 검증 연결 결손 S18-SCOPE-01 때문에 fail입니다. 실제 모델 복구/최종 인수는 판단하지 않습니다.",
+  "scope": {
+    "project_root": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트",
+    "implementation_root": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크",
+    "baseline_head_supplied_by_parent": "cde2aaab4ed4c448ecd32f3e368a31b3c8569ac5",
+    "baseline_kind": "현재 동결 작업트리: committed HEAD 대체나 diff-only 판정 아님",
+    "git_read_or_write_operations": [],
+    "git_state_independently_verified": false,
+    "authorized_write": "검증결과/근거문맥실제/자동근거보완/독립_두축검토.json 새 파일 하나",
+    "source_edits": [],
+    "test_execution": false,
+    "app_code_import_or_execution": false,
+    "provider_or_web_calls": 0,
+    "servers_started": 0,
+    "credential_or_real_ledger_or_03_execution_data_reads": false
+  },
+  "standards": {
+    "status": "pass",
+    "scope_qualification": "파일 이름/식별자 보존·학습실습 경로/승인 경계·설계와 검증 구분에 대한 정적 검토입니다. lint/전체 AGENTS 타 프로젝트 규정 준수나 실제 실행 품질 인증이 아닙니다.",
+    "sources": [
+      {
+        "path": "../../AGENTS.md",
+        "lines": "16-18",
+        "sentence": "새 파일명은 기본 한국어. 단 기존 파일명·사용자 지정 이름·코드 식별자·모델/API 이름·URL·명령어·설정 값은 원형 유지."
+      },
+      {
+        "path": "../../AGENTS.md",
+        "line": 29,
+        "sentence": "작업 분류가 확정된 뒤에도 실행·검증·제출·리뷰 상태를 서로 구분해 기록한다."
+      },
+      {
+        "path": "../../AGENTS.md",
+        "line": 94,
+        "sentence": "설계·구현·제출·코드 리뷰·실행 검증은 서로 다른 단계다. 과제가 제출되었거나 코드가 존재한다는 사실만으로 리뷰·실행 검증까지 완료되었다고 기록하지 않는다."
+      }
+    ],
+    "findings": [],
+    "not_assessed_reason": null,
+    "evidence": [
+      "새 순수 모듈·테스트는 한국어 파일명이며 공개 API 식별자를 유지합니다.",
+      "최신 진행 현황13행과 구현 인계는 실제2요청 복구·운영 적용 미완료를 명시합니다. 이 검토도 테스트/모델 성공으로 확대하지 않습니다.",
+      "이번 작업은 기존 승인 경로에서 읽기 전용 검토와 지정된 새 JSON 작성만 수행합니다."
+    ]
+  },
+  "spec": {
+    "status": "fail",
+    "sources": [
+      {
+        "path": "📘 딥리서치 에이전트 기술 명세서.md",
+        "line": 1238,
+        "sentence": "- **승인/목표:** 사용자는 같은과제3차의 citation_gap3곳 이후 `자동 1회 근거 보완·재검토를 추가 — 지적된 문장·인용만 수정, 원본 보존, 추가 최대 2요청, 통과한 경우만 제출`을 선택했다. 기존29.12의 citation_gap 보완 금지 중 이 자동 단1회 경로만 대체한다. 전체 연구/읽기/종합 재생성·모델 교체·추가 검색·무한 retry와 무조건 차단 해제는 금지한다. 추정10000회/$20·같은 질문/34문서·한 실행 최대55요청은 유지한다."
+      },
+      {
+        "path": "📘 딥리서치 에이전트 기술 명세서.md",
+        "line": 1239,
+        "sentence": "- **자격:** 현재 로컬 실행의 정본 없는 blocked/quality_failed, quality.reasons가 semantic_review_failed 하나, 현재 strict 검토의 needs_revision/citation_gap만1~3개, 같은 원본 revision·raw 재검증·고유한 가시 주장 매핑·읽은 원문 결합을 모두 요구한다. 기존 보완 시도가 있거나 malformed/undetermined/출처충돌/문맥부족/unsupported/4문제 이상·웹·삭제·superseded는 자동 요청0이다. 기존 수동 contradiction1~2 교정은 별도 호환 경로로 유지한다."
+      },
+      {
+        "path": "📘 딥리서치 에이전트 기술 명세서.md",
+        "line": 1240,
+        "sentence": "- **순수 경계:** `서버/근거보완.py`의 `prepare_evidence_correction(draft, sections, problems, sources)`는 IO/모델 없이 불변 요청을 만들고 `apply_evidence_correction(raw, request, sources)`는 `{draft, sections, changes}`를 반환한다. `보고서보완.py`의 원본 위치/가시문단/비대상 바이트불변 검사와 `보고서근거.py`의 제공 구간 선택·정수 별칭·정확 slice 조립을 재사용한다. 기존 prepare_correction의 기본1~2개 계약은 바꾸지 않으며 공통 매핑에 명시적 max_problems=3이 필요하면 그 경로만 허용한다."
+      },
+      {
+        "path": "📘 딥리서치 에이전트 기술 명세서.md",
+        "line": 1241,
+        "sentence": "- **모델 입력/출력:** 지적 대상의 기존 문장·선택인용·문제와 해당 절에서 이미 읽은 문서의 실제 구간만 제공한다. 기존 build_draft_request로 대상 주장/설명을 query로 한 결합 목록을 만들며 최대128구간/96000 UTF-8 bytes, 원문10~400자, source key·SHA-256·offset·text 결합을 유지한다. 새 출처 읽기는 없다. 새 요청ID는 protocol·system 지침·원본 draft/sections/문제/목록/원문해시에 결합한다. strict 출력은 `근거목록ID`와 `교정` 배열이며 대상번호/내용/근거구간 정수 배열을 모든 대상에 정확히 한 번 반환한다. 제시되지 않은/bool/문자열/중복/다른 절·안 읽은 출처·변조 위치·다른 요청의 번호를 거절한다. 형식 실패를 수선·재호출하지 않는다."
+      },
+      {
+        "path": "📘 딥리서치 에이전트 기술 명세서.md",
+        "line": 1242,
+        "sentence": "- **적용 불변식:** 선택 인용은 모델이 명시적으로 다시 고르고 코드가 실제 구간으로 조립한다. 코드가 review 근거를 추정해 자동 승격하지 않는다. 인용만 고치는 대상은 원문장을 유지할 수 있고, 새 날짜/의도/원인 추가 없이 근거 있는 범위로 좁힐 수 있다. 지적된 문단과 그 인용표식/근거 관계만 새 버전에서 변경하고 제목·서론·결론·비대상 절·표/SVG/생략 사유는 바이트 보존한다. 절당 전체16관계·가시본문2000자·모든 기존 품질/시각화 검사를 유지한다. 원래 claim 배열과 old source markers가 정확한 canonical 문단에 대응되지 않으면 모델 호출 전 거절한다. 변경 없는 응답이나 본문 삭제/표식 위장도 거절한다."
+      },
+      {
+        "path": "📘 딥리서치 에이전트 기술 명세서.md",
+        "line": 1243,
+        "sentence": "- **실행/수명:** evaluate가 원래 부정 판정/원고/quality를 저장하고 transaction을 닫은 뒤 자동 자격을 판정한다. 보완 소비와 source_revision 보존·새 control_revision 생성·pending 상태를 하나의 직렬화 경계에서 기록한 다음 모델을 호출한다. correction_state는 automatic=true/mode=evidence와 기존 source_revision/revision/status/max_model_calls=2를 포함한다. 기존 supervisor/complete/evaluate/publish를 재사용하고 새 revision의 허용 호출 순서는 semantic_correction→semantic_review뿐이다. 단1회 보완 실패/재검토 미합격 뒤 반복하지 않는다. restart/GET/replay는 보완을 시작하지 않는다. 중복 evaluate/수동 요청 경합·늦은 결과·삭제·개입·취소에도 같은 영속 소비/fence를 사용한다. 통과 시만 정본/다운로드를 만들고 이후 큐를 재개한다."
+      },
+      {
+        "path": "📘 딥리서치 에이전트 기술 명세서.md",
+        "line": 1244,
+        "sentence": "- **소비자/소유:** backend 작업자는 `근거보완.py`, 필요한 공통보완/실제연구제어와 명시된 backend 테스트만 소유한다. 메인은 기술/작업 명세·진행 현황·CHANGELOG·화면 계약/상태 표시·실제 연구 검사기와 실제 호출/최종 인수/Git을 소유한다. CorrectionState의 automatic/mode는 optional이며 과거 기록은 미시도 상태 그대로 표시한다. 자동 보완 중/재검토 중/소진/합격을 표시하고 과거 blocked 기록의 조회를 새 호출로 바꾸지 않는다."
+      },
+      {
+        "path": "📘 딥리서치 에이전트 기술 명세서.md",
+        "line": 1245,
+        "sentence": "- **검증:** 실제3차의21요청/citation_gap3건/정본0을 원본으로 보존한다. 순수 위치/귀속/비대상 보존, 실제 서비스·ASGI·SQLite의 자동2요청/재검토 실패·중복·삭제·개입·취소·재시작, 실제 SDK payload의 strict schema/예약상한을 각각 검사한다. 대역 통과와 실제 모델 복구는 구별하며 새 정상 UI 연구에서 자동 보완→정본/MD·HTML·PDF/새로고침 무재호출을 최종 확인한다. 합격 전에 기존 설치본/운영8768은 교체하지 않는다."
+      }
+    ],
+    "findings": [
+      {
+        "id": "S18-SCOPE-01",
+        "axis": "spec",
+        "priority": "P2",
+        "classification": "conditional_logic_gap_static_only",
+        "title": "보완 내용의 원래 주장 대비 확장 금지가 생성 지침에만 있고 최종 수락 경계에는 전달되지 않습니다.",
+        "rule": {
+          "path": "📘 딥리서치 에이전트 기술 명세서.md",
+          "line": 1242,
+          "sentence": "- **적용 불변식:** 선택 인용은 모델이 명시적으로 다시 고르고 코드가 실제 구간으로 조립한다. 코드가 review 근거를 추정해 자동 승격하지 않는다. 인용만 고치는 대상은 원문장을 유지할 수 있고, 새 날짜/의도/원인 추가 없이 근거 있는 범위로 좁힐 수 있다. 지적된 문단과 그 인용표식/근거 관계만 새 버전에서 변경하고 제목·서론·결론·비대상 절·표/SVG/생략 사유는 바이트 보존한다. 절당 전체16관계·가시본문2000자·모든 기존 품질/시각화 검사를 유지한다. 원래 claim 배열과 old source markers가 정확한 canonical 문단에 대응되지 않으면 모델 호출 전 거절한다. 변경 없는 응답이나 본문 삭제/표식 위장도 거절한다."
+        },
+        "trigger": "대상 문단을 기존 주장보다 넓혀, 같은 절의 이미 읽은 catalog가 실제로 지지하는 새 날짜·의도·원인 사실을 추가한 유효 JSON이 반환되고, 새 전체 의미 검토가 그 확장된 현재 원고를 supported로 판정하는 경우입니다. malformed/미읽기 출처/근거 없는 허위 주장이 아니라, 출처는 참이지만 승인된 보완 범위 밖인 확장입니다.",
+        "producer_evidence": [
+          {
+            "path": "서버/근거보완.py",
+            "lines": "13-20",
+            "observation": "SYSTEM은 새 날짜·사실·의도·원인 추가를 금지하지만 이는 모델 지침입니다."
+          },
+          {
+            "path": "서버/근거보완.py",
+            "lines": "165-205",
+            "observation": "내용은 string이며 제공 근거구간을 선택하면 materialize_section으로 조립합니다. 원래 주장과의 비교는 no-op 거절뿐입니다. 새 날짜/사실 추가나 원래 주장 범위 확장 여부를 수락 조건으로 검사하지 않습니다."
+          },
+          {
+            "path": "서버/보고서근거.py",
+            "lines": "291-333",
+            "observation": "조립기는 가시 문자열·예약표식·제공한 source/hash/offset/slice를 검사하므로 실제 읽은 원문에 있는 확장 사실은 이 경계를 통과할 수 있습니다."
+          }
+        ],
+        "consumer_evidence": [
+          {
+            "path": "서버/실제연구제어.py",
+            "lines": "351-377",
+            "observation": "changes에 before/after를 보존하지만 evaluate에는 수정 후 results/draft와 기존 title/question만 넘깁니다. 원래 주장/허용 변경 범위를 새 검토에 연결하지 않습니다."
+          },
+          {
+            "path": "서버/검토문맥.py",
+            "lines": "175-184,200-210",
+            "observation": "검토 입력은 현재 draft/sections/evidence/context입니다. 원래 대상 문장·수정 전후 비교·보완 한계가 없고 새 사실·의도·인과는 근거가 필요하다고 지시합니다. 따라서 사실성/지지 검토가 정확해도 근거 있는 새 사실의 추가 금지를 판정할 정보가 없습니다."
+          },
+          {
+            "path": "서버/교안연구.py",
+            "lines": "133-155",
+            "observation": "기존 정적 필수 조건은 제목/2000자/인용/귀속이며 원래 주장 대비 의미적 확장을 검사하지 않습니다."
+          },
+          {
+            "path": "서버/실제연구제어.py",
+            "lines": "1113-1120,1156-1160",
+            "observation": "수정 후 현재 원고에 supported가 나오고 기존 필수 검사가 통과하면 publish합니다."
+          }
+        ],
+        "actual_conditional_impact": "지적 문단의 위치와 비대상 바이트·실제 출처는 보존되면서도 허용된 인용 재선택/주장 축소를 넘어선 새 내용이 정본으로 게시될 수 있습니다. 모든 보완이 실패하거나 새 사실이 허위여야 발생하는 문제가 아닙니다. 현재 실제3차 또는 실제 제공자에서 이 현상이 발생했다고 주장하지 않습니다.",
+        "why_not_just_model_accuracy": "새 검토자가 사실/인용 지지를 올바르게 supported로 판단해도, 수정 전 문장을 받지 않으므로 상대적 변경 범위 위반을 판별할 수 없는 정보 연결 문제입니다. 첫 교정 모델이 지침을 항상 지키는 경우에는 영향이 없습니다.",
+        "evidence_kind": "생산자/소비자 정적 경로. 실행·재현·실제 모델 응답 없음.",
+        "minimal_repair_direction": "자동 evidence 경로에 한해 기존 두 번째 semantic_review에 원본 대상/수정 전후와 인용 재연결 또는 축소만 허용한다는 조건을 결합하고 범위 위반을 fail-closed로 판정하도록 연결하는 방향을 검토하십시오. 새 모델 호출이나 전체 재생성은 필요하지 않습니다. 날짜 등 보수적 결정론적 검사로 거절 가능한 추가는 선차단할 수 있으나 의미 축소 전체를 문자열 비교로 증명한다고 표현하지 마십시오.",
+        "requested_validation_not_executed": "기존 원고의 지적 문단에 같은 절 원문의 새로운 지지 가능한 날짜/원인 사실을 추가한 반례가 원본/비대상 보존과 별개로 게시되지 않는지 확인하십시오. 인용만 바꾸는 정상 사례 및 정당한 범위 축소는 유지해야 합니다.",
+        "current_case_incidence": "미관측/미평가: context03는 이전 부정 원본이며 S18 실제 복구는 이번 검토에서 실행하지 않았습니다."
+      }
+    ],
+    "checks": [
+      {
+        "id": "ELIGIBILITY",
+        "status": "pass",
+        "rule": {
+          "path": "📘 딥리서치 에이전트 기술 명세서.md",
+          "line": 1239,
+          "sentence": "- **자격:** 현재 로컬 실행의 정본 없는 blocked/quality_failed, quality.reasons가 semantic_review_failed 하나, 현재 strict 검토의 needs_revision/citation_gap만1~3개, 같은 원본 revision·raw 재검증·고유한 가시 주장 매핑·읽은 원문 결합을 모두 요구한다. 기존 보완 시도가 있거나 malformed/undetermined/출처충돌/문맥부족/unsupported/4문제 이상·웹·삭제·superseded는 자동 요청0이다. 기존 수동 contradiction1~2 교정은 별도 호환 경로로 유지한다."
+        },
+        "evidence": [
+          {
+            "path": "서버/실제연구제어.py",
+            "lines": "188-280",
+            "observation": "BEGIN IMMEDIATE 안에서 현재 run/revision·local·blocked·report 없음·reasons 정확 일치·strict needs_revision/citation_gap 1..3·기소비 없음·53 이하를 확인하고 원본 row/raw를 재구성/재파싱합니다."
+          }
+        ]
+      },
+      {
+        "id": "PURE_BINDING",
+        "status": "pass",
+        "rule": {
+          "path": "📘 딥리서치 에이전트 기술 명세서.md",
+          "line": 1241,
+          "sentence": "- **모델 입력/출력:** 지적 대상의 기존 문장·선택인용·문제와 해당 절에서 이미 읽은 문서의 실제 구간만 제공한다. 기존 build_draft_request로 대상 주장/설명을 query로 한 결합 목록을 만들며 최대128구간/96000 UTF-8 bytes, 원문10~400자, source key·SHA-256·offset·text 결합을 유지한다. 새 출처 읽기는 없다. 새 요청ID는 protocol·system 지침·원본 draft/sections/문제/목록/원문해시에 결합한다. strict 출력은 `근거목록ID`와 `교정` 배열이며 대상번호/내용/근거구간 정수 배열을 모든 대상에 정확히 한 번 반환한다. 제시되지 않은/bool/문자열/중복/다른 절·안 읽은 출처·변조 위치·다른 요청의 번호를 거절한다. 형식 실패를 수선·재호출하지 않는다."
+        },
+        "evidence": [
+          {
+            "path": "서버/근거보완.py",
+            "lines": "60-139",
+            "observation": "공통 위치 매핑 max_problems=3, canonical 문단·표식 전체 일치 후 해당 절 읽기만 catalog 구성; protocol/system/binding/catalog 토큰과 strict enum, 분리 사본, 272000 proxy 적용."
+          },
+          {
+            "path": "서버/보고서근거.py",
+            "lines": "104-150,173-226,229-333",
+            "observation": "128/96000, 원문 해시와 위치 기반 private id, 반환 시 source/hash/exact slice/10..400 재검사."
+          }
+        ]
+      },
+      {
+        "id": "NO_REVIEW_PROMOTION",
+        "status": "pass",
+        "rule": {
+          "path": "📘 딥리서치 에이전트 기술 명세서.md",
+          "line": 1242,
+          "sentence": "- **적용 불변식:** 선택 인용은 모델이 명시적으로 다시 고르고 코드가 실제 구간으로 조립한다. 코드가 review 근거를 추정해 자동 승격하지 않는다. 인용만 고치는 대상은 원문장을 유지할 수 있고, 새 날짜/의도/원인 추가 없이 근거 있는 범위로 좁힐 수 있다. 지적된 문단과 그 인용표식/근거 관계만 새 버전에서 변경하고 제목·서론·결론·비대상 절·표/SVG/생략 사유는 바이트 보존한다. 절당 전체16관계·가시본문2000자·모든 기존 품질/시각화 검사를 유지한다. 원래 claim 배열과 old source markers가 정확한 canonical 문단에 대응되지 않으면 모델 호출 전 거절한다. 변경 없는 응답이나 본문 삭제/표식 위장도 거절한다."
+        },
+        "evidence": [
+          {
+            "path": "서버/근거보완.py",
+            "lines": "76-94,164-187",
+            "observation": "review 근거문맥/id/source를 선택 근거로 자동 사용하지 않습니다. 모델에게는 유형/설명/발췌와 읽기 결합 catalog를 주고 반환 ref마다 대상 절 읽기 범위를 확인합니다."
+          }
+        ]
+      },
+      {
+        "id": "TARGET_BYTES_REFERENCES",
+        "status": "pass",
+        "rule": {
+          "path": "📘 딥리서치 에이전트 기술 명세서.md",
+          "line": 1242,
+          "sentence": "- **적용 불변식:** 선택 인용은 모델이 명시적으로 다시 고르고 코드가 실제 구간으로 조립한다. 코드가 review 근거를 추정해 자동 승격하지 않는다. 인용만 고치는 대상은 원문장을 유지할 수 있고, 새 날짜/의도/원인 추가 없이 근거 있는 범위로 좁힐 수 있다. 지적된 문단과 그 인용표식/근거 관계만 새 버전에서 변경하고 제목·서론·결론·비대상 절·표/SVG/생략 사유는 바이트 보존한다. 절당 전체16관계·가시본문2000자·모든 기존 품질/시각화 검사를 유지한다. 원래 claim 배열과 old source markers가 정확한 canonical 문단에 대응되지 않으면 모델 호출 전 거절한다. 변경 없는 응답이나 본문 삭제/표식 위장도 거절한다."
+        },
+        "evidence": [
+          {
+            "path": "서버/보고서보완.py",
+            "lines": "161-200,246-261",
+            "observation": "고유 주장/원고/절 위치 확인 및 비대상 UTF8 바이트 조립 검증."
+          },
+          {
+            "path": "서버/근거보완.py",
+            "lines": "182-240",
+            "observation": "지적 canonical 문단+표식과 해당 claim의 근거만 splice; 같은절 여러 대상은 원본 목록 한 번 순회; 전체 절16관계 재검사. 의미 축소 보장은 S18-SCOPE-01에서 별도 실패 판정."
+          }
+        ]
+      },
+      {
+        "id": "DURABLE_SINGLE_CONSUMPTION",
+        "status": "pass",
+        "rule": {
+          "path": "📘 딥리서치 에이전트 기술 명세서.md",
+          "line": 1243,
+          "sentence": "- **실행/수명:** evaluate가 원래 부정 판정/원고/quality를 저장하고 transaction을 닫은 뒤 자동 자격을 판정한다. 보완 소비와 source_revision 보존·새 control_revision 생성·pending 상태를 하나의 직렬화 경계에서 기록한 다음 모델을 호출한다. correction_state는 automatic=true/mode=evidence와 기존 source_revision/revision/status/max_model_calls=2를 포함한다. 기존 supervisor/complete/evaluate/publish를 재사용하고 새 revision의 허용 호출 순서는 semantic_correction→semantic_review뿐이다. 단1회 보완 실패/재검토 미합격 뒤 반복하지 않는다. restart/GET/replay는 보완을 시작하지 않는다. 중복 evaluate/수동 요청 경합·늦은 결과·삭제·개입·취소에도 같은 영속 소비/fence를 사용한다. 통과 시만 정본/다운로드를 만들고 이후 큐를 재개한다."
+        },
+        "evidence": [
+          {
+            "path": "서버/실제연구제어.py",
+            "lines": "1121-1178,286-329",
+            "observation": "원 부정 transaction 종료 후 별도 직렬화 경계에서 원본 보존·newrevision·pending·request 기억을 저장하고 task 생성."
+          },
+          {
+            "path": "서버/저장소.py",
+            "lines": "110-135,208-221",
+            "observation": "BEGIN IMMEDIATE, 같은 ID/body 접수 재사용, 다른 body 충돌, current/status/revision fence."
+          }
+        ]
+      },
+      {
+        "id": "TWO_CALL_SEQUENCE",
+        "status": "pass",
+        "rule": {
+          "path": "📘 딥리서치 에이전트 기술 명세서.md",
+          "line": 1243,
+          "sentence": "- **실행/수명:** evaluate가 원래 부정 판정/원고/quality를 저장하고 transaction을 닫은 뒤 자동 자격을 판정한다. 보완 소비와 source_revision 보존·새 control_revision 생성·pending 상태를 하나의 직렬화 경계에서 기록한 다음 모델을 호출한다. correction_state는 automatic=true/mode=evidence와 기존 source_revision/revision/status/max_model_calls=2를 포함한다. 기존 supervisor/complete/evaluate/publish를 재사용하고 새 revision의 허용 호출 순서는 semantic_correction→semantic_review뿐이다. 단1회 보완 실패/재검토 미합격 뒤 반복하지 않는다. restart/GET/replay는 보완을 시작하지 않는다. 중복 evaluate/수동 요청 경합·늦은 결과·삭제·개입·취소에도 같은 영속 소비/fence를 사용한다. 통과 시만 정본/다운로드를 만들고 이후 큐를 재개한다."
+        },
+        "evidence": [
+          {
+            "path": "서버/실제연구제어.py",
+            "lines": "216,331-378,531-558",
+            "observation": "원본 actual<=53, correction revision의 calls 영속 순서가 correction 또는 correction/review뿐이어야 예약저널 진입; 추가 연구 노드 없음."
+          }
+        ]
+      },
+      {
+        "id": "QUALITY_PUBLISH_QUEUE",
+        "status": "pass",
+        "rule": {
+          "path": "📘 딥리서치 에이전트 기술 명세서.md",
+          "line": 1243,
+          "sentence": "- **실행/수명:** evaluate가 원래 부정 판정/원고/quality를 저장하고 transaction을 닫은 뒤 자동 자격을 판정한다. 보완 소비와 source_revision 보존·새 control_revision 생성·pending 상태를 하나의 직렬화 경계에서 기록한 다음 모델을 호출한다. correction_state는 automatic=true/mode=evidence와 기존 source_revision/revision/status/max_model_calls=2를 포함한다. 기존 supervisor/complete/evaluate/publish를 재사용하고 새 revision의 허용 호출 순서는 semantic_correction→semantic_review뿐이다. 단1회 보완 실패/재검토 미합격 뒤 반복하지 않는다. restart/GET/replay는 보완을 시작하지 않는다. 중복 evaluate/수동 요청 경합·늦은 결과·삭제·개입·취소에도 같은 영속 소비/fence를 사용한다. 통과 시만 정본/다운로드를 만들고 이후 큐를 재개한다."
+        },
+        "evidence": [
+          {
+            "path": "서버/실제연구제어.py",
+            "lines": "1041-1120,1156-1178",
+            "observation": "기존 품질·절근거·시각화·새 strict review 재검사; 불합격 blocked/queue pause, 통과 후에만 publish/queue."
+          },
+          {
+            "path": "서버/실행제어.py",
+            "lines": "576-612,296-319",
+            "observation": "현재 fence 후 고유 정본 파일 쓰기/재열기·DB 제출, queue는 그 뒤 시작. 단 상대적 수정 범위 검사는 S18-SCOPE-01 참조."
+          }
+        ]
+      },
+      {
+        "id": "FAIL_CLOSED_NO_RETRY",
+        "status": "pass",
+        "rule": {
+          "path": "📘 딥리서치 에이전트 기술 명세서.md",
+          "line": 1241,
+          "sentence": "- **모델 입력/출력:** 지적 대상의 기존 문장·선택인용·문제와 해당 절에서 이미 읽은 문서의 실제 구간만 제공한다. 기존 build_draft_request로 대상 주장/설명을 query로 한 결합 목록을 만들며 최대128구간/96000 UTF-8 bytes, 원문10~400자, source key·SHA-256·offset·text 결합을 유지한다. 새 출처 읽기는 없다. 새 요청ID는 protocol·system 지침·원본 draft/sections/문제/목록/원문해시에 결합한다. strict 출력은 `근거목록ID`와 `교정` 배열이며 대상번호/내용/근거구간 정수 배열을 모든 대상에 정확히 한 번 반환한다. 제시되지 않은/bool/문자열/중복/다른 절·안 읽은 출처·변조 위치·다른 요청의 번호를 거절한다. 형식 실패를 수선·재호출하지 않는다."
+        },
+        "evidence": [
+          {
+            "path": "서버/근거보완.py",
+            "lines": "142-205",
+            "observation": "중복키·다른요청·bool/string/중복ref·범위외ref·변조원문·no-op 거절."
+          },
+          {
+            "path": "서버/실제연구제어.py",
+            "lines": "379-417,561-568",
+            "observation": "실패 소진, 반복 correction_state 거절, 전송 callback 재시도 차단."
+          },
+          {
+            "path": "서버/실제모델.py",
+            "lines": "201-254",
+            "observation": "strict schema 옵션과 input proxy를 예약 전 검사, SDK max_retries=0."
+          }
+        ]
+      },
+      {
+        "id": "BUDGET_POLICY_REUSE",
+        "status": "pass",
+        "rule": {
+          "path": "📘 딥리서치 에이전트 기술 명세서.md",
+          "line": 1238,
+          "sentence": "- **승인/목표:** 사용자는 같은과제3차의 citation_gap3곳 이후 `자동 1회 근거 보완·재검토를 추가 — 지적된 문장·인용만 수정, 원본 보존, 추가 최대 2요청, 통과한 경우만 제출`을 선택했다. 기존29.12의 citation_gap 보완 금지 중 이 자동 단1회 경로만 대체한다. 전체 연구/읽기/종합 재생성·모델 교체·추가 검색·무한 retry와 무조건 차단 해제는 금지한다. 추정10000회/$20·같은 질문/34문서·한 실행 최대55요청은 유지한다."
+        },
+        "evidence": [
+          {
+            "path": "서버/실제연구제어.py",
+            "lines": "494-525,561-580",
+            "observation": "schema 사전 크기/지원 검사와 on_attempt count 저널."
+          },
+          {
+            "path": "서버/실제모델.py",
+            "lines": "201-241",
+            "observation": "기존 model budget reserve 재사용."
+          },
+          {
+            "path": "서버/호출예산.py",
+            "lines": "64-88",
+            "observation": "기존 policy count/money를 예약 transaction에서 읽고 초과 거절. 실제 장부의10000/$20 값은 이번에 읽지 않았으며 최신 사용자 승인/부모 제공 맥락으로만 기록."
+          }
+        ]
+      },
+      {
+        "id": "LIFECYCLE",
+        "status": "pass",
+        "rule": {
+          "path": "📘 딥리서치 에이전트 기술 명세서.md",
+          "line": 1243,
+          "sentence": "- **실행/수명:** evaluate가 원래 부정 판정/원고/quality를 저장하고 transaction을 닫은 뒤 자동 자격을 판정한다. 보완 소비와 source_revision 보존·새 control_revision 생성·pending 상태를 하나의 직렬화 경계에서 기록한 다음 모델을 호출한다. correction_state는 automatic=true/mode=evidence와 기존 source_revision/revision/status/max_model_calls=2를 포함한다. 기존 supervisor/complete/evaluate/publish를 재사용하고 새 revision의 허용 호출 순서는 semantic_correction→semantic_review뿐이다. 단1회 보완 실패/재검토 미합격 뒤 반복하지 않는다. restart/GET/replay는 보완을 시작하지 않는다. 중복 evaluate/수동 요청 경합·늦은 결과·삭제·개입·취소에도 같은 영속 소비/fence를 사용한다. 통과 시만 정본/다운로드를 만들고 이후 큐를 재개한다."
+        },
+        "evidence": [
+          {
+            "path": "서버/실제연구제어.py",
+            "lines": "125-134,148-172,350-417,453-463,604-680",
+            "observation": "restore는 consumed pending을 실패로 정리; 개입 시 실패고정; 적용/완료/실패에 fence; close는 tasks 취소 후 pending 정리. 늦은 calls UPDATE는 삭제 행을 재생성하지 않음."
+          },
+          {
+            "path": "서버/저장소.py",
+            "lines": "24-41,126-135,152-155,429-469",
+            "observation": "삭제 tombstone·현재 fence·event suppress·재시작 interrupted/queue pause."
+          },
+          {
+            "path": "서버/실행삭제.py",
+            "lines": "59-92,130-163,178-190",
+            "observation": "running 삭제거절, 취소 후 delete 직렬화, 호출/사건 삭제와 영구 tombstone."
+          }
+        ]
+      },
+      {
+        "id": "MANUAL_COMPATIBILITY",
+        "status": "pass",
+        "rule": {
+          "path": "📘 딥리서치 에이전트 기술 명세서.md",
+          "line": 1239,
+          "sentence": "- **자격:** 현재 로컬 실행의 정본 없는 blocked/quality_failed, quality.reasons가 semantic_review_failed 하나, 현재 strict 검토의 needs_revision/citation_gap만1~3개, 같은 원본 revision·raw 재검증·고유한 가시 주장 매핑·읽은 원문 결합을 모두 요구한다. 기존 보완 시도가 있거나 malformed/undetermined/출처충돌/문맥부족/unsupported/4문제 이상·웹·삭제·superseded는 자동 요청0이다. 기존 수동 contradiction1~2 교정은 별도 호환 경로로 유지한다."
+        },
+        "evidence": [
+          {
+            "path": "서버/실제연구제어.py",
+            "lines": "174-176,212-228,271-278",
+            "observation": "public manual은 automatic=False, strict면 모든 contradiction 1..2, legacy 판정은 기존 parser."
+          },
+          {
+            "path": "서버/보고서보완.py",
+            "lines": "96-109",
+            "observation": "기본 max_problems=2 유지; evidence helper만3 명시."
+          },
+          {
+            "path": "서버/앱.py",
+            "lines": "58-61,209-214",
+            "observation": "기존 POST만 공개, strict body, 자동모드 입력 파라미터 없음."
+          }
+        ]
+      },
+      {
+        "id": "UI_READONLY_STATUS",
+        "status": "pass",
+        "rule": {
+          "path": "📘 딥리서치 에이전트 기술 명세서.md",
+          "line": 1244,
+          "sentence": "- **소비자/소유:** backend 작업자는 `근거보완.py`, 필요한 공통보완/실제연구제어와 명시된 backend 테스트만 소유한다. 메인은 기술/작업 명세·진행 현황·CHANGELOG·화면 계약/상태 표시·실제 연구 검사기와 실제 호출/최종 인수/Git을 소유한다. CorrectionState의 automatic/mode는 optional이며 과거 기록은 미시도 상태 그대로 표시한다. 자동 보완 중/재검토 중/소진/합격을 표시하고 과거 blocked 기록의 조회를 새 호출로 바꾸지 않는다."
+        },
+        "evidence": [
+          {
+            "path": "화면/src/계약.ts",
+            "lines": "35-42",
+            "observation": "automatic/mode optional, legacy 상태 union 유지."
+          },
+          {
+            "path": "화면/src/실행실패.tsx",
+            "lines": "6-48,49-90",
+            "observation": "render POST 없음; 수동 click만 POST; automatic pending/applied/failed/completed 표시는 실제 정본/quality/semantic 통과 조건과 결합."
+          }
+        ]
+      },
+      {
+        "id": "VISUAL_AND_ARCHIVE_VERIFIER",
+        "status": "pass",
+        "rule": {
+          "path": "📘 딥리서치 에이전트 기술 명세서.md",
+          "line": 1245,
+          "sentence": "- **검증:** 실제3차의21요청/citation_gap3건/정본0을 원본으로 보존한다. 순수 위치/귀속/비대상 보존, 실제 서비스·ASGI·SQLite의 자동2요청/재검토 실패·중복·삭제·개입·취소·재시작, 실제 SDK payload의 strict schema/예약상한을 각각 검사한다. 대역 통과와 실제 모델 복구는 구별하며 새 정상 UI 연구에서 자동 보완→정본/MD·HTML·PDF/새로고침 무재호출을 최종 확인한다. 합격 전에 기존 설치본/운영8768은 교체하지 않는다."
+        },
+        "evidence": [
+          {
+            "path": "검증/보고서품질_실제연구검사.py",
+            "lines": "202-238,403-412",
+            "observation": "실제 선언된 table/diagram 개수 일치, SVG0 허용·svg_rendering_tested=false 분리. auto 검증은 부정 원본/source revision/두 완료 응답 순서/실제요청차2를 검사. 이 함수 자체를 실행하거나 실제 렌더를 확인한 것은 아닙니다."
+          }
+        ]
+      }
+    ],
+    "not_assessed_reason": null
+  },
+  "security_concerns": [],
+  "logic_errors": [
+    {
+      "finding_id": "S18-SCOPE-01",
+      "priority": "P2",
+      "kind": "conditional_acceptance_gap",
+      "reproduced": false,
+      "real_model_incident_claimed": false
+    }
+  ],
+  "uncertain_concerns_and_heuristics": [
+    {
+      "id": "H-CATALOG",
+      "blocking": false,
+      "observation": "공유128/96000 catalog와 토큰 단어 점수는 모든 필요한 근거를 반드시 포함시키지 않습니다. 새 인용 선택 실패 가능성이지만 승인된 상한/선택 정책의 알려진 한계이며 이번에 별도 버그로 세지 않습니다.",
+      "evidence": {
+        "path": "서버/보고서근거.py",
+        "lines": "121-150",
+        "observation": "랭킹/출처별 대표/바이트와항목 상한."
+      }
+    },
+    {
+      "id": "H-MODEL",
+      "blocking": false,
+      "observation": "strict JSON·정확 slice는 의미 지지를 증명하지 않습니다. 순수/서비스 대역은 실제 생성·의미 복구 증거가 아닙니다. 새 모델의 schema 수락·실제 축소/인용 선택 품질은 미평가입니다.",
+      "evidence": {
+        "path": "테스트/테스트_근거보완연결.py",
+        "lines": "19-99,172-227,590-668",
+        "observation": "명시 대역 supported/MockTransport이며 실제 판단이나 외부 전송이 아닙니다."
+      }
+    },
+    {
+      "id": "H-VISUAL-EMPTY",
+      "blocking": false,
+      "observation": "검증기는 도식0은 허용하나 표>=1을 요구합니다. 제품 parse_synthesis는 표/도식 모두0+생략사유도 허용합니다. 현재 검증 대상은표1/도식0이고 사용자가 이 경계의 diagram 수정을 지정했으므로 현재 S18 결함이나 현재 실제 실패로 승격하지 않았습니다. 이후 양쪽 모두 생략된 유효 사례까지 해당 검사기로 인수하려면 acceptance 범위를 따로 맞춰야 합니다.",
+      "evidence": {
+        "path": "검증/보고서품질_실제연구검사.py",
+        "lines": "202-205",
+        "observation": "tables>=1, diagrams==declared."
+      }
+    }
+  ],
+  "contract_precedence": [
+    {
+      "older": "📘 딥리서치 에이전트 기술 명세서.md:1183,1230",
+      "newer": "📘 딥리서치 에이전트 기술 명세서.md:1238-1243",
+      "resolution": "§29.12/29.17의 자동 인용 재연결 금지는 일반/당시 정책이며 최신 명시 승인 §29.18의 citation_gap 1..3 자동 단1회만 예외입니다. 기존 수동 contradiction 정책이나 과거 원본을 무효화하지 않습니다. 문장 충돌을 새 기능 자체의 결함으로 집계하지 않았습니다."
+    },
+    {
+      "older": "📘 딥리서치 에이전트 기술 명세서.md:1153",
+      "newer": "📘 딥리서치 에이전트 기술 명세서.md:1238,1243",
+      "resolution": "기존 수동29회 호환과 달리 신규 자동 evidence 경로는 한 실행55 이내입니다. actual<=53 자격과 최대2 순서가 이를 지킵니다."
+    },
+    {
+      "older": "📘 딥리서치 에이전트 기술 명세서.md:1197,1210",
+      "newer": "📘 딥리서치 에이전트 기술 명세서.md:1214-1216,1238",
+      "resolution": "이전245/$2 추가 승인 대기는 최신10000/$20로 대체되지만 각 연구55·추가2와 모델/자료 조건은 유지됩니다."
+    }
+  ],
+  "test_source_evidence": [
+    {
+      "path": "테스트/테스트_근거보완.py",
+      "lines": "60-410",
+      "observation": "인용만 교체/사본불변/enum·no-op/고유문단/다른절/실제 원본 준비/동일절 교환/16총량/272000/표식과비대상보존/system 결합 사례를 정적으로 읽었습니다. 240행 실제원본 준비 시험은 실행하지 않았고 corpus/아카이브 내용은 이번에 읽지 않았습니다."
+    },
+    {
+      "path": "테스트/테스트_근거보완연결.py",
+      "lines": "172-668",
+      "observation": "자동 두호출/55경계/실패·부정/no-retry/개입·취소·삭제·재시작/중복·수동경합/부적격/원문변경/operation 영속 제한/close/queue/구형 복원/SDK MockTransport 사례를 읽었습니다. 테스트를 실행하거나 저장 결과를 이 검토의 pass 근거로 삼지 않았습니다."
+    },
+    {
+      "path": "테스트/테스트_보고서보완.py",
+      "lines": "1-90,219-325",
+      "observation": "기존 기본1..2·사본·동일절 대상 교환·비대상 바이트·strict/가시본문 검사와 비교했습니다."
+    },
+    {
+      "path": "테스트/테스트_보고서보완연결.py",
+      "lines": "1-245,280-369",
+      "observation": "legacy seed/helper, 기존수동 POST의 두호출·원본/멱등·부적격·strict body·중복 소비 검사를 비교했습니다. 나머지는 test 함수명 목록만 확인했습니다."
+    }
+  ],
+  "frozen_manifest_checks": [
+    {
+      "path": "서버/보고서보완.py",
+      "expected": "726c0fa03dfccd04497983bddb2ba5eb5bb301e09cc46cd26cddac2eaae07c74",
+      "observed": "726c0fa03dfccd04497983bddb2ba5eb5bb301e09cc46cd26cddac2eaae07c74"
+    },
+    {
+      "path": "서버/실제연구제어.py",
+      "expected": "285b77ccaccd705bf59cd7f57da3aedc1f698fb6f3508ea26c31bf9d9b84d812",
+      "observed": "285b77ccaccd705bf59cd7f57da3aedc1f698fb6f3508ea26c31bf9d9b84d812"
+    },
+    {
+      "path": "서버/근거보완.py",
+      "expected": "5fb62aa0329127c2bce5c89087abcd015f05e1d665c248dc5e59fc681132a12d",
+      "observed": "5fb62aa0329127c2bce5c89087abcd015f05e1d665c248dc5e59fc681132a12d"
+    },
+    {
+      "path": "테스트/테스트_근거보완.py",
+      "expected": "e617a11ef8701c8c982b5a8989a735fb850ee2cb45be551cb8ee49033579b2ab",
+      "observed": "e617a11ef8701c8c982b5a8989a735fb850ee2cb45be551cb8ee49033579b2ab"
+    },
+    {
+      "path": "테스트/테스트_근거보완연결.py",
+      "expected": "e3ed841943f51cf69d728c9e0c6ee8cdcff4a8e8fff154a19e05fcf93612c91b",
+      "observed": "e3ed841943f51cf69d728c9e0c6ee8cdcff4a8e8fff154a19e05fcf93612c91b"
+    }
+  ],
+  "prior_evidence_not_adopted_as_fresh": {
+    "parent_supplied_junit": "180 no failure/skip: 부모가 확인한 오프라인 근거로만 알고 있으며 이번에 실행/판정하지 않았습니다.",
+    "handoff": "구현 인계의 passed/self-report는 independent verdict의 근거가 아닙니다. changed_files hashes만 직접 읽고 대조했습니다.",
+    "whole_05": "최초 model.arrived 2초 대기 실패와 대상 replay 성공은 부모제공/최신 현황 이력입니다. 원인 확정·지연 임계값 변경·전체PASS 선언을 하지 않습니다.",
+    "context03": "21요청/citation_gap3/정본0,표1/도식0은 최신 진행 현황12행과 부모 맥락입니다. 실제 S18 성공 사례가 아닙니다."
+  },
+  "limitations": [
+    "이 보고서의 pass는 지정한 정적 부분의 규칙/코드 연결 판단입니다. Spec fail과 별개로 실제 모델·앱 전체·운영 배포·LMS 제출의 최종 인수는 not_assessed입니다.",
+    "테스트/타입체크/린트/빌드/GUI/브라우저/MD·HTML·PDF 다운로드/재열기/프로세스 재시작을 실행하지 않았습니다.",
+    "자격/수명 경로는 단일 로컬 작업자 구조를 기준으로 정적으로 읽었습니다. 멀티프로세스 운영/파일시스템 오류/실제 제공자 취소·부하 경합을 재현하지 않았습니다.",
+    "실제 장부와 원래03_실행데이터,인증/.env를 열지 않았습니다. 예산 값/과거 미정산 보존의 현재 실제 상태는 independently verified가 아닙니다.",
+    "소스 전체를 모두 읽은 whole-app audit가 아닙니다. inspected_paths의 hash는 파일 전체 바이트 지문이며 자세한 coverage와 evidence는 명시된 함수/행에 한정됩니다.",
+    "기존 테스트 일부는 함수명 목록만 읽었으며 원 연구 그래프/모든 웹receipt 구현·변환렌더러·프런트 전체 호출자는 별도 미평가입니다.",
+    "초반 큰 읽기 출력이 도구에서 잘렸으나 핵심 요구§29.10..29.18/최신 현황·새 모듈·새 테스트는 별도 작은 범위로 읽었습니다. AGENTS는 관련 공통 규칙/승인 경계 위주이며 타 프로젝트 전체 지침을 이 프로젝트로 확대하지 않았습니다.",
+    "한 번의 읽기 도우미 작업에서 json 미import NameError가 났고 import 후 frozen hash 대조를 완료했습니다. 앱/테스트는 실행되지 않았고 소스 쓰기도 없었습니다.",
+    "재사용 skill 기록은 이번 허용 쓰기 경계 밖이므로 생성/수정하지 않았습니다."
+  ],
+  "recommended_next_order": [
+    "부모가 S18-SCOPE-01의 정확한 승인 범위 해석과 정적 producer/consumer 증거를 재대조하십시오.",
+    "채택한다면 자동 경로의 기존 재검토 입력에 원본 대비 허용 변경 범위를 연결한 뒤 승인된 격리 검증으로 반례/정상사례를 검사하십시오. 이 검토는 수정이나 추가 호출을 수행하지 않았습니다.",
+    "실제 schema 수락·자동2요청 복구·현재품질/정본·MD/HTML/PDF·새로고침 무재호출은 부모가 별도 인수해야 하며 통과 전8768 적용 성공을 선언하지 마십시오."
+  ],
+  "inspected_paths": [
+    {
+      "path": "02_구현\\전체화면_스파이크\\검증\\보고서품질_실제연구검사.py",
+      "sha256": "ef59c37fcf299ae0a1a96fc3dc074cb576f63f25c894c1185a637ea66eeb2870",
+      "bytes": 28953,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\구현_인계.json",
+      "sha256": "a52d1c5de4574c76cc7de6a4867e17ff933e6bb480f17d24902fff9fbf8f5ad5",
+      "bytes": 56344,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\서버\\검토문맥.py",
+      "sha256": "64c254014afcbd68aa8b6758be8f7c5306491ce92ccd08ea64b4efe5a162069f",
+      "bytes": 16524,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\서버\\교안연구.py",
+      "sha256": "c6bbddae8dd67518227fbe952482b443b7c0d648a8f14be99145ccce45aacd92",
+      "bytes": 17654,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\서버\\근거보완.py",
+      "sha256": "5fb62aa0329127c2bce5c89087abcd015f05e1d665c248dc5e59fc681132a12d",
+      "bytes": 10808,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\서버\\보고서근거.py",
+      "sha256": "851ec98e6f275c64637355c3fc6727194865f7412e394d55fa5e3bf2c273d1b6",
+      "bytes": 14987,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\서버\\보고서보완.py",
+      "sha256": "726c0fa03dfccd04497983bddb2ba5eb5bb301e09cc46cd26cddac2eaae07c74",
+      "bytes": 13421,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\서버\\보고서품질.py",
+      "sha256": "3887496cbce8332eaf38624c45f4f1825faae38d040083e7aa5df29236885790",
+      "bytes": 10526,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\서버\\실제모델.py",
+      "sha256": "80ae3bfda7725342699acc38b0455f8bed8b72e5494a8f760501543ee53ff766",
+      "bytes": 14375,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\서버\\실제연구제어.py",
+      "sha256": "285b77ccaccd705bf59cd7f57da3aedc1f698fb6f3508ea26c31bf9d9b84d812",
+      "bytes": 51035,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\서버\\실행삭제.py",
+      "sha256": "1c0d2fc411355595efe20f177c0e4ecabea440201c9732193664fe90c70b2b9b",
+      "bytes": 11660,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\서버\\실행제어.py",
+      "sha256": "6fe218510f555c41f7e362ed0e763d8b2106170affb6b0edefc611382f23ea7a",
+      "bytes": 29094,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\서버\\앱.py",
+      "sha256": "21c396305fc07ccea2ffdb856dc5fd7f0dbbe820a2c114f4aa771c15aa90c017",
+      "bytes": 11000,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\서버\\저장소.py",
+      "sha256": "bff9ea9d64fff72203c57ae1bf4f4045db2dc084e16241309855ecfb0a00db8c",
+      "bytes": 19440,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\서버\\호출예산.py",
+      "sha256": "42216cb8f6fe9e36602214a7c01079b157ddcb7c8a56ca6434fc6b5d18366bfb",
+      "bytes": 5943,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\서버\\활동기록.py",
+      "sha256": "a9bbd77a72954d6e339fb8edd61038b3432d23ed76cbc3081e750c7078ea186a",
+      "bytes": 7768,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\테스트\\테스트_검토보완.py",
+      "sha256": "cca8a802ae435fa2f6f8068bdba2bf6ecad4bd27316bafb441084fc7d0879370",
+      "bytes": 10693,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\테스트\\테스트_근거보완.py",
+      "sha256": "e617a11ef8701c8c982b5a8989a735fb850ee2cb45be551cb8ee49033579b2ab",
+      "bytes": 17869,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\테스트\\테스트_근거보완연결.py",
+      "sha256": "e3ed841943f51cf69d728c9e0c6ee8cdcff4a8e8fff154a19e05fcf93612c91b",
+      "bytes": 27432,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\테스트\\테스트_보고서보완.py",
+      "sha256": "0964533f7a66e41ce671f40d82725f0d2cf18085ebb779b752f852289c8bab71",
+      "bytes": 13412,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\테스트\\테스트_보고서보완연결.py",
+      "sha256": "b20a16ba33136461177f31a46c478cfc726b10ec079f26d799e1db8d1758c7ea",
+      "bytes": 24011,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\화면\\src\\계약.ts",
+      "sha256": "aeacf64d249684eb0505c809890f7df502bec95e783685fe6a7fee266da2a29c",
+      "bytes": 6862,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "02_구현\\전체화면_스파이크\\화면\\src\\실행실패.tsx",
+      "sha256": "2eb6cf33add38ac563bd63ad6c025848862f3a04693d57a6c45a364a01619940",
+      "bytes": 7770,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "📋 진행 현황.md",
+      "sha256": "299a77e38387df36c55e8de1cf043a312acd96a774ad7bdaa2cf0dc494b763b4",
+      "bytes": 147581,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "📘 딥리서치 에이전트 기술 명세서.md",
+      "sha256": "a876895fbb65cd4d57df6a2bc0494dc11677b40bc6830d5977ca065787eedfce",
+      "bytes": 261145,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\AGENTS.md",
+      "sha256": "18ec6a15781a131482aabb3a0fa306f16d08610abd52349adc842d2f305442d6",
+      "bytes": 38347,
+      "coverage": "부분/전체 읽기는 본문 evidence의 행 범위 참조; 해시는 전체 바이트",
+      "unchanged_at_report": true
+    }
+  ],
+  "counts": {
+    "findings": 1,
+    "security_concerns": 0,
+    "logic_errors": 1,
+    "inspected_paths": 26,
+    "frozen_paths": 5,
+    "frozen_mismatch": 0,
+    "review_time_drift": 0
+  }
+}

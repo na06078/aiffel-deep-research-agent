@@ -12,6 +12,15 @@ from 서버.원문구간 import source_ranges
 
 DRAFT_PROTOCOL = "sentence-paragraph-evidence-v3"
 
+DRAFT_SYSTEM_RULES = (
+    "각 항목에는 날짜·행위·원인 관계 중 하나의 검증 가능한 사실을 명확하게 써라. "
+    "기간과 제도 목록, 서로 다른 사건 전개를 긴 복합 문장 하나로 묶지 말고 짧게 나누어라. "
+    "각 항목의 모든 사실을 지지하는 제공 구간 번호를 빠짐없이 선택하라. "
+    "여러 구간이 필요하면 같은 문장번호에 여러 관계를 쓰되 전체16관계를 지켜라. "
+    "관계를 절약하려 독립 사실을 합치거나 인용에 없는 의도·종결·직접 원인을 덧붙이지 마라. "
+    "자료의 달력·날짜 차이는 자료별 서술로 구분하고 불명확한 달력을 임의로 환산하지 마라. "
+)
+
 
 @dataclass(frozen=True)
 class DraftRequest:
@@ -158,14 +167,14 @@ def build_draft_request(assignment: dict, notes: list, sources: dict[str, str]) 
         "문장 텍스트는 한 번만 작성하고 관계에 인용문·주장·출처 표식을 다시 쓰지 마라. "
         "«출처» 예약 표식은 금지한다. 충분=true면 모든 문장에 관계가 하나 이상 필요하다. "
         "자료가 부족하면 충분=false와 구체적 부족 사유를 쓰며 빈 관계·부분 무참조를 허용한다. "
-        "번호를 문자열·소수·bool로 쓰거나 제시하지 않은 ID를 쓰지 마라."
+        "번호를 문자열·소수·bool로 쓰거나 제시하지 않은 ID를 쓰지 마라. " + DRAFT_SYSTEM_RULES
     )
 
     def serialize(selected):
         token = hashlib.sha256(
-            _json([DRAFT_PROTOCOL, assignment, notes, sorted(hashes.items()), selected]).encode(
-                "utf-8"
-            )
+            _json(
+                [DRAFT_PROTOCOL, system, assignment, notes, sorted(hashes.items()), selected]
+            ).encode("utf-8")
         ).hexdigest()
         user = _json(
             {

@@ -28,6 +28,7 @@ from 서버.보고서근거 import build_draft_request, materialize_section
 from 서버.보고서품질 import parse_semantic, parse_synthesis, validate_section
 from 서버.실행제어 import ExecutionService
 from 서버.저장소 import ApiError, encode, now, run_deleted, uid
+from 서버.종합계약 import SYNTHESIS_PROTOCOL, build_synthesis_schema
 from 서버.활동기록 import measured_call, measured_node, start_call
 
 
@@ -171,10 +172,19 @@ class RealResearchService(ExecutionService):
                 raise SupersededResearch()
 
     def request_correction(self, run_id, revision, request_id):
+        """공개 수동 계약은 기존 contradiction 1..2로 유지한다."""
+        return self._request_correction(run_id, revision, request_id, automatic=False)
+
+    def _request_correction(self, run_id, revision, request_id, *, automatic):
         """자격/순수 준비/단1회 소비를 같은 직렬화 경계에서 처리한다."""
+        from 서버.근거보완 import prepare_evidence_correction
         from 서버.보고서보완 import prepare_correction
 
-        body = {"action": "correction", "run_id": run_id, "control_revision": revision}
+        body = {
+            "action": "automatic_evidence_correction" if automatic else "correction",
+            "run_id": run_id,
+            "control_revision": revision,
+        }
         with self.repo.transaction() as (db, data):
             duplicate = self.repo.duplicate(db, request_id, body)
             if duplicate is not None:
@@ -199,9 +209,21 @@ class RealResearchService(ExecutionService):
                 or quality.get("reasons") != ["semantic_review_failed"]
                 or decision.get("통과") is not False
                 or not isinstance(problems, list)
-                or not 1 <= len(problems) <= 2
+                or not 1 <= len(problems) <= (3 if automatic else 2)
                 or (
-                    decision.get("검토계약") == REVIEW_PROTOCOL
+                    automatic
+                    and (
+                        run.get("actual_model_requests", 0) > 53
+                        or decision.get("검토계약") != REVIEW_PROTOCOL
+                        or decision.get("판정") != "needs_revision"
+                        or any(
+                            type(p) is not dict or p.get("유형") != "citation_gap" for p in problems
+                        )
+                    )
+                )
+                or (
+                    not automatic
+                    and decision.get("검토계약") == REVIEW_PROTOCOL
                     and any(p.get("유형") != "contradiction" for p in problems)
                 )
                 or any(r["status"] == "running" for r in data["runs"])
@@ -251,7 +273,8 @@ class RealResearchService(ExecutionService):
                     parsed = parse_semantic(run["semantic_review_state"]["raw"], read)
                 if parsed != decision:
                     raise ResearchContractError("correction: decision mismatch")
-                request = prepare_correction(
+                prepare = prepare_evidence_correction if automatic else prepare_correction
+                request = prepare(
                     draft=run["draft"], sections=sections, problems=problems, sources=sources
                 )
             except (ResearchContractError, KeyError, TypeError, ValueError):
@@ -277,6 +300,8 @@ class RealResearchService(ExecutionService):
                 "client_request_id": request_id,
                 "passed": None,
             }
+            if automatic:
+                run["correction_state"].update(automatic=True, mode="evidence")
             admission = {
                 "run_id": run_id,
                 "control_revision": new_revision,
@@ -304,8 +329,14 @@ class RealResearchService(ExecutionService):
         return admission
 
     async def _supervise_correction(self, run_id, revision, original, sections, request):
+        from 서버.근거보완 import EvidenceCorrectionRequest, apply_evidence_correction
         from 서버.보고서보완 import apply_correction
 
+        apply = (
+            apply_evidence_correction
+            if type(request) is EvidenceCorrectionRequest
+            else apply_correction
+        )
         state = {"run_id": run_id, "revision": revision}
         try:
             raw = await self.complete(
@@ -319,7 +350,7 @@ class RealResearchService(ExecutionService):
             self.check(state)
             read = {key for section in sections for key in section["읽은문서"]}
             sources = {key: self.corpus.docs[key] for key in read}
-            result = apply_correction(raw=raw, request=request, sources=sources)
+            result = apply(raw=raw, request=request, sources=sources)
             with self.repo.transaction() as (db, data):
                 run = self.repo.fenced(data, run_id, revision)
                 if not run or run_deleted(db, run_id):
@@ -919,7 +950,10 @@ class RealResearchService(ExecutionService):
             inputs={
                 "title": state["title"],
                 "sections": sections,
+                "synthesis_protocol": SYNTHESIS_PROTOCOL,
+                "source_ids": sorted(read_sources),
             },
+            response_schema=build_synthesis_schema(read_sources),
         )
         obj = parse_synthesis(raw, read_sources)
         introduction = required_text(obj, "머리말", "synthesize")
@@ -1130,4 +1164,16 @@ class RealResearchService(ExecutionService):
             self.repo.save_revision(db, run)
         if quality["passed"]:
             self.start_next_queue()
+        else:
+            # 실패 원본은 위 transaction에서 먼저 보존한다. 조회/복원에서는 시작하지 않는다.
+            try:
+                self._request_correction(
+                    state["run_id"],
+                    state["revision"],
+                    f"auto-evidence:{state['run_id']}:{state['revision']}",
+                    automatic=True,
+                )
+            except ApiError:
+                # 부적격/중복/수동 경합/늦은 버전은 원래 불합격을 그대로 남긴다.
+                pass
         return {}

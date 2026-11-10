@@ -1,0 +1,454 @@
+{
+  "status": "backend_scoped_verified_not_final_acceptance",
+  "project_root": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트",
+  "implementation_root": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크",
+  "contract": "📘 딥리서치 에이전트 기술 명세서.md §29.18 (read-only frozen contract)",
+  "baseline_head_supplied_by_parent": "cde2aaab4ed4c448ecd32f3e368a31b3c8569ac5",
+  "git_operations_performed": [],
+  "actual-provider-calls": 0,
+  "actual_provider_calls": 0,
+  "external_network_calls": 0,
+  "changed_files": [
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서보완.py",
+      "relative_path": "서버/보고서보완.py",
+      "change": "modified",
+      "sha256": "726c0fa03dfccd04497983bddb2ba5eb5bb301e09cc46cd26cddac2eaae07c74",
+      "bytes": 13421
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\실제연구제어.py",
+      "relative_path": "서버/실제연구제어.py",
+      "change": "modified",
+      "sha256": "285b77ccaccd705bf59cd7f57da3aedc1f698fb6f3508ea26c31bf9d9b84d812",
+      "bytes": 51035
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\근거보완.py",
+      "relative_path": "서버/근거보완.py",
+      "change": "created",
+      "sha256": "5fb62aa0329127c2bce5c89087abcd015f05e1d665c248dc5e59fc681132a12d",
+      "bytes": 10808
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\테스트\\테스트_근거보완.py",
+      "relative_path": "테스트/테스트_근거보완.py",
+      "change": "created",
+      "sha256": "e617a11ef8701c8c982b5a8989a735fb850ee2cb45be551cb8ee49033579b2ab",
+      "bytes": 17869
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\테스트\\테스트_근거보완연결.py",
+      "relative_path": "테스트/테스트_근거보완연결.py",
+      "change": "created",
+      "sha256": "e3ed841943f51cf69d728c9e0c6ee8cdcff4a8e8fff154a19e05fcf93612c91b",
+      "bytes": 27432
+    }
+  ],
+  "implementation": [
+    "Public request_correction signature and legacy/manual 1..2 behavior preserved. Shared prepare_correction gains keyword-only max_problems=2, restricted to 2 or 3; only evidence helper selects 3.",
+    "New pure immutable EvidenceCorrectionRequest binds system snapshot/protocol/original draft/sections/problems/catalog/source hashes. Model receives targeted claims/reasons/old quotes and bounded catalog from build_draft_request over target sections already-read sources only. Reviewer context is not promoted into supplied evidence.",
+    "Exact canonical old paragraph/source markers required before request. Strict response binds evidence_set_id, exact target set, typed integer IDs, unique nonempty references and per-section read scope. materialize_section reassembles exact source slices; _splice preserves all non-target bytes. Whole-section 16-reference limit and validate_section retained. No-op including reference-order-only rejected.",
+    "evaluate saves original failure and closes transaction before synchronously attempting automatic admission. Private _request_correction reuses original raw-review revalidation, source revision preservation, persistent single consumption, new revision, task supervisor and complete/evaluate/publish path.",
+    "Automatic eligibility: current local blocked quality_failed/no report, only semantic_review_failed, strict v1 needs_revision, 1..3 all citation_gap, no correction_state, at most 53 already-sent requests so two additional requests remain within 55. Malformed/stale/unsupported/undetermined/web/other failures remain blocked with zero repair calls.",
+    "Automatic correction_state adds automatic:true, mode:evidence. Existing complete persistent operation order and attempt callback fences unchanged. No new planning/reading/research/synthesis/retry/fallback calls. No startup/GET/archive/replay auto trigger. Queue resumes only after corrected full quality and semantic pass."
+  ],
+  "trace": [
+    "앱.py POST /api/spike/runs/{run_id}/correction -> unchanged public manual request_correction.",
+    "Real graph synthesize -> evaluate -> persist original negative -> private shared admission -> existing _supervise_correction -> complete semantic_correction -> pure apply -> existing evaluate/semantic_review -> guarded publish.",
+    "CorrectionRequest target mapper/_paragraph_position/_splice and DraftRequest catalog/materialize_section reused; 보고서근거.py/검토문맥.py/provider code not modified."
+  ],
+  "verification": {
+    "final_command_label": "final_handoff",
+    "final_log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\final_handoff.json",
+    "junit": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\인계_범위검증.xml",
+    "passed": 180,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "counts_by_module": {
+      "테스트.테스트_보고서보완": 54,
+      "테스트.테스트_보고서보완연결": 39,
+      "테스트.테스트_근거보완": 36,
+      "테스트.테스트_근거보완연결": 40,
+      "테스트.테스트_실제연구제어": 11
+    },
+    "source_snapshot_unchanged_during_final_run": true,
+    "ruff_check": {
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\lint_handoff.json",
+      "exit_code": 0,
+      "observed": "All checks passed!"
+    },
+    "ruff_format_check": {
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\format_handoff_check.json",
+      "exit_code": 0,
+      "observed": "5 files already formatted"
+    },
+    "coverage": [
+      "Pure citation-only repair, marker replacement, same-section two-target swap, detached inputs/schema/system snapshot, actual third-run failure fixture preflight maps all three targets.",
+      "Strict bool/string/duplicate/unknown/empty reference and target validation, stale request ID/source/private slice, noncanonical marker/paragraph, hidden fence/empty/reserved marker rejection, no-op/reference-order-only rejection, other-section scope, 16 aggregate references and serialized input budget.",
+      "Actual Service + SQLite + ASGI success: original failed revision preserved, 3 citation gaps, exactly semantic_correction + semantic_review extra, canonical publish only after pass, stable GET count; exact 55-call positive and 54-before-repair negative boundary.",
+      "Valid negative re-review and malformed original/re-review/no-repeat; invalid correction has no re-review; unsupported/contradiction/insufficient_context/4 valid citation gaps auto-zero.",
+      "Duplicate evaluate/manual race single consumption, raw/source/section/admission staleness, source drift while pending, correction/review intervention/cancel/delete/restart late-write fences, pre-start close, historical blocked restore auto-zero and queue resumption only after pass.",
+      "Installed OpenAI SDK + OpenAIModel + actual isolated CallBudget exercised with MockTransport only: identical strict response schema, system/user, low reasoning, max_completion_tokens4096 and exact serialized input/schema +8192 reservation. This is NOT provider acceptance or model quality evidence."
+    ],
+    "known_preexisting_wait_case": {
+      "edited": false,
+      "standalone_log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\known_wait_scoped.json",
+      "standalone_observed": "1 passed in 4.98s",
+      "final_selected_scope_passed": true,
+      "interpretation": "semantic_review initial arrived wait timeout not reproduced in scoped execution; no actual latency assertion changed. Load/timing remains a hypothesis, not a proven root cause."
+    }
+  },
+  "tdd_slices": [
+    {
+      "behavior": "supported citation-only response replaces only evidence; original text preserved",
+      "red": "pure_01_red.json",
+      "green": "pure_01_green_corrected_oracle.json",
+      "red_observed": "ResearchContractError: evidence correction: not implemented from interface-only scaffold; not an import/setup error"
+    },
+    {
+      "behavior": "three problems accepted only through explicit evidence mapping; default manual still 1..2",
+      "red": "pure_02_red.json",
+      "green": "pure_02_green.json",
+      "red_observed": "problem count must be 1..2 on evidence path"
+    },
+    {
+      "behavior": "evaluate automatically schedules exactly two additional calls for three citation gaps",
+      "red": "service_01_red.json",
+      "green": "service_01_green.json",
+      "red_observed": "operations [semantic_review] differed from expected [semantic_review,semantic_correction,semantic_review]"
+    },
+    {
+      "behavior": "do not admit automatic two-call repair when it would exceed total55",
+      "red": "service_02_red.json",
+      "green": "service_02_green.json",
+      "red_observed": "two prohibited additional calls were observed"
+    },
+    {
+      "behavior": "same-section target swaps retain both original evidence relationships",
+      "red": "pure_03_red.json",
+      "green": "pure_03_green.json",
+      "red_observed": "only one evidence claim remained instead of two"
+    },
+    {
+      "behavior": "reference ordering alone is not a correction",
+      "red": "pure_04_red.json",
+      "green": "pure_04_green.json",
+      "red_observed": "DID NOT RAISE no change"
+    },
+    {
+      "behavior": "reviewer other-section raw context cannot become repair evidence input",
+      "red": "pure_05_red.json",
+      "green": "pure_05_green.json",
+      "red_observed": "other-section sentinel text leaked into model user input"
+    },
+    {
+      "behavior": "returned system prompt is immutable at preparation time",
+      "red": "pure_06_red.json",
+      "green": "pure_06_green.json",
+      "red_observed": "changing module SYSTEM changed previously returned request.prompts"
+    }
+  ],
+  "test_oracle_and_tool_issues": [
+    "Initial positive test expected a standalone sentence catalog span; source_ranges intentionally keeps this short source as one complete 36-character span. Corrected independently specified exact quote to the complete source. pure_01_green.json is a failed intermediate run, not GREEN.",
+    "Initial hidden-input negative used HTML comment syntax. HTML is disabled in approved Markdown parser, so it is visible literal text escaped by canonical assembly, not hidden content. Replaced hidden counterexample with fenced code; retained literal HTML as explicit positive canonicalization test. pure_guard_regression.json records the obsolete oracle failure.",
+    "Additional rejection and lifetime tests initially passed against already-implemented shared guards; they are regression evidence, not individually claimed RED/GREEN cycles.",
+    "write_file refused one overwrite of the small interface scaffold; no write occurred. Applied targeted patch instead.",
+    "Import formatting and reused pytest autouse-fixture import lint issues were corrected without removing network denial. Earlier lint logs retained; final check and format check pass."
+  ],
+  "read_only_actual_failure": {
+    "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실제연구\\context03\\메인_차단아카이브.json",
+    "sha256": "527dfa58c6ed289b0e22b2e8050d4abb29f646bee3f564bd4255602aee8985c1",
+    "unchanged_content_since_first_read": true,
+    "run_id": "5bf80ec206054e2692ee7a9ec9da6350",
+    "actual_model_requests": 21,
+    "status": "blocked",
+    "citation_gaps": 3,
+    "report_id": null,
+    "use": "Read-only pure preparation regression only; did not reopen/retry/repair/publish the historical run."
+  },
+  "commands": [
+    {
+      "label": "smoke",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\smoke\" 테스트/테스트_보고서보완.py::test_shared_claim_and_detached_copies -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\smoke.json",
+      "exit_code": 0
+    },
+    {
+      "label": "pure_01_red",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\pure_01_red\" 테스트/테스트_근거보완.py::test_인용만교체_다른바이트와메타데이터보존 -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_01_red.json",
+      "exit_code": 1
+    },
+    {
+      "label": "known_wait_scoped",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\known_wait_scoped\" 테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단[semantic_review] -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\known_wait_scoped.json",
+      "exit_code": 0
+    },
+    {
+      "label": "pure_01_green",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\pure_01_green\" 테스트/테스트_근거보완.py::test_인용만교체_다른바이트와메타데이터보존 -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_01_green.json",
+      "exit_code": 1
+    },
+    {
+      "label": "pure_01_green_corrected_oracle",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\pure_01_green_corrected_oracle\" 테스트/테스트_근거보완.py::test_인용만교체_다른바이트와메타데이터보존 -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_01_green_corrected_oracle.json",
+      "exit_code": 0
+    },
+    {
+      "label": "pure_02_red",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\pure_02_red\" 테스트/테스트_근거보완.py::test_세문제까지명시허용_기존수동기본은두문제 -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_02_red.json",
+      "exit_code": 1
+    },
+    {
+      "label": "pure_02_green",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\pure_02_green\" 테스트/테스트_근거보완.py 테스트/테스트_보고서보완.py -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_02_green.json",
+      "exit_code": 0
+    },
+    {
+      "label": "service_01_red",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\service_01_red\" 테스트/테스트_근거보완연결.py::test_자동한번_세곳인용교체_두추가호출_원본보존 -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\service_01_red.json",
+      "exit_code": 1
+    },
+    {
+      "label": "service_01_green",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\service_01_green\" 테스트/테스트_근거보완연결.py::test_자동한번_세곳인용교체_두추가호출_원본보존 -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\service_01_green.json",
+      "exit_code": 0
+    },
+    {
+      "label": "service_02_red",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\service_02_red\" 테스트/테스트_근거보완연결.py::test_전체55요청넘을추가예약은_자동소비전차단 -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\service_02_red.json",
+      "exit_code": 1
+    },
+    {
+      "label": "service_02_green",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\service_02_green\" 테스트/테스트_근거보완연결.py -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\service_02_green.json",
+      "exit_code": 0
+    },
+    {
+      "label": "pure_guard_regression",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\pure_guard_regression\" 테스트/테스트_근거보완.py -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_guard_regression.json",
+      "exit_code": 1
+    },
+    {
+      "label": "pure_03_red",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\pure_03_red\" 테스트/테스트_근거보완.py::test_같은절두대상_교환해도_각원본관계와문단만교체 -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_03_red.json",
+      "exit_code": 1
+    },
+    {
+      "label": "pure_03_green",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\pure_03_green\" 테스트/테스트_근거보완.py -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_03_green.json",
+      "exit_code": 0
+    },
+    {
+      "label": "auto_guard_lifetime_regression",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\auto_guard_lifetime_regression\" 테스트/테스트_근거보완연결.py -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\auto_guard_lifetime_regression.json",
+      "exit_code": 0
+    },
+    {
+      "label": "pure_boundary_regression",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\pure_boundary_regression\" 테스트/테스트_근거보완.py -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_boundary_regression.json",
+      "exit_code": 0
+    },
+    {
+      "label": "manual_path_regression",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\manual_path_regression\" 테스트/테스트_보고서보완연결.py -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\manual_path_regression.json",
+      "exit_code": 0
+    },
+    {
+      "label": "auto_extended_regression",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\auto_extended_regression\" 테스트/테스트_근거보완연결.py -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\auto_extended_regression.json",
+      "exit_code": 0
+    },
+    {
+      "label": "control_selected_regression",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\control_selected_regression\" 테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음 테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단 테스트/테스트_실제연구제어.py::test_같은revision_동시평가는_의미검토를_한번만_예약한다 테스트/테스트_실제연구제어.py::test_로컬4절2라운드_최대55모델호출_의미검토한번 -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\control_selected_regression.json",
+      "exit_code": 0
+    },
+    {
+      "label": "pure_04_red",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\pure_04_red\" 테스트/테스트_근거보완.py::test_인용순서만바꾼응답은_실제근거변경없는_noop거절 -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_04_red.json",
+      "exit_code": 1
+    },
+    {
+      "label": "pure_04_green",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\pure_04_green\" 테스트/테스트_근거보완.py -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_04_green.json",
+      "exit_code": 0
+    },
+    {
+      "label": "sdk_payload_transport_only",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\sdk_payload_transport_only\" 테스트/테스트_근거보완연결.py::test_실제SDK_근거보완strict_payload와예약상한_전송은MockTransport만 -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\sdk_payload_transport_only.json",
+      "exit_code": 0
+    },
+    {
+      "label": "format",
+      "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m ruff format --no-cache \"서버/보고서보완.py\" \"서버/실제연구제어.py\" \"서버/근거보완.py\" \"테스트/테스트_근거보완.py\" \"테스트/테스트_근거보완연결.py\"",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\format.json",
+      "exit_code": 0
+    },
+    {
+      "label": "lint_initial",
+      "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m ruff check --no-cache \"서버/보고서보완.py\" \"서버/실제연구제어.py\" \"서버/근거보완.py\" \"테스트/테스트_근거보완.py\" \"테스트/테스트_근거보완연결.py\"",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\lint_initial.json",
+      "exit_code": 1
+    },
+    {
+      "label": "imports",
+      "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m ruff check --no-cache --select I --fix \"서버/보고서보완.py\" \"서버/실제연구제어.py\" \"서버/근거보완.py\" \"테스트/테스트_근거보완.py\" \"테스트/테스트_근거보완연결.py\"",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\imports.json",
+      "exit_code": 0
+    },
+    {
+      "label": "lint_final",
+      "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m ruff check --no-cache \"서버/보고서보완.py\" \"서버/실제연구제어.py\" \"서버/근거보완.py\" \"테스트/테스트_근거보완.py\" \"테스트/테스트_근거보완연결.py\"",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\lint_final.json",
+      "exit_code": 1
+    },
+    {
+      "label": "final_scoped",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\final_scoped\" 테스트/테스트_보고서보완.py 테스트/테스트_보고서보완연결.py 테스트/테스트_근거보완.py 테스트/테스트_근거보완연결.py 테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음 테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단 테스트/테스트_실제연구제어.py::test_같은revision_동시평가는_의미검토를_한번만_예약한다 테스트/테스트_실제연구제어.py::test_로컬4절2라운드_최대55모델호출_의미검토한번 --junitxml=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\최종_범위검증.xml\" -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\final_scoped.json",
+      "exit_code": 0
+    },
+    {
+      "label": "pure_05_red",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\pure_05_red\" 테스트/테스트_근거보완.py::test_검토자가다른절근거를지적해도_그원문을보완입력으로승격하지않음 -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_05_red.json",
+      "exit_code": 1
+    },
+    {
+      "label": "pure_05_green",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\pure_05_green\" 테스트/테스트_근거보완.py 테스트/테스트_근거보완연결.py -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_05_green.json",
+      "exit_code": 0
+    },
+    {
+      "label": "pure_06_red",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\pure_06_red\" 테스트/테스트_근거보완.py::test_반환요청의system도_준비시점불변스냅샷 -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_06_red.json",
+      "exit_code": 1
+    },
+    {
+      "label": "pure_06_green",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\pure_06_green\" 테스트/테스트_근거보완.py::test_반환요청의system도_준비시점불변스냅샷 -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_06_green.json",
+      "exit_code": 0
+    },
+    {
+      "label": "format_final",
+      "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m ruff format --no-cache \"서버/보고서보완.py\" \"서버/실제연구제어.py\" \"서버/근거보완.py\" \"테스트/테스트_근거보완.py\" \"테스트/테스트_근거보완연결.py\"",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\format_final.json",
+      "exit_code": 0
+    },
+    {
+      "label": "lint_final_clean",
+      "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m ruff check --no-cache \"서버/보고서보완.py\" \"서버/실제연구제어.py\" \"서버/근거보완.py\" \"테스트/테스트_근거보완.py\" \"테스트/테스트_근거보완연결.py\"",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\lint_final_clean.json",
+      "exit_code": 1
+    },
+    {
+      "label": "final_scoped_frozen",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\final_scoped_frozen\" 테스트/테스트_보고서보완.py 테스트/테스트_보고서보완연결.py 테스트/테스트_근거보완.py 테스트/테스트_근거보완연결.py 테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음 테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단 테스트/테스트_실제연구제어.py::test_같은revision_동시평가는_의미검토를_한번만_예약한다 테스트/테스트_실제연구제어.py::test_로컬4절2라운드_최대55모델호출_의미검토한번 --junitxml=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\최종_동결범위검증.xml\" -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\final_scoped_frozen.json",
+      "exit_code": 0
+    },
+    {
+      "label": "lint_handoff",
+      "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m ruff check --no-cache \"서버/보고서보완.py\" \"서버/실제연구제어.py\" \"서버/근거보완.py\" \"테스트/테스트_근거보완.py\" \"테스트/테스트_근거보완연결.py\"",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\lint_handoff.json",
+      "exit_code": 0
+    },
+    {
+      "label": "format_handoff_check",
+      "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m ruff format --no-cache --check \"서버/보고서보완.py\" \"서버/실제연구제어.py\" \"서버/근거보완.py\" \"테스트/테스트_근거보완.py\" \"테스트/테스트_근거보완연결.py\"",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\format_handoff_check.json",
+      "exit_code": 0
+    },
+    {
+      "label": "final_handoff",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe\" -I -B -X utf8 -m pytest -p pytest_asyncio.plugin -p no:cacheprovider -o asyncio_mode=auto --basetemp=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01\\final_handoff\" 테스트/테스트_보고서보완.py 테스트/테스트_보고서보완연결.py 테스트/테스트_근거보완.py 테스트/테스트_근거보완연결.py 테스트/테스트_실제연구제어.py::test_의미검토_불합격과_불명응답은_초안보존_큐차단_재호출없음 테스트/테스트_실제연구제어.py::test_늦은응답_중에도_새지시즉시적용_초기질문보존_과거출판차단 테스트/테스트_실제연구제어.py::test_같은revision_동시평가는_의미검토를_한번만_예약한다 테스트/테스트_실제연구제어.py::test_로컬4절2라운드_최대55모델호출_의미검토한번 --junitxml=\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\인계_범위검증.xml\" -q",
+      "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\final_handoff.json",
+      "exit_code": 0
+    }
+  ],
+  "evidence_files": [
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\auto_extended_regression.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\auto_guard_lifetime_regression.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\control_selected_regression.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\final_handoff.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\final_scoped.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\final_scoped_frozen.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\format.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\format_final.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\format_handoff_check.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\imports.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\known_wait_scoped.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\lint_final.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\lint_final_clean.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\lint_handoff.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\lint_initial.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\manual_path_regression.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_01_green.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_01_green_corrected_oracle.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_01_red.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_02_green.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_02_red.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_03_green.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_03_red.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_04_green.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_04_red.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_05_green.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_05_red.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_06_green.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_06_red.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_boundary_regression.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\pure_guard_regression.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\sdk_payload_transport_only.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\service_01_green.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\service_01_red.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\service_02_green.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\service_02_red.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\smoke.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\인계_범위검증.xml",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\최종_동결범위검증.xml",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\근거문맥실제\\자동근거보완\\최종_범위검증.xml"
+  ],
+  "disposable_fixture_root": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\자동근거보완\\backend_01",
+  "excluded": [
+    "Whole-project suite and remaining 실제연구제어 cases outside explicit selected11; main owns final wider gate.",
+    "Actual provider network, account/schema acceptance and semantic/model correction success. Own actual-provider-calls=0.",
+    "Real ledger, original 03_실행데이터, .env/auth files, installations and operating service8768 untouched.",
+    "Frontend DTO/UI, specs/status/CHANGELOG, live verifiers, provider implementation, Git staging/commit/cleanup and browser/UI/PDF acceptance: main-owned and not modified/executed.",
+    "HTML/PDF/rendering export acceptance, actual user refresh/replay/browser workflow not exercised here.",
+    "No profile/skill files changed: fixed allowlist excludes recording a reusable workflow in profile skills."
+  ],
+  "remaining_risks": [
+    "A real provider may reject the new schema or produce invalid/no-op/unsupported correction; this intentionally consumes the one attempt without retries/fallback.",
+    "The catalog can be incomplete because of128/96000 bounds; supplied source existence and mock verdict do not prove semantic support. Fresh real quality + strict re-review must decide publish.",
+    "Main must reconcile optional automatic/mode DTO/UI and run actual normal pipeline/MD-HTML-PDF/refresh-no-recall final acceptance. No operating installation replacement is authorized by this backend handoff.",
+    "Known simultaneous-run arrived.wait timing failure was not reproduced scoped and was not weakened; main wider/load validation remains necessary."
+  ],
+  "needs_decision": false,
+  "ownership": "Only these five source/test files were changed. Existing S16/S17 and unrelated/untracked records preserved. Ownership frozen at listed hashes until parent handoff."
+}

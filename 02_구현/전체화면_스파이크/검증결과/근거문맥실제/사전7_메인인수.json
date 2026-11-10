@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "preflight": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\live-40f9916fd5f84086bf25e0e1120b90e1\\실행메타데이터.json",
+  "calls": 4,
+  "source_hashes_current_match": 21,
+  "negative_detected": true,
+  "synthesis_schema_received": true,
+  "usage_after": {
+    "attempt_count": 269,
+    "remaining_attempts": 9731,
+    "spent_usd": 0.63730805,
+    "reserved_usd": 0.1042923,
+    "input_tokens": 1800485,
+    "output_tokens": 155989,
+    "unknown_count": 4
+  }
+}

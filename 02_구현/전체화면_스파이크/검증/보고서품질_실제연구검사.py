@@ -28,9 +28,10 @@ def validate_preflight(path, expected_unknown):
     from 보고서품질_실모델점검 import ROOT as PROBE_ROOT
 
     from 서버.검토문맥 import build_review_request, parse_review
-    from 서버.교안연구 import assemble_report
+    from 서버.교안연구 import assemble_report, synthesis_prompt
     from 서버.보고서근거 import build_draft_request, materialize_section
     from 서버.보고서품질 import parse_synthesis, visible_markdown
+    from 서버.종합계약 import SYNTHESIS_PROTOCOL, build_synthesis_schema
 
     try:
         assert path is not None
@@ -54,6 +55,8 @@ def validate_preflight(path, expected_unknown):
         assert value["draft_protocol"] == "sentence-paragraph-evidence-v3"
         assert value["review_protocol"] == "source-context-review-v1"
         assert value["review_schema_cases"] == ["positive", "negative"]
+        assert value.get("synthesis_protocol") == SYNTHESIS_PROTOCOL
+        assert value.get("synthesis_schema_received") is True
         assert value["draft_schema_received"] is True
         assert value["source_hashes"] == manifest()
         section_input = read("입력_section.json")
@@ -94,6 +97,24 @@ def validate_preflight(path, expected_unknown):
         assert generated["충분"] and "1882년" in visible_markdown(generated["본문"])
         section = {**data["assignment"], **generated, "읽은문서": ["임오군란"]}
         assert read("절_조립.json") == {"section": section, "request_inputs": draft_request.inputs}
+        synthesis_input = read("입력_synthesis.json")
+        synthesis_schema = build_synthesis_schema(sources)
+        assert synthesis_input["response_schema"] == synthesis_schema
+        assert synthesis_input["request_inputs"] == {
+            "synthesis_protocol": SYNTHESIS_PROTOCOL,
+            "source_ids": sorted(sources),
+        }
+        assert (
+            value["synthesis_schema_sha256"]
+            == hashlib.sha256(
+                json.dumps(synthesis_schema, ensure_ascii=False, allow_nan=False).encode("utf-8")
+            ).hexdigest()
+        )
+        assert (synthesis_input["system"], synthesis_input["user"]) == synthesis_prompt(
+            "임오군란의 발생 시기를 원문 근거로 요약하라. 이 사전점검은 표 1개와 SVG 도식 1개를 확인한다. 검증된 발생 시기만 요약하고 인과나 새 수치를 만들지 마라. 근거가 부족하면 생략 사유를 밝혀라.",
+            "임오군란 발생 시기 사전점검",
+            [section],
+        )
         summary = parse_synthesis(read("응답_synthesis.json")["content"], sources)
         assert summary["표"] and summary["도식"]
         candidate = assemble_report(
@@ -176,6 +197,45 @@ def validate_preflight(path, expected_unknown):
         return value
     except (AssertionError, KeyError, TypeError, ValueError, OSError) as error:
         raise AssertionError("preflight_control_invalid") from error
+
+
+def validate_visual_counts(synthesis, *, tables, diagrams):
+    """실제 종합 내용과 렌더 개수를 맞추되 명시된 도식 생략은 별도 경로로 검사한다."""
+    assert tables == len(synthesis["표"]) and tables >= 1, "실제 비교표가 종합 내용과 다릅니다."
+    assert diagrams == len(synthesis["도식"]), "실제 도식이 종합 내용과 다릅니다."
+
+
+def validate_auto_correction(archive):
+    """성공 실행의 자동 보완은 저장한 원본과 정확히 두 후속 모델 응답을 요구한다."""
+    run = archive["run"]
+    correction = run.get("correction_state", {})
+    if correction.get("mode") != "evidence":
+        return None
+    assert correction.get("automatic") is True
+    source_revision, revision = correction["source_revision"], run["control_revision"]
+    assert revision == source_revision + 1 == correction["revision"]
+    assert correction["max_model_calls"] == 2 and correction["status"] == "completed"
+    originals = [r for r in archive["revisions"] if r["control_revision"] == source_revision]
+    assert len(originals) == 1
+    original = originals[0]
+    assert original["status"] == "blocked" and original["report_id"] is None
+    assert original["quality"]["passed"] is False
+    assert original["quality"]["reasons"] == ["semantic_review_failed"]
+    review = original["quality"]["semantic_review"]
+    assert review["판정"] == "needs_revision" and 1 <= len(review["문제"]) <= 3
+    assert all(p["유형"] == "citation_gap" for p in review["문제"])
+    responses = [
+        e
+        for e in archive["events"]
+        if e["type"] == "model.completed" and e["control_revision"] == revision
+    ]
+    assert [e["input"]["context"]["operation"] for e in responses] == [
+        "semantic_correction",
+        "semantic_review",
+    ]
+    assert all(e["input"]["context"]["revision"] == revision for e in responses)
+    assert run["actual_model_requests"] - original["actual_model_requests"] == 2
+    return {"source_revision": source_revision, "revision": revision, "added_model_requests": 2}
 
 
 def main(args):
@@ -294,7 +354,13 @@ def main(args):
                 if phase != last:
                     print("REAL_STATE " + json.dumps(phase, ensure_ascii=False), flush=True)
                     last = phase
-                if run["status"] != "running":
+                correction = run.get("correction_state", {})
+                finalizing = (
+                    run["status"] == "completed"
+                    and correction.get("automatic") is True
+                    and correction.get("status") == "applied"
+                )
+                if run["status"] != "running" and not finalizing:
                     break
                 page.wait_for_timeout(1500)
             result["run"] = {k: v for k, v in run.items() if k != "draft"}
@@ -312,6 +378,7 @@ def main(args):
                     == run["actual_model_requests"]
                 )
             archive = get(args.base_url, f"/api/spike/runs/{run_id}/archive")
+            result["auto_correction"] = validate_auto_correction(archive)
             assert not any(event["type"].startswith("web.") for event in archive["events"])
             responses = [event for event in archive["events"] if event["type"] == "model.completed"]
             assert len(responses) == run["actual_model_requests"]
@@ -335,9 +402,16 @@ def main(args):
             frame.locator("h1").wait_for()
             tables = frame.locator("table").count()
             diagrams = frame.locator("svg").count()
-            assert tables >= 1 and diagrams >= 1, "이번 비교/연표 주제의 실제 표·도식을 확인합니다."
+            synthesis = run["visual_summary"]
+            validate_visual_counts(synthesis, tables=tables, diagrams=diagrams)
             assert frame.locator("script,img").count() == 0
-            record("종합자의 제출 문서 클릭과 실제 표·코드 도식", tables=tables, diagrams=diagrams)
+            record(
+                "종합자의 제출 문서 클릭과 실제 시각 자료 일치",
+                tables=tables,
+                diagrams=diagrams,
+                svg_rendering_tested=diagrams > 0,
+                omission_reason=synthesis["시각화생략사유"],
+            )
             downloaded = {}
             for format in ("md", "html", "pdf"):
                 if format == "md":
@@ -361,12 +435,16 @@ def main(args):
                         digest == report["sha256"] and content.decode("utf-8") == report["markdown"]
                     )
                 elif format == "html":
-                    assert "<table" in content.decode("utf-8") and "<svg" in content.decode("utf-8")
                     opened = context.new_page()
                     opened.set_content(content.decode("utf-8"))
-                    assert opened.locator("table").count() == tables
-                    assert opened.locator("svg").count() == diagrams
-                    opened.locator("svg").first.scroll_into_view_if_needed()
+                    validate_visual_counts(
+                        synthesis,
+                        tables=opened.locator("table").count(),
+                        diagrams=opened.locator("svg").count(),
+                    )
+                    opened.locator(
+                        "svg" if diagrams else "table"
+                    ).first.scroll_into_view_if_needed()
                     screenshot(opened, "HTML_실제파일_재열기.png")
                     opened.close()
                 else:
@@ -410,7 +488,7 @@ def main(args):
                 )
                 inside = page.frames[1]
                 inside.evaluate("window.scrollTo(0,0)")
-                label = frame.locator("svg text").first
+                label = frame.locator("svg text" if diagrams else "table th").first
                 assert label.count() > 0
                 reached = False
                 for _ in range(40):
@@ -425,12 +503,13 @@ def main(args):
                     page.mouse.move(outer["x"] + outer["width"] / 2, (top + bottom) / 2)
                     page.mouse.wheel(0, 180)
                     page.wait_for_timeout(60)
-                assert reached, "보이는 iframe 영역에서 실제 도식 레이블에 접근해야 합니다."
+                assert reached, "보이는 iframe 영역에서 실제 시각 자료에 접근해야 합니다."
                 assert page.evaluate("document.documentElement.scrollWidth<=innerWidth")
                 assert page.locator("canvas").count() == 1
                 close = hit_test(page.get_by_test_id("popup-close"))
                 assert close["hit"] and close["inView"]
-                screenshot(page, f"실제_도식_{width}x{height}.png")
+                kind = "도식" if diagrams else "비교표"
+                screenshot(page, f"실제_{kind}_{width}x{height}.png")
                 record(f"실제 보고서 viewport {width}x{height}", close=close)
             page.set_viewport_size({"width": 1440, "height": 900})
             close_popup(page)

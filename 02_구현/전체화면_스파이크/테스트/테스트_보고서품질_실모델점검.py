@@ -63,6 +63,13 @@ def test_prepare_never_reads_secrets_or_ledger_or_constructs_provider(monkeypatc
     assert "LLM 읽기 결과가 아님" in data["notes"][0][1]
 
 
+def test_preflight_manifest_binds_both_evidence_repair_modules(monkeypatch):
+    monkeypatch.setattr(Path, "read_bytes", lambda _path: b"isolated module bytes")
+    paths = probe.manifest()
+    assert str((SPIKE / "서버/근거보완.py").resolve()) in paths
+    assert str((SPIKE / "서버/보고서보완.py").resolve()) in paths
+
+
 class ModelDouble:
     """명시적 스크립트 응답: 의미 검출력을 구현하거나 보증하지 않는다."""
 
@@ -319,6 +326,36 @@ def test_actual_draft_call_forwards_provider_schema_not_only_prompt(tmp_path):
     )
 
 
+def test_종합사전요청은_동일strict_schema와_출처저널과_해시를_보존한다(tmp_path):
+    from 서버.종합계약 import build_synthesis_schema
+
+    model = ModelDouble()
+    result = asyncio.run(probe.run_probe(model=model, work=tmp_path))
+    assert result["passed"], result
+    sent = model.calls[1]
+    assert sent["response_schema"] is not None, "사전 종합 schema 누락"
+    assert sent["response_schema"] == build_synthesis_schema(["임오군란"])
+    saved = json.loads((tmp_path / "입력_synthesis.json").read_text("utf-8"))
+    assert saved["response_schema"] == sent["response_schema"]
+    assert saved["request_inputs"] == {
+        "synthesis_protocol": "source-bound-synthesis-v1",
+        "source_ids": ["임오군란"],
+    }
+    assert result["synthesis_protocol"] == "source-bound-synthesis-v1"
+    assert result["synthesis_schema_received"] is True
+    assert (
+        result["synthesis_schema_sha256"]
+        == hashlib.sha256(
+            json.dumps(saved["response_schema"], ensure_ascii=False, allow_nan=False).encode(
+                "utf-8"
+            )
+        ).hexdigest()
+    )
+    assert str((SPIKE / "서버/종합계약.py").resolve()) in result["source_hashes"]
+    assert result["observed_attempts"] == result["completed_calls"] == 4
+    assert result["generated_candidate_semantic_verified"] is False
+
+
 def test_four_steps_use_actual_parsers_and_assembly_with_bound_attempts(tmp_path, monkeypatch):
     monkeypatch.setitem(sys.modules, "서버.실제모델", None)
     model = ModelDouble()
@@ -421,6 +458,18 @@ def test_stops_without_retry_or_false_detection(index, reply, error, expected_ca
         encoding="utf-8"
     )
     assert len(model.calls) <= 4
+
+
+def test_실제검토요청의_제목포함_다중행발췌도_연도모순검출로_인정한다(tmp_path):
+    model = ModelDouble()
+    model.negative["문제"][0]["본문발췌"] = (
+        "임오군란 날짜 대조\n"
+        "임오군란은 1883년 7월 23일부터 8월 30일까지 이어진 조선 한성부에서 발발한 "
+        "구식 군인의 폭동이다. «임오군란»\n"
+    )
+    result = asyncio.run(probe.run_probe(model=model, work=tmp_path))
+    assert result["passed"] and result["negative_detected"], result
+    assert result["observed_attempts"] == 4 and model.closed
 
 
 def test_negative_date_mention_without_date_contradiction_is_not_detection(tmp_path):

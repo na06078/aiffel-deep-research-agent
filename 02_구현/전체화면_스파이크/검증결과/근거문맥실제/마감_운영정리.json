@@ -1,0 +1,27 @@
+{
+  "stopped_test_pid": 43184,
+  "test_port": 8797,
+  "test_port_closed": true,
+  "hermes_targeted": false,
+  "operating_8768_listening": false,
+  "runs": [
+    {
+      "run_id": "b709e6af75194f19b854490368cca059",
+      "revision": 1,
+      "status": "failed",
+      "actual_model_requests": 19
+    }
+  ],
+  "budget": {
+    "attempt_count": 294,
+    "max_attempts": 10000,
+    "remaining_attempts": 9706,
+    "spent_usd": 0.70550335,
+    "reserved_usd": 0.1700117,
+    "max_usd": 20.0,
+    "input_tokens": 2029807,
+    "output_tokens": 165043,
+    "unknown_count": 6
+  },
+  "new_provider_calls": 0
+}

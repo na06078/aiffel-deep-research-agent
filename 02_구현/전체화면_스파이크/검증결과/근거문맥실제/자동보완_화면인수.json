@@ -1,0 +1,20 @@
+{
+  "frontend_tests": {
+    "passed": 254,
+    "total": 254,
+    "failed": 0,
+    "files": 26
+  },
+  "typecheck_exit_code": 0,
+  "build_exit_code": 0,
+  "candidate": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\근거보완_화면",
+  "candidate_count": 25,
+  "installed_dist_replaced": false,
+  "actual_provider_calls": 0,
+  "source_hashes": {
+    "화면/src/계약.ts": "aeacf64d249684eb0505c809890f7df502bec95e783685fe6a7fee266da2a29c",
+    "화면/src/실행실패.tsx": "2eb6cf33add38ac563bd63ad6c025848862f3a04693d57a6c45a364a01619940",
+    "화면/src/실행실패.test.tsx": "f7df78cc17289ada2844a9cec182f75722e94d82bcbd3cec5e18226859cbec54"
+  },
+  "real_gui_tested": false
+}

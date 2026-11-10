@@ -559,6 +559,73 @@ def test_NUM_SCHEMA_01_모든object는_닫힌필수필드이며_예약전거부(
     assert sent == callbacks == [] and model.usage()["attempt_count"] == 0
 
 
+def test_종합schema_UTF8크기는_전송예약전에_입력상한에_포함된다(tmp_path):
+    from 서버.종합계약 import build_synthesis_schema
+
+    # 문자 수만 세면 상한 아래지만 UTF-8 바이트와 중첩 출처 enum을 합치면 초과한다.
+    schema = build_synthesis_schema(["한" * 16000])
+    encoded = json.dumps(schema, ensure_ascii=False, allow_nan=False)
+    assert len(encoded) + 8192 < 272000 < len(encoded.encode("utf-8")) + 8192
+    sent, callbacks = [], []
+    model = model_for(tmp_path, lambda req: sent.append(req))
+
+    async def run():
+        try:
+            with pytest.raises(ModelCallError) as caught:
+                await model.complete(
+                    "JSON", "JSON", context=CTX, response_schema=schema, on_attempt=callbacks.append
+                )
+            assert caught.value.code == "input_too_large" and caught.value.attempt_id is None
+        finally:
+            await model.aclose()
+
+    asyncio.run(run())
+    assert sent == callbacks == []
+    assert model.usage()["attempt_count"] == 0
+
+
+def test_종합builder의_nested_anyOf와_출처enum은_실제SDK_payload에_그대로실린다(tmp_path):
+    from 서버.종합계약 import build_synthesis_schema
+
+    schema = build_synthesis_schema(["자료B", "자료A", "자료A"])
+    sent, callbacks = [], []
+    content = '{"머리말":"요약","맺음말":"한계","표":[],"도식":[],"시각화생략사유":"부족"}'
+    model = model_for(
+        tmp_path,
+        lambda req: (
+            sent.append(json.loads(req.content)) or httpx.Response(200, json=response(content))
+        ),
+    )
+
+    async def run():
+        try:
+            result = await model.complete(
+                "JSON",
+                "JSON",
+                context={**CTX, "operation": "synthesize"},
+                response_schema=schema,
+                on_attempt=callbacks.append,
+            )
+            assert result["content"] == content
+        finally:
+            await model.aclose()
+
+    asyncio.run(run())
+    assert len(sent) == len(callbacks) == 1
+    format = sent[0]["response_format"]
+    assert format["type"] == "json_schema"
+    assert format["json_schema"]["strict"] is True
+    assert format["json_schema"]["schema"] == schema
+    branches = format["json_schema"]["schema"]["properties"]["표"]["items"]["anyOf"]
+    four = branches[2]["properties"]
+    assert four["열"]["minItems"] == four["열"]["maxItems"] == 4
+    assert four["행"]["items"]["properties"]["셀"]["minItems"] == 4
+    assert four["행"]["items"]["properties"]["셀"]["maxItems"] == 4
+    assert four["행"]["items"]["properties"]["출처"]["items"]["enum"] == ["자료A", "자료B"]
+    assert set(four["행"]["items"]["required"]) == {"셀", "출처"}
+    assert model.usage()["attempt_count"] == 1
+
+
 def test_실제builder_schema의_정수enum이_SDK_HTTP까지_동일하다(tmp_path):
     from 서버.보고서근거 import build_draft_request
 

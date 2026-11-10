@@ -54,6 +54,43 @@ it('보완 상태는 새 revision이 running이어도 중·기시도 사유를 �
  }
  expect(fetcher).not.toHaveBeenCalled();
 });
+it('서버가 시작한 자동 근거 보완을 표시하고 화면 조회로 POST하지 않는다',()=>{
+ const fetcher=vi.fn();vi.stubGlobal('fetch',fetcher);
+ const run={...eligible,status:'running',control_revision:2,correction_state:{status:'pending',source_revision:1,max_model_calls:2,automatic:true,mode:'evidence'}};
+ const html=markup(draw(run));
+ expect(html).toContain('자동 근거 보완 중입니다');
+ expect(html).toContain('최대 2회');
+ expect(html).toContain('원본 버전 1');
+ expect(html).not.toContain('data-testid="run-correction"');
+ expect(fetcher).not.toHaveBeenCalled();
+});
+it('자동 보완이 적용된 뒤에는 완료가 아니라 전체 재검토 중으로 표시한다',()=>{
+ const run={...eligible,status:'running',control_revision:2,correction_state:{status:'applied',source_revision:1,max_model_calls:2,automatic:true,mode:'evidence'}};
+ const html=markup(draw(run));
+ expect(html).toContain('근거 보완을 적용하고 전체 원고를 재검토 중입니다');
+ expect(html).not.toContain('통과해 제출');
+ expect(html).not.toContain('data-testid="run-correction"');
+});
+it('자동 보완 소진 후에는 미제출과 추가 시도 금지를 함께 표시한다',()=>{
+ const fetcher=vi.fn();vi.stubGlobal('fetch',fetcher);
+ const run={...eligible,control_revision:2,correction_state:{status:'failed',source_revision:1,max_model_calls:2,automatic:true,mode:'evidence'}};
+ const html=markup(draw(run));
+ expect(html).toContain('자동 근거 보완을 1회 시도했지만 제출하지 못했습니다');
+ expect(html).toContain('다시 시작하지 않습니다');
+ expect(html).not.toContain('통과해 제출');
+ expect(html).not.toContain('data-testid="run-correction"');
+ expect(fetcher).not.toHaveBeenCalled();
+});
+it('자동 보완 통과는 실제 정본과 품질 통과가 모두 있을 때만 제출로 표시한다',()=>{
+ const run={...eligible,status:'completed',report_id:'report-1',control_revision:2,
+  quality:{...eligible.quality,passed:true,reasons:[],semantic_review:{...eligible.quality.semantic_review,통과:true,문제:[]}},
+  correction_state:{status:'completed',source_revision:1,max_model_calls:2,automatic:true,mode:'evidence'}};
+ expect(markup(draw(run))).toContain('자동 근거 보완과 재검토를 통과해 제출했습니다');
+ for(const changed of [{report_id:null},{status:'running'},{quality:{...run.quality,passed:false}},
+  {quality:{...run.quality,semantic_review:{...run.quality.semantic_review,통과:false}}}]){
+  expect(markup(draw({...run,...changed}))).not.toContain('통과해 제출');
+ }
+});
 it('HTTP 실패 원인과 검토 지적을 보존하고 명시 재시도만 최초 UUID로 POST한다',async()=>{
  const before=JSON.stringify(eligible);
  const fetcher=vi.fn().mockResolvedValueOnce(new Response(JSON.stringify({error:{code:'correction_mapping_invalid',message:'<b>고유 매핑 불가</b>'}}),{status:409})).mockResolvedValueOnce(new Response(JSON.stringify({run_id:'run/A',control_revision:2,source_revision:1,status:'running',max_model_calls:2}),{status:202}));vi.stubGlobal('fetch',fetcher);

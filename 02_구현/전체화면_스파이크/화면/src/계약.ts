@@ -38,6 +38,7 @@ export interface CorrectionAdmission {
 }
 export interface CorrectionState {
   status:'pending'|'applied'|'passed'|'failed'|'completed'; source_revision:number; max_model_calls:2;
+  automatic?:boolean; mode?:'evidence';
 }
 export interface RunSnapshot {
   correction_state?: CorrectionState;

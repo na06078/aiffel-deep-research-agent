@@ -24,6 +24,7 @@ MAX_COST_NANO_USD = MAX_CALLS * (MAX_INPUT_PROXY * 250 + MAX_OUTPUT * 1200)
 sys.path.insert(0, str(SPIKE))
 
 from 서버.교안연구 import Corpus
+from 서버.종합계약 import SYNTHESIS_PROTOCOL, build_synthesis_schema
 
 
 def digest(data):
@@ -108,8 +109,11 @@ def manifest():
         SPIKE / "서버" / name
         for name in (
             "교안연구.py",
+            "종합계약.py",
             "보고서품질.py",
             "보고서근거.py",
+            "보고서보완.py",
+            "근거보완.py",
             "원문구간.py",
             "검토문맥.py",
             "보고서도식.py",
@@ -290,6 +294,8 @@ async def run_probe(*, model, work=WORK):
         "live_verified": False,
         "draft_protocol": None,
         "draft_schema_received": False,
+        "synthesis_protocol": SYNTHESIS_PROTOCOL,
+        "synthesis_schema_received": False,
         "review_protocol": "source-context-review-v1",
         "review_schema_cases": [],
         "control_protocol": CONTROL_PROTOCOL,
@@ -364,6 +370,11 @@ async def run_probe(*, model, work=WORK):
             result["draft_schema_sha256"] = hashlib.sha256(
                 json.dumps(response_schema, ensure_ascii=False, allow_nan=False).encode("utf-8")
             ).hexdigest()
+        if case == "synthesis" and response_schema is not None:
+            result["synthesis_schema_received"] = True
+            result["synthesis_schema_sha256"] = hashlib.sha256(
+                json.dumps(response_schema, ensure_ascii=False, allow_nan=False).encode("utf-8")
+            ).hexdigest()
         if operation == "semantic_review" and response_schema is not None:
             result["review_schema_cases"].append(case)
         receipt = {
@@ -420,6 +431,11 @@ async def run_probe(*, model, work=WORK):
                     title,
                     sections,
                 ),
+                response_schema=build_synthesis_schema(sources),
+                request_inputs={
+                    "synthesis_protocol": SYNTHESIS_PROTOCOL,
+                    "source_ids": sorted(sources),
+                },
             ),
             sources,
         )
@@ -500,7 +516,7 @@ async def run_probe(*, model, work=WORK):
         if not any(
             p["유형"] == "contradiction"
             and "1883년" in p["본문발췌"]
-            and p["본문발췌"] in negative_visible
+            and p["본문발췌"] in negative_request.inputs["visible_text"]
             and "임오군란" in p["출처"]
             for p in verdict["문제"]
         ):

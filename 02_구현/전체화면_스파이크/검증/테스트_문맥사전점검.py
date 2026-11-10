@@ -15,6 +15,112 @@ sys.path.insert(0, str(I))
 from 테스트.테스트_보고서품질_실모델점검 import ModelDouble, probe
 
 
+def test_실제화면검사도_명세의_도식생략_경로를_받아들인다(monkeypatch):
+    import importlib
+
+    monkeypatch.syspath_prepend(str(I / "검증"))
+    driver = importlib.import_module("보고서품질_실제연구검사")
+    synthesis = {
+        "표": [{"제목": "사건 비교"}],
+        "도식": [],
+        "시각화생략사유": "인과를 암시하지 않기 위해 생략했다.",
+    }
+    driver.validate_visual_counts(synthesis, tables=1, diagrams=0)
+
+
+@pytest.mark.parametrize(
+    "table_count,diagram_count,declared_diagrams,reason",
+    [
+        (1, 0, ["제공된 도식"], "생략 사유가 있어도 실제 도식을 숨기면 안 된다"),
+        (1, 1, [], "제공하지 않은 도식"),
+        (0, 0, [], "비교표 누락"),
+        (2, 0, [], "표 개수 불일치"),
+    ],
+)
+def test_생략을_허용해도_선언한시각물_누락과_개수불일치는_거절한다(
+    monkeypatch, table_count, diagram_count, declared_diagrams, reason
+):
+    import importlib
+
+    monkeypatch.syspath_prepend(str(I / "검증"))
+    driver = importlib.import_module("보고서품질_실제연구검사")
+    synthesis = {"표": ["비교표"], "도식": declared_diagrams, "시각화생략사유": reason}
+    with pytest.raises(AssertionError):
+        driver.validate_visual_counts(synthesis, tables=table_count, diagrams=diagram_count)
+
+
+def test_실제보완검사는_원본버전과_추가2요청_순서를_대조한다(monkeypatch):
+    import importlib
+
+    monkeypatch.syspath_prepend(str(I / "검증"))
+    driver = importlib.import_module("보고서품질_실제연구검사")
+    original = {
+        "control_revision": 1,
+        "status": "blocked",
+        "report_id": None,
+        "actual_model_requests": 21,
+        "quality": {
+            "passed": False,
+            "reasons": ["semantic_review_failed"],
+            "semantic_review": {
+                "판정": "needs_revision",
+                "문제": [{"유형": "citation_gap"}] * 3,
+            },
+        },
+    }
+    run = {
+        "control_revision": 2,
+        "actual_model_requests": 23,
+        "correction_state": {
+            "automatic": True,
+            "mode": "evidence",
+            "source_revision": 1,
+            "revision": 2,
+            "max_model_calls": 2,
+            "status": "completed",
+        },
+    }
+    events = [
+        {
+            "type": "model.completed",
+            "control_revision": 2,
+            "input": {
+                "context": {
+                    "revision": 2,
+                    "operation": operation,
+                }
+            },
+        }
+        for operation in ["semantic_correction", "semantic_review"]
+    ]
+    result = driver.validate_auto_correction(
+        {"run": run, "revisions": [original, run], "events": events}
+    )
+    assert result == {"source_revision": 1, "revision": 2, "added_model_requests": 2}
+    import copy
+
+    for mutation in (
+        "missing_original",
+        "extra_call",
+        "reverse_order",
+        "wrong_count",
+        "wrong_revision",
+    ):
+        bad = copy.deepcopy({"run": run, "revisions": [original, run], "events": events})
+        if mutation == "missing_original":
+            bad["revisions"] = [bad["run"]]
+        elif mutation == "extra_call":
+            bad["events"].append(copy.deepcopy(bad["events"][-1]))
+        elif mutation == "reverse_order":
+            bad["events"].reverse()
+        elif mutation == "wrong_count":
+            bad["run"]["actual_model_requests"] = 24
+        else:
+            bad["events"][0]["input"]["context"]["revision"] = 1
+        with pytest.raises(AssertionError):
+            driver.validate_auto_correction(bad)
+
+
 class ReviewSchemaDouble(ModelDouble):
     async def complete(self, *args, **kwargs):
         result = await super().complete(*args, **kwargs)
@@ -292,6 +398,12 @@ def gate_bundle(tmp_path, monkeypatch):
     "mutation",
     [
         "valid",
+        "synthesis_old",
+        "synthesis_schema",
+        "synthesis_prompt",
+        "synthesis_inputs",
+        "synthesis_hash",
+        "synthesis_received",
         "schema",
         "review_id",
         "source",
@@ -318,7 +430,26 @@ def test_submit_gate_validates_actual_bound_bundle(gate_bundle, mutation, monkey
         transform(value)
         path.write_text(json.dumps(value, ensure_ascii=False), encoding="utf-8")
 
-    if mutation == "schema":
+    if mutation == "synthesis_old":
+        change(target.name, lambda v: v.pop("synthesis_protocol"))
+    elif mutation == "synthesis_schema":
+        change("입력_synthesis.json", lambda v: v.update(response_schema={}))
+        # Saved schema + saved digest 둘 다 바꿔도 현재 재구성과 달라 거절해야 한다.
+        import hashlib
+
+        forged = hashlib.sha256(b"{}").hexdigest()
+        change(target.name, lambda v: v.update(synthesis_schema_sha256=forged))
+    elif mutation == "synthesis_prompt":
+        change("입력_synthesis.json", lambda v: v.update(user="다른 종합 입력"))
+    elif mutation == "synthesis_inputs":
+        change(
+            "입력_synthesis.json", lambda v: v["request_inputs"].update(source_ids=["없는 자료"])
+        )
+    elif mutation == "synthesis_hash":
+        change(target.name, lambda v: v.update(synthesis_schema_sha256="0" * 64))
+    elif mutation == "synthesis_received":
+        change(target.name, lambda v: v.update(synthesis_schema_received=False))
+    elif mutation == "schema":
         change("입력_positive.json", lambda v: v.update(response_schema={}))
     elif mutation == "review_id":
         change("입력_negative.json", lambda v: v["request_inputs"].update(review_set_id="wrong"))

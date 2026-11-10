@@ -37,8 +37,17 @@ export function RunFailureNotice({run,readOnly=true}:{run:NoticeRun;readOnly?:bo
   }
   const accepted=attempt?.accepted;
   const correction=run.correction_state;
+  const automaticEvidence=correction?.automatic===true&&correction.mode==='evidence';
+  let correctionMessage=correction?.status==='pending'?'검토 지적 문장 보완 중입니다.':'이미 1회 보완을 시도한 실행입니다.';
+  if(automaticEvidence){
+    if(correction.status==='pending')correctionMessage='자동 근거 보완 중입니다.';
+    else if(correction.status==='applied')correctionMessage='근거 보완을 적용하고 전체 원고를 재검토 중입니다.';
+    else if(correction.status==='failed')correctionMessage='자동 근거 보완을 1회 시도했지만 제출하지 못했습니다.';
+    else if((correction.status==='completed'||correction.status==='passed')&&run.status==='completed'&&run.report_id&&run.quality?.passed===true&&semantic?.통과===true)
+      correctionMessage='자동 근거 보완과 재검토를 통과해 제출했습니다.';
+  }
   const correctionNotice=correction?<p role="status" data-testid="run-correction-state">
-    {correction.status==='pending'?'검토 지적 문장 보완 중입니다.':'이미 1회 보완을 시도한 실행입니다.'}
+    {correctionMessage}
     {` 상태: ${correction.status} · 원본 버전 ${correction.source_revision} · 모델 호출 최대 ${correction.max_model_calls}회. `}
     보완을 다시 시작하지 않습니다. 원래 초안과 현재 판정은 보존됩니다.
   </p>:null;

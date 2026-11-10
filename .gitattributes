@@ -68,3 +68,9 @@
 "/02_구현/전체화면_스파이크/검증결과/근거문맥실제/SVG예시_RED.xml" whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
 "/02_구현/전체화면_스파이크/검증결과/근거문맥실제/사전경로_RED.xml" whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
 "/02_구현/전체화면_스파이크/검증결과/근거문맥실제/한도_RED.xml" whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
+
+# 종합 계약과 자동 근거 보완의 새 소스도 해시 결합 바이트를 보존한다.
+"/02_구현/전체화면_스파이크/서버/종합계약.py" -text
+"/02_구현/전체화면_스파이크/서버/근거보완.py" -text
+"/02_구현/전체화면_스파이크/테스트/테스트_근거보완.py" -text
+"/02_구현/전체화면_스파이크/테스트/테스트_근거보완연결.py" -text

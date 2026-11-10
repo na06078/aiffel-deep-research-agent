@@ -34,7 +34,6 @@ def no_external_requests(monkeypatch):
 
 ROOT = Path(__file__).resolve().parents[3]
 CORPUS = ROOT / "01_참고자료/원본데이터/corpus.json"
-EVIDENCE = ROOT / ".cache/보고서품질_검증/관계목록/대역/로컬"
 
 
 async def test_complete_strict_schema_전달과_저널사본_다른노드미전달(data_dir):
@@ -307,6 +306,68 @@ class ScriptedModel:
         self.closed = True
 
 
+@pytest.mark.parametrize("mode", ["local", "web"])
+async def test_종합의_정상호출은_읽은출처스키마와_저널을_동일하게_전달한다(
+    tmp_path, monkeypatch, mode
+):
+    from 서버 import 웹연구
+    from 서버.교안연구 import assemble_report
+    from 서버.종합계약 import build_synthesis_schema
+
+    model = ScriptedModel()
+    service = RealResearchService(tmp_path, model, CORPUS)
+    sections = [
+        {
+            "section_id": "s1",
+            "title": "절",
+            "role": "큰그림 담당",
+            "round": 1,
+            "order": 1,
+            "본문": "검증된 본문",
+            "근거": [],
+            "읽은문서": [model.titles[0]],
+        }
+    ]
+    with service.repo.transaction() as (db, data):
+        run, _ = service.start(db, data, "질문", "synthesis-schema")
+    state = {
+        "run_id": run["run_id"],
+        "revision": 1,
+        "question": "질문",
+        "title": "제목",
+        "results": sections,
+        "source_mode": mode,
+    }
+    if mode == "web":
+        # 웹 출처 receipt 검증은 기존 경계의 별도 테스트 대상. 이 대역은 조립만 격리한다.
+        monkeypatch.setattr(웹연구, "evidence", lambda *_: (None, sections, {}))
+        monkeypatch.setattr(
+            웹연구,
+            "assemble",
+            lambda t, i, c, ss, sources, obj: assemble_report(t, i, c, ss, service.corpus, obj),
+        )
+    try:
+        actual = await service.synthesize(state)
+        assert "검증된 본문" in actual["draft"]
+        assert len(model.calls) == 1
+        assert model.schemas[0] is not None, "종합 제공자 schema 누락"
+        assert model.schemas[0] == build_synthesis_schema([model.titles[0]])
+        events = [
+            e for e in service.repo.archive(run["run_id"])["events"] if e["type"] == "model.started"
+        ]
+        assert len(events) == 1
+        journal = events[0]["input"]
+        assert journal["response_schema"] == model.schemas[0]
+        assert journal["inputs"] == {
+            "title": "제목",
+            "sections": sections,
+            "synthesis_protocol": "source-bound-synthesis-v1",
+            "source_ids": [model.titles[0]],
+        }
+    finally:
+        await service.close()
+
+
 async def settle(service):
     for _ in range(1000):
         if not service.tasks:
@@ -316,12 +377,9 @@ async def settle(service):
 
 
 @pytest.fixture
-def data_dir():
-    import uuid
-
-    target = EVIDENCE / uuid.uuid4().hex
-    target.mkdir(parents=True)
-    return target
+def data_dir(tmp_path):
+    # pytest --basetemp가 지정하는 작업별 격리 캐시에만 SQLite/보고서를 쓴다.
+    return tmp_path
 
 
 async def test_실제6노드_Send병렬_부족절만2라운드_원고보존과_정본재열기(data_dir):

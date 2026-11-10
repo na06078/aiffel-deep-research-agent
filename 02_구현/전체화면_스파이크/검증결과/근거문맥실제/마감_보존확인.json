@@ -1,0 +1,30 @@
+{
+  "checked_at": "2026-11-11T01:10:06.111318+09:00",
+  "protected_except_approved_ledger": 54,
+  "protected_changed": [],
+  "existing_execution_files": 26,
+  "old_data_changed": [],
+  "ledger_original_rows": 209,
+  "ledger_prefix_sha256": "9ae5963def1a10bfbd407ba0048ea96d7c85129966e48a62f08653c3110403c9",
+  "ledger_original_prefix_preserved": true,
+  "policy": [
+    10000,
+    20000000000,
+    27
+  ],
+  "old_unknown_count": 4,
+  "old_unknown_preserved": true,
+  "new_unknown_count": 2,
+  "current_unknown_count": 6,
+  "current_unknown_ids": [
+    "0186b3760c704d228122501890c60fba",
+    "0cee1f2417ff4208aeb0b61e8011ba95",
+    "2d07ab93e7a54b7781bfdf680691ae46",
+    "909f062950c141c89a1edf929d660312",
+    "c787beaee9964a9cb28b5dbb5d563d4f",
+    "d292fc2357974316a639cce7557dc801"
+  ],
+  "unknown_reservations_removed": false,
+  "installed_dist_replaced": false,
+  "new_model_calls_for_closing": 0
+}

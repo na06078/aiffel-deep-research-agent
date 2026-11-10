@@ -14,6 +14,13 @@ TEXT = "😀한글 사건은 1882년에 발생하였으며 기록에 남아 있�
 
 
 class SpanEvidenceTests(unittest.TestCase):
+    def test_writer_guidance_changes_prompt_and_request_binding(self):
+        before = build_draft_request(ASSIGNMENT, [], {"A": TEXT})
+        with patch("서버.보고서근거.DRAFT_SYSTEM_RULES", "새로운 독립 작성 지침", create=True):
+            after = build_draft_request(ASSIGNMENT, [], {"A": TEXT})
+        self.assertNotEqual(before.prompts[0], after.prompts[0])
+        self.assertNotEqual(before.inputs["evidence_set_id"], after.inputs["evidence_set_id"])
+
     def test_sentence_boundary_is_preserved_in_builder_catalog(self):
         first = "가" * 298 + ". "
         second = "나" * 99 + "."

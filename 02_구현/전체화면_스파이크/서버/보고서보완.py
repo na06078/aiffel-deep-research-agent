@@ -93,7 +93,7 @@ def _paragraph_position(text, anchor):
     raise ResearchContractError("correction: claim location is not visible paragraph")
 
 
-def prepare_correction(draft, sections, problems, sources):
+def prepare_correction(draft, sections, problems, sources, *, max_problems=2):
     try:
         if not _plain_tree([draft, sections, problems, sources]):
             raise ValueError("plain JSON required")
@@ -103,8 +103,10 @@ def prepare_correction(draft, sections, problems, sources):
         raise ResearchContractError("correction: invalid inputs") from exc
     if type(draft) is not str or not draft.strip() or type(sections) is not list or not sections:
         raise ResearchContractError("correction: invalid inputs")
-    if type(problems) is not list or not 1 <= len(problems) <= 2:
-        raise ResearchContractError("correction: problem count must be 1..2")
+    if type(max_problems) is not int or max_problems not in (2, 3):
+        raise ResearchContractError("correction: invalid problem limit")
+    if type(problems) is not list or not 1 <= len(problems) <= max_problems:
+        raise ResearchContractError(f"correction: problem count must be 1..{max_problems}")
     if (
         type(sources) is not dict
         or not sources

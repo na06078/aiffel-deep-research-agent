@@ -89,7 +89,7 @@ def test_판정과_근거결합_새계약():
         "bool",
         "verdict",
         "hidden",
-        "gap_quote",
+        "gap_empty",
         "conflict_one",
         "stale",
     ],
@@ -122,8 +122,9 @@ def test_엄격한_거절(mutation):
         obj["판정"] = "supported"
     elif mutation == "hidden":
         obj["문제"][0]["본문발췌"] = "비밀날짜"
-    elif mutation == "gap_quote":
+    elif mutation == "gap_empty":
         obj["문제"][0]["유형"] = "citation_gap"
+        obj["문제"][0]["근거번호"] = []
     elif mutation == "conflict_one":
         obj["문제"][0]["유형"] = "source_conflict"
         obj["판정"] = "undetermined"
@@ -134,6 +135,48 @@ def test_엄격한_거절(mutation):
         raw = raw[:-1] + ',"판정":"needs_revision"}'
     with pytest.raises(ResearchContractError, match="review"):
         parse_review(raw, request, sources)
+
+
+def test_다른주장의_선택인용도_누락근거를_가리키는_유효부정일_수_있다():
+    first = "갑은 1894년에 마을을 방문했다."
+    second = "을은 1895년에 도시로 이동했다."
+    claim = "갑은 1894년에 방문했고 을은 1895년에 이동했다."
+    text = first + "\n\n" + second
+    draft = claim + "\n\n" + second
+    sections = [
+        {
+            "section_id": "s1",
+            "읽은문서": ["자료"],
+            "본문": draft,
+            "근거": [
+                {"주장": claim, "출처": "자료", "인용문": first},
+                {"주장": second, "출처": "자료", "인용문": second},
+            ],
+        }
+    ]
+    sources = {"s1": {"자료": text}}
+    request = build_review_request(draft, sections, sources)
+    refs = [c["id"] for c in request.inputs["contexts"] if c["kind"] == "quote"]
+    assert len(refs) == 2
+    problem = {
+        "유형": "citation_gap",
+        "설명": "첫 주장에 둘째 인용 관계가 빠짐",
+        "본문발췌": claim,
+        "근거번호": refs,
+    }
+    result = parse_review(payload(request, "needs_revision", [problem]), request, sources)
+    assert result["통과"] is False and result["판정"] == "needs_revision"
+    assert result["문제"][0]["유형"] == "citation_gap"
+
+
+def test_검토지침만_달라도_실제프롬프트와_요청ID가_함께_달라진다(monkeypatch):
+    from 서버 import 검토문맥
+
+    before = build_review_request(DRAFT, SECTIONS, SOURCES)
+    monkeypatch.setattr(검토문맥, "REVIEW_SYSTEM_RULES", "새로운 독립 검토 지침", raising=False)
+    after = build_review_request(DRAFT, SECTIONS, SOURCES)
+    assert before.prompts[0] != after.prompts[0]
+    assert before.inputs["review_set_id"] != after.inputs["review_set_id"]
 
 
 def test_추가문맥_예산과_전체원문_미제공_표시():

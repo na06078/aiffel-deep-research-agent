@@ -1,0 +1,43 @@
+{
+  "checkpoint_type": "unfinished_work_in_progress",
+  "release_approved": false,
+  "development_paused": true,
+  "pause_requested": true,
+  "python_saved_testcases": 885,
+  "python_saved_outcomes": {
+    "passed": 885
+  },
+  "python_saved_subtests": {
+    "passed": 1362
+  },
+  "saved_test_modules": 42,
+  "current_source_hashes_match": 122,
+  "source_drift": [],
+  "tests_rerun_for_closing": false,
+  "frontend_saved_passed": 254,
+  "frontend_saved_files": 26,
+  "current_budget": {
+    "attempt_count": 294,
+    "max_attempts": 10000,
+    "remaining_attempts": 9706,
+    "spent_usd": 0.70550335,
+    "reserved_usd": 0.1700117,
+    "max_usd": 20.0,
+    "input_tokens": 2029807,
+    "output_tokens": 165043,
+    "unknown_count": 6
+  },
+  "known_failures": [
+    "context03 copied r2: two real requests; semantic_review_failed; no report",
+    "context04: nineteen real requests; span response: sufficiency; item10 has no citation relationship",
+    "independent Spec fail: S18-SCOPE-01; before/after correction scope not forwarded to final review"
+  ],
+  "unapproved": [
+    "sentence plus mandatory citation generation redesign",
+    "operating application before quality/format acceptance"
+  ],
+  "next_step": "Confirm the pending generation-format decision; preserve canonical output, model/data/budget constraints; address S18-SCOPE-01 without adding calls; no automatic restart from late notifications.",
+  "runtime_data_and_raw_archives_in_git": false,
+  "new_model_calls_for_closing": 0,
+  "no_push_or_tag": true
+}
