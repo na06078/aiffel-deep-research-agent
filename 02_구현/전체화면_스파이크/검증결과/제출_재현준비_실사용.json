@@ -1,0 +1,139 @@
+{
+  "passed": true,
+  "copied_final_sources": [
+    {
+      "path": "교안자료_준비.py",
+      "sha256": "c0c0b1d6fcdb899f4e42a69dc52879e5b4cdf69990101c20be9fd887d9d4d8a4"
+    },
+    {
+      "path": "실행준비.py",
+      "sha256": "0192cd16c50ff2275f7cd5c1a4ea31fca58a17a2089b774d2b52c9aca6edc0bb"
+    },
+    {
+      "path": "02_구현/전체화면_스파이크/서버/호출예산.py",
+      "sha256": "42216cb8f6fe9e36602214a7c01079b157ddcb7c8a56ca6434fc6b5d18366bfb"
+    }
+  ],
+  "commands": [
+    {
+      "script": "교안자료_준비.py",
+      "args": [
+        "--download"
+      ],
+      "exit": 0,
+      "result": {
+        "documents": 34,
+        "characters": 447487,
+        "links": 428,
+        "downloaded": true,
+        "source_url": "https://raw.githubusercontent.com/88chacha/deepresearch-agent-data/21f6625aeebc5629e34545c717969e80b62b47c1/data/deepresearch_d48_data.zip",
+        "data_hashes": {
+          "corpus.json": "583dbf10ee811796c80302e005bef71812476059dc79c3b5dd2fd3ea251e4ec7",
+          "결과자료.json": "93efed1d4cf1b35909377203094f3fe0b8f2af18f9155668df775f79cbda6697"
+        }
+      }
+    },
+    {
+      "script": "실행준비.py",
+      "args": [
+        "--init"
+      ],
+      "exit": 0,
+      "result": {
+        "materials": {
+          "documents": 34,
+          "characters": 447487,
+          "links": 428,
+          "downloaded": false,
+          "source_url": "https://raw.githubusercontent.com/88chacha/deepresearch-agent-data/21f6625aeebc5629e34545c717969e80b62b47c1/data/deepresearch_d48_data.zip",
+          "data_hashes": {
+            "corpus.json": "583dbf10ee811796c80302e005bef71812476059dc79c3b5dd2fd3ea251e4ec7",
+            "결과자료.json": "93efed1d4cf1b35909377203094f3fe0b8f2af18f9155668df775f79cbda6697"
+          }
+        },
+        "ledger_created": true,
+        "budget": {
+          "max_attempts": 10000,
+          "max_usd": 20.0,
+          "attempt_count": 0,
+          "unknown_count": 0
+        },
+        "environment_file_exists": false,
+        "credentials_read_or_validated": false,
+        "frontend_built": false,
+        "actual_model_requests": 0
+      }
+    },
+    {
+      "script": "실행준비.py",
+      "args": [
+        "--check"
+      ],
+      "exit": 0,
+      "result": {
+        "materials": {
+          "documents": 34,
+          "characters": 447487,
+          "links": 428,
+          "downloaded": false,
+          "source_url": "https://raw.githubusercontent.com/88chacha/deepresearch-agent-data/21f6625aeebc5629e34545c717969e80b62b47c1/data/deepresearch_d48_data.zip",
+          "data_hashes": {
+            "corpus.json": "583dbf10ee811796c80302e005bef71812476059dc79c3b5dd2fd3ea251e4ec7",
+            "결과자료.json": "93efed1d4cf1b35909377203094f3fe0b8f2af18f9155668df775f79cbda6697"
+          }
+        },
+        "ledger_created": false,
+        "budget": {
+          "max_attempts": 10000,
+          "max_usd": 20.0,
+          "attempt_count": 0,
+          "unknown_count": 0
+        },
+        "environment_file_exists": false,
+        "credentials_read_or_validated": false,
+        "frontend_built": false,
+        "actual_model_requests": 0
+      }
+    },
+    {
+      "script": "실행준비.py",
+      "args": [
+        "--init",
+        "--max-attempts",
+        "1",
+        "--max-usd",
+        "1"
+      ],
+      "exit": 0,
+      "result": {
+        "materials": {
+          "documents": 34,
+          "characters": 447487,
+          "links": 428,
+          "downloaded": false,
+          "source_url": "https://raw.githubusercontent.com/88chacha/deepresearch-agent-data/21f6625aeebc5629e34545c717969e80b62b47c1/data/deepresearch_d48_data.zip",
+          "data_hashes": {
+            "corpus.json": "583dbf10ee811796c80302e005bef71812476059dc79c3b5dd2fd3ea251e4ec7",
+            "결과자료.json": "93efed1d4cf1b35909377203094f3fe0b8f2af18f9155668df775f79cbda6697"
+          }
+        },
+        "ledger_created": false,
+        "budget": {
+          "max_attempts": 10000,
+          "max_usd": 20.0,
+          "attempt_count": 0,
+          "unknown_count": 0
+        },
+        "environment_file_exists": false,
+        "credentials_read_or_validated": false,
+        "frontend_built": false,
+        "actual_model_requests": 0
+      }
+    }
+  ],
+  "real_fixed_source_download": true,
+  "existing_ledger_preserved": true,
+  "original_project_data_touched": false,
+  "actual_model_requests": 0,
+  "fixture": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\제출_최초준비실사용\\run01"
+}
