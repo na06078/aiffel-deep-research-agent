@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="5.445" timestamp="2026-11-11T21:43:40.803511+09:00" hostname="z13flow"><testcase classname="테스트.테스트_실험실행기" name="test_선택질문이_실제접수와_저장아카이브까지_같이전달된다" time="3.519"><failure message="AssertionError: assert '1894년에 일어난 주...각각의 원인은 무엇인가?' == '운요호 사건은 무엇인가?'&#10;  &#10;  - 운요호 사건은 무엇인가?&#10;  + 1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?">테스트\테스트_실험실행기.py:99: in test_선택질문이_실제접수와_저장아카이브까지_같이전달된다
+    assert archive["run"]["question"] == "운요호 사건은 무엇인가?"
+E   AssertionError: assert '1894년에 일어난 주...각각의 원인은 무엇인가?' == '운요호 사건은 무엇인가?'
+E     
+E     - 운요호 사건은 무엇인가?
+E     + 1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?</failure></testcase></testsuite></testsuites>

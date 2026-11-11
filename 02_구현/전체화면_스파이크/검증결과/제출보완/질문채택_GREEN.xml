@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="5.197" timestamp="2026-11-11T21:50:13.461319+09:00" hostname="z13flow"><testcase classname="테스트.테스트_실험실행기" name="test_선택질문이_실제접수와_저장아카이브까지_같이전달된다" time="3.943" /></testsuite></testsuites>

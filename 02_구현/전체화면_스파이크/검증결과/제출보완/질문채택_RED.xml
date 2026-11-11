@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="5.523" timestamp="2026-11-11T21:49:35.626129+09:00" hostname="z13flow"><testcase classname="테스트.테스트_실험실행기" name="test_선택질문이_실제접수와_저장아카이브까지_같이전달된다" time="3.537"><failure message="ValueError: comparison: adoption metadata mismatch">테스트\테스트_실험실행기.py:134: in test_선택질문이_실제접수와_저장아카이브까지_같이전달된다
+    adopted = runner.adopt_baseline(
+검증\비교실험_실행.py:409: in adopt_baseline
+    raise ValueError("comparison: adoption metadata mismatch")
+E   ValueError: comparison: adoption metadata mismatch</failure></testcase></testsuite></testsuites>

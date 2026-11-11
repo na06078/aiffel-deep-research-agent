@@ -57,6 +57,11 @@ async def test_동시forwarding도_55회이후는_제공자호출없음():
     assert len(failures) == 5 and all(e.code == "experiment_request_limit" for e in failures)
 
 
+def test_질문지문은_기본1894년대신_선택한실제질문을_고정한다(isolated_runner):
+    actual = runner.identity(question="운요호 사건은 무엇인가?")
+    assert actual["question"] == "운요호 사건은 무엇인가?"
+
+
 @pytest.fixture
 def isolated_runner(tmp_path, monkeypatch):
     monkeypatch.setattr(runner, "ROOT", tmp_path)
@@ -71,6 +76,100 @@ def isolated_runner(tmp_path, monkeypatch):
         )
         db.commit()
     return ledger, budget
+
+
+@pytest.mark.parametrize(
+    ("key", "question"),
+    [
+        ("Q1", "운요호 사건은 무엇인가?"),
+        ("Q4", "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?"),
+        ("Q6", "김옥균이 관여한 사건들과 그 결과는 무엇인가?"),
+    ],
+)
+def test_질문프리셋CLI_준비가_실제질문을고정하고_장부를보존한다(
+    isolated_runner, monkeypatch, key, question
+):
+    from 서버 import 실제모델
+
+    monkeypatch.setattr(실제모델, "OpenAIModel", lambda *a, **k: pytest.fail("provider_created"))
+    ledger, _ = isolated_runner
+    before = ledger.read_bytes()
+    argv = ["--prepare", "--ledger", str(ledger), "--label", key, "--question-key", key]
+    assert runner.main(argv) == 0
+    manifest = json.loads((runner.locations(key)["evidence"] / "준비.json").read_text("utf-8"))
+    assert manifest["identity"]["question"] == question
+    assert manifest["identity"]["question_key"] == key
+    assert ledger.read_bytes() == before
+    assert not runner.locations(key)["data"].exists()
+
+
+async def test_선택질문이_실제접수와_저장아카이브까지_같이전달된다(isolated_runner, monkeypatch):
+    ledger, budget = isolated_runner
+
+    class LedgerFake(ExperimentModel):
+        async def complete(self, *args, on_attempt, **kwargs):
+            attempt = budget.reserve(100000, 4096, kwargs["context"])
+            response = await super().complete(
+                *args, on_attempt=lambda _: on_attempt(attempt), **kwargs
+            )
+            budget.settle(attempt, 11, 13)
+            return {**response, "attempt_id": attempt, "model": runner.MODEL_ID}
+
+    paths = runner.locations("선택질문")
+    expected = runner.identity(question="운요호 사건은 무엇인가?")
+    result = await runner.run_arm(
+        "baseline", paths, ledger, expected, model_factory=lambda: LedgerFake(ARMS["baseline"])
+    )
+    archive = json.loads((paths["cache"] / "baseline/실행아카이브.json").read_text("utf-8"))
+    assert archive["run"]["question"] == "운요호 사건은 무엇인가?"
+    assert result["source_unchanged"] is True
+    assert result["accounting_verified"] is True
+    runner.save(
+        paths["evidence"] / "준비.json",
+        {"identity": expected, "ledger": runner.ledger_snapshot(ledger)},
+    )
+    total = runner.aggregate(paths)
+    assert (
+        total["count"] == 1
+        and total["results"][0]["identity"]["question"] == "운요호 사건은 무엇인가?"
+    )
+    stable = ledger.read_bytes()
+    adopted = runner.adopt_baseline(
+        paths["cache"] / "baseline/실행아카이브.json",
+        runner.locations("선택재사용"),
+        ledger,
+        expected,
+    )
+    assert adopted["adopted"] and ledger.read_bytes() == stable
+
+    wrong_paths = runner.locations("다른질문재사용거절")
+    with pytest.raises(ValueError, match="adoption metadata mismatch"):
+        runner.adopt_baseline(
+            paths["cache"] / "baseline/실행아카이브.json",
+            wrong_paths,
+            ledger,
+            runner.identity(question="김옥균이 관여한 사건들과 그 결과는 무엇인가?"),
+        )
+    assert not wrong_paths["evidence"].exists() and ledger.read_bytes() == stable
+
+    async def forbidden(*args, **kwargs):
+        pytest.fail("resume_must_not_resend")
+
+    monkeypatch.setattr(runner, "run_arm", forbidden)
+    argv = ["--execute", "--ledger", str(ledger), "--label", "선택질문", "--resume"]
+    assert runner.main([*argv, "--question-key", "Q1"]) == 0
+    with pytest.raises(ValueError, match="prepared source/config/corpus/ledger mismatch"):
+        runner.main([*argv, "--question-key", "Q6"])
+    assert ledger.read_bytes() == stable
+
+    mixed = {
+        **result,
+        "identity": runner.identity(question="김옥균이 관여한 사건들과 그 결과는 무엇인가?"),
+    }
+    runner.save(paths["evidence"] / "baseline/결과.json", mixed)
+    with pytest.raises(ValueError, match="aggregation identity/config mismatch"):
+        runner.aggregate(paths)
+    assert ledger.read_bytes() == stable
 
 
 def test_help_check_prepare는_제공자미생성과_unknown6보존(isolated_runner, monkeypatch, capsys):

@@ -1,0 +1,41 @@
+{
+  "test_subprocess_hits": [
+    {
+      "file": "테스트\\테스트_보고서근거.py",
+      "line": 195,
+      "text": "            patch(\"subprocess.Popen\") as process,"
+    },
+    {
+      "file": "테스트\\테스트_보고서표현.py",
+      "line": 129,
+      "text": "    import subprocess"
+    },
+    {
+      "file": "테스트\\테스트_보고서표현.py",
+      "line": 138,
+      "text": "        (subprocess, \"Popen\"),"
+    },
+    {
+      "file": "테스트\\테스트_보고서품질_실모델점검.py",
+      "line": 18,
+      "text": "SPEC = importlib.util.spec_from_file_location("
+    }
+  ],
+  "reviewed_local_children": [
+    "Playwright PipeTransport -> project .venv playwright/driver/node.exe package/cli.js run-driver",
+    "Node Chromium launch -> existing project .cache/playwright/chromium-1248/chrome-win64/chrome.exe only; no existing user browser profile",
+    "server browser_pdf -> offline=True, javascript disabled, service_workers block, route abort; test presentation -> explicit memory route fulfillment"
+  ],
+  "reviewed_helpers": [
+    "테스트_기본경로: StorageBoundarySpy (no original DB open)",
+    "테스트_연구조립: tmp_path project root and model/service injection",
+    "테스트_실제모델: httpx.MockTransport with fixture env/budget",
+    "테스트_실제연구제어: EVIDENCE redirected only, CORPUS read-only retained",
+    "테스트_웹연구/자료모드제어: test module ROOT redirected to owned cache; captured CORPUS retained",
+    "테스트_보고서품질_실모델점검 and extra verifier: ModelDouble injection; no main CLI execution"
+  ],
+  "limitations": [
+    "Python audit hook and Playwright launch validation are in-process guards, not an OS sandbox.",
+    "Node/Chromium do not inherit Python audit hook. Exact project binaries, synthetic content, isolated temporary browser profile, denied DNS/proxy and inspected explicit routes bound their approved local rendering path."
+  ]
+}

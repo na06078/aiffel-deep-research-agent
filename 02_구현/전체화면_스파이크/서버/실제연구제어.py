@@ -850,6 +850,7 @@ class RealResearchService(ExecutionService):
         )
         for _ in range(sum(a["budget"] for a in state["pending"])):
             self.check(state)
+            selection_metadata = {}
             title = seeds.pop(0) if seeds else None
             memory = json.dumps(notes, ensure_ascii=False)
             if title is None:
@@ -870,6 +871,14 @@ class RealResearchService(ExecutionService):
                     },
                 )
                 title = self.corpus.pick(raw, candidates, read)
+                if title is None:
+                    # 고정 읽기 대조군: 명시 null로 남은 리소스를 버리지 않는다.
+                    # 제시 후보만 코드로 선택하며 모델 원응답/계약 오류는 보존한다.
+                    title = candidates[0]
+                    selection_metadata = {
+                        "selection_origin": "code_budget_fill",
+                        "model_requested_stop": True,
+                    }
             if title is None:
                 break
             system, user = read_prompt(title, state["question"], self.corpus)
@@ -880,6 +889,7 @@ class RealResearchService(ExecutionService):
                     "document": title,
                     "brief": state["question"],
                     "document_text": self.corpus.docs[title],
+                    **selection_metadata,
                 },
                 None,
                 "running",
@@ -950,6 +960,7 @@ class RealResearchService(ExecutionService):
         title = assignment["seed"] if assignment["seed"] not in read else None
         for _ in range(assignment["budget"]):
             self.check(state)
+            selection_metadata = {}
             if title is None:
                 candidates = self.corpus.candidates(read, state["avoid"])[:60]
                 if not candidates:
@@ -962,6 +973,13 @@ class RealResearchService(ExecutionService):
                     inputs={"candidates": candidates, "read": read, "avoid": state["avoid"]},
                 )
                 title = self.corpus.pick(raw, candidates, read)
+                if title is None and self.experiment_config is not None:
+                    # 비교 조건의 읽기 수는 동일하게 채우고 일반 앱의 중단 정책은 유지한다.
+                    title = candidates[0]
+                    selection_metadata = {
+                        "selection_origin": "code_budget_fill",
+                        "model_requested_stop": True,
+                    }
             if title is None:
                 break
             prompts = read_prompt(title, assignment["instruction"], self.corpus)
@@ -972,6 +990,7 @@ class RealResearchService(ExecutionService):
                     "document": title,
                     "brief": assignment["instruction"],
                     "document_text": self.corpus.docs[title],
+                    **selection_metadata,
                 },
                 None,
                 "running",

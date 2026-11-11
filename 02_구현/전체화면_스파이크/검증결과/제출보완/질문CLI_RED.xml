@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="2.029" timestamp="2026-11-11T21:45:47.338072+09:00" hostname="z13flow"><testcase classname="테스트.테스트_실험실행기" name="test_질문프리셋CLI_준비가_실제질문을고정하고_장부를보존한다[Q1-\uc6b4\uc694\ud638 \uc0ac\uac74\uc740 \ubb34\uc5c7\uc778\uac00?]" time="0.101"><failure message="AssertionError: assert '1894년에 일어난 주...각각의 원인은 무엇인가?' == '운요호 사건은 무엇인가?'&#10;  &#10;  - 운요호 사건은 무엇인가?&#10;  + 1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?">테스트\테스트_실험실행기.py:100: in test_질문프리셋CLI_준비가_실제질문을고정하고_장부를보존한다
+    assert manifest["identity"]["question"] == question
+E   AssertionError: assert '1894년에 일어난 주...각각의 원인은 무엇인가?' == '운요호 사건은 무엇인가?'
+E     
+E     - 운요호 사건은 무엇인가?
+E     + 1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?</failure></testcase><testcase classname="테스트.테스트_실험실행기" name="test_질문프리셋CLI_준비가_실제질문을고정하고_장부를보존한다[Q4-1894\ub144\uc5d0 \uc77c\uc5b4\ub09c \uc8fc\uc694 \uc0ac\uac74\ub4e4\uc740 \ubb34\uc5c7\uc774\uace0 \uac01\uac01\uc758 \uc6d0\uc778\uc740 \ubb34\uc5c7\uc778\uac00?]" time="0.064"><failure message="KeyError: 'question_key'">테스트\테스트_실험실행기.py:101: in test_질문프리셋CLI_준비가_실제질문을고정하고_장부를보존한다
+    assert manifest["identity"]["question_key"] == key
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'question_key'</failure></testcase><testcase classname="테스트.테스트_실험실행기" name="test_질문프리셋CLI_준비가_실제질문을고정하고_장부를보존한다[Q6-\uae40\uc625\uade0\uc774 \uad00\uc5ec\ud55c \uc0ac\uac74\ub4e4\uacfc \uadf8 \uacb0\uacfc\ub294 \ubb34\uc5c7\uc778\uac00?]" time="0.085"><failure message="AssertionError: assert '1894년에 일어난 주...각각의 원인은 무엇인가?' == '김옥균이 관여한 사건들과 그 결과는 무엇인가?'&#10;  &#10;  - 김옥균이 관여한 사건들과 그 결과는 무엇인가?&#10;  + 1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?">테스트\테스트_실험실행기.py:100: in test_질문프리셋CLI_준비가_실제질문을고정하고_장부를보존한다
+    assert manifest["identity"]["question"] == question
+E   AssertionError: assert '1894년에 일어난 주...각각의 원인은 무엇인가?' == '김옥균이 관여한 사건들과 그 결과는 무엇인가?'
+E     
+E     - 김옥균이 관여한 사건들과 그 결과는 무엇인가?
+E     + 1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?</failure></testcase></testsuite></testsuites>

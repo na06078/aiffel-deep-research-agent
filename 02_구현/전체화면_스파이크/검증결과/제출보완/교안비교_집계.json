@@ -1,0 +1,378 @@
+{
+  "protocol": "lesson-submission-postprocess-v1",
+  "count": 7,
+  "actual_model_requests": 203,
+  "quality_reasons": {
+    "semantic_review_invalid": 2,
+    "semantic_review_failed": 5
+  },
+  "all_first_round_reads_12": true,
+  "all_visible_body_at_least_2000": true,
+  "original_results_untouched": true,
+  "source_archive": "실험소스.zip",
+  "rows": [
+    {
+      "question_key": "Q4",
+      "question": "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?",
+      "arm": "baseline",
+      "run_id": "b5f3af433ccd4d269bce85baf034025d",
+      "status": "blocked",
+      "requests": 27,
+      "first_round_reads": 12,
+      "rounds": [
+        1
+      ],
+      "actual_reading": {
+        "읽기시도": 12,
+        "완료읽기": 12,
+        "고유문서": 9,
+        "조사자문서쌍": 12,
+        "중복률": 25.0,
+        "재읽기율": 25.0
+      },
+      "visible_body_chars": 5805,
+      "draft_chars": 6150,
+      "legacy_metrics": {
+        "문장수": 89,
+        "근거붙은문장": 1,
+        "근거율": 1.1,
+        "허위인용": [],
+        "읽은문서": 9,
+        "읽고안쓴": [],
+        "인용편중": 20.6,
+        "중복률": 25.0,
+        "절수": 4,
+        "보고서자수": 6150,
+        "인용수": 68,
+        "LLM호출": 27,
+        "격리율": 8.4
+      },
+      "quality_reasons": [
+        "semantic_review_invalid"
+      ],
+      "draft_path": "02_구현/전체화면_스파이크/검증결과/제출/비교/lesson_Q4_01/baseline/원고.md",
+      "result_path": "02_구현/전체화면_스파이크/검증결과/제출/비교/lesson_Q4_01/baseline/결과.json",
+      "archive_sha256": "6bfc21c0b83e9dad9804c5ba15c453025ba974e63c35343cccad1ed19b9466ee",
+      "result_sha256": "1cb9b50d53b362665b516da6acf3abd6ebedcdd95d401fec0dc55ccc608c9725",
+      "elapsed_seconds": 72.18051430000014,
+      "fallback_choices": 0
+    },
+    {
+      "question_key": "Q4",
+      "question": "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?",
+      "arm": "single",
+      "run_id": "f0fb46fb12804c168a359c3c1b0ee4c2",
+      "status": "blocked",
+      "requests": 27,
+      "first_round_reads": 12,
+      "rounds": [
+        1
+      ],
+      "actual_reading": {
+        "읽기시도": 12,
+        "완료읽기": 12,
+        "고유문서": 12,
+        "조사자문서쌍": 12,
+        "중복률": 0.0,
+        "재읽기율": 0.0
+      },
+      "visible_body_chars": 6528,
+      "draft_chars": 6920,
+      "legacy_metrics": {
+        "문장수": 101,
+        "근거붙은문장": 4,
+        "근거율": 4.0,
+        "허위인용": [],
+        "읽은문서": 12,
+        "읽고안쓴": [
+          "강화도 조약",
+          "동학",
+          "명성황후",
+          "흥선대원군"
+        ],
+        "인용편중": 45.7,
+        "중복률": 75.0,
+        "절수": 4,
+        "보고서자수": 6920,
+        "인용수": 70,
+        "LLM호출": 27,
+        "격리율": 6.2
+      },
+      "quality_reasons": [
+        "semantic_review_failed"
+      ],
+      "draft_path": "02_구현/전체화면_스파이크/검증결과/제출/비교/lesson_Q4_01/single/원고.md",
+      "result_path": "02_구현/전체화면_스파이크/검증결과/제출/비교/lesson_Q4_01/single/결과.json",
+      "archive_sha256": "6817e9a8894f994c5b7a31669cfaa48b66abc3eebbd0719f9ca4376083f666ad",
+      "result_sha256": "c7c49827b9da1c00fe23405793f631942248d06dbb54754e41bf76c27da9b078",
+      "elapsed_seconds": 174.4756422999999,
+      "fallback_choices": 3
+    },
+    {
+      "question_key": "Q1",
+      "question": "운요호 사건은 무엇인가?",
+      "arm": "baseline",
+      "run_id": "e47d3ea8ac1a414bbd2abcba63c1a2ac",
+      "status": "blocked",
+      "requests": 34,
+      "first_round_reads": 12,
+      "rounds": [
+        1,
+        2
+      ],
+      "actual_reading": {
+        "읽기시도": 15,
+        "완료읽기": 15,
+        "고유문서": 12,
+        "조사자문서쌍": 15,
+        "중복률": 20.0,
+        "재읽기율": 20.0
+      },
+      "visible_body_chars": 3579,
+      "draft_chars": 3973,
+      "legacy_metrics": {
+        "문장수": 57,
+        "근거붙은문장": 2,
+        "근거율": 3.5,
+        "허위인용": [],
+        "읽은문서": 12,
+        "읽고안쓴": [
+          "갑신정변",
+          "명성황후",
+          "이토 히로부미",
+          "임오군란"
+        ],
+        "인용편중": 36.8,
+        "중복률": 20.0,
+        "절수": 4,
+        "보고서자수": 3973,
+        "인용수": 38,
+        "LLM호출": 34,
+        "격리율": 4.2
+      },
+      "quality_reasons": [
+        "semantic_review_failed"
+      ],
+      "draft_path": "02_구현/전체화면_스파이크/검증결과/제출/비교/lesson_Q1_01/baseline/원고.md",
+      "result_path": "02_구현/전체화면_스파이크/검증결과/제출/비교/lesson_Q1_01/baseline/결과.json",
+      "archive_sha256": "d00d4510b1cfa4c101e986bda24b90cfde0ebf3760da4811008a4ad0274d78b7",
+      "result_sha256": "834758156fe06613382c71144340ed1c270bdb3c06eb7d6023dc7fc7d0091635",
+      "elapsed_seconds": 89.18301930000052,
+      "fallback_choices": 2
+    },
+    {
+      "question_key": "Q1",
+      "question": "운요호 사건은 무엇인가?",
+      "arm": "single",
+      "run_id": "7d77e4ae54e74ac6bd80e72ab5250618",
+      "status": "blocked",
+      "requests": 27,
+      "first_round_reads": 12,
+      "rounds": [
+        1
+      ],
+      "actual_reading": {
+        "읽기시도": 12,
+        "완료읽기": 12,
+        "고유문서": 12,
+        "조사자문서쌍": 12,
+        "중복률": 0.0,
+        "재읽기율": 0.0
+      },
+      "visible_body_chars": 4705,
+      "draft_chars": 5092,
+      "legacy_metrics": {
+        "문장수": 74,
+        "근거붙은문장": 2,
+        "근거율": 2.7,
+        "허위인용": [],
+        "읽은문서": 12,
+        "읽고안쓴": [
+          "갑신정변",
+          "갑오개혁",
+          "거문도 사건",
+          "광무개혁",
+          "국채보상운동",
+          "김옥균",
+          "대한제국"
+        ],
+        "인용편중": 62.5,
+        "중복률": 75.0,
+        "절수": 4,
+        "보고서자수": 5092,
+        "인용수": 56,
+        "LLM호출": 27,
+        "격리율": 6.7
+      },
+      "quality_reasons": [
+        "semantic_review_failed"
+      ],
+      "draft_path": "02_구현/전체화면_스파이크/검증결과/제출/비교/lesson_Q1_01/single/원고.md",
+      "result_path": "02_구현/전체화면_스파이크/검증결과/제출/비교/lesson_Q1_01/single/결과.json",
+      "archive_sha256": "986bc0334ff4fcd7ae52dce8a721be861558682c7a06205f5d829a9e9ad0adcb",
+      "result_sha256": "c30c2f5daba48c28f07b014a83d18770859a56552b5873408031a1aa218a1d5b",
+      "elapsed_seconds": 105.13411730000007,
+      "fallback_choices": 8
+    },
+    {
+      "question_key": "Q6",
+      "question": "김옥균이 관여한 사건들과 그 결과는 무엇인가?",
+      "arm": "baseline",
+      "run_id": "b3596b6b9cc04161af347c1fcb4a2670",
+      "status": "blocked",
+      "requests": 27,
+      "first_round_reads": 12,
+      "rounds": [
+        1
+      ],
+      "actual_reading": {
+        "읽기시도": 12,
+        "완료읽기": 12,
+        "고유문서": 8,
+        "조사자문서쌍": 12,
+        "중복률": 33.3,
+        "재읽기율": 33.3
+      },
+      "visible_body_chars": 4577,
+      "draft_chars": 4909,
+      "legacy_metrics": {
+        "문장수": 71,
+        "근거붙은문장": 2,
+        "근거율": 2.8,
+        "허위인용": [],
+        "읽은문서": 8,
+        "읽고안쓴": [
+          "청일 전쟁"
+        ],
+        "인용편중": 30.0,
+        "중복률": 33.3,
+        "절수": 4,
+        "보고서자수": 4909,
+        "인용수": 50,
+        "LLM호출": 27,
+        "격리율": 6.9
+      },
+      "quality_reasons": [
+        "semantic_review_failed"
+      ],
+      "draft_path": "02_구현/전체화면_스파이크/검증결과/제출/비교/lesson_Q6_01/baseline/원고.md",
+      "result_path": "02_구현/전체화면_스파이크/검증결과/제출/비교/lesson_Q6_01/baseline/결과.json",
+      "archive_sha256": "ac98f997ff1e83d25b889a5b96250ed851ee0cce32b894eae5aaac4dbec64f9f",
+      "result_sha256": "444e21b2bc054b0a2f69702ffdb8c02f0c0c24c8a14b6b4d707b3e34a7b47e44",
+      "elapsed_seconds": 66.07568749999882,
+      "fallback_choices": 0
+    },
+    {
+      "question_key": "Q6",
+      "question": "김옥균이 관여한 사건들과 그 결과는 무엇인가?",
+      "arm": "single",
+      "run_id": "80c2d826540b4816b0ca154336a29070",
+      "status": "blocked",
+      "requests": 27,
+      "first_round_reads": 12,
+      "rounds": [
+        1
+      ],
+      "actual_reading": {
+        "읽기시도": 12,
+        "완료읽기": 12,
+        "고유문서": 12,
+        "조사자문서쌍": 12,
+        "중복률": 0.0,
+        "재읽기율": 0.0
+      },
+      "visible_body_chars": 5900,
+      "draft_chars": 6291,
+      "legacy_metrics": {
+        "문장수": 85,
+        "근거붙은문장": 1,
+        "근거율": 1.2,
+        "허위인용": [],
+        "읽은문서": 12,
+        "읽고안쓴": [
+          "강화도 조약",
+          "거문도 사건",
+          "고종 (대한제국)",
+          "광무개혁",
+          "국채보상운동",
+          "대한제국",
+          "아관파천"
+        ],
+        "인용편중": 39.7,
+        "중복률": 75.0,
+        "절수": 4,
+        "보고서자수": 6291,
+        "인용수": 63,
+        "LLM호출": 27,
+        "격리율": 7.8
+      },
+      "quality_reasons": [
+        "semantic_review_invalid"
+      ],
+      "draft_path": "02_구현/전체화면_스파이크/검증결과/제출/비교/lesson_Q6_01/single/원고.md",
+      "result_path": "02_구현/전체화면_스파이크/검증결과/제출/비교/lesson_Q6_01/single/결과.json",
+      "archive_sha256": "a64a681cfda4ef3971af53e09ed8242ae835ea4e3db46def620f7d55aa0324a4",
+      "result_sha256": "dc1ec3115b265e9da2238381d0960b2bedc71a672cd4c08c5481398bcb91bc9a",
+      "elapsed_seconds": 160.03991400000086,
+      "fallback_choices": 5
+    },
+    {
+      "question_key": "Q6",
+      "question": "김옥균이 관여한 사건들과 그 결과는 무엇인가?",
+      "arm": "no-role",
+      "run_id": "1b29e1caf27443228257d4ced790e9b1",
+      "status": "blocked",
+      "requests": 34,
+      "first_round_reads": 12,
+      "rounds": [
+        1,
+        2
+      ],
+      "actual_reading": {
+        "읽기시도": 15,
+        "완료읽기": 15,
+        "고유문서": 12,
+        "조사자문서쌍": 15,
+        "중복률": 20.0,
+        "재읽기율": 20.0
+      },
+      "visible_body_chars": 5096,
+      "draft_chars": 5483,
+      "legacy_metrics": {
+        "문장수": 88,
+        "근거붙은문장": 1,
+        "근거율": 1.1,
+        "허위인용": [],
+        "읽은문서": 12,
+        "읽고안쓴": [
+          "강화도 조약",
+          "대한제국",
+          "독립협회"
+        ],
+        "인용편중": 27.9,
+        "중복률": 20.0,
+        "절수": 4,
+        "보고서자수": 5483,
+        "인용수": 61,
+        "LLM호출": 34,
+        "격리율": 6.1
+      },
+      "quality_reasons": [
+        "semantic_review_failed"
+      ],
+      "draft_path": "02_구현/전체화면_스파이크/검증결과/제출/비교/lesson_Q6_01/no-role/원고.md",
+      "result_path": "02_구현/전체화면_스파이크/검증결과/제출/비교/lesson_Q6_01/no-role/결과.json",
+      "archive_sha256": "03e361da157623303a99bddeca32347cf4266661076fc7835844bdb754041b09",
+      "result_sha256": "8295fa9a61dee37668224f4b461aa457a6b01ce7df177ba982024f14b6629a3d",
+      "elapsed_seconds": 92.42110350000075,
+      "fallback_choices": 0
+    }
+  ],
+  "reading_metric_definition": "완료 응답에 결합한 실제 조사자-문서 쌍으로 교안 중복률을 산출. 절별 공유 접근권은 별도 읽기가 아니다.",
+  "grounding_rate_limit": "교안 원식은 문장뒤 표식을 분리해 과소 계산한다. 원 수치를 보존하되 성능 비교에서 제외하며 의미 지지율로 해석하지 않는다.",
+  "limitations": [
+    "조건당1회·동일 질문을 튜닝한 결과이며 통계적 우열이 아니다.",
+    "Q1 멀티와 Q6 역할소거는 재위임3읽기를 더해 총15회다. 정확히12회 비교의 주 대조는 Q4다.",
+    "일부 인과·범위·메타데이터 지지 부족과 검토 발췌 계약 실패가 남는다. 교안 원고와 제품 최종 보고서 합격은 별개다."
+  ]
+}

@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="1.272" timestamp="2026-11-11T21:42:10.115107+09:00" hostname="z13flow"><testcase classname="테스트.테스트_실험실행기" name="test_질문지문은_기본1894년대신_선택한실제질문을_고정한다" time="0.085" /></testsuite></testsuites>

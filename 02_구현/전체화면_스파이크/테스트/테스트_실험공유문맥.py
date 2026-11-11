@@ -46,6 +46,51 @@ async def test_단일은_12고유문서와_공통메모를_한조사자와_모�
         await service.close()
 
 
+@pytest.mark.parametrize("arm", ["single", "baseline"])
+async def test_실험의_명시null은_후보가남으면_고정12읽기를_중단하지않는다(tmp_path, arm):
+    class DecliningOnce(ExperimentModel):
+        declined = False
+
+        async def complete(self, *args, **kwargs):
+            response = await super().complete(*args, **kwargs)
+            if kwargs["context"]["operation"] == "select" and not self.declined:
+                self.declined = True
+                # final02/single의 실제 응답을 보존한 최소 반례다.
+                response["content"] = '{"문서":null}'
+            return response
+
+    model = DecliningOnce(ARMS[arm])
+    service = RealResearchService(tmp_path, model, CORPUS, experiment_config=ARMS[arm])
+    try:
+        admitted = service.admit("1894년 질문", "single-null")
+        await settle(service)
+        archive = service.repo.archive(admitted["run_id"])
+        starts = [e for e in archive["events"] if e["type"] == "model.started"]
+        reads = [e for e in starts if e["input"]["context"]["operation"] == "read_one"]
+        assert len(reads) == 12
+        if arm == "single":
+            assert len({e["input"]["inputs"]["document"] for e in reads}) == 12
+        selected = next(e for e in starts if e["input"]["context"]["operation"] == "select")
+        completed = next(
+            e
+            for e in archive["events"]
+            if e["type"] == "model.completed"
+            and e["output"]["call_id"] == selected["output"]["call_id"]
+        )
+        assert completed["output"]["content"] == '{"문서":null}'
+        fallback = [
+            e
+            for e in archive["events"]
+            if e["type"] == "tool.started"
+            and e["input"].get("selection_origin") == "code_budget_fill"
+        ]
+        assert len(fallback) == 1 and fallback[0]["input"]["model_requested_stop"] is True
+        assert fallback[0]["input"]["document"] == selected["input"]["inputs"]["candidates"][0]
+        assert archive["run"]["status"] == "completed"
+    finally:
+        await service.close()
+
+
 @pytest.mark.parametrize(
     "arm,reads",
     [

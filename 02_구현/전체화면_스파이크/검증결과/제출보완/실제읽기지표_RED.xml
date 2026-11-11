@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="0.214" timestamp="2026-11-11T22:18:04.072103+09:00" hostname="z13flow"><testcase classname="테스트.테스트_교안비교후처리" name="test_절별공유가아닌_실제조사자와문서쌍으로_중복을센다[pairs0-expected0]" time="0.001"><failure message="assert 0 == 12">테스트\테스트_교안비교후처리.py:30: in test_절별공유가아닌_실제조사자와문서쌍으로_중복을센다
+    assert actual["읽기시도"] == actual["완료읽기"] == calls
+E   assert 0 == 12</failure></testcase><testcase classname="테스트.테스트_교안비교후처리" name="test_절별공유가아닌_실제조사자와문서쌍으로_중복을센다[pairs1-expected1]" time="0.001"><failure message="assert 0 == 4">테스트\테스트_교안비교후처리.py:30: in test_절별공유가아닌_실제조사자와문서쌍으로_중복을센다
+    assert actual["읽기시도"] == actual["완료읽기"] == calls
+E   assert 0 == 4</failure></testcase><testcase classname="테스트.테스트_교안비교후처리" name="test_절별공유가아닌_실제조사자와문서쌍으로_중복을센다[pairs2-expected2]" time="0.001"><failure message="assert 0 == 2">테스트\테스트_교안비교후처리.py:30: in test_절별공유가아닌_실제조사자와문서쌍으로_중복을센다
+    assert actual["읽기시도"] == actual["완료읽기"] == calls
+E   assert 0 == 2</failure></testcase></testsuite></testsuites>

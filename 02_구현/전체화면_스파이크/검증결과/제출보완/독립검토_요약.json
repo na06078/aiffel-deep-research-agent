@@ -1,0 +1,47 @@
+{
+  "protocol": "independent-review-handoff-v1",
+  "delegation_id": "deleg_32c3ab3d",
+  "reviewer": "sa-0-b8f55743",
+  "read_only": true,
+  "summary_only": true,
+  "original_verdict": "부분 검토 완료. null의 실험 전용 읽기 보충과 질문 프리셋 연결에서 새 필수 기능 결함은 발견하지 못함. 기존 비교 지표 결함2건과 설명 불일치1건을 발견. 실제 연구 품질이나 루브릭 전체 합격은 판정하지 않음.",
+  "standards": "검토 범위 내 확정 위반 없음",
+  "spec": "발견 있음",
+  "findings": [
+    {
+      "id": "DR-METRIC-01",
+      "priority": "P2",
+      "scope": "기존 결함",
+      "source": "서버/교안연구.py:100-102,124",
+      "producer": "서버/실제연구제어.py의single은같은읽기목록을4절에공유",
+      "impact": "절별공유접근권을읽기중복으로계산하여실제한조사자가한번씩읽어도75%를산출",
+      "parent_verified": true,
+      "resolution": "원 quality/실험을수정하지않고검증/교안비교_후처리.py에서실제완료호출의조사자-문서쌍으로산출.12읽기/12고유/실제중복0%의single과멀티중복검출을TDD및실제아카이브에서확인.",
+      "evidence": ["실제읽기지표_RED.xml", "실제읽기지표_GREEN.xml", "실제읽기지표_최종02.xml", "교안비교_집계.json"]
+    },
+    {
+      "id": "DR-METRIC-02",
+      "priority": "P2",
+      "scope": "기존자동대리지표의한계",
+      "producer": "서버/보고서근거.py:349-354가마침표뒤에인용표식을조립",
+      "consumer": "서버/교안연구.py:114-119의분할이주장과표식을떨어뜨림",
+      "parent_verified": true,
+      "resolution": "원식을조작하지않고수치를보존하되README와후처리집계에서성능비교해석제외를명시.의미적지지율/사실오류율로사용하지않음.원교안식의한계를기록하고새품질게이트로만들지않음.",
+      "production_metric_fix": "후속개발로분리;이번에의미검토차단을완화하지않음"
+    },
+    {
+      "id": "DR-NOTE-01",
+      "priority": "P3",
+      "scope": "정책설명불일치",
+      "source": "서버/실험설정.py:77 ARM_NOTES.baseline",
+      "parent_verified": true,
+      "resolution": "7조건실행후기존실험소스ZIP을보존하고현재정책문구만정정.실험identity/원결과를소급변경하지않음.정정뒤source identity가달라지므로기존라벨resume를거절하며새실험은새라벨을사용.",
+      "live_calls_for_note_fix": 0
+    }
+  ],
+  "confirmed_connections": ["single/multi의정상null만코드가첫제시후보로보충", "malformed/미제시/기열람선택계약은여전히거절", "일반앱null중단은유지", "Q1/Q4/Q6준비/접수/저장/집계/채택/재개가같은질문에결합", "다른질문혼합은제공자호출전에거절"],
+  "limits": ["독립검토는저장원문/소스/XML/이전JSON을읽은정적검토", "별도공식채점표는확인하지못했고노드6/7의실습요구를대조", "Node9 HITL·사람승인·REPORT.md는적용하지않음", "교안의동일총량폭실험및동시배정/구역소거와이프로젝트의단일요인실험은차이를명시", "실제7조건203요청및후처리/게시검증은부모의별도근거이며독립검토자의실행으로서술하지않음"],
+  "covered_groups": ["AGENTS.md", "작업명세R-01~R-06", "기술명세29.21", "진행현황", "README", "노드6원문", "노드7원문", "서버/실제연구제어.py", "서버/교안연구.py", "서버/실험설정.py", "서버/실제모델.py", "서버/보고서품질.py", "서버/보고서근거.py", "검증/비교실험_실행.py", "실험설정/실행기/공유문맥테스트", "이전final02집계", "대상회귀XML"],
+  "reviewer_provider_calls": 0,
+  "reviewer_file_changes": 0
+}

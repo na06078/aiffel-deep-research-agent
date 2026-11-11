@@ -30,6 +30,11 @@ from 서버.실험설정 import ARM_NOTES, ARMS, source_manifest
 ROOT = IMPLEMENTATION.parents[1]
 CORPUS = ROOT / "01_참고자료/원본데이터/corpus.json"
 QUESTION = "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?"
+QUESTION_PRESETS = {
+    "Q1": "운요호 사건은 무엇인가?",
+    "Q4": QUESTION,
+    "Q6": "김옥균이 관여한 사건들과 그 결과는 무엇인가?",
+}
 MODEL_ID = "gpt-5.6-luna"
 PROTOCOL = "controlled-research-comparison-v1"
 
@@ -112,14 +117,17 @@ def preserved(before, after):
     )
 
 
-def identity(corpus=CORPUS):
+def identity(corpus=CORPUS, *, question=QUESTION):
     corpus = Path(corpus)
     data = json.loads(corpus.read_text("utf-8"))
     if len(data.get("docs", {})) != 34:
         raise ValueError("comparison: fixed 34-document corpus required")
     return {
         "protocol": PROTOCOL,
-        "question": QUESTION,
+        "question": question,
+        "question_key": next(
+            (key for key, text in QUESTION_PRESETS.items() if text == question), None
+        ),
         "model_id": MODEL_ID,
         "provider_settings": {
             "reasoning_effort": "low",
@@ -220,7 +228,11 @@ def summarize(archive, config):
 
 def aggregate(paths):
     results = []
-    expected = identity()
+    manifest_path = paths["evidence"] / "준비.json"
+    prepared = json.loads(manifest_path.read_text("utf-8")) if manifest_path.is_file() else None
+    expected = identity(question=prepared["identity"]["question"]) if prepared else identity()
+    if prepared and prepared["identity"] != expected:
+        raise ValueError("comparison: aggregation prepared identity mismatch")
     for arm in ARMS:
         path = paths["evidence"] / arm / "결과.json"
         if path.is_file():
@@ -307,7 +319,7 @@ async def run_arm(
             provider = model_factory()
         model = CappedModel(provider)
         service = RealResearchService(data, model, CORPUS, experiment_config=config)
-        admitted = service.admit(QUESTION, f"comparison:{arm}")
+        admitted = service.admit(expected["question"], f"comparison:{arm}")
 
         async def wait():
             while service.tasks:
@@ -367,7 +379,7 @@ async def run_arm(
         ledger_before=before,
         ledger_after=after,
         history_preserved=preserved(before, after),
-        source_unchanged=identity() == expected,
+        source_unchanged=identity(question=expected["question"]) == expected,
         budget_delta={
             key: after[key] - before[key]
             for key in (
@@ -392,7 +404,7 @@ def adopt_baseline(bundle_path, paths, ledger, expected):
         run.get("experiment_config") != config.as_dict()
         or run.get("experiment_metadata")
         != {k: expected[k] for k in ("source_hashes", "corpus_sha256", "model_id")}
-        or run.get("question") != QUESTION
+        or run.get("question") != expected["question"]
         or run.get("source_mode", "local") != "local"
         or run.get("status") not in {"completed", "blocked", "failed", "cancelled", "interrupted"}
     ):
@@ -458,13 +470,15 @@ def main(argv=None):
     )
     parser.add_argument("--label", default="제출01")
     parser.add_argument("--arm", choices=[*ARMS, "all"], default="baseline")
+    parser.add_argument("--question-key", choices=QUESTION_PRESETS, default="Q4")
     parser.add_argument(
         "--resume", action="store_true", help="저장된 결과는 실패도 다시 실행하지 않음"
     )
     args = parser.parse_args(argv)
     ledger = within(args.ledger, ROOT)
     paths = locations(args.label)
-    current, snapshot = identity(), ledger_snapshot(ledger)
+    current = identity(question=QUESTION_PRESETS[args.question_key])
+    snapshot = ledger_snapshot(ledger)
     manifest_path = paths["evidence"] / "준비.json"
     if not (args.prepare or args.execute or args.adopt_baseline):
         print(

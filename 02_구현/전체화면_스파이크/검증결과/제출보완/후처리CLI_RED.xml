@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.189" timestamp="2026-11-11T22:22:58.987224+09:00" hostname="z13flow"><testcase classname="테스트.테스트_교안비교후처리" name="test_후처리CLI는_저장파일을_읽기만하고_집계를출력한다" time="0.007"><failure message="AssertionError: assert '읽기시도' in ''">테스트\테스트_교안비교후처리.py:17: in test_후처리CLI는_저장파일을_읽기만하고_집계를출력한다
+    assert "읽기시도" in output
+E   AssertionError: assert '읽기시도' in ''</failure></testcase></testsuite></testsuites>
