@@ -58,7 +58,7 @@ async def test_실제앱_주입모델과_분리저장_정본다운로드(tmp_pat
                 assert catalog == payload["inputs"]["catalog"]
                 token = json.loads(payload["user"])["evidence_set_id"]
                 assert payload["response_schema"]["properties"]["근거목록ID"]["enum"] == [token]
-                assert payload["response_schema"]["properties"]["근거관계"]["items"]["properties"][
+                assert payload["response_schema"]["properties"]["문장"]["items"]["properties"][
                     "근거구간"
                 ]["enum"] == [e["id"] for e in catalog]
                 assert all(type(e["id"]) is int for e in catalog)
@@ -69,9 +69,7 @@ async def test_실제앱_주입모델과_분리저장_정본다운로드(tmp_pat
                 if e["type"] == "model.completed" and '"문장"' in e["output"]["content"]
             ]
             assert len(raw_drafts) == 5
-            assert all(
-                set(raw) == {"근거목록ID", "문장", "근거관계", "충분", "부족"} for raw in raw_drafts
-            )
+            assert all(set(raw) == {"근거목록ID", "문장", "충분", "부족"} for raw in raw_drafts)
             sections = [e["output"] for e in archive["events"] if e["type"] == "research.completed"]
             assert len(sections) == 5 and all(s["근거"] and "문장" not in s for s in sections)
             assert len(model.calls) == before

@@ -31,7 +31,7 @@ BASE = "http://127.0.0.1:8799"
 LABEL = uuid.uuid4().hex
 OUT = I / "검증결과/근거문맥/완료_실사용" / LABEL
 DATA = R / ".cache/보고서품질_검증/실모델점검/근거문맥/완료UI" / LABEL
-STATIC = R / ".cache/근거문맥_화면"
+STATIC = R / ".cache/제출_화면"
 PROOF = {
     "label": LABEL,
     "passed": False,
@@ -242,7 +242,7 @@ async def execute():
     PROOF["draft_protocol"] = DRAFT_PROTOCOL
     check(
         "sentence/paragraph native protocol ready",
-        DRAFT_PROTOCOL == "sentence-paragraph-evidence-v3",
+        DRAFT_PROTOCOL == "sentence-cited-units-v5",
     )
     scripts = re.findall(r'<script[^>]+src="([^"]+)"', (STATIC / "index.html").read_text("utf-8"))
     check(
@@ -421,32 +421,39 @@ async def execute():
                 offered = json.loads(payload["user"])
                 schema = payload["response_schema"]
                 metadata = payload["inputs"]
-                pair_schema = schema["properties"]["근거관계"]
+                from 보고서품질_실제연구검사 import validate_draft_schema
+
+                validate_draft_schema(schema, offered)
+                valid_units, statement_number, seen_pairs = True, 0, set()
+                offered_ids = {x["id"] for x in offered["evidence"]}
+                for unit in reply["문장"]:
+                    if type(unit) is not dict or set(unit) != {"내용", "근거구간"}:
+                        valid_units = False
+                        break
+                    if type(unit["내용"]) is str:
+                        if not unit["내용"].strip():
+                            valid_units = False
+                            break
+                        statement_number += 1
+                    elif unit["내용"] is not None or statement_number == 0:
+                        valid_units = False
+                        break
+                    ref = unit["근거구간"]
+                    if type(ref) is not int or ref not in offered_ids or (statement_number, ref) in seen_pairs:
+                        valid_units = False
+                        break
+                    seen_pairs.add((statement_number, ref))
                 check(
-                    f"draft {number}: flat schema exact journal and offered binding",
+                    f"draft {number}: mandatory citation schema exact journal and offered binding",
                     set(reply)
                     == set(schema["required"])
-                    == {"근거목록ID", "문장", "근거관계", "충분", "부족"}
-                    and schema["additionalProperties"] is False
-                    and schema["properties"]["문장"]["items"] == {"type": "string"}
-                    and schema["properties"]["문장"]["maxItems"] == 12
-                    and pair_schema["maxItems"] == 16
-                    and pair_schema["items"]["additionalProperties"] is False
-                    and pair_schema["items"]["properties"]["근거구간"]["enum"]
-                    == [x["id"] for x in offered["evidence"]]
+                    == {"근거목록ID", "문장", "충분", "부족"}
                     and reply["근거목록ID"]
                     == offered["evidence_set_id"]
                     == schema["properties"]["근거목록ID"]["enum"][0]
-                    and all(type(t) is str for t in reply["문장"])
-                    and all(
-                        type(p["문장번호"]) is int
-                        and 1 <= p["문장번호"] <= len(reply["문장"])
-                        and type(p["근거구간"]) is int
-                        and p["근거구간"] in {x["id"] for x in offered["evidence"]}
-                        and set(p) == {"문장번호", "근거구간"}
-                        for p in reply["근거관계"]
-                    )
-                    and len(reply["근거관계"]) <= 16
+                    and valid_units
+                    and len(reply["문장"]) <= 16
+                    and (not reply["충분"] or statement_number > 0)
                     and type(reply["충분"]) is bool
                     and type(reply["부족"]) is str
                     and metadata["draft_protocol"] == DRAFT_PROTOCOL
@@ -485,20 +492,23 @@ async def execute():
             structured = [
                 r
                 for r in journal
-                if r["input"]["context"]["operation"] in {"draft_section", "semantic_review"}
+                if r["input"]["context"]["operation"]
+                in {"draft_section", "synthesize", "semantic_review"}
             ]
             check(
                 "normal draft and review wrappers receive exact schemas without fallback",
                 len(structured)
                 == len(observed)
-                == operations.count("draft_section") + operations.count("semantic_review")
+                == operations.count("draft_section")
+                + operations.count("synthesize")
+                + operations.count("semantic_review")
                 and all(
                     row["input"]["response_schema"] == schema
                     for row, schema in zip(structured, observed)
                 )
                 and all(
                     (schema is not None)
-                    == (call[2]["operation"] in {"draft_section", "semantic_review"})
+                    == (call[2]["operation"] in {"draft_section", "synthesize", "semantic_review"})
                     for call, schema in zip(model.calls, model.schemas)
                 ),
             )

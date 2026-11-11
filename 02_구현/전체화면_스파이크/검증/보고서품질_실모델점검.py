@@ -123,6 +123,7 @@ def manifest():
             "호출예산.py",
             "실제연구제어.py",
             "연구앱.py",
+            "실험설정.py",
         )
     ]
     return {str(p.resolve()): digest(p.read_bytes()) for p in paths}

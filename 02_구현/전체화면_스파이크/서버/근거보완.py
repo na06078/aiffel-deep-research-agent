@@ -5,7 +5,13 @@ import json
 from dataclasses import dataclass
 
 from 서버.교안연구 import ResearchContractError
-from 서버.보고서근거 import DraftRequest, _source_markdown, build_draft_request, materialize_section
+from 서버.보고서근거 import (
+    DraftRequest,
+    _source_markdown,
+    build_draft_request,
+    encode_citation_units,
+    materialize_section,
+)
 from 서버.보고서보완 import _hashes, _json, _splice, _unique_object, prepare_correction
 from 서버.보고서품질 import plain_markdown, validate_section
 
@@ -189,8 +195,9 @@ def apply_evidence_correction(raw, request, sources):
             _json(
                 {
                     "근거목록ID": request._draft_request._evidence_set_id,
-                    "문장": [item["내용"]],
-                    "근거관계": [{"문장번호": 1, "근거구간": ref} for ref in item["근거구간"]],
+                    "문장": encode_citation_units([
+                        {"내용": item["내용"], "근거구간": item["근거구간"]}
+                    ]),
                     "충분": True,
                     "부족": "",
                 }

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="68" failures="0" errors="0" time="0.1464583">
+    <testsuite name="src/실행실패.test.tsx" timestamp="2026-11-11T03:55:08.446Z" hostname="z13flow" tests="27" failures="0" errors="0" skipped="0" time="0.0362136">
+        <testcase classname="src/실행실패.test.tsx" name="현재 local 의미 검토 실패만 명시적인 1회 보완 버튼을 제공한다" time="0.0061466">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="보완 범위 초과 판정은 한국어 사유로 표시한다" time="0.0005034">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="이전 기록·웹·불명 판정·기시도·잘못된 식별은 보완을 노출하지 않는다" time="0.0034936">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="현재 실행은 재생 여부를 전달하고 과거 상세는 항상 읽기 전용으로 연결한다" time="0.0001836">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="수동 클릭은 pending 중 한 POST만 보내고 202는 성공 아닌 접수로 유지한다" time="0.0159153">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="보완 상태는 새 revision이 running이어도 중·기시도 사유를 표시하며 다시 시작하지 않는다" time="0.0009771">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="서버가 시작한 자동 근거 보완을 표시하고 화면 조회로 POST하지 않는다" time="0.0003384">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="자동 보완이 적용된 뒤에는 완료가 아니라 전체 재검토 중으로 표시한다" time="0.0001547">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="자동 보완 소진 후에는 미제출과 추가 시도 금지를 함께 표시한다" time="0.0002975">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="자동 보완 통과는 실제 정본과 품질 통과가 모두 있을 때만 제출로 표시한다" time="0.0003786">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="HTTP 실패 원인과 검토 지적을 보존하고 명시 재시도만 최초 UUID로 POST한다" time="0.0017791">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="재생·과거 기록으로 바뀐 뒤 이전 버튼 콜백도 POST하지 않는다" time="0.0003673">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="run 전환 후 이전 접수는 새 대상에 재사용하지 않는다" time="0.0005518">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="모델 의미 검토의 차단 사유와 지적 문장·출처·새 조사 비용을 바로 보인다" time="0.0003881">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="의미 검토 응답 불명은 내용 오류 확정과 구별해 설명한다" time="0.0001875">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="실패한 실행은 기록된 사유(보낸 역할·코드·문구)를 경고로 보인다" time="0.0001833">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="사유가 기록되지 않은 이전 실패는 사건 기록의 오류 항목을 안내한다" time="0.0001968">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="실패가 아닌 실행에는 아무것도 그리지 않는다" time="0.0001952">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="사유 문구의 마크업은 이스케이프된다" time="0.0001464">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="새 문맥 검토의 근거 선택 누락에는 주장만 고치는 보완 버튼을 제공하지 않는다" time="0.0002637">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="근거 선택 누락은 사실 오류가 아니라 인용 재연결이 필요한 상태로 설명한다" time="0.0002872">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="새 문맥 판정 source_conflict는 판정 불가와 내용 오류 미확정을 명시한다" time="0.0002691">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="새 문맥 판정 insufficient_context는 판정 불가와 내용 오류 미확정을 명시한다" time="0.0002966">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="대조한 원문 문맥은 위치·출처와 함께 접어서 보존하고 열람으로 POST하지 않는다" time="0.0007213">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="새 판정의 contradiction를 내부 코드 대신 한글로 설명한다" time="0.0003778">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="새 판정의 unsupported를 내부 코드 대신 한글로 설명한다" time="0.0002279">
+        </testcase>
+        <testcase classname="src/실행실패.test.tsx" name="새 판정의 자격이 바뀌면 이전 보완 콜백과 미지원 계약도 POST하지 않는다" time="0.0003846">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/앱.test.tsx" timestamp="2026-11-11T03:55:08.453Z" hostname="z13flow" tests="22" failures="0" errors="0" skipped="0" time="0.062146">
+        <testcase classname="src/앱.test.tsx" name="실행/큐의 복구는 입력과 팝업 재열기 후에도 같은 요청 ID를 보존한다" time="0.0057882">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="재생 인디케이터는 첫 지시 전 미확인이고 과거 지시의 웹 자료를 최종 데이터셋과 구별한다" time="0.0060349">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="앱은 드로어·입력·팝업이 공유할 단일 유효 높이와 실제 크기 변경 콜백을 연결한다" time="0.0012928">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="과거 기록 팝업은 새 목록을 쓰고 자세히 보기·기록 재생을 기존 동작에 연결한다" time="0.0037945">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="일반 질문의 최초 web 자료는 이후 local 폴링으로 재해석하지 않는다" time="0.0012942">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="일반 질문의 최초 undefined 자료는 이후 web 폴링으로 재해석하지 않는다" time="0.0012461">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="단독 /웹 ack는 선택만 알리고 늦은 GET/이전 ack가 확인한 선택이나 초안을 되돌리지 않는다" time="0.0132042">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="종료 직전 실행의 늦은 GET은 더 최신 단독 선택 ack 인디케이터를 되돌리지 않는다" time="0.0010535">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="다른 자료 잠금은 원문 초안과 자료를 보존하고 /큐 또는 다음 연구 복구를 안내한다" time="0.0010997">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="명령 핸들러는 /큐 /웹 원문과 실패한 자료·ID를 배경 폴링 후에도 재전송하고 새 초안을 보존한다" time="0.0020519">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="에셋 실험의 기존 독립 연출에는 live 기록 clock을 강제하지 않는다" time="0.0008035">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="재생 장면의 코드 사건은 archive 전체의 미래 사건이 아니라 해당 cursor까지의 사건이다" time="0.0031261">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="대역 서버에서 실제 아카이브를 재생해도 제공자와 요청 수는 재생 원본을 따른다" time="0.0022371">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="실제 앱에 입력 아래 타임라인 손잡이를 연결하고 복원된 기록 모드는 명령을 잠근다" time="0.0014031">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="에셋 모드의 전송 시도는 주소 해시로 실행 제어에 들어가라고 안내하고 서버로 보내지 않는다" time="0.0010553">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="삭제: 목록에서 시작하면 서버 개수로 확인 상태가 되고, 확인하면 같은 요청 ID로 POST한다" time="0.0030581">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="삭제 성공: 재생 중이던 실행이면 실시간으로 복귀하고, 다른 실행이면 복귀하지 않는다" time="0.0031998">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="삭제 성공 알림: 다른 실행 null 재생 여부와 무관하게 개수 요약과 경고를 보인다" time="0.0016007">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="삭제 성공 알림: 다른 실행 B 재생 여부와 무관하게 개수 요약과 경고를 보인다" time="0.0017625">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="삭제 실패: 오류 문구를 확인 상태에 두고 같은 요청 ID로 다시 보낸다" time="0.0019024">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="실행 상세에도 같은 삭제 진입점과 확인이 있고, 성공하면 과거 기록 목록으로 돌아간다" time="0.0026617">
+        </testcase>
+        <testcase classname="src/앱.test.tsx" name="사건 기록 목록은 run.deleted 흔적 사건을 숨긴다" time="0.001199">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/큐복구.test.tsx" timestamp="2026-11-11T03:55:08.456Z" hostname="z13flow" tests="9" failures="0" errors="0" skipped="0" time="0.0251742">
+        <testcase classname="src/큐복구.test.tsx" name="현재 실패 재시도와 각 대기 지시 취소를 실제 버튼으로 제공한다" time="0.0055382">
+        </testcase>
+        <testcase classname="src/큐복구.test.tsx" name="명시 클릭만 POST하며 처리 중 중복을 막고 알 수 없는 결과는 같은 ID로 확인한다" time="0.0155176">
+        </testcase>
+        <testcase classname="src/큐복구.test.tsx" name="큐 취소는 중복 클릭 중 한 번만 전송하고 완료 뒤 재전송하지 않는다" time="0.0007441">
+        </testcase>
+        <testcase classname="src/큐복구.test.tsx" name="재생과 공통 busy 및 진행·완료 실행에서 mutation은 버튼과 핸들러 양쪽으로 차단한다" time="0.0004574">
+        </testcase>
+        <testcase classname="src/큐복구.test.tsx" name="실시간 때의 오래된 클릭도 재생으로 전환한 뒤에는 POST하지 않는다" time="0.0002554">
+        </testcase>
+        <testcase classname="src/큐복구.test.tsx" name="접수 뒤 조회만 실패하면 새 mutation 없이 성공과 조회 실패를 구분한다" time="0.0006185">
+        </testcase>
+        <testcase classname="src/큐복구.test.tsx" name="대기 취소의 알 수 없는 결과도 항목별 원 요청 ID를 보존하고 오류를 숨기지 않는다" time="0.0005735">
+        </testcase>
+        <testcase classname="src/큐복구.test.tsx" name="현재 재시도는 원 버전과 고정 ID만 POST한다" time="0.0003503">
+        </testcase>
+        <testcase classname="src/큐복구.test.tsx" name="대기 취소는 정확한 ID와 요청 ID만 POST한다" time="0.0002724">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/통신.test.ts" timestamp="2026-11-11T03:55:08.458Z" hostname="z13flow" tests="10" failures="0" errors="0" skipped="0" time="0.0229245">
+        <testcase classname="src/통신.test.ts" name="correction은 고정 revision과 요청 ID를 POST하고 접수·지원 없음 오류를 그대로 유지한다" time="0.0167669">
+        </testcase>
+        <testcase classname="src/통신.test.ts" name="presentation은 정본 해시와 렌더러 버전을 GET으로 보내며 오류 사유를 유지한다" time="0.0005719">
+        </testcase>
+        <testcase classname="src/통신.test.ts" name="자료를 캡처한 명령은 원문과 선택을 함께 전송하고 미확인 자료는 생략한다" time="0.0003814">
+        </testcase>
+        <testcase classname="src/통신.test.ts" name="createExport는 해당 정본 해시와 형식만 POST하며 202 메타데이터와 409 사유를 보존한다" time="0.0004719">
+        </testcase>
+        <testcase classname="src/통신.test.ts" name="exports는 인코딩한 보고서의 collection만 GET하고 본문을 그대로 반환한다" time="0.0003716">
+        </testcase>
+        <testcase classname="src/통신.test.ts" name="archive는 실행 ID를 인코딩한 GET만 수행하며 현재 실행이나 작업을 변경하지 않는다" time="0.0003611">
+        </testcase>
+        <testcase classname="src/통신.test.ts" name="자연어와 요청 ID를 실제 POST 경계에 전달하고 202는 received로 유지한다" time="0.0003499">
+        </testcase>
+        <testcase classname="src/통신.test.ts" name="release는 명시한 이전 gate만 전송하고 서버 거절을 숨기지 않는다" time="0.0018482">
+        </testcase>
+        <testcase classname="src/통신.test.ts" name="deletePreview는 인코딩한 실행 ID의 delete-preview만 GET한다" time="0.0003506">
+        </testcase>
+        <testcase classname="src/통신.test.ts" name="deleteRun은 요청 ID와 확인용 실행 ID를 본문에 담아 POST하고 오류 코드를 보존한다" time="0.0005336">
+        </testcase>
+    </testsuite>
+</testsuites>

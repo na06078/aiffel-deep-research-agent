@@ -1,0 +1,9 @@
+{
+  "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크' && env -u PYTHONPATH -u PYTHONHOME -u PYTHONSTARTUP -u VIRTUAL_ENV '../../.venv/Scripts/python.exe' -m pytest 테스트/테스트_큐복구.py 테스트/테스트_큐경계.py 테스트/테스트_실행제어.py 테스트/테스트_접근경계.py -q --basetemp='../../.cache/보고서품질_검증/실모델점검/제출_큐/final' --junitxml='검증결과/제출/큐/서버_JUnit.xml'",
+  "result": {
+    "output": "..........................................                               [100%]\r\n42 passed in 5.36s",
+    "exit_code": 0,
+    "error": null,
+    "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크"
+  }
+}

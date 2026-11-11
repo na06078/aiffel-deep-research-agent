@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.223" timestamp="2026-11-11T15:33:07.328722+09:00" hostname="z13flow"><testcase classname="테스트.테스트_근거단위v5" name="test_internal_encoder_preserves_explicit_relations_without_cutting" time="0.001"><failure message="AssertionError: assert [{'내용': '첫 주장... '근거구간': [3]}] == [{'내용': '첫 주장...e, '근거구간': 3}]&#10;  &#10;  At index 0 diff: {'내용': '첫 주장', '근거구간': [2, 1]} != {'내용': '첫 주장', '문장번호': None, '근거구간': 2}&#10;  Right contains one more item: {'내용': '둘째 주장', '문장번호': None, '근거구간': 3}&#10;  Use -v to get more diff">def test_internal_encoder_preserves_explicit_relations_without_cutting():
+        from 서버 import 보고서근거 as core
+        encoder = getattr(core, "encode_citation_units", lambda statements: statements)
+        logical = [{"내용": "첫 주장", "근거구간": [2, 1]}, {"내용": "둘째 주장", "근거구간": [3]}]
+&gt;       assert encoder(logical) == [primary("첫 주장", 2), support(1, 1), primary("둘째 주장", 3)]
+E       AssertionError: assert [{'내용': '첫 주장... '근거구간': [3]}] == [{'내용': '첫 주장...e, '근거구간': 3}]
+E         
+E         At index 0 diff: {'내용': '첫 주장', '근거구간': [2, 1]} != {'내용': '첫 주장', '문장번호': None, '근거구간': 2}
+E         Right contains one more item: {'내용': '둘째 주장', '문장번호': None, '근거구간': 3}
+E         Use -v to get more diff
+
+테스트\테스트_근거단위v5.py:92: AssertionError</failure></testcase></testsuite></testsuites>

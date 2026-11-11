@@ -1,0 +1,159 @@
+{
+  "status": "completed_owned_scope",
+  "draft_protocol": "sentence-cited-units-v5",
+  "contract": "§29.20 최종 두 필드: 내용 string|null, 근거구간 offered integer; 연속 null은 최근 새 문장 지원",
+  "changed_files": [
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\보고서근거.py",
+      "relative_path": "서버/보고서근거.py",
+      "sha256": "73187ad7a3f0f270778008f285576819a762d2e08041352db9d244568a6130db"
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\근거보완.py",
+      "relative_path": "서버/근거보완.py",
+      "sha256": "5e178411ed8db4b2c872be6081f73fa74219397d4288a43beffe3943e228ebd5"
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\테스트\\근거단위대역.py",
+      "relative_path": "테스트/근거단위대역.py",
+      "sha256": "442fb794d441c475713df3ec410982032eb0062fc82b5e04f289d86592a13d7d"
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\테스트\\테스트_근거단위v5.py",
+      "relative_path": "테스트/테스트_근거단위v5.py",
+      "sha256": "cd17f9e08995b4b1e9bea49cee96489901a2a5b0003fab2163697c88a4a4157a"
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\테스트\\테스트_문장인용v4.py",
+      "relative_path": "테스트/테스트_문장인용v4.py",
+      "sha256": "f10b6becf38bb5f729198cde18ed25ea293d5d26430f164f36d369f881bbb209"
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\테스트\\테스트_보고서근거.py",
+      "relative_path": "테스트/테스트_보고서근거.py",
+      "sha256": "f4b371751a680eff075894cc603b6a8ac0dd0922e6d1536a2029ad1fd4bfe26d"
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\테스트\\테스트_보고서품질.py",
+      "relative_path": "테스트/테스트_보고서품질.py",
+      "sha256": "6986d3753f65066c7163f4b48f9a59dc42d7b773ed6a868b8dddb89d71e54078"
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\테스트\\테스트_보고서품질_실모델점검.py",
+      "relative_path": "테스트/테스트_보고서품질_실모델점검.py",
+      "sha256": "429b8fc2b65aa52d9c896a8101698522a7e0bc3e316a9fb8bb4b4e007e050728"
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\테스트\\테스트_실제모델.py",
+      "relative_path": "테스트/테스트_실제모델.py",
+      "sha256": "98bd1ff5197492cabb8d6ff71313caa153cde64f6daaaf77c4edc55f9d2744ab"
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\테스트\\테스트_실제연구제어.py",
+      "relative_path": "테스트/테스트_실제연구제어.py",
+      "sha256": "a51084ac2c00eca516a56bc50595d0bb3078583159f899400e088432e45e2319"
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\테스트\\테스트_웹연구.py",
+      "relative_path": "테스트/테스트_웹연구.py",
+      "sha256": "04d335dc9abb388199a81cb6e596e36644db45bdbb4af5c958a01bd9e0e69588"
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\테스트\\테스트_웹통합.py",
+      "relative_path": "테스트/테스트_웹통합.py",
+      "sha256": "afe94bc96a07bbfdb9c2848a35e21971039ddb57f78b6b4e2e41650c0b5e8b53"
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\테스트\\테스트_삭제후기록차단.py",
+      "relative_path": "테스트/테스트_삭제후기록차단.py",
+      "sha256": "0830d00c4d8c381ecfc732396aecb7821bd4895331a2cf2d7ad38c8a5a44962f"
+    },
+    {
+      "path": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\테스트\\테스트_연구앱.py",
+      "relative_path": "테스트/테스트_연구앱.py",
+      "sha256": "cced8afc83d531188fa0653fdad9d606315fa9377e6cf0c8c19c468beb89d1e8"
+    }
+  ],
+  "encoder": {
+    "callable": "서버.보고서근거.encode_citation_units(statements: list[dict]) -> list[dict]",
+    "input": "정확히 내용:string, 근거구간:비어있지 않은 int[]인 내부 논리 문장 목록",
+    "output": "문장별 내용+첫 참조, 그 뒤 null+추가 참조. 절단/추론/중복 제거 없음. 제한은 materialize_section이 검증.",
+    "production_use": "근거보완.apply_evidence_correction의 명시적 선택을 조립할 때만 사용. 모델 raw fallback 없음",
+    "test_helper": "테스트.근거단위대역.citation_units(statements): 잘못된 타입/빈 주근거/중복 등 부정 fixture를 보존하는 테스트 전용 생성기"
+  },
+  "red_green": [
+    {
+      "junit": "RED.xml",
+      "result": "초기 3필드 계약: 10 failed, 6 passed; maxItems12 및 v4 수신 경계에서 의도한 행동 RED"
+    },
+    {
+      "junit": "encoder_RED.xml",
+      "result": "1 failed; 명시 논리 문장이 단위로 인코딩되지 않는 독립 기대값 RED"
+    },
+    {
+      "junit": "final_contract_RED.xml",
+      "result": "최종 2필드 계약: 9 failed, 8 passed. 새 2필드 정상 응답을 3필드 구현이 schema로 거절. 이후 최종 계약 구현"
+    },
+    {
+      "junit": "core_GREEN.xml",
+      "result": "중간 2 failed, 146 passed, 53 subtests passed. v5에서 유효해진 옛 scalar 반례와 누락된 번호 시작 안내를 조정; 원 scalar는 양성 대조로 유지"
+    },
+    {
+      "junit": "regression.xml",
+      "result": "중간 1 failed, 423 passed, 54 subtests passed. 별도 일반 strict SDK array fixture의 enum mutation 경로를 과도하게 바꾼 테스트 이행 오류를 복원"
+    },
+    {
+      "junit": "final_GREEN.xml",
+      "result": "424 passed, 54 subtests passed in 89.24s; zero failures/errors/skips",
+      "junit_declared_tests": 478,
+      "junit_testcase_elements": 424,
+      "subtests": 54,
+      "count_explanation": "unittest subtests를 pytest가 suite tests 합계에 포함한다. 424개 testcase와 54 subtests를 별도 보고하며 478개 독립 testcase로 주장하지 않는다."
+    }
+  ],
+  "final_test_modules": [
+    "테스트_근거단위v5.py",
+    "테스트_문장인용v4.py",
+    "테스트_보고서근거.py",
+    "테스트_근거보완.py",
+    "테스트_근거보완연결.py",
+    "테스트_보고서품질.py",
+    "테스트_보고서품질_실모델점검.py",
+    "테스트_실제연구제어.py",
+    "테스트_실험설정.py",
+    "테스트_실제모델.py",
+    "테스트_웹연구.py",
+    "테스트_웹통합.py",
+    "테스트_삭제후기록차단.py",
+    "테스트_연구앱.py"
+  ],
+  "command_environment": {
+    "python": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe",
+    "unset": [
+      "PYTHONHOME",
+      "PYTHONPATH",
+      "PYTHONSTARTUP"
+    ],
+    "basetemp": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\..\\..\\.cache\\보고서품질_검증\\실모델점검\\제출_근거단위\\final",
+    "pytest_args": "-q --tb=short --junitxml=검증결과/제출/근거단위/final_GREEN.xml"
+  },
+  "verified": [
+    "보존된 실패의11문장19관계 분포를19단위로 그대로 인코딩하여 native maxItems16과 수신 reference limit에서 차단",
+    "복수 근거의 canonical 본문/근거 순서·실제 원문·hash/offset·목록/버전 권위·SDK strict 전송/바이트 회귀 보존",
+    "16개 새 문장 허용,17단위 차단, 선행 null/중복/빈 가시문장/구형 v4-v3/부정 충분 판정 차단",
+    "ScriptedModel, WebModel, IntegrationModel, preflight ModelDouble 이행; ExperimentModel은 ScriptedModel 상속으로 연결되며 별도 편집 불필요",
+    "근거 보완 API는 그대로, 내부 조립만 최종 단위 wire로 이행"
+  ],
+  "excluded": [
+    "전체1100개 회귀 미실행: 부모 통합 게이트",
+    "실제 모델/네트워크/키/운영 장부 호출 없음",
+    "검증/*.py, SVG 프로필, 기타 서버/UI/명세/진행/CHANGELOG/.env/원 DB/코퍼스/원보고서/장부/설치dist/Git 미수정",
+    "부모 소유 실험실행기 timeout 테스트 미수정",
+    "브라우저·실제 전체연구·배포·산출3형식 최종 실측은 부모 담당"
+  ],
+  "issues_remaining": [],
+  "notes": [
+    "계약 중간 변경 전 RED/GREEN XML은 역사적 근거로 보존. 최종 권위는 final_GREEN.xml과 위 소스 hash.",
+    "skills/는 승인 쓰기 범위 밖이므로 별도 수정하지 않음."
+  ]
+}

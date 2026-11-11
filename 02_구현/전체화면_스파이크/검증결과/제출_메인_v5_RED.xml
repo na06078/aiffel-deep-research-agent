@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.634" timestamp="2026-11-11T15:36:03.487548+09:00" hostname="z13flow"><testcase classname="검증.테스트_필수근거사전" name="test_문장과필수근거가_묶인스키마는_허용한다" time="0.321"><failure message="AssertionError">검증\테스트_필수근거사전.py:48: in test_문장과필수근거가_묶인스키마는_허용한다
+    driver.validate_draft_schema(schema, offered)
+검증\보고서품질_실제연구검사.py:33: in validate_draft_schema
+    assert statements["type"] == "array" and statements["maxItems"] == 12
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError</failure></testcase></testsuite></testsuites>

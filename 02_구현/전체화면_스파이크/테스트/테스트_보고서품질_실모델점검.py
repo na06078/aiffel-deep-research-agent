@@ -170,8 +170,7 @@ class ModelDouble:
             text = self.section["본문"].replace("«임오군란»", "").rstrip()
             reply = {
                 "근거목록ID": payload["evidence_set_id"],
-                "문장": [text],
-                "근거관계": [{"문장번호": 1, "근거구간": ref, **self.extra_fields}],
+                "문장": [{"내용": text, "근거구간": ref, **self.extra_fields}],
                 "충분": self.section["충분"],
                 "부족": self.section["부족"],
             }
@@ -261,7 +260,7 @@ def test_generated_inference_does_not_contaminate_source_fixed_controls(tmp_path
 def test_probe_metadata_rejects_reuse_of_nested_reference_protocol(tmp_path):
     result = asyncio.run(probe.run_probe(model=ModelDouble(), work=tmp_path))
     assert result["passed"] is True
-    assert result["draft_protocol"] == "sentence-paragraph-evidence-v3"
+    assert result["draft_protocol"] == "sentence-cited-units-v5"
 
 
 def test_active_preflight_sends_id_catalog_and_never_asks_model_to_copy_quotes(tmp_path):
@@ -278,7 +277,7 @@ def test_active_preflight_sends_id_catalog_and_never_asks_model_to_copy_quotes(t
     )
     assert result["passed"] is True and result["observed_attempts"] == 4
     response = json.loads((tmp_path / "응답_section.json").read_text("utf-8"))["content"]
-    assert {"근거목록ID", "문장", "근거관계", "충분", "부족"} == set(json.loads(response))
+    assert {"근거목록ID", "문장", "충분", "부족"} == set(json.loads(response))
 
 
 def test_actual_draft_call_forwards_provider_schema_not_only_prompt(tmp_path):
@@ -292,18 +291,19 @@ def test_actual_draft_call_forwards_provider_schema_not_only_prompt(tmp_path):
                 payload = json.loads(args[1])
                 properties = response_schema["properties"]
                 assert properties["근거목록ID"]["enum"] == [payload["evidence_set_id"]]
-                assert properties["근거관계"]["maxItems"] == 16
-                assert properties["문장"]["items"] == {"type": "string"}
-                assert properties["근거관계"]["items"]["properties"]["근거구간"] == {
+                item = properties["문장"]["items"]
+                assert item["properties"]["내용"] == {"type": ["string", "null"]}
+                assert item["properties"]["근거구간"] == {
                     "type": "integer",
                     "enum": [span["id"] for span in payload["evidence"]],
                 }
+                assert properties["문장"]["maxItems"] == 16
             return await super().complete(*args, response_schema=response_schema, **kwargs)
 
     model = SchemaRequiredDouble()
     result = asyncio.run(probe.run_probe(model=model, work=tmp_path))
     assert result["passed"] is True and result["observed_attempts"] == 4
-    assert result["draft_protocol"] == "sentence-paragraph-evidence-v3"
+    assert result["draft_protocol"] == "sentence-cited-units-v5"
     assert result["draft_schema_received"] is True
     assert result["review_protocol"] == "source-context-review-v1"
     assert result["review_schema_cases"] == ["positive", "negative"]

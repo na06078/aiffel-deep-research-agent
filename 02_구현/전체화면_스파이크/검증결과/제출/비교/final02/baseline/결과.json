@@ -1,0 +1,490 @@
+{
+  "arm": "baseline",
+  "config": {
+    "arm": "baseline",
+    "section_count": 4,
+    "reads_per_section": 3,
+    "max_rounds": 2,
+    "single_actor": false,
+    "assignment": true,
+    "role": true,
+    "region": true,
+    "redelegation": true,
+    "reads_per_round": 12,
+    "max_actual_requests": 55,
+    "automatic_retry": false,
+    "min_visible_body_chars": 2000,
+    "max_references_per_section": 16,
+    "correction_attempts": 1,
+    "correction_max_calls": 2
+  },
+  "status": "blocked",
+  "run_id": "1c9cd886f4b44b718d69c23ece416421",
+  "revision": 1,
+  "quality": {
+    "passed": false,
+    "reasons": [
+      "semantic_review_failed"
+    ],
+    "warnings": [
+      "자동 인용 검사는 문장과 원문 사이의 의미적 지지를 증명하지 않습니다.",
+      "조사관 사이에 중복 읽기가 있습니다.",
+      "읽었지만 본문 인용에 쓰이지 않은 문서가 있습니다.",
+      "검토 입력 상한으로 전체 원문 문맥을 제공하지 않았습니다. 미제공 구간에 대한 의미 판정은 보장하지 않습니다."
+    ],
+    "metrics": {
+      "문장수": 94,
+      "근거붙은문장": 2,
+      "근거율": 2.1,
+      "허위인용": [],
+      "읽은문서": 10,
+      "읽고안쓴": [
+        "동학"
+      ],
+      "인용편중": 22.2,
+      "중복률": 16.7,
+      "절수": 4,
+      "보고서자수": 6372,
+      "인용수": 72,
+      "LLM호출": 27,
+      "격리율": 8.0
+    },
+    "unknown_citations": [],
+    "unread_citations": [],
+    "misattributed_citations": [],
+    "semantic_review_raw": "{\"검토목록ID\":\"a4b74b951017cd4933123025b02b40ff436f70cbb96a66ea03fcccc5ab3c554d\",\"검토요약\":\"대부분의 사건 전개와 주요 사실은 선택 인용으로 뒷받침되지만, 일부 문장은 선택 인용에 없는 사상·세부 경위·인과·기간을 추가하거나 인용문보다 넓게 요약하고 있다. 따라서 해당 부분의 인용을 보강하거나 문장을 축소해야 한다.\",\"문제\":[{\"근거번호\":[5],\"본문발췌\":\"동학의 보국안민 구호와 인내천에 바탕을 둔 인간 평등 사상은 농민들이 기존의 신분 차별과 지배 질서에 맞설 수 있는 사상적 기반을 제공했다. «동학 농민 혁명»\",\"설명\":\"선택 인용은 보국안민·제폭구민 구호와 항일 성격은 뒷받침하지만, 인내천·인간 평등 사상 및 그것이 농민의 저항 기반을 제공했다는 인과까지는 제시하지 않는다.\",\"유형\":\"citation_gap\"},{\"근거번호\":[29],\"본문발췌\":\"제1차 개혁은 의정부와 궁내부를 분리하고 기존 6조를 8아문으로 개편했으며, 과거제를 폐지하고 은본위 화폐제도·조세 금납제·도량형 통일·경찰제도를 실시했다. «갑오개혁»\",\"설명\":\"선택 인용은 의정부·궁내부 분리와 6조의 8아문 개편은 지지하지만, 과거제 폐지·은본위제·조세 금납·도량형 통일·경찰제도 시행은 이 인용문에 없다.\",\"유형\":\"citation_gap\"},{\"근거번호\":[33],\"본문발췌\":\"갑신정변은 1884년 12월 4일 청나라 군대의 개입으로 3일 만에 실패했고, 김옥균은 일본으로 망명했다. «갑신정변»\",\"설명\":\"선택 인용에는 1884년 12월 4일과 청나라군 개입에 따른 실패는 있으나, 3일 만에 실패했다는 기간과 김옥균의 일본 망명은 포함되어 있지 않다.\",\"유형\":\"citation_gap\"},{\"근거번호\":[45],\"본문발췌\":\"그는 1894년 3월 상하이에 도착했으며, 이 과정에서 조선에서 온 이일직과 홍종우의 동행과 경비 지원을 받아들였다. «김옥균»\",\"설명\":\"선택 인용은 1894년 3월 상하이 도착과 리징방의 초청·홍종우의 경비 제공 언급은 뒷받침하지만, 이일직의 동행까지는 뒷받침하지 않는다.\",\"유형\":\"citation_gap\"},{\"근거번호\":[37],\"본문발췌\":\"1894년 3월 28일 홍종우는 상하이의 동화양행에서 김옥균이 혼자 있는 틈을 타 리볼버 권총을 발사해 그를 암살했다. «갑신정변»\",\"설명\":\"선택 인용은 3월 28일 동화양행에서 리볼버로 암살했다는 사실은 지지하지만, 김옥균이 혼자 있는 틈이었다는 세부 내용은 해당 인용문에 없다.\",\"유형\":\"citation_gap\"},{\"근거번호\":[46],\"본문발췌\":\"김옥균은 일본인 수행원들에 의해 병원으로 옮겨졌으나 같은 날 오후 4시경 사망했다. «김옥균»\",\"설명\":\"선택 인용은 병원 이송과 오후 4시경 사망은 뒷받침하지만, 암살일인 3월 28일과 연결되는 ‘같은 날’이라는 날짜 귀속은 인용문 자체에 없다.\",\"유형\":\"citation_gap\"},{\"근거번호\":[47],\"본문발췌\":\"일본은 김옥균 생전에는 그를 부담스럽게 취급했지만, 암살 뒤에는 사건을 조선 정부와 청나라를 비난하고 대외적 여론을 조성하는 데 활용했다. «김옥균»\",\"설명\":\"선택 인용은 일본이 김옥균의 죽음을 언론에서 애도·추모하고 청일전쟁을 향한 국민감정 형성에 이용했다는 내용은 지지하지만, 조선 정부와 청나라를 비난하는 데 활용했다는 구체적 목적까지는 지지하지 않는다.\",\"유형\":\"citation_gap\"}],\"판정\":\"needs_revision\"}",
+    "semantic_review": {
+      "통과": false,
+      "문제": [
+        {
+          "근거번호": [
+            5
+          ],
+          "본문발췌": "동학의 보국안민 구호와 인내천에 바탕을 둔 인간 평등 사상은 농민들이 기존의 신분 차별과 지배 질서에 맞설 수 있는 사상적 기반을 제공했다. «동학 농민 혁명»",
+          "설명": "선택 인용은 보국안민·제폭구민 구호와 항일 성격은 뒷받침하지만, 인내천·인간 평등 사상 및 그것이 농민의 저항 기반을 제공했다는 인과까지는 제시하지 않는다.",
+          "유형": "citation_gap",
+          "출처": [
+            "동학 농민 혁명"
+          ],
+          "근거문맥": [
+            {
+              "end": 8659,
+              "id": 5,
+              "kind": "quote",
+              "section_id": "section-1",
+              "source_hash": "d7a8b4a7aa624c00b729f7ae15887012187f04d42d1eceebf4ea948125b565f3",
+              "source_id": "동학 농민 혁명",
+              "start": 8398,
+              "text": "동학농민군의 구호는 '보국안민', '제폭구민' 등으로 유교적인 충군, 애민 사상을 담고 있었다.\n1894년 가을에 이르러 동학 농민군은 항일의병적인 성격으로 변화한다. 이를 두고 서울대학교 교수 유영익은 그해 가을의 동학 봉기를 \"일본군을 쫓아낼 목적으로 궐기한 구한말 최초의 본격적인 항일 의병운동이었다.\"라고 하였다. 부패한 집권층 타도, 민씨 정권 축출을 목적으로 시작된 동학농민혁명은 항일 의병전쟁, 독립운동적인 성격으로 변모하였다.\n\n\n== 봉기 직전 ==\n"
+            }
+          ]
+        },
+        {
+          "근거번호": [
+            29
+          ],
+          "본문발췌": "제1차 개혁은 의정부와 궁내부를 분리하고 기존 6조를 8아문으로 개편했으며, 과거제를 폐지하고 은본위 화폐제도·조세 금납제·도량형 통일·경찰제도를 실시했다. «갑오개혁»",
+          "설명": "선택 인용은 의정부·궁내부 분리와 6조의 8아문 개편은 지지하지만, 과거제 폐지·은본위제·조세 금납·도량형 통일·경찰제도 시행은 이 인용문에 없다.",
+          "유형": "citation_gap",
+          "출처": [
+            "갑오개혁"
+          ],
+          "근거문맥": [
+            {
+              "end": 3112,
+              "id": 29,
+              "kind": "quote",
+              "section_id": "section-3",
+              "source_hash": "ab0fa173225d0955322dbdeb12af25ef8b3f2a84aeb04b0a723aba37b2c6e855",
+              "source_id": "갑오개혁",
+              "start": 2824,
+              "text": "김홍집 내각이 교정청을 폐지하고 설치한 군국기무처는 김홍집, 김윤식, 김가진 등 17명의 의원으로 구성된 임시 합의기관으로서, 행정제도, 사법, 교육, 사회 등 전근대적인 여러 문제에 걸친 사항과 정치 제도의 개혁을 단행하였다. 군국기무처의 회의총재는 영의정 김홍집이 맡았다. 특히 '개국' 기원 연호를 사용하여 청과의 대등한 관계를 나타냈고, 중앙관제를 의정부와 궁내부로 구별하여 기존 조선의 6조체계를 8아문(八衙門: 내무·외무·탁지·군무·법무·학무·공무·농상)으로 개편하였으며, 이를 의정부 직속으로 두었다.\n"
+            }
+          ]
+        },
+        {
+          "근거번호": [
+            33
+          ],
+          "본문발췌": "갑신정변은 1884년 12월 4일 청나라 군대의 개입으로 3일 만에 실패했고, 김옥균은 일본으로 망명했다. «갑신정변»",
+          "설명": "선택 인용에는 1884년 12월 4일과 청나라군 개입에 따른 실패는 있으나, 3일 만에 실패했다는 기간과 김옥균의 일본 망명은 포함되어 있지 않다.",
+          "유형": "citation_gap",
+          "출처": [
+            "갑신정변"
+          ],
+          "근거문맥": [
+            {
+              "end": 288,
+              "id": 33,
+              "kind": "quote",
+              "section_id": "section-4",
+              "source_hash": "431712762019170d7c5e071287592c5da41f718f2a5a667cd534221b7139b7f2",
+              "source_id": "갑신정변",
+              "start": 0,
+              "text": "갑신정변(甲申政變)은 1884년 12월 4일 갑신년(음력 10월 17일)에 김옥균·박영효·서재필·서광범·홍영식 등 급진개화당파들이 청나라에 의존하는 척족 중심의 수구당을 몰아내고 개화정권을 수립하려 하였다가 청나라군의 개입으로 실패한 쿠데타 사건이다. 현대식 날짜 표기로는 12.4 사태(12.4 事態).\n진압 후 갑신난 또는 갑신전란, 갑신반란, 갑신당의 난 등으로 불렸고 대한민국 임시정부에서는 이를 '갑신혁명당의 난'(甲申革命黨의 亂)이라 불렀다. 박은식은 자신의 저서 한국혁명지혈사에 갑신혁명으로 규정했다. "
+            }
+          ]
+        },
+        {
+          "근거번호": [
+            45
+          ],
+          "본문발췌": "그는 1894년 3월 상하이에 도착했으며, 이 과정에서 조선에서 온 이일직과 홍종우의 동행과 경비 지원을 받아들였다. «김옥균»",
+          "설명": "선택 인용은 1894년 3월 상하이 도착과 리징방의 초청·홍종우의 경비 제공 언급은 뒷받침하지만, 이일직의 동행까지는 뒷받침하지 않는다.",
+          "유형": "citation_gap",
+          "출처": [
+            "김옥균"
+          ],
+          "근거문맥": [
+            {
+              "end": 26288,
+              "id": 45,
+              "kind": "quote",
+              "section_id": "section-4",
+              "source_hash": "116e1b41336d8fae13a09fb5386804954c762de3d99273326f731affc17e54a5",
+              "source_id": "김옥균",
+              "start": 26024,
+              "text": "두 번째 이유로는 김옥균이 동양 평화에 위협적인 인물이라는 것이었다.\n\n\n=== 최후 ===\n\n1894년 3월 중순 경 상하이에 도착한 김옥균 일행은 외국인 거주지 안에 있는 한 여관에 투숙하였다. 투숙한 다음 날 오후, 김옥균 일행은 거리를 구경하기로 하고 오전에는 각자 용무를 보았다.\n1894년 3월 27일 오후, 윤치호가 상하이에 체류하면서 지냈을 때 윤치호는 김옥균과 홍종우 일행을 받아들였다. 김옥균은 윤치호에게 \"리훙장의 양아들 리징방의 초청으로 오게되었다. "
+            }
+          ]
+        },
+        {
+          "근거번호": [
+            37
+          ],
+          "본문발췌": "1894년 3월 28일 홍종우는 상하이의 동화양행에서 김옥균이 혼자 있는 틈을 타 리볼버 권총을 발사해 그를 암살했다. «갑신정변»",
+          "설명": "선택 인용은 3월 28일 동화양행에서 리볼버로 암살했다는 사실은 지지하지만, 김옥균이 혼자 있는 틈이었다는 세부 내용은 해당 인용문에 없다.",
+          "유형": "citation_gap",
+          "출처": [
+            "갑신정변"
+          ],
+          "근거문맥": [
+            {
+              "end": 28483,
+              "id": 37,
+              "kind": "quote",
+              "section_id": "section-4",
+              "source_hash": "431712762019170d7c5e071287592c5da41f718f2a5a667cd534221b7139b7f2",
+              "source_id": "갑신정변",
+              "start": 28198,
+              "text": "3월 27일 김옥균은 인편으로 윤치호에게 오후 1시 반에 자신이 숙박하고 있는 동화양행(일본 호텔)로 와서 함께 갈 곳이 있다는 내용의 편지를 급히 보낸다. 그러나 윤치호는 학교 일이 바쁘다는 이유로 김옥균의 제안을 사양한다. 3월 28일 홍종우는 상하이에 있는 호텔 둥허 양행(東和洋行)에서 리볼버 권총으로 김옥균을 저격하여 암살하였다. 이후 윤치호는 신변의 안전을 위해 피신한다.\n김옥균은 홍종우를 완전히 자기 사람으로 생각했다. 홍종우는 그만큼 암살 의도를 철저히 숨기고 위장 접근에 완벽하게 성공했다. "
+            }
+          ]
+        },
+        {
+          "근거번호": [
+            46
+          ],
+          "본문발췌": "김옥균은 일본인 수행원들에 의해 병원으로 옮겨졌으나 같은 날 오후 4시경 사망했다. «김옥균»",
+          "설명": "선택 인용은 병원 이송과 오후 4시경 사망은 뒷받침하지만, 암살일인 3월 28일과 연결되는 ‘같은 날’이라는 날짜 귀속은 인용문 자체에 없다.",
+          "유형": "citation_gap",
+          "출처": [
+            "김옥균"
+          ],
+          "근거문맥": [
+            {
+              "end": 27051,
+              "id": 46,
+              "kind": "quote",
+              "section_id": "section-4",
+              "source_hash": "116e1b41336d8fae13a09fb5386804954c762de3d99273326f731affc17e54a5",
+              "source_id": "김옥균",
+              "start": 26798,
+              "text": "와다가 나가자 김옥균의 주위에 아무도 없음을 눈치챈 자객 홍종우가 때를 놓치지 않고 김옥균을 향해 리볼버 권총을 발사하였다.그는 곧 일본인 수행원들에 의해 병원으로 옮겨졌지만 오후 4시 경 사망한다 (홍종우를 보낸 곳은 수구당 또는 민씨파라는 의견도 있다). 당시 그의 나이 향년 44세였다.\n미행의 그림자를 예상한 윤치호는 김옥균의 암살 소식을 접하고 수시로 거처를 이동하였다.\n\n\n=== 부관참시와 복권 ===\n\n\n==== 공개 부관참시 ====\n\n"
+            }
+          ]
+        },
+        {
+          "근거번호": [
+            47
+          ],
+          "본문발췌": "일본은 김옥균 생전에는 그를 부담스럽게 취급했지만, 암살 뒤에는 사건을 조선 정부와 청나라를 비난하고 대외적 여론을 조성하는 데 활용했다. «김옥균»",
+          "설명": "선택 인용은 일본이 김옥균의 죽음을 언론에서 애도·추모하고 청일전쟁을 향한 국민감정 형성에 이용했다는 내용은 지지하지만, 조선 정부와 청나라를 비난하는 데 활용했다는 구체적 목적까지는 지지하지 않는다.",
+          "유형": "citation_gap",
+          "출처": [
+            "김옥균"
+          ],
+          "근거문맥": [
+            {
+              "end": 27927,
+              "id": 47,
+              "kind": "quote",
+              "section_id": "section-4",
+              "source_hash": "116e1b41336d8fae13a09fb5386804954c762de3d99273326f731affc17e54a5",
+              "source_id": "김옥균",
+              "start": 27610,
+              "text": "또한 이 사건으로 그의 가까운 친척들은 항렬자를 균에서 규로 바꾸기도 한다.\n홍종우가 돌아오자 고종이 버선발로 뛰어나와 맞았다고 한다. 김옥균의 죽음은 곧바로 동북아 정세의 외교적으로 확대되었고, 김옥균이 일본에 망명해 있을 때, 이용가치가 없다고 판단했던 일제는 곧바로 이중적인 태도를 보이면서 언론매체 등을 통해 김옥균의 죽음을 애도하고 추모하는 등 분위기를 이끌어내고, 청일전쟁을 향한 일본제국의 국민감정으로 발전시키는 데 이용했다.\n갑신정변의 실패를 본 청년지사 박중양은 분노하였다. 특히 박중양은 김옥균을 유인해서 암살한 조선 조정을 잔인하다며 지탄하였다. "
+            }
+          ]
+        }
+      ],
+      "검토요약": "대부분의 사건 전개와 주요 사실은 선택 인용으로 뒷받침되지만, 일부 문장은 선택 인용에 없는 사상·세부 경위·인과·기간을 추가하거나 인용문보다 넓게 요약하고 있다. 따라서 해당 부분의 인용을 보강하거나 문장을 축소해야 한다.",
+      "검토계약": "source-context-review-v1",
+      "검토목록ID": "a4b74b951017cd4933123025b02b40ff436f70cbb96a66ea03fcccc5ab3c554d",
+      "판정": "needs_revision",
+      "제공범위": {
+        "additional_bytes": 94636,
+        "incomplete": true,
+        "omitted": 623,
+        "original_characters": 213546,
+        "original_items": 47,
+        "provided_characters": 42990,
+        "selected": 106
+      }
+    }
+  },
+  "failure": null,
+  "actual_model_requests": 27,
+  "journal_started": 27,
+  "completed_responses": 27,
+  "operations": {
+    "plan": 1,
+    "read_one": 12,
+    "select": 8,
+    "draft_section": 4,
+    "synthesize": 1,
+    "semantic_review": 1
+  },
+  "actual_model_ids": [
+    "gpt-5.6-luna"
+  ],
+  "tokens": {
+    "input_tokens": 365823,
+    "output_tokens": 14542,
+    "reasoning_tokens": 3153
+  },
+  "actual_reads": 12,
+  "unique_reads": 10,
+  "read_documents": [
+    "동학 농민 혁명",
+    "청일 전쟁",
+    "갑오개혁",
+    "김옥균",
+    "전봉준",
+    "임오군란",
+    "갑신정변",
+    "명성황후",
+    "동학",
+    "갑신정변",
+    "개화파",
+    "전봉준"
+  ],
+  "report_id": null,
+  "run_created_at": "2026-11-11T06:56:06.386505+00:00",
+  "run_updated_at": "2026-11-11T06:57:26.967061+00:00",
+  "elapsed_boundary": "adopted run creation/update timestamps; no runner duration or ledger delta inferred",
+  "identity": {
+    "protocol": "controlled-research-comparison-v1",
+    "question": "1894년에 일어난 주요 사건들은 무엇이고 각각의 원인은 무엇인가?",
+    "model_id": "gpt-5.6-luna",
+    "provider_settings": {
+      "reasoning_effort": "low",
+      "max_completion_tokens": 4096,
+      "temperature": "omitted: provider default (not controlled)",
+      "seed": "omitted: not fixed",
+      "input_proxy_limit_bytes": 272000,
+      "sdk_automatic_retries": 0,
+      "draft_evidence_max_spans": 128,
+      "draft_evidence_max_utf8_bytes": 96000
+    },
+    "corpus_sha256": "583dbf10ee811796c80302e005bef71812476059dc79c3b5dd2fd3ea251e4ec7",
+    "source_hashes": {
+      "검토문맥.py": "33388a70fbca864b466e14b9adddc81c858d33925f1d71588c28b96d8154249a",
+      "교안연구.py": "b7ca2bebc38776247c80064014f134a829dbcced711a84bc055e0bc73467c5e2",
+      "근거보완.py": "5e178411ed8db4b2c872be6081f73fa74219397d4288a43beffe3943e228ebd5",
+      "명령해석.py": "a8bb23168a535dc9a40dac63ad0299e932328cfccb6a3a2950e960cdb2ad9a0c",
+      "모델대역.py": "89672e64a3556ed448042859d87b5105b91f27938c9b17ecf064f2ec8a13824e",
+      "보고서근거.py": "73187ad7a3f0f270778008f285576819a762d2e08041352db9d244568a6130db",
+      "보고서도식.py": "ddf5c42d46bc86dfe883714ffb5f8666c765a541142acf26febca4f1651ced48",
+      "보고서변환.py": "6dbd31927da7a23e2f6651605274e0df3127db5ae7ae460c65ab6e4331d729fc",
+      "보고서보완.py": "726c0fa03dfccd04497983bddb2ba5eb5bb301e09cc46cd26cddac2eaae07c74",
+      "보고서표현.py": "826063df92b15d394717fe962049426a71e64e6c96e4ee899f8ce3a24b94e2e8",
+      "보고서품질.py": "3887496cbce8332eaf38624c45f4f1825faae38d040083e7aa5df29236885790",
+      "시험문서.py": "9a7e03ed34e0eb19dfa93b6f2b14a79074af3a7f22f33c393cefd72e74009ca3",
+      "실제모델.py": "80ae3bfda7725342699acc38b0455f8bed8b72e5494a8f760501543ee53ff766",
+      "실제연구제어.py": "4e032501f2bc935914ffdb54d6f7c94f791d0a3980e2a5eb70fed25fd8672ab4",
+      "실행삭제.py": "1c0d2fc411355595efe20f177c0e4ecabea440201c9732193664fe90c70b2b9b",
+      "실행제어.py": "959c043e107f9fa82df449f7fb60334b2f2dad36afcbebc296837c74255c2313",
+      "실험설정.py": "f023a75f445b510b1a3d6ea086c8a351e65d71e9c44af5e0e3a30fb12ac2b5dd",
+      "앱.py": "427132de7882e7a87240e59609a03ea8c2ada88a7000ac121c654c9cef172ec2",
+      "야후결과파서.py": "64e602c20a5df7081fac1bc8828ba40e75715a71ad539c741530ab6a7f338ed7",
+      "연구그래프.py": "9ecff4240b5011da08c2c2b293e9d49f2ca660caacd48241e6ee895f58a150ad",
+      "연구앱.py": "97cc149a740eeb286b994fb531a5c4fb18e4ef1fa3e3f57b837e8ba9281f389d",
+      "원문구간.py": "b88839050ede1b3f598496773ea0a7caa711916ed9f28da57bc3158275323ae8",
+      "웹계약.py": "7a1dfba4d73a7755c7801a04e5c2794f619e2ecd03b4526a9e94c77d0e1afbcb",
+      "웹연구.py": "c76295547bd79b189876e59214098b3c84b67552b81d079e9b45def15ddc84e8",
+      "웹자료.py": "6ba0bbd0fc309e56f1dae056c80dbf119c5b75e91268f7ab3bc002e3043a9d42",
+      "웹자료저장소.py": "5a7d7fa231631a64ddb5da283a8f27231b440e106982a0e99f8795379c030d04",
+      "저장소.py": "bff9ea9d64fff72203c57ae1bf4f4045db2dc084e16241309855ecfb0a00db8c",
+      "접근경계.py": "69b71b4bf821c31cea1964af9b8058c4a5071fe263ba97fd3a460742dd5e6890",
+      "종합계약.py": "c55fbe1b7b2477ddb219e69af641beab20040dc59864565e4a50a61a181c55b6",
+      "호출예산.py": "42216cb8f6fe9e36602214a7c01079b157ddcb7c8a56ca6434fc6b5d18366bfb",
+      "활동기록.py": "a9bbd77a72954d6e339fb8edd61038b3432d23ed76cbc3081e750c7078ea186a"
+    },
+    "runner_sha256": "d0da0b1eebedb8bacc4b19580fabb09f5e56cba9ece6ffe841df8ca3d8035d3c",
+    "arms": {
+      "baseline": {
+        "arm": "baseline",
+        "section_count": 4,
+        "reads_per_section": 3,
+        "max_rounds": 2,
+        "single_actor": false,
+        "assignment": true,
+        "role": true,
+        "region": true,
+        "redelegation": true,
+        "reads_per_round": 12,
+        "max_actual_requests": 55,
+        "automatic_retry": false,
+        "min_visible_body_chars": 2000,
+        "max_references_per_section": 16,
+        "correction_attempts": 1,
+        "correction_max_calls": 2
+      },
+      "single": {
+        "arm": "single",
+        "section_count": 4,
+        "reads_per_section": 3,
+        "max_rounds": 2,
+        "single_actor": true,
+        "assignment": true,
+        "role": true,
+        "region": true,
+        "redelegation": true,
+        "reads_per_round": 12,
+        "max_actual_requests": 55,
+        "automatic_retry": false,
+        "min_visible_body_chars": 2000,
+        "max_references_per_section": 16,
+        "correction_attempts": 1,
+        "correction_max_calls": 2
+      },
+      "width2": {
+        "arm": "width2",
+        "section_count": 2,
+        "reads_per_section": 3,
+        "max_rounds": 2,
+        "single_actor": false,
+        "assignment": true,
+        "role": true,
+        "region": true,
+        "redelegation": true,
+        "reads_per_round": 6,
+        "max_actual_requests": 55,
+        "automatic_retry": false,
+        "min_visible_body_chars": 2000,
+        "max_references_per_section": 16,
+        "correction_attempts": 1,
+        "correction_max_calls": 2
+      },
+      "depth1": {
+        "arm": "depth1",
+        "section_count": 4,
+        "reads_per_section": 1,
+        "max_rounds": 2,
+        "single_actor": false,
+        "assignment": true,
+        "role": true,
+        "region": true,
+        "redelegation": true,
+        "reads_per_round": 4,
+        "max_actual_requests": 55,
+        "automatic_retry": false,
+        "min_visible_body_chars": 2000,
+        "max_references_per_section": 16,
+        "correction_attempts": 1,
+        "correction_max_calls": 2
+      },
+      "no-assignment": {
+        "arm": "no-assignment",
+        "section_count": 4,
+        "reads_per_section": 3,
+        "max_rounds": 2,
+        "single_actor": false,
+        "assignment": false,
+        "role": true,
+        "region": true,
+        "redelegation": true,
+        "reads_per_round": 12,
+        "max_actual_requests": 55,
+        "automatic_retry": false,
+        "min_visible_body_chars": 2000,
+        "max_references_per_section": 16,
+        "correction_attempts": 1,
+        "correction_max_calls": 2
+      },
+      "no-role": {
+        "arm": "no-role",
+        "section_count": 4,
+        "reads_per_section": 3,
+        "max_rounds": 2,
+        "single_actor": false,
+        "assignment": true,
+        "role": false,
+        "region": true,
+        "redelegation": true,
+        "reads_per_round": 12,
+        "max_actual_requests": 55,
+        "automatic_retry": false,
+        "min_visible_body_chars": 2000,
+        "max_references_per_section": 16,
+        "correction_attempts": 1,
+        "correction_max_calls": 2
+      },
+      "no-region": {
+        "arm": "no-region",
+        "section_count": 4,
+        "reads_per_section": 3,
+        "max_rounds": 2,
+        "single_actor": false,
+        "assignment": true,
+        "role": true,
+        "region": false,
+        "redelegation": true,
+        "reads_per_round": 12,
+        "max_actual_requests": 55,
+        "automatic_retry": false,
+        "min_visible_body_chars": 2000,
+        "max_references_per_section": 16,
+        "correction_attempts": 1,
+        "correction_max_calls": 2
+      },
+      "no-redelegation": {
+        "arm": "no-redelegation",
+        "section_count": 4,
+        "reads_per_section": 3,
+        "max_rounds": 2,
+        "single_actor": false,
+        "assignment": true,
+        "role": true,
+        "region": true,
+        "redelegation": false,
+        "reads_per_round": 12,
+        "max_actual_requests": 55,
+        "automatic_retry": false,
+        "min_visible_body_chars": 2000,
+        "max_references_per_section": 16,
+        "correction_attempts": 1,
+        "correction_max_calls": 2
+      }
+    },
+    "notes": {
+      "baseline": "4절×3읽기, 최대2라운드의 격리 멀티 기준. 모델의 조기 읽기 종료는 실제 수치로 남긴다.",
+      "single": "한 조사자·공통 읽은문서/메모·공통 원문 구간 문맥을 모든 절 작성에 사용. 1라운드 최대12고유문서. 다중 역할별 고립 문맥의 직렬 실행이 아니다. 공통 기획/종합/최종 검토 단계는 유지하고 조사·집필 주체만 하나다. 원문 전체가 아닌 동일 구간선택/크기 상한을 적용한다.",
+      "width2": "폭만2절로 축소하므로 라운드 읽기 총량도12→6이다. 동일 총량 비교가 아니다.",
+      "depth1": "절당 읽기만3→1이므로 라운드 총량12→4이다.",
+      "no-assignment": "목차/출력 절 구조는 유지하지만 모든 조사자의 맞춤 지시·시작문서 배정을 제거하고 전체 질문을 전달한다. 추가 select 요청 가능.",
+      "no-role": "기획 명단과 선택/작성의 전문 역할을 중립 역할로 대체한다.",
+      "no-region": "다른 절 seed·읽은문서의 avoid 전달만 제거한다. 자기 중복 읽기 금지는 유지한다.",
+      "no-redelegation": "부족절 재위임만 금지한다. 부족은 성공으로 승격하지 않는다."
+    },
+    "statistical_superiority_claimed": false,
+    "max_actual_requests_per_arm": 55,
+    "automatic_retry": false
+  },
+  "adopted": true,
+  "adopted_at": "2026-11-11T08:16:12.734699+00:00",
+  "adoption_bundle_sha256": "27368aa17870b9ccf353dd82109452ff567ba4dd5f0d5802c319328d66856501",
+  "budget_delta": null,
+  "elapsed_seconds": null
+}

@@ -7,6 +7,10 @@ it('현재 local 의미 검토 실패만 명시적인 1회 보완 버튼을 제�
 });
 import {renderToStaticMarkup} from 'react-dom/server';
 import {RunFailureNotice} from './실행실패';
+it('보완 범위 초과 판정은 한국어 사유로 표시한다',()=>{
+ const run={...eligible,quality:{...eligible.quality,semantic_review:{...eligible.quality.semantic_review,문제:[{유형:'scope_expansion',설명:'새 원인 추가',본문발췌:'추가한 주장',출처:[]}]}}};
+ expect(renderToStaticMarkup(<RunFailureNotice run={run}/>)).toContain('보완 허용 범위 초과');
+});
 it('이전 기록·웹·불명 판정·기시도·잘못된 식별은 보완을 노출하지 않는다',()=>{
  const cases=[{...eligible,report_id:'already-published'}, {...eligible,quality:{...eligible.quality,reasons:['semantic_review_failed','semantic_review_invalid']}}, {...eligible,quality:{...eligible.quality,reasons:['static_failed']}}, {...eligible,source_mode:'web'}, {...eligible,source_mode:undefined}, {...eligible,run_id:''}, {...eligible,control_revision:0}, {...eligible,control_revision:undefined}, {...eligible,control_revision:1.5}, {...eligible,status:'completed'}, {...eligible,quality:{...eligible.quality,reasons:['semantic_review_invalid']}}, {...eligible,quality:{...eligible.quality,semantic_review:{...eligible.quality.semantic_review,통과:true}}}, ...[0,3].map(n=>({...eligible,quality:{...eligible.quality,semantic_review:{...eligible.quality.semantic_review,문제:Array(n).fill(eligible.quality.semantic_review.문제[0])}}})), ...['pending','applied','passed','failed','completed'].map(status=>({...eligible,correction_state:{status,source_revision:1,max_model_calls:2}}))];
  for(const run of cases)expect(renderToStaticMarkup(<RunFailureNotice run={run as any} readOnly={false}/>)).not.toContain('data-testid="run-correction"');

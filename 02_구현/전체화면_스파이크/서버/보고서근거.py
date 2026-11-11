@@ -10,13 +10,13 @@ from 서버.교안연구 import ResearchContractError
 from 서버.보고서품질 import plain_markdown, validate_section, visible_markdown
 from 서버.원문구간 import source_ranges
 
-DRAFT_PROTOCOL = "sentence-paragraph-evidence-v3"
+DRAFT_PROTOCOL = "sentence-cited-units-v5"
 
 DRAFT_SYSTEM_RULES = (
     "각 항목에는 날짜·행위·원인 관계 중 하나의 검증 가능한 사실을 명확하게 써라. "
     "기간과 제도 목록, 서로 다른 사건 전개를 긴 복합 문장 하나로 묶지 말고 짧게 나누어라. "
     "각 항목의 모든 사실을 지지하는 제공 구간 번호를 빠짐없이 선택하라. "
-    "여러 구간이 필요하면 같은 문장번호에 여러 관계를 쓰되 전체16관계를 지켜라. "
+    "여러 구간이 필요하면 내용=null인 연속 추가 근거 단위를 쓰라. "
     "관계를 절약하려 독립 사실을 합치거나 인용에 없는 의도·종결·직접 원인을 덧붙이지 마라. "
     "자료의 달력·날짜 차이는 자료별 서술로 구분하고 불명확한 달력을 임의로 환산하지 마라. "
 )
@@ -54,20 +54,19 @@ def _response_schema(token, count):
     return {
         "type": "object",
         "additionalProperties": False,
-        "required": ["근거목록ID", "문장", "근거관계", "충분", "부족"],
+        "required": ["근거목록ID", "문장", "충분", "부족"],
         "properties": {
             "근거목록ID": {"type": "string", "enum": [token]},
-            "문장": {"type": "array", "minItems": 1, "maxItems": 12, "items": {"type": "string"}},
-            "근거관계": {
+            "문장": {
                 "type": "array",
                 "minItems": 0,
                 "maxItems": 16,
                 "items": {
                     "type": "object",
                     "additionalProperties": False,
-                    "required": ["문장번호", "근거구간"],
+                    "required": ["내용", "근거구간"],
                     "properties": {
-                        "문장번호": {"type": "integer", "enum": list(range(1, 13))},
+                        "내용": {"type": ["string", "null"]},
                         "근거구간": {"type": "integer", "enum": list(range(1, count + 1))},
                     },
                 },
@@ -158,15 +157,19 @@ def build_draft_request(assignment: dict, notes: list, sources: dict[str, str]) 
         "최종 보고서의 가시 본문 2,000자 기준은 별도 검사한다. "
         "분량과 근거가 충돌하면 검증을 완화하거나 세부 사실로 채우지 말고 자료 부족을 반환한다. "
         'JSON만: {"근거목록ID":"제시된 evidence_set_id",'
-        '"문장":["본문 문장"],"근거관계":[{"문장번호":1,"근거구간":1}],"충분":true,"부족":""}. '
-        "루트의 다섯 필드와 관계의 두 필드는 모두 필수이며 추가 필드는 금지다. "
-        "근거목록ID는 evidence_set_id와 정확히 같아야 한다. 근거구간은 제시된 정수 id만 쓴다. "
-        "문장은 가시 Markdown 문자열 1~12개, 문장번호는 1부터 실제 문장 수까지다. "
-        "근거관계는 전체 0~16개이며 각 항목은 문장번호와 단일 근거구간 정수 한 쌍이다. "
-        "한 문장에 여러 구간, 다른 문장에 같은 구간은 허용하지만 같은 쌍의 중복은 금지다. "
-        "문장 텍스트는 한 번만 작성하고 관계에 인용문·주장·출처 표식을 다시 쓰지 마라. "
-        "«출처» 예약 표식은 금지한다. 충분=true면 모든 문장에 관계가 하나 이상 필요하다. "
-        "자료가 부족하면 충분=false와 구체적 부족 사유를 쓰며 빈 관계·부분 무참조를 허용한다. "
+        '"문장":[{"내용":"본문 문장","근거구간":1},'
+        '{"내용":null,"근거구간":2}],"충분":true,"부족":""}. '
+        "루트의 네 필드와 단위 항목의 두 필드는 모두 필수이며 추가 필드는 금지다. "
+        "근거목록ID는 evidence_set_id와 정확히 같아야 한다. 근거구간은 1부터 제시된 정수 id만 쓴다. "
+        "문장은 전체 인용 단위를 담은 단일 목록 최대16개다. 각 단위는 정확히 하나의 근거구간을 쓴다. "
+        "새 문장 단위는 내용에 가시 Markdown 문장, 근거구간에 주근거 번호를 쓴다. "
+        "추가 근거 단위는 내용=null, 근거구간에 추가 번호를 쓴다. "
+        "추가 근거는 반드시 최근 새 문장 바로 뒤에 연속 배치한다. 첫 새 문장 전에는 추가 근거를 쓸 수 없다. "
+        "다른 문장에 같은 구간은 허용하지만 같은 문장과 구간의 중복은 금지다. "
+        "내용은 한 번만 작성하고 추가 근거에 인용문·주장·출처 표식을 다시 쓰지 마라. "
+        "«출처» 예약 표식은 금지한다. 충분=true면 최소1문장과 빈 부족 사유가 필요하다. "
+        "자료가 부족하면 충분=false와 구체적 부족 사유를 쓰며 빈 문장 목록을 허용한다. "
+        "불충분이어도 반환한 문장은 모두 최소1개의 근거구간을 가져야 한다. "
         "번호를 문자열·소수·bool로 쓰거나 제시하지 않은 ID를 쓰지 마라. " + DRAFT_SYSTEM_RULES
     )
 
@@ -226,6 +229,31 @@ def build_draft_request(assignment: dict, notes: list, sources: dict[str, str]) 
     )
 
 
+def encode_citation_units(statements: list[dict]) -> list[dict]:
+    """내부에서 명시적으로 선택한 논리 문장만 인코딩한다. 모델 응답 복구에 쓰지 않는다.
+
+    관계를 추론·절단·중복 제거하지 않는다. 상한과 offered ID는 수신 경계가 검증한다.
+    """
+    if type(statements) is not list or any(
+        type(item) is not dict
+        or set(item) != {"내용", "근거구간"}
+        or type(item["내용"]) is not str
+        or type(item["근거구간"]) is not list
+        or not item["근거구간"]
+        or any(type(ref) is not int for ref in item["근거구간"])
+        for item in statements
+    ):
+        raise ResearchContractError("citation units: invalid logical statements")
+    units = []
+    for item in statements:
+        for index, ref in enumerate(item["근거구간"]):
+            units.append({
+                "내용": item["내용"] if index == 0 else None,
+                "근거구간": ref,
+            })
+    return units
+
+
 def materialize_section(raw: str, request: DraftRequest, sources: dict[str, str]) -> dict:
     if (
         type(request) is not DraftRequest
@@ -251,46 +279,44 @@ def materialize_section(raw: str, request: DraftRequest, sources: dict[str, str]
         raise ResearchContractError("span response: schema") from exc
     if (
         type(obj) is not dict
-        or set(obj) != {"근거목록ID", "문장", "근거관계", "충분", "부족"}
+        or set(obj) != {"근거목록ID", "문장", "충분", "부족"}
         or type(obj["근거목록ID"]) is not str
         or type(obj["충분"]) is not bool
         or type(obj["부족"]) is not str
         or type(obj["문장"]) is not list
-        or not 1 <= len(obj["문장"]) <= 12
-        or any(type(item) is not str for item in obj["문장"])
-        or type(obj["근거관계"]) is not list
+        or any(
+            type(item) is not dict
+            or set(item) != {"내용", "근거구간"}
+            or type(item["근거구간"]) is not int
+            or not (type(item["내용"]) is str or item["내용"] is None)
+            for item in obj["문장"]
+        )
     ):
         raise ResearchContractError("span response: schema")
     if obj["근거목록ID"] != request._evidence_set_id:
         raise ResearchContractError("span response: evidence set")
-    if obj["충분"] == bool(obj["부족"].strip()):
+    if obj["충분"] == bool(obj["부족"].strip()) or (obj["충분"] and not obj["문장"]):
         raise ResearchContractError("span response: sufficiency")
     pool = dict(enumerate(request._catalog, 1))
     body, evidence = [], []
-    if len(obj["근거관계"]) > 16:
+    if len(obj["문장"]) > 16:
         raise ResearchContractError("span response: reference limit")
-    grouped = [[] for _ in obj["문장"]]
-    pairs = set()
-    for relation in obj["근거관계"]:
-        if (
-            type(relation) is not dict
-            or set(relation) != {"문장번호", "근거구간"}
-            or type(relation["문장번호"]) is not int
-            or type(relation["근거구간"]) is not int
-        ):
-            raise ResearchContractError("span response: schema")
-        number, ref = relation["문장번호"], relation["근거구간"]
-        if not 1 <= number <= len(grouped):
-            raise ResearchContractError("span response: statement index")
-        if ref not in pool:
-            raise ResearchContractError("span response: unoffered ID")
-        if (number, ref) in pairs:
-            raise ResearchContractError("span response: duplicate reference")
-        pairs.add((number, ref))
-        grouped[number - 1].append(ref)
-    for item, refs in zip(obj["문장"], grouped):
-        if obj["충분"] and not refs:
+    statements = []
+    for unit in obj["문장"]:
+        if unit["내용"] is not None:
+            statements.append({"내용": unit["내용"], "근거구간": [unit["근거구간"]]})
+        else:
+            if not statements:
+                raise ResearchContractError("span response: statement reference")
+            statements[-1]["근거구간"].append(unit["근거구간"])
+    for sentence in statements:
+        item, refs = sentence["내용"], sentence["근거구간"]
+        if not refs:
             raise ResearchContractError("span response: sufficiency")
+        if any(ref not in pool for ref in refs):
+            raise ResearchContractError("span response: unoffered ID")
+        if len(set(refs)) != len(refs):
+            raise ResearchContractError("span response: duplicate reference")
         claim = visible_markdown(item)
         if "«" in item or "»" in item or "«" in claim or "»" in claim:
             raise ResearchContractError("span response: reserved citation")
@@ -330,4 +356,7 @@ def materialize_section(raw: str, request: DraftRequest, sources: dict[str, str]
         "부족": obj["부족"],
         "근거": evidence,
     }
+    # 빈 불충분 응답에는 발명한 본문을 넣지 않는다. 충분 초안은 종전 검증을 그대로 거친다.
+    if not obj["문장"]:
+        return canonical
     return validate_section(json.dumps(canonical, ensure_ascii=False), sources)

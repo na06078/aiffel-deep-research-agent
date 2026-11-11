@@ -8,6 +8,8 @@ export async function request<T>(path:string,body?:unknown):Promise<T> {
 export async function sendCommand(text:string,id:string,source_mode?:SourceMode):Promise<Admission> { return request<Admission>('/api/spike/commands',{text,client_request_id:id,...(source_mode===undefined?{}:{source_mode})}); }
 import type {RunArchive} from './시간계약';
 export const api={
+ retryRun:(id:string,control_revision:number,client_request_id:string)=>request<Admission>(`/api/spike/runs/${encodeURIComponent(id)}/retry`,{control_revision,client_request_id}),
+ cancelQueued:(id:string,client_request_id:string)=>request<{instruction_id:string;status:'cancelled'}>(`/api/spike/queue/${encodeURIComponent(id)}/cancel`,{client_request_id}),
  correction:(id:string,control_revision:number,client_request_id:string)=>request<CorrectionAdmission>(`/api/spike/runs/${encodeURIComponent(id)}/correction`,{control_revision,client_request_id}),
  presentation:(id:string,hash:string)=>request<ReportPresentation>(`/api/spike/reports/${encodeURIComponent(id)}/presentation?source_report_hash=${encodeURIComponent(hash)}&renderer_version=${encodeURIComponent(REPORT_RENDERER_VERSION)}`),
  exports:(id:string)=>request<ReportExports>(`/api/spike/reports/${encodeURIComponent(id)}/exports`),

@@ -169,6 +169,10 @@ def create_app(
     async def continue_queue(body: Continue):
         return app.state.service.continue_queue(body.client_request_id)
 
+    @app.post("/api/spike/queue/{instruction_id}/cancel")
+    async def cancel_queued(instruction_id: str, body: Continue):
+        return app.state.service.cancel_queued(instruction_id, body.client_request_id)
+
     @app.post("/api/spike/cancel")
     async def cancel(body: Cancel):
         return app.state.service.cancel(body.run_id, body.control_revision, body.client_request_id)
@@ -205,6 +209,10 @@ def create_app(
     @app.get("/api/spike/runs/{run_id}/archive")
     async def run_archive(run_id: str):
         return app.state.service.repo.archive(run_id)
+
+    @app.post("/api/spike/runs/{run_id}/retry", status_code=202)
+    async def retry_run(run_id: str, body: Correction):
+        return app.state.service.retry_run(run_id, body.control_revision, body.client_request_id)
 
     @app.post("/api/spike/runs/{run_id}/correction", status_code=202)
     async def correction(run_id: str, body: Correction):

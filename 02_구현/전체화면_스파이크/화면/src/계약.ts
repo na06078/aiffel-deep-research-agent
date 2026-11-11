@@ -41,6 +41,7 @@ export interface CorrectionState {
   automatic?:boolean; mode?:'evidence';
 }
 export interface RunSnapshot {
+  retry_of_run_id?: string;
   correction_state?: CorrectionState;
   run_id: string;
   question: string;

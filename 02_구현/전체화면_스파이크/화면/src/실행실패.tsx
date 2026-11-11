@@ -59,7 +59,7 @@ export function RunFailureNotice({run,readOnly=true}:{run:NoticeRun;readOnly?:bo
     const labels:Record<string,string>={
       contradiction:'사실 오류 지적 (모델 판정)',citation_gap:'근거 선택 누락',
       unsupported:'제공 근거로 지지되지 않는 주장',source_conflict:'출처 간 충돌',
-      insufficient_context:'제공 문맥 부족',
+      insufficient_context:'제공 문맥 부족',scope_expansion:'보완 허용 범위 초과',
     };
     return <section className="notice" role="alert" data-testid="run-quality-blocked" style={{overflowWrap:'anywhere'}}>
       <p>{invalid?'검토 응답을 확인할 수 없어 최종 제출을 차단했습니다. 내용 오류가 확정된 것은 아닙니다.':uncertain?'판정 불가: 읽은 자료의 충돌 또는 제공 문맥 부족으로 최종 제출을 보류했습니다. 내용 오류가 확정된 것은 아닙니다.':'모델의 근거 검토에서 보완이 필요하다고 판정해 최종 제출을 차단했습니다.'}</p>

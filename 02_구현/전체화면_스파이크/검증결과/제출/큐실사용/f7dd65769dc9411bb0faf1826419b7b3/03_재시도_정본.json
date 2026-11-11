@@ -1,0 +1,600 @@
+{
+  "selected_source_mode": "local",
+  "current_run_id": "5496ba155c4b487faad7e1767999172e",
+  "runs": [
+    {
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "question": "격리 큐 복구 원 질문",
+      "control_revision": 1,
+      "status": "failed",
+      "phase": "failed",
+      "plan": [
+        {
+          "section_id": "section-1",
+          "title": "합성 시험 1절: 격리 큐 복구 원 질문",
+          "assignee": "researcher-1"
+        },
+        {
+          "section_id": "section-2",
+          "title": "합성 시험 2절: 격리 큐 복구 원 질문",
+          "assignee": "researcher-2"
+        },
+        {
+          "section_id": "section-3",
+          "title": "합성 시험 3절: 격리 큐 복구 원 질문",
+          "assignee": "researcher-3"
+        },
+        {
+          "section_id": "section-4",
+          "title": "합성 시험 4절: 격리 큐 복구 원 질문",
+          "assignee": "researcher-4"
+        }
+      ],
+      "report_id": null,
+      "draft": null,
+      "quality": {
+        "passed": null,
+        "reasons": []
+      },
+      "parent_report_id": null,
+      "created_at": "2026-11-11T06:55:07.763618+00:00",
+      "updated_at": "2026-11-11T06:55:08.034488+00:00",
+      "mock_requests": 5,
+      "actual_model_requests": 0,
+      "source_mode": "local",
+      "failure": {
+        "code": "model_error",
+        "message": "의도적으로 발생시킨 합성 모델 오류",
+        "actor": "researcher-1"
+      }
+    },
+    {
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "question": "격리 큐 복구 원 질문",
+      "control_revision": 1,
+      "status": "running",
+      "phase": "researching",
+      "plan": [
+        {
+          "section_id": "section-1",
+          "title": "합성 시험 1절: 격리 큐 복구 원 질문",
+          "assignee": "researcher-1"
+        },
+        {
+          "section_id": "section-2",
+          "title": "합성 시험 2절: 격리 큐 복구 원 질문",
+          "assignee": "researcher-2"
+        },
+        {
+          "section_id": "section-3",
+          "title": "합성 시험 3절: 격리 큐 복구 원 질문",
+          "assignee": "researcher-3"
+        },
+        {
+          "section_id": "section-4",
+          "title": "합성 시험 4절: 격리 큐 복구 원 질문",
+          "assignee": "researcher-4"
+        }
+      ],
+      "report_id": null,
+      "draft": null,
+      "quality": {
+        "passed": null,
+        "reasons": []
+      },
+      "parent_report_id": null,
+      "created_at": "2026-11-11T06:55:08.590360+00:00",
+      "updated_at": "2026-11-11T06:55:08.590360+00:00",
+      "mock_requests": 5,
+      "actual_model_requests": 0,
+      "source_mode": "local",
+      "retry_of_run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "retry_queue_pause": {
+        "reason": "model_error"
+      }
+    }
+  ],
+  "queue": [
+    {
+      "instruction_id": "963a2c7001b849379ba8a747e5d678bb",
+      "text": "두 번째 보존할 지시",
+      "raw_text": "/큐 두 번째 보존할 지시",
+      "source_mode": "local",
+      "status": "queued"
+    }
+  ],
+  "queue_paused": true,
+  "queue_pause_reason": "model_error",
+  "protocol_version": 1,
+  "source_modes": [
+    "local"
+  ],
+  "mode": "spike",
+  "provider": "test-double",
+  "waiting": [
+    {
+      "gate_id": "1f8e338809274309982766a9c9cfe79e",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "control_revision": 1,
+      "actor": "researcher-1",
+      "section_id": "section-1",
+      "created_at": "2026-11-11T06:55:08.628965+00:00",
+      "is_stale": false
+    },
+    {
+      "gate_id": "2e8db8956da1404e90aeed6ff4d3ddd4",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "control_revision": 1,
+      "actor": "researcher-2",
+      "section_id": "section-2",
+      "created_at": "2026-11-11T06:55:08.635837+00:00",
+      "is_stale": false
+    },
+    {
+      "gate_id": "ebf2b42718e042a1bbba67f5cb48d042",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "control_revision": 1,
+      "actor": "researcher-3",
+      "section_id": "section-3",
+      "created_at": "2026-11-11T06:55:08.641869+00:00",
+      "is_stale": false
+    },
+    {
+      "gate_id": "244fc8b858e040ffb95c903fe86110f1",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "control_revision": 1,
+      "actor": "researcher-4",
+      "section_id": "section-4",
+      "created_at": "2026-11-11T06:55:08.647474+00:00",
+      "is_stale": false
+    }
+  ],
+  "events": [
+    {
+      "source_mode": "local",
+      "event_id": "0e65f36d480640b0a5e03ac3c0e62f8f",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 1,
+      "occurred_at": "2026-11-11T06:55:07.763618+00:00",
+      "type": "instruction.received",
+      "actor": "planner",
+      "recipient": null,
+      "status": "received",
+      "summary": "instruction.received"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "17a75e72156643ef8281ff6ef8261bdc",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 2,
+      "occurred_at": "2026-11-11T06:55:07.780442+00:00",
+      "type": "model.started",
+      "actor": "planner",
+      "recipient": null,
+      "status": "running",
+      "summary": "model.started"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "030924ca8d47453bb97fec6550273ae0",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 3,
+      "occurred_at": "2026-11-11T06:55:07.785945+00:00",
+      "type": "model.completed",
+      "actor": "planner",
+      "recipient": null,
+      "status": "completed",
+      "summary": "model.completed"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "c40301f7888b476a8280ebaec09efd4e",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 4,
+      "occurred_at": "2026-11-11T06:55:07.785945+00:00",
+      "type": "plan.created",
+      "actor": "planner",
+      "recipient": "dispatcher",
+      "status": "completed",
+      "summary": "plan.created"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "8f530859954e4ab2a56e8d4713e2ae07",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 5,
+      "occurred_at": "2026-11-11T06:55:07.795572+00:00",
+      "type": "assignment.created",
+      "actor": "dispatcher",
+      "recipient": "researcher-1",
+      "status": "completed",
+      "summary": "assignment.created"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "0911a43033754fa0971421c22132ac7c",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 6,
+      "occurred_at": "2026-11-11T06:55:07.795572+00:00",
+      "type": "assignment.created",
+      "actor": "dispatcher",
+      "recipient": "researcher-2",
+      "status": "completed",
+      "summary": "assignment.created"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "aa8df360c76943ca9bd74a45480573d9",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 7,
+      "occurred_at": "2026-11-11T06:55:07.795572+00:00",
+      "type": "assignment.created",
+      "actor": "dispatcher",
+      "recipient": "researcher-3",
+      "status": "completed",
+      "summary": "assignment.created"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "bbd596769dd54171a4f51ab53f36c046",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 8,
+      "occurred_at": "2026-11-11T06:55:07.795572+00:00",
+      "type": "assignment.created",
+      "actor": "dispatcher",
+      "recipient": "researcher-4",
+      "status": "completed",
+      "summary": "assignment.created"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "a82963d7856d4e7d911d61bee3adc7ce",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 9,
+      "occurred_at": "2026-11-11T06:55:07.795572+00:00",
+      "type": "instruction.applied",
+      "actor": "dispatcher",
+      "recipient": null,
+      "status": "applied",
+      "summary": "instruction.applied"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "6d71897a2a6142c5bae26e52211e7fa2",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 10,
+      "occurred_at": "2026-11-11T06:55:07.812274+00:00",
+      "type": "model.started",
+      "actor": "researcher-1",
+      "recipient": null,
+      "status": "waiting",
+      "summary": "model.started"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "c91190bfc96d42fcb08e0ecad926cac4",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 11,
+      "occurred_at": "2026-11-11T06:55:07.817822+00:00",
+      "type": "model.started",
+      "actor": "researcher-2",
+      "recipient": null,
+      "status": "waiting",
+      "summary": "model.started"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "f0cf4f28a69f4010bb9e29f6683fba68",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 12,
+      "occurred_at": "2026-11-11T06:55:07.823344+00:00",
+      "type": "model.started",
+      "actor": "researcher-3",
+      "recipient": null,
+      "status": "waiting",
+      "summary": "model.started"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "91993eac9584466d9f95a28d84f3dacc",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 13,
+      "occurred_at": "2026-11-11T06:55:07.830475+00:00",
+      "type": "model.started",
+      "actor": "researcher-4",
+      "recipient": null,
+      "status": "waiting",
+      "summary": "model.started"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "15fca8ef847b4362bee58db37d7e28de",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 14,
+      "occurred_at": "2026-11-11T06:55:07.867821+00:00",
+      "type": "instruction.queued",
+      "actor": "planner",
+      "recipient": null,
+      "status": "queued",
+      "summary": "instruction.queued"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "fd30ce57246c432191d5c8373d94e20b",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 15,
+      "occurred_at": "2026-11-11T06:55:07.906691+00:00",
+      "type": "instruction.queued",
+      "actor": "planner",
+      "recipient": null,
+      "status": "queued",
+      "summary": "instruction.queued"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "1760021e142a406185ffcf92ba553e75",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 16,
+      "occurred_at": "2026-11-11T06:55:08.030701+00:00",
+      "type": "model.failed",
+      "actor": "researcher-1",
+      "recipient": null,
+      "status": "failed",
+      "summary": "model.failed"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "542005ae73a344c594802e2bce48980b",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 17,
+      "occurred_at": "2026-11-11T06:55:08.095607+00:00",
+      "type": "result.superseded",
+      "actor": "researcher-2",
+      "recipient": null,
+      "status": "superseded",
+      "summary": "result.superseded"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "d04a2de802d04a7a8a561563d406bf5a",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 18,
+      "occurred_at": "2026-11-11T06:55:08.102526+00:00",
+      "type": "result.superseded",
+      "actor": "researcher-3",
+      "recipient": null,
+      "status": "superseded",
+      "summary": "result.superseded"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "dd0ddffee3684128b10bdc3920d6b99c",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 19,
+      "occurred_at": "2026-11-11T06:55:08.114939+00:00",
+      "type": "result.superseded",
+      "actor": "researcher-4",
+      "recipient": null,
+      "status": "superseded",
+      "summary": "result.superseded"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "75dc5b6863f0415d87f5f9c5a6959575",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1,
+      "seq": 20,
+      "occurred_at": "2026-11-11T06:55:08.517829+00:00",
+      "type": "instruction.cancelled",
+      "actor": "dispatcher",
+      "recipient": null,
+      "status": "cancelled",
+      "summary": "instruction.cancelled"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "d862568edb4b406b8c389fabac469adf",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "control_revision": 1,
+      "seq": 21,
+      "occurred_at": "2026-11-11T06:55:08.590360+00:00",
+      "type": "instruction.received",
+      "actor": "planner",
+      "recipient": null,
+      "status": "received",
+      "summary": "instruction.received"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "022f5a0d2e0d4f0dbb26c7d4c727b136",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "control_revision": 1,
+      "seq": 22,
+      "occurred_at": "2026-11-11T06:55:08.591811+00:00",
+      "type": "run.retried",
+      "actor": "dispatcher",
+      "recipient": null,
+      "status": "received",
+      "summary": "run.retried"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "8ffa2e4d039d46d4b1c10ae2a01824e5",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "control_revision": 1,
+      "seq": 23,
+      "occurred_at": "2026-11-11T06:55:08.595959+00:00",
+      "type": "model.started",
+      "actor": "planner",
+      "recipient": null,
+      "status": "running",
+      "summary": "model.started"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "4a4b5f4dcea3482197594053478e03b9",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "control_revision": 1,
+      "seq": 24,
+      "occurred_at": "2026-11-11T06:55:08.606680+00:00",
+      "type": "model.completed",
+      "actor": "planner",
+      "recipient": null,
+      "status": "completed",
+      "summary": "model.completed"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "e39630dfa1aa46bc8f88430f13e5d4b8",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "control_revision": 1,
+      "seq": 25,
+      "occurred_at": "2026-11-11T06:55:08.606680+00:00",
+      "type": "plan.created",
+      "actor": "planner",
+      "recipient": "dispatcher",
+      "status": "completed",
+      "summary": "plan.created"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "a04b729b27af4828be178fe42dd48c94",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "control_revision": 1,
+      "seq": 26,
+      "occurred_at": "2026-11-11T06:55:08.617835+00:00",
+      "type": "assignment.created",
+      "actor": "dispatcher",
+      "recipient": "researcher-1",
+      "status": "completed",
+      "summary": "assignment.created"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "514a75e3ef2343e5b4df98a80749b525",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "control_revision": 1,
+      "seq": 27,
+      "occurred_at": "2026-11-11T06:55:08.617835+00:00",
+      "type": "assignment.created",
+      "actor": "dispatcher",
+      "recipient": "researcher-2",
+      "status": "completed",
+      "summary": "assignment.created"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "5611bc59d0b248988d09dbe9b104a667",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "control_revision": 1,
+      "seq": 28,
+      "occurred_at": "2026-11-11T06:55:08.617835+00:00",
+      "type": "assignment.created",
+      "actor": "dispatcher",
+      "recipient": "researcher-3",
+      "status": "completed",
+      "summary": "assignment.created"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "459f0f9366f44f16a6970c2c5b3aa19a",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "control_revision": 1,
+      "seq": 29,
+      "occurred_at": "2026-11-11T06:55:08.617835+00:00",
+      "type": "assignment.created",
+      "actor": "dispatcher",
+      "recipient": "researcher-4",
+      "status": "completed",
+      "summary": "assignment.created"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "f91c1045716043b0ae8d33d945ce2a5a",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "control_revision": 1,
+      "seq": 30,
+      "occurred_at": "2026-11-11T06:55:08.619330+00:00",
+      "type": "instruction.applied",
+      "actor": "dispatcher",
+      "recipient": null,
+      "status": "applied",
+      "summary": "instruction.applied"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "6118c45c4069468ea44a81008596a2d8",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "control_revision": 1,
+      "seq": 31,
+      "occurred_at": "2026-11-11T06:55:08.631227+00:00",
+      "type": "model.started",
+      "actor": "researcher-1",
+      "recipient": null,
+      "status": "waiting",
+      "summary": "model.started"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "c8fbb15e28cb42c2acface41109f3153",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "control_revision": 1,
+      "seq": 32,
+      "occurred_at": "2026-11-11T06:55:08.637889+00:00",
+      "type": "model.started",
+      "actor": "researcher-2",
+      "recipient": null,
+      "status": "waiting",
+      "summary": "model.started"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "3406436271ab4fac8a05664017276ddd",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "control_revision": 1,
+      "seq": 33,
+      "occurred_at": "2026-11-11T06:55:08.641869+00:00",
+      "type": "model.started",
+      "actor": "researcher-3",
+      "recipient": null,
+      "status": "waiting",
+      "summary": "model.started"
+    },
+    {
+      "source_mode": "local",
+      "event_id": "9fa24c457b914aacb9c87dbd1dea2757",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "control_revision": 1,
+      "seq": 34,
+      "occurred_at": "2026-11-11T06:55:08.651510+00:00",
+      "type": "model.started",
+      "actor": "researcher-4",
+      "recipient": null,
+      "status": "waiting",
+      "summary": "model.started"
+    }
+  ],
+  "events_has_more": false,
+  "high_watermark_seq": 34,
+  "mock_requests": 10,
+  "actual_model_requests": 0
+}

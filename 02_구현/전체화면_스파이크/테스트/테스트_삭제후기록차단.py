@@ -96,11 +96,9 @@ async def test_구간초안대기중_삭제는_늦은원응답과_조립결과�
                 ]
                 raw = json.loads(response["content"])
                 assert raw["근거목록ID"] == catalog["evidence_set_id"]
-                assert all(type(s) is str for s in raw["문장"])
-                assert raw["근거관계"] == [
-                    {"문장번호": 1, "근거구간": catalog["evidence"][0]["id"]}
-                ]
-                assert kwargs["response_schema"]["properties"]["근거관계"]["maxItems"] == 16
+                assert all(type(s) is dict and set(s) == {"내용", "근거구간"} for s in raw["문장"])
+                assert raw["문장"][0]["근거구간"] == catalog["evidence"][0]["id"]
+                assert kwargs["response_schema"]["properties"]["문장"]["maxItems"] == 16
                 self.entered.set()
                 await self.release.wait()
             return response

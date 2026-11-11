@@ -293,6 +293,57 @@ class ExecutionService:
         self.repo.save_revision(db, run)
         return run, admission
 
+    def retry_run(self, run_id, revision, request_id):
+        """실패한 현재 작업을 새 실행으로 접수한다. 원 실행과 큐 정지는 그대로다."""
+        if (
+            type(revision) is not int
+            or revision <= 0
+            or not isinstance(request_id, str)
+            or not 1 <= len(request_id) <= 200
+        ):
+            raise ApiError(422, "invalid_request", "요청 필드·타입을 확인해 주세요.")
+        body = {"action": "retry_run", "run_id": run_id, "control_revision": revision}
+        with self.repo.transaction() as (db, data):
+            duplicate = self.repo.duplicate(db, request_id, body)
+            if duplicate is not None:
+                return duplicate
+            original = self.repo.run(data, run_id)
+            if original is None:
+                raise ApiError(404, "not_found", "실행이 없습니다.")
+            if data["current_run_id"] != run_id or original["control_revision"] != revision:
+                raise ApiError(409, "revision_conflict", "현재 실행·버전이 아닙니다.")
+            if original["status"] not in {"failed", "blocked", "cancelled", "interrupted"} or any(
+                r["status"] == "running" for r in data["runs"]
+            ):
+                raise ApiError(
+                    409, "retry_unavailable", "종료된 현재 실패 작업만 재시도할 수 있습니다."
+                )
+            source_mode = original.get("source_mode", "local")
+            if source_mode not in self.source_modes:
+                raise ApiError(
+                    409, "source_mode_unavailable", "원래 자료 연결을 사용할 수 없습니다."
+                )
+            run, admission = self.start(
+                db, data, original["question"], uid(), source_mode=source_mode
+            )
+            run["retry_of_run_id"] = run_id
+            if data["queue_paused"]:
+                run["retry_queue_pause"] = {"reason": data["queue_pause_reason"]}
+            self.repo.save_revision(db, run)
+            self.repo.event(
+                db,
+                run["run_id"],
+                run["control_revision"],
+                "run.retried",
+                "dispatcher",
+                input=body,
+                output=admission,
+                status="received",
+            )
+            self.repo.remember(db, request_id, body, admission)
+        self.spawn(run["run_id"], run["control_revision"], run["question"])
+        return admission
+
     def start_next_queue(self):
         with self.repo.transaction() as (db, data):
             run = self.take_next(db, data)
@@ -303,6 +354,12 @@ class ExecutionService:
 
     def take_next(self, db, data):
         current = self.repo.run(data, data["current_run_id"])
+        # 실제 자동 보완의 성공도 명시 재시도 전의 큐 정지를 풀 권한은 없다.
+        # 큐 계속은 이 새 실행의 보호 표식을 명시적으로 해제한다.
+        if current and current["status"] == "completed" and "retry_queue_pause" in current:
+            data.update(
+                queue_paused=True, queue_pause_reason=current["retry_queue_pause"]["reason"]
+            )
         if data["queue_paused"] or not data["queue"] or current and current["status"] == "running":
             return None
         item = data["queue"][0]
@@ -654,12 +711,53 @@ class ExecutionService:
             self.gates[gate_id].set_result(outcome)
         return {"released_gate_ids": released}
 
+    def cancel_queued(self, instruction_id, request_id):
+        """정확히 대기 중인 항목 하나만 제거한다. 재전송은 최초 응답을 반환한다."""
+        if not isinstance(request_id, str) or not 1 <= len(request_id) <= 200:
+            raise ApiError(422, "invalid_request", "요청 필드·타입을 확인해 주세요.")
+        body = {"action": "cancel_queued", "instruction_id": instruction_id}
+        with self.repo.transaction() as (db, data):
+            duplicate = self.repo.duplicate(db, request_id, body)
+            if duplicate is not None:
+                return duplicate
+            index = next(
+                (
+                    i
+                    for i, item in enumerate(data["queue"])
+                    if item["instruction_id"] == instruction_id
+                ),
+                None,
+            )
+            if index is None:
+                raise ApiError(
+                    404, "not_found", "대기 중인 지시가 없습니다. 이미 시작되었을 수 있습니다."
+                )
+            data["queue"].pop(index)
+            current = self.repo.run(data, data["current_run_id"])
+            response = {"instruction_id": instruction_id, "status": "cancelled"}
+            self.repo.event(
+                db,
+                current["run_id"] if current else "queue",
+                current["control_revision"] if current else 0,
+                "instruction.cancelled",
+                "dispatcher",
+                input=body,
+                output=response,
+                status="cancelled",
+            )
+            self.repo.remember(db, request_id, body, response)
+        return response
+
     def continue_queue(self, request_id):
         body = {"action": "continue"}
         with self.repo.transaction() as (db, data):
             duplicate = self.repo.duplicate(db, request_id, body)
             if duplicate is not None:
                 return duplicate
+            current = self.repo.run(data, data["current_run_id"])
+            if current and "retry_queue_pause" in current:
+                current.pop("retry_queue_pause")
+                self.repo.save_revision(db, current)
             data.update(queue_paused=False, queue_pause_reason=None)
             started = self.take_next(db, data)
             current = self.repo.run(data, data["current_run_id"])

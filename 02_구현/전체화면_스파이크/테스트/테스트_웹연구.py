@@ -12,6 +12,7 @@ import pytest
 from 서버.보고서근거 import build_draft_request
 from 서버.실제연구제어 import RealResearchService
 from 서버.웹계약 import WebSourceError
+from 테스트.근거단위대역 import citation_units
 
 ROOT = Path(__file__).resolve().parents[3]
 CORPUS = ROOT / "01_참고자료/원본데이터/corpus.json"
@@ -264,25 +265,28 @@ class WebModel:
             assert (
                 set(response_schema["required"])
                 == set(response_schema["properties"])
-                == {"근거목록ID", "문장", "근거관계", "충분", "부족"}
+                == {"근거목록ID", "문장", "충분", "부족"}
             )
-            assert response_schema["properties"]["문장"]["items"] == {"type": "string"}
-            relations = response_schema["properties"]["근거관계"]
-            assert relations["minItems"] == 0 and relations["maxItems"] == 16
-            assert relations["items"]["additionalProperties"] is False
-            assert set(relations["items"]["required"]) == {"문장번호", "근거구간"}
+            item = response_schema["properties"]["문장"]["items"]
+            assert item["properties"]["내용"] == {"type": ["string", "null"]}
+            refs = item["properties"]["근거구간"]
+            assert refs["type"] == "integer"
+            assert item["additionalProperties"] is False
+            assert set(item["required"]) == {"내용", "근거구간"}
             assert response_schema["properties"]["근거목록ID"]["enum"] == [
                 catalog["evidence_set_id"]
             ]
-            assert response_schema["properties"]["근거관계"]["items"]["properties"]["근거구간"][
-                "enum"
-            ] == [e["id"] for e in offered]
+            assert refs["enum"] == [e["id"] for e in offered]
             assert offered and all(e["end"] <= 20000 for e in offered)
             assert {e["source_id"] for e in offered} <= self.excerpts.keys()
             value = {
                 "근거목록ID": catalog["evidence_set_id"],
-                "문장": ["자료에 적힌 범위를 벗어나지 않는 대역 문장입니다. " * 88],
-                "근거관계": [{"문장번호": 1, "근거구간": offered[0]["id"]}],
+                "문장": citation_units([
+                    {
+                        "내용": "자료에 적힌 범위를 벗어나지 않는 대역 문장입니다. " * 88,
+                        "근거구간": [offered[0]["id"]],
+                    }
+                ]),
                 "충분": True,
                 "부족": "",
             }
@@ -918,7 +922,7 @@ async def test_웹절근거는_receipt와_실제읽힌앞20000자에_귀속한�
             if kwargs["context"]["operation"] == "draft_section":
                 obj = json.loads(result["content"])
                 if mutation == "missing":
-                    obj.pop("근거관계")
+                    obj["문장"][0].pop("근거구간")
                 else:
                     catalog = json.loads(args[1])
                     sid = catalog["evidence"][0]["source_id"]
@@ -944,7 +948,7 @@ async def test_웹절근거는_receipt와_실제읽힌앞20000자에_귀속한�
                     extra_catalog = json.loads(extra.prompts[1])
                     assert extra_catalog["evidence_set_id"] != catalog["evidence_set_id"]
                     obj["근거목록ID"] = extra_catalog["evidence_set_id"]
-                    obj["근거관계"][0]["근거구간"] = bad_id
+                    obj["문장"][0]["근거구간"] = bad_id
                 result["content"] = json.dumps(obj, ensure_ascii=False)
             return result
 

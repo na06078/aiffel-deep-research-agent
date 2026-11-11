@@ -1,6 +1,27 @@
 import {afterEach,expect,it,vi} from 'vitest';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {App} from './앱';
+import {QueueRecoveryControls} from './큐복구';
+it('실행/큐의 복구는 입력과 팝업 재열기 후에도 같은 요청 ID를 보존한다',async()=>{
+ hooks.active=true;const run={run_id:'failed-A',question:'원 질문',control_revision:1,status:'failed',phase:'failed',plan:[],quality:{passed:false,reasons:[]},actual_model_requests:0};
+ hooks.snapshot={provider:'test-double',mode:'spike',runs:[run],events:[],waiting:[],queue:[{instruction_id:'q1',text:'대기',status:'queued'}],current_run_id:'failed-A',queue_paused:true,high_watermark_seq:1};
+ vi.stubGlobal('location',{hash:'#/control'});replayOverride.value={open:false,replay:false,archive:null,projection:null,at:0};
+ const fetcher=vi.fn().mockRejectedValue(new Error('unknown outcome'));vi.stubGlobal('fetch',fetcher);
+ let tree=commandRender();findNode(tree,n=>n.props['data-testid']==='command-input').props.onChange({target:{value:'보존할 새 초안'}});
+ tree=commandRender();findNode(tree,n=>n.props['data-testid']==='menu-toggle').props.onClick();
+ tree=commandRender();findNode(tree,n=>n.type==='button'&&n.props.children==='실행/큐').props.onClick();
+ tree=commandRender();let control=findNode(tree,n=>n.type===QueueRecoveryControls);
+ expect(control).toBeTruthy();
+ findNode(QueueRecoveryControls(control.props),n=>n.props['data-testid']==='run-retry').props.onClick();await settle();
+ expect(fetcher).toHaveBeenCalledTimes(1);const first=fetcher.mock.calls[0][1].body;
+ tree=commandRender();expect(findNode(tree,n=>n.props['data-testid']==='command-input').props.value).toBe('보존할 새 초안');
+ findNode(tree,n=>n.props['data-testid']==='popup-close').props.onClick();
+ tree=commandRender();findNode(tree,n=>n.props['data-testid']==='menu-toggle').props.onClick();
+ tree=commandRender();findNode(tree,n=>n.type==='button'&&n.props.children==='실행/큐').props.onClick();
+ tree=commandRender();control=findNode(tree,n=>n.type===QueueRecoveryControls);
+ findNode(QueueRecoveryControls(control.props),n=>n.props['data-testid']==='run-retry').props.onClick();await settle();
+ expect(fetcher.mock.calls[1][1].body).toBe(first);
+});
 import {projectArchive} from './시간재생';
 import type {RunArchive} from './시간계약';
 import {PastRecordList} from './과거기록목록';

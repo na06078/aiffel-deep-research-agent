@@ -22,14 +22,37 @@ SPIKE = Path(__file__).resolve().parents[1]
 ROOT = SPIKE.parents[1]
 
 
+def validate_draft_schema(schema, offered):
+    """문장/추가근거 단일 목록의 네이티브 전체16상한을 독립 대조한다."""
+    assert schema["type"] == "object" and schema["additionalProperties"] is False
+    assert set(schema["required"]) == {"근거목록ID", "문장", "충분", "부족"}
+    props = schema["properties"]
+    assert set(props) == set(schema["required"])
+    assert props["근거목록ID"]["enum"] == [offered["evidence_set_id"]]
+    statements = props["문장"]
+    assert statements["type"] == "array" and statements["maxItems"] == 16
+    item = statements["items"]
+    assert item["type"] == "object" and item["additionalProperties"] is False
+    assert set(item["required"]) == {"내용", "근거구간"}
+    assert set(item["properties"]) == {"내용", "근거구간"}
+    assert type(item["properties"]["내용"]["type"]) is list
+    assert set(item["properties"]["내용"]["type"]) == {"string", "null"}
+    refs = item["properties"]["근거구간"]
+    assert all(type(value) is int for value in refs.get("enum", []))
+    assert refs == {
+        "type": "integer",
+        "enum": [span["id"] for span in offered["evidence"]],
+    }
+
+
 def validate_preflight(path, expected_unknown):
     """submit 전에 로컬 증거만 읽는다. 제공자·장부·HTTP·브라우저 I/O는 없다."""
     from 보고서품질_실모델점검 import CONTROL_PROTOCOL, control_cases, inputs, manifest
     from 보고서품질_실모델점검 import ROOT as PROBE_ROOT
 
-    from 서버.검토문맥 import build_review_request, parse_review
+    from 서버.검토문맥 import REVIEW_PROTOCOL, build_review_request, parse_review
     from 서버.교안연구 import assemble_report, synthesis_prompt
-    from 서버.보고서근거 import build_draft_request, materialize_section
+    from 서버.보고서근거 import DRAFT_PROTOCOL, build_draft_request, materialize_section
     from 서버.보고서품질 import parse_synthesis, visible_markdown
     from 서버.종합계약 import SYNTHESIS_PROTOCOL, build_synthesis_schema
 
@@ -52,8 +75,8 @@ def validate_preflight(path, expected_unknown):
         assert value["mode"] == "live"
         assert value["passed"] and value["live_verified"]
         assert value["observed_attempts"] == value["completed_calls"] == 4
-        assert value["draft_protocol"] == "sentence-paragraph-evidence-v3"
-        assert value["review_protocol"] == "source-context-review-v1"
+        assert value["draft_protocol"] == DRAFT_PROTOCOL
+        assert value["review_protocol"] == REVIEW_PROTOCOL
         assert value["review_schema_cases"] == ["positive", "negative"]
         assert value.get("synthesis_protocol") == SYNTHESIS_PROTOCOL
         assert value.get("synthesis_schema_received") is True
@@ -68,13 +91,7 @@ def validate_preflight(path, expected_unknown):
             ).hexdigest()
         )
         offered = json.loads(section_input["user"])
-        assert schema["properties"]["근거목록ID"]["enum"] == [offered["evidence_set_id"]]
-        assert schema["properties"]["문장"]["items"] == {"type": "string"}
-        assert schema["properties"]["근거관계"]["maxItems"] == 16
-        assert schema["properties"]["근거관계"]["items"]["properties"]["근거구간"] == {
-            "type": "integer",
-            "enum": [span["id"] for span in offered["evidence"]],
-        }
+        validate_draft_schema(schema, offered)
         receipts = read("호출영수증.json")
         assert [r["case"] for r in receipts] == ["section", "synthesis", "positive", "negative"]
         assert all(r["model"] == "gpt-5.6-luna" and r["request_id"] for r in receipts)
@@ -292,6 +309,7 @@ def main(args):
                     ROOT / ".cache/playwright/chromium-1248/chrome-win64/chrome.exe"
                 ),
                 headless=True,
+                args=["--disable-background-networking", "--no-proxy-server"],
             )
             context = browser.new_context(
                 viewport={"width": 1440, "height": 900}, accept_downloads=True

@@ -1,0 +1,8 @@
+{
+  "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면' && 'C:/nvm4w/nodejs/node.exe' node_modules/vitest/vitest.mjs run src/앱.test.tsx src/큐복구.test.tsx src/통신.test.ts src/실행실패.test.tsx --reporter=default --reporter=junit --outputFile='../검증결과/제출/큐/화면_JUnit.xml' && 'C:/nvm4w/nodejs/node.exe' node_modules/typescript/bin/tsc --noEmit",
+  "result": {
+    "output": "RUN  v5.1.0 C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면\n\n ✓ src/통신.test.ts (10 tests) 23ms\n ✓ src/큐복구.test.tsx (9 tests) 25ms\n ✓ src/실행실패.test.tsx (27 tests) 36ms\n ✓ src/앱.test.tsx (22 tests) 62ms\n\n Test Files  4 passed (4)\n      Tests  68 passed (68)\n   Start at  12:55:08\n   Duration  319ms (import 37%, tests 33%, transform 26%, worker 3%)\n\nJUNIT report written to C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/제출/큐/화면_JUnit.xml",
+    "exit_code": 0,
+    "error": null
+  }
+}

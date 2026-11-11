@@ -37,8 +37,18 @@ def _validate_existing_ledger(path):
 
 
 def create_research_app(
-    *, data_dir=None, model=None, ledger_path=None, web_client=None, static_dir=None
+    *,
+    data_dir=None,
+    model=None,
+    ledger_path=None,
+    web_client=None,
+    static_dir=None,
+    experiment_config=None,
 ):
+    from 서버.실험설정 import ExperimentConfig
+
+    if experiment_config is not None and type(experiment_config) is not ExperimentConfig:
+        raise ValueError("experiment: validated ExperimentConfig required")
     # LangGraph의 관측 자료를 외부 추적 서비스로 자동 전송하지 않는다.
     os.environ["LANGSMITH_TRACING"] = "false"
     os.environ["LANGCHAIN_TRACING_V2"] = "false"
@@ -59,7 +69,7 @@ def create_research_app(
     def factory(path):
         provider = model if model is not None else OpenAIModel(ROOT / ".env", ledger)
         client = web_client
-        if client is None:
+        if client is None and experiment_config is None:
             from 서버.웹자료 import FreeWebClient
 
             client = FreeWebClient()
@@ -68,6 +78,7 @@ def create_research_app(
             provider,
             ROOT / "01_참고자료/원본데이터/corpus.json",
             web_client=client,
+            experiment_config=experiment_config,
         )
 
     return create_app(data_dir=target, static_dir=static, service_factory=factory)

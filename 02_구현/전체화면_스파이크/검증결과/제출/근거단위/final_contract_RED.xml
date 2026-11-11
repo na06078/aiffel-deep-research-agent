@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="9" skipped="0" tests="17" time="0.305" timestamp="2026-11-11T15:37:01.258104+09:00" hostname="z13flow"><testcase classname="테스트.테스트_근거단위v5" name="test_native_schema_blocks_original_19_reference_shape" time="0.001"><failure message="KeyError: 'properties'">테스트\테스트_근거단위v5.py:38: in test_native_schema_blocks_original_19_reference_shape
+    assert schema["items"]["properties"]["내용"] == {"type": ["string", "null"]}
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'properties'</failure></testcase><testcase classname="테스트.테스트_근거단위v5" name="test_support_ordinal_is_statement_not_unit_index_and_grouping_stable" time="0.001"><failure message="서버.교안연구.ResearchContractError: span response: schema">테스트\테스트_근거단위v5.py:47: in test_support_ordinal_is_statement_not_unit_index_and_grouping_stable
+    result = materialize_section(raw(request, [primary("**첫 주장**이다.", 2), support(1, 1), support(1, 3), primary("둘째 주장이다.", 3), support(2, 4)]), request, sources)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+서버\보고서근거.py:314: in materialize_section
+    raise ResearchContractError("span response: schema")
+E   서버.교안연구.ResearchContractError: span response: schema</failure></testcase><testcase classname="테스트.테스트_근거단위v5" name="test_invalid_units_fail_before_canonical_gate[units0-statement reference]" time="0.001"><failure message="AssertionError: Regex pattern did not match.&#10;  Expected regex: 'span response: statement reference'&#10;  Actual message: 'span response: schema'">테스트\테스트_근거단위v5.py:75: in test_invalid_units_fail_before_canonical_gate
+    with pytest.raises(ResearchContractError, match="span response: " + reason):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'span response: statement reference'
+E     Actual message: 'span response: schema'</failure></testcase><testcase classname="테스트.테스트_근거단위v5" name="test_invalid_units_fail_before_canonical_gate[units1-schema]" time="0.001" /><testcase classname="테스트.테스트_근거단위v5" name="test_invalid_units_fail_before_canonical_gate[units2-schema]" time="0.001" /><testcase classname="테스트.테스트_근거단위v5" name="test_invalid_units_fail_before_canonical_gate[units3-schema]" time="0.001" /><testcase classname="테스트.테스트_근거단위v5" name="test_invalid_units_fail_before_canonical_gate[units4-schema]" time="0.001" /><testcase classname="테스트.테스트_근거단위v5" name="test_invalid_units_fail_before_canonical_gate[units5-duplicate reference]" time="0.001"><failure message="AssertionError: Regex pattern did not match.&#10;  Expected regex: 'span response: duplicate reference'&#10;  Actual message: 'span response: schema'">테스트\테스트_근거단위v5.py:75: in test_invalid_units_fail_before_canonical_gate
+    with pytest.raises(ResearchContractError, match="span response: " + reason):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'span response: duplicate reference'
+E     Actual message: 'span response: schema'</failure></testcase><testcase classname="테스트.테스트_근거단위v5" name="test_invalid_units_fail_before_canonical_gate[units6-schema]" time="0.001" /><testcase classname="테스트.테스트_근거단위v5" name="test_invalid_units_fail_before_canonical_gate[units7-schema]" time="0.001" /><testcase classname="테스트.테스트_근거단위v5" name="test_invalid_units_fail_before_canonical_gate[units8-schema]" time="0.001" /><testcase classname="테스트.테스트_근거단위v5" name="test_invalid_units_fail_before_canonical_gate[units9-schema]" time="0.001" /><testcase classname="테스트.테스트_근거단위v5" name="test_invalid_units_fail_before_canonical_gate[units10-visible content]" time="0.001"><failure message="AssertionError: Regex pattern did not match.&#10;  Expected regex: 'span response: visible content'&#10;  Actual message: 'span response: schema'">테스트\테스트_근거단위v5.py:75: in test_invalid_units_fail_before_canonical_gate
+    with pytest.raises(ResearchContractError, match="span response: " + reason):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'span response: visible content'
+E     Actual message: 'span response: schema'</failure></testcase><testcase classname="테스트.테스트_근거단위v5" name="test_invalid_units_fail_before_canonical_gate[units11-reserved citation]" time="0.001"><failure message="AssertionError: Regex pattern did not match.&#10;  Expected regex: 'span response: reserved citation'&#10;  Actual message: 'span response: schema'">테스트\테스트_근거단위v5.py:75: in test_invalid_units_fail_before_canonical_gate
+    with pytest.raises(ResearchContractError, match="span response: " + reason):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'span response: reserved citation'
+E     Actual message: 'span response: schema'</failure></testcase><testcase classname="테스트.테스트_근거단위v5" name="test_invalid_units_fail_before_canonical_gate[units12-reference limit]" time="0.001"><failure message="AssertionError: Regex pattern did not match.&#10;  Expected regex: 'span response: reference limit'&#10;  Actual message: 'span response: schema'">테스트\테스트_근거단위v5.py:75: in test_invalid_units_fail_before_canonical_gate
+    with pytest.raises(ResearchContractError, match="span response: " + reason):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'span response: reference limit'
+E     Actual message: 'span response: schema'</failure></testcase><testcase classname="테스트.테스트_근거단위v5" name="test_sixteen_primary_statements_and_empty_sufficiency" time="0.001"><failure message="서버.교안연구.ResearchContractError: span response: schema">테스트\테스트_근거단위v5.py:82: in test_sixteen_primary_statements_and_empty_sufficiency
+    assert len(materialize_section(raw(request, [primary(f"기록 {n}이다.") for n in range(16)]), request, sources)["근거"]) == 16
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+서버\보고서근거.py:314: in materialize_section
+    raise ResearchContractError("span response: schema")
+E   서버.교안연구.ResearchContractError: span response: schema</failure></testcase><testcase classname="테스트.테스트_근거단위v5" name="test_internal_encoder_preserves_explicit_relations_without_cutting" time="0.001"><failure message="AssertionError: assert [{'내용': '첫 주장...e, '근거구간': 3}] == [{'내용': '첫 주장...', '근거구간': 3}]&#10;  &#10;  At index 0 diff: {'내용': '첫 주장', '문장번호': None, '근거구간': 2} != {'내용': '첫 주장', '근거구간': 2}&#10;  Use -v to get more diff">테스트\테스트_근거단위v5.py:92: in test_internal_encoder_preserves_explicit_relations_without_cutting
+    assert encoder(logical) == [primary("첫 주장", 2), support(1, 1), primary("둘째 주장", 3)]
+E   AssertionError: assert [{'내용': '첫 주장...e, '근거구간': 3}] == [{'내용': '첫 주장...', '근거구간': 3}]
+E     
+E     At index 0 diff: {'내용': '첫 주장', '문장번호': None, '근거구간': 2} != {'내용': '첫 주장', '근거구간': 2}
+E     Use -v to get more diff</failure></testcase></testsuite></testsuites>

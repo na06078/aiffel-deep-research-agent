@@ -35,7 +35,7 @@ def required_text(obj, key, operation):
     return value
 
 
-def parse_plan(raw, corpus):
+def parse_plan(raw, corpus, *, experiment_config=None):
     obj = json_object(raw, "plan")
     title = required_text(obj, "제목", "plan")
     if "\n" in title or len(title) > 300:
@@ -43,6 +43,8 @@ def parse_plan(raw, corpus):
     toc = obj.get("목차")
     if not isinstance(toc, list) or not 1 <= len(toc) <= 4:
         raise ResearchContractError("plan: 1..4 content sections required")
+    if experiment_config is not None and len(toc) != experiment_config.section_count:
+        raise ResearchContractError("plan: experiment section count mismatch")
     seeds, names, plan = set(), set(), []
     for i, item in enumerate(toc):
         if not isinstance(item, dict):
@@ -51,7 +53,10 @@ def parse_plan(raw, corpus):
         brief = required_text(item, "지시", "plan")
         role = required_text(item, "역할", "plan")
         seed = required_text(item, "시작문서", "plan")
-        if role not in ROSTER or seed not in corpus.docs or seed in seeds or name in names:
+        roles = (
+            ROSTER if experiment_config is None or experiment_config.role else {"자료 조사 담당"}
+        )
+        if role not in roles or seed not in corpus.docs or seed in seeds or name in names:
             raise ResearchContractError("plan: invalid role/seed or duplicate section")
         seeds.add(seed)
         names.add(name)
@@ -63,7 +68,7 @@ def parse_plan(raw, corpus):
                 "role": role,
                 "seed": seed,
                 "instruction": brief,
-                "budget": 3,
+                "budget": 3 if experiment_config is None else experiment_config.reads_per_section,
                 "round": 1,
                 "order": i,
             }
@@ -158,10 +163,12 @@ def evaluate_report(report, sections, corpus, *, model_calls=0, coord_chars=0, s
 
 def role_sentence(assignment):
     role = assignment["role"]
+    if role == "자료 조사 담당":
+        return "너는 자료 조사 담당이다. 자료에 근거하여 조사한다."
     return f"너는 {role}이다. {ROSTER[role]}."
 
 
-def plan_prompt(question, corpus, prior_report=None):
+def plan_prompt(question, corpus, prior_report=None, *, experiment_config=None):
     roster = "\n".join(f"- {k}: {v}" for k, v in ROSTER.items())
     system = (
         "너는 리서치 팀의 코디네이터다. 아래 질문에 답하는 보고서의 목차를 짜고, 각 절을 리서처 에이전트 "
@@ -176,6 +183,19 @@ def plan_prompt(question, corpus, prior_report=None):
         '밝혀야 할 것 한두 문장","역할":"명단에 있는 이름 그대로","시작문서":"목록에 있는 제목"}]}'
     )
     user = f"[질문 및 같은 실행의 누적 지시] {question}\n[읽을 수 있는 문서 카드]\n{corpus.cards()}"
+    if experiment_config is not None:
+        system = system.replace(
+            "절은 최대 4개.", f"절은 정확히 {experiment_config.section_count}개."
+        )
+        if not experiment_config.role:
+            system = system.replace(
+                roster, "- 자료 조사 담당: 전문 역할 구분 없이 자료에 근거해 조사한다"
+            )
+            system += '\n역할 필드는 모든 절에서 정확히 "자료 조사 담당"으로 써라.'
+        if not experiment_config.assignment:
+            system += "\n절별 맞춤 조사 지시는 사용하지 않는다. 지시에는 전체 질문을 그대로 쓰고 시작문서는 출력 형식용이며 실제 읽기에는 배정하지 않는다."
+        if experiment_config.single_actor:
+            system += "\n목차는 출력 구조다. 하나의 조사자가 공통 읽기·메모를 모아 모든 절을 쓴다."
     if prior_report:
         user += f"\n[이전 보고서 문맥 — 코퍼스 근거가 아니며 인용 근거로 사용 금지]\n{prior_report}"
     return system, user

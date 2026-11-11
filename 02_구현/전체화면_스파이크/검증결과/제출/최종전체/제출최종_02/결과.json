@@ -1,0 +1,395 @@
+{
+  "run_id": "제출최종_02",
+  "exit_code": 0,
+  "elapsed_seconds": 165.84400000000096,
+  "expected_modules": [
+    "테스트/테스트_검토문맥.py",
+    "테스트/테스트_검토문맥연결.py",
+    "테스트/테스트_검토보완.py",
+    "테스트/테스트_교안연구.py",
+    "테스트/테스트_근거단위v5.py",
+    "테스트/테스트_근거보완.py",
+    "테스트/테스트_근거보완연결.py",
+    "테스트/테스트_기본경로.py",
+    "테스트/테스트_명령해석.py",
+    "테스트/테스트_문장인용v4.py",
+    "테스트/테스트_보고서근거.py",
+    "테스트/테스트_보고서도식.py",
+    "테스트/테스트_보고서변환.py",
+    "테스트/테스트_보고서변환_API.py",
+    "테스트/테스트_보고서보완.py",
+    "테스트/테스트_보고서보완연결.py",
+    "테스트/테스트_보고서표현.py",
+    "테스트/테스트_보고서표현_API.py",
+    "테스트/테스트_보고서품질.py",
+    "테스트/테스트_보고서품질_실모델점검.py",
+    "테스트/테스트_사건흐름.py",
+    "테스트/테스트_삭제중변환.py",
+    "테스트/테스트_삭제후기록차단.py",
+    "테스트/테스트_수정범위검토.py",
+    "테스트/테스트_실제모델.py",
+    "테스트/테스트_실제연결경계.py",
+    "테스트/테스트_실제연구제어.py",
+    "테스트/테스트_실행삭제.py",
+    "테스트/테스트_실행아카이브.py",
+    "테스트/테스트_실행제어.py",
+    "테스트/테스트_실험공유문맥.py",
+    "테스트/테스트_실험보완범위.py",
+    "테스트/테스트_실험설정.py",
+    "테스트/테스트_실험실행기.py",
+    "테스트/테스트_야후결과파서.py",
+    "테스트/테스트_연구앱.py",
+    "테스트/테스트_연구조립.py",
+    "테스트/테스트_원문구간.py",
+    "테스트/테스트_웹연구.py",
+    "테스트/테스트_웹자료.py",
+    "테스트/테스트_웹자료저장소.py",
+    "테스트/테스트_웹통합.py",
+    "테스트/테스트_자료모드제어.py",
+    "테스트/테스트_접근경계.py",
+    "테스트/테스트_종합숫자계약.py",
+    "테스트/테스트_커밋경계.py",
+    "테스트/테스트_큐경계.py",
+    "테스트/테스트_큐복구.py",
+    "테스트/테스트_호출예산.py",
+    "테스트/테스트_호출한도초기화.py",
+    "테스트/테스트_활동기록.py",
+    "검증/테스트_문맥사전점검.py",
+    "검증/테스트_필수근거사전.py",
+    "검증/테스트_제출준비.py",
+    "검증/테스트_큐보완연결.py"
+  ],
+  "collected_modules": [
+    "검증/테스트_문맥사전점검.py",
+    "검증/테스트_제출준비.py",
+    "검증/테스트_큐보완연결.py",
+    "검증/테스트_필수근거사전.py",
+    "테스트/테스트_검토문맥.py",
+    "테스트/테스트_검토문맥연결.py",
+    "테스트/테스트_검토보완.py",
+    "테스트/테스트_교안연구.py",
+    "테스트/테스트_근거단위v5.py",
+    "테스트/테스트_근거보완.py",
+    "테스트/테스트_근거보완연결.py",
+    "테스트/테스트_기본경로.py",
+    "테스트/테스트_명령해석.py",
+    "테스트/테스트_문장인용v4.py",
+    "테스트/테스트_보고서근거.py",
+    "테스트/테스트_보고서도식.py",
+    "테스트/테스트_보고서변환.py",
+    "테스트/테스트_보고서변환_API.py",
+    "테스트/테스트_보고서보완.py",
+    "테스트/테스트_보고서보완연결.py",
+    "테스트/테스트_보고서표현.py",
+    "테스트/테스트_보고서표현_API.py",
+    "테스트/테스트_보고서품질.py",
+    "테스트/테스트_보고서품질_실모델점검.py",
+    "테스트/테스트_사건흐름.py",
+    "테스트/테스트_삭제중변환.py",
+    "테스트/테스트_삭제후기록차단.py",
+    "테스트/테스트_수정범위검토.py",
+    "테스트/테스트_실제모델.py",
+    "테스트/테스트_실제연결경계.py",
+    "테스트/테스트_실제연구제어.py",
+    "테스트/테스트_실행삭제.py",
+    "테스트/테스트_실행아카이브.py",
+    "테스트/테스트_실행제어.py",
+    "테스트/테스트_실험공유문맥.py",
+    "테스트/테스트_실험보완범위.py",
+    "테스트/테스트_실험설정.py",
+    "테스트/테스트_실험실행기.py",
+    "테스트/테스트_야후결과파서.py",
+    "테스트/테스트_연구앱.py",
+    "테스트/테스트_연구조립.py",
+    "테스트/테스트_원문구간.py",
+    "테스트/테스트_웹연구.py",
+    "테스트/테스트_웹자료.py",
+    "테스트/테스트_웹자료저장소.py",
+    "테스트/테스트_웹통합.py",
+    "테스트/테스트_자료모드제어.py",
+    "테스트/테스트_접근경계.py",
+    "테스트/테스트_종합숫자계약.py",
+    "테스트/테스트_커밋경계.py",
+    "테스트/테스트_큐경계.py",
+    "테스트/테스트_큐복구.py",
+    "테스트/테스트_호출예산.py",
+    "테스트/테스트_호출한도초기화.py",
+    "테스트/테스트_활동기록.py"
+  ],
+  "completed_modules": [
+    "검증/테스트_문맥사전점검.py",
+    "검증/테스트_제출준비.py",
+    "검증/테스트_큐보완연결.py",
+    "검증/테스트_필수근거사전.py",
+    "테스트/테스트_검토문맥.py",
+    "테스트/테스트_검토문맥연결.py",
+    "테스트/테스트_검토보완.py",
+    "테스트/테스트_교안연구.py",
+    "테스트/테스트_근거단위v5.py",
+    "테스트/테스트_근거보완.py",
+    "테스트/테스트_근거보완연결.py",
+    "테스트/테스트_기본경로.py",
+    "테스트/테스트_명령해석.py",
+    "테스트/테스트_문장인용v4.py",
+    "테스트/테스트_보고서근거.py",
+    "테스트/테스트_보고서도식.py",
+    "테스트/테스트_보고서변환.py",
+    "테스트/테스트_보고서변환_API.py",
+    "테스트/테스트_보고서보완.py",
+    "테스트/테스트_보고서보완연결.py",
+    "테스트/테스트_보고서표현.py",
+    "테스트/테스트_보고서표현_API.py",
+    "테스트/테스트_보고서품질.py",
+    "테스트/테스트_보고서품질_실모델점검.py",
+    "테스트/테스트_사건흐름.py",
+    "테스트/테스트_삭제중변환.py",
+    "테스트/테스트_삭제후기록차단.py",
+    "테스트/테스트_수정범위검토.py",
+    "테스트/테스트_실제모델.py",
+    "테스트/테스트_실제연결경계.py",
+    "테스트/테스트_실제연구제어.py",
+    "테스트/테스트_실행삭제.py",
+    "테스트/테스트_실행아카이브.py",
+    "테스트/테스트_실행제어.py",
+    "테스트/테스트_실험공유문맥.py",
+    "테스트/테스트_실험보완범위.py",
+    "테스트/테스트_실험설정.py",
+    "테스트/테스트_실험실행기.py",
+    "테스트/테스트_야후결과파서.py",
+    "테스트/테스트_연구앱.py",
+    "테스트/테스트_연구조립.py",
+    "테스트/테스트_원문구간.py",
+    "테스트/테스트_웹연구.py",
+    "테스트/테스트_웹자료.py",
+    "테스트/테스트_웹자료저장소.py",
+    "테스트/테스트_웹통합.py",
+    "테스트/테스트_자료모드제어.py",
+    "테스트/테스트_접근경계.py",
+    "테스트/테스트_종합숫자계약.py",
+    "테스트/테스트_커밋경계.py",
+    "테스트/테스트_큐경계.py",
+    "테스트/테스트_큐복구.py",
+    "테스트/테스트_호출예산.py",
+    "테스트/테스트_호출한도초기화.py",
+    "테스트/테스트_활동기록.py"
+  ],
+  "missing_collected_modules": [],
+  "unexpected_collected_modules": [],
+  "missing_completed_modules": [],
+  "collected_testcase_count": 1097,
+  "completed_testcase_count": 1097,
+  "missing_completed_nodeids": [],
+  "call_outcomes": {
+    "passed": 1097
+  },
+  "subtest_outcomes": {
+    "passed": 1361
+  },
+  "junit_testcase_element_count": 1097,
+  "junit_failed_testcases": [],
+  "junit_error_testcases": [],
+  "junit_skipped_testcases": [],
+  "failed_reports": [],
+  "collection_errors": [],
+  "source_hash_count": 197,
+  "source_hash_drift": {},
+  "guard_denials": [],
+  "approved_children": [
+    {
+      "executable": "None",
+      "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\driver\\node.exe\" \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\driver\\package\\cli.js\" run-driver",
+      "cwd": "None"
+    },
+    {
+      "executable": "None",
+      "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\driver\\node.exe\" \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\driver\\package\\cli.js\" run-driver",
+      "cwd": "None"
+    },
+    {
+      "executable": "None",
+      "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\driver\\node.exe\" \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\driver\\package\\cli.js\" run-driver",
+      "cwd": "None"
+    },
+    {
+      "executable": "None",
+      "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\driver\\node.exe\" \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\driver\\package\\cli.js\" run-driver",
+      "cwd": "None"
+    },
+    {
+      "executable": "None",
+      "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\driver\\node.exe\" \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\driver\\package\\cli.js\" run-driver",
+      "cwd": "None"
+    },
+    {
+      "executable": "None",
+      "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\driver\\node.exe\" \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\driver\\package\\cli.js\" run-driver",
+      "cwd": "None"
+    },
+    {
+      "executable": "None",
+      "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\driver\\node.exe\" \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\driver\\package\\cli.js\" run-driver",
+      "cwd": "None"
+    },
+    {
+      "executable": "None",
+      "command": "\"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\driver\\node.exe\" \"C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Lib\\site-packages\\playwright\\driver\\package\\cli.js\" run-driver",
+      "cwd": "None"
+    }
+  ],
+  "real_chromium_launches": [
+    {
+      "executable": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\playwright\\chromium-1248\\chrome-win64\\chrome.exe",
+      "args": [
+        "--disable-background-networking",
+        "--disable-component-update",
+        "--disable-sync",
+        "--no-first-run",
+        "--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE localhost",
+        "--proxy-server=http://127.0.0.1:9",
+        "--proxy-bypass-list=<-loopback>"
+      ],
+      "headless": true
+    },
+    {
+      "executable": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\playwright\\chromium-1248\\chrome-win64\\chrome.exe",
+      "args": [
+        "--disable-background-networking",
+        "--disable-component-update",
+        "--disable-sync",
+        "--no-first-run",
+        "--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE localhost",
+        "--proxy-server=http://127.0.0.1:9",
+        "--proxy-bypass-list=<-loopback>"
+      ],
+      "headless": true
+    },
+    {
+      "executable": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\playwright\\chromium-1248\\chrome-win64\\chrome.exe",
+      "args": [
+        "--disable-background-networking",
+        "--disable-component-update",
+        "--disable-sync",
+        "--no-first-run",
+        "--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE localhost",
+        "--proxy-server=http://127.0.0.1:9",
+        "--proxy-bypass-list=<-loopback>"
+      ],
+      "headless": true
+    },
+    {
+      "executable": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\playwright\\chromium-1248\\chrome-win64\\chrome.exe",
+      "args": [
+        "--disable-background-networking",
+        "--disable-component-update",
+        "--disable-sync",
+        "--no-first-run",
+        "--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE localhost",
+        "--proxy-server=http://127.0.0.1:9",
+        "--proxy-bypass-list=<-loopback>"
+      ],
+      "headless": true
+    },
+    {
+      "executable": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\playwright\\chromium-1248\\chrome-win64\\chrome.exe",
+      "args": [
+        "--disable-background-networking",
+        "--disable-component-update",
+        "--disable-sync",
+        "--no-first-run",
+        "--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE localhost",
+        "--proxy-server=http://127.0.0.1:9",
+        "--proxy-bypass-list=<-loopback>"
+      ],
+      "headless": true
+    },
+    {
+      "executable": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\playwright\\chromium-1248\\chrome-win64\\chrome.exe",
+      "args": [
+        "--disable-background-networking",
+        "--disable-component-update",
+        "--disable-sync",
+        "--no-first-run",
+        "--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE localhost",
+        "--proxy-server=http://127.0.0.1:9",
+        "--proxy-bypass-list=<-loopback>"
+      ],
+      "headless": true
+    },
+    {
+      "executable": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\playwright\\chromium-1248\\chrome-win64\\chrome.exe",
+      "args": [
+        "--disable-background-networking",
+        "--disable-component-update",
+        "--disable-sync",
+        "--no-first-run",
+        "--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE localhost",
+        "--proxy-server=http://127.0.0.1:9",
+        "--proxy-bypass-list=<-loopback>"
+      ],
+      "headless": true
+    }
+  ],
+  "storage_redirects": [
+    {
+      "module": "테스트.테스트_보고서보완연결",
+      "name": "SCRATCH",
+      "before": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\교정_연결",
+      "after": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\제출_전체\\제출최종_02\\fixtures\\correction"
+    },
+    {
+      "module": "테스트_보고서보완연결",
+      "name": "SCRATCH",
+      "before": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\교정_연결",
+      "after": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\제출_전체\\제출최종_02\\fixtures\\correction"
+    },
+    {
+      "module": "테스트_보고서품질_실모델점검.probe",
+      "name": "WORK",
+      "before": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검",
+      "after": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\제출_전체\\제출최종_02"
+    },
+    {
+      "module": "테스트.테스트_웹연구",
+      "name": "ROOT",
+      "before": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트",
+      "after": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\제출_전체\\제출최종_02\\fixtures\\web-project"
+    },
+    {
+      "module": "테스트_웹연구",
+      "name": "ROOT",
+      "before": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트",
+      "after": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\제출_전체\\제출최종_02\\fixtures\\web-project"
+    },
+    {
+      "module": "테스트_자료모드제어",
+      "name": "ROOT",
+      "before": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트",
+      "after": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\제출_전체\\제출최종_02\\fixtures\\source-mode-project"
+    },
+    {
+      "module": "테스트.테스트_보고서품질_실모델점검.probe",
+      "name": "WORK",
+      "before": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검",
+      "after": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\제출_전체\\제출최종_02"
+    }
+  ],
+  "actual_provider_calls": "not performed; MockTransport/model doubles; external Python socket/DNS blocked",
+  "guard_limitations": [
+    "Not an OS sandbox; Node/Chromium audited by inspected paths and launch configuration, not OS-level network rules."
+  ],
+  "paths": {
+    "evidence": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\최종전체\\제출최종_02",
+    "cache": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\제출_전체\\제출최종_02",
+    "runner": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출작업\\최종전체_실행.py",
+    "log": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\최종전체\\제출최종_02\\전체.log",
+    "junit": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\최종전체\\제출최종_02\\전체.xml",
+    "coverage": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\최종전체\\제출최종_02\\완료범위.json"
+  },
+  "gate_passed": true,
+  "expected_module_count": 55,
+  "collected_module_count": 55,
+  "completed_module_count": 55,
+  "runner_sha256": "476fc78b6156af780375020a1380ddc502161eaa9dbe11ea1551faf546d772a3",
+  "source_manifest_sha256": "b38db20fbf881a64698327f841e6e3b6e07bc967a7f4d2608299a003048a089f",
+  "skipped_reports": []
+}

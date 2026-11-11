@@ -1,0 +1,975 @@
+{
+  "passed": true,
+  "run_label": "f7dd65769dc9411bb0faf1826419b7b3",
+  "checks": [
+    {
+      "name": "owned server ready",
+      "passed": true
+    },
+    {
+      "name": "default ExecutionService and explicit FakeModel only",
+      "passed": true
+    },
+    {
+      "name": "isolated empty SQLite fixture",
+      "passed": true
+    },
+    {
+      "name": "UI HTTP /commands",
+      "passed": true,
+      "body": {
+        "kind": "research",
+        "source_mode": "local",
+        "instruction_id": "a1c13db9c5b745f1a32d7d7658a73655",
+        "run_id": "3f7a9864f4324820a035ed88d051d27a",
+        "mode": "immediate",
+        "status": "received",
+        "control_revision": 1,
+        "state_seq": 1
+      }
+    },
+    {
+      "name": "UI HTTP /commands",
+      "passed": true,
+      "body": {
+        "instruction_id": "5e4bd80ebcab42599c7b31a26e22380e",
+        "run_id": null,
+        "mode": "queued",
+        "status": "queued",
+        "control_revision": null,
+        "kind": "research",
+        "source_mode": "local",
+        "state_seq": 14
+      }
+    },
+    {
+      "name": "UI HTTP /commands",
+      "passed": true,
+      "body": {
+        "instruction_id": "963a2c7001b849379ba8a747e5d678bb",
+        "run_id": null,
+        "mode": "queued",
+        "status": "queued",
+        "control_revision": null,
+        "kind": "research",
+        "source_mode": "local",
+        "state_seq": 15
+      }
+    },
+    {
+      "name": "UI HTTP /releases",
+      "passed": true,
+      "body": {
+        "released_gate_ids": [
+          "2cb82e38cb3f4d82a7202f6b2d43c8a1"
+        ]
+      }
+    },
+    {
+      "name": "UI HTTP /releases",
+      "passed": true,
+      "body": {
+        "released_gate_ids": [
+          "e5ba5705ee4e45c49c1e88376ab1eb92",
+          "c4328a29f4194a9d9139ab80ef6de61b",
+          "46f40f31f8be43b0816398b5506d77db"
+        ]
+      }
+    },
+    {
+      "name": "failure pauses two queued instructions",
+      "passed": true
+    },
+    {
+      "name": "UI HTTP /cancel",
+      "passed": true,
+      "body": {
+        "instruction_id": "5e4bd80ebcab42599c7b31a26e22380e",
+        "status": "cancelled"
+      }
+    },
+    {
+      "name": "first queued cancellation preserves other item failed run and pause",
+      "passed": true
+    },
+    {
+      "name": "UI HTTP /retry",
+      "passed": true,
+      "body": {
+        "kind": "research",
+        "source_mode": "local",
+        "instruction_id": "dd5a28abcb794a88bb85004fcb74da75",
+        "run_id": "5496ba155c4b487faad7e1767999172e",
+        "mode": "immediate",
+        "status": "received",
+        "control_revision": 1,
+        "state_seq": 21
+      }
+    },
+    {
+      "name": "retry creates one distinct same-question/source run preserving original and revision",
+      "passed": true
+    },
+    {
+      "name": "retry preserves queue order and paused policy",
+      "passed": true
+    },
+    {
+      "name": "retry disabled after accepted new running run",
+      "passed": true
+    },
+    {
+      "name": "draft survives popup opens closes recovery mutations",
+      "passed": true
+    },
+    {
+      "name": "reload restores identical run queue pause without POST model or SQLite writes",
+      "passed": true
+    },
+    {
+      "name": "390x844 last popup control and close actual hit tests no root overflow",
+      "passed": true,
+      "last_label": "큐 계속"
+    },
+    {
+      "name": "390 queued cancel actual hit test",
+      "passed": true
+    },
+    {
+      "name": "UI HTTP /cancel",
+      "passed": true,
+      "body": {
+        "instruction_id": "963a2c7001b849379ba8a747e5d678bb",
+        "status": "cancelled"
+      }
+    },
+    {
+      "name": "second queued cancellation preserves both runs and pause",
+      "passed": true
+    },
+    {
+      "name": "UI HTTP /cancel",
+      "passed": true,
+      "body": {
+        "status": "cancelled"
+      }
+    },
+    {
+      "name": "owned retry cancelled via UI no queue starts old record preserved",
+      "passed": true
+    },
+    {
+      "name": "mobile draft survives popup and cancellation",
+      "passed": true
+    },
+    {
+      "name": "SQLite integrity one retry acceptance and two queued cancel events",
+      "passed": true
+    },
+    {
+      "name": "zero actual model traffic no real provider modules imported or browser errors",
+      "passed": true
+    },
+    {
+      "name": "owned server closed and source/bundle identity unchanged",
+      "passed": true
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/index--hQf3o_5.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/CanvasPool-DzuCm1vb.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/Filter-vpEaIMwd.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/canvasUtils-U4WZZEj-.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/Cache-CTROkX_m.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/GCManagedHash-DCvVepMX.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/RenderTargetSystem-BK2ifv01.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/getTextureBatchBindGroup-CEQHRttu.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/GraphicsContext-48tzdr3Q.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/getTexelRangeRects-Bdv1rQ51.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/index-CcRZevJm.css",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/snapshot",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/browserAll-BZQaYkFA.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/init-DoUXYMOj.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/events",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png",
+      "body": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/spike/commands",
+      "body": {
+        "text": "격리 큐 복구 원 질문",
+        "client_request_id": "2ec1c27f-cc97-4f05-83c1-ca59865afd8e",
+        "source_mode": "local"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/snapshot",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/runs/3f7a9864f4324820a035ed88d051d27a/archive",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/snapshot",
+      "body": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/spike/commands",
+      "body": {
+        "text": "/큐 첫 번째 취소할 지시",
+        "client_request_id": "75ae115f-8055-4aab-b303-c455b8b8e9c0",
+        "source_mode": "local"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/snapshot",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/runs/3f7a9864f4324820a035ed88d051d27a/archive",
+      "body": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/spike/commands",
+      "body": {
+        "text": "/큐 두 번째 보존할 지시",
+        "client_request_id": "fca6adee-1c26-4eaf-be20-5c66507c6220",
+        "source_mode": "local"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/snapshot",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/runs/3f7a9864f4324820a035ed88d051d27a/archive",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/snapshot",
+      "body": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/spike/releases",
+      "body": {
+        "gate_ids": [
+          "2cb82e38cb3f4d82a7202f6b2d43c8a1"
+        ],
+        "outcome": "failure"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/snapshot",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/snapshot",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/runs/3f7a9864f4324820a035ed88d051d27a/archive",
+      "body": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/spike/releases",
+      "body": {
+        "gate_ids": [
+          "e5ba5705ee4e45c49c1e88376ab1eb92",
+          "c4328a29f4194a9d9139ab80ef6de61b",
+          "46f40f31f8be43b0816398b5506d77db"
+        ],
+        "outcome": "success"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/snapshot",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/runs/3f7a9864f4324820a035ed88d051d27a/archive",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/snapshot",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/snapshot",
+      "body": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/spike/queue/5e4bd80ebcab42599c7b31a26e22380e/cancel",
+      "body": {
+        "client_request_id": "4e2138c9-632e-4cdc-b967-566a03b8c10c"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/snapshot",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/runs/3f7a9864f4324820a035ed88d051d27a/archive",
+      "body": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/spike/runs/3f7a9864f4324820a035ed88d051d27a/retry",
+      "body": {
+        "control_revision": 1,
+        "client_request_id": "c75b8df9-45b4-47b8-886a-195091243e26"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/snapshot",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/snapshot",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/runs/5496ba155c4b487faad7e1767999172e/archive",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/snapshot",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/index--hQf3o_5.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/CanvasPool-DzuCm1vb.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/Filter-vpEaIMwd.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/canvasUtils-U4WZZEj-.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/Cache-CTROkX_m.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/GCManagedHash-DCvVepMX.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/RenderTargetSystem-BK2ifv01.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/getTextureBatchBindGroup-CEQHRttu.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/GraphicsContext-48tzdr3Q.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/getTexelRangeRects-Bdv1rQ51.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/index-CcRZevJm.css",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/snapshot",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/browserAll-BZQaYkFA.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/assets/init-DoUXYMOj.js",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/events",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/runs/5496ba155c4b487faad7e1767999172e/archive",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png",
+      "body": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/spike/queue/963a2c7001b849379ba8a747e5d678bb/cancel",
+      "body": {
+        "client_request_id": "a92d0b6f-6e97-4d7f-b654-2b88cd72c5d2"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/snapshot",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/runs/5496ba155c4b487faad7e1767999172e/archive",
+      "body": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/spike/cancel",
+      "body": {
+        "run_id": "5496ba155c4b487faad7e1767999172e",
+        "control_revision": 1,
+        "client_request_id": "0f13b2e9-ca76-48a9-9fc3-30a1d7f7bf69"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/snapshot",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/spike/runs/5496ba155c4b487faad7e1767999172e/archive",
+      "body": null
+    }
+  ],
+  "responses": [
+    {
+      "path": "/api/spike/commands",
+      "status": 202,
+      "body": {
+        "kind": "research",
+        "source_mode": "local",
+        "instruction_id": "a1c13db9c5b745f1a32d7d7658a73655",
+        "run_id": "3f7a9864f4324820a035ed88d051d27a",
+        "mode": "immediate",
+        "status": "received",
+        "control_revision": 1,
+        "state_seq": 1
+      }
+    },
+    {
+      "path": "/api/spike/commands",
+      "status": 202,
+      "body": {
+        "instruction_id": "5e4bd80ebcab42599c7b31a26e22380e",
+        "run_id": null,
+        "mode": "queued",
+        "status": "queued",
+        "control_revision": null,
+        "kind": "research",
+        "source_mode": "local",
+        "state_seq": 14
+      }
+    },
+    {
+      "path": "/api/spike/commands",
+      "status": 202,
+      "body": {
+        "instruction_id": "963a2c7001b849379ba8a747e5d678bb",
+        "run_id": null,
+        "mode": "queued",
+        "status": "queued",
+        "control_revision": null,
+        "kind": "research",
+        "source_mode": "local",
+        "state_seq": 15
+      }
+    },
+    {
+      "path": "/api/spike/releases",
+      "status": 200,
+      "body": {
+        "released_gate_ids": [
+          "2cb82e38cb3f4d82a7202f6b2d43c8a1"
+        ]
+      }
+    },
+    {
+      "path": "/api/spike/releases",
+      "status": 200,
+      "body": {
+        "released_gate_ids": [
+          "e5ba5705ee4e45c49c1e88376ab1eb92",
+          "c4328a29f4194a9d9139ab80ef6de61b",
+          "46f40f31f8be43b0816398b5506d77db"
+        ]
+      }
+    },
+    {
+      "path": "/api/spike/queue/5e4bd80ebcab42599c7b31a26e22380e/cancel",
+      "status": 200,
+      "body": {
+        "instruction_id": "5e4bd80ebcab42599c7b31a26e22380e",
+        "status": "cancelled"
+      }
+    },
+    {
+      "path": "/api/spike/runs/3f7a9864f4324820a035ed88d051d27a/retry",
+      "status": 202,
+      "body": {
+        "kind": "research",
+        "source_mode": "local",
+        "instruction_id": "dd5a28abcb794a88bb85004fcb74da75",
+        "run_id": "5496ba155c4b487faad7e1767999172e",
+        "mode": "immediate",
+        "status": "received",
+        "control_revision": 1,
+        "state_seq": 21
+      }
+    },
+    {
+      "path": "/api/spike/queue/963a2c7001b849379ba8a747e5d678bb/cancel",
+      "status": 200,
+      "body": {
+        "instruction_id": "963a2c7001b849379ba8a747e5d678bb",
+        "status": "cancelled"
+      }
+    },
+    {
+      "path": "/api/spike/cancel",
+      "status": 200,
+      "body": {
+        "status": "cancelled"
+      }
+    }
+  ],
+  "network_denials": [],
+  "protected_path_denials": [],
+  "external_browser_requests": [],
+  "browser_errors": [],
+  "console_errors": [],
+  "screenshots": [
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\01_실패_큐2_1440.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\02_재시도_1440.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\03_큐팝업_마지막조작_390.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\04_대기취소_390.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\05_정리완료_390.png"
+  ],
+  "actual_provider_requests": 0,
+  "explicit_model_double": true,
+  "provider": "test-double",
+  "output": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3",
+  "data": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\제출_큐실사용\\f7dd65769dc9411bb0faf1826419b7b3",
+  "limitations": [
+    "FakeModel only; not real provider acceptance",
+    "Process guards are not an OS sandbox",
+    "Native Korean IME and human visual review not tested"
+  ],
+  "command": [
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.venv\\Scripts\\python.exe",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\큐복구_실사용검사.py"
+  ],
+  "source_hashes_start": {
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\큐복구_실사용검사.py": "a699aef16b618d2b43b19e2054177215b757f67ec90ced96ad76ae515233904f",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\앱.py": "427132de7882e7a87240e59609a03ea8c2ada88a7000ac121c654c9cef172ec2",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\실행제어.py": "959c043e107f9fa82df449f7fb60334b2f2dad36afcbebc296837c74255c2313",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\저장소.py": "bff9ea9d64fff72203c57ae1bf4f4045db2dc084e16241309855ecfb0a00db8c",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\모델대역.py": "89672e64a3556ed448042859d87b5105b91f27938c9b17ecf064f2ec8a13824e",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\앱.tsx": "a447b4fe563932fd75417d022e0481e0f659bddef67310187cdbd64f6e4f5695",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\통신.ts": "a64f09bd457f83290fc397154d21a62b659519ae99a70a4273d496559de7c116",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\큐복구.tsx": "3f1e0148667782df26e57891127438a0d21ba6eed1e3da6bb7aa6ec5fa117362",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\계약.ts": "c627603332c52c5407de502df82df62319a03a99a29d62f1db22e7106fdd8582",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\browserAll-BZQaYkFA.js": "b347b91912364cc45b5422d0bc0ef935e852568c3ad98838228c486b35f30e64",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\Cache-CTROkX_m.js": "1362d81633b62e495b282f17617beb74083f16064864156e04949a07fa9ae0cf",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\CanvasPool-DzuCm1vb.js": "edde6aa9084e7f5958ad3f9a1437ea82c2406913957ef01be12296ca951373f1",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\canvasUtils-U4WZZEj-.js": "c0a01018402f30d7e9ad35ae43fafc8c490899236e6f28c8c4c8095fd066d448",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\Filter-vpEaIMwd.js": "e802a7ce1c4d21948131c5d247ee9db7f33376b17678d973d22ae0296f1935fc",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\GCManagedHash-DCvVepMX.js": "f9c36545f614350af3b653bd4e603e590afad27332ad79133fb661180406b312",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\getTexelRangeRects-Bdv1rQ51.js": "baa0c3c95a387acb0bf72e4b440a0ffc947f8bfcb34bfd462c32a10bbe53c665",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\getTextureBatchBindGroup-CEQHRttu.js": "f820ad942542bd39943bfcbc6073fa6d5237ee8fe574a36f8a4d22ae67c9558a",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\GraphicsContext-48tzdr3Q.js": "26553fe11bde03fcc13af77e92b26890e5b7f7ec1b791ad26634a133b670a7dc",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\index--hQf3o_5.js": "78bea3bc543ccd678bb818e1df10073c1b0fa689411fa850e70646c0e068232e",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\index-CcRZevJm.css": "537ebc4f0880ee2c9ee9931feeabaaba2b581c6814c9f2ce0d25f14132e8de93",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\init-DoUXYMOj.js": "8aa920d822fab365c3d8f4dff6dd7daa2ef6d7d8979f4156b928684d79ac0af5",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\RenderTargetSystem-BK2ifv01.js": "76151e37944ac1989dd3632f63fdc2a7f8b897cd226583baa060db0c71ccd6b0",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\webworkerAll-DHyz82Bx.js": "286283b3eea444d62e0859dd048655269c5cfa207640cd57d66548b724818cb3",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\index.html": "779643f7f05bf6a787c527dab13716135551265c04bb8ca6adbecaf8a2087abd",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\마을_타일.png": "bea430eb9a11074b349587978f7eae8ea9b030a38a046bff240d662e5cb45b17",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\에셋_목록.json": "51306343fb1939344783559b14e70bb4bf9ffbdf101fc51b40cacfcedad91aad",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\인물_라이선스.txt": "97f92c9d60b7ba92e3d08d5061b614abcd01629c9bfcd26ca7b6c6c04e67ce58",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\조사관_1.png": "441290e7e62dfed6359b6fa3d94b07431208a6c99fefdb54e351286f6e464c97",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\조사관_2.png": "6f75115baf28df20b8a04bf9ef0d5608f4e91d306fa3bd198515174c2f05fe5e",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\조사관_3.png": "8a509790890837c4c378209f9aa24aebb54c39a4dde290c6581174782b30c0ca",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\조사관_4.png": "e120fdc8513fbd0c77b0dbc321c45d3e56d4a8b945fc23d7492211874c1a7b1c",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\조정자.png": "66f739c3b5c8d3890d963d04c7998bd310f1a80c4777d36a70d1e1a1dfcfc6c0",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\종합자.png": "13b9807ee13c5c1b860fcfdb988312784109b1316cf70570a8ec5e610eaf3f50",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\타운_라이선스.txt": "587587de795599e3d4795247503c45e023980c5c66b26b90c807909af26b303d"
+  },
+  "fixture_admissions": [
+    {
+      "kind": "research",
+      "source_mode": "local",
+      "instruction_id": "a1c13db9c5b745f1a32d7d7658a73655",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "mode": "immediate",
+      "status": "received",
+      "control_revision": 1,
+      "state_seq": 1
+    },
+    {
+      "instruction_id": "5e4bd80ebcab42599c7b31a26e22380e",
+      "run_id": null,
+      "mode": "queued",
+      "status": "queued",
+      "control_revision": null,
+      "kind": "research",
+      "source_mode": "local",
+      "state_seq": 14
+    },
+    {
+      "instruction_id": "963a2c7001b849379ba8a747e5d678bb",
+      "run_id": null,
+      "mode": "queued",
+      "status": "queued",
+      "control_revision": null,
+      "kind": "research",
+      "source_mode": "local",
+      "state_seq": 15
+    }
+  ],
+  "old_record_before": {
+    "revisions": [
+      [
+        1,
+        "{\"run_id\": \"3f7a9864f4324820a035ed88d051d27a\", \"question\": \"격리 큐 복구 원 질문\", \"control_revision\": 1, \"status\": \"failed\", \"phase\": \"failed\", \"plan\": [{\"section_id\": \"section-1\", \"title\": \"합성 시험 1절: 격리 큐 복구 원 질문\", \"assignee\": \"researcher-1\"}, {\"section_id\": \"section-2\", \"title\": \"합성 시험 2절: 격리 큐 복구 원 질문\", \"assignee\": \"researcher-2\"}, {\"section_id\": \"section-3\", \"title\": \"합성 시험 3절: 격리 큐 복구 원 질문\", \"assignee\": \"researcher-3\"}, {\"section_id\": \"section-4\", \"title\": \"합성 시험 4절: 격리 큐 복구 원 질문\", \"assignee\": \"researcher-4\"}], \"report_id\": null, \"draft\": null, \"quality\": {\"passed\": null, \"reasons\": []}, \"parent_report_id\": null, \"created_at\": \"2026-11-11T06:55:07.763618+00:00\", \"updated_at\": \"2026-11-11T06:55:08.034488+00:00\", \"mock_requests\": 5, \"actual_model_requests\": 0, \"source_mode\": \"local\", \"failure\": {\"code\": \"model_error\", \"message\": \"의도적으로 발생시킨 합성 모델 오류\", \"actor\": \"researcher-1\"}}"
+      ]
+    ],
+    "sha256": "ce13af4720484a50cbc222480f15bb284cab48bc0e38078a1d4a367f6740cdc7"
+  },
+  "retry_run_id": "5496ba155c4b487faad7e1767999172e",
+  "old_record_after": {
+    "revisions": [
+      [
+        1,
+        "{\"run_id\": \"3f7a9864f4324820a035ed88d051d27a\", \"question\": \"격리 큐 복구 원 질문\", \"control_revision\": 1, \"status\": \"failed\", \"phase\": \"failed\", \"plan\": [{\"section_id\": \"section-1\", \"title\": \"합성 시험 1절: 격리 큐 복구 원 질문\", \"assignee\": \"researcher-1\"}, {\"section_id\": \"section-2\", \"title\": \"합성 시험 2절: 격리 큐 복구 원 질문\", \"assignee\": \"researcher-2\"}, {\"section_id\": \"section-3\", \"title\": \"합성 시험 3절: 격리 큐 복구 원 질문\", \"assignee\": \"researcher-3\"}, {\"section_id\": \"section-4\", \"title\": \"합성 시험 4절: 격리 큐 복구 원 질문\", \"assignee\": \"researcher-4\"}], \"report_id\": null, \"draft\": null, \"quality\": {\"passed\": null, \"reasons\": []}, \"parent_report_id\": null, \"created_at\": \"2026-11-11T06:55:07.763618+00:00\", \"updated_at\": \"2026-11-11T06:55:08.034488+00:00\", \"mock_requests\": 5, \"actual_model_requests\": 0, \"source_mode\": \"local\", \"failure\": {\"code\": \"model_error\", \"message\": \"의도적으로 발생시킨 합성 모델 오류\", \"actor\": \"researcher-1\"}}"
+      ]
+    ],
+    "sha256": "ce13af4720484a50cbc222480f15bb284cab48bc0e38078a1d4a367f6740cdc7"
+  },
+  "request_counts": {
+    "GET /": 2,
+    "GET /assets/index--hQf3o_5.js": 2,
+    "GET /assets/CanvasPool-DzuCm1vb.js": 2,
+    "GET /assets/Filter-vpEaIMwd.js": 2,
+    "GET /assets/canvasUtils-U4WZZEj-.js": 2,
+    "GET /assets/Cache-CTROkX_m.js": 2,
+    "GET /assets/GCManagedHash-DCvVepMX.js": 2,
+    "GET /assets/RenderTargetSystem-BK2ifv01.js": 2,
+    "GET /assets/getTextureBatchBindGroup-CEQHRttu.js": 2,
+    "GET /assets/GraphicsContext-48tzdr3Q.js": 2,
+    "GET /assets/getTexelRangeRects-Bdv1rQ51.js": 2,
+    "GET /assets/index-CcRZevJm.css": 2,
+    "GET /api/spike/snapshot": 18,
+    "GET /assets/browserAll-BZQaYkFA.js": 2,
+    "GET /assets/init-DoUXYMOj.js": 2,
+    "GET /api/spike/events": 2,
+    "GET /%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_1.png": 2,
+    "GET /%EC%97%90%EC%85%8B/%EC%A1%B0%EC%A0%95%EC%9E%90.png": 2,
+    "GET /%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_3.png": 2,
+    "GET /%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_2.png": 2,
+    "GET /%EC%97%90%EC%85%8B/%EC%A1%B0%EC%82%AC%EA%B4%80_4.png": 2,
+    "GET /%EC%97%90%EC%85%8B/%EC%A2%85%ED%95%A9%EC%9E%90.png": 2,
+    "GET /%EC%97%90%EC%85%8B/%EB%A7%88%EC%9D%84_%ED%83%80%EC%9D%BC.png": 2,
+    "POST /api/spike/commands": 3,
+    "GET /api/spike/runs/3f7a9864f4324820a035ed88d051d27a/archive": 6,
+    "POST /api/spike/releases": 2,
+    "POST /api/spike/queue/5e4bd80ebcab42599c7b31a26e22380e/cancel": 1,
+    "POST /api/spike/runs/3f7a9864f4324820a035ed88d051d27a/retry": 1,
+    "GET /api/spike/runs/5496ba155c4b487faad7e1767999172e/archive": 4,
+    "POST /api/spike/queue/963a2c7001b849379ba8a747e5d678bb/cancel": 1,
+    "POST /api/spike/cancel": 1
+  },
+  "source_hashes_end": {
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\큐복구_실사용검사.py": "a699aef16b618d2b43b19e2054177215b757f67ec90ced96ad76ae515233904f",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\앱.py": "427132de7882e7a87240e59609a03ea8c2ada88a7000ac121c654c9cef172ec2",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\실행제어.py": "959c043e107f9fa82df449f7fb60334b2f2dad36afcbebc296837c74255c2313",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\저장소.py": "bff9ea9d64fff72203c57ae1bf4f4045db2dc084e16241309855ecfb0a00db8c",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\서버\\모델대역.py": "89672e64a3556ed448042859d87b5105b91f27938c9b17ecf064f2ec8a13824e",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\앱.tsx": "a447b4fe563932fd75417d022e0481e0f659bddef67310187cdbd64f6e4f5695",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\통신.ts": "a64f09bd457f83290fc397154d21a62b659519ae99a70a4273d496559de7c116",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\큐복구.tsx": "3f1e0148667782df26e57891127438a0d21ba6eed1e3da6bb7aa6ec5fa117362",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\화면\\src\\계약.ts": "c627603332c52c5407de502df82df62319a03a99a29d62f1db22e7106fdd8582",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\browserAll-BZQaYkFA.js": "b347b91912364cc45b5422d0bc0ef935e852568c3ad98838228c486b35f30e64",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\Cache-CTROkX_m.js": "1362d81633b62e495b282f17617beb74083f16064864156e04949a07fa9ae0cf",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\CanvasPool-DzuCm1vb.js": "edde6aa9084e7f5958ad3f9a1437ea82c2406913957ef01be12296ca951373f1",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\canvasUtils-U4WZZEj-.js": "c0a01018402f30d7e9ad35ae43fafc8c490899236e6f28c8c4c8095fd066d448",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\Filter-vpEaIMwd.js": "e802a7ce1c4d21948131c5d247ee9db7f33376b17678d973d22ae0296f1935fc",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\GCManagedHash-DCvVepMX.js": "f9c36545f614350af3b653bd4e603e590afad27332ad79133fb661180406b312",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\getTexelRangeRects-Bdv1rQ51.js": "baa0c3c95a387acb0bf72e4b440a0ffc947f8bfcb34bfd462c32a10bbe53c665",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\getTextureBatchBindGroup-CEQHRttu.js": "f820ad942542bd39943bfcbc6073fa6d5237ee8fe574a36f8a4d22ae67c9558a",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\GraphicsContext-48tzdr3Q.js": "26553fe11bde03fcc13af77e92b26890e5b7f7ec1b791ad26634a133b670a7dc",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\index--hQf3o_5.js": "78bea3bc543ccd678bb818e1df10073c1b0fa689411fa850e70646c0e068232e",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\index-CcRZevJm.css": "537ebc4f0880ee2c9ee9931feeabaaba2b581c6814c9f2ce0d25f14132e8de93",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\init-DoUXYMOj.js": "8aa920d822fab365c3d8f4dff6dd7daa2ef6d7d8979f4156b928684d79ac0af5",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\RenderTargetSystem-BK2ifv01.js": "76151e37944ac1989dd3632f63fdc2a7f8b897cd226583baa060db0c71ccd6b0",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\assets\\webworkerAll-DHyz82Bx.js": "286283b3eea444d62e0859dd048655269c5cfa207640cd57d66548b724818cb3",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\index.html": "779643f7f05bf6a787c527dab13716135551265c04bb8ca6adbecaf8a2087abd",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\마을_타일.png": "bea430eb9a11074b349587978f7eae8ea9b030a38a046bff240d662e5cb45b17",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\에셋_목록.json": "51306343fb1939344783559b14e70bb4bf9ffbdf101fc51b40cacfcedad91aad",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\인물_라이선스.txt": "97f92c9d60b7ba92e3d08d5061b614abcd01629c9bfcd26ca7b6c6c04e67ce58",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\조사관_1.png": "441290e7e62dfed6359b6fa3d94b07431208a6c99fefdb54e351286f6e464c97",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\조사관_2.png": "6f75115baf28df20b8a04bf9ef0d5608f4e91d306fa3bd198515174c2f05fe5e",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\조사관_3.png": "8a509790890837c4c378209f9aa24aebb54c39a4dde290c6581174782b30c0ca",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\조사관_4.png": "e120fdc8513fbd0c77b0dbc321c45d3e56d4a8b945fc23d7492211874c1a7b1c",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\조정자.png": "66f739c3b5c8d3890d963d04c7998bd310f1a80c4777d36a70d1e1a1dfcfc6c0",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\종합자.png": "13b9807ee13c5c1b860fcfdb988312784109b1316cf70570a8ec5e610eaf3f50",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\제출_화면\\에셋\\타운_라이선스.txt": "587587de795599e3d4795247503c45e023980c5c66b26b90c807909af26b303d"
+  },
+  "server_task_done": true,
+  "owned_port_closed": true,
+  "elapsed_seconds": 7.093,
+  "checks_count": 27,
+  "checks_passed": 27,
+  "owned_created_files": [
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증\\큐복구_실사용검사.py",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\01_실패_정본.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\01_실패_큐2_1440.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\02_재시도_1440.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\02_첫대기취소_정본.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\03_재시도_정본.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\03_큐팝업_마지막조작_390.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\04_대기취소_390.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\04_새로고침_정본.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\05_정리완료_390.png",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\05_최종_정본.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\SQLite_사건.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\SQLite_요청.json",
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\.cache\\보고서품질_검증\\실모델점검\\제출_큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\실행기록.sqlite3"
+  ],
+  "owned_created_files_count_before_manifest": 14,
+  "artifact_manifest": {
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\01_실패_정본.json": {
+      "bytes": 10333,
+      "sha256": "6b3a9da38ca0b6b6ebefb566a326e86d9650e474a867dfb3660ad4b2f59e40b8"
+    },
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\01_실패_큐2_1440.png": {
+      "bytes": 98211,
+      "sha256": "955158aec0d075afb45235f06fbf3277eb8dc48798ff8cb17ed76e47737ed796"
+    },
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\02_재시도_1440.png": {
+      "bytes": 98867,
+      "sha256": "49ef0e87ed7997cfe5bc810ddb2c27f1af428dd3404aa0a5211a2c67e2a84f97"
+    },
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\02_첫대기취소_정본.json": {
+      "bytes": 10527,
+      "sha256": "c1583b9cccb69374b98ba38a91568b88a191ae3d3d77d16718f6a29bd0a34d43"
+    },
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\03_재시도_정본.json": {
+      "bytes": 19011,
+      "sha256": "9cd6ef1b53d230c871ffedf7fda0dc7bfec1932c5f56b0b9f9962e7e193e6da4"
+    },
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\03_큐팝업_마지막조작_390.png": {
+      "bytes": 48983,
+      "sha256": "9eb6248482494bcf59ccf1c5857c9280b94a73a66be30fb3f1f4e789d0c55fb1"
+    },
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\04_대기취소_390.png": {
+      "bytes": 48983,
+      "sha256": "9eb6248482494bcf59ccf1c5857c9280b94a73a66be30fb3f1f4e789d0c55fb1"
+    },
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\04_새로고침_정본.json": {
+      "bytes": 19011,
+      "sha256": "9cd6ef1b53d230c871ffedf7fda0dc7bfec1932c5f56b0b9f9962e7e193e6da4"
+    },
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\05_정리완료_390.png": {
+      "bytes": 81172,
+      "sha256": "a0ff7231db2b0488eca4cf42cdbe1636492251d237e6548eebd906eddf69c67f"
+    },
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\05_최종_정본.json": {
+      "bytes": 19608,
+      "sha256": "bee28136f9e22aa80c1b42648c40ce9cd143766c5405497e4092af83990ab35b"
+    },
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\SQLite_사건.json": {
+      "bytes": 39447,
+      "sha256": "d94980c30b4d141f4e7d27567b11e33686cca4548cd47b4a756878dbb1860d39"
+    },
+    "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크\\검증결과\\제출\\큐실사용\\f7dd65769dc9411bb0faf1826419b7b3\\SQLite_요청.json": {
+      "bytes": 2843,
+      "sha256": "c40a4f2e63cf90fc1fbde929b1323ef24b4f6269d07c7e3f2e415e0be73e36e2"
+    }
+  }
+}

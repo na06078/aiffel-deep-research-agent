@@ -9,6 +9,7 @@ import pytest
 
 from 서버.보고서근거 import build_draft_request
 from 서버.실제연구제어 import RealResearchService
+from 테스트.근거단위대역 import citation_units
 
 os.environ["LANGSMITH_TRACING"] = "false"
 os.environ["LANGCHAIN_TRACING_V2"] = "false"
@@ -233,19 +234,18 @@ class ScriptedModel:
             assert (
                 set(response_schema["required"])
                 == set(response_schema["properties"])
-                == {"근거목록ID", "문장", "근거관계", "충분", "부족"}
+                == {"근거목록ID", "문장", "충분", "부족"}
             )
-            assert response_schema["properties"]["문장"]["items"] == {"type": "string"}
-            relations = response_schema["properties"]["근거관계"]
-            assert relations["minItems"] == 0 and relations["maxItems"] == 16
-            assert relations["items"]["additionalProperties"] is False
-            assert set(relations["items"]["required"]) == {"문장번호", "근거구간"}
+            sentence_schema = response_schema["properties"]["문장"]["items"]
+            assert sentence_schema["additionalProperties"] is False
+            assert set(sentence_schema["required"]) == {"내용", "근거구간"}
+            references = sentence_schema["properties"]["근거구간"]
+            assert references["type"] == "integer"
+            assert response_schema["properties"]["문장"]["maxItems"] == 16
             assert response_schema["properties"]["근거목록ID"]["enum"] == [
                 catalog["evidence_set_id"]
             ]
-            assert response_schema["properties"]["근거관계"]["items"]["properties"]["근거구간"][
-                "enum"
-            ] == [e["id"] for e in offered]
+            assert references["enum"] == [e["id"] for e in offered]
             assert offered and {e["source_id"] for e in offered} <= {
                 title for title, _ in catalog["notes"]
             }
@@ -255,8 +255,7 @@ class ScriptedModel:
             self.bodies[actor] = body
             value = {
                 "근거목록ID": catalog["evidence_set_id"],
-                "문장": [body],
-                "근거관계": [{"문장번호": 1, "근거구간": offered[0]["id"]}],
+                "문장": citation_units([{"내용": body, "근거구간": [offered[0]["id"]]}]),
                 "충분": actor != "researcher-1" or n >= 2,
                 "부족": "추가 원인 자료 필요" if actor == "researcher-1" and n == 1 else "",
             }
@@ -531,7 +530,7 @@ class AlteredModel(ScriptedModel):
 async def test_신규실제경로는_누락근거를_충분으로_승격하지_않는다(data_dir):
     def missing(response):
         obj = json.loads(response["content"])
-        obj.pop("근거관계")
+        obj["문장"][0].pop("근거구간")
         return {**response, "content": json.dumps(obj, ensure_ascii=False)}
 
     model = AlteredModel("draft_section", missing)
@@ -761,7 +760,7 @@ async def test_허위구간ID_원응답보존_출판차단_자동재생성없음
                 assert bad_id in {e["id"] for e in catalog["evidence"]}
                 assert other_catalog["evidence_set_id"] != catalog["evidence_set_id"]
                 obj["근거목록ID"] = other_catalog["evidence_set_id"]
-            obj["근거관계"][0]["근거구간"] = bad_id
+            obj["문장"][0]["근거구간"] = bad_id
             return {**response, "content": json.dumps(obj, ensure_ascii=False)}
 
     model = InvalidSpanModel()
@@ -824,8 +823,15 @@ async def test_평면관계_16개는_전체경로통과_17개이상은_자르지
             response["content"] = json.dumps(
                 {
                     "근거목록ID": catalog["evidence_set_id"],
-                    "문장": statements,
-                    "근거관계": relations,
+                    "문장": citation_units([
+                        {
+                            "내용": statement,
+                            "근거구간": [
+                                r["근거구간"] for r in relations if r["문장번호"] == i + 1
+                            ],
+                        }
+                        for i, statement in enumerate(statements)
+                    ]),
                     "충분": True,
                     "부족": "",
                 },
@@ -845,9 +851,9 @@ async def test_평면관계_16개는_전체경로통과_17개이상은_자르지
         raw = [
             json.loads(e["output"]["content"])
             for e in events
-            if e["type"] == "model.completed" and '"근거관계"' in e["output"]["content"]
+            if e["type"] == "model.completed" and '"문장"' in e["output"]["content"]
         ]
-        assert raw and all(len(obj["근거관계"]) == count for obj in raw)
+        assert raw and all(len(obj["문장"]) == count for obj in raw)
         drafts = [c for c in model.calls if c[2]["operation"] == "draft_section"]
         assert len(drafts) == (4 if mode == "local" else 1)
         if count == 16:

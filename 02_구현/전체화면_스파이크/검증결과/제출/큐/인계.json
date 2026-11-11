@@ -1,0 +1,182 @@
+{
+  "status": "격리 구현/집중 검증 통과; 실제 제공자·GUI·운영 적용은 미실행",
+  "implementation_root": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크",
+  "files": [
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/실행제어.py",
+      "sha256": "959c043e107f9fa82df449f7fb60334b2f2dad36afcbebc296837c74255c2313"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/앱.py",
+      "sha256": "427132de7882e7a87240e59609a03ea8c2ada88a7000ac121c654c9cef172ec2"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_큐복구.py",
+      "sha256": "1fca206664b7efa101f34883931181dcc92e923768eea2d60cd6ca6ff647d881"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_큐경계.py",
+      "sha256": "062263316a9caa2adeb86f0bafe5e28a970d3682eb77187826ec5001ab6f6310"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/통신.ts",
+      "sha256": "a64f09bd457f83290fc397154d21a62b659519ae99a70a4273d496559de7c116"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/앱.tsx",
+      "sha256": "a447b4fe563932fd75417d022e0481e0f659bddef67310187cdbd64f6e4f5695"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/앱.test.tsx",
+      "sha256": "f7c9a5cea51db977a1b5781307d86efb910abb109c523e9de952cfe001906239"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/실행실패.tsx",
+      "sha256": "ea5b205ac01a984029a9484901c5cd4983a47c603d1875187724853d7c809f52"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/실행실패.test.tsx",
+      "sha256": "4d628a32c8103701ac720a940aff4db484a83988c5b5a37da3822179b68d2307"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/큐복구.tsx",
+      "sha256": "2db135301cf6e1bc6ec52bda974e9bf6bada539fced080222fcc5cfa38c8c338"
+    },
+    {
+      "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/큐복구.test.tsx",
+      "sha256": "d8b28e63d1032bf0d17e8698847b2a54b3c7e69d4bce87a0f9a2787e8266a327"
+    }
+  ],
+  "verification": {
+    "서버": {
+      "testcase_count": 42,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "by_class": {
+        "테스트.테스트_큐복구": 4,
+        "테스트.테스트_큐경계": 23,
+        "테스트.테스트_실행제어": 8,
+        "테스트.테스트_접근경계": 7
+      }
+    },
+    "화면": {
+      "testcase_count": 68,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "by_class": {
+        "src/실행실패.test.tsx": 27,
+        "src/앱.test.tsx": 22,
+        "src/큐복구.test.tsx": 9,
+        "src/통신.test.ts": 10
+      }
+    }
+  },
+  "commands": {
+    "server": {
+      "cwd": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크",
+      "command": "env -u PYTHONPATH -u PYTHONHOME -u PYTHONSTARTUP -u VIRTUAL_ENV '../../.venv/Scripts/python.exe' -m pytest 테스트/테스트_큐복구.py 테스트/테스트_큐경계.py 테스트/테스트_실행제어.py 테스트/테스트_접근경계.py -q --basetemp='../../.cache/보고서품질_검증/실모델점검/제출_큐/final' --junitxml='검증결과/제출/큐/서버_JUnit.xml'"
+    },
+    "frontend": {
+      "cwd": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면",
+      "command": "cd 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면' && 'C:/nvm4w/nodejs/node.exe' node_modules/vitest/vitest.mjs run src/앱.test.tsx src/큐복구.test.tsx src/통신.test.ts src/실행실패.test.tsx --reporter=default --reporter=junit --outputFile='../검증결과/제출/큐/화면_JUnit.xml' && 'C:/nvm4w/nodejs/node.exe' node_modules/typescript/bin/tsc --noEmit"
+    },
+    "lint": {
+      "cwd": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크",
+      "command": "env -u PYTHONPATH -u PYTHONHOME -u PYTHONSTARTUP -u VIRTUAL_ENV '../../.venv/Scripts/python.exe' -m ruff check 서버/실행제어.py 서버/앱.py 테스트/테스트_큐복구.py 테스트/테스트_큐경계.py",
+      "result": "All checks passed!"
+    },
+    "format": {
+      "command": "env -u PYTHONPATH -u PYTHONHOME -u PYTHONSTARTUP -u VIRTUAL_ENV '../../.venv/Scripts/python.exe' -m ruff format --check 서버/실행제어.py 테스트/테스트_큐복구.py 테스트/테스트_큐경계.py",
+      "result": "3 files already formatted"
+    }
+  },
+  "observed_red_green": [
+    {
+      "boundary": "재시도 ASGI→기본 서비스→SQLite",
+      "command": "pytest 테스트/테스트_큐복구.py -q --basetemp=../../.cache/보고서품질_검증/실모델점검/제출_큐/red1 (상기 venv/정리 환경 사용)",
+      "red": "1 failed: HTTP 405 != expected 202",
+      "green": "1 passed (green1)"
+    },
+    {
+      "boundary": "대기 취소 ASGI→기본 서비스→SQLite",
+      "command": "pytest 테스트/테스트_큐복구.py -q --basetemp=../../.cache/보고서품질_검증/실모델점검/제출_큐/red2 (동일 venv/환경)",
+      "red": "1 failed, 1 passed: HTTP 405 != expected 200",
+      "green": "2 passed (green2)"
+    },
+    {
+      "boundary": "프론트 API 전송",
+      "command": "C:/nvm4w/nodejs/node.exe node_modules/vitest/vitest.mjs run src/큐복구.test.tsx",
+      "red": "2 failed: public api.retryRun/cancelQueued undefined",
+      "green": "2 passed"
+    },
+    {
+      "boundary": "복구 컴포넌트 버튼",
+      "command": "C:/nvm4w/nodejs/node.exe node_modules/vitest/vitest.mjs run src/큐복구.test.tsx",
+      "red": "1 failed, 2 passed: run-retry button absent",
+      "green": "3 passed"
+    },
+    {
+      "boundary": "명시 클릭·unknown outcome 고정 ID",
+      "command": "C:/nvm4w/nodejs/node.exe node_modules/vitest/vitest.mjs run src/큐복구.test.tsx",
+      "red": "1 failed, 3 passed: expected fetch once, actual zero",
+      "green": "4 passed"
+    },
+    {
+      "boundary": "App 실제 큐 팝업 연결·입력·재열기 요청ID 보존",
+      "command": "C:/nvm4w/nodejs/node.exe node_modules/vitest/vitest.mjs run src/앱.test.tsx -t '실행/큐의 복구'",
+      "red": "1 failed, 21 skipped: QueueRecoveryControls missing",
+      "green": "22 App tests passed in final; reopen harness menu toggle repaired, not product RED"
+    },
+    {
+      "boundary": "scope_expansion 한국어 사유",
+      "command": "C:/nvm4w/nodejs/node.exe node_modules/vitest/vitest.mjs run src/앱.test.tsx src/실행실패.test.tsx",
+      "red": "1 failed, 48 passed: expected 보완 허용 범위 초과, actual scope_expansion",
+      "green": "final scope label test passed"
+    },
+    {
+      "boundary": "자동 보완 합격의 큐 정지 해제 방어",
+      "command": "pytest 테스트/테스트_큐복구.py -q --basetemp=../../.cache/보고서품질_검증/실모델점검/제출_큐/red-policy (동일 venv/환경)",
+      "red": "1 failed, 3 passed: start_next_queue started 대기1 instead of None",
+      "green": "final test passed; explicit continue still starts first remaining item"
+    }
+  ],
+  "tdd_limits": "거절/필드/경합/재시작 및 추가 UI 경계 검사는 구현 후 보강 검사다. 각각 별도 RED를 관측했다고 주장하지 않는다. import/setup 오류는 RED에서 제외했다.",
+  "behavior": [
+    "현재 failed/blocked/cancelled/interrupted와 정확한 revision, 다른 running 없음만 새 실행 접수. self.start override 재사용, 원 질문/자료 유지, retry_of_run_id 저장.",
+    "동일 ID 동시 4요청·영속 중복 응답으로 총 1회 추가 spawn. 원 run 및 revision 바이트 보존. 기존 requests 멱등 저장 재사용.",
+    "대기 정확한 항목만 transaction 제거, instruction.cancelled 사건, 나머지 순서·실행·정지 불변. 시작/누락404·ID충돌409·retry 필드422.",
+    "새 retry run의 retry_queue_pause는 사전 정지 사유를 보존한다. take_next에서 자동 보완 성공의 해제를 되돌리고 명시 continue_queue만 표식을 해제한다.",
+    "App 수명 hook에 mutation identity를 두어 popup 닫기/재열기와 배경조회 후에도 원 ID 유지. pending/ref/replay/busy 중복 차단. 접수와 생성 성공/조회 실패 구별. 초안 조작 없음.",
+    "실제 기본 LangGraph 합격·보고서 생성 뒤 대기 큐 유지 검사. RealResearchService 실제 start override의 instruction_history 전달 검사."
+  ],
+  "parent_contract_request": {
+    "path": "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/화면/src/계약.ts",
+    "request": "RunSnapshot에 retry_of_run_id?: string 추가. 필요하면 내부 정책 메타데이터 retry_queue_pause?: {reason:string|null}도 기술 가능. Admission wire 변경 없음. SemanticReview 문제.유형은 기존 string이라 enum 변경 없음."
+  },
+  "integration_note": {
+    "owner": "C/parent (실제연구제어.py는 수정하지 않음)",
+    "location": "RealResearchService.evaluate, 현재 1260~1261행 correction 성공 분기",
+    "detail": "현재 C 코드는 correction 합격 transaction에서 queue_paused=False를 먼저 쓴다. 기본 take_next가 곧바로 retry_queue_pause로 복구하여 자동 큐 시작은 차단된다(RED→GREEN). crash gap/순간 저장상태까지 엄격히 없애려면 C 분기에서 retry_queue_pause 존재 시 원래 reason으로 paused=True를 같은 transaction에 유지하도록 연결하는 것이 권장된다."
+  },
+  "evidence_files": [
+    "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/제출/큐/서버_JUnit.xml",
+    "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/제출/큐/화면_JUnit.xml",
+    "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/제출/큐/서버_최종로그.json",
+    "C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/검증결과/제출/큐/화면_재검증로그.json"
+  ],
+  "issues_resolved": [
+    "C가 연구그래프에 research_single 노드만 먼저 추가한 중간 시점에 RealResearchService 생성이 AttributeError로 실패했다. 이는 RED가 아니며 C 구현 완료 뒤 해당 실제 start 검사와 최종 서버42개 통과.",
+    "App 재열기 검증 harness에 닫힌 메뉴를 다시 여는 동작을 추가했다.",
+    "첫 화면 JUnit 출력 경로가 한 단계 위로 잡혔으나 해당 새 파일만 올바른 폴더로 이동하고 빈 생성 폴더를 제거했다. 올바른 경로로 재실행한 화면_재검증로그.json/JUnit이 최종 증거다."
+  ],
+  "exclusions": [
+    "실제 모델/검색/키/예산 원장 접근 없음",
+    "Git 실행·커밋·설치·빌드 dist 교체 없음",
+    "실제 GUI/viewport·브라우저 조작 검증 없음: no-DOM hook/SSR와 실제 fetch 전송 경계 대역 검사",
+    "기존 원본 DB/보고서/코퍼스·다른 소유 파일 변경 없음. 코퍼스는 RealResearchService 초기화 중 읽기만 수행",
+    "전체 전역 회귀 미실행. 원 앱.py의 기존 포맷 전체 수정은 하지 않음."
+  ],
+  "provider_calls": 0
+}

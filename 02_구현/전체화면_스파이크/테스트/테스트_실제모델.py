@@ -6,6 +6,7 @@ import pytest
 from openai import AsyncOpenAI
 
 from 서버.실제모델 import ModelCallError, OpenAIModel
+from 테스트.근거단위대역 import citation_units
 
 CTX = {"run_id": "dummy-run", "revision": 1, "actor": "dummy", "operation": "probe"}
 
@@ -636,14 +637,18 @@ def test_실제builder_schema의_정수enum이_SDK_HTTP까지_동일하다(tmp_p
     )
     catalog = json.loads(request.prompts[1])
     schema = request.response_schema
-    # §29.10: 전체 관계 수의 상한은 문장별 상한이 아니라 루트 배열에 둔다.
-    assert schema["properties"].get("근거관계", {}).get("maxItems") == 16
+    # §29.19: 개별 배열은 strict schema, 전체 합계16은 순수 materializer가 검사한다.
+    assert schema["properties"]["문장"]["maxItems"] == 16
     sent = []
     content = json.dumps(
         {
             "근거목록ID": catalog["evidence_set_id"],
-            "문장": ["자료에 기록된 사건을 정리한다."],
-            "근거관계": [{"문장번호": 1, "근거구간": catalog["evidence"][0]["id"]}],
+            "문장": citation_units([
+                {
+                    "내용": "자료에 기록된 사건을 정리한다.",
+                    "근거구간": [catalog["evidence"][0]["id"]],
+                }
+            ]),
             "충분": True,
             "부족": "",
         },
@@ -672,30 +677,22 @@ def test_실제builder_schema의_정수enum이_SDK_HTTP까지_동일하다(tmp_p
         "type": "json_schema",
         "json_schema": {"name": "grounded_section", "strict": True, "schema": schema},
     }
-    assert actual["json_schema"]["schema"]["properties"]["근거관계"]["items"]["properties"][
-        "근거구간"
-    ]["enum"] == [e["id"] for e in catalog["evidence"]]
+    assert actual["json_schema"]["schema"]["properties"]["문장"]["items"]["properties"]["근거구간"]["enum"] == [e["id"] for e in catalog["evidence"]]
     carrier = actual["json_schema"]["schema"]
     assert carrier["additionalProperties"] is False
     assert (
         set(carrier["required"])
         == set(carrier["properties"])
-        == {"근거목록ID", "문장", "근거관계", "충분", "부족"}
+        == {"근거목록ID", "문장", "충분", "부족"}
     )
-    assert carrier["properties"]["문장"] == {
-        "type": "array",
-        "minItems": 1,
-        "maxItems": 12,
-        "items": {"type": "string"},
-    }
-    relations = carrier["properties"]["근거관계"]
-    assert relations["minItems"] == 0 and relations["maxItems"] == 16
-    assert relations["items"]["additionalProperties"] is False
-    assert set(relations["items"]["required"]) == {"문장번호", "근거구간"}
-    assert relations["items"]["properties"]["문장번호"] == {
-        "type": "integer",
-        "enum": list(range(1, 13)),
-    }
+    sentences = carrier["properties"]["문장"]
+    assert sentences["type"] == "array"
+    assert sentences["minItems"] == 0 and sentences["maxItems"] == 16
+    assert sentences["items"]["additionalProperties"] is False
+    assert set(sentences["items"]["required"]) == {"내용", "근거구간"}
+    assert sentences["items"]["properties"]["내용"] == {"type": ["string", "null"]}
+    refs = sentences["items"]["properties"]["근거구간"]
+    assert refs["type"] == "integer"
     assert all(type(e["id"]) is int for e in catalog["evidence"])
 
 

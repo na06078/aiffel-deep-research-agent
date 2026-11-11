@@ -2,6 +2,7 @@
 
 import asyncio
 import copy
+import hashlib
 import json
 import operator
 import re
@@ -27,6 +28,7 @@ from 서버.교안연구 import (
 from 서버.보고서근거 import build_draft_request, materialize_section
 from 서버.보고서품질 import parse_semantic, parse_synthesis, validate_section
 from 서버.실행제어 import ExecutionService
+from 서버.실험설정 import ExperimentConfig, source_manifest
 from 서버.저장소 import ApiError, encode, now, run_deleted, uid
 from 서버.종합계약 import SYNTHESIS_PROTOCOL, build_synthesis_schema
 from 서버.활동기록 import measured_call, measured_node, start_call
@@ -52,6 +54,7 @@ class RealState(TypedDict, total=False):
     avoid: list
     results: Annotated[list, operator.add]
     draft: str
+    correction_scope: dict
 
 
 def latest_sections(results):
@@ -69,6 +72,7 @@ def build_real_graph(service):
         ("plan", service.plan),
         ("dispatch", service.dispatch),
         ("researcher", service.research),
+        ("single_researcher", service.research_single),
         ("review", service.review),
         ("synthesize", service.synthesize),
         ("evaluate", service.evaluate),
@@ -78,12 +82,21 @@ def build_real_graph(service):
     graph.add_edge("plan", "dispatch")
 
     def fanout(state):
+        config = service.experiment_config
+        if config is not None and config.single_actor:
+            return [Send("single_researcher", state)]
         latest = {s["section_id"]: s for s in latest_sections(state["results"])}
         sends = []
         for assignment in state["pending"]:
             sid = assignment["section_id"]
-            avoid = {a["seed"] for a in state["plan"] if a["section_id"] != sid and "seed" in a}
+            avoid = {
+                a.get("region_seed", a.get("seed"))
+                for a in state["plan"]
+                if a["section_id"] != sid and a.get("region_seed", a.get("seed"))
+            }
             avoid |= {d for other, s in latest.items() if other != sid for d in s["읽은문서"]}
+            if config is not None and not config.region:
+                avoid = set()
             sends.append(
                 Send(
                     "researcher",
@@ -102,8 +115,9 @@ def build_real_graph(service):
             )
         return sends or "review"
 
-    graph.add_conditional_edges("dispatch", fanout, ["researcher", "review"])
+    graph.add_conditional_edges("dispatch", fanout, ["researcher", "single_researcher", "review"])
     graph.add_edge("researcher", "review")
+    graph.add_edge("single_researcher", "review")
     graph.add_conditional_edges(
         "review", lambda s: "dispatch" if s["pending"] else "synthesize", ["dispatch", "synthesize"]
     )
@@ -113,7 +127,28 @@ def build_real_graph(service):
 
 
 class RealResearchService(ExecutionService):
-    def __init__(self, data_dir, model, corpus_path, *, web_client=None, web_store=None):
+    def __init__(
+        self,
+        data_dir,
+        model,
+        corpus_path,
+        *,
+        web_client=None,
+        web_store=None,
+        experiment_config=None,
+    ):
+        if experiment_config is not None and type(experiment_config) is not ExperimentConfig:
+            raise ValueError("experiment: validated ExperimentConfig required")
+        self.experiment_config = experiment_config
+        self.experiment_metadata = None
+        if experiment_config is not None:
+            from pathlib import Path
+
+            self.experiment_metadata = {
+                "source_hashes": source_manifest(),
+                "corpus_sha256": hashlib.sha256(Path(corpus_path).read_bytes()).hexdigest(),
+                "model_id": "gpt-5.6-luna",
+            }
         self.web_client = web_client
         self._web_store = web_store
         corpus = Corpus(corpus_path)
@@ -135,6 +170,8 @@ class RealResearchService(ExecutionService):
 
     @property
     def source_modes(self):
+        if self.experiment_config is not None:
+            return ["local"]
         return ["local", "web"] if self.web_client is not None else ["local"]
 
     @property
@@ -160,6 +197,11 @@ class RealResearchService(ExecutionService):
             db, state, text, instruction_id, source_mode=source_mode, raw_text=raw_text
         )
         run["instruction_history"] = history + [text]
+        if self.experiment_config is not None:
+            if run.get("source_mode", "local") != "local":
+                raise ValueError("experiment: local corpus only")
+            run["experiment_config"] = self.experiment_config.as_dict()
+            run["experiment_metadata"] = copy.deepcopy(self.experiment_metadata)
         if run.get("source_mode", "local") == "web":
             run["web_usage"] = 웹연구.new_usage()
         self.repo.save_revision(db, run)
@@ -374,6 +416,17 @@ class RealResearchService(ExecutionService):
                     "results": result["sections"],
                     "source_mode": "local",
                     "draft": result["draft"],
+                    "correction_scope": {
+                        "source_revision": original["control_revision"],
+                        "original_draft": original["draft"],
+                        "changes": [
+                            {
+                                key: change[key]
+                                for key in ("target_id", "section_id", "before", "after")
+                            }
+                            for change in result["changes"]
+                        ],
+                    },
                 }
             )
         except SupersededResearch:
@@ -528,6 +581,12 @@ class RealResearchService(ExecutionService):
             if not self.repo.fenced(data, state["run_id"], state["revision"]):
                 raise SupersededResearch()
             run = self.repo.run(data, state["run_id"])
+            if self.experiment_config is not None:
+                logical_count = db.execute(
+                    "SELECT COUNT(*) FROM calls WHERE run_id=?", (state["run_id"],)
+                ).fetchone()[0]
+                if run.get("actual_model_requests", 0) >= 55 or logical_count >= 55:
+                    raise ResearchContractError("experiment: request limit")
             correction = run.get("correction_state", {})
             if correction.get("revision") == state["revision"]:
                 prior_calls = db.execute(
@@ -696,7 +755,9 @@ class RealResearchService(ExecutionService):
         prompts = (
             웹연구.plan_prompt(question, previous)
             if web
-            else plan_prompt(question, self.corpus, previous)
+            else plan_prompt(
+                question, self.corpus, previous, experiment_config=self.experiment_config
+            )
         )
         raw = await self.complete(
             state,
@@ -705,7 +766,19 @@ class RealResearchService(ExecutionService):
             prompts,
             inputs={"instruction_history": question, "prior_report_is_primary_evidence": False},
         )
-        title, plan = 웹연구.parse_plan(raw) if web else parse_plan(raw, self.corpus)
+        title, plan = (
+            웹연구.parse_plan(raw)
+            if web
+            else parse_plan(raw, self.corpus, experiment_config=self.experiment_config)
+        )
+        if not web and self.experiment_config is not None:
+            if self.experiment_config.single_actor:
+                plan = [{**a, "assignee": "researcher-1"} for a in plan]
+            if not self.experiment_config.assignment:
+                plan = [
+                    {**a, "instruction": question, "region_seed": a["seed"], "seed": None}
+                    for a in plan
+                ]
         with self.repo.transaction() as (db, data):
             run = self.repo.fenced(data, state["run_id"], state["revision"])
             if not run:
@@ -756,6 +829,91 @@ class RealResearchService(ExecutionService):
             )
         return {}
 
+    async def research_single(self, state):
+        """한 주체가 먼저 공통 자료/메모를 모으고 모든 절에 같은 문맥을 제공한다."""
+        self.check(state)
+        prior = latest_sections(state["results"])
+        notes_by_doc = {d: n for section in prior for d, n in section["메모"]}
+        read, notes = list(notes_by_doc), list(map(list, notes_by_doc.items()))
+        assignment = {
+            **state["pending"][0],
+            "assignee": "researcher-1",
+            "role": "자료 조사 담당",
+            "title": state["question"],
+            "instruction": state["question"],
+        }
+        shared_state = {**state, "assignment": assignment, "avoid": []}
+        seeds = list(
+            dict.fromkeys(
+                a["seed"] for a in state["pending"] if a.get("seed") and a["seed"] not in read
+            )
+        )
+        for _ in range(sum(a["budget"] for a in state["pending"])):
+            self.check(state)
+            title = seeds.pop(0) if seeds else None
+            memory = json.dumps(notes, ensure_ascii=False)
+            if title is None:
+                candidates = self.corpus.candidates(read, [])[:60]
+                if not candidates:
+                    break
+                system, user = selection_prompt(assignment, read, candidates)
+                raw = await self.complete(
+                    state,
+                    "researcher-1",
+                    "select",
+                    (system, user + "\n[공통 조사메모]\n" + memory),
+                    inputs={
+                        "candidates": candidates,
+                        "read": read,
+                        "avoid": [],
+                        "shared_notes": notes,
+                    },
+                )
+                title = self.corpus.pick(raw, candidates, read)
+            if title is None:
+                break
+            system, user = read_prompt(title, state["question"], self.corpus)
+            self.tool_event(
+                shared_state,
+                "tool.started",
+                {
+                    "document": title,
+                    "brief": state["question"],
+                    "document_text": self.corpus.docs[title],
+                },
+                None,
+                "running",
+            )
+            note = await self.complete(
+                state,
+                "researcher-1",
+                "read_one",
+                (system, user + "\n[공통 조사메모]\n" + memory),
+                inputs={"document": title, "brief": state["question"], "shared_notes": notes},
+                json_mode=False,
+            )
+            if not note.strip():
+                raise ResearchContractError("read_one: empty note")
+            self.tool_event(
+                shared_state, "tool.completed", {"document": title}, {"note": note}, "completed"
+            )
+            read.append(title)
+            notes.append([title, note])
+        results = []
+        for target in state["pending"]:
+            # budget=0은 추가 읽기만 생략한다. 동일 strict 초안/원문조립/최종 품질 경로다.
+            output = await self.research(
+                {
+                    **shared_state,
+                    "assignment": {**target, "assignee": "researcher-1", "budget": 0},
+                    "prior": {"읽은문서": read, "메모": notes},
+                }
+            )
+            section = output["results"][0]
+            section["budget"] = target["budget"]
+            results.append(section)
+        return {"results": results}
+
     @measured_node("research", None, "actor")
     async def research(self, state):
         self.check(state)
@@ -779,6 +937,14 @@ class RealResearchService(ExecutionService):
             return {"results": [section]}
         assignment = state["assignment"]
         actor = assignment["assignee"]
+        prompt_assignment = assignment
+        if self.experiment_config is not None and not self.experiment_config.assignment:
+            prompt_assignment = {
+                **assignment,
+                "title": state["question"],
+                "instruction": state["question"],
+            }
+            prompt_assignment.pop("region_seed", None)
         read = list(state["prior"].get("읽은문서", []))
         notes = list(state["prior"].get("메모", []))
         title = assignment["seed"] if assignment["seed"] not in read else None
@@ -792,7 +958,7 @@ class RealResearchService(ExecutionService):
                     state,
                     actor,
                     "select",
-                    selection_prompt(assignment, read, candidates),
+                    selection_prompt(prompt_assignment, read, candidates),
                     inputs={"candidates": candidates, "read": read, "avoid": state["avoid"]},
                 )
                 title = self.corpus.pick(raw, candidates, read)
@@ -827,7 +993,9 @@ class RealResearchService(ExecutionService):
             notes.append([title, note])
             title = None
         self.check(state)
-        request = build_draft_request(assignment, notes, {d: self.corpus.docs[d] for d in read})
+        request = build_draft_request(
+            prompt_assignment, notes, {d: self.corpus.docs[d] for d in read}
+        )
         raw = await self.complete(
             state,
             actor,
@@ -891,7 +1059,9 @@ class RealResearchService(ExecutionService):
             "sufficient"
             if not gaps
             else "round_exhausted"
-            if state["round"] >= 2
+            if state["round"]
+            >= (2 if self.experiment_config is None else self.experiment_config.max_rounds)
+            or (self.experiment_config is not None and not self.experiment_config.redelegation)
             else "redelegation"
         )
         if reason == "redelegation":
@@ -1076,8 +1246,16 @@ class RealResearchService(ExecutionService):
             request = None
             if quality["passed"]:
                 try:
+                    scope_options = (
+                        {"correction_scope": state["correction_scope"]}
+                        if "correction_scope" in state
+                        else {}
+                    )
                     request = build_review_request(
-                        state["draft"], sections, self.review_sources(state, sections)
+                        state["draft"],
+                        sections,
+                        self.review_sources(state, sections),
+                        **scope_options,
                     )
                     if request.inputs["scope"]["incomplete"]:
                         quality["warnings"].append(
@@ -1156,7 +1334,13 @@ class RealResearchService(ExecutionService):
             if quality["passed"]:
                 self.report_title = state["title"]
                 self.publish(db, data, state["run_id"], state["revision"])
-                if run.get("correction_state", {}).get("revision") == state["revision"]:
+                if "retry_queue_pause" in run:
+                    # take_next 이전에 중단돼도 원래 명시 정지 정책이 저장 상태에 남아야 한다.
+                    data.update(
+                        queue_paused=True,
+                        queue_pause_reason=run["retry_queue_pause"]["reason"],
+                    )
+                elif run.get("correction_state", {}).get("revision") == state["revision"]:
                     data.update(queue_paused=False, queue_pause_reason=None)
             else:
                 run.update(status="blocked", phase="quality_failed", updated_at=now())

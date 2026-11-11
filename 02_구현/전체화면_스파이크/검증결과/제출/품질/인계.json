@@ -1,0 +1,162 @@
+{
+  "status": "focused_pure_boundary_complete",
+  "protocol": "sentence-cited-evidence-v4",
+  "scope": "§29.19 / A: 순수 경계와 소유 테스트만. 실제 제공자/키/운영 자료/Git 사용 없음.",
+  "changed_paths": [
+    {
+      "path": "서버/보고서근거.py",
+      "sha256": "23a54ef411672b084d1ded22c08a00c03c144c02da3f90ac4c130cbb9149eee3"
+    },
+    {
+      "path": "서버/검토문맥.py",
+      "sha256": "33388a70fbca864b466e14b9adddc81c858d33925f1d71588c28b96d8154249a"
+    },
+    {
+      "path": "서버/근거보완.py",
+      "sha256": "d797a4517ecf973ec38b8fb73d631074669035bdd75b5187d61307dd10f9929c"
+    },
+    {
+      "path": "테스트/테스트_문장인용v4.py",
+      "sha256": "2d44679f518c0480467dd5d180cf66cd2931c2ba3897423683952b06dd5c4b0d"
+    },
+    {
+      "path": "테스트/테스트_수정범위검토.py",
+      "sha256": "f539d5144d2aa86f460980b59560d158a76275d8c03ac9a64ccac02421272648"
+    },
+    {
+      "path": "테스트/테스트_보고서근거.py",
+      "sha256": "d37872c39a3adad30248ff81fb7508674ae5fa8b17c42e639abc82f94013e597"
+    },
+    {
+      "path": "테스트/테스트_보고서품질.py",
+      "sha256": "659ab51849b36f070c9c9c68fdd7236720377a8179331c30ca20c2a23645ba7c"
+    },
+    {
+      "path": "테스트/테스트_보고서품질_실모델점검.py",
+      "sha256": "184a1f85d022ce8150a721cd0bfdd1c4a1420e79bc6d4984f9bcc642e7d80ac1"
+    },
+    {
+      "path": "테스트/테스트_실제모델.py",
+      "sha256": "102e1908d1c9b2947045fd1dcb068663ce4c0d7774b6edbef33cc19e369a9d41"
+    },
+    {
+      "path": "테스트/테스트_웹연구.py",
+      "sha256": "92490b6854aeab12ae0feb5d051d1d7dca7fd55738a74cab1eac45afc3b75cf3"
+    },
+    {
+      "path": "테스트/테스트_웹통합.py",
+      "sha256": "cf2c1dd43b20159bf9c487a40fa500c6aef195053417e8c4d1be96af87fb4e37"
+    },
+    {
+      "path": "테스트/테스트_삭제후기록차단.py",
+      "sha256": "6c95519fae61ba5729c1f08d59c2ee0edb95c676ec904d081927cfdde06949b8"
+    }
+  ],
+  "unchanged_reused": [
+    "서버/보고서보완.py: _plain_tree/실제 apply_correction 결과를 재사용; 수정 없음"
+  ],
+  "new_files": [
+    "테스트/테스트_문장인용v4.py",
+    "테스트/테스트_수정범위검토.py"
+  ],
+  "behavior": [
+    "정확한 네 root 필드, 문장 항목 정확 두 필드/최소1정수 참조/중복·bool·문자열·미제시 참조 거절/12문장·합계16관계 제한",
+    "strict SDK schema/저널 schema bytes/불변 private catalog·원문 오프셋·source version 유지, v3 자동 fallback 없음",
+    "충분=false+명시 부족사유+빈 문장은 본문 빈 문자열/근거 빈 배열인 같은 canonical 키로 반환. 허위 본문을 채우지 않으며 충분 조건은 별도 차단.",
+    "근거보완의 내부 flat raw 합성만 v4로 이행; 원 canonical 교체/비대상 바이트/절 전체16관계 검사 유지",
+    "keyword-only correction_scope 정확 필드·source_revision 양의 exact int·변경항목/중복 target·실제 after/절/근거 주장·원 before 가시 내용 결합 검사",
+    "system/user/해시/input budget에 scope 전체 불변 사본 결합; scope_expansion은 빈 근거 허용+실제 가시 발췌 필수+needs_revision. 정상 parse_review canonical 키 유지.",
+    "실제 canonical 공백 접힘과 여러 줄 가시 주장은 결합 시에만 공백 정규화; 저널 scope 원본 문자열은 유지."
+  ],
+  "red_green": [
+    {
+      "case": "v4 canonical materialization exact smoke",
+      "red": "1 failed: old flat parser raised span response: schema on valid v4 payload",
+      "green": "same case plus v4 schema/budget/reference/insufficiency/fallback tests passed"
+    },
+    {
+      "case": "v4 boundary matrix",
+      "red": "9 failed, 3 passed; schema mismatch, old flat unexpectedly accepted, correct error-stage checks failed",
+      "green": "12 passed at first core GREEN"
+    },
+    {
+      "case": "actual evidence correction internal consumer",
+      "red": "1 failed, 12 passed; test_인용만교체_다른바이트와메타데이터보존 reached internal materializer span response: schema",
+      "green": "same preservation test passed after internal v4 synthesis migration"
+    },
+    {
+      "case": "scoped request interface",
+      "setup_only": "2 failures from unsupported keyword were interface-scaffolding evidence, not behavioral RED",
+      "red": "after adding signature only, 18 failed: correction_scope absent, invalid scopes silently accepted, valid scope_expansion rejected as invalid type, budget ignored",
+      "green": "18 passed in core GREEN, now 19 with later multiline regression"
+    },
+    {
+      "case": "multiline visible after vs canonical whitespace",
+      "red": "1 failed: actual evidence correction after had newline but scope request raised correction scope",
+      "green": "same case included final pass; exact newline snapshot retained and canonical visible sentence matched"
+    }
+  ],
+  "commands": {
+    "cwd": "C:\\my vault\\ME\\1. Note\\Hermes\\Aiffel_Work\\02_노드실습\\딥리서치_에이전트\\02_구현\\전체화면_스파이크",
+    "smoke_target": "테스트/테스트_문장인용v4.py::test_v4_materializes_exact_canonical_words_and_order",
+    "final": "env -u PYTHONPATH -u PYTHONHOME -u VIRTUAL_ENV -u PYTHONSTARTUP 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -X utf8 -m pytest '테스트/테스트_문장인용v4.py' '테스트/테스트_수정범위검토.py' '테스트/테스트_보고서근거.py' '테스트/테스트_검토문맥.py' '테스트/테스트_근거보완.py' '테스트/테스트_보고서보완.py' '테스트/테스트_보고서품질.py' '테스트/테스트_보고서품질_실모델점검.py' '테스트/테스트_실제모델.py::test_실제builder_schema의_정수enum이_SDK_HTTP까지_동일하다' -q --tb=short -p no:cacheprovider --basetemp='../../.cache/보고서품질_검증/실모델점검/제출_품질/품질_final_02' --junitxml='검증결과/제출/품질/회귀02.xml'",
+    "ruff_check": "env -u PYTHONPATH -u PYTHONHOME -u VIRTUAL_ENV -u PYTHONSTARTUP 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -X utf8 -m ruff check 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/보고서근거.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/검토문맥.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/근거보완.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_문장인용v4.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_수정범위검토.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_보고서근거.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_보고서품질.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_보고서품질_실모델점검.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_실제모델.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_웹연구.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_웹통합.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_삭제후기록차단.py'",
+    "ruff_format_check": "env -u PYTHONPATH -u PYTHONHOME -u VIRTUAL_ENV -u PYTHONSTARTUP 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/.venv/Scripts/python.exe' -X utf8 -m ruff format --check 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/보고서근거.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/검토문맥.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/서버/근거보완.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_문장인용v4.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_수정범위검토.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_보고서근거.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_보고서품질.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_보고서품질_실모델점검.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_실제모델.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_웹연구.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_웹통합.py' 'C:/my vault/ME/1. Note/Hermes/Aiffel_Work/02_노드실습/딥리서치_에이전트/02_구현/전체화면_스파이크/테스트/테스트_삭제후기록차단.py'",
+    "environment": "PYTHONPATH/PYTHONHOME/VIRTUAL_ENV/PYTHONSTARTUP removed; explicit project venv; installed deps only"
+  },
+  "verification": {
+    "pytest_exit_code": 0,
+    "test_cases": 278,
+    "successful_subtests": 54,
+    "junit_suite_tests": 332,
+    "junit_testcase_entries": 278,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 5.58,
+    "executed_targets": [
+      "테스트/테스트_문장인용v4.py",
+      "테스트/테스트_수정범위검토.py",
+      "테스트/테스트_보고서근거.py",
+      "테스트/테스트_검토문맥.py",
+      "테스트/테스트_근거보완.py",
+      "테스트/테스트_보고서보완.py",
+      "테스트/테스트_보고서품질.py",
+      "테스트/테스트_보고서품질_실모델점검.py",
+      "테스트/테스트_실제모델.py::test_실제builder_schema의_정수enum이_SDK_HTTP까지_동일하다"
+    ],
+    "modules": {
+      "테스트.테스트_문장인용v4": 14,
+      "테스트.테스트_수정범위검토": 19,
+      "테스트.테스트_보고서근거.SpanEvidenceTests": 30,
+      "테스트.테스트_검토문맥": 26,
+      "테스트.테스트_근거보완": 36,
+      "테스트.테스트_보고서보완": 54,
+      "테스트.테스트_보고서품질": 50,
+      "테스트.테스트_보고서품질_실모델점검": 48,
+      "테스트.테스트_실제모델": 1
+    },
+    "junit": "검증결과/제출/품질/회귀02.xml",
+    "junit_sha256": "328f6e2797f6ed7754791a04f1dda7cf328be6ca495c1ef311ea9e8c32baa8c3",
+    "owned_hash_drift": [],
+    "ruff": "All checks passed; 12 files formatted. Initial import ordering issue corrected. Formatting AST identity was checked for 12 files."
+  },
+  "tests_excluded": [
+    "전체 suite 및 C/B 소유 테스트 직접 실행 제외. 마지막 전체 조립 검증은 메인/C가 수행해야 함.",
+    "테스트_웹연구.py·테스트_웹통합.py 전체 서비스 테스트는 hardcoded make 경로가 승인 scratch보다 넓어 실행하지 않음. 공유 WebModel/IntegrationModel v4 응답→실제 materialize 경계는 새 두 테스트로 무IO 실행.",
+    "테스트_삭제후기록차단.py는 v4 assertion만 이행했고 해당 서비스 경합 테스트 미실행. 메인 통합 게이트 필요.",
+    "테스트_실제모델.py 전체는 제외; 변경된 actual builder schema→AsyncOpenAI→httpx.MockTransport 단일 test만 실제로 실행.",
+    "실모델 의미 판별·HTTP 서버·브라우저·MD/HTML/PDF·운영 설치본 검증 미실행. 의미 응답은 모두 명시 대역."
+  ],
+  "consumer_handoff": {
+    "actual": "C 소유 실제연구제어 evaluate까지 correction_scope 전달/저장·복원·fence 검증 필요. 최신 read에서는 source_revision/original_draft/changes 구성과 final build_review_request kwargs 전달이 이미 보이나 이 작업자의 순수 통과를 서비스 통과로 확대하지 않음.",
+    "scope_payload": "{source_revision: exact positive int, original_draft: str, changes: [{target_id: exact int, section_id: str, before: str, after: str}]} — 근거보완 changes의 before_evidence/after_evidence는 scope에 넣지 말고 네 필드만 투영.",
+    "external_fake_migration": "서버/테스트/검증의 직계 *.py 재검색: 본인 소유 테스트의 옛 flat payload는 명시 거절 반례로만 남는다. 메인 소유 검증/관계목록_완료실사용검사.py에는 추가 이행이 필요하다: L245 DRAFT_PROTOCOL v3→v4, L424 pair_schema→문장.items.properties.근거구간, L429 정확 네 root 필드, L447~449 문장별 참조 배열/전체 합계16/최소1 검사로 변경. 소유 범위 밖이므로 수정하지 않았다. 메인/C 소비자 변경의 전체 실행은 이 인계 범위 밖.",
+    "empty_insufficient": "빈 false canonical 본문은 빈 문자열이다. 과거 parse_section은 빈 본문을 거절하므로 materializer는 이 한 경우 검증된 canonical을 직접 반환; 사용자 승인 false/빈문장 요구 이외에는 validate_section 경로 유지. 후속 호출자가 원고 보존/부족 종료를 처리하는지 통합 점검 필요."
+  },
+  "limitations": [
+    "의미적 범위 확장 탐지는 단일 기존 리뷰 호출의 모델 책임이며 결정론 파서는 응답 계약/결합/차단만 보증한다. 새 모델 호출/추가 반복 없음.",
+    "revision의 실제 영속 run 일치와 scope 전체 누락 방지는 순수 API만으로 보증하지 않고 호출자 C의 책임이다.",
+    "원 코퍼스와 이전 실패 자료는 기존 테스트가 읽기 전용으로 사용했으며 수정하지 않았다. 보호 파일의 전역 hash 감사는 메인 소유다."
+  ]
+}

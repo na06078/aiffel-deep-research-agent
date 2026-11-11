@@ -1,0 +1,107 @@
+[
+  {
+    "request_id": "2ec1c27f-cc97-4f05-83c1-ca59865afd8e",
+    "body": {
+      "action": "commands",
+      "text": "격리 큐 복구 원 질문",
+      "source_mode": "local"
+    },
+    "response": {
+      "kind": "research",
+      "source_mode": "local",
+      "instruction_id": "a1c13db9c5b745f1a32d7d7658a73655",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "mode": "immediate",
+      "status": "received",
+      "control_revision": 1,
+      "state_seq": 1
+    }
+  },
+  {
+    "request_id": "75ae115f-8055-4aab-b303-c455b8b8e9c0",
+    "body": {
+      "action": "commands",
+      "text": "/큐 첫 번째 취소할 지시",
+      "source_mode": "local"
+    },
+    "response": {
+      "instruction_id": "5e4bd80ebcab42599c7b31a26e22380e",
+      "run_id": null,
+      "mode": "queued",
+      "status": "queued",
+      "control_revision": null,
+      "kind": "research",
+      "source_mode": "local",
+      "state_seq": 14
+    }
+  },
+  {
+    "request_id": "fca6adee-1c26-4eaf-be20-5c66507c6220",
+    "body": {
+      "action": "commands",
+      "text": "/큐 두 번째 보존할 지시",
+      "source_mode": "local"
+    },
+    "response": {
+      "instruction_id": "963a2c7001b849379ba8a747e5d678bb",
+      "run_id": null,
+      "mode": "queued",
+      "status": "queued",
+      "control_revision": null,
+      "kind": "research",
+      "source_mode": "local",
+      "state_seq": 15
+    }
+  },
+  {
+    "request_id": "4e2138c9-632e-4cdc-b967-566a03b8c10c",
+    "body": {
+      "action": "cancel_queued",
+      "instruction_id": "5e4bd80ebcab42599c7b31a26e22380e"
+    },
+    "response": {
+      "instruction_id": "5e4bd80ebcab42599c7b31a26e22380e",
+      "status": "cancelled"
+    }
+  },
+  {
+    "request_id": "c75b8df9-45b4-47b8-886a-195091243e26",
+    "body": {
+      "action": "retry_run",
+      "run_id": "3f7a9864f4324820a035ed88d051d27a",
+      "control_revision": 1
+    },
+    "response": {
+      "kind": "research",
+      "source_mode": "local",
+      "instruction_id": "dd5a28abcb794a88bb85004fcb74da75",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "mode": "immediate",
+      "status": "received",
+      "control_revision": 1,
+      "state_seq": 21
+    }
+  },
+  {
+    "request_id": "a92d0b6f-6e97-4d7f-b654-2b88cd72c5d2",
+    "body": {
+      "action": "cancel_queued",
+      "instruction_id": "963a2c7001b849379ba8a747e5d678bb"
+    },
+    "response": {
+      "instruction_id": "963a2c7001b849379ba8a747e5d678bb",
+      "status": "cancelled"
+    }
+  },
+  {
+    "request_id": "0f13b2e9-ca76-48a9-9fc3-30a1d7f7bf69",
+    "body": {
+      "action": "cancel",
+      "run_id": "5496ba155c4b487faad7e1767999172e",
+      "control_revision": 1
+    },
+    "response": {
+      "status": "cancelled"
+    }
+  }
+]
